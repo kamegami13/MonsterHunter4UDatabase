@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -96,8 +97,11 @@ public class WishlistDataAddDialogFragment extends DialogFragment {
 		            		   
 	            	   Bundle args = getArguments();
 	            	   item_id = args.getLong(ARG_WISHLIST_DATA_ID);
-	            	   
+
+	            	   Log.d("helpme", "id: " + item_id);
 	            	   ArrayList<String> paths = DataManager.get(getActivity()).queryComponentCreateImprove(item_id);
+	            	   
+	            	   Log.d("helpme", "length: " + paths.size());
 	            	   
 	            	   if (paths.size() > 1) {
 	            		   String weaponName = args.getString(ARG_WISHLIST_DATA_WEAPON_NAME);
@@ -108,9 +112,15 @@ public class WishlistDataAddDialogFragment extends DialogFragment {
 		       				dialogPath.setTargetFragment(WishlistDataAddDialogFragment.this, REQUEST_PATH);
 		       				dialogPath.show(fm, DIALOG_WISHLIST_COMPONENT_PATH);
 	            	   }
-	            	   else {
+	            	   else if (paths.size() == 1){
 	            		   DataManager.get(getActivity()).queryAddWishlistData(
 	            				   wishlistId, item_id, quantity, paths.get(0));
+	            			Toast.makeText(getActivity(), "Added to '" + wishlistName + "' wishlist", 
+	         					   Toast.LENGTH_SHORT).show();
+	            	   }
+	            	   else {
+	            		   DataManager.get(getActivity()).queryAddWishlistData(
+	            				   wishlistId, item_id, quantity, "Create");
 	            			Toast.makeText(getActivity(), "Added to '" + wishlistName + "' wishlist", 
 	         					   Toast.LENGTH_SHORT).show();
 	            	   }
