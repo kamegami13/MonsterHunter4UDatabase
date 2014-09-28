@@ -12,19 +12,21 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.daviancorp.android.data.database.WishlistCursor;
 import com.daviancorp.android.data.object.Wishlist;
 import com.daviancorp.android.loader.WishlistListCursorLoader;
@@ -36,7 +38,7 @@ import com.daviancorp.android.ui.dialog.WishlistDeleteDialogFragment;
 import com.daviancorp.android.ui.dialog.WishlistRenameDialogFragment;
 
 @SuppressLint("NewApi")
-public class WishlistListFragment extends ListFragment implements
+public class WishlistListFragment extends SherlockListFragment implements
 		LoaderCallbacks<Cursor> {
 
 	private static final String DIALOG_WISHLIST_ADD = "wishlist_add";
@@ -81,7 +83,7 @@ public class WishlistListFragment extends ListFragment implements
 			                return false;
 			            }
 			
-			            mActionMode = getActivity().startActionMode(new mActionModeCallback());
+			            mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
 			            mActionMode.setTag(position);
 			            mListView.setItemChecked(position, true);
 			            return true;
@@ -124,7 +126,6 @@ public class WishlistListFragment extends ListFragment implements
 		}
 	}
 	
-	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		int position = info.position;
@@ -135,7 +136,7 @@ public class WishlistListFragment extends ListFragment implements
 			return true;
 		}
 		else {
-			return super.onContextItemSelected(item);
+			return super.onContextItemSelected((android.view.MenuItem) item);
 		}
 	}
 	
@@ -151,7 +152,7 @@ public class WishlistListFragment extends ListFragment implements
 				return true;
 			case R.id.wishlist_edit:
 				if (mListView.getAdapter().getCount() > 0) {
-					mActionMode = getActivity().startActionMode(new mActionModeCallback());
+					mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
 		            mActionMode.setTag(0);
 					mListView.setItemChecked(0, true);
 				}
