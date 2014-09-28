@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@drawable/weapon_clicked_states" >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/transparent_states"
+        android:gravity="center"
+        android:textColorHighlight="@color/transparent"
+        android:textSize="10sp"
+        android:textStyle="bold" >
+    </TextView>
+
+</LinearLayout>

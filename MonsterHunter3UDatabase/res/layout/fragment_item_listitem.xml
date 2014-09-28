@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/generic_clicked_states"
+    android:paddingBottom="1dip"
+    android:paddingEnd="8dip"
+    android:paddingStart="8dip"
+    android:paddingTop="1dip" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="24dip"
+        android:layout_height="24dip" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:paddingLeft="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

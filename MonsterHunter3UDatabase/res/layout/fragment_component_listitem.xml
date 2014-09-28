@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listitem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/generic_clicked_states"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:id="@+id/item_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <TextView
+            android:id="@+id/item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".35"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/amt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".15"
+        android:gravity="center" />
+
+</LinearLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="90dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/generic_clicked_states"
+    android:orientation="vertical"
+    android:padding="4dp" >
+
+    <ImageView
+        android:id="@+id/grid_item_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/monster_image" >
+    </ImageView>
+
+    <TextView
+        android:id="@+id/grid_item_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="@+id/label"
+        android:textSize="12sp"
+        android:textStyle="bold" >
+    </TextView>
+
+</LinearLayout>

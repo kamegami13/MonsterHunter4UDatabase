@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightpurple"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/header1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:gravity="center"
+            android:text="Weapon"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/header2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".15"
+            android:gravity="center"
+            android:text="Atk"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/header3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".15"
+            android:gravity="center"
+            android:text="Ele"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/header4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".14"
+            android:gravity="center"
+            android:text=" Slot"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/header5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".13"
+            android:gravity="center"
+            android:text="Aff"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/header6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".13"
+            android:gravity="center"
+            android:text="Def"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listitem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/generic_clicked_states">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight=".3" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".7"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/attack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".16"
+                android:gravity="center" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight=".24"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp" >
+
+                <TextView
+                    android:id="@+id/awaken"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".1" />
+
+                <TextView
+                    android:id="@+id/element"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".9" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/slot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight=".22"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/affinity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".18"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/defense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".19"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".5"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/arc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.175"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/charge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.425"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/filler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.0"
+                android:gravity="center" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".40"
+                android:orientation="horizontal" >
+                
+                <ImageView
+                    android:id="@+id/power"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="0.125" />
+                
+                <ImageView
+                    android:id="@+id/crange"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="0.125" />>
+                
+                <ImageView
+                    android:id="@+id/poison"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="0.125" />>
+                
+                <ImageView
+                    android:id="@+id/para"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="0.125" />>
+                
+                <ImageView
+                    android:id="@+id/sleep"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="0.125" />>
+                
+                <ImageView
+                    android:id="@+id/exhaust"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="0.125" />>
+                
+                <ImageView
+                    android:id="@+id/slime"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="0.125" />>
+                
+                <ImageView
+                    android:id="@+id/paint"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="0.125" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--
+        LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".333"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/charge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:gravity="center" />
+        </LinearLayout
+        -->
+    </LinearLayout>
+
+</LinearLayout>

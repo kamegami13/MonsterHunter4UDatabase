@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   	android:paddingLeft="10dp"
+    android:baselineAligned="false" >
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:textStyle="bold"
+            android:text="Name:" />
+
+        <TextView
+            android:id="@+id/detail_weapon_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:textStyle="bold" />
+
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:text="Type:" />
+
+        <TextView
+            android:id="@+id/detail_weapon_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7" />
+            
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:text="Attack:" />
+
+        <TextView
+            android:id="@+id/detail_weapon_attack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7" />
+            
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:text="Element:" />
+
+        <TextView
+            android:id="@+id/detail_weapon_element"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7" />
+            
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:text="Sharpness:" />
+
+        <ImageView
+            android:id="@+id/detail_weapon_blade_sharpness"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:layout_marginTop="2dp" />
+            
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:text="Rarity:" />
+
+        <TextView
+            android:id="@+id/detail_weapon_rarity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7" />
+            
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:text="Slots:" />
+
+        <TextView
+            android:id="@+id/detail_weapon_slot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7" />
+            
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:text="Affinity:" />
+
+        <TextView
+            android:id="@+id/detail_weapon_affinity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7" />
+            
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:text="Defense:" />
+
+        <TextView
+            android:id="@+id/detail_weapon_defense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7" />
+            
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/detail_weapon_blade_special"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight=".7" >
+
+            <ImageView
+                android:id="@+id/detail_weapon_blade_note1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp" />
+
+            <ImageView
+                android:id="@+id/detail_weapon_blade_note2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp" />
+
+            <ImageView
+                android:id="@+id/detail_weapon_blade_note3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:id="@+id/detail_weapon_blade_special_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+            
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:text="Creation Cost:" />
+
+        <TextView
+            android:id="@+id/detail_weapon_creation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7" />
+            
+    </TableRow>
+
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:text="Upgrade Cost:" />
+
+        <TextView
+            android:id="@+id/detail_weapon_upgrade"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7" />
+            
+    </TableRow>
+
+</TableLayout>

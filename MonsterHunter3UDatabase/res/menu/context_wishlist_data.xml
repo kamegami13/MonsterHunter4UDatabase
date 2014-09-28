@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item android:id="@+id/menu_item_edit_wishlist_data"
+        android:icon="@drawable/ic_menu_edit"
+        android:title="@string/option_wishlist_data_edit" />
+
+    <item android:id="@+id/menu_item_delete_wishlist_data"
+        android:icon="@drawable/ic_menu_delete"
+        android:title="@string/option_wishlist_data_delete" />
+</menu>

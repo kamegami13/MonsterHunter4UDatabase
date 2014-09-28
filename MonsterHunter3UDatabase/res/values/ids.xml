@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ui.detail -->
+	<item name="arena_quest_detail_fragment" type="id"/>
+	<item name="arena_quest_monster_fragment" type="id"/>
+	<item name="arena_quest_reward_fragment" type="id"/>
+	<item name="armor_detail_fragment" type="id"/>
+	<item name="component_list_fragment" type="id"/>
+	<item name="decoration_detail_fragment" type="id"/>
+	<item name="item_arena_fragment" type="id"/>
+	<item name="item_component_fragment" type="id"/>
+	<item name="item_detail_fragment" type="id"/>
+	<item name="item_location_fragment" type="id"/>
+	<item name="item_monster_fragment" type="id"/>
+	<item name="item_quest_fragment" type="id"/>
+	<item name="item_to_skill_fragment" type="id"/>
+	<item name="location_detail_fragment" type="id"/>
+	<item name="location_rank_fragment_low" type="id"/>
+	<item name="location_rank_fragment_high" type="id"/>
+	<item name="location_rank_fragment_g" type="id"/>
+	<item name="monster_detail_fragment" type="id"/>
+	<item name="monster_quest_fragment" type="id"/>
+	<item name="monster_reward_fragment" type="id"/>
+	<item name="quest_detail_fragment" type="id"/>
+	<item name="quest_monster_fragment" type="id"/>
+	<item name="quest_reward_fragment" type="id"/>
+	<item name="skill_tree_armor_fragment_head" type="id"/>
+	<item name="skill_tree_armor_fragment_body" type="id"/>
+	<item name="skill_tree_armor_fragment_arms" type="id"/>
+	<item name="skill_tree_armor_fragment_waist" type="id"/>
+	<item name="skill_tree_armor_fragment_legs" type="id"/>
+	<item name="skill_tree_decoration_fragment" type="id"/>
+	<item name="skill_tree_detail_fragment" type="id"/>
+	<item name="weapon_detail_fragment" type="id"/>
+	<item name="weapon_tree_fragment" type="id"/>
+	<item name="wishlist_data_component_fragment" type="id"/>
+	<item name="wishlist_data_detail_fragment" type="id"/>
+	    
+    <!-- ui.general -->
+	<item name="home_fragment" type="id"/>
+	
+    <!-- ui.list -->
+	<item name="arena_quest_list_fragment" type="id"/>
+	<item name="combining_list_fragment" type="id"/>
+	<item name="decoration_list_fragment" type="id"/>
+	<item name="hunting_fleet_list_fragment" type="id"/>
+	<item name="item_list_fragment" type="id"/>
+	<item name="location_grid_fragment" type="id"/>
+	<item name="monster_grid_fragment" type="id"/>
+	<item name="skill_tree_list_fragment" type="id"/>
+	<item name="weapon_list_fragment" type="id"/>
+	<item name="wishlist_list_fragment" type="id"/>
+</resources>

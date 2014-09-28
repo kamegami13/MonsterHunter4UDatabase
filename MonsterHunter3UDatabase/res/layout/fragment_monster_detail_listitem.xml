@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <TextView
+        android:id="@+id/body_part"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5" />
+
+    <TextView
+        android:id="@+id/dmg1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/dmg2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/dmg3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/dmg4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/dmg5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1" 
+        android:gravity="center" />
+
+</TableRow>
