@@ -846,29 +846,29 @@ public class DataManager {
 	}
 
 	public void queryCopyWishlist(long id, String name) {
-//		long newId = mHelper.queryAddWishlist(name);
-//		
-//		WishlistDataCursor cursor = mHelper.queryWishlistData(id);
-//		cursor.moveToFirst();
-//		
-//		while(!cursor.isAfterLast()) {
-//			WishlistData wishlist = cursor.getWishlistData();
-//			mHelper.queryAddWishlistDataAll(newId, wishlist.getItem().getId(), 
-//					wishlist.getQuantity(), wishlist.getSatisfied());
-//			cursor.moveToNext();
-//		}
-//		cursor.close();
-//		
-//		WishlistComponentCursor wcCursor = mHelper.queryWishlistComponents(id);
-//		wcCursor.moveToFirst();
-//
-//		while(!wcCursor.isAfterLast()) {
-//			WishlistComponent wishlist = wcCursor.getWishlistComponent();
-//			mHelper.queryAddWishlistComponentAll(newId, wishlist.getItem().getId(), 
-//					wishlist.getQuantity(), wishlist.getNotes());
-//			wcCursor.moveToNext();
-//		}
-//		wcCursor.close();
+		long newId = mHelper.queryAddWishlist(name);
+		
+		WishlistDataCursor cursor = mHelper.queryWishlistData(id);
+		cursor.moveToFirst();
+		
+		while(!cursor.isAfterLast()) {
+			WishlistData wishlist = cursor.getWishlistData();
+			mHelper.queryAddWishlistDataAll(newId, wishlist.getItem().getId(), 
+					wishlist.getQuantity(), wishlist.getSatisfied(), wishlist.getPath());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		
+		WishlistComponentCursor wcCursor = mHelper.queryWishlistComponents(id);
+		wcCursor.moveToFirst();
+
+		while(!wcCursor.isAfterLast()) {
+			WishlistComponent wishlist = wcCursor.getWishlistComponent();
+			mHelper.queryAddWishlistComponentAll(newId, wishlist.getItem().getId(), 
+					wishlist.getQuantity(), wishlist.getNotes());
+			wcCursor.moveToNext();
+		}
+		wcCursor.close();
 	}
 	
 	public Wishlist getWishlist(long id) {

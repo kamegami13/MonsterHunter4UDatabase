@@ -11,12 +11,17 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.view.ActionMode;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,11 +31,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.daviancorp.android.data.database.WishlistDataCursor;
 import com.daviancorp.android.data.object.WishlistData;
 import com.daviancorp.android.loader.WishlistDataListCursorLoader;
@@ -38,7 +38,7 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.dialog.WishlistDataDeleteDialogFragment;
 import com.daviancorp.android.ui.dialog.WishlistDataEditDialogFragment;
 
-public class WishlistDataDetailFragment extends SherlockListFragment implements
+public class WishlistDataDetailFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
 	public static final String EXTRA_DETAIL_REFRESH =
@@ -107,7 +107,7 @@ public class WishlistDataDetailFragment extends SherlockListFragment implements
 			                return false;
 			            }
 			
-			            mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
+			            mActionMode = getActivity().startActionMode(new mActionModeCallback());
 			            mActionMode.setTag(position);
 			            mListView.setItemChecked(position, true);
 			            return true;
@@ -134,7 +134,7 @@ public class WishlistDataDetailFragment extends SherlockListFragment implements
 		switch (item.getItemId()) {
 			case R.id.wishlist_edit:
 				if (mListView.getAdapter().getCount() > 0) {
-					mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
+					mActionMode = getActivity().startActionMode(new mActionModeCallback());
 		            mActionMode.setTag(0);
 					mListView.setItemChecked(0, true);
 				}
@@ -203,6 +203,7 @@ public class WishlistDataDetailFragment extends SherlockListFragment implements
 			.onActivityResult(getTargetRequestCode(), resultCode, i);
 	}
 	
+	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		int position = info.position;
@@ -213,7 +214,7 @@ public class WishlistDataDetailFragment extends SherlockListFragment implements
 			return true;
 		}
 		else {
-			return super.onContextItemSelected((android.view.MenuItem) item);
+			return super.onContextItemSelected(item);
 		}
 	}
 	

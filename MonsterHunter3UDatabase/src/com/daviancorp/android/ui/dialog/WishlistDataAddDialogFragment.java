@@ -99,7 +99,7 @@ public class WishlistDataAddDialogFragment extends DialogFragment {
 	            	   item_id = args.getLong(ARG_WISHLIST_DATA_ID);
 
 	            	   ArrayList<String> paths = DataManager.get(getActivity()).queryComponentCreateImprove(item_id);
-	            	   	            	   
+	            	   
 	            	   if (paths.size() > 1) {
 	            		   String weaponName = args.getString(ARG_WISHLIST_DATA_WEAPON_NAME);
 

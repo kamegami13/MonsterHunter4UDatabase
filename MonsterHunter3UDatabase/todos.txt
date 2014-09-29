@@ -1,12 +1,10 @@
 
 ------------ Shared ------------
-General:	make all highlights consistent?
-		bold labels/main things? (eg. item names from monster carves)
-		clean logs
+General:	clean logs
+		comment
 
 Armor:		modify armor list (add def/slots?)
 
 ------------ Next Update -------
 
-comment
 add search in other lists?
