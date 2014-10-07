@@ -1,8 +1,10 @@
 package com.daviancorp.android.data.database;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.database.SQLException;
 
 import com.daviancorp.android.data.object.ArenaQuest;
 import com.daviancorp.android.data.object.ArenaReward;
@@ -41,6 +43,25 @@ public class DataManager {
 	private DataManager(Context appContext) {
 		mAppContext = appContext;
 		mHelper = new MonsterHunterDatabaseHelper(mAppContext);
+//		try {
+//			 
+//			mHelper.createDataBase();
+// 
+//	 	} catch (IOException ioe) {
+//	 
+//	 		throw new Error("Unable to create database");
+//	 
+//	 	}
+//	 
+//	 	try {
+//	 
+//	 		mHelper.openDataBase();
+//	 
+//	 	}catch(SQLException sqle){
+//	 
+//	 		throw sqle;
+//	 
+//	 	}
 	}
 	
 	public static DataManager get(Context c) {

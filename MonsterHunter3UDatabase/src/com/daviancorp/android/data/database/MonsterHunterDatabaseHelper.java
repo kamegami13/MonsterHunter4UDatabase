@@ -1,21 +1,21 @@
 package com.daviancorp.android.data.database;
 
-import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.Locale;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
-
-import com.daviancorp.android.monsterhunter3udatabase.R;
 
 //
 //   QUERY REFERENCE:
@@ -43,10 +43,14 @@ import com.daviancorp.android.monsterhunter3udatabase.R;
 public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "MonsterHunterDatabaseHelper";
 	
-	private static final String DB_NAME = "mh3u.sqlite";
+	//The Android's default system path of your application database.
+    private static String DB_PATH = "/data/data/com.daviancorp.android.monsterhunter3udatabase/databases/";
+	private static String DB_NAME = "mh3u.db";
+	private static String ASSETS_DB_FOLDER = "db";
 	private static final int VERSION = 1; // EDIT
 
-	private final Context mContext;
+	private final Context myContext;
+	private SQLiteDatabase myDataBase; 
 	
 	private boolean _Distinct;
 	private String _Table; 
@@ -61,7 +65,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 
 	public MonsterHunterDatabaseHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
-		mContext = context;
+		myContext = context;
 		
 		_Distinct = false;
 		_Table = null;
@@ -73,117 +77,343 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		_OrderBy = null;
 		_Limit = null;
 	}
+	
+	/**
+	 * Creates a empty database on the system and overwrite it with your own
+	 * database.
+	 **/
+	public void createDatabase() throws IOException {
+	    boolean dbExist = checkDatabase();
+		if (!dbExist) {
+			super.getReadableDatabase();
+			try {
+				copyDatabase();
+			}
+			catch (IOException e) {
+				throw new Error("Error copying database");
+			}
+		}
+	}
+
+	/**
+	 * Check if the database already exist to avoid re-copying the file each
+	 * time you open the application.
+	 * 
+	 * @return true if it exists, false if it doesn't
+	 */
+	private boolean checkDatabase() {
+		SQLiteDatabase checkDB = null;
+
+		try {
+			String myPath = DB_PATH + DB_NAME;
+			checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY|SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+		}
+		catch (SQLiteException e) {
+			// database does't exist yet.
+		}
+
+		if (checkDB != null) {
+			checkDB.close();
+		}
+		return checkDB != null ? true : false;
+	}
+
+	private void copyDatabase() throws IOException {
+		String[] dbFiles = myContext.getAssets().list(ASSETS_DB_FOLDER);
+		String outFileName = DB_PATH + DB_NAME;
+		OutputStream myOutput = new FileOutputStream(outFileName);		
+		
+		for(int i =0; i < dbFiles.length; i++) {
+			InputStream myInput = myContext.getAssets().open(ASSETS_DB_FOLDER+"/"+dbFiles[i]);
+			byte[] buffer = new byte[1024];
+			int length;
+			
+			while ((length = myInput.read(buffer)) > 0) {
+				myOutput.write(buffer, 0, length);
+			}
+			
+			myInput.close();
+		}
+		myOutput.flush();
+		myOutput.close();
+	}
+
+	public void openDatabase() throws SQLException {
+		// Open the database
+		String myPath = DB_PATH + DB_NAME;
+		myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY|SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+	}
 
 	@Override
-	public void onCreate(SQLiteDatabase db) {
-		populateDatabase(db);
-		db.execSQL("INSERT INTO 'wishlist' (`_id`, `name`) VALUES (1, 'My Wishlist');");
+	public synchronized void close() {
+		if (myDataBase != null) myDataBase.close();
+		super.close();
 	}
 
 	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// Implement schema changes and data message here when upgrading
-		populateDatabase(db);
+	public void onCreate(SQLiteDatabase db) { }
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
+	
+	@Override
+	public synchronized SQLiteDatabase getReadableDatabase (){
+		try {
+			createDatabase();
+			openDatabase();
+		}
+		catch (SQLException e) {
+			myDataBase = null;
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			myDataBase = null;
+			e.printStackTrace();
+		}
+		return myDataBase;
 	}
 	
-	private void populateDatabase(SQLiteDatabase db) {
-		 String sqlStatement = "";
-		 String currLine = null;
-		    boolean inOnCreate = true;
-
-		    // if called from onCreate() db is open and inTransaction, else getWritableDatabase()
-		    if(db == null) {
-		        inOnCreate = false;
-		        db = this.getWritableDatabase();
-		    }
-
-	    	InputStream is = mContext.getResources().openRawResource(
-					R.raw.mh3u);
-		    try {
-		    	BufferedReader reader = new BufferedReader(new InputStreamReader(is));	
-		    	int line = 1;	  
-		    	
-		        while ((currLine = reader.readLine()) != null) {
-		        	line++;
-		        	sqlStatement = sqlStatement + currLine;
-		            // trim, so we can look for ';'
-		            sqlStatement.trim();
-		            if(!sqlStatement.endsWith(";")) {
-		                continue;   // line breaks in file, get whole statement
-		            }
-		            if(!sqlStatement.startsWith("DROP") && !sqlStatement.startsWith("CREATE")
-		            		&& !sqlStatement.startsWith("INSERT") && !sqlStatement.startsWith("  INSERT")) {
-		            	sqlStatement = "";
-		            	continue;
-		            }
-		            try {
-	                    db.execSQL(sqlStatement);
-	                    sqlStatement = "";
-	                } catch (SQLException e) {
-//		            	Log.d("helpme", "Error " + line + ":" + sqlStatement);
-	                    throw(new Error("Error executing SQL " + sqlStatement));
-	                }   // try/catch
-		        }   // while()
-		    } catch (IOException e) {
-//		    	
-//				Log.d("helpme", "IOException");
-				
-		        throw(new Error("Error reading SQL file"));
-		    } finally {
-		        try { is.close(); } catch (Throwable ignore) {}
-		    }
-
-		    if(!inOnCreate) {
-		        db.close();
-		    }
-	}
 	
-//	private void populateDatabase(SQLiteDatabase db) {
-//		String text;
-//		
-//		try {
-//			InputStream is = mContext.getResources().openRawResource(
-//					R.raw.mh3u);
-//			// We guarantee that the available method returns the total
-//			// size of the asset... of course, this does mean that a single
-//			// asset can't be more than 2 gigs.
-//			int size = is.available();
-//
-//			// Read the entire asset into a local byte buffer.
-//			byte[] buffer = new byte[size];
-//			is.read(buffer);
-//			is.close();
-//
-//			// Convert the buffer into a string.
-//			text = new String(buffer);
-//		} catch (IOException e) {
-//			// Should never happen!
-//			Log.d("helpme", "exception");
-//			throw new RuntimeException(e);
-//		}
-//
-//		String[] str = text.split(";");
-//		String temp = "";
-//		String before = "";
-//		
-//		try {
-//			for (String s : str) {
-//				temp = s;
-//				if (!s.equals("") && !s.startsWith("-") && !s.startsWith("/")
-//						&& !s.startsWith("\n") && !s.startsWith("\r")) {
-//					db.execSQL(s);
-//				}
-//				before = s;
-//			}
-//		} catch (Exception e) {
-//			int t = (int) temp.charAt(0);
-//			Log.d("helpme", "Before: " + before);
-//			Log.d("helpme", "String: " + temp);
-//			Log.d("helpme", "ascii: " + t);
-//			throw e;
-//		}
+
+//	@Override
+//	public void onCreate(SQLiteDatabase db) {
+//		createDB();
+////		populateDatabase(db);
+////		db.execSQL("INSERT INTO 'wishlist' (`_id`, `name`) VALUES (1, 'My Wishlist');");
 //	}
+//
+//	@Override
+//	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//		// Implement schema changes and data message here when upgrading
+////		populateDatabase(db);
+//		Log.w(TAG, "Upgrading DB from version " + oldVersion + " to " +
+//                newVersion + ", which will destroy all old data");
+//        onCreate(db);
+//	}
+//	
+//	public void createDataBase(){
+//        createDB();
+//    }
+//	
+//	private void createDB(){
+//        boolean dbExist = dbExists();
+//        if(!dbExist){
+//            copyDataBase();
+//        }
+//        else if(dbExist){
+//            copyDataBase();
+//        }
+//    }
+//
+//    private boolean dbExists(){
+//        SQLiteDatabase db = null;
+//        try{
+//            String dbPath = DB_PATH + DB_NAME;
+//            db = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
+//            db.setLocale(Locale.getDefault());
+//            db.setVersion(VERSION);
+//        }
+//        catch(SQLiteException e){
+//            Log.e("SQL Helper", "database not found");
+//        }
+//        if(db != null){
+//            db.close();
+//        }
+//        return db != null ? true : false;
+//    }
+//
+//    private void copyDataBase(){
+//        InputStream iStream = null;
+//        OutputStream oStream = null;
+//        String outFilePath = DB_PATH + DB_NAME;
+//        try{
+//            iStream = mContext.getAssets().open(DB_NAME);
+//            oStream = new FileOutputStream(outFilePath);
+//            byte[] buffer = new byte[1024];
+//            int length;
+//            while((length = iStream.read(buffer))>0){
+//                oStream.write(buffer,0,length);
+//            }
+//            oStream.flush();
+//            oStream.close();
+//            iStream.close();
+//        }
+//        catch(IOException ioe){
+//            throw new Error("Problem copying database from resource file.");
+//        }
+//    }
+//
+//    public void openDataBase() throws SQLException {
+//        String myPath = DB_PATH + DB_NAME;
+//        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+//    }
+//
+//    @Override
+//    public synchronized void close(){
+//        if (myDataBase != null)
+//            myDataBase.close();
+//        super.close();
+//    }
+    
+    
+    
 	
+//	/**
+//     * Creates a empty database on the system and rewrites it with your own database.
+//     * */
+//    public void createDataBase() throws IOException{
+// 
+//    	boolean dbExist = checkDataBase();
+// 
+//    	if(dbExist){
+//    		//do nothing - database already exist
+//    	}else{
+// 
+//    		//By calling this method and empty database will be created into the default system path
+//               //of your application so we are gonna be able to overwrite that database with our database.
+//        	this.getReadableDatabase();
+// 
+//        	try {
+// 
+//    			copyDataBase();
+// 
+//    		} catch (IOException e) {
+// 
+//        		throw new Error("Error copying database");
+// 
+//        	}
+//    	}
+// 
+//    }
+// 
+//    /**
+//     * Check if the database already exist to avoid re-copying the file each time you open the application.
+//     * @return true if it exists, false if it doesn't
+//     */
+//    private boolean checkDataBase(){
+// 
+//    	SQLiteDatabase checkDB = null;
+// 
+//    	try{
+//    		String myPath = DB_PATH + DB_NAME;
+//    		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+// 
+//    	}catch(SQLiteException e){
+// 
+//    		//database does't exist yet.
+// 
+//    	}
+// 
+//    	if(checkDB != null){
+// 
+//    		checkDB.close();
+// 
+//    	}
+// 
+//    	return checkDB != null ? true : false;
+//    }
+// 
+//    /**
+//     * Copies your database from your local assets-folder to the just created empty database in the
+//     * system folder, from where it can be accessed and handled.
+//     * This is done by transfering bytestream.
+//     * */
+//    private void copyDataBase() throws IOException{
+// 
+//    	//Open your local db as the input stream
+//    	InputStream myInput = mContext.getAssets().open(DB_NAME);
+// 
+//    	// Path to the just created empty db
+//    	String outFileName = DB_PATH + DB_NAME;
+// 
+//    	//Open the empty db as the output stream
+//    	OutputStream myOutput = new FileOutputStream(outFileName);
+// 
+//    	//transfer bytes from the inputfile to the outputfile
+//    	byte[] buffer = new byte[1024];
+//    	int length;
+//    	while ((length = myInput.read(buffer))>0){
+//    		myOutput.write(buffer, 0, length);
+//    	}
+// 
+//    	//Close the streams
+//    	myOutput.flush();
+//    	myOutput.close();
+//    	myInput.close();
+// 
+//    }
+// 
+//    public void openDataBase() throws SQLException{
+// 
+//    	//Open the database
+//        String myPath = DB_PATH + DB_NAME;
+//    	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+// 
+//    }
+	
+//	
+//	private void populateDatabase(SQLiteDatabase db) {
+//		 String sqlStatement = "";
+//		 String currLine = null;
+//		    boolean inOnCreate = true;
+//
+//		    // if called from onCreate() db is open and inTransaction, else getWritableDatabase()
+//		    if(db == null) {
+//		        inOnCreate = false;
+//		        db = this.getWritableDatabase();
+//		    }
+//
+//	    	InputStream is = mContext.getResources().openRawResource(
+//					R.raw.mh3u);
+//		    try {
+//		    	BufferedReader reader = new BufferedReader(new InputStreamReader(is));	
+//		    	int line = 1;	  
+//		    	
+//		        while ((currLine = reader.readLine()) != null) {
+//		        	line++;
+//		        	sqlStatement = sqlStatement + currLine;
+//		            // trim, so we can look for ';'
+//		            sqlStatement.trim();
+//		            if(!sqlStatement.endsWith(";")) {
+//		                continue;   // line breaks in file, get whole statement
+//		            }
+//		            if(!sqlStatement.startsWith("DROP") && !sqlStatement.startsWith("CREATE")
+//		            		&& !sqlStatement.startsWith("INSERT") && !sqlStatement.startsWith("  INSERT")) {
+//		            	sqlStatement = "";
+//		            	continue;
+//		            }
+//		            try {
+//	                    db.execSQL(sqlStatement);
+//	                    sqlStatement = "";
+//	                } catch (SQLException e) {
+////		            	Log.d("helpme", "Error " + line + ":" + sqlStatement);
+//	                    throw(new Error("Error executing SQL " + sqlStatement));
+//	                }   // try/catch
+//		        }   // while()
+//		    } catch (IOException e) {
+////		    	
+////				Log.d("helpme", "IOException");
+//				
+//		        throw(new Error("Error reading SQL file"));
+//		    } finally {
+//		        try { is.close(); } catch (Throwable ignore) {}
+//		    }
+//
+//		    if(!inOnCreate) {
+//		        db.close();
+//		    }
+//	}
+//	
+//    @Override
+//	public synchronized void close() {
+// 
+//    	    if(myDataBase != null)
+//    		    myDataBase.close();
+// 
+//    	    super.close();
+// 
+//	}
+    
 	private String makePlaceholders(int len) {
 	    if (len < 1) {
 	        // It will lead to an invalid query anyway ..
