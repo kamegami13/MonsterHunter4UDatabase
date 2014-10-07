@@ -2,7 +2,6 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.daviancorp.android.data.database.DataManager;
 
@@ -28,7 +27,6 @@ public class ItemToSkillTreeListCursorLoader extends SQLiteCursorLoader {
 			return DataManager.get(getContext()).queryItemToSkillTreeSkillTree(id, type);
 		}
 		else {
-			Log.d("heyo", "ItemToSkillTreeListCursorLoader: bad arg!!! + (" + from + ")");
 			return null;
 		}
 	}

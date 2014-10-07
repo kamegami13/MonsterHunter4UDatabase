@@ -120,13 +120,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	                    db.execSQL(sqlStatement);
 	                    sqlStatement = "";
 	                } catch (SQLException e) {
-		            	Log.d("helpme", "Error " + line + ":" + sqlStatement);
+//		            	Log.d("helpme", "Error " + line + ":" + sqlStatement);
 	                    throw(new Error("Error executing SQL " + sqlStatement));
 	                }   // try/catch
 		        }   // while()
 		    } catch (IOException e) {
-		    	
-				Log.d("helpme", "IOException");
+//		    	
+//				Log.d("helpme", "IOException");
 				
 		        throw(new Error("Error reading SQL file"));
 		    } finally {

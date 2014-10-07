@@ -2,7 +2,6 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.daviancorp.android.data.database.DataManager;
 
@@ -25,7 +24,6 @@ public class ComponentListCursorLoader extends SQLiteCursorLoader {
 			return DataManager.get(getContext()).queryComponentComponent(id);
 		}
 		else {
-			Log.d("heyo", "ComponentCursorLoader: bad arg!!! + (" + from + ")");
 			return null;
 		}
 	}

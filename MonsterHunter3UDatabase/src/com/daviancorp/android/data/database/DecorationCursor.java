@@ -2,7 +2,6 @@ package com.daviancorp.android.data.database;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
-import android.util.Log;
 
 import com.daviancorp.android.data.object.Decoration;
 

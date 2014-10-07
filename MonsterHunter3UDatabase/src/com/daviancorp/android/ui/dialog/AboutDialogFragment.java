@@ -10,7 +10,6 @@ import android.support.v4.app.DialogFragment;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.daviancorp.android.monsterhunter3udatabase.R;
@@ -19,7 +18,6 @@ public class AboutDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-		Log.d("helpme", "oncreatedialog");
 		final TextView message = new TextView(getActivity());
 
 		final SpannableString s = new SpannableString(getActivity().getText(

@@ -2,7 +2,6 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.daviancorp.android.data.database.DataManager;
 
@@ -24,7 +23,6 @@ public class MonsterListCursorLoader extends SQLiteCursorLoader {
 		if (tab == null) {
 			return DataManager.get(getContext()).queryMonsters();
 		} else if (tab.equals("Small")) {
-			Log.d("hoooooo", "SMALLS");
 			return DataManager.get(getContext()).querySmallMonsters();
 		} else if (tab.equals("Large")) {
 			return DataManager.get(getContext()).queryLargeMonsters();

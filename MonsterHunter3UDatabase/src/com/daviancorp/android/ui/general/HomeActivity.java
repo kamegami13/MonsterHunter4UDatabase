@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
 import com.actionbarsherlock.view.MenuItem;
 import com.daviancorp.android.monsterhunter3udatabase.R;
@@ -30,12 +29,10 @@ public class HomeActivity extends GenericActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Log.d("helpme", "test");
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			return true;
 		case R.id.about:
-			Log.d("helpme", "aboutt");
 			FragmentManager fm = getSupportFragmentManager();
 			AboutDialogFragment dialog = new AboutDialogFragment();
 			dialog.show(fm, DIALOG_ABOUT);

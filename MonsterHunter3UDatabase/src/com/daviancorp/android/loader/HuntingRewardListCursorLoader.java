@@ -2,7 +2,6 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.daviancorp.android.data.database.DataManager;
 
@@ -27,7 +26,6 @@ public class HuntingRewardListCursorLoader extends SQLiteCursorLoader {
 			return DataManager.get(getContext()).queryHuntingRewardMonsterRank(id, rank);
 		}
 		else {
-			Log.d("heyo", "HuntingRewardCursorLoader: bad arg!!! + (" + from + ")");
 			return null;
 		}
 	}
