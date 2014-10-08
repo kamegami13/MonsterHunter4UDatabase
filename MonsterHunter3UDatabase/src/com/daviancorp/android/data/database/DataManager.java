@@ -42,7 +42,7 @@ public class DataManager {
 	
 	private DataManager(Context appContext) {
 		mAppContext = appContext;
-		mHelper = new MonsterHunterDatabaseHelper(mAppContext);
+		mHelper = MonsterHunterDatabaseHelper.getInstance(mAppContext);
 //		try {
 //			 
 //			mHelper.createDataBase();
@@ -237,6 +237,7 @@ public class DataManager {
 			cursor.moveToNext();
 		}
 		
+		cursor.close();
 		return paths;
 	}
 	
@@ -342,6 +343,7 @@ public class DataManager {
 		monsterCursor.moveToFirst();
 		
 		String name = monsterCursor.getMonster().getName();
+		monsterCursor.close();
 		
 		monsterCursor = mHelper.queryMonsterTrait(name);
 		monsterCursor.moveToFirst();
@@ -350,7 +352,8 @@ public class DataManager {
 			ids.add(monsterCursor.getMonster().getId());
 			monsterCursor.moveToNext();
 		}
-
+		monsterCursor.close();
+		
 		long[] idArray = new long[ids.size()];
 		for (int i = 0; i < idArray.length; i++) {
 			idArray[i] = ids.get(i);
@@ -818,7 +821,8 @@ public class DataManager {
 			
 			currentId = cursor.getWeapon().getId();
 			ids.add(0, currentId);
-
+			
+			cursor.close();
 		}
 		while (true);
 		
@@ -834,7 +838,8 @@ public class DataManager {
 				cursor.moveToNext();
 			}
 		}
-
+		cursor.close();
+		
 		long[] idArray = new long[ids.size()];
 		for (int i = 0; i < idArray.length; i++) {
 			idArray[i] = ids.get(i);
@@ -926,7 +931,8 @@ public class DataManager {
 			
 			mHelper.queryUpdateWishlistDataQuantity(id, total);
 		}
-
+		cursor.close();
+		
 		helperQueryAddWishlistData(wishlist_id, item_id, quantity, path);
 		helperQueryUpdateWishlistSatisfied(wishlist_id);
 	}
@@ -955,9 +961,11 @@ public class DataManager {
 
 				mHelper.queryUpdateWishlistComponentQuantity(wc_id, old_amt + c_amt);
 			}
+			wc.close();
 			
 			cc.moveToNext();
 		}
+		cc.close();
 	}
 
 	public void queryUpdateWishlistData(long id, int quantity) {
@@ -967,6 +975,8 @@ public class DataManager {
 		wdCursor.moveToFirst();
 		
 		WishlistData wd = wdCursor.getWishlistData();
+		wdCursor.close();
+		
 		long wishlist_id = wd.getWishlistId();
 		long item_id = wd.getItem().getId();
 		int wd_old_quantity = wd.getQuantity();
@@ -990,9 +1000,11 @@ public class DataManager {
 			
 			mHelper.queryUpdateWishlistComponentQuantity(wc_id, old_amt + c_amt);
 			
+			wc.close();
 			cc.moveToNext();
 		}
-
+		cc.close();
+		
 		mHelper.queryUpdateWishlistDataQuantity(id, quantity);
 		helperQueryUpdateWishlistSatisfied(wishlist_id);
 	}
@@ -1004,6 +1016,8 @@ public class DataManager {
 		wdCursor.moveToFirst();
 		
 		WishlistData wd = wdCursor.getWishlistData();
+		wdCursor.close();
+		
 		long wishlist_id = wd.getWishlistId();
 		long item_id = wd.getItem().getId();
 		int wd_old_quantity = wd.getQuantity();
@@ -1032,8 +1046,10 @@ public class DataManager {
 				mHelper.queryDeleteWishlistComponent(wc_id);
 			}
 			
+			wc.close();
 			cc.moveToNext();
 		}
+		cc.close();
 		
 		mHelper.queryDeleteWishlistData(id);
 	}
@@ -1062,6 +1078,7 @@ public class DataManager {
 				else if (type.equals("Improve")) {
 					buy = wc.getWeapon().getUpgradeCost();
 				}
+				wc.close();
 			}
 			else {
 				buy = wd.getItem().getBuy();
@@ -1076,7 +1093,7 @@ public class DataManager {
 			
 			wdc.moveToNext();
 		}
-		
+		wdc.close();
 		return total;
 	}
 	
@@ -1092,15 +1109,13 @@ public class DataManager {
 		wcc.moveToFirst();
 		long w_id = wcc.getWishlistComponent().getWishlistId();
 		
+		wcc.close();
 		helperQueryUpdateWishlistSatisfied(w_id);
 	}
 	
 	private void helperQueryUpdateWishlistSatisfied(long wishlist_id) {
 		WishlistDataCursor wdc = mHelper.queryWishlistData(wishlist_id);
 		wdc.moveToFirst();
-		
-		WishlistCursor cur = mHelper.queryWishlist(wishlist_id);
-		cur.moveToFirst();
 		
 		WishlistData wd = null;
 		WishlistComponent wc = null;
