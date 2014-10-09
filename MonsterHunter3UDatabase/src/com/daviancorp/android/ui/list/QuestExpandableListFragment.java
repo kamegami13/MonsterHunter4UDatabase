@@ -233,9 +233,16 @@ public class QuestExpandableListFragment extends Fragment {
 					viewGroup, false);
 
 			TextView questChildTextView = (TextView) v.findViewById(R.id.name);
+			TextView keyChildTextView = (TextView) v.findViewById(R.id.key);
 			LinearLayout root = (LinearLayout) v.findViewById(R.id.root);
 
 			questChildTextView.setText(getChild(i, i1).toString());
+			
+			String key = ((Quest) getChild(i, i1)).getType();
+			if (key.equals("Normal")) {
+				key = "";
+			}
+			keyChildTextView.setText(key);
 
 			root.setTag(((Quest) getChild(i, i1)).getId());
 			return v;
