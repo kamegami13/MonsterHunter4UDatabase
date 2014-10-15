@@ -1,14 +1,20 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for WishlistData
+ *
+ * Holds the items wanted
+ */
 public class WishlistData {
 
-	private long id;
-	private long wishlist_id;
-	private Item item;
-	private int quantity;
-	private int satisfied;
-	private String path;
+	private long id;			// id
+	private long wishlist_id;	// Wishlist
+	private Item item;			// Item
+	private int quantity;		// Quantity
+	private int satisfied;		// Can make Item yet or no
+	private String path;		// Creation path of Item
 	
+	/* Default Constructor */
 	public WishlistData() {
 		this.id = -1;
 		this.wishlist_id = -1;
@@ -18,6 +24,7 @@ public class WishlistData {
 		this.path = "";
 	}
 	
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

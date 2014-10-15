@@ -1,10 +1,14 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for Wishlist
+ */
 public class Wishlist {
 
-	private long id;
-	private String name;
+	private long id;			// Wishlist id
+	private String name;		// Wishlist name
 	
+	/* Default Constructor */
 	public Wishlist() {
 		this.id = -1;
 		this.name = "";
@@ -15,6 +19,7 @@ public class Wishlist {
 		this.name = name;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

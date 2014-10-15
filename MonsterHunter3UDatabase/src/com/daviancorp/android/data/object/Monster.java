@@ -1,13 +1,17 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for Monster
+ */
 public class Monster {
 
-	private long id;
-	private String name;
-	private String monsterClass;
-	private String trait;
-	private String file_location;
+	private long id;				// Monster id
+	private String name;			// Monster name
+	private String monsterClass;	// Large / small
+	private String trait;			// Traits/different type
+	private String file_location;	// File location for image
 	
+	/* Default Constructor */
 	public Monster() {
 		this.id = -1;
 		this.name = "";
@@ -15,14 +19,8 @@ public class Monster {
 		this.trait = "";
 		this.file_location = "";
 	}
-	
-	public Monster(long id, String name, String monsterClass, String trait) {
-		this.id = id;
-		this.name = name;
-		this.monsterClass = monsterClass;
-		this.trait = trait;
-	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

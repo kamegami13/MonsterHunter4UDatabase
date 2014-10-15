@@ -1,21 +1,23 @@
 package com.daviancorp.android.data.object;
 
 /*
- * Note: No constructor with fields
- * Note: Add skills
+ * Class for Decoration
+ *
+ * Note: Subclass of Item
  */
 public class Decoration extends Item{
 
-	private int num_slots;
-	private long skill_1_id;
-	private String skill_1_name;
-	private int skill_1_point;
-	private long skill_2_id;
-	private String skill_2_name;
-	private int skill_2_point;
+	private int num_slots;			// Number of slots required
+	private long skill_1_id;		// Id of SkillTree 1
+	private String skill_1_name;	// Name of SkillTree 1
+	private int skill_1_point;		// # of points for SkillTree 1
+	private long skill_2_id;		// Id of SkillTree 2
+	private String skill_2_name;	// Name of SkillTree 2
+	private int skill_2_point;		// # of points for SkillTree 2
 	
+	/* Default Constructor */
 	public Decoration() {
-		super();
+		super();					// Initialized variables in Item
 		
 		this.num_slots = -1;
 		this.skill_1_id = -1;
@@ -26,6 +28,7 @@ public class Decoration extends Item{
 		this.skill_2_point = -1;
 	}
 	
+	/* Getters and Setters */
 	public int getNumSlots() {
 		return num_slots;
 	}
@@ -81,6 +84,5 @@ public class Decoration extends Item{
 	public void setSkill2Point(int skill_2_point) {
 		this.skill_2_point = skill_2_point;
 	}
-
 	
 }

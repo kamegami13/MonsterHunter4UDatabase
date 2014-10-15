@@ -28,7 +28,7 @@ public class CombiningCursor extends CursorWrapper {
 		String created = "crt";
 		String mat1 = "mat1";
 		String mat2 = "mat2";
-		
+
 		Combining combining = new Combining();
 
 		long combiningId = getLong(getColumnIndex(S.COLUMN_COMBINING_ID));
@@ -41,9 +41,9 @@ public class CombiningCursor extends CursorWrapper {
 		combining.setAmountMadeMax(amount_made_max);
 		combining.setPercentage(percentage);
 		
-		Item created_item = itemHelper(created);	
-		Item item1 = itemHelper(mat1);	
-		Item item2 = itemHelper(mat2);
+		Item created_item = itemHelper(created);	// Get the resulted Item
+		Item item1 = itemHelper(mat1);				// Get the first material Item
+		Item item2 = itemHelper(mat2);				// Get the second material Item
 
 		combining.setCreatedItem(created_item);
 		combining.setItem1(item1);
@@ -52,6 +52,9 @@ public class CombiningCursor extends CursorWrapper {
 		return combining;
 	}
 	
+	/*
+	 * Helper method to get the data for an Item
+	 */
 	private Item itemHelper(String prefix) {
 		Item item = new Item();
 

@@ -39,6 +39,7 @@ public class WishlistDataCursor extends CursorWrapper {
 		wishlistData.setSatisfied(satisfied);
 		wishlistData.setPath(path);
 
+		// Get the Item
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_WISHLIST_DATA_ITEM_ID));

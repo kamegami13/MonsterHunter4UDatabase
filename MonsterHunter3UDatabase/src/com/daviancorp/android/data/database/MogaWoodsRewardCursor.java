@@ -40,6 +40,7 @@ public class MogaWoodsRewardCursor extends CursorWrapper {
 		mogaWoodsReward.setKillPercentage(kill_percentage);
 		mogaWoodsReward.setCapturePercentage(capture_percentage);
 
+		// Get the Item
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID));
@@ -68,6 +69,7 @@ public class MogaWoodsRewardCursor extends CursorWrapper {
 		
 		mogaWoodsReward.setItem(item);
 
+		// Get the Monster
 		Monster monster = new Monster();
 
 		long monsterId = getLong(getColumnIndex(S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID));

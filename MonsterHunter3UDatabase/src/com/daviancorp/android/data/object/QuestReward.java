@@ -1,14 +1,18 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for QuestReward
+ */
 public class QuestReward {
 
-	private long id;
-	private Quest quest;
-	private Item item;
-	private String reward_slot;
-	private int percentage;
-	private int stack_size;
+	private long id;				// id
+	private Quest quest;			// Quest
+	private Item item;				// Item
+	private String reward_slot;		// Slot A or Slot B
+	private int percentage;			// Percentage to obtain item
+	private int stack_size;			// Amount of item obtained
 	
+	/* Default Constructor */
 	public QuestReward() {
 		this.id = -1;
 		this.quest = null;
@@ -18,6 +22,7 @@ public class QuestReward {
 		this.stack_size = -1;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

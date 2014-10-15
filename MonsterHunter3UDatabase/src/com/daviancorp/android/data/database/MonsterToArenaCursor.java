@@ -31,6 +31,7 @@ public class MonsterToArenaCursor extends CursorWrapper {
 		long id = getLong(getColumnIndex(S.COLUMN_MONSTER_TO_ARENA_ID));
 		monster_to_arena.setId(id);
 
+		// Get the ArenaQuest
 		ArenaQuest arenaQuest = new ArenaQuest();
 
 		long arenaId = getLong(getColumnIndex(S.COLUMN_MONSTER_TO_ARENA_ARENA_ID));
@@ -41,6 +42,7 @@ public class MonsterToArenaCursor extends CursorWrapper {
 
 		monster_to_arena.setArenaQuest(arenaQuest);
 
+		// Get the Monster
 		Monster monster = new Monster();
 
 		long monsterId = getLong(getColumnIndex(S.COLUMN_MONSTER_TO_ARENA_MONSTER_ID));

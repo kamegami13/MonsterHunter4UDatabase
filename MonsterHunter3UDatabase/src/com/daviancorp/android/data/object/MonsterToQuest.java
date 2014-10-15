@@ -1,12 +1,16 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for MonsterToQuest
+ */
 public class MonsterToQuest {
 
-	private long id;
-	private Monster monster;
-	private Quest quest;
-	private String unstable;
+	private long id;			// id
+	private Monster monster;	// Monster
+	private Quest quest;		// Quest
+	private String unstable;	// Unstable or not
 	
+	/* Default Constructors */
 	public MonsterToQuest() {
 		this.id = -1;
 		this.monster = null;
@@ -14,6 +18,7 @@ public class MonsterToQuest {
 		this.unstable = null;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

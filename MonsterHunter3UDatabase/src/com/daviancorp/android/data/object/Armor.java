@@ -1,25 +1,27 @@
 package com.daviancorp.android.data.object;
 
 /*
- * Note: No constructor with fields
- * Note: Add skills
+ * Class for Armor
+ *
+ * Note: Subclass of Item
  */
 public class Armor extends Item{
 	
-	private String slot;
-	private int defense;
-	private int max_defense;
-	private int fire_res;
-	private int thunder_res;
-	private int dragon_res;
-	private int water_res;
-	private int ice_res;
-	private String gender;
-	private String hunter_type;
-	private int num_slots;
+	private String slot;			// Equipment type
+	private int defense;			// Base defense
+	private int max_defense;		// Max defense
+	private int fire_res;			// Fire resistance
+	private int thunder_res;		// Thunder resistance
+	private int dragon_res;			// Dragon resistance
+	private int water_res;			// Water resistance
+	private int ice_res;			// Ice resistance
+	private String gender;			// Which gender can equip
+	private String hunter_type;		// Which hunter type can equip: Blademaster/Gunner
+	private int num_slots;			// Number of slots
 	
+	/* Default Constructor */
 	public Armor() {
-		super();
+		super();					// Initialize variables from Item
 		
 		this.slot = "";
 		this.defense = -1;
@@ -32,6 +34,7 @@ public class Armor extends Item{
 		this.num_slots = -1;
 	}
 
+	/* Getters and Setters */
 	public String getSlot() {
 		return slot;
 	}

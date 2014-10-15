@@ -1,15 +1,19 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for MogaWoodsReward
+ */
 public class MogaWoodsReward {
 
-	private long id;
-	private Monster monster;
-	private String time;
-	private Item item;
-	private int commodity_stars;
-	private int kill_percentage;
-	private int capture_percentage;
+	private long id;					// id
+	private Monster monster;			// Monster
+	private String time;				// Day or night
+	private Item item;					// Item
+	private int commodity_stars;		// # of commodity stars
+	private int kill_percentage;		// Percentage to obtain through killing
+	private int capture_percentage;		// Percentage to obtain through capturing
 	
+	/* Default Constructor */
 	public MogaWoodsReward() {
 		this.id = -1;
 		this.monster = null;
@@ -20,6 +24,7 @@ public class MogaWoodsReward {
 		this.capture_percentage = -1;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

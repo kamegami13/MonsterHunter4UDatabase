@@ -1,14 +1,18 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for Skill
+ */
 public class Skill {
 
-	private long id;
-//	private SkillTree skillTree;
-	private int required_points;
-	private String name;
-	private String jpn_name;
-	private String description;
+	private long id;				// id
+//	private SkillTree skillTree;	// SkillTree; unused at the moment
+	private int required_points;	// Required points to unlock skill
+	private String name;			// Skill name
+	private String jpn_name;		// Japanese skill name; unused at the moment
+	private String description;		// Skill description
 	
+	/* Default Constructor */
 	public Skill() {
 		this.id = -1;
 		this.required_points = -1;
@@ -17,6 +21,7 @@ public class Skill {
 		this.description = "";
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

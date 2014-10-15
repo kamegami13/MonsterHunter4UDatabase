@@ -41,6 +41,7 @@ public class HuntingRewardCursor extends CursorWrapper {
 		huntingReward.setStackSize(stack_size);
 		huntingReward.setPercentage(percentage);
 
+		// Get the Item
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_HUNTING_REWARDS_ITEM_ID));
@@ -69,6 +70,7 @@ public class HuntingRewardCursor extends CursorWrapper {
 		
 		huntingReward.setItem(item);
 		
+		// Get the Monster
 		Monster monster = new Monster();
 
 		long monsterId = getLong(getColumnIndex(S.COLUMN_HUNTING_REWARDS_MONSTER_ID));

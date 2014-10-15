@@ -1,11 +1,11 @@
 package com.daviancorp.android.data.database;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.Locale;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,6 +16,10 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
+
+import com.daviancorp.android.data.object.Wishlist;
+import com.daviancorp.android.data.object.WishlistComponent;
+import com.daviancorp.android.data.object.WishlistData;
 
 //
 //   QUERY REFERENCE:
@@ -49,7 +53,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
     private static String DB_PATH = "/data/data/com.daviancorp.android.monsterhunter3udatabase/databases/";
 	private static String DB_NAME = "mh3u.db";
 	private static String ASSETS_DB_FOLDER = "db";
-	private static final int VERSION = 1; // EDIT
+	private static final int VERSION = 3; // EDIT
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -59,7 +63,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private String[] _Columns; 
 	private String _Selection; 
 	private String[] _SelectionArgs; 
-	private String _GroupBy; 
+	private String _GroupBy;
 	private String _Having; 
 	private String _OrderBy; 
 	private String _Limit;
@@ -78,6 +82,8 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private MonsterHunterDatabaseHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
 		myContext = context;
+
+		Log.d("helpme", "version: " + VERSION);
 		
 		_Distinct = false;
 		_Table = null;
@@ -173,7 +179,47 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) { }
 
 	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		if (newVersion > oldVersion) {
+			Log.d("helpme", "start upgrade");
+			WishlistCursor wc = queryWishlists();
+			WishlistDataCursor wdc = queryWishlistsData();
+			WishlistComponentCursor wcc = queryWishlistsComponent();
+			
+			File file = new File(DB_PATH + DB_NAME);
+			if(file.exists())
+			  file.delete();
+			
+			wc.moveToFirst();
+			wdc.moveToFirst();
+			wcc.moveToFirst();
+			
+			while (!wc.isAfterLast()) {
+				Wishlist wishlist = wc.getWishlist();
+				queryAddWishlistAll(wishlist.getId(), wishlist.getName());
+				wc.moveToNext();
+			}
+			wc.close();
+			
+			while (!wdc.isAfterLast()) {
+				WishlistData wishlistData = wdc.getWishlistData();
+				queryAddWishlistDataAll(wishlistData.getWishlistId(), wishlistData.getItem().getId(), 
+						wishlistData.getQuantity(), wishlistData.getSatisfied(), wishlistData.getPath());
+				wdc.moveToNext();
+			}
+			wdc.close();
+			
+			while (!wcc.isAfterLast()) {
+				WishlistComponent wishlistComponent = wcc.getWishlistComponent();
+				queryAddWishlistComponentAll(wishlistComponent.getWishlistId(), 
+						wishlistComponent.getItem().getId(), wishlistComponent.getQuantity(), wishlistComponent.getNotes());
+				wcc.moveToNext();
+			}
+			wcc.close();
+		}
+
+		Log.d("helpme", "finish upgrade");
+	}
 	
 	@Override
 	public synchronized SQLiteDatabase getReadableDatabase (){
@@ -2213,6 +2259,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		values.put(S.COLUMN_WISHLIST_NAME, name);
 		
 		return insertRecord(S.TABLE_WISHLIST, values);
+	}		
+
+	/*
+	 * Add a wishlist with all info
+	 */
+	public long queryAddWishlistAll(long id, String name) {
+		ContentValues values = new ContentValues();
+		values.put(S.COLUMN_WISHLIST_ID, id);
+		values.put(S.COLUMN_WISHLIST_NAME, name);
+		
+		return insertRecord(S.TABLE_WISHLIST, values);
 	}
 	
 	public int queryUpdateWishlist(long id, String name) {
@@ -2236,7 +2293,25 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 /********************************* WISHLIST DATA QUERIES ******************************************/
+	
+	/*
+	 * Get all wishlist data
+	 */
+	public WishlistDataCursor queryWishlistsData() {
 
+		_Distinct = false;
+		_Table = S.TABLE_WISHLIST_DATA;
+		_Columns = null;
+		_Selection = null;
+		_SelectionArgs = null;
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+
+		return new WishlistDataCursor(wrapHelper());
+	}
+	
 	/*
 	 * Get all wishlist data for a specific wishlist
 	 */
@@ -2409,7 +2484,25 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 /********************************* WISHLIST COMPONENT QUERIES ******************************************/
+	
+	/*
+	 * Get all wishlist components
+	 */
+	public WishlistComponentCursor queryWishlistsComponent() {
 
+		_Distinct = false;
+		_Table = S.TABLE_WISHLIST_COMPONENT;
+		_Columns = null;
+		_Selection = null;
+		_SelectionArgs = null;
+		_GroupBy = null;
+		_Having = null;
+		_OrderBy = null;
+		_Limit = null;
+
+		return new WishlistComponentCursor(wrapHelper());
+	}
+	
 	/*
 	 * Get all wishlist components for a specific wishlist
 	 */

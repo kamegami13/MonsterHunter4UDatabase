@@ -1,23 +1,22 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for SkillTree
+ */
 public class SkillTree {
 
-	private long id;
-	private String name;
-	private String jpn_name;
+	private long id;			// Id
+	private String name;		// SkillTree name
+	private String jpn_name;	// Japanese name; unused at the moment
 	
+	/* Default Constructor */
 	public SkillTree() {
 		this.id = -1;
 		this.name = "";
 		this.jpn_name = "";
 	}
-	
-	public SkillTree(long id, String name, String jpn_name) {
-		this.id = id;
-		this.name = name;
-		this.jpn_name = jpn_name;
-	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

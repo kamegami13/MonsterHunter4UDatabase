@@ -36,6 +36,7 @@ public class ArenaRewardCursor extends CursorWrapper {
 		arenaReward.setPercentage(percentage);
 		arenaReward.setStackSize(stack_size);
 
+		// Get the Item
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_ARENA_REWARDS_ITEM_ID));
@@ -64,7 +65,9 @@ public class ArenaRewardCursor extends CursorWrapper {
 		
 		arenaReward.setItem(item);
 		
+		// Get the ArenaQuest
 		ArenaQuest arenaQuest = new ArenaQuest();
+		
 		long arenaId = getLong(getColumnIndex(S.COLUMN_ARENA_REWARDS_ARENA_ID));
 		String arenaName = getString(getColumnIndex("a" + S.COLUMN_ARENA_QUESTS_NAME));
 		arenaQuest.setId(arenaId);

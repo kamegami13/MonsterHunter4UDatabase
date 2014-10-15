@@ -1,20 +1,24 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for MonsterDamage
+ */
 public class MonsterDamage {
 
-	private long id;
-//	private Monster monster;
-	private String body_part;
-	private int cut;
-	private int impact;
-	private int shot;
-	private int fire;
-	private int water;
-	private int ice;
-	private int thunder;
-	private int dragon;
-	private int ko;
+	private long id;			// id
+//	private Monster monster;	// Belongs to which monster; unused
+	private String body_part;	// Body part / hitzone
+	private int cut;			// Cut damage
+	private int impact;			// Impact damage
+	private int shot;			// Shot damage
+	private int fire;			// Fire damage
+	private int water;			// Water damage
+	private int ice;			// Ice damage
+	private int thunder;		// Thunder damage
+	private int dragon;			// Dragon damage
+	private int ko;				// KO damage
 	
+	/* Default Constructor */
 	public MonsterDamage() {
 		this.id = -1;
 		this.body_part = "";
@@ -29,6 +33,7 @@ public class MonsterDamage {
 		this.ko = -1;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

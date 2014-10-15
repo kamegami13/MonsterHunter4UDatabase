@@ -1,12 +1,16 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for MonsterToArena
+ */
 public class MonsterToArena {
 
-	private long id;
-	private Monster monster;
-	private ArenaQuest arenaQuest;
-	private String unstable;
+	private long id;				// id
+	private Monster monster;		// Monster
+	private ArenaQuest arenaQuest;	// Arena Quest
+	private String unstable;		// Unstable or not
 	
+	/* Default Constructor */
 	public MonsterToArena() {
 		this.id = -1;
 		this.monster = null;
@@ -14,6 +18,7 @@ public class MonsterToArena {
 		this.unstable = null;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

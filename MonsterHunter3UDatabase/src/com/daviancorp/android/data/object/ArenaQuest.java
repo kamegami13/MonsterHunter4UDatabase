@@ -1,17 +1,21 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for ArenaQuest
+ */
 public class ArenaQuest {
 	
-	private long id;
-	private String name;
-	private String goal;
-	private Location location;
-	private int reward;
-	private int num_participants;
-	private String time_s;
-	private String time_a;
-	private String time_b;
+	private long id;				// Quest id
+	private String name;			// Quest name
+	private String goal;			// Quest clear goal
+	private Location location;		// Quest location
+	private int reward;				// Quest reward
+	private int num_participants;	// Number of participants
+	private String time_s;			// Time limit for S-Rank
+	private String time_a;			// Time limit for A-Rank
+	private String time_b;			// Time limit for B-Rank
 	
+	/* Default Constructor */
 	public ArenaQuest() {
 		this.id = -1;
 		this.name = "";
@@ -24,6 +28,7 @@ public class ArenaQuest {
 		this.time_b = "";
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}
@@ -95,7 +100,7 @@ public class ArenaQuest {
 	public void setTimeB(String time_b) {
 		this.time_b = time_b;
 	}
-	
+
 	@Override
 	public String toString(){
 		return this.name;

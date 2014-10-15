@@ -1,13 +1,19 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for WishlistComponent
+ *
+ * Holds total number of materials
+ */
 public class WishlistComponent {
 
-	private long id;
-	private long wishlist_id;
-	private Item item;
-	private int quantity;
-	private int notes;
+	private long id;				// id
+	private long wishlist_id;		// Wishlist
+	private Item item;				// Item
+	private int quantity;			// Quantity
+	private int notes;				// User's notes for their own quantities
 	
+	/* Default Constructor */
 	public WishlistComponent() {
 		this.id = -1;
 		this.quantity = -1;
@@ -16,6 +22,7 @@ public class WishlistComponent {
 		this.notes = -1;
 	}
 	
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

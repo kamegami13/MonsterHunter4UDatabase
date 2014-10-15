@@ -38,6 +38,7 @@ public class QuestRewardCursor extends CursorWrapper {
 		questReward.setPercentage(percentage);
 		questReward.setStackSize(stack_size);
 
+		// Get the Item
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_QUEST_REWARDS_ITEM_ID));
@@ -66,6 +67,7 @@ public class QuestRewardCursor extends CursorWrapper {
 		
 		questReward.setItem(item);
 		
+		// Get the Quest
 		Quest quest = new Quest();
 
 		long questId = getLong(getColumnIndex(S.COLUMN_QUEST_REWARDS_QUEST_ID));

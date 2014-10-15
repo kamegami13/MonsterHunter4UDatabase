@@ -1,13 +1,19 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for Component
+ *
+ * This is used for forging armor, weapons, and decorations
+ */
 public class Component {
 
-	private long id;
-	private Item created;
-	private Item component;
-	private int quantity;
-	private String type;
+	private long id;			// Component id
+	private Item created;		// Created Item
+	private Item component;		// Component Item
+	private int quantity;		// Amount needed for the component Item
+	private String type;		// Creation method
 	
+	/* Default Constructor */
 	public Component() {
 		this.id = -1;
 		this.created = null;
@@ -16,6 +22,7 @@ public class Component {
 		this.type = "";
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

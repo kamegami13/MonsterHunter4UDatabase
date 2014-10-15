@@ -1,15 +1,19 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for HuntingReward
+ */
 public class HuntingReward {
 
-	private long id;
-	private Item item;
-	private String condition;
-	private Monster monster;
-	private String rank;
-	private int stack_size;
-	private int percentage;
+	private long id;			// HuntingReward id
+	private Item item;			// Item id
+	private String condition;	// Condition to obtain Item
+	private Monster monster;	// Monster that drops Item
+	private String rank;		// Quest rank
+	private int stack_size;		// Amount of Item dropped
+	private int percentage;		// Percentage of obtaining Item
 	
+	/* Default Constructor */
 	public HuntingReward() {
 		this.id = -1;
 		this.item = null;
@@ -20,6 +24,7 @@ public class HuntingReward {
 		this.percentage = -1;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

@@ -46,6 +46,7 @@ public class ArenaQuestCursor extends CursorWrapper {
 		arenaQuest.setTimeA(time_a);
 		arenaQuest.setTimeB(time_b);
 
+		// Get the Location
 		Location location = new Location();
 
 		long locationId = getLong(getColumnIndex(S.COLUMN_ARENA_QUESTS_LOCATION_ID));

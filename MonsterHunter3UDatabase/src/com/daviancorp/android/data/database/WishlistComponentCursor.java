@@ -37,6 +37,7 @@ public class WishlistComponentCursor extends CursorWrapper {
 		wishlistComponent.setQuantity(quantity);
 		wishlistComponent.setNotes(notes);
 
+		// Get the Item
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_COMPONENT_ID));

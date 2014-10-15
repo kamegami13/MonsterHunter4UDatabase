@@ -1,12 +1,16 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for ItemToSkillTree
+ */
 public class ItemToSkillTree {
 
-	private long id;
-	private Item item;
-	private SkillTree skillTree;
-	private int points;
+	private long id;				// Id
+	private Item item;				// Item
+	private SkillTree skillTree;	// SkillTree
+	private int points;				// # of points in SkillTree
 	
+	/* Default Constructor */
 	public ItemToSkillTree() {
 		this.id = -1;
 		this.item = null;
@@ -14,6 +18,7 @@ public class ItemToSkillTree {
 		this.points = -1;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

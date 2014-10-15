@@ -35,6 +35,7 @@ public class ComponentCursor extends CursorWrapper {
 		component.setQuantity(quantity);
 		component.setType(ctype);
 
+		// Get the created Item
 		Item created = new Item();
 		
 		long itemId1 = getLong(getColumnIndex(S.COLUMN_COMPONENTS_CREATED_ITEM_ID));
@@ -63,6 +64,7 @@ public class ComponentCursor extends CursorWrapper {
 		
 		component.setCreated(created);
 	
+		// Get the component Item
 		Item comp = new Item();
 		
 		long itemId2 = getLong(getColumnIndex(S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID));

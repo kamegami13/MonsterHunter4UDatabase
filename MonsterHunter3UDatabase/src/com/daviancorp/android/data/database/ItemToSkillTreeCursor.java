@@ -34,6 +34,7 @@ public class ItemToSkillTreeCursor extends CursorWrapper {
 		itemToSkillTree.setId(id);
 		itemToSkillTree.setPoints(points);
 
+		// Get the Item
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID));
@@ -62,6 +63,7 @@ public class ItemToSkillTreeCursor extends CursorWrapper {
 		
 		itemToSkillTree.setItem(item);
 		
+		// Get the SkillTree
 		SkillTree skillTree = new SkillTree();
 
 		long skillTreeId = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID));

@@ -1,15 +1,19 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for HuntingFleet
+ */
 public class HuntingFleet {
 	
-	private long id;
-	private String type;
-	private int level;
-	private String location;
-	private Item item;
-	private int amount;
-	private int percentage;
+	private long id;			// HuntingFleet id
+	private String type;		// Type of HuntingFleet
+	private int level;			// Level of HuntingFleet; 1-4
+	private String location;	// Location of HuntingFleet; name
+	private Item item;			// Item obtained
+	private int amount;			// Amount of the Item obtained
+	private int percentage;		// Percentage in obtaining Item
 	
+	/* Default constructor */
 	public HuntingFleet() {
 		this.id = -1;
 		this.type = "";
@@ -20,6 +24,7 @@ public class HuntingFleet {
 		this.percentage = -1;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

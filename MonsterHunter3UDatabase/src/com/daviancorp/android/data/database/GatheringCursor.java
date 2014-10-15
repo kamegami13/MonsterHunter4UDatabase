@@ -38,6 +38,7 @@ public class GatheringCursor extends CursorWrapper {
 		gathering.setSite(site);
 		gathering.setRank(rank);
 		
+		// Get the Item
 		Item item = new Item();
 		
 		long itemId = getLong(getColumnIndex(S.COLUMN_GATHERING_ITEM_ID));
@@ -66,6 +67,7 @@ public class GatheringCursor extends CursorWrapper {
 		
 		gathering.setItem(item);
 
+		// Get the Location
 		Location location = new Location();
 
 		long locationId = getLong(getColumnIndex(S.COLUMN_GATHERING_LOCATION_ID));

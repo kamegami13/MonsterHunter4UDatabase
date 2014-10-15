@@ -45,6 +45,7 @@ public class HuntingFleetCursor extends CursorWrapper {
 		huntingFleet.setAmount(amount);
 		huntingFleet.setPercentage(percentage);
 
+		// Get the Item
 		String itemName = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
 		String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 		String itemType = getString(getColumnIndex("i" + S.COLUMN_ITEMS_TYPE));

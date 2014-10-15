@@ -1,19 +1,23 @@
 package com.daviancorp.android.data.object;
 
-public class Item {
+/*
+ * Class for Item
+ */
+public class  Item {
 
-	private long id;
-	private String name;
-	private String jpn_name;
-	private String type;
-	private int rarity;
-	private int carry_capacity;
-	private int buy;
-	private int sell;
-	private String description;
-	private String file_location;
-	private String armor_dupe_name_fix;
+	private long id;						// Item id
+	private String name;					// Item name
+	private String jpn_name;				// Japanese name; unused at the moment
+	private String type;					// Item type
+	private int rarity;						// Rarity; 1-10
+	private int carry_capacity;				// Carry capacity in backpack
+	private int buy;						// Buy amount
+	private int sell;						// Sell amount
+	private String description;				// Item description
+	private String file_location;			// File location for image
+	private String armor_dupe_name_fix;		// unused at the moment?
 	
+	/* Default Constructor */
 	public Item() {
 		this.id = -1;
 		this.name = "";
@@ -28,22 +32,7 @@ public class Item {
 		this.armor_dupe_name_fix = "";
 	}
 
-	public Item(long id, String name, String jpn_name, String type, int rarity,
-			int carry_capacity, int buy, int sell, String description,
-			String file_location, String armor_dupe_name_fix) {
-		this.id = id;
-		this.name = name;
-		this.jpn_name = jpn_name;
-		this.type = type;
-		this.rarity = rarity;
-		this.carry_capacity = carry_capacity;
-		this.buy = buy;
-		this.sell = sell;
-		this.description = description;
-		this.file_location = file_location;
-		this.armor_dupe_name_fix = armor_dupe_name_fix;
-	}
-
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

@@ -34,6 +34,7 @@ public class MonsterToQuestCursor extends CursorWrapper {
 		monster_to_quest.setId(id);
 		monster_to_quest.setUnstable(unstable);
 
+		// Get the Quest
 		Quest quest = new Quest();
 
 		long questId = getLong(getColumnIndex(S.COLUMN_MONSTER_TO_QUEST_QUEST_ID));
@@ -60,6 +61,7 @@ public class MonsterToQuestCursor extends CursorWrapper {
 
 		monster_to_quest.setQuest(quest);
 
+		// Get the Monster
 		Monster monster = new Monster();
 
 		long monsterId = getLong(getColumnIndex(S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID));

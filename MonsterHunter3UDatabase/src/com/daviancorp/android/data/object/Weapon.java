@@ -1,35 +1,35 @@
 package com.daviancorp.android.data.object;
 
 /*
- * Note: No constructor with fields
- * Note: Add skills
+ * Class for Weapon
  */
 public class Weapon extends Item{
 
-	private String wtype;
-	private int creation_cost;
-	private int upgrade_cost;
-	private int attack;
-	private int max_attack;
-	private String elemental_attack;
-	private String awakened_elemental_attack;
-	private int defense;
-	private String sharpness;
-	private int affinity;
-	private String horn_notes;
-	private String shelling_type;
-	private String phial;
-	private String charges;
-	private String coatings;
-	private String recoil;
-	private String reload_speed;
-	private String rapid_fire;
-	private String deviation;
-	private String ammo;
-	private int num_slots;
-	private String sharpness_file;
-	private int wfinal;
+	private String wtype;						// Weapon type
+	private int creation_cost;					// Cost to create
+	private int upgrade_cost;					// Cost to upgrade
+	private int attack;							// Attack damage
+	private int max_attack;						// Max attack damage; unused at the moment
+	private String elemental_attack;			// Elemental attack damage
+	private String awakened_elemental_attack;	// Awakened elmeental attack damage
+	private int defense;						// Defense
+	private String sharpness;					// Sharpness values; unused at the moment
+	private int affinity;						// Affinity
+	private String horn_notes;					// Horn notes
+	private String shelling_type;				// Shelling type
+	private String phial;						// Phial type
+	private String charges;						// Charges for bows
+	private String coatings;					// Coatings for bows
+	private String recoil;						// Recoils for bowguns; arc for bows
+	private String reload_speed;				// Reload speed for bowguns
+	private String rapid_fire;					// Rapid fire/crouching fire for bowguns
+	private String deviation;					// Deviation for bowguns
+	private String ammo;						// Ammo for bowguns
+	private int num_slots;						// Number of slots
+	private String sharpness_file;				// Sharpness image file location
+	private int wfinal;							// Final in weapon tree or not
 	
+	/* Default Constructor */
 	public Weapon() {
 		super();
 		
@@ -58,6 +58,7 @@ public class Weapon extends Item{
 		this.wfinal = -1;
 	}
 
+	/* Getters and Setters */
 	public String getWtype() {
 		return wtype;
 	}

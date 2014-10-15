@@ -1,14 +1,18 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for Gathering
+ */
 public class Gathering {
 
-	private long id;
-	private Item item;
-	private Location location;
-	private String area;
-	private String site;
-	private String rank;
+	private long id;			// Gathering id
+	private Item item;			// Item gathered
+	private Location location;	// Location gathered
+	private String area;		// Area # of location
+	private String site;		// Type of gathering node; bug, mine, fish, etc.
+	private String rank;		// Quest Rank found in
 	
+	/* Default Constructor */
 	public Gathering() {
 		this.id = -1;
 		this.item = null;
@@ -18,6 +22,7 @@ public class Gathering {
 		this.rank = "";
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

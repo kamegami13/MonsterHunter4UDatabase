@@ -1,19 +1,23 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for Quest
+ */
 public class Quest {
 	
-	private long id;
-	private String name;
-	private String goal;
-	private String hub;
-	private String type;
-	private String stars;
-	private Location location;
-	private int time_limit;
-	private int fee;
-	private int reward;
-	private int hrp;
+	private long id;			// id
+	private String name;		// Quest name
+	private String goal;		// Clear condition
+	private String hub;			// Port or village
+	private String type;		// Key quest or not
+	private String stars;		// # of stars
+	private Location location;	// Location
+	private int time_limit;		// Time limit
+	private int fee;			// Quest fee
+	private int reward;			// Quest reward in zenny
+	private int hrp;			// Hunting rank points
 	
+	/* Default Constructor */
 	public Quest() {
 		this.id = -1;
 		this.name = "";
@@ -28,6 +32,7 @@ public class Quest {
 		this.hrp = -1;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

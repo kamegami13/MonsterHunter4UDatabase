@@ -1,13 +1,17 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for ArenaReward
+ */
 public class ArenaReward {
 
-	private long id;
-	private ArenaQuest arenaQuest;
-	private Item item;
-	private int percentage;
-	private int stack_size;
+	private long id;				// Reward id
+	private ArenaQuest arenaQuest;	// ArenaQuest this belongs to
+	private Item item;				// Item drop
+	private int percentage;			// Percentage drop
+	private int stack_size;			// Amount of drops of the Item
 	
+	/* Default Constructor */
 	public ArenaReward() {
 		this.id = -1;
 		this.arenaQuest = null;
@@ -16,6 +20,7 @@ public class ArenaReward {
 		this.stack_size = -1;
 	}
 
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

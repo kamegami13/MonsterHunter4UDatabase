@@ -1,23 +1,22 @@
 package com.daviancorp.android.data.object;
 
+/*
+ * Class for Location
+ */
 public class Location {
 	
-	private long id;
-	private String name;
-	private String file_location;
+	private long id;				// Location id
+	private String name;			// Location name
+	private String file_location;	// File location for image
 	
+	/* Default Constructor */
 	public Location() {
 		this.id = -1;
 		this.name = "";
 		this.file_location = "";
 	}
 
-	public Location(long id, String name, String file_location) {
-		this.id = id;
-		this.name = name;
-		this.file_location = file_location;
-	}
-
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}

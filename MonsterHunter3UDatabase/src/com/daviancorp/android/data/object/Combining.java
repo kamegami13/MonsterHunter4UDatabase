@@ -1,18 +1,22 @@
 package com.daviancorp.android.data.object;
 
 /*
- * Note: No constructor with fields
+ * Class for Combining
+ *
+ * This is for the Combining List, where two Items are used to
+ * create another Item
  */
 public class Combining {
 
-	private long id;
-	private Item created_item;
-	private Item item_1;
-	private Item item_2;
-	private int amount_made_min;
-	private int amount_made_max;
-	private int percentage;
+	private long id;				// Combining id
+	private Item created_item;		// Created Item
+	private Item item_1;			// Component Item #1
+	private Item item_2;			// Component Item #2
+	private int amount_made_min;	// Minimum possible amount made
+	private int amount_made_max;	// Maximum possible amount made
+	private int percentage;			// Percentage of success
 	
+	/* Default Constructor */
 	public Combining() {
 		this.id = -1;
 		this.created_item = null;
@@ -23,6 +27,7 @@ public class Combining {
 		this.percentage = -1;
 	}
 	
+	/* Getters and Setters */
 	public long getId() {
 		return id;
 	}
