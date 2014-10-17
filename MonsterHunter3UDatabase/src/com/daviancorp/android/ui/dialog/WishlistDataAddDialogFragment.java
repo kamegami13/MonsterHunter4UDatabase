@@ -15,9 +15,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.database.WishlistCursor;
-import com.daviancorp.android.data.object.Wishlist;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class WishlistDataAddDialogFragment extends DialogFragment {

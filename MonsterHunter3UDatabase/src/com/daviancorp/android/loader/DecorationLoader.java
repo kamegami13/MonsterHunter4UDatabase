@@ -2,8 +2,8 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 
+import com.daviancorp.android.data.classes.Decoration;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.data.object.Decoration;
 
 public class DecorationLoader extends DataLoader<Decoration> {
 	private long mDecorationId;

@@ -16,8 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.ArenaReward;
 import com.daviancorp.android.data.database.ArenaRewardCursor;
-import com.daviancorp.android.data.object.ArenaReward;
 import com.daviancorp.android.loader.ArenaQuestRewardListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

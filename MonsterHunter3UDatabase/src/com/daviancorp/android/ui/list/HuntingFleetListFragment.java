@@ -19,8 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.HuntingFleet;
 import com.daviancorp.android.data.database.HuntingFleetCursor;
-import com.daviancorp.android.data.object.HuntingFleet;
 import com.daviancorp.android.loader.HuntingFleetListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.ItemDetailActivity;

@@ -1,4 +1,4 @@
-package com.daviancorp.android.data.object;
+package com.daviancorp.android.data.classes;
 
 /*
  * Class for Armor

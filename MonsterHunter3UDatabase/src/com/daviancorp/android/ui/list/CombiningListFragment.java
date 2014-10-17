@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.Combining;
 import com.daviancorp.android.data.database.CombiningCursor;
-import com.daviancorp.android.data.object.Combining;
 import com.daviancorp.android.loader.CombiningListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.ItemDetailActivity;

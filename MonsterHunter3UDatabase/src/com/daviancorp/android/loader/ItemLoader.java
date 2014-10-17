@@ -2,8 +2,8 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 
+import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.data.object.Item;
 
 public class ItemLoader extends DataLoader<Item> {
 	private long mItemId;

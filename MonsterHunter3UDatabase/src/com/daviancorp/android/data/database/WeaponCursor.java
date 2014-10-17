@@ -3,7 +3,7 @@ package com.daviancorp.android.data.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.daviancorp.android.data.object.Weapon;
+import com.daviancorp.android.data.classes.Weapon;
 
 /**
  * A convenience class to wrap a cursor that returns rows from the "weapon"

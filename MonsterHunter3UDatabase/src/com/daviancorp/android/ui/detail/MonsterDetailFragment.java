@@ -20,9 +20,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.Monster;
+import com.daviancorp.android.data.classes.MonsterDamage;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.data.object.Monster;
-import com.daviancorp.android.data.object.MonsterDamage;
 import com.daviancorp.android.loader.MonsterLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

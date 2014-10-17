@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
-import com.daviancorp.android.data.object.Weapon;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class WeaponBowgunListFragment extends WeaponListFragment implements

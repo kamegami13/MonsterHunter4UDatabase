@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daviancorp.android.data.object.Item;
+import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.loader.ItemLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

@@ -2,8 +2,8 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 
+import com.daviancorp.android.data.classes.Armor;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.data.object.Armor;
 
 public class ArmorLoader extends DataLoader<Armor> {
 	private long mArmorId;

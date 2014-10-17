@@ -19,8 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.Component;
 import com.daviancorp.android.data.database.ComponentCursor;
-import com.daviancorp.android.data.object.Component;
 import com.daviancorp.android.loader.ComponentListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

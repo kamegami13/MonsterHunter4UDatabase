@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.Toast;
 
+import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.database.WishlistCursor;
-import com.daviancorp.android.data.object.Wishlist;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
 public class WishlistDataAddMultiDialogFragment extends DialogFragment {

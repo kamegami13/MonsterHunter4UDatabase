@@ -21,8 +21,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.data.database.ItemCursor;
-import com.daviancorp.android.data.object.Item;
 import com.daviancorp.android.loader.ItemListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.ItemDetailActivity;

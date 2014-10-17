@@ -3,8 +3,8 @@ package com.daviancorp.android.data.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.daviancorp.android.data.object.WishlistData;
-import com.daviancorp.android.data.object.Item;
+import com.daviancorp.android.data.classes.Item;
+import com.daviancorp.android.data.classes.WishlistData;
 
 /**
  * A convenience class to wrap a cursor that returns rows from the "wishlist_data"

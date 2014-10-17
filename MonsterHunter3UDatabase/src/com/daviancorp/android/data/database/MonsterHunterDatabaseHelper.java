@@ -17,9 +17,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
-import com.daviancorp.android.data.object.Wishlist;
-import com.daviancorp.android.data.object.WishlistComponent;
-import com.daviancorp.android.data.object.WishlistData;
+import com.daviancorp.android.data.classes.Wishlist;
+import com.daviancorp.android.data.classes.WishlistComponent;
+import com.daviancorp.android.data.classes.WishlistData;
 
 //
 //   QUERY REFERENCE:
@@ -179,7 +179,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		if (newVersion > oldVersion) {
-			Log.d("helpme", "start upgrade");
 			WishlistCursor wc = queryWishlists();
 			WishlistDataCursor wdc = queryWishlistsData();
 			WishlistComponentCursor wcc = queryWishlistsComponent();
@@ -215,8 +214,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 			}
 			wcc.close();
 		}
-
-		Log.d("helpme", "finish upgrade");
 	}
 	
 	@Override

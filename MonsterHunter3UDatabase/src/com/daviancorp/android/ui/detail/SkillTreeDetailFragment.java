@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.Skill;
 import com.daviancorp.android.data.database.SkillCursor;
-import com.daviancorp.android.data.object.Skill;
 import com.daviancorp.android.loader.SkillListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

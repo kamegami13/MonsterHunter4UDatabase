@@ -11,7 +11,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.widget.ListView;
 
-import com.daviancorp.android.data.object.Weapon;
+import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.loader.WeaponListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.WeaponDetailActivity;

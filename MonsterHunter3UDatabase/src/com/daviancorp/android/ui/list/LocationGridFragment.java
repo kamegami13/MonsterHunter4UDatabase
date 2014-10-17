@@ -24,8 +24,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.Location;
 import com.daviancorp.android.data.database.LocationCursor;
-import com.daviancorp.android.data.object.Location;
 import com.daviancorp.android.loader.LocationListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.LocationDetailActivity;

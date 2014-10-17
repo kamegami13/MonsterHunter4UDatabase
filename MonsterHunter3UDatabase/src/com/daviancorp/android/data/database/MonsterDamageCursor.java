@@ -3,7 +3,7 @@ package com.daviancorp.android.data.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.daviancorp.android.data.object.MonsterDamage;
+import com.daviancorp.android.data.classes.MonsterDamage;
 
 /**
  * A convenience class to wrap a cursor that returns rows from the "monster_damage"

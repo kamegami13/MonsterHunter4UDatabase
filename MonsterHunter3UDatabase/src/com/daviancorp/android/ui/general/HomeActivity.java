@@ -9,6 +9,9 @@ import com.actionbarsherlock.view.MenuItem;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 
+/*
+ * The home screen activity upon starting the application
+ */
 @SuppressLint("NewApi")
 public class HomeActivity extends GenericActivity {
 
@@ -17,29 +20,11 @@ public class HomeActivity extends GenericActivity {
 		super.onCreate(savedInstanceState);
 		setTitle(R.string.app_name);
 
-		getActionBar().setDisplayHomeAsUpEnabled(false);
-		getActionBar().setHomeButtonEnabled(false);
 	}
 
 	@Override
 	protected Fragment createFragment() {
 		super.detail = new HomeFragment();
 		return super.detail;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			return true;
-		case R.id.about:
-			FragmentManager fm = getSupportFragmentManager();
-			AboutDialogFragment dialog = new AboutDialogFragment();
-			dialog.show(fm, DIALOG_ABOUT);
-
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
 	}
 }

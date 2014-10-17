@@ -16,8 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.QuestReward;
 import com.daviancorp.android.data.database.QuestRewardCursor;
-import com.daviancorp.android.data.object.QuestReward;
 import com.daviancorp.android.loader.QuestRewardListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

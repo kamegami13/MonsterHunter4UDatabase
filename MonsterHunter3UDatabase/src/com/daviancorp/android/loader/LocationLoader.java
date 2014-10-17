@@ -2,8 +2,8 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 
+import com.daviancorp.android.data.classes.Location;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.data.object.Location;
 
 public class LocationLoader extends DataLoader<Location> {
 	private long mLocationId;

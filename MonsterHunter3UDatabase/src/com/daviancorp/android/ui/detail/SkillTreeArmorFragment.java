@@ -19,8 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.ItemToSkillTree;
 import com.daviancorp.android.data.database.ItemToSkillTreeCursor;
-import com.daviancorp.android.data.object.ItemToSkillTree;
 import com.daviancorp.android.loader.ItemToSkillTreeListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

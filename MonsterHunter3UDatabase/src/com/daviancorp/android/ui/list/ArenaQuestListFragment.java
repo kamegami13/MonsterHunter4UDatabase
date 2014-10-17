@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.ArenaQuest;
 import com.daviancorp.android.data.database.ArenaQuestCursor;
-import com.daviancorp.android.data.object.ArenaQuest;
 import com.daviancorp.android.loader.ArenaQuestListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.ArenaQuestDetailActivity;

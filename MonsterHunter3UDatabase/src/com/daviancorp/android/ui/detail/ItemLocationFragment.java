@@ -16,8 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.Gathering;
 import com.daviancorp.android.data.database.GatheringCursor;
-import com.daviancorp.android.data.object.Gathering;
 import com.daviancorp.android.loader.GatheringListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

@@ -3,9 +3,9 @@ package com.daviancorp.android.data.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.daviancorp.android.data.object.MonsterToQuest;
-import com.daviancorp.android.data.object.Monster;
-import com.daviancorp.android.data.object.Quest;
+import com.daviancorp.android.data.classes.Monster;
+import com.daviancorp.android.data.classes.MonsterToQuest;
+import com.daviancorp.android.data.classes.Quest;
 
 /**
  * A convenience class to wrap a cursor that returns rows from the "monster_to_quest"

@@ -21,8 +21,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daviancorp.android.data.classes.Armor;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.data.object.Armor;
 import com.daviancorp.android.loader.ArmorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

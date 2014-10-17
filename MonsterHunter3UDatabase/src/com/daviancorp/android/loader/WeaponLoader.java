@@ -2,8 +2,8 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 
+import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.data.object.Weapon;
 
 public class WeaponLoader extends DataLoader<Weapon> {
 	private long mWeaponId;

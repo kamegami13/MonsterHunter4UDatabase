@@ -20,7 +20,6 @@ import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 /*
  * Any subclass needs to:
  *  - override onCreate() to set title
- *  - override createFragmentOne() for detail fragments
  */
 
 public abstract class GenericTabActivity extends SherlockFragmentActivity {
@@ -46,6 +45,7 @@ public abstract class GenericTabActivity extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
+			// Whenever the home button is pressed, go back to home and clear the stack of activities
 			Intent intent = new Intent(GenericTabActivity.this,
 					HomeActivity.class);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -15,8 +15,8 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.data.object.Quest;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.detail.QuestDetailActivity;
 

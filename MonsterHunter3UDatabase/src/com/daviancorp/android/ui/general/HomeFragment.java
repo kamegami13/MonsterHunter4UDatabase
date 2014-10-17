@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daviancorp.android.data.object.Quest;
+import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.loader.QuestLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.list.ArenaQuestListActivity;
@@ -32,16 +32,19 @@ import com.daviancorp.android.ui.list.WishlistListActivity;
 
 public class HomeFragment extends Fragment {
 
-	private ImageView mLogo;
+	private ImageView mLogo;		// Image logo for home screen
+	
+	// Options to navigate
 	private TextView mMonsters, mWeapons, mArmors, mQuests, mItems, mCombining,
 		mDecorations, mSkillTrees, mLocations, mHuntingFleet, mArenaQuests, mWishlists;
 
-	private ProgressDialog progress;
+	private ProgressDialog progress;	// Progress spinner upon creating/updating database
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		// Make a dummy query to create/update database if needed
 		LoaderManager lm = getLoaderManager();
 		lm.initLoader(R.id.home_fragment, null, new DummyLoaderCallbacks());
 	}
@@ -163,7 +166,6 @@ public class HomeFragment extends Fragment {
 			}
 		});
 
-		
 		return v;
 	}
 	

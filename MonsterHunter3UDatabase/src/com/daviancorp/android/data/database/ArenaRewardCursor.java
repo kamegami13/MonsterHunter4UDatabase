@@ -3,9 +3,9 @@ package com.daviancorp.android.data.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.daviancorp.android.data.object.ArenaReward;
-import com.daviancorp.android.data.object.Item;
-import com.daviancorp.android.data.object.ArenaQuest;
+import com.daviancorp.android.data.classes.ArenaQuest;
+import com.daviancorp.android.data.classes.ArenaReward;
+import com.daviancorp.android.data.classes.Item;
 
 /**
  * A convenience class to wrap a cursor that returns rows from the "arena_reward"

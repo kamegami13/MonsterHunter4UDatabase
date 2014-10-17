@@ -1,7 +1,7 @@
 package com.daviancorp.android.loader;
 
+import com.daviancorp.android.data.classes.Monster;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.data.object.Monster;
 
 import android.content.Context;
 

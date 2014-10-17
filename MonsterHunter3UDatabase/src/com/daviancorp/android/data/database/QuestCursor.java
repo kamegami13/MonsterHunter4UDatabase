@@ -3,8 +3,8 @@ package com.daviancorp.android.data.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.daviancorp.android.data.object.Location;
-import com.daviancorp.android.data.object.Quest;
+import com.daviancorp.android.data.classes.Location;
+import com.daviancorp.android.data.classes.Quest;
 
 /**
  * A convenience class to wrap a cursor that returns rows from the "quests"

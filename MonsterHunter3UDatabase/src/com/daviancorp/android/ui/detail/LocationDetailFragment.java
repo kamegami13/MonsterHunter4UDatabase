@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daviancorp.android.data.object.Location;
+import com.daviancorp.android.data.classes.Location;
 import com.daviancorp.android.loader.LocationLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 

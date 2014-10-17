@@ -6,6 +6,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
+/*
+ * Currently unused
+ * 
+ * Draws a sharpness level by values
+ * 
+ */
 public class DrawSharpness extends View {
 
 	private int mRed;

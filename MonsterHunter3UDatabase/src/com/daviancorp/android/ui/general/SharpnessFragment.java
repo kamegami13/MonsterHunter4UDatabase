@@ -8,7 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-
+/*
+ * Currently unused
+ * 
+ * Displays a sharpness level as a fragment
+ */
 public class SharpnessFragment extends Fragment {
 	DrawSharpness mDrawSharpness;
 	
