@@ -54,7 +54,8 @@ public class MonsterQuestFragment extends ListFragment implements
 		// You only ever load the runs, so assume this is the case
 		long monsterId = args.getLong(ARG_MONSTER_ID, -1);
 
-		return new MonsterToQuestListCursorLoader(getActivity(), "monster",
+		return new MonsterToQuestListCursorLoader(getActivity(), 
+				MonsterToQuestListCursorLoader.FROM_MONSTER,
 				monsterId);
 	}
 

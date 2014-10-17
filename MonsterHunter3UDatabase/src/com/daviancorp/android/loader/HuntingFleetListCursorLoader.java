@@ -11,6 +11,10 @@ import com.daviancorp.android.data.database.DataManager;
  *  Note: Either type or location or both should be null when created
  */
 public class HuntingFleetListCursorLoader extends SQLiteCursorLoader {
+	public static String TYPE_FISHING = "Fishing";
+	public static String TYPE_TREASURE = "Treasure";
+	public static String TYPE_HUNTING = "Hunting";
+	
 	private String type; // "Fishing", "Treasure","Hunting", or null
 	private String location; // "Moga Coast", "Dark Waters", "Nearby Island",
 								// "Moga Shallows",
@@ -32,13 +36,15 @@ public class HuntingFleetListCursorLoader extends SQLiteCursorLoader {
 	 */
 	@Override
 	protected Cursor loadCursor() {
-		// Query the list of all hunting fleet data
 		if (location != null) {
+			// Query the list of hunting fleet based on location
 			return DataManager.get(getContext()).queryHuntingFleetLocation(
 					location);
 		} else if (type != null) {
+			// Query the list of hunting fleet based on type
 			return DataManager.get(getContext()).queryHuntingFleetType(type);
 		} else {
+			// Query the list of all hunting fleet data
 			return DataManager.get(getContext()).queryHuntingFleets();
 		}
 	}

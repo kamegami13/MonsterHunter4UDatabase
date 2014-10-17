@@ -61,8 +61,8 @@ public class MonsterRewardFragment extends ListFragment implements
 		long monsterId = args.getLong(ARG_MONSTER_ID, -1);
 		String rank = args.getString(ARG_RANK, null);
 
-		return new HuntingRewardListCursorLoader(getActivity(), "monster", monsterId,
-				rank);
+		return new HuntingRewardListCursorLoader(getActivity(), 
+				HuntingRewardListCursorLoader.FROM_MONSTER, monsterId, rank);
 	}
 
 	@Override

@@ -6,6 +6,9 @@ import android.database.Cursor;
 import com.daviancorp.android.data.database.DataManager;
 
 public class MonsterToArenaListCursorLoader extends SQLiteCursorLoader {
+	public static String FROM_MONSTER = "monster";
+	public static String FROM_ARENA = "arena";
+	
 	private String from;	// "monster" or "arena"
 	private long id; 		// Monster or ArenaQuest id
 
@@ -17,10 +20,12 @@ public class MonsterToArenaListCursorLoader extends SQLiteCursorLoader {
 
 	@Override
 	protected Cursor loadCursor() {
-		if (from.equals("monster")) {
+		if (from.equals(FROM_MONSTER)) {
+			// Query the list of arena quests based on monster
 			return DataManager.get(getContext()).queryMonsterToArenaMonster(id);
 		}
-		else if(from.equals("arena")) {
+		else if(from.equals(FROM_ARENA)) {
+			// Query the list of monsters based on arena quest
 			return DataManager.get(getContext()).queryMonsterToArenaArena(id);
 		}
 		else {

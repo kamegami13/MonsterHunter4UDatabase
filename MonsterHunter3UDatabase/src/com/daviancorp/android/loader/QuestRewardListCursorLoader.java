@@ -6,6 +6,9 @@ import android.database.Cursor;
 import com.daviancorp.android.data.database.DataManager;
 
 public class QuestRewardListCursorLoader extends SQLiteCursorLoader {
+	public static String FROM_ITEM = "item";
+	public static String FROM_QUEST = "quest";
+	
 	private String from;	// "item" or "quest"
 	private long id; 		// Item or Quest id
 
@@ -17,10 +20,12 @@ public class QuestRewardListCursorLoader extends SQLiteCursorLoader {
 
 	@Override
 	protected Cursor loadCursor() {
-		if (from.equals("item")) {
+		if (from.equals(FROM_ITEM)) {
+			// Query the list of quest rewards based on item
 			return DataManager.get(getContext()).queryQuestRewardItem(id);
 		}
-		else if(from.equals("quest")) {
+		else if(from.equals(FROM_QUEST)) {
+			// Query the list of quest rewards based on quest
 			return DataManager.get(getContext()).queryQuestRewardQuest(id);
 		}
 		else {

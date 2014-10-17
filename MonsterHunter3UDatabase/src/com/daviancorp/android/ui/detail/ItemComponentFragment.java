@@ -61,7 +61,8 @@ public class ItemComponentFragment extends ListFragment implements
 		if (args != null) {
 			mId = args.getLong(ARG_ITEM_ID);
 		}
-		return new ComponentListCursorLoader(getActivity(), "component", mId);
+		return new ComponentListCursorLoader(getActivity(), 
+				ComponentListCursorLoader.FROM_COMPONENT, mId);
 	}
 
 	@Override
@@ -87,6 +88,10 @@ public class ItemComponentFragment extends ListFragment implements
 		else if (tagId >= 1314) {
 			i = new Intent(getActivity(), ArmorDetailActivity.class);
 			i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, tagId);
+		}
+		else if (tagId >= 1118) {
+			i = new Intent(getActivity(), DecorationDetailActivity.class);
+			i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, tagId);
 		}
 		else {
 			i = new Intent(getActivity(), ItemDetailActivity.class);

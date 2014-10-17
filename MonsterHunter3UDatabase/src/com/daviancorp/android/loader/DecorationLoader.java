@@ -15,6 +15,7 @@ public class DecorationLoader extends DataLoader<Decoration> {
 	
 	@Override
 	public Decoration loadInBackground() {
+		// Query the specific decoration
 		return DataManager.get(getContext()).getDecoration(mDecorationId);
 	}
 }

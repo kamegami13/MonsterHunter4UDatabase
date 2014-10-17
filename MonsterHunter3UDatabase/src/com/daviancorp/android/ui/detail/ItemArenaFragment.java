@@ -54,7 +54,8 @@ public class ItemArenaFragment extends ListFragment implements
 		// You only ever load the runs, so assume this is the case
 		long itemId = args.getLong(ARG_ITEM_ID, -1);
 
-		return new ArenaQuestRewardListCursorLoader(getActivity(), "item", itemId);
+		return new ArenaQuestRewardListCursorLoader(getActivity(), 
+				ArenaQuestRewardListCursorLoader.FROM_ITEM, itemId);
 	}
 
 	@Override

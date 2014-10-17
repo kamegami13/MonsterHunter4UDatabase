@@ -6,6 +6,13 @@ import android.database.Cursor;
 import com.daviancorp.android.data.database.DataManager;
 
 public class HuntingRewardListCursorLoader extends SQLiteCursorLoader {
+	public static String FROM_ITEM = "item";
+	public static String FROM_MONSTER = "monster";
+
+	public static String RANK_LR = "LR";
+	public static String RANK_HR = "HR";
+	public static String RANK_G = "G";
+	
 	private String from;	// "item" or "monster"
 	private long id; 		// Item or Monster id
 	private String rank; 	// (For Monsters only) "LR", "HR", "G", or null
@@ -19,10 +26,12 @@ public class HuntingRewardListCursorLoader extends SQLiteCursorLoader {
 
 	@Override
 	protected Cursor loadCursor() {
-		if (from.equals("item")) {
+		if (from.equals(FROM_ITEM)) {
+			// Query the list of hunting reward based on item
 			return DataManager.get(getContext()).queryHuntingRewardItem(id);
 		}
-		else if(from.equals("monster")) {
+		else if(from.equals(FROM_MONSTER)) {
+			// Query the list of hunting reward based on monster and rank
 			return DataManager.get(getContext()).queryHuntingRewardMonsterRank(id, rank);
 		}
 		else {

@@ -13,7 +13,7 @@ public class WishlistListCursorLoader extends SQLiteCursorLoader {
 
 	@Override
 	protected Cursor loadCursor() {
-		// Query the list of all skill trees
+		// Query the list of all wishlists
 		return DataManager.get(getContext()).queryWishlists();
 	}
 }

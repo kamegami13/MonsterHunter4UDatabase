@@ -58,7 +58,8 @@ public class QuestRewardFragment extends ListFragment implements
 		// You only ever load the runs, so assume this is the case
 		long questId = args.getLong(ARG_QUEST_ID, -1);
 		
-		return new QuestRewardListCursorLoader(getActivity(), "quest", questId);
+		return new QuestRewardListCursorLoader(getActivity(), 
+				QuestRewardListCursorLoader.FROM_QUEST, questId);
 	}
 
 	@Override

@@ -51,7 +51,8 @@ public class ItemMonsterFragment extends ListFragment implements
 		// You only ever load the runs, so assume this is the case
 		long itemId = args.getLong(ARG_ITEM_ID, -1);
 		
-		return new HuntingRewardListCursorLoader(getActivity(), "item", itemId, null);
+		return new HuntingRewardListCursorLoader(getActivity(), 
+				HuntingRewardListCursorLoader.FROM_ITEM, itemId, null);
 	}
 
 	@Override

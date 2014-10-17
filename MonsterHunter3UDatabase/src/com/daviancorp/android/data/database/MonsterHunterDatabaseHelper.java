@@ -53,7 +53,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
     private static String DB_PATH = "/data/data/com.daviancorp.android.monsterhunter3udatabase/databases/";
 	private static String DB_NAME = "mh3u.db";
 	private static String ASSETS_DB_FOLDER = "db";
-	private static final int VERSION = 3; // EDIT
+	private static final int VERSION = 1; // EDIT
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -82,8 +82,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private MonsterHunterDatabaseHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
 		myContext = context;
-
-		Log.d("helpme", "version: " + VERSION);
 		
 		_Distinct = false;
 		_Table = null;

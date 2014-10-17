@@ -15,6 +15,7 @@ public class QuestLoader extends DataLoader<Quest> {
 	
 	@Override
 	public Quest loadInBackground() {
+		// Query the specific quest
 		return DataManager.get(getContext()).getQuest(mQuestId);
 	}
 }

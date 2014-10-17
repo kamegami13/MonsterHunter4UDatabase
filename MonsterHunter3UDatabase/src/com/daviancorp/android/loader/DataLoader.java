@@ -3,6 +3,9 @@ package com.daviancorp.android.loader;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 
+/*
+ * Abstract class used for querying a specific data
+ */
 public abstract class DataLoader<D> extends AsyncTaskLoader<D> {
 	private D mData;
 	

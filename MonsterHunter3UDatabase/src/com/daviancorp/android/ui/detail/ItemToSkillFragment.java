@@ -56,7 +56,8 @@ public class ItemToSkillFragment extends ListFragment implements
 		// You only ever load the runs, so assume this is the case
 		long mId = args.getLong(ARG_ITEM_TO_SKILL_ID, -1);
 		String mFrom = args.getString(ARG_ITEM_TO_SKILL_FROM);
-		return new ItemToSkillTreeListCursorLoader(getActivity(), "item", mId, mFrom);
+		return new ItemToSkillTreeListCursorLoader(getActivity(), 
+				ItemToSkillTreeListCursorLoader.FROM_ITEM, mId, mFrom);
 	}
 
 	@Override

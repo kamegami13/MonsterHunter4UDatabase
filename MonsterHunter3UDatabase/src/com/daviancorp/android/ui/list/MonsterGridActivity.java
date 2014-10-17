@@ -8,6 +8,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.daviancorp.android.loader.MonsterListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.adapter.MonsterGridPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
@@ -21,7 +22,9 @@ public class MonsterGridActivity extends GenericTabActivity implements
 	private int toggle;
 
 	// Tab titles
-	private String[] tabs = { "All", "Small", "Large" };
+	private String[] tabs = { "All", 
+			MonsterListCursorLoader.TAB_SMALL, 
+			MonsterListCursorLoader.TAB_LARGE };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

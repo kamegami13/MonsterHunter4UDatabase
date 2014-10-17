@@ -7,7 +7,7 @@ import com.daviancorp.android.data.database.DataManager;
 
 public class WishlistComponentListCursorLoader extends SQLiteCursorLoader {
 
-	private long id;
+	private long id;		// Wishlist id
 	
 	public WishlistComponentListCursorLoader(Context context, long id) {
 		super(context);
@@ -16,6 +16,7 @@ public class WishlistComponentListCursorLoader extends SQLiteCursorLoader {
 
 	@Override
 	protected Cursor loadCursor() {
+		// Query the list of wishlist components based on wishlist
 		return DataManager.get(getContext()).queryWishlistComponents(id);
 	}
 }

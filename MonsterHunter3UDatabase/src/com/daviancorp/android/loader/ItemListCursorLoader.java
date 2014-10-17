@@ -15,11 +15,12 @@ public class ItemListCursorLoader extends SQLiteCursorLoader {
 
 	@Override
 	protected Cursor loadCursor() {
-		// Query the list of all items
 		if (filter == null || filter.equals("")) {
+			// Query the list of all items
 			return DataManager.get(getContext()).queryItems();
 		}
 		else {
+			// Query the list of items by filter
 			return DataManager.get(getContext()).queryItemSearch(filter);
 		}
 	}

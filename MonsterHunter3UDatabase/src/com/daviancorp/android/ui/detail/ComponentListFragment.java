@@ -60,7 +60,8 @@ public class ComponentListFragment extends ListFragment implements
 		if (args != null) {
 			mId = args.getLong(ARG_ITEM_ID);
 		}
-		return new ComponentListCursorLoader(getActivity(), "created", mId);
+		return new ComponentListCursorLoader(getActivity(), 
+				ComponentListCursorLoader.FROM_CREATED, mId);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ public class MonsterDamageListCursorLoader extends SQLiteCursorLoader {
 
 	@Override
 	protected Cursor loadCursor() {
+		// Query the monster damage for a specific monster
 		return DataManager.get(getContext()).queryMonsterDamage(id);
 	}
 }

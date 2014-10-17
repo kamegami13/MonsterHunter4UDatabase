@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.content.AsyncTaskLoader;
 
+/*
+ * Abstract class used for querying a list of data
+ * Mainly used by ListFragments
+ */
 public abstract class SQLiteCursorLoader extends AsyncTaskLoader<Cursor> {
 	private Cursor mCursor;
 

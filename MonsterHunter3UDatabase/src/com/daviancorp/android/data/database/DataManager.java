@@ -32,36 +32,20 @@ import com.daviancorp.android.data.object.Wishlist;
 import com.daviancorp.android.data.object.WishlistComponent;
 import com.daviancorp.android.data.object.WishlistData;
 
+/*
+ * Singleton class
+ */
 public class DataManager {
 	private static final String TAG = "DataManager";
 
-	
-	private static DataManager sDataManager;
+	private static DataManager sDataManager;		// Singleton design
 	private Context mAppContext;
-	private MonsterHunterDatabaseHelper mHelper;
+	private MonsterHunterDatabaseHelper mHelper;	// Used for queries
 	
+	/* Singleton design */
 	private DataManager(Context appContext) {
 		mAppContext = appContext;
 		mHelper = MonsterHunterDatabaseHelper.getInstance(mAppContext);
-//		try {
-//			 
-//			mHelper.createDataBase();
-// 
-//	 	} catch (IOException ioe) {
-//	 
-//	 		throw new Error("Unable to create database");
-//	 
-//	 	}
-//	 
-//	 	try {
-//	 
-//	 		mHelper.openDataBase();
-//	 
-//	 	}catch(SQLException sqle){
-//	 
-//	 		throw sqle;
-//	 
-//	 	}
 	}
 	
 	public static DataManager get(Context c) {
@@ -74,30 +58,35 @@ public class DataManager {
 	
 /********************************* ARENA QUESTS QUERIES ******************************************/	
 	
+	/* Get a Cursor that has a list of all ArenaQuests */
 	public ArenaQuestCursor queryArenaQuests() {
 		return mHelper.queryArenaQuests();
 	}
 	
+	/* Get a specific ArenaQuest */
 	public ArenaQuest getArenaQuest(long id) {
 		ArenaQuest arenaQuest = null;
 		ArenaQuestCursor cursor = mHelper.queryArenaQuest(id);
-		cursor.moveToFirst();
+		cursor.moveToFirst();				// Point to first row
 		
-		if (!cursor.isAfterLast())
+		if (!cursor.isAfterLast())			// Make sure cursor is not empty
 			arenaQuest = cursor.getArenaQuest();
 		cursor.close();
 		return arenaQuest;
 	}
 	
 /********************************* ARENA REWARD QUERIES ******************************************/
+	/* Get a Cursor that has a list of ArenaReward based on Item */
 	public ArenaRewardCursor queryArenaRewardItem(long id) {
 		return mHelper.queryArenaRewardItem(id);
 	}
 
+	/* Get a Cursor that has a list of ArenaReward based on ArenaQuest */
 	public ArenaRewardCursor queryArenaRewardArena(long id) {
 		return mHelper.queryArenaRewardArena(id);
 	}
 	
+	/* Get an array of ArenaReward based on Item */
 	public ArrayList<ArenaReward> queryArenaRewardArrayItem(long id) {
 		ArrayList<ArenaReward> rewards = new ArrayList<ArenaReward>();
 		ArenaRewardCursor cursor = mHelper.queryArenaRewardItem(id);
@@ -111,6 +100,7 @@ public class DataManager {
 		return rewards;
 	}
 	
+	/* Get an array of ArenaReward based on ArenaQuet */
 	public ArrayList<ArenaReward> queryArenaRewardArrayArena(long id) {
 		ArrayList<ArenaReward> rewards = new ArrayList<ArenaReward>();
 		ArenaRewardCursor cursor = mHelper.queryArenaRewardArena(id);
@@ -126,10 +116,12 @@ public class DataManager {
 	
 /********************************* ARMOR QUERIES ******************************************/	
 	
+	/* Get a Cursor that has a list of all Armors */
 	public ArmorCursor queryArmor() {
 		return mHelper.queryArmor();
 	}
 	
+	/* Get a specific Armor */
 	public Armor getArmor(long id) {
 		Armor armor = null;
 		ArmorCursor cursor = mHelper.queryArmor(id);
@@ -141,6 +133,7 @@ public class DataManager {
 		return armor;
 	}
 	
+	/* Get an array of Armor based on hunter type */
 	public ArrayList<Armor> queryArmorArrayType(String type) {
 		ArrayList<Armor> armors = new ArrayList<Armor>();
 		ArmorCursor cursor = mHelper.queryArmorType(type);
@@ -154,23 +147,28 @@ public class DataManager {
 		return armors;
 	}
 	
+	/* Get a Cursor that has a list of Armor based on hunter type */
 	public ArmorCursor queryArmorType(String type) {
 		return mHelper.queryArmorType(type);
 	}
 
+	/* Get a Cursor that has a list of Armor based on equipment slot */
 	public ArmorCursor queryArmorSlot(String slot) {
 		return mHelper.queryArmorSlot(slot);
 	}
 
+	/* Get a Cursor that has a list of Armor based on hunter type and equipment slot */
 	public ArmorCursor queryArmorTypeSlot(String type, String slot) {
 		return mHelper.queryArmorTypeSlot(type, slot);
 	}
 	
 /********************************* COMBINING QUERIES ******************************************/
+	/* Get a Cursor that has a list of all Combinings */
 	public CombiningCursor queryCombinings() {
 		return mHelper.queryCombinings();
 	}
 	
+	/* Get a specific Combining */
 	public Combining getCombining(long id) {
 		Combining combining = null;
 		CombiningCursor cursor = mHelper.queryCombining(id);
@@ -183,18 +181,22 @@ public class DataManager {
 	}
 	
 /********************************* COMPONENT QUERIES ******************************************/
+	/* Get a Cursor that has a list of Components based on the created Item */
 	public ComponentCursor queryComponentCreated(long id) {
 		return mHelper.queryComponentCreated(id);
 	}
 
+	/* Get a Cursor that has a list of Components based on the component Item */
 	public ComponentCursor queryComponentComponent(long id) {
 		return mHelper.queryComponentComponent(id);
 	}
 
+	/* Get a Cursor that has a list of Components based on the created Item and creation type */
 	public ComponentCursor queryComponentCreatedType(long id, String type) {
 		return mHelper.queryComponentCreatedType(id, type);
 	}
 	
+	/* Get an array of Components based on the created Item */
 	public ArrayList<Component> queryComponentArrayCreated(long id) {
 		ArrayList<Component> components = new ArrayList<Component>();
 		ComponentCursor cursor = mHelper.queryComponentCreated(id);
@@ -208,6 +210,7 @@ public class DataManager {
 		return components;
 	}
 	
+	/* Get an array of Components based on the component Item */
 	public ArrayList<Component> queryComponentArrayComponent(long id) {
 		ArrayList<Component> components = new ArrayList<Component>();
 		ComponentCursor cursor = mHelper.queryComponentComponent(id);
@@ -221,15 +224,19 @@ public class DataManager {
 		return components;
 	}
 
+	/* Get an array of paths for a created Item */
 	public ArrayList<String> queryComponentCreateImprove(long id) {
+		// Gets all the component Items
 		ComponentCursor cursor = mHelper.queryComponentCreated(id);
 		cursor.moveToFirst();
 		
 		ArrayList<String> paths = new ArrayList<String>();
 		
+		// Only get distinct paths
 		while (!cursor.isAfterLast()) {
 			String type = cursor.getComponent().getType();
 			
+			// Check if not a duplicate
 			if(!paths.contains(type)) {
 				paths.add(type);
 			}
@@ -242,10 +249,12 @@ public class DataManager {
 	}
 	
 /********************************* DECORATION QUERIES ******************************************/
+	/* Get a Cursor that has a list of all Decorations */
 	public DecorationCursor queryDecorations() {
 		return mHelper.queryDecorations();
 	}
 	
+	/* Get a specific Decoration */
 	public Decoration getDecoration(long id) {
 		Decoration decoration = null;
 		DecorationCursor cursor = mHelper.queryDecoration(id);
@@ -258,18 +267,22 @@ public class DataManager {
 	}
 	
 /********************************* GATHERING QUERIES ******************************************/
+	/* Get a Cursor that has a list of Gathering based on Item */
 	public GatheringCursor queryGatheringItem(long id) {
 		return mHelper.queryGatheringItem(id);
 	}
 
+	/* Get a Cursor that has a list of Gathering based on Location */
 	public GatheringCursor queryGatheringLocation(long id) {
 		return mHelper.queryGatheringLocation(id);
 	}
 	
+	/* Get a Cursor that has a list of Gathering based on Location and Quest rank */
 	public GatheringCursor queryGatheringLocationRank(long id, String rank) {
 		return mHelper.queryGatheringLocationRank(id, rank);
 	}
 	
+	/* Get an array of Gathering based on Item */
 	public ArrayList<Gathering> queryGatheringArrayItem(long id) {
 		ArrayList<Gathering> gatherings = new ArrayList<Gathering>();
 		GatheringCursor cursor = mHelper.queryGatheringItem(id);
@@ -283,6 +296,7 @@ public class DataManager {
 		return gatherings;
 	}
 	
+	/* Get an array of Gathering based on Location */
 	public ArrayList<Gathering> queryGatheringArrayLocation(long id) {
 		ArrayList<Gathering> gatherings = new ArrayList<Gathering>();
 		GatheringCursor cursor = mHelper.queryGatheringLocation(id);
@@ -296,6 +310,7 @@ public class DataManager {
 		return gatherings;
 	}
 	
+	/* Get an array of Gathering based on Location and Quest rank */
 	public ArrayList<Gathering> queryGatheringArrayLocationRank(long id, String rank) {
 		ArrayList<Gathering> gatherings = new ArrayList<Gathering>();
 		GatheringCursor cursor = mHelper.queryGatheringLocationRank(id, rank);
@@ -310,11 +325,12 @@ public class DataManager {
 	}
 	
 /********************************* HUNTING FLEET QUERIES ******************************************/	
-	
+	/* Get a Cursor that has a list of all HuntingFleets */
 	public HuntingFleetCursor queryHuntingFleets() {
 		return mHelper.queryHuntingFleets();
 	}
 	
+	/* Get a specific HuntingFleet */
 	public HuntingFleet getHuntingFleet(long id) {
 		HuntingFleet huntingFleet = null;
 		HuntingFleetCursor cursor = mHelper.queryHuntingFleet(id);
@@ -326,15 +342,20 @@ public class DataManager {
 		return huntingFleet;
 	}
 	
+	/* Get a Cursor that has a list of HuntingFleet based on type */
 	public HuntingFleetCursor queryHuntingFleetType(String type) {
 		return mHelper.queryHuntingFleetType(type);
 	}
 
+	/* Get a Cursor that has a list of HuntingFleet based on location */
 	public HuntingFleetCursor queryHuntingFleetLocation(String location) {
 		return mHelper.queryHuntingFleetLocation(location);
 	}
 	
 /********************************* HUNTING REWARD QUERIES ******************************************/
+	/* Helper method: Get an array of all ids for a certain Monster 
+	 *		Note: Monsters may have multiple ids
+	 */
 	private long[] helperHuntingRewardMonster(long id) {
 		ArrayList<Long> ids = new ArrayList<Long>();
 		ids.add(id);
@@ -342,9 +363,11 @@ public class DataManager {
 		MonsterCursor monsterCursor = mHelper.queryMonster(id);
 		monsterCursor.moveToFirst();
 		
+		// Get the monster name
 		String name = monsterCursor.getMonster().getName();
 		monsterCursor.close();
 		
+		// Find all of the Monster ids based on name
 		monsterCursor = mHelper.queryMonsterTrait(name);
 		monsterCursor.moveToFirst();
 		
@@ -362,12 +385,13 @@ public class DataManager {
 		return idArray;
 	}
 	
+	/* Get a Cursor that has a list of HuntingReward based on Item */
 	public HuntingRewardCursor queryHuntingRewardItem(long id) {
 		return mHelper.queryHuntingRewardItem(id);
 	}
 
+	/* Get a Cursor that has a list of HuntingReward based on Monster */
 	public HuntingRewardCursor queryHuntingRewardMonster(long id) {
-//		return mHelper.queryHuntingRewardMonster(id);
 		return mHelper.queryHuntingRewardMonster(helperHuntingRewardMonster(id));
 	}
 	

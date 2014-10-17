@@ -15,6 +15,7 @@ public class ArenaQuestLoader extends DataLoader<ArenaQuest> {
 	
 	@Override
 	public ArenaQuest loadInBackground() {
+		// Query the specific arena quest
 		return DataManager.get(getContext()).getArenaQuest(mArenaQuestId);
 	}
 }

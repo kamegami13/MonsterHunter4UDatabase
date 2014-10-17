@@ -6,6 +6,9 @@ import android.database.Cursor;
 import com.daviancorp.android.data.database.DataManager;
 
 public class ComponentListCursorLoader extends SQLiteCursorLoader {
+	public static String FROM_CREATED = "created";
+	public static String FROM_COMPONENT = "component";
+	
 	private String from;	// "created" or "component"
 	private long id; 		// Item id
 
@@ -17,10 +20,10 @@ public class ComponentListCursorLoader extends SQLiteCursorLoader {
 
 	@Override
 	protected Cursor loadCursor() {
-		if (from.equals("created")) {
+		if (from.equals(FROM_CREATED)) {
 			return DataManager.get(getContext()).queryComponentCreated(id);
 		}
-		else if(from.equals("component")) {
+		else if(from.equals(FROM_COMPONENT)) {
 			return DataManager.get(getContext()).queryComponentComponent(id);
 		}
 		else {

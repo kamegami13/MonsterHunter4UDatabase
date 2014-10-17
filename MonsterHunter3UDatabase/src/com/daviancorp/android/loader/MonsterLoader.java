@@ -15,6 +15,7 @@ public class MonsterLoader extends DataLoader<Monster> {
 	
 	@Override
 	public Monster loadInBackground() {
+		// Query the specific monster
 		return DataManager.get(getContext()).getMonster(mMonsterId);
 	}
 }

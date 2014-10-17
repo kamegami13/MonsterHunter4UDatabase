@@ -77,7 +77,8 @@ public class LocationRankFragment extends ListFragment implements
 			mRank = args.getString(ARG_RANK);
 		}
 
-		return new GatheringListCursorLoader(getActivity(), "location",
+		return new GatheringListCursorLoader(getActivity(), 
+				GatheringListCursorLoader.FROM_LOCATION,
 				mLocation, mRank);
 	}
 

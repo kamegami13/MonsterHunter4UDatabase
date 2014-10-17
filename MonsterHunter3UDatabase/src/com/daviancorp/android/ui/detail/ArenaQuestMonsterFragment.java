@@ -51,7 +51,8 @@ public class ArenaQuestMonsterFragment extends ListFragment implements
 		// You only ever load the runs, so assume this is the case
 		long arenaId = args.getLong(ARG_ARENA_QUEST_ID, -1);
 
-		return new MonsterToArenaListCursorLoader(getActivity(), "arena",
+		return new MonsterToArenaListCursorLoader(getActivity(), 
+				MonsterToArenaListCursorLoader.FROM_ARENA,
 				arenaId);
 	}
 

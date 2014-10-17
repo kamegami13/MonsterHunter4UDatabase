@@ -22,10 +22,11 @@ public class WeaponListCursorLoader extends SQLiteCursorLoader {
 
 	@Override
 	protected Cursor loadCursor() {
-		// Query the list of weapons
 		if (type == null) {
+			// Query the list of all weapons
 			return DataManager.get(getContext()).queryWeapon();
 		} else {
+			// Query the list of weapons based on type
 			return DataManager.get(getContext()).queryWeaponType(type);
 		}
 	}

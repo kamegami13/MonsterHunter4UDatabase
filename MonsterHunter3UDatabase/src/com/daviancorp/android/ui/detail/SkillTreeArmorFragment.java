@@ -94,7 +94,8 @@ public class SkillTreeArmorFragment extends ListFragment implements
 			mSkill = args.getLong(ARG_SKILL);
 			skill_type = args.getString(ARG_TYPE);
 		}
-		return new ItemToSkillTreeListCursorLoader(getActivity(), "skillTree", mSkill, skill_type);
+		return new ItemToSkillTreeListCursorLoader(getActivity(), 
+				ItemToSkillTreeListCursorLoader.FROM_SKILL_TREE, mSkill, skill_type);
 	}
 
 	@Override

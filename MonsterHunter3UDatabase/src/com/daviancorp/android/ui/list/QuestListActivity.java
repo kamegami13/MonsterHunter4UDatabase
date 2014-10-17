@@ -8,6 +8,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.daviancorp.android.loader.QuestListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 import com.daviancorp.android.ui.adapter.QuestExpandableListPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
@@ -20,7 +21,10 @@ public class QuestListActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "Village", "Port", "DLC" };
+	private String[] tabs = { 
+			QuestListCursorLoader.HUB_VILLAGE, 
+			QuestListCursorLoader.HUB_PORT, 
+			QuestListCursorLoader.HUB_DLC };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

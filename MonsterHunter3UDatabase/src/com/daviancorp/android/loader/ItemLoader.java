@@ -15,6 +15,7 @@ public class ItemLoader extends DataLoader<Item> {
 	
 	@Override
 	public Item loadInBackground() {
+		// Query the specific item
 		return DataManager.get(getContext()).getItem(mItemId);
 	}
 }

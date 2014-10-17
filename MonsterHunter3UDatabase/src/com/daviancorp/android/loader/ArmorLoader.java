@@ -15,6 +15,7 @@ public class ArmorLoader extends DataLoader<Armor> {
 	
 	@Override
 	public Armor loadInBackground() {
+		// Query the specific armor
 		return DataManager.get(getContext()).getArmor(mArmorId);
 	}
 }

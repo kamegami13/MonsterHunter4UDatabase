@@ -74,7 +74,8 @@ public class SkillTreeDecorationFragment extends ListFragment implements
 			mSkill = args.getLong(ARG_SKILL);
 			mType = args.getString(ARG_TYPE);
 		}
-		return new ItemToSkillTreeListCursorLoader(getActivity(), "skillTree", mSkill, mType);
+		return new ItemToSkillTreeListCursorLoader(getActivity(), 
+				ItemToSkillTreeListCursorLoader.FROM_SKILL_TREE, mSkill, mType);
 	}
 
 	@Override
