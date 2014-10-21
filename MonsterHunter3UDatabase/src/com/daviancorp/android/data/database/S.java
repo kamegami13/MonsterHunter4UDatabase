@@ -1,8 +1,37 @@
 package com.daviancorp.android.data.database;
 
-
+/*
+ * Class that only has constant variables
+ * 
+ * Note: Do not need to instantiate to use
+ */
 public class S {
-
+	// Item sections
+	public static final long SECTION_DECORATIONS = 1118;
+	
+	public static final long SECTION_HEAD = 1314;
+	public static final long SECTION_BODY = 1646;
+	public static final long SECTION_ARMS = 1983;
+	public static final long SECTION_WAIST = 2303;
+	public static final long SECTION_LEGS = 2623;
+	public static final long SECTION_ARMOR = SECTION_HEAD;
+	
+	public static final long SECTION_GREAT_SWORD = 2955;
+	public static final long SECTION_HUNTING_HORN = 3090;
+	public static final long SECTION_LONG_SWORD = 3191;
+	public static final long SECTION_SWORD_AND_SHIELD = 3305;
+	public static final long SECTION_DUAL_BLADES = 3445;
+	public static final long SECTION_HAMMER = 3570;
+	public static final long SECTION_LANCE = 3704;
+	public static final long SECTION_GUNLANCE = 3849;
+	public static final long SECTION_SWITCH_AXE = 3961;
+	public static final long SECTION_LIGHT_BOWGUN = 4074;
+	public static final long SECTION_HEAVY_BOWGUN = 4170;
+	public static final long SECTION_BOW = 4261;
+	public static final long SECTION_WEAPON = SECTION_GREAT_SWORD;
+	public static final long SECTION_BLADE = SECTION_GREAT_SWORD;
+	public static final long SECTION_BOWGUN = SECTION_LIGHT_BOWGUN;
+	
 	// Arena Quests
 	static final String TABLE_ARENA_QUESTS = "arena_quests";
 	static final String COLUMN_ARENA_QUESTS_ID = "_id";

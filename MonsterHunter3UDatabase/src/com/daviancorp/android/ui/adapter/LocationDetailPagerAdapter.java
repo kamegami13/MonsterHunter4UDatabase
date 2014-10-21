@@ -22,12 +22,16 @@ public class LocationDetailPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// Location detail
 			return LocationDetailFragment.newInstance(locationId);
 		case 1:
+			// Low-rank items
 			return LocationRankFragment.newInstance(locationId, GatheringListCursorLoader.RANK_LR);
 		case 2:
+			// High-rank items
 			return LocationRankFragment.newInstance(locationId, GatheringListCursorLoader.RANK_HR);
 		case 3:
+			// G-rank items
 			return LocationRankFragment.newInstance(locationId, GatheringListCursorLoader.RANK_G);
 		default:
 			return null;

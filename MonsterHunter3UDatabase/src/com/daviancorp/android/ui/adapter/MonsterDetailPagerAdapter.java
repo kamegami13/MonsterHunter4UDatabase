@@ -23,14 +23,19 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// Monster detail
 			return MonsterDetailFragment.newInstance(monsterId);
 		case 1:
+			// Low-rank drops
 			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_LR);
 		case 2:
+			// High-rank drops
 			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_HR);
 		case 3:
+			// G-rank drops
 			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_G);
 		case 4:
+			// Quest appearance
 			return MonsterQuestFragment.newInstance(monsterId);
 		default:
 			return null;

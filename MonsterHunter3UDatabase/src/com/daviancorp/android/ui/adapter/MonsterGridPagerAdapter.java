@@ -17,10 +17,13 @@ public class MonsterGridPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// Monster grid (all monsters)
 			return MonsterGridFragment.newInstance(null);
 		case 1:
+			// Monster grid (small monsters)
 			return MonsterGridFragment.newInstance("Small");
 		case 2:
+			// Monster grid (large monsters)
 			return MonsterGridFragment.newInstance("Large");
 		default:
 			return null;

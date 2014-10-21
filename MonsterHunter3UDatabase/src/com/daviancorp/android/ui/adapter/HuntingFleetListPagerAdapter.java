@@ -18,10 +18,13 @@ public class HuntingFleetListPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// HuntingFleet list under "Fishing"
 			return HuntingFleetListFragment.newInstance(HuntingFleetListCursorLoader.TYPE_FISHING, null);
 		case 1:
+			// HuntingFleet list under "Treasure"
 			return HuntingFleetListFragment.newInstance(HuntingFleetListCursorLoader.TYPE_TREASURE, null);
 		case 2:
+			// HuntingFleet list under "Hunting"
 			return HuntingFleetListFragment.newInstance(HuntingFleetListCursorLoader.TYPE_HUNTING, null);
 		default:
 			return null;

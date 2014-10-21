@@ -17,10 +17,13 @@ public class ArmorExpandableListPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// Armor list for both Blademaster and Gunner
 			return ArmorExpandableListFragment.newInstance("Both");
 		case 1:
+			// Armor list for both Blademaster
 			return ArmorExpandableListFragment.newInstance("Blade");
 		case 2:
+			// Armor list for both Gunner
 			return ArmorExpandableListFragment.newInstance("Gunner");
 		default:
 			return null;

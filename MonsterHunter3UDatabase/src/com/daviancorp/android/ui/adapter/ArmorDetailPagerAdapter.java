@@ -22,10 +22,13 @@ public class ArmorDetailPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// Armor detail
 			return ArmorDetailFragment.newInstance(armorId);
 		case 1:
+			// Armor skills
 			return ItemToSkillFragment.newInstance(armorId, "Armor");
 		case 2:
+			// Item components to make Armor
 			return ComponentListFragment.newInstance(armorId);
 		default:
 			return null;

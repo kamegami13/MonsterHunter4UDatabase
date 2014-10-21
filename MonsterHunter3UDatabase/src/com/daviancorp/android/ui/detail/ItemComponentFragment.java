@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Component;
 import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.data.database.ComponentCursor;
+import com.daviancorp.android.data.database.S;
 import com.daviancorp.android.loader.ComponentListCursorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
@@ -81,15 +82,15 @@ public class ItemComponentFragment extends ListFragment implements
 		Intent i = null;
 		long tagId = (long) v.getTag();
 		
-		if (tagId >= 2955) {
+		if (tagId >= S.SECTION_WEAPON) {
 			i = new Intent(getActivity(), WeaponDetailActivity.class);
 			i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, tagId);
 		}
-		else if (tagId >= 1314) {
+		else if (tagId >= S.SECTION_ARMOR) {
 			i = new Intent(getActivity(), ArmorDetailActivity.class);
 			i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, tagId);
 		}
-		else if (tagId >= 1118) {
+		else if (tagId >= S.SECTION_DECORATIONS) {
 			i = new Intent(getActivity(), DecorationDetailActivity.class);
 			i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, tagId);
 		}
@@ -154,55 +155,55 @@ public class ItemComponentFragment extends ListFragment implements
 			if (created.getType().equals("Decoration")) {
 				cellImage = "icons_items/" + created.getFileLocation();
 			} 
-			else if ((createdId >= 1314) && (createdId < 1646)) {
+			else if ((createdId >= S.SECTION_HEAD) && (createdId < S.SECTION_BODY)) {
 				cellImage = "icons_armor/icons_head/head" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 1646) && (createdId < 1983)) {
+			else if ((createdId >= S.SECTION_BODY) && (createdId < S.SECTION_ARMS)) {
 				cellImage = "icons_armor/icons_body/body" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 1983) && (createdId < 2303)) {
+			else if ((createdId >= S.SECTION_ARMS) && (createdId < S.SECTION_WAIST)) {
 				cellImage = "icons_armor/icons_arms/arms" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 2303) && (createdId < 2623)) {
+			else if ((createdId >= S.SECTION_WAIST) && (createdId < S.SECTION_LEGS)) {
 				cellImage = "icons_armor/icons_waist/waist" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 2623) && (createdId < 2955)) {
+			else if ((createdId >= S.SECTION_LEGS) && (createdId < S.SECTION_GREAT_SWORD)) {
 				cellImage = "icons_armor/icons_legs/legs" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 2955) && (createdId < 3091)) {
+			else if ((createdId >= S.SECTION_GREAT_SWORD) && (createdId < S.SECTION_HUNTING_HORN)) {
 				cellImage = "icons_weapons/icons_great_sword/great_sword" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 3091) && (createdId < 3191)) {
+			else if ((createdId >= S.SECTION_HUNTING_HORN) && (createdId < S.SECTION_LONG_SWORD)) {
 				cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 3191) && (createdId < 3305)) {
+			else if ((createdId >= S.SECTION_LONG_SWORD) && (createdId < S.SECTION_SWORD_AND_SHIELD)) {
 				cellImage = "icons_weapons/icons_long_sword/long_sword" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 3305) && (createdId < 3445)) {
+			else if ((createdId >= S.SECTION_SWORD_AND_SHIELD) && (createdId < S.SECTION_DUAL_BLADES)) {
 				cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 3445) && (createdId < 3570)) {
+			else if ((createdId >= S.SECTION_DUAL_BLADES) && (createdId < S.SECTION_HAMMER)) {
 				cellImage = "icons_weapons/icons_dual_blades/dual_blades" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 3570) && (createdId < 3704)) {
+			else if ((createdId >= S.SECTION_HAMMER) && (createdId < S.SECTION_LANCE)) {
 				cellImage = "icons_weapons/icons_hammer/hammer" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 3704) && (createdId < 3849)) {
+			else if ((createdId >= S.SECTION_LANCE) && (createdId < S.SECTION_GUNLANCE)) {
 				cellImage = "icons_weapons/icons_lance/lance" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 3849) && (createdId < 3961)) {
+			else if ((createdId >= S.SECTION_GUNLANCE) && (createdId < S.SECTION_SWITCH_AXE)) {
 				cellImage = "icons_weapons/icons_gunlance/gunlance" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 3961) && (createdId < 4074)) {
+			else if ((createdId >= S.SECTION_SWITCH_AXE) && (createdId < S.SECTION_LIGHT_BOWGUN)) {
 				cellImage = "icons_weapons/icons_switch_axe/switch_axe" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 4074) && (createdId < 4170)) {
+			else if ((createdId >= S.SECTION_LIGHT_BOWGUN) && (createdId < S.SECTION_HEAVY_BOWGUN)) {
 				cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + created.getRarity() + ".png";
 			}
-			else if ((createdId >= 4170) && (createdId < 4261)) {
+			else if ((createdId >= S.SECTION_HEAVY_BOWGUN) && (createdId < S.SECTION_BOW)) {
 				cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + created.getRarity() + ".png";
 			}
-			else if (createdId >= 4261) {
+			else if (createdId >= S.SECTION_BOW) {
 				cellImage = "icons_weapons/icons_bow/bow" + created.getRarity() + ".png";
 			}
 			

@@ -12,17 +12,13 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daviancorp.android.data.classes.Armor;
-import com.daviancorp.android.data.database.DataManager;
+import com.daviancorp.android.data.database.S;
 import com.daviancorp.android.loader.ArmorLoader;
 import com.daviancorp.android.monsterhunter3udatabase.R;
 
@@ -132,19 +128,19 @@ public class ArmorDetailFragment extends Fragment {
 		
 		long createdId = mArmor.getId();
 
-		 if ((createdId >= 1314) && (createdId < 1646)) {
+		 if ((createdId >= S.SECTION_HEAD) && (createdId < S.SECTION_BODY)) {
 				cellImage = "icons_armor/icons_head/head" + cellRare + ".png";
 			}
-			else if ((createdId >= 1646) && (createdId < 1983)) {
+			else if ((createdId >= S.SECTION_BODY) && (createdId < S.SECTION_ARMS)) {
 				cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
 			}
-			else if ((createdId >= 1983) && (createdId < 2303)) {
+			else if ((createdId >= S.SECTION_ARMS) && (createdId < S.SECTION_WAIST)) {
 				cellImage = "icons_armor/icons_arms/arms" + cellRare + ".png";
 			}
-			else if ((createdId >= 2303) && (createdId < 2623)) {
+			else if ((createdId >= S.SECTION_WAIST) && (createdId < S.SECTION_LEGS)) {
 				cellImage = "icons_armor/icons_waist/waist" + cellRare + ".png";
 			}
-			else if ((createdId >= 2623) && (createdId < 2955)) {
+			else if ((createdId >= S.SECTION_LEGS) && (createdId < S.SECTION_WEAPON)) {
 				cellImage = "icons_armor/icons_legs/legs" + cellRare + ".png";
 			}
 		 

@@ -21,28 +21,34 @@ import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
 
-//
-//   QUERY REFERENCE:
-//   
-//query(boolean distinct, 
-//		String table, 
-//		String[] columns, 
-//		String selection, 
-//		String[] selectionArgs, 
-//		String groupBy, 
-//		String having, 
-//		String orderBy, 
-//		String limit)
+/*
+   QUERY REFERENCE:
+   
+For queries with no JOINs:
+	- call wrapHelper()
+	- set values for
+			_Distinct
+			_Table
+			_Columns
+			_Selection
+			_SelectionArgs
+			_GroupBy
+			_Having
+			_OrderBy
+			_Limit
 
-// query(SQLiteDatabase db, 
-//	String[] projectionIn, 
-//	String selection, 
-//	String[] selectionArgs, 
-//	String groupBy, 
-//	String having, 
-//	String sortOrder, 
-//	String limit)
-
+For queries with JOINs:
+	- call wrapJoinHelper(SQLiteQueryBuilder qb)
+	= set values for 
+		_Columns
+		_Selection
+		_SelectionArgs
+		_GroupBy
+		_Having
+		_OrderBy
+		_Limit
+		
+*/
 
 public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "MonsterHunterDatabaseHelper";
@@ -176,8 +182,12 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) { }
 
+	/*
+	 * If upgraded: drop existing tables while keeping wishlist data
+	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// Transfer over the wishlist data
 		if (newVersion > oldVersion) {
 			WishlistCursor wc = queryWishlists();
 			WishlistDataCursor wdc = queryWishlistsData();
@@ -259,28 +269,42 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	    }
 	}
 	
-	
+	/*
+	 * Helper method: used for queries that has no JOINs
+	 */
 	private Cursor wrapHelper() {
 		return getReadableDatabase().query(_Distinct, _Table, _Columns, _Selection, _SelectionArgs,_GroupBy,_Having, _OrderBy, _Limit);
 	}
 	
+	/*
+	 * Helper method: used for queries that has JOINs
+	 */	
 	private Cursor wrapJoinHelper(SQLiteQueryBuilder qb) {
 //		Log.d(TAG, "qb: " + qb.buildQuery(_Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit));
 		return qb.query(getReadableDatabase(), _Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit);
 	}
-	
+
+	/*
+	 * Insert data to a table
+	 */
 	public long insertRecord(String table, ContentValues values) { 
 		long l = getWritableDatabase().insert(table, null, values); 
 		close();
 		return l;
 	}
 	
+	/*
+	 * Update data in a table
+	 */
 	public int updateRecord(String table, String strFilter, ContentValues values) {
 		int i = getWritableDatabase().update(table, values, strFilter, null);
 		close();
 		return i;
 	}
 	
+	/*
+	 * Delete data in a table
+	 */	
 	public boolean deleteRecord(String table, String where, String[] args) {
 	    boolean b = getWritableDatabase().delete(table, where, args) > 0;
 	    close();
@@ -682,7 +706,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		_Columns = null;
 		_Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? " +
-				" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < 1314";
+				" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < " + S.SECTION_ARMOR;
 		_SelectionArgs = new String[]{"" + id};
 		_GroupBy = null;
 		_Having = null;
@@ -715,7 +739,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		
 		_Columns = null;
 		_Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? " +
-				" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < 1314" +
+				" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < " + S.SECTION_ARMOR +
 				" AND " + "c." + S.COLUMN_COMPONENTS_TYPE + " = ?";
 		_SelectionArgs = new String[]{"" + id, type};
 		_GroupBy = null;
@@ -1889,24 +1913,21 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	
 /********************************* SKILL QUERIES ******************************************/
 	
-	/*
-	 * Get all skills for a skill tree
-	 */
-	public SkillCursor querySkill(long id) {
-		// "SELECT * FROM skills WHERE skill_tree_id = id"
-		
-		_Distinct = false;
-		_Table = S.TABLE_SKILLS;
-		_Columns = null;
-		_Selection = S.COLUMN_SKILLS_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
-		
-		return new SkillCursor(wrapHelper());
-	}	
+//	public SkillCursor querySkill(long id) {
+//		// "SELECT * FROM skills WHERE skill_id = id"
+//		
+//		_Distinct = false;
+//		_Table = S.TABLE_SKILLS;
+//		_Columns = null;
+//		_Selection = S.COLUMN_SKILLS_ID + " = ?";
+//		_SelectionArgs = new String[]{ String.valueOf(id) };
+//		_GroupBy = null;
+//		_Having = null;
+//		_OrderBy = null;
+//		_Limit = null;
+//		
+//		return new SkillCursor(wrapHelper());
+//	}	
 	
 	/*
 	 * Get all skills for a skill tree

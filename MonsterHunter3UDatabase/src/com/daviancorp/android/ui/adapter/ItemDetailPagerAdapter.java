@@ -25,16 +25,22 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// Item detail
 			return ItemDetailFragment.newInstance(itemId);
 		case 1:
+			// List of Armor, Decoration, and Weapon the Item can be used for
 			return ItemComponentFragment.newInstance(itemId);
 		case 2:
+			// Monster drops
 			return ItemMonsterFragment.newInstance(itemId);
 		case 3:
+			// Quest rewards
 			return ItemQuestFragment.newInstance(itemId);
 		case 4:
+			// Location drops; gathering
 			return ItemLocationFragment.newInstance(itemId);
 		case 5:
+			// ArenaQuest rewards
 			return ItemArenaFragment.newInstance(itemId);
 		default:
 			return null;

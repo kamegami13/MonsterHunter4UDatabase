@@ -22,10 +22,13 @@ public class DecorationDetailPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// Decoration detail
 			return DecorationDetailFragment.newInstance(decorationId);
 		case 1:
+			// Decoration skills
 			return ItemToSkillFragment.newInstance(decorationId, "Decoration");
 		case 2:
+			// Item components to make Decoration
 			return ComponentListFragment.newInstance(decorationId);
 		default:
 			return null;

@@ -23,23 +23,30 @@ public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// SkillTree detail
 			return SkillTreeDetailFragment.newInstance(skillTreeId);
 		case 1:
+			// List of "Head" Armor with the SkillTree
 			return SkillTreeArmorFragment.newInstance(skillTreeId, 
 					ItemToSkillTreeListCursorLoader.TYPE_HEAD);
 		case 2:
+			// List of "Body" Armor with the SkillTree
 			return SkillTreeArmorFragment.newInstance(skillTreeId,  
 					ItemToSkillTreeListCursorLoader.TYPE_BODY);
 		case 3:
+			// List of "Arms" Armor with the SkillTree
 			return SkillTreeArmorFragment.newInstance(skillTreeId,  
 					ItemToSkillTreeListCursorLoader.TYPE_ARMS);
 		case 4:
+			// List of "Waist" Armor with the SkillTree
 			return SkillTreeArmorFragment.newInstance(skillTreeId,  
 					ItemToSkillTreeListCursorLoader.TYPE_WAIST);
 		case 5:
+			// List of "Legs" Armor with the SkillTree
 			return SkillTreeArmorFragment.newInstance(skillTreeId,  
 					ItemToSkillTreeListCursorLoader.TYPE_LEGS);
 		case 6:
+			// List of Decoration with the SkillTree
 			return SkillTreeDecorationFragment.newInstance(skillTreeId,  
 					ItemToSkillTreeListCursorLoader.TYPE_DECORATION);
 		default:

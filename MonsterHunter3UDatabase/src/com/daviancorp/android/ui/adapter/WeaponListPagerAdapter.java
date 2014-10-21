@@ -24,28 +24,40 @@ public class WeaponListPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// Great Sword
 			return WeaponBladeListFragment.newInstance("Great Sword");
 		case 1:
+			// Long Sword
 			return WeaponBladeListFragment.newInstance("Long Sword");
 		case 2:
+			// Sword and Shield
 			return WeaponBladeListFragment.newInstance("Sword and Shield");
 		case 3:
+			// Dual Blades
 			return WeaponBladeListFragment.newInstance("Dual Blades");
 		case 4:
+			// Hammer
 			return WeaponBladeListFragment.newInstance("Hammer");
 		case 5:
+			// Hunting Horn 
 			return WeaponBladeListFragment.newInstance("Hunting Horn");
 		case 6:
+			// Lance
 			return WeaponBladeListFragment.newInstance("Lance");
 		case 7:
+			// Gunlance
 			return WeaponBladeListFragment.newInstance("Gunlance");
 		case 8:
+			// Switch Axe
 			return WeaponBladeListFragment.newInstance("Switch Axe");
 		case 9:
+			// Light Bowgun
 			return WeaponBowgunListFragment.newInstance("Light Bowgun");
 		case 10:
+			// Heavy Bowgun
 			return WeaponBowgunListFragment.newInstance("Heavy Bowgun");
 		case 11:
+			// Bow
 			return WeaponBowListFragment.newInstance("Bow");
 		default:
 			return null;

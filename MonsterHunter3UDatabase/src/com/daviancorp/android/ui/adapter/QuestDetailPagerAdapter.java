@@ -22,10 +22,13 @@ public class QuestDetailPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// Quest detail
 			return QuestDetailFragment.newInstance(questId);
 		case 1:
+			// Monsters in Quest
 			return QuestMonsterFragment.newInstance(questId);
 		case 2:
+			// Quest rewards
 			return QuestRewardFragment.newInstance(questId);
 		default:
 			return null;

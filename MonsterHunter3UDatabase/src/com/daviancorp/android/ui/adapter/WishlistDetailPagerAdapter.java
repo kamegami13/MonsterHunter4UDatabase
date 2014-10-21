@@ -24,6 +24,7 @@ public class WishlistDetailPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// WishlistData
 			mWishlistDataDetailFragment = WishlistDataDetailFragment.newInstance(wishlistId);
 			
 			// For refreshing each other
@@ -34,6 +35,7 @@ public class WishlistDetailPagerAdapter extends FragmentPagerAdapter {
 			
 			return mWishlistDataDetailFragment;
 		case 1:
+			// WistlistComponent
 			mWishlistDataComponentFragment = WishlistDataComponentFragment.newInstance(wishlistId);
 			
 			// For refreshing each other

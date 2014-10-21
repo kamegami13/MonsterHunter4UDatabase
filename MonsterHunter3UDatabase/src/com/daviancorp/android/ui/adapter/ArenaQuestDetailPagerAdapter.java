@@ -22,10 +22,13 @@ public class ArenaQuestDetailPagerAdapter extends FragmentPagerAdapter {
 
 		switch (index) {
 		case 0:
+			// ArenaQuest detail
 			return ArenaQuestDetailFragment.newInstance(arenaQuestId);
 		case 1:
+			// Monsters in ArenaQuest
 			return ArenaQuestMonsterFragment.newInstance(arenaQuestId);
 		case 2:
+			// Item rewards in ArenaQuest
 			return ArenaQuestRewardFragment.newInstance(arenaQuestId);
 
 		default:
