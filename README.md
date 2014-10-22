@@ -2,7 +2,9 @@ MonsterHunter3UDatabase
 =======================
 
 Source code for the Android app Monster Hunter 3U Database.
+
 App can be found here in the Google Play Store:
+
 https://play.google.com/store/apps/details?id=com.daviancorp.android.mh3udatabase&hl=en
 
 ### Database
