@@ -7,6 +7,10 @@ App can be found here in the Google Play Store:
 
 https://play.google.com/store/apps/details?id=com.daviancorp.android.mh3udatabase&hl=en
 
+List of To-Dos can be found here (thanks to kamegami):
+
+https://trello.com/b/3RYJT1lZ/monster-hunter-3u-database
+
 ### Database
 
 Located in MonsterHunter3UDatabase\MonsterHunter3UDatabase\assets.
