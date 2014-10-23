@@ -1,7 +1,7 @@
 MonsterHunter3UDatabase
 =======================
 
-Source code for the Android app Monster Hunter 3U Database.
+Source code for the Android app Monster Hunter 3U Database. We use ADT Eclipse as our envirnoment.
 
 App can be found here in the Google Play Store:
 
