@@ -63,16 +63,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
-	
-	private boolean _Distinct;
-	private String _Table; 
-	private String[] _Columns; 
-	private String _Selection; 
-	private String[] _SelectionArgs; 
-	private String _GroupBy;
-	private String _Having; 
-	private String _OrderBy; 
-	private String _Limit;
 
 	public static MonsterHunterDatabaseHelper getInstance(Context c) {
 
@@ -88,16 +78,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private MonsterHunterDatabaseHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
 		myContext = context;
-		
-		_Distinct = false;
-		_Table = null;
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
 	}
 	
 	/**
@@ -272,24 +252,9 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Helper method: used for queries that has no JOINs
 	 */
-	/*private Cursor wrapHelper() {
-		return getReadableDatabase().query(_Distinct, _Table, _Columns, _Selection, _SelectionArgs,_GroupBy,_Having, _OrderBy, _Limit);
-	}*/
-	
-	/*
-	 * Helper method: used for queries that has no JOINs
-	 */
 	private Cursor wrapHelper(QueryHelper qh) {
 		return getReadableDatabase().query(qh.Distinct, qh.Table, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
 	}
-	
-	/*
-	 * Helper method: used for queries that has JOINs
-	 */	
-	/*private Cursor wrapJoinHelper(SQLiteQueryBuilder qb) {
-//		Log.d(TAG, "qb: " + qb.buildQuery(_Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit));
-		return qb.query(getReadableDatabase(), _Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit);
-	}*/
 	
 	/*
 	 * Helper method: used for queries that has JOINs
@@ -1682,7 +1647,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.OrderBy = null;
 		qh.Limit = null;
 		
-		return new MonsterToArenaCursor(wrapJoinHelper(builderMonsterToArena(), qh));
+		return new MonsterToArenaCursor(wrapJoinHelper(builderMonsterToArena(qh.Distinct), qh));
 	}
 	
 	/*
@@ -1701,13 +1666,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.OrderBy = null;
 		qh.Limit = null;
 		
-		return new MonsterToArenaCursor(wrapJoinHelper(builderMonsterToArena(), qh));
+		return new MonsterToArenaCursor(wrapJoinHelper(builderMonsterToArena(qh.Distinct), qh));
 	}
 	
 	/*
 	 * Helper method to query for MonsterToArena
 	 */
-	private SQLiteQueryBuilder builderMonsterToArena() {
+	private SQLiteQueryBuilder builderMonsterToArena(boolean Distinct) {
 //		SELECT mta._id AS _id, mta.monster_id, mta.arena_id,
 //		m.name AS mname, a.name AS aname,
 //		FROM monster_to_arena AS mta
@@ -1738,7 +1703,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 				S.COLUMN_MONSTER_TO_ARENA_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID + " LEFT OUTER JOIN " + S.TABLE_ARENA_QUESTS +
 				" AS a " + " ON " + "mta." + S.COLUMN_MONSTER_TO_ARENA_ARENA_ID + " = " + "a." + S.COLUMN_ARENA_QUESTS_ID);
 
-		QB.setDistinct(_Distinct);
+		QB.setDistinct(Distinct);
 		QB.setProjectionMap(projectionMap);
 		return QB;
 	}
@@ -1761,7 +1726,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.OrderBy = null;
 		qh.Limit = null;
 		
-		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest(), qh));
+		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest(qh.Distinct), qh));
 	}
 	
 	/*
@@ -1780,13 +1745,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.OrderBy = null;
 		qh.Limit = null;
 		
-		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest(), qh));
+		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest(qh.Distinct), qh));
 	}
 	
 	/*
 	 * Helper method to query for MonsterToQuest
 	 */
-	private SQLiteQueryBuilder builderMonsterToQuest() {
+	private SQLiteQueryBuilder builderMonsterToQuest(boolean Distinct) {
 //		SELECT mtq._id AS _id, mtq.monster_id, mtq.quest_id,
 //		mtq.unstable, m.name AS mname, q.name AS qname,
 //		q.hub, q.stars
@@ -1820,7 +1785,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 				S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID + " LEFT OUTER JOIN " + S.TABLE_QUESTS +
 				" AS q " + " ON " + "mtq." + S.COLUMN_MONSTER_TO_QUEST_QUEST_ID + " = " + "q." + S.COLUMN_QUESTS_ID);
 
-		QB.setDistinct(_Distinct);
+		QB.setDistinct(Distinct);
 		QB.setProjectionMap(projectionMap);
 		return QB;
 	}
