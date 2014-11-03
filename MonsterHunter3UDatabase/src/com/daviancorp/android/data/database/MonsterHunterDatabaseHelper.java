@@ -63,16 +63,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
-	
-	private boolean _Distinct;
-	private String _Table; 
-	private String[] _Columns; 
-	private String _Selection; 
-	private String[] _SelectionArgs; 
-	private String _GroupBy;
-	private String _Having; 
-	private String _OrderBy; 
-	private String _Limit;
 
 	public static MonsterHunterDatabaseHelper getInstance(Context c) {
 
@@ -88,16 +78,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private MonsterHunterDatabaseHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
 		myContext = context;
-		
-		_Distinct = false;
-		_Table = null;
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
 	}
 	
 	/**
@@ -272,16 +252,16 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Helper method: used for queries that has no JOINs
 	 */
-	private Cursor wrapHelper() {
-		return getReadableDatabase().query(_Distinct, _Table, _Columns, _Selection, _SelectionArgs,_GroupBy,_Having, _OrderBy, _Limit);
+	private Cursor wrapHelper(QueryHelper qh) {
+		return getReadableDatabase().query(qh.Distinct, qh.Table, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
 	}
 	
 	/*
 	 * Helper method: used for queries that has JOINs
 	 */	
-	private Cursor wrapJoinHelper(SQLiteQueryBuilder qb) {
+	private Cursor wrapJoinHelper(SQLiteQueryBuilder qb, QueryHelper qh) {
 //		Log.d(TAG, "qb: " + qb.buildQuery(_Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit));
-		return qb.query(getReadableDatabase(), _Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit);
+		return qb.query(getReadableDatabase(), qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
 	}
 
 	/*
@@ -318,15 +298,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ArenaQuestCursor queryArenaQuests() {
 		
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARENA_QUESTS;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ArenaQuestCursor(wrapJoinHelper(builderArenaQuest()));
+		return new ArenaQuestCursor(wrapJoinHelper(builderArenaQuest(), qh));
 	}
 	
 	/*
@@ -334,17 +316,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ArenaQuestCursor queryArenaQuest(long id) {
 		
-		_Distinct = false;
-		_Table = S.TABLE_ARENA_QUESTS;
-		_Columns = null;
-		_Selection = "a." + S.COLUMN_ARENA_QUESTS_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_ARENA_QUESTS;
+		qh.Columns = null;
+		qh.Selection = "a." + S.COLUMN_ARENA_QUESTS_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new ArenaQuestCursor(wrapJoinHelper(builderArenaQuest()));
+		return new ArenaQuestCursor(wrapJoinHelper(builderArenaQuest(), qh));
 	}
 	
 	/*
@@ -352,15 +335,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ArenaQuestCursor queryArenaQuestLocation(long id) {
 		
-		_Columns = null;
-		_Selection = "a." + S.COLUMN_ARENA_QUESTS_LOCATION_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARENA_QUESTS;
+		qh.Selection = "a." + S.COLUMN_ARENA_QUESTS_LOCATION_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ArenaQuestCursor(wrapJoinHelper(builderArenaQuest()));
+		return new ArenaQuestCursor(wrapJoinHelper(builderArenaQuest(), qh));
 	}
 	
 	/*
@@ -391,13 +376,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(l + S.COLUMN_LOCATIONS_NAME, l + "." + S.COLUMN_LOCATIONS_NAME + " AS " + l + S.COLUMN_LOCATIONS_NAME);
 
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_ARENA_QUESTS + " AS a" + " LEFT OUTER JOIN " + S.TABLE_LOCATIONS +
+		QB.setTables(S.TABLE_ARENA_QUESTS + " AS a" + " LEFT OUTER JOIN " + S.TABLE_LOCATIONS +
 				" AS l " + " ON " + "a." + S.COLUMN_ARENA_QUESTS_LOCATION_ID + " = " + "l." + S.COLUMN_LOCATIONS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* ARENA REWARD QUERIES ******************************************/
@@ -407,15 +392,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ArenaRewardCursor queryArenaRewardItem(long id) {
 		
-		_Columns = null;
-		_Selection = "ar." + S.COLUMN_ARENA_REWARDS_ITEM_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = "ar." + S.COLUMN_ARENA_REWARDS_PERCENTAGE + " DESC";
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARENA_REWARDS;
+		qh.Selection = "ar." + S.COLUMN_ARENA_REWARDS_ITEM_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = "ar." + S.COLUMN_ARENA_REWARDS_PERCENTAGE + " DESC";
+		qh.Limit = null;
 		
-		return new ArenaRewardCursor(wrapJoinHelper(builderArenaReward()));
+		return new ArenaRewardCursor(wrapJoinHelper(builderArenaReward(), qh));
 	}
 	
 	/*
@@ -423,15 +410,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ArenaRewardCursor queryArenaRewardArena(long id) {
 		
-		_Columns = null;
-		_Selection = "ar." + S.COLUMN_ARENA_REWARDS_ARENA_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARENA_REWARDS;
+		qh.Selection = "ar." + S.COLUMN_ARENA_REWARDS_ARENA_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ArenaRewardCursor(wrapJoinHelper(builderArenaReward()));
+		return new ArenaRewardCursor(wrapJoinHelper(builderArenaReward(), qh));
 	}
 	
 	/*
@@ -462,14 +451,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(a + S.COLUMN_ARENA_QUESTS_NAME, a + "." + S.COLUMN_ARENA_QUESTS_NAME + " AS " + a + S.COLUMN_ARENA_QUESTS_NAME);
 
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_ARENA_REWARDS + " AS ar" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "ar." +
+		QB.setTables(S.TABLE_ARENA_REWARDS + " AS ar" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "ar." +
 				S.COLUMN_ARENA_REWARDS_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_ARENA_QUESTS +
 				" AS a " + " ON " + "ar." + S.COLUMN_ARENA_REWARDS_ARENA_ID + " = " + "a." + S.COLUMN_ARENA_QUESTS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* ARMOR QUERIES ******************************************/
@@ -479,15 +468,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ArmorCursor queryArmor() {
 
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARMOR;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+		return new ArmorCursor(wrapJoinHelper(builderArmor(), qh));
 	}
 	
 	/*
@@ -495,15 +486,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ArmorCursor queryArmor(long id) {
 
-		_Columns = null;
-		_Selection = "a." + S.COLUMN_ARMOR_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARMOR;
+		qh.Selection = "a." + S.COLUMN_ARMOR_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+		return new ArmorCursor(wrapJoinHelper(builderArmor(), qh));
 	}	
 	
 	/*
@@ -511,16 +504,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ArmorCursor queryArmorType(String type) {
 
-		_Columns = null;
-		_Selection = "a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = ? " + " OR " +
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARMOR;
+		qh.Selection = "a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = ? " + " OR " +
 					"a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = 'Both'";
-		_SelectionArgs = new String[]{type};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		qh.SelectionArgs = new String[]{type};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+		return new ArmorCursor(wrapJoinHelper(builderArmor(), qh));
 	}
 	
 	/*
@@ -528,15 +523,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ArmorCursor queryArmorSlot(String slot) {
 
-		_Columns = null;
-		_Selection = "a." + S.COLUMN_ARMOR_SLOT + " = ?";
-		_SelectionArgs = new String[]{slot};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARMOR;
+		qh.Selection = "a." + S.COLUMN_ARMOR_SLOT + " = ?";
+		qh.SelectionArgs = new String[]{slot};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+		return new ArmorCursor(wrapJoinHelper(builderArmor(), qh));
 	}
 	
 	/*
@@ -544,17 +541,19 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ArmorCursor queryArmorTypeSlot(String type, String slot) {
 
-		_Columns = null;
-		_Selection = "(a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = ?" + " OR " +
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARMOR;
+		qh.Selection = "(a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = ?" + " OR " +
 				"a." + S.COLUMN_ARMOR_HUNTER_TYPE + " = 'Both') " + " AND " + 
 				"a." + S.COLUMN_ARMOR_SLOT + " = ?";
-		_SelectionArgs = new String[]{type, slot};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		qh.SelectionArgs = new String[]{type, slot};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ArmorCursor(wrapJoinHelper(builderArmor()));
+		return new ArmorCursor(wrapJoinHelper(builderArmor(), qh));
 	}
 
 	/*
@@ -596,13 +595,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_ARMOR + " AS a" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "a." +
+		QB.setTables(S.TABLE_ARMOR + " AS a" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "a." +
 				S.COLUMN_ARMOR_ID + " = " + "i." + S.COLUMN_ITEMS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 
 /********************************* COMBINING QUERIES ******************************************/
@@ -612,15 +611,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public CombiningCursor queryCombinings() {
 		
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_COMBINING;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new CombiningCursor(wrapJoinHelper(builderCursor()));
+		return new CombiningCursor(wrapJoinHelper(builderCursor(), qh));
 	}
 	
 	/*
@@ -628,15 +629,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public CombiningCursor queryCombining(long id) {
 		
-		_Columns = null;
-		_Selection = "c._id" + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_COMBINING;
+		qh.Selection = "c._id" + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new CombiningCursor(wrapJoinHelper(builderCursor()));
+		return new CombiningCursor(wrapJoinHelper(builderCursor(), qh));
 	}	
 	
 	private SQLiteQueryBuilder builderCursor()  {
@@ -683,17 +686,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		}
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		 
-		_QB.setTables(S.TABLE_COMBINING + " AS c" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS crt" + " ON " + "c." +
+		QB.setTables(S.TABLE_COMBINING + " AS c" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS crt" + " ON " + "c." +
 				S.COLUMN_COMBINING_CREATED_ITEM_ID + " = " + "crt." + S.COLUMN_ITEMS_ID +
 				" LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS mat1" + " ON " + "c." +
 				S.COLUMN_COMBINING_ITEM_1_ID + " = " + "mat1." + S.COLUMN_ITEMS_ID +
 				" LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS mat2" + " ON " + "c." +
 				S.COLUMN_COMBINING_ITEM_2_ID + " = " + "mat2." + S.COLUMN_ITEMS_ID);
 				
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 		
 	}
 	
@@ -704,16 +707,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ComponentCursor queryComponentCreated(long id) {
 		
-		_Columns = null;
-		_Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? " +
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_COMPONENTS;
+		qh.Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? " +
 				" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < " + S.SECTION_ARMOR;
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ComponentCursor(wrapJoinHelper(builderComponent()));
+		return new ComponentCursor(wrapJoinHelper(builderComponent(), qh));
 	}
 	
 	/*
@@ -721,15 +726,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ComponentCursor queryComponentComponent(long id) {
 		
-		_Columns = null;
-		_Selection = "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_COMPONENTS;
+		qh.Selection = "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ComponentCursor(wrapJoinHelper(builderComponent()));
+		return new ComponentCursor(wrapJoinHelper(builderComponent(), qh));
 	}
 	
 	/*
@@ -737,17 +744,19 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ComponentCursor queryComponentCreatedType(long id, String type) {
 		
-		_Columns = null;
-		_Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? " +
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_COMPONENTS;
+		qh.Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? " +
 				" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < " + S.SECTION_ARMOR +
 				" AND " + "c." + S.COLUMN_COMPONENTS_TYPE + " = ?";
-		_SelectionArgs = new String[]{"" + id, type};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		qh.SelectionArgs = new String[]{"" + id, type};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ComponentCursor(wrapJoinHelper(builderComponent()));
+		return new ComponentCursor(wrapJoinHelper(builderComponent(), qh));
 	}
 	
 	/*
@@ -781,14 +790,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(co + S.COLUMN_ITEMS_ICON_NAME, co + "." + S.COLUMN_ITEMS_ICON_NAME + " AS " + co + S.COLUMN_ITEMS_ICON_NAME);
 
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_COMPONENTS + " AS c" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS cr" + " ON " + "c." +
+		QB.setTables(S.TABLE_COMPONENTS + " AS c" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS cr" + " ON " + "c." +
 				S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = " + "cr." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_ITEMS +
 				" AS co " + " ON " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " = " + "co." + S.COLUMN_ITEMS_ID);
 		
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 
 /********************************* DECORATION QUERIES ******************************************/
@@ -798,15 +807,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public DecorationCursor queryDecorations() {
 
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_DECORATIONS;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new DecorationCursor(wrapJoinHelper(builderDecoration()));
+		return new DecorationCursor(wrapJoinHelper(builderDecoration(), qh));
 	}
 	
 	/*
@@ -814,15 +825,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public DecorationCursor queryDecoration(long id) {
 
-		_Columns = null;
-		_Selection = "i._id" + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_DECORATIONS;
+		qh.Selection = "i._id" + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new DecorationCursor(wrapJoinHelper(builderDecoration()));
+		return new DecorationCursor(wrapJoinHelper(builderDecoration(), qh));
 	}	
 
 	/*
@@ -859,9 +872,9 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put("skill_2_point_value", "its2." + S.COLUMN_ITEM_TO_SKILL_TREE_POINT_VALUE + " AS " + "skill_2_point_value");
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		 
-		_QB.setTables(S.TABLE_DECORATIONS + " AS d" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "d." +
+		QB.setTables(S.TABLE_DECORATIONS + " AS d" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "d." +
 		        S.COLUMN_DECORATIONS_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_ITEM_TO_SKILL_TREE +
 		        " AS its1 " + " ON " + "i." + S.COLUMN_ITEMS_ID + " = " + "its1." + S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID + " AND " + 
 		        "its1." + S.COLUMN_ITEM_TO_SKILL_TREE_POINT_VALUE + " > 0 " + " LEFT OUTER JOIN " + S.TABLE_SKILL_TREES + " AS s1" +
@@ -871,8 +884,8 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		        "its2." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " LEFT OUTER JOIN " + S.TABLE_SKILL_TREES + " AS s2" +
 		        " ON " + "its2." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = " + "s2." + S.COLUMN_SKILL_TREES_ID );
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* GATHERING QUERIES ******************************************/
@@ -882,15 +895,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public GatheringCursor queryGatheringItem(long id) {
 		
-		_Columns = null;
-		_Selection = "g." + S.COLUMN_GATHERING_ITEM_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_GATHERING;
+		qh.Selection = "g." + S.COLUMN_GATHERING_ITEM_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new GatheringCursor(wrapJoinHelper(builderGathering()));
+		return new GatheringCursor(wrapJoinHelper(builderGathering(), qh));
 	}
 	
 	/*
@@ -898,15 +913,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public GatheringCursor queryGatheringLocation(long id) {
 		
-		_Columns = null;
-		_Selection = "g." + S.COLUMN_GATHERING_LOCATION_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_GATHERING;
+		qh.Selection = "g." + S.COLUMN_GATHERING_LOCATION_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new GatheringCursor(wrapJoinHelper(builderGathering()));
+		return new GatheringCursor(wrapJoinHelper(builderGathering(), qh));
 	}
 	
 	/*
@@ -914,16 +931,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public GatheringCursor queryGatheringLocationRank(long id, String rank) {
 		
-		_Columns = null;
-		_Selection = "g." + S.COLUMN_GATHERING_LOCATION_ID + " = ? " + "AND " + 
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_GATHERING;
+		qh.Selection = "g." + S.COLUMN_GATHERING_LOCATION_ID + " = ? " + "AND " + 
 				"g." + S.COLUMN_GATHERING_RANK + " = ? ";
-		_SelectionArgs = new String[]{"" + id, rank};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		qh.SelectionArgs = new String[]{"" + id, rank};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new GatheringCursor(wrapJoinHelper(builderGathering()));
+		return new GatheringCursor(wrapJoinHelper(builderGathering(), qh));
 	}
 	
 	/*
@@ -956,14 +975,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(l + S.COLUMN_LOCATIONS_NAME, l + "." + S.COLUMN_LOCATIONS_NAME + " AS " + l + S.COLUMN_LOCATIONS_NAME);
 
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_GATHERING + " AS g" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "g." +
+		QB.setTables(S.TABLE_GATHERING + " AS g" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "g." +
 				S.COLUMN_GATHERING_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_LOCATIONS +
 				" AS l " + " ON " + "g." + S.COLUMN_GATHERING_LOCATION_ID + " = " + "l." + S.COLUMN_LOCATIONS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* HUNTING FLEET QUERIES ******************************************/
@@ -973,15 +992,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public HuntingFleetCursor queryHuntingFleets() {
 
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_HUNTING_FLEET;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet()));
+		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet(), qh));
 	}
 	
 	/*
@@ -989,15 +1010,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public HuntingFleetCursor queryHuntingFleet(long id) {
 
-		_Columns = null;
-		_Selection = "h." + S.COLUMN_HUNTING_FLEET_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_HUNTING_FLEET;
+		qh.Selection = "h." + S.COLUMN_HUNTING_FLEET_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet()));
+		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet(), qh));
 	}	
 	
 	/*
@@ -1005,15 +1028,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public HuntingFleetCursor queryHuntingFleetType(String type) {
 
-		_Columns = null;
-		_Selection = "h." + S.COLUMN_HUNTING_FLEET_TYPE + " = ?";
-		_SelectionArgs = new String[]{ type };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_HUNTING_FLEET;
+		qh.Selection = "h." + S.COLUMN_HUNTING_FLEET_TYPE + " = ?";
+		qh.SelectionArgs = new String[]{ type };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet()));
+		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet(), qh));
 	}
 	
 	/*
@@ -1021,15 +1046,16 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public HuntingFleetCursor queryHuntingFleetLocation(String location) {
 
-		_Columns = null;
-		_Selection = "h." + S.COLUMN_HUNTING_FLEET_LOCATION + " = ?";
-		_SelectionArgs = new String[]{ location };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Selection = "h." + S.COLUMN_HUNTING_FLEET_LOCATION + " = ?";
+		qh.SelectionArgs = new String[]{ location };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet()));
+		return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet(), qh));
 	}
 	
 	/*
@@ -1067,13 +1093,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		 
-		_QB.setTables(S.TABLE_HUNTING_FLEET + " AS h" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "h." +
+		QB.setTables(S.TABLE_HUNTING_FLEET + " AS h" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "h." +
 				S.COLUMN_HUNTING_FLEET_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* HUNTING REWARD QUERIES ******************************************/
@@ -1083,16 +1109,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public HuntingRewardCursor queryHuntingRewardItem(long id) {
 		
-		_Columns = null;
-		_Selection = "h." + S.COLUMN_HUNTING_REWARDS_ITEM_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = "m." + S.COLUMN_MONSTERS_ID + " ASC, " + "h." + S.COLUMN_HUNTING_REWARDS_RANK +
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_HUNTING_REWARDS;
+		qh.Selection = "h." + S.COLUMN_HUNTING_REWARDS_ITEM_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = "m." + S.COLUMN_MONSTERS_ID + " ASC, " + "h." + S.COLUMN_HUNTING_REWARDS_RANK +
 					" DESC, " + "h." + S.COLUMN_HUNTING_REWARDS_ID + " ASC";
-		_Limit = null;
+		qh.Limit = null;
 		
-		return new HuntingRewardCursor(wrapJoinHelper(builderHuntingReward()));
+		return new HuntingRewardCursor(wrapJoinHelper(builderHuntingReward(), qh));
 	}
 	
 	/*
@@ -1105,15 +1133,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		    string_list[i] = String.valueOf(ids[i]);
 		}
 		
-		_Columns = null;
-		_Selection = "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " IN (" + makePlaceholders(ids.length) + ")";
-		_SelectionArgs = string_list;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_HUNTING_REWARDS;
+		qh.Selection = "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " IN (" + makePlaceholders(ids.length) + ")";
+		qh.SelectionArgs = string_list;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new HuntingRewardCursor(wrapJoinHelper(builderHuntingReward()));
+		return new HuntingRewardCursor(wrapJoinHelper(builderHuntingReward(), qh));
 	}
 	
 	/*
@@ -1127,16 +1157,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		}
 		string_list[ids.length] = rank;
 		
-		_Columns = null;
-		_Selection = "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " IN (" + makePlaceholders(ids.length) + ")"
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_HUNTING_REWARDS;
+		qh.Selection = "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " IN (" + makePlaceholders(ids.length) + ")"
 				+ " AND " + "h." + S.COLUMN_HUNTING_REWARDS_RANK + " = ? ";
-		_SelectionArgs = string_list;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		qh.SelectionArgs = string_list;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new HuntingRewardCursor(wrapJoinHelper(builderHuntingReward()));
+		return new HuntingRewardCursor(wrapJoinHelper(builderHuntingReward(), qh));
 	}
 	
 	/*
@@ -1171,14 +1203,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(m + S.COLUMN_MONSTERS_FILE_LOCATION, m + "." + S.COLUMN_MONSTERS_FILE_LOCATION + " AS " + m + S.COLUMN_MONSTERS_FILE_LOCATION);
 
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_HUNTING_REWARDS + " AS h" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "h." +
+		QB.setTables(S.TABLE_HUNTING_REWARDS + " AS h" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "h." +
 				S.COLUMN_HUNTING_REWARDS_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_MONSTERS +
 				" AS m " + " ON " + "h." + S.COLUMN_HUNTING_REWARDS_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* ITEM QUERIES ******************************************/
@@ -1189,17 +1221,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public ItemCursor queryItems() {
 		// "SELECT DISTINCT * FROM items GROUP BY name LIMIT 1114"
 		
-		_Distinct = true;
-		_Table = S.TABLE_ITEMS;
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1114";
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = true;
+		qh.Table = S.TABLE_ITEMS;
+		qh.Columns = null;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1114";
 		
-		return new ItemCursor(wrapHelper());
+		return new ItemCursor(wrapHelper(qh));
 	}
 	
 	/*
@@ -1208,17 +1241,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public ItemCursor queryItem(long id) {
 		// "SELECT DISTINCT * FROM items WHERE _id = id LIMIT 1"
 		
-		_Distinct = false;
-		_Table = S.TABLE_ITEMS;
-		_Columns = null;
-		_Selection = S.COLUMN_ITEMS_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_ITEMS;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_ITEMS_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new ItemCursor(wrapHelper());
+		return new ItemCursor(wrapHelper(qh));
 	}		
 	
 	/*
@@ -1227,17 +1261,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public ItemCursor queryItemSearch(String search) {
 		// "SELECT * FROM items WHERE name LIKE %?%"
 		
-		_Distinct = false;
-		_Table = S.TABLE_ITEMS;
-		_Columns = null;
-		_Selection = S.COLUMN_ITEMS_NAME + " LIKE ?";
-		_SelectionArgs = new String[]{ '%' + search  + '%'};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_ITEMS;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_ITEMS_NAME + " LIKE ?";
+		qh.SelectionArgs = new String[]{ '%' + search  + '%'};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ItemCursor(wrapHelper());
+		return new ItemCursor(wrapHelper(qh));
 	}	
 	
 	
@@ -1248,15 +1283,16 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public ItemToSkillTreeCursor queryItemToSkillTreeItem(long id) {
 		
-		_Columns = null;
-		_Selection = "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Selection = "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ItemToSkillTreeCursor(wrapJoinHelper(builderItemToSkillTree()));
+		return new ItemToSkillTreeCursor(wrapJoinHelper(builderItemToSkillTree(), qh));
 	}
 	
 	/*
@@ -1272,16 +1308,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 			queryType = "a." + S.COLUMN_ARMOR_SLOT;
 		}
 		
-		_Columns = null;
-		_Selection = "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = ? " + " AND " +
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ITEM_TO_SKILL_TREE;
+		qh.Selection = "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = ? " + " AND " +
 					queryType + " = ? ";
-		_SelectionArgs = new String[]{"" + id, type};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		qh.SelectionArgs = new String[]{"" + id, type};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new ItemToSkillTreeCursor(wrapJoinHelper(builderItemToSkillTree()));
+		return new ItemToSkillTreeCursor(wrapJoinHelper(builderItemToSkillTree(), qh));
 	}
 	
 	/*
@@ -1314,17 +1352,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(s + S.COLUMN_SKILL_TREES_NAME, s + "." + S.COLUMN_SKILL_TREES_NAME + " AS " + s + S.COLUMN_SKILL_TREES_NAME);
 
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_ITEM_TO_SKILL_TREE + " AS itst" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "itst." +
+		QB.setTables(S.TABLE_ITEM_TO_SKILL_TREE + " AS itst" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "itst." +
 				S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_SKILL_TREES +
 				" AS s " + " ON " + "itst." + S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID + " = " + "s." + S.COLUMN_SKILL_TREES_ID + 
 				" LEFT OUTER JOIN " + S.TABLE_ARMOR + " AS a" + " ON " + "i." + S.COLUMN_ITEMS_ID + " = " + "a." + S.COLUMN_ARMOR_ID + 
 				" LEFT OUTER JOIN " + S.TABLE_DECORATIONS + " AS d" + " ON " + "i." + S.COLUMN_ITEMS_ID + " = " + "d." + 
 				S.COLUMN_DECORATIONS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 
 /********************************* LOCATION QUERIES ******************************************/
@@ -1335,17 +1373,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public LocationCursor queryLocations() {
 		// "SELECT DISTINCT * FROM locations GROUP BY name"
 		
-		_Distinct = true;
-		_Table = S.TABLE_LOCATIONS;
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = true;
+		qh.Table = S.TABLE_LOCATIONS;
+		qh.Columns = null;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new LocationCursor(wrapHelper());
+		return new LocationCursor(wrapHelper(qh));
 	}
 	
 	/*
@@ -1354,17 +1393,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public LocationCursor queryLocation(long id) {
 		// "SELECT DISTINCT * FROM locations WHERE _id = id LIMIT 1"	
 		
-		_Distinct = false;
-		_Table = S.TABLE_LOCATIONS;
-		_Columns = null;
-		_Selection = S.COLUMN_LOCATIONS_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_LOCATIONS;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_LOCATIONS_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new LocationCursor(wrapHelper());
+		return new LocationCursor(wrapHelper(qh));
 	}
 	
 /********************************* MOGA WOODS REWARD QUERIES ******************************************/
@@ -1374,15 +1414,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public MogaWoodsRewardCursor queryMogaWoodsRewardItem(long id) {
 		
-		_Columns = null;
-		_Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_MOGA_WOODS_REWARDS;
+		qh.Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward()));
+		return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward(), qh));
 	}
 	
 	/*
@@ -1390,15 +1432,16 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public MogaWoodsRewardCursor queryMogaWoodsRewardMonster(long id) {
 		
-		_Columns = null;
-		_Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward()));
+		return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward(), qh));
 	}
 	
 	/*
@@ -1406,16 +1449,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public MogaWoodsRewardCursor queryMogaWoodsRewardMonsterTime(long id, String time) {
 		
-		_Columns = null;
-		_Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = ? " + "AND " + 
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_MOGA_WOODS_REWARDS;
+		qh.Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = ? " + "AND " + 
 				"mwr." + S.COLUMN_MOGA_WOODS_REWARDS_TIME + " = ? ";
-		_SelectionArgs = new String[]{"" + id, time};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		qh.SelectionArgs = new String[]{"" + id, time};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward()));
+		return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward(), qh));
 	}
 	
 	/*
@@ -1450,14 +1495,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(m + S.COLUMN_MONSTERS_FILE_LOCATION, m + "." + S.COLUMN_MONSTERS_FILE_LOCATION + " AS " + m + S.COLUMN_MONSTERS_FILE_LOCATION);
 
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_MOGA_WOODS_REWARDS + " AS mwr" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "mwr." +
+		QB.setTables(S.TABLE_MOGA_WOODS_REWARDS + " AS mwr" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "mwr." +
 				S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_MONSTERS +
 				" AS m " + " ON " + "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* MONSTER QUERIES ******************************************/
@@ -1468,17 +1513,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public MonsterCursor queryMonsters() {
 		// "SELECT DISTINCT * FROM monsters GROUP BY name"		
 		
-		_Distinct = true;
-		_Table = S.TABLE_MONSTERS;
-		_Columns = null;
-		_Selection = S.COLUMN_MONSTERS_TRAIT + " = '' ";
-		_SelectionArgs = null;
-		_GroupBy = S.COLUMN_MONSTERS_NAME;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = true;
+		qh.Table = S.TABLE_MONSTERS;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_MONSTERS_TRAIT + " = '' ";
+		qh.SelectionArgs = null;
+		qh.GroupBy = S.COLUMN_MONSTERS_NAME;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new MonsterCursor(wrapHelper());
+		return new MonsterCursor(wrapHelper(qh));
 	}
 	
 	/*
@@ -1487,17 +1533,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public MonsterCursor querySmallMonsters() {
 		// "SELECT DISTINCT * FROM monsters WHERE class = 'Minion' GROUP BY name"
 		
-		_Distinct = true;
-		_Table = S.TABLE_MONSTERS;
-		_Columns = null;
-		_Selection = S.COLUMN_MONSTERS_CLASS + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " = '' ";
-		_SelectionArgs = new String[] {"Minion"};
-		_GroupBy = S.COLUMN_MONSTERS_NAME;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = true;
+		qh.Table = S.TABLE_MONSTERS;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_MONSTERS_CLASS + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " = '' ";
+		qh.SelectionArgs = new String[] {"Minion"};
+		qh.GroupBy = S.COLUMN_MONSTERS_NAME;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MonsterCursor(wrapHelper());
+		return new MonsterCursor(wrapHelper(qh));
 	}
 	
 	/*
@@ -1506,17 +1553,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public MonsterCursor queryLargeMonsters() {
 		// "SELECT DISTINCT * FROM monsters WHERE class = 'Boss' GROUP BY name"
 		
-		_Distinct = true;
-		_Table = S.TABLE_MONSTERS;
-		_Columns = null;
-		_Selection = S.COLUMN_MONSTERS_CLASS + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " = '' ";
-		_SelectionArgs = new String[] {"Boss"};
-		_GroupBy = S.COLUMN_MONSTERS_NAME;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = true;
+		qh.Table = S.TABLE_MONSTERS;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_MONSTERS_CLASS + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " = '' ";
+		qh.SelectionArgs = new String[] {"Boss"};
+		qh.GroupBy = S.COLUMN_MONSTERS_NAME;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MonsterCursor(wrapHelper());
+		return new MonsterCursor(wrapHelper(qh));
 	}
 	
 	/*
@@ -1525,17 +1573,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public MonsterCursor queryMonster(long id) {
 		// "SELECT DISTINCT * FROM monsters WHERE _id = id LIMIT 1"
 		
-		_Distinct = false;
-		_Table = S.TABLE_MONSTERS;
-		_Columns = null;
-		_Selection = S.COLUMN_MONSTERS_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_MONSTERS;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_MONSTERS_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new MonsterCursor(wrapHelper());
+		return new MonsterCursor(wrapHelper(qh));
 	}
 	
 	/*
@@ -1544,17 +1593,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public MonsterCursor queryMonsterTrait(String name) {
 		// "SELECT * FROM monsters WHERE _id = ? AND trait != ''"
 		
-		_Distinct = true;
-		_Table = S.TABLE_MONSTERS;
-		_Columns = null;
-		_Selection = S.COLUMN_MONSTERS_NAME + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " != '' ";
-		_SelectionArgs = new String[] {name};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = true;
+		qh.Table = S.TABLE_MONSTERS;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_MONSTERS_NAME + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " != '' ";
+		qh.SelectionArgs = new String[] {name};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MonsterCursor(wrapHelper());
+		return new MonsterCursor(wrapHelper(qh));
 	}
 	
 /********************************* MONSTER DAMAGE QUERIES ******************************************/
@@ -1565,17 +1615,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public MonsterDamageCursor queryMonsterDamage(long id) {
 		// "SELECT * FROM monster_damage WHERE monster_id = id"
 		
-		_Distinct = false;
-		_Table = S.TABLE_MONSTER_DAMAGE;
-		_Columns = null;
-		_Selection = S.COLUMN_MONSTER_DAMAGE_MONSTER_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_MONSTER_DAMAGE;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_MONSTER_DAMAGE_MONSTER_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MonsterDamageCursor(wrapHelper());
+		return new MonsterDamageCursor(wrapHelper(qh));
 	}	
 	
 /********************************* MONSTER TO ARENA QUERIES ******************************************/
@@ -1585,16 +1636,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public MonsterToArenaCursor queryMonsterToArenaMonster(long id) {
 
-		_Distinct = true;
-		_Columns = null;
-		_Selection = "mta." + S.COLUMN_MONSTER_TO_ARENA_MONSTER_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = "a." + S.COLUMN_ARENA_QUESTS_NAME;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = true;
+		qh.Table = S.TABLE_MONSTER_TO_ARENA;
+		qh.Columns = null;
+		qh.Selection = "mta." + S.COLUMN_MONSTER_TO_ARENA_MONSTER_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = "a." + S.COLUMN_ARENA_QUESTS_NAME;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MonsterToArenaCursor(wrapJoinHelper(builderMonsterToArena()));
+		return new MonsterToArenaCursor(wrapJoinHelper(builderMonsterToArena(qh.Distinct), qh));
 	}
 	
 	/*
@@ -1602,22 +1655,24 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public MonsterToArenaCursor queryMonsterToArenaArena(long id) {
 
-		_Distinct = false;
-		_Columns = null;
-		_Selection = "mta." + S.COLUMN_MONSTER_TO_ARENA_ARENA_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_MONSTER_TO_ARENA;
+		qh.Columns = null;
+		qh.Selection = "mta." + S.COLUMN_MONSTER_TO_ARENA_ARENA_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MonsterToArenaCursor(wrapJoinHelper(builderMonsterToArena()));
+		return new MonsterToArenaCursor(wrapJoinHelper(builderMonsterToArena(qh.Distinct), qh));
 	}
 	
 	/*
 	 * Helper method to query for MonsterToArena
 	 */
-	private SQLiteQueryBuilder builderMonsterToArena() {
+	private SQLiteQueryBuilder builderMonsterToArena(boolean Distinct) {
 //		SELECT mta._id AS _id, mta.monster_id, mta.arena_id,
 //		m.name AS mname, a.name AS aname,
 //		FROM monster_to_arena AS mta
@@ -1642,15 +1697,15 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(a + S.COLUMN_ARENA_QUESTS_NAME, a + "." + S.COLUMN_ARENA_QUESTS_NAME + " AS " + a + S.COLUMN_ARENA_QUESTS_NAME);
 				
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_MONSTER_TO_ARENA + " AS mta" + " LEFT OUTER JOIN " + S.TABLE_MONSTERS + " AS m" + " ON " + "mta." +
+		QB.setTables(S.TABLE_MONSTER_TO_ARENA + " AS mta" + " LEFT OUTER JOIN " + S.TABLE_MONSTERS + " AS m" + " ON " + "mta." +
 				S.COLUMN_MONSTER_TO_ARENA_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID + " LEFT OUTER JOIN " + S.TABLE_ARENA_QUESTS +
 				" AS a " + " ON " + "mta." + S.COLUMN_MONSTER_TO_ARENA_ARENA_ID + " = " + "a." + S.COLUMN_ARENA_QUESTS_ID);
 
-		_QB.setDistinct(_Distinct);
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setDistinct(Distinct);
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 		
 /********************************* MONSTER TO QUEST QUERIES ******************************************/
@@ -1660,16 +1715,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public MonsterToQuestCursor queryMonsterToQuestMonster(long id) {
 
-		_Distinct = true;
-		_Columns = null;
-		_Selection = "mtq." + S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = "q." + S.COLUMN_QUESTS_NAME;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = true;
+		qh.Table = S.TABLE_MONSTER_TO_QUEST;
+		qh.Columns = null;
+		qh.Selection = "mtq." + S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = "q." + S.COLUMN_QUESTS_NAME;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest()));
+		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest(qh.Distinct), qh));
 	}
 	
 	/*
@@ -1677,22 +1734,24 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public MonsterToQuestCursor queryMonsterToQuestQuest(long id) {
 
-		_Distinct = false;
-		_Columns = null;
-		_Selection = "mtq." + S.COLUMN_MONSTER_TO_QUEST_QUEST_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_MONSTER_TO_QUEST;
+		qh.Columns = null;
+		qh.Selection = "mtq." + S.COLUMN_MONSTER_TO_QUEST_QUEST_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest()));
+		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest(qh.Distinct), qh));
 	}
 	
 	/*
 	 * Helper method to query for MonsterToQuest
 	 */
-	private SQLiteQueryBuilder builderMonsterToQuest() {
+	private SQLiteQueryBuilder builderMonsterToQuest(boolean Distinct) {
 //		SELECT mtq._id AS _id, mtq.monster_id, mtq.quest_id,
 //		mtq.unstable, m.name AS mname, q.name AS qname,
 //		q.hub, q.stars
@@ -1720,15 +1779,15 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_QUESTS_STARS, q + "." + S.COLUMN_QUESTS_STARS);
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_MONSTER_TO_QUEST + " AS mtq" + " LEFT OUTER JOIN " + S.TABLE_MONSTERS + " AS m" + " ON " + "mtq." +
+		QB.setTables(S.TABLE_MONSTER_TO_QUEST + " AS mtq" + " LEFT OUTER JOIN " + S.TABLE_MONSTERS + " AS m" + " ON " + "mtq." +
 				S.COLUMN_MONSTER_TO_QUEST_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID + " LEFT OUTER JOIN " + S.TABLE_QUESTS +
 				" AS q " + " ON " + "mtq." + S.COLUMN_MONSTER_TO_QUEST_QUEST_ID + " = " + "q." + S.COLUMN_QUESTS_ID);
 
-		_QB.setDistinct(_Distinct);
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setDistinct(Distinct);
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 		
 /********************************* QUEST QUERIES ******************************************/
@@ -1738,15 +1797,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public QuestCursor queryQuests() {
 
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_QUESTS;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new QuestCursor(wrapJoinHelper(builderQuest()));
+		return new QuestCursor(wrapJoinHelper(builderQuest(), qh));
 	}
 	
 	/*
@@ -1754,15 +1815,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public QuestCursor queryQuest(long id) {
 
-		_Columns = null;
-		_Selection = "q." + S.COLUMN_QUESTS_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_QUESTS;
+		qh.Selection = "q." + S.COLUMN_QUESTS_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new QuestCursor(wrapJoinHelper(builderQuest()));
+		return new QuestCursor(wrapJoinHelper(builderQuest(), qh));
 	}	
 	
 	/*
@@ -1770,15 +1833,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public QuestCursor queryQuestHub(String hub) {
 
-		_Columns = null;
-		_Selection = "q." + S.COLUMN_QUESTS_HUB + " = ?";
-		_SelectionArgs = new String[]{ hub };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_QUESTS;
+		qh.Selection = "q." + S.COLUMN_QUESTS_HUB + " = ?";
+		qh.SelectionArgs = new String[]{ hub };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new QuestCursor(wrapJoinHelper(builderQuest()));
+		return new QuestCursor(wrapJoinHelper(builderQuest(), qh));
 	}
 	
 	/*
@@ -1786,16 +1851,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public QuestCursor queryQuestHubStar(String hub, String stars) {
 
-		_Columns = null;
-		_Selection = "q." + S.COLUMN_QUESTS_HUB + " = ?" + " AND " +
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_QUESTS;
+		qh.Selection = "q." + S.COLUMN_QUESTS_HUB + " = ?" + " AND " +
 					"q." + S.COLUMN_QUESTS_STARS + " = ?";
-		_SelectionArgs = new String[]{ hub, stars };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		qh.SelectionArgs = new String[]{ hub, stars };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new QuestCursor(wrapJoinHelper(builderQuest()));
+		return new QuestCursor(wrapJoinHelper(builderQuest(), qh));
 	}
 
 	/*
@@ -1827,13 +1894,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_LOCATIONS_MAP, l + "." + S.COLUMN_LOCATIONS_MAP);
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		 
-		_QB.setTables(S.TABLE_QUESTS + " AS q" + " LEFT OUTER JOIN " + S.TABLE_LOCATIONS + " AS l" + " ON " + "q." +
+		QB.setTables(S.TABLE_QUESTS + " AS q" + " LEFT OUTER JOIN " + S.TABLE_LOCATIONS + " AS l" + " ON " + "q." +
 				S.COLUMN_QUESTS_LOCATION_ID + " = " + "l." + S.COLUMN_LOCATIONS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* QUEST REWARD QUERIES ******************************************/
@@ -1843,15 +1910,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public QuestRewardCursor queryQuestRewardItem(long id) {
 		
-		_Columns = null;
-		_Selection = "qr." + S.COLUMN_QUEST_REWARDS_ITEM_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = "qr." + S.COLUMN_QUEST_REWARDS_PERCENTAGE + " DESC";
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_QUEST_REWARDS;
+		qh.Selection = "qr." + S.COLUMN_QUEST_REWARDS_ITEM_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = "qr." + S.COLUMN_QUEST_REWARDS_PERCENTAGE + " DESC";
+		qh.Limit = null;
 		
-		return new QuestRewardCursor(wrapJoinHelper(builderQuestReward()));
+		return new QuestRewardCursor(wrapJoinHelper(builderQuestReward(), qh));
 	}
 	
 	/*
@@ -1859,15 +1928,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public QuestRewardCursor queryQuestRewardQuest(long id) {
 		
-		_Columns = null;
-		_Selection = "qr." + S.COLUMN_QUEST_REWARDS_QUEST_ID + " = ? ";
-		_SelectionArgs = new String[]{"" + id};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_QUEST_REWARDS;
+		qh.Selection = "qr." + S.COLUMN_QUEST_REWARDS_QUEST_ID + " = ? ";
+		qh.SelectionArgs = new String[]{"" + id};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new QuestRewardCursor(wrapJoinHelper(builderQuestReward()));
+		return new QuestRewardCursor(wrapJoinHelper(builderQuestReward(), qh));
 	}
 	
 	/*
@@ -1901,14 +1972,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_QUESTS_STARS, q + "." + S.COLUMN_QUESTS_STARS);
 
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_QUEST_REWARDS + " AS qr" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "qr." +
+		QB.setTables(S.TABLE_QUEST_REWARDS + " AS qr" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "qr." +
 				S.COLUMN_QUEST_REWARDS_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_QUESTS +
 				" AS q " + " ON " + "qr." + S.COLUMN_QUEST_REWARDS_QUEST_ID + " = " + "q." + S.COLUMN_QUESTS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* SKILL QUERIES ******************************************/
@@ -1935,17 +2006,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public SkillCursor querySkillFromTree(long id) {
 		// "SELECT * FROM skills WHERE skill_tree_id = id"
 		
-		_Distinct = false;
-		_Table = S.TABLE_SKILLS;
-		_Columns = null;
-		_Selection = S.COLUMN_SKILLS_SKILL_TREE_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_SKILLS;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_SKILLS_SKILL_TREE_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new SkillCursor(wrapHelper());
+		return new SkillCursor(wrapHelper(qh));
 	}	
 	
 /********************************* SKILL TREE QUERIES ******************************************/	
@@ -1956,17 +2028,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public SkillTreeCursor querySkillTrees() {
 		// "SELECT DISTINCT * FROM skill_trees GROUP BY name"
 		
-		_Distinct = true;
-		_Table = S.TABLE_SKILL_TREES;
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = S.COLUMN_SKILL_TREES_NAME;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = true;
+		qh.Table = S.TABLE_SKILL_TREES;
+		qh.Columns = null;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = S.COLUMN_SKILL_TREES_NAME;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new SkillTreeCursor(wrapHelper());
+		return new SkillTreeCursor(wrapHelper(qh));
 	}
 	
 	/*
@@ -1975,17 +2048,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public SkillTreeCursor querySkillTree(long id) {
 		// "SELECT DISTINCT * FROM skill_trees WHERE _id = id LIMIT 1"
 		
-		_Distinct = false;
-		_Table = S.TABLE_SKILL_TREES;
-		_Columns = null;
-		_Selection = S.COLUMN_SKILL_TREES_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_SKILL_TREES;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_SKILL_TREES_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new SkillTreeCursor(wrapHelper());
+		return new SkillTreeCursor(wrapHelper(qh));
 	}	
 	
 /********************************* WEAPON QUERIES ******************************************/
@@ -1995,15 +2069,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public WeaponCursor queryWeapon() {
 
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_WEAPONS;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new WeaponCursor(wrapJoinHelper(builderWeapon()));
+		return new WeaponCursor(wrapJoinHelper(builderWeapon(), qh));
 	}
 	
 	/*
@@ -2011,15 +2087,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public WeaponCursor queryWeapon(long id) {
 
-		_Columns = null;
-		_Selection = "w." + S.COLUMN_WEAPONS_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_WEAPONS;
+		qh.Selection = "w." + S.COLUMN_WEAPONS_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new WeaponCursor(wrapJoinHelper(builderWeapon()));
+		return new WeaponCursor(wrapJoinHelper(builderWeapon(), qh));
 	}	
 	
 	/*
@@ -2032,15 +2110,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		    string_list[i] = String.valueOf(ids[i]);
 		}
 		
-		_Columns = null;
-		_Selection = "w." + S.COLUMN_WEAPONS_ID + " IN (" + makePlaceholders(ids.length) + ")";
-		_SelectionArgs = string_list;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_WEAPONS;
+		qh.Selection = "w." + S.COLUMN_WEAPONS_ID + " IN (" + makePlaceholders(ids.length) + ")";
+		qh.SelectionArgs = string_list;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new WeaponCursor(wrapJoinHelper(builderWeapon()));
+		return new WeaponCursor(wrapJoinHelper(builderWeapon(), qh));
 	}
 	
 	/*
@@ -2048,15 +2128,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public WeaponCursor queryWeaponType(String type) {
 
-		_Columns = null;
-		_Selection = "w." + S.COLUMN_WEAPONS_WTYPE + " = ? ";
-		_SelectionArgs = new String[]{type};
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_WEAPONS;
+		qh.Selection = "w." + S.COLUMN_WEAPONS_WTYPE + " = ? ";
+		qh.SelectionArgs = new String[]{type};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new WeaponCursor(wrapJoinHelper(builderWeapon()));
+		return new WeaponCursor(wrapJoinHelper(builderWeapon(), qh));
 	}
 
 	/*
@@ -2114,13 +2196,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_WEAPONS + " AS w" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "w." +
+		QB.setTables(S.TABLE_WEAPONS + " AS w" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "w." +
 				S.COLUMN_WEAPONS_ID + " = " + "i." + S.COLUMN_ITEMS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* WEAPON TREE QUERIES ******************************************/
@@ -2130,15 +2212,16 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public WeaponTreeCursor queryWeaponTreeParent(long id) {
 
-		_Columns = null;
-		_Selection = "i1." + S.COLUMN_ITEMS_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Selection = "i1." + S.COLUMN_ITEMS_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new WeaponTreeCursor(wrapJoinHelper(builderWeaponTreeParent()));
+		return new WeaponTreeCursor(wrapJoinHelper(builderWeaponTreeParent(), qh));
 	}
 	
 	/*
@@ -2146,15 +2229,16 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public WeaponTreeCursor queryWeaponTreeChild(long id) {
 
-		_Columns = null;
-		_Selection = "i1." + S.COLUMN_ITEMS_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Selection = "i1." + S.COLUMN_ITEMS_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 		
-		return new WeaponTreeCursor(wrapJoinHelper(builderWeaponTreeChild()));
+		return new WeaponTreeCursor(wrapJoinHelper(builderWeaponTreeChild(), qh));
 	}
 	
 	/*
@@ -2180,17 +2264,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_ITEMS_NAME, i2 + "." + S.COLUMN_ITEMS_NAME);
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_ITEMS + " AS i1" + " LEFT OUTER JOIN " + S.TABLE_COMPONENTS + " AS c" + 
+		QB.setTables(S.TABLE_ITEMS + " AS i1" + " LEFT OUTER JOIN " + S.TABLE_COMPONENTS + " AS c" + 
 				" ON " + "i1." + S.COLUMN_ITEMS_ID + " = " + "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID +
 				" JOIN " + S.TABLE_WEAPONS + " AS w2" + " ON " + "w2." + S.COLUMN_WEAPONS_ID + " = " + 
 				"c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " LEFT OUTER JOIN " + S.TABLE_ITEMS + 
 				" AS i2" + " ON " + "i2." + S.COLUMN_ITEMS_ID + " = " + "w2." + S.COLUMN_WEAPONS_ID
 				);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 	/*
@@ -2216,17 +2300,17 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_ITEMS_NAME, i2 + "." + S.COLUMN_ITEMS_NAME);
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_ITEMS + " AS i1" + " LEFT OUTER JOIN " + S.TABLE_COMPONENTS + " AS c" + 
+		QB.setTables(S.TABLE_ITEMS + " AS i1" + " LEFT OUTER JOIN " + S.TABLE_COMPONENTS + " AS c" + 
 				" ON " + "i1." + S.COLUMN_ITEMS_ID + " = " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID +
 				" JOIN " + S.TABLE_WEAPONS + " AS w2" + " ON " + "w2." + S.COLUMN_WEAPONS_ID + " = " + 
 				"c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " LEFT OUTER JOIN " + S.TABLE_ITEMS + 
 				" AS i2" + " ON " + "i2." + S.COLUMN_ITEMS_ID + " = " + "w2." + S.COLUMN_WEAPONS_ID
 				);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* WISHLIST QUERIES ******************************************/
@@ -2236,17 +2320,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public WishlistCursor queryWishlists() {
 
-		_Distinct = false;
-		_Table = S.TABLE_WISHLIST;
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_WISHLIST;
+		qh.Columns = null;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new WishlistCursor(wrapHelper());
+		return new WishlistCursor(wrapHelper(qh));
 	}
 	
 	/*
@@ -2254,17 +2339,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public WishlistCursor queryWishlist(long id) {
 
-		_Distinct = false;
-		_Table = S.TABLE_WISHLIST;
-		_Columns = null;
-		_Selection = S.COLUMN_WISHLIST_ID + " = ?";
-		_SelectionArgs = new String[]{ String.valueOf(id) };
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = "1";
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_WISHLIST;
+		qh.Columns = null;
+		qh.Selection = S.COLUMN_WISHLIST_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
 		
-		return new WishlistCursor(wrapHelper());
+		return new WishlistCursor(wrapHelper(qh));
 	}		
 
 	/*
@@ -2315,17 +2401,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public WishlistDataCursor queryWishlistsData() {
 
-		_Distinct = false;
-		_Table = S.TABLE_WISHLIST_DATA;
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_WISHLIST_DATA;
+		qh.Columns = null;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new WishlistDataCursor(wrapHelper());
+		return new WishlistDataCursor(wrapHelper(qh));
 	}
 	
 	/*
@@ -2489,14 +2576,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_WISHLIST_DATA + " AS wd" + " LEFT OUTER JOIN " + S.TABLE_WISHLIST + " AS w" + " ON " +
+		QB.setTables(S.TABLE_WISHLIST_DATA + " AS wd" + " LEFT OUTER JOIN " + S.TABLE_WISHLIST + " AS w" + " ON " +
 				"wd." + S.COLUMN_WISHLIST_DATA_WISHLIST_ID + " = " + "w." + S.COLUMN_WISHLIST_ID + " LEFT OUTER JOIN " +
 				S.TABLE_ITEMS + " AS i" + " ON " + "wd." + S.COLUMN_WISHLIST_DATA_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
+		QB.setProjectionMap(projectionMap);
+		return QB;
 	}
 	
 /********************************* WISHLIST COMPONENT QUERIES ******************************************/
@@ -2506,17 +2593,18 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public WishlistComponentCursor queryWishlistsComponent() {
 
-		_Distinct = false;
-		_Table = S.TABLE_WISHLIST_COMPONENT;
-		_Columns = null;
-		_Selection = null;
-		_SelectionArgs = null;
-		_GroupBy = null;
-		_Having = null;
-		_OrderBy = null;
-		_Limit = null;
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_WISHLIST_COMPONENT;
+		qh.Columns = null;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
 
-		return new WishlistComponentCursor(wrapHelper());
+		return new WishlistComponentCursor(wrapHelper(qh));
 	}
 	
 	/*
@@ -2674,15 +2762,15 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
 		
 		//Create new querybuilder
-		SQLiteQueryBuilder _QB = new SQLiteQueryBuilder();
+		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		
-		_QB.setTables(S.TABLE_WISHLIST_COMPONENT + " AS wc" + " LEFT OUTER JOIN " + S.TABLE_WISHLIST + " AS w" + " ON " +
+		QB.setTables(S.TABLE_WISHLIST_COMPONENT + " AS wc" + " LEFT OUTER JOIN " + S.TABLE_WISHLIST + " AS w" + " ON " +
 				"wc." + S.COLUMN_WISHLIST_COMPONENT_WISHLIST_ID + " = " + "w." + S.COLUMN_WISHLIST_ID + " LEFT OUTER JOIN " +
 				S.TABLE_ITEMS + " AS i" + " ON " + "wc." + S.COLUMN_WISHLIST_COMPONENT_COMPONENT_ID + " = " + 
 				"i." + S.COLUMN_ITEMS_ID);
 
-		_QB.setProjectionMap(projectionMap);
-		return _QB;
-	}	
+		QB.setProjectionMap(projectionMap);
+		return QB;
+	}
 	
 }
