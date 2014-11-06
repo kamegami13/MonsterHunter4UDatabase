@@ -1,5 +1,6 @@
 package com.daviancorp.android.ui.detail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -26,6 +27,7 @@ public class QuestDetailFragment extends Fragment {
 	TextView questtv4;
 	TextView questtv5;
 	TextView questtv6;
+	TextView questtv7;
 
 	public static QuestDetailFragment newInstance(long questId) {
 		Bundle args = new Bundle();
@@ -61,6 +63,19 @@ public class QuestDetailFragment extends Fragment {
 		questtv4 = (TextView) view.findViewById(R.id.reward);
 		questtv5 = (TextView) view.findViewById(R.id.fee);
 		questtv6 = (TextView) view.findViewById(R.id.quest);
+		questtv7 = (TextView) view.findViewById(R.id.location);
+		
+		questtv7.setOnClickListener(new View.OnClickListener() {
+
+		    @Override
+		    public void onClick(View v) {
+				// The id argument will be the Monster ID; CursorAdapter gives us this
+				// for free
+				Intent i = new Intent(getActivity(), LocationDetailActivity.class);
+				i.putExtra(LocationDetailActivity.EXTRA_LOCATION_ID, (long) v.getTag());
+				startActivity(i);
+		    }
+		});
 
 		return view;
 	}
@@ -72,6 +87,8 @@ public class QuestDetailFragment extends Fragment {
 		String cellHrp = "" + mQuest.getHrp();
 		String cellReward = "" + mQuest.getReward() + "z";
 		String cellFee = "" + mQuest.getFee() + "z";
+		String time = mQuest.getLocationTime().equals("") ? "" : " (" + mQuest.getLocationTime() + ")";
+		String cellLocation = mQuest.getLocation().getName() + time;
 		
 		questtv1.setText(cellLevels);
 		questtv2.setText(cellGoal);
@@ -79,6 +96,8 @@ public class QuestDetailFragment extends Fragment {
 		questtv4.setText(cellReward);
 		questtv5.setText(cellFee);
 		questtv6.setText(cellQuest);
+		questtv7.setText(cellLocation);
+		questtv7.setTag(mQuest.getLocation().getId());
 		
 	}
 	

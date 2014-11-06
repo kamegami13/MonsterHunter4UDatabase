@@ -12,6 +12,7 @@ public class Quest {
 	private String type;		// Key quest or not
 	private String stars;		// # of stars
 	private Location location;	// Location
+	private String locationTime;// Day or Night
 	private int time_limit;		// Time limit
 	private int fee;			// Quest fee
 	private int reward;			// Quest reward in zenny
@@ -26,6 +27,7 @@ public class Quest {
 		this.type = "";
 		this.stars = "";
 		this.location = null;
+		this.locationTime = "";
 		this.time_limit = -1;
 		this.fee = -1;
 		this.reward = -1;
@@ -87,6 +89,14 @@ public class Quest {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+	
+	public String getLocationTime() {
+		return locationTime;
+	}
+
+	public void setLocationTime(String locationTime) {
+		this.locationTime = locationTime;
 	}
 
 	public int getTimeLimit() {

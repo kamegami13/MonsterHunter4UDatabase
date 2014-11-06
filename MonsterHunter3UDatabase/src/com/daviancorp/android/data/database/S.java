@@ -220,6 +220,7 @@ public class S {
 	static final String COLUMN_QUESTS_TYPE = "type";
 	static final String COLUMN_QUESTS_STARS = "stars";
 	static final String COLUMN_QUESTS_LOCATION_ID = "location_id";
+	static final String COLUMN_QUESTS_LOCATION_TIME = "location_time";
 	static final String COLUMN_QUESTS_TIME_LIMIT = "time_limit";
 	static final String COLUMN_QUESTS_FEE = "fee";
 	static final String COLUMN_QUESTS_REWARD = "reward";
