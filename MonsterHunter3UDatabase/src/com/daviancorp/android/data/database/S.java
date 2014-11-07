@@ -172,7 +172,8 @@ public class S {
 	static final String COLUMN_MONSTERS_NAME = "name";
 	static final String COLUMN_MONSTERS_CLASS = "class";
 	static final String COLUMN_MONSTERS_TRAIT = "trait";
-	static final String COLUMN_MONSTERS_FILE_LOCATION = "icon_name"; 
+	static final String COLUMN_MONSTERS_FILE_LOCATION = "icon_name";
+	static final String COLUMN_MONSTERS_SORT_NAME = "sort_name";
 	
 	// Monster Damage
 	static final String TABLE_MONSTER_DAMAGE = "monster_damage";
