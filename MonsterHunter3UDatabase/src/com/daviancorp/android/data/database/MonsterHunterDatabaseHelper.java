@@ -62,7 +62,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private static String DB_NAME = "mh3u.db";
 	private static String DB_TEMP_NAME = "mh3u_temp.db";
 	private static String ASSETS_DB_FOLDER = "db";
-	private static final int VERSION = 3; // EDIT
+	private static final int VERSION = 4; // EDIT
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -1613,7 +1613,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.Columns = null;
 		qh.Selection = S.COLUMN_MONSTERS_TRAIT + " = '' ";
 		qh.SelectionArgs = null;
-		qh.GroupBy = S.COLUMN_MONSTERS_NAME;
+		qh.GroupBy = S.COLUMN_MONSTERS_SORT_NAME;
 		qh.Having = null;
 		qh.OrderBy = null;
 		qh.Limit = null;
@@ -1633,7 +1633,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.Columns = null;
 		qh.Selection = S.COLUMN_MONSTERS_CLASS + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " = '' ";
 		qh.SelectionArgs = new String[] {"Minion"};
-		qh.GroupBy = S.COLUMN_MONSTERS_NAME;
+		qh.GroupBy = S.COLUMN_MONSTERS_SORT_NAME;
 		qh.Having = null;
 		qh.OrderBy = null;
 		qh.Limit = null;
@@ -1653,7 +1653,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.Columns = null;
 		qh.Selection = S.COLUMN_MONSTERS_CLASS + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " = '' ";
 		qh.SelectionArgs = new String[] {"Boss"};
-		qh.GroupBy = S.COLUMN_MONSTERS_NAME;
+		qh.GroupBy = S.COLUMN_MONSTERS_SORT_NAME;
 		qh.Having = null;
 		qh.OrderBy = null;
 		qh.Limit = null;
