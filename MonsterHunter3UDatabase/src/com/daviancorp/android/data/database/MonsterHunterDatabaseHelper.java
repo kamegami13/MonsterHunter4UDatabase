@@ -1,6 +1,7 @@
 package com.daviancorp.android.data.database;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,14 +57,21 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private static MonsterHunterDatabaseHelper mInstance = null;
 	
 	//The Android's default system path of your application database.
+	// /data/data/com.daviancorp.android.monsterhunter3udatabase/databases/
     private static String DB_PATH = "/data/data/com.daviancorp.android.monsterhunter3udatabase/databases/";
 	private static String DB_NAME = "mh3u.db";
+	private static String DB_TEMP_NAME = "mh3u_temp.db";
 	private static String ASSETS_DB_FOLDER = "db";
-	private static final int VERSION = 1; // EDIT
+	private static final int VERSION = 4; // EDIT
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
 
+	/**
+	 * Returns Singleton instance of the helper object
+	 * @param c Application context
+	 * @return Singleton instance of helper
+	 */
 	public static MonsterHunterDatabaseHelper getInstance(Context c) {
 
 	    // Use the application context, which will ensure that you 
@@ -75,9 +83,19 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	    return mInstance;
 	  }
 	
+	/**
+	 * Initialize the helper object
+	 * @param context
+	 */
 	private MonsterHunterDatabaseHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
 		myContext = context;
+		
+		try {
+			createDatabase();
+		} catch (IOException e) {
+			throw new Error("Error copying database");
+		}
 	}
 	
 	/**
@@ -127,6 +145,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		return checkDB != null ? true : false;
 	}
 
+	/**
+	 * Copy distributed db in assets folder to data folder
+	 * @throws IOException
+	 */
 	private void copyDatabase() throws IOException {
 		String[] dbFiles = myContext.getAssets().list(ASSETS_DB_FOLDER);
 		String outFileName = DB_PATH + DB_NAME;
@@ -146,13 +168,53 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		myOutput.flush();
 		myOutput.close();
 	}
-
-	public void openDatabase() throws SQLException {
-		// Open the database
-		String myPath = DB_PATH + DB_NAME;
-		myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE|SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+	
+	/**
+	 * Copy distributed db in assets folder to temp file for upgrade
+	 * @throws IOException
+	 */
+	private void copyTempDatabase() throws IOException {
+		String[] dbFiles = myContext.getAssets().list(ASSETS_DB_FOLDER);
+		String outFileName = DB_PATH + DB_TEMP_NAME;
+		OutputStream myOutput = new FileOutputStream(outFileName);		
+		
+		for(int i =0; i < dbFiles.length; i++) {
+			InputStream myInput = myContext.getAssets().open(ASSETS_DB_FOLDER+"/"+dbFiles[i]);
+			byte[] buffer = new byte[1024];
+			int length;
+			
+			while ((length = myInput.read(buffer)) > 0) {
+				myOutput.write(buffer, 0, length);
+			}
+			
+			myInput.close();
+		}
+		myOutput.flush();
+		myOutput.close();
 	}
 
+	/**
+	 * Set database instance
+	 * @throws SQLException
+	 */
+	public void openDatabase() throws SQLException {
+		myDataBase = getWritableDatabase();
+	}
+	
+	/**
+	 * Returns an opened instance of the temp database
+	 * @return The temp database object
+	 * @throws SQLException
+	 */
+	public SQLiteDatabase openTempDatabase() throws SQLException {
+		// Open the database
+		String myPath = DB_PATH + DB_TEMP_NAME;
+		return SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE|SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+	}
+
+	/**
+	 * Close database
+	 */
 	@Override
 	public synchronized void close() {
 		if (myDataBase != null) myDataBase.close();
@@ -162,78 +224,98 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) { }
 
-	/*
-	 * If upgraded: drop existing tables while keeping wishlist data
+	/**
+	 * Copy the new database and transfer the wishlist data
 	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// Transfer over the wishlist data
 		if (newVersion > oldVersion) {
-			WishlistCursor wc = queryWishlists();
-			WishlistDataCursor wdc = queryWishlistsData();
-			WishlistComponentCursor wcc = queryWishlistsComponent();
 			
-			File file = new File(DB_PATH + DB_NAME);
-			if(file.exists())
-			  file.delete();
+			//query wishlist data with provided db instance
+			//Must NOT call getReadableDatabase() or loop will occur
+			WishlistCursor wc = queryWishlists(db);
+			WishlistDataCursor wdc = queryWishlistsData(db);
+			WishlistComponentCursor wcc = queryWishlistsComponent(db);
 			
-			wc.moveToFirst();
-			wdc.moveToFirst();
-			wcc.moveToFirst();
-			
-			while (!wc.isAfterLast()) {
-				Wishlist wishlist = wc.getWishlist();
-				queryAddWishlistAll(wishlist.getId(), wishlist.getName());
-				wc.moveToNext();
+			//Pull the new database to a temp file
+			try {
+				copyTempDatabase();
 			}
-			wc.close();
-			
-			while (!wdc.isAfterLast()) {
-				WishlistData wishlistData = wdc.getWishlistData();
-				queryAddWishlistDataAll(wishlistData.getWishlistId(), wishlistData.getItem().getId(), 
-						wishlistData.getQuantity(), wishlistData.getSatisfied(), wishlistData.getPath());
-				wdc.moveToNext();
+			catch (IOException e) {
+				throw new Error("Error copying database");
 			}
-			wdc.close();
 			
-			while (!wcc.isAfterLast()) {
-				WishlistComponent wishlistComponent = wcc.getWishlistComponent();
-				queryAddWishlistComponentAll(wishlistComponent.getWishlistId(), 
-						wishlistComponent.getItem().getId(), wishlistComponent.getQuantity(), wishlistComponent.getNotes());
-				wcc.moveToNext();
+			//get connection to temp database 
+			SQLiteDatabase newDb = null;
+			try {
+				newDb = openTempDatabase();
 			}
-			wcc.close();
+			catch (SQLException e) {
+				
+			}
+			
+			//Copy the wishlast tables from current db to new db
+			if(newDb != null)
+			{
+				wc.moveToFirst();
+				wdc.moveToFirst();
+				wcc.moveToFirst();
+				
+				while (!wc.isAfterLast()) {
+					Wishlist wishlist = wc.getWishlist();
+					queryAddWishlistAll(newDb, wishlist.getId(), wishlist.getName());
+					wc.moveToNext();
+				}
+				wc.close();
+				
+				while (!wdc.isAfterLast()) {
+					WishlistData wishlistData = wdc.getWishlistData();
+					queryAddWishlistDataAll(newDb, wishlistData.getWishlistId(), wishlistData.getItem().getId(), 
+							wishlistData.getQuantity(), wishlistData.getSatisfied(), wishlistData.getPath());
+					wdc.moveToNext();
+				}
+				wdc.close();
+				
+				while (!wcc.isAfterLast()) {
+					WishlistComponent wishlistComponent = wcc.getWishlistComponent();
+					queryAddWishlistComponentAll(newDb, wishlistComponent.getWishlistId(), 
+							wishlistComponent.getItem().getId(), wishlistComponent.getQuantity(), wishlistComponent.getNotes());
+					wcc.moveToNext();
+				}
+				wcc.close();
+				
+				newDb.close();
+			}
+			
+			//Overwrite current db with temp db
+			//Overwriting with file streams as delete/rename doesn't seem to work correctly
+			try {
+				InputStream myInput = new FileInputStream(DB_PATH + DB_TEMP_NAME);
+				OutputStream myOutput = new FileOutputStream(DB_PATH + DB_NAME);		
+
+				byte[] buffer = new byte[1024];
+				int length;
+
+				while ((length = myInput.read(buffer)) > 0) {
+					myOutput.write(buffer, 0, length);
+				}
+
+				myOutput.flush();
+				myOutput.close();
+				myInput.close();
+				
+			} catch (IOException e) {
+				throw new Error("Error overwritting database");
+			}
 		}
 	}
 	
 	@Override
-	public synchronized SQLiteDatabase getReadableDatabase (){
-		try {
-			createDatabase();
-			openDatabase();
-		}
-		catch (SQLException e) {
-			myDataBase = null;
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			myDataBase = null;
-			e.printStackTrace();
-		}
-		return myDataBase;
-	}
+	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
 	
-	@Override
-	public synchronized SQLiteDatabase getWritableDatabase (){
-		try {
-			openDatabase();
-		}
-		catch (SQLException e) {
-			myDataBase = null;
-			e.printStackTrace();
-		}
-		return myDataBase;
-	}
+	//removed getWritableDatabase() and getReadableDatabase() overrides as they broke
+	//functionality such as onUpgrade()
     
 	private String makePlaceholders(int len) {
 	    if (len < 1) {
@@ -257,6 +339,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	/*
+	 * Helper method: used for queries that has no JOINs
+	 */
+	private Cursor wrapHelper(SQLiteDatabase db, QueryHelper qh) {
+		return db.query(qh.Distinct, qh.Table, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+	}
+	
+	/*
 	 * Helper method: used for queries that has JOINs
 	 */	
 	private Cursor wrapJoinHelper(SQLiteQueryBuilder qb, QueryHelper qh) {
@@ -269,7 +358,14 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public long insertRecord(String table, ContentValues values) { 
 		long l = getWritableDatabase().insert(table, null, values); 
-		close();
+		return l;
+	}
+	
+	/*
+	 * Insert data to a table
+	 */
+	public long insertRecord(SQLiteDatabase db, String table, ContentValues values) { 
+		long l = db.insert(table, null, values); 
 		return l;
 	}
 	
@@ -278,7 +374,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public int updateRecord(String table, String strFilter, ContentValues values) {
 		int i = getWritableDatabase().update(table, values, strFilter, null);
-		close();
 		return i;
 	}
 	
@@ -287,7 +382,6 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 */	
 	public boolean deleteRecord(String table, String where, String[] args) {
 	    boolean b = getWritableDatabase().delete(table, where, args) > 0;
-	    close();
 	    return b;
 	}
 	
@@ -1519,7 +1613,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.Columns = null;
 		qh.Selection = S.COLUMN_MONSTERS_TRAIT + " = '' ";
 		qh.SelectionArgs = null;
-		qh.GroupBy = S.COLUMN_MONSTERS_NAME;
+		qh.GroupBy = S.COLUMN_MONSTERS_SORT_NAME;
 		qh.Having = null;
 		qh.OrderBy = null;
 		qh.Limit = null;
@@ -1539,7 +1633,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.Columns = null;
 		qh.Selection = S.COLUMN_MONSTERS_CLASS + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " = '' ";
 		qh.SelectionArgs = new String[] {"Minion"};
-		qh.GroupBy = S.COLUMN_MONSTERS_NAME;
+		qh.GroupBy = S.COLUMN_MONSTERS_SORT_NAME;
 		qh.Having = null;
 		qh.OrderBy = null;
 		qh.Limit = null;
@@ -1559,7 +1653,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.Columns = null;
 		qh.Selection = S.COLUMN_MONSTERS_CLASS + " = ?" + " AND " + S.COLUMN_MONSTERS_TRAIT + " = '' ";
 		qh.SelectionArgs = new String[] {"Boss"};
-		qh.GroupBy = S.COLUMN_MONSTERS_NAME;
+		qh.GroupBy = S.COLUMN_MONSTERS_SORT_NAME;
 		qh.Having = null;
 		qh.OrderBy = null;
 		qh.Limit = null;
@@ -1885,6 +1979,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		projectionMap.put(S.COLUMN_QUESTS_TYPE, q + "." + S.COLUMN_QUESTS_TYPE);
 		projectionMap.put(S.COLUMN_QUESTS_STARS, q + "." + S.COLUMN_QUESTS_STARS);
 		projectionMap.put(S.COLUMN_QUESTS_LOCATION_ID, q + "." + S.COLUMN_QUESTS_LOCATION_ID);
+		projectionMap.put(S.COLUMN_QUESTS_LOCATION_TIME, q + "." + S.COLUMN_QUESTS_LOCATION_TIME);
 		projectionMap.put(S.COLUMN_QUESTS_TIME_LIMIT, q + "." + S.COLUMN_QUESTS_TIME_LIMIT);
 		projectionMap.put(S.COLUMN_QUESTS_FEE, q + "." + S.COLUMN_QUESTS_FEE);
 		projectionMap.put(S.COLUMN_QUESTS_REWARD, q + "." + S.COLUMN_QUESTS_REWARD);
@@ -2335,6 +2430,25 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	/*
+	 * Get all wishlist using a specific db instance
+	 */
+	public WishlistCursor queryWishlists(SQLiteDatabase db) {
+
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_WISHLIST;
+		qh.Columns = null;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
+
+		return new WishlistCursor(wrapHelper(db, qh));
+	}
+	
+	/*
 	 * Get a specific wishlist
 	 */
 	public WishlistCursor queryWishlist(long id) {
@@ -2366,12 +2480,12 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	/*
 	 * Add a wishlist with all info
 	 */
-	public long queryAddWishlistAll(long id, String name) {
+	public long queryAddWishlistAll(SQLiteDatabase db, long id, String name) {
 		ContentValues values = new ContentValues();
 		values.put(S.COLUMN_WISHLIST_ID, id);
 		values.put(S.COLUMN_WISHLIST_NAME, name);
 		
-		return insertRecord(S.TABLE_WISHLIST, values);
+		return insertRecord(db, S.TABLE_WISHLIST, values);
 	}
 	
 	public int queryUpdateWishlist(long id, String name) {
@@ -2411,8 +2525,37 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.Having = null;
 		qh.OrderBy = null;
 		qh.Limit = null;
+		
+		// Multithread issues workaround
+		SQLiteQueryBuilder qb = builderWishlistData();
+		Cursor cursor = qb.query(
+				getReadableDatabase(), qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+		
+		return new WishlistDataCursor(cursor);
+	}
+	
+	/*
+	 * Get all wishlist data using specific db instance
+	 */
+	public WishlistDataCursor queryWishlistsData(SQLiteDatabase db) {
 
-		return new WishlistDataCursor(wrapHelper(qh));
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_WISHLIST_DATA;
+		qh.Columns = null;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
+		
+		// Multithread issues workaround
+		SQLiteQueryBuilder qb = builderWishlistData();
+		Cursor cursor = qb.query(
+				db, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+		
+		return new WishlistDataCursor(cursor);
 	}
 	
 	/*
@@ -2434,7 +2577,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 				getReadableDatabase(), wdColumns, wdSelection, wdSelectionArgs, wdGroupBy, wdHaving, wdOrderBy, wdLimit);
 		
 		return new WishlistDataCursor(cursor);
-	}	
+	}
 
 
 	/*
@@ -2511,6 +2654,21 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	/*
+	 * Add a wishlist data to a specific wishlist for copying
+	 */
+	public long queryAddWishlistDataAll(SQLiteDatabase db, long wishlist_id, long item_id, 
+			int quantity, int satisfied, String path) {
+		ContentValues values = new ContentValues();
+		values.put(S.COLUMN_WISHLIST_DATA_WISHLIST_ID, wishlist_id);
+		values.put(S.COLUMN_WISHLIST_DATA_ITEM_ID, item_id);
+		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
+		values.put(S.COLUMN_WISHLIST_DATA_SATISFIED, satisfied);
+		values.put(S.COLUMN_WISHLIST_DATA_PATH, path);
+		
+		return insertRecord(db, S.TABLE_WISHLIST_DATA, values);
+	}
+	
+	/*
 	 * Update a wishlist data to a specific wishlist
 	 */
 	public int queryUpdateWishlistDataQuantity(long id, int quantity) {
@@ -2520,7 +2678,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		values.put(S.COLUMN_WISHLIST_DATA_QUANTITY, quantity);
 		
 		return updateRecord(S.TABLE_WISHLIST_DATA, strFilter, values);
-	}	
+	}
 	
 	/*
 	 * Update a wishlist data to a specific wishlist
@@ -2604,7 +2762,38 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		qh.OrderBy = null;
 		qh.Limit = null;
 
-		return new WishlistComponentCursor(wrapHelper(qh));
+		// Multithread issues workaround
+		SQLiteQueryBuilder qb = builderWishlistComponent();
+		Cursor cursor = qb.query(
+				getReadableDatabase(), qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+		
+		return new WishlistComponentCursor(cursor);
+	}
+	
+	/**
+	 * Get all wishlist components using a specific db instance
+	 * @param db
+	 * @return
+	 */
+	public WishlistComponentCursor queryWishlistsComponent(SQLiteDatabase db) {
+
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Table = S.TABLE_WISHLIST_COMPONENT;
+		qh.Columns = null;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
+		
+		// Multithread issues workaround
+		SQLiteQueryBuilder qb = builderWishlistComponent();
+		Cursor cursor = qb.query(
+				db, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+		
+		return new WishlistComponentCursor(cursor);
 	}
 	
 	/*
@@ -2694,6 +2883,19 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		values.put(S.COLUMN_WISHLIST_COMPONENT_NOTES, notes);
 		
 		return insertRecord(S.TABLE_WISHLIST_COMPONENT, values);
+	}
+	
+	/*
+	 * Add a wishlist component to a specific wishlist
+	 */
+	public long queryAddWishlistComponentAll(SQLiteDatabase db, long wishlist_id, long component_id, int quantity, int notes) {
+		ContentValues values = new ContentValues();
+		values.put(S.COLUMN_WISHLIST_COMPONENT_WISHLIST_ID, wishlist_id);
+		values.put(S.COLUMN_WISHLIST_COMPONENT_COMPONENT_ID, component_id);
+		values.put(S.COLUMN_WISHLIST_COMPONENT_QUANTITY, quantity);
+		values.put(S.COLUMN_WISHLIST_COMPONENT_NOTES, notes);
+		
+		return insertRecord(db, S.TABLE_WISHLIST_COMPONENT, values);
 	}
 	
 	/*

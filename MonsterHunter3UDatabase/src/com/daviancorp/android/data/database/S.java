@@ -172,7 +172,8 @@ public class S {
 	static final String COLUMN_MONSTERS_NAME = "name";
 	static final String COLUMN_MONSTERS_CLASS = "class";
 	static final String COLUMN_MONSTERS_TRAIT = "trait";
-	static final String COLUMN_MONSTERS_FILE_LOCATION = "icon_name"; 
+	static final String COLUMN_MONSTERS_FILE_LOCATION = "icon_name";
+	static final String COLUMN_MONSTERS_SORT_NAME = "sort_name";
 	
 	// Monster Damage
 	static final String TABLE_MONSTER_DAMAGE = "monster_damage";
@@ -220,6 +221,7 @@ public class S {
 	static final String COLUMN_QUESTS_TYPE = "type";
 	static final String COLUMN_QUESTS_STARS = "stars";
 	static final String COLUMN_QUESTS_LOCATION_ID = "location_id";
+	static final String COLUMN_QUESTS_LOCATION_TIME = "location_time";
 	static final String COLUMN_QUESTS_TIME_LIMIT = "time_limit";
 	static final String COLUMN_QUESTS_FEE = "fee";
 	static final String COLUMN_QUESTS_REWARD = "reward";
