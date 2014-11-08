@@ -26,7 +26,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Monster;
 import com.daviancorp.android.data.database.MonsterCursor;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 import com.daviancorp.android.ui.detail.MonsterDetailActivity;
 
 public class MonsterGridFragment extends Fragment implements

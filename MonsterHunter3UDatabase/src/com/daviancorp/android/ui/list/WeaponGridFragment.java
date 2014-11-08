@@ -16,7 +16,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 
 public class WeaponGridFragment extends Fragment {
 

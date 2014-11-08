@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.actionbarsherlock.view.Menu;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 import com.daviancorp.android.ui.general.GenericActivity;
 
 public class LocationGridActivity extends GenericActivity {

@@ -27,7 +27,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.MonsterToQuest;
 import com.daviancorp.android.data.database.MonsterToQuestCursor;
 import com.daviancorp.android.loader.MonsterToQuestListCursorLoader;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 
 public class QuestMonsterFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

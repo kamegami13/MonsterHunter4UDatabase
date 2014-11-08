@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.loader.WeaponLoader;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
 
 public class WeaponDetailFragment extends Fragment {

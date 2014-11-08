@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.actionbarsherlock.view.MenuItem;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 
 /*

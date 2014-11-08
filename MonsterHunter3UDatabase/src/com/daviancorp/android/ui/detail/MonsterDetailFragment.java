@@ -24,7 +24,7 @@ import com.daviancorp.android.data.classes.Monster;
 import com.daviancorp.android.data.classes.MonsterDamage;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.loader.MonsterLoader;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 
 public class MonsterDetailFragment extends Fragment {
 	private static final String ARG_MONSTER_ID = "MONSTER_ID";

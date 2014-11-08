@@ -20,8 +20,8 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.loader.WeaponTreeListCursorLoader;
-import com.daviancorp.android.monsterhunter3udatabase.R;
-import com.daviancorp.android.monsterhunter3udatabase.R.color;
+import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R.color;
 
 public class WeaponTreeFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

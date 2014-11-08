@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.HuntingReward;
 import com.daviancorp.android.data.database.HuntingRewardCursor;
 import com.daviancorp.android.loader.HuntingRewardListCursorLoader;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 
 public class MonsterRewardFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

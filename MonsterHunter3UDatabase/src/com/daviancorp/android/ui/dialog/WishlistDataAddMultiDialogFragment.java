@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.database.WishlistCursor;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 
 public class WishlistDataAddMultiDialogFragment extends DialogFragment {
 	public static final String EXTRA_ADD_MULTI =

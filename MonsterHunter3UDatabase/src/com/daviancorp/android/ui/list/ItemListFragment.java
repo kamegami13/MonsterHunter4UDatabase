@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.data.database.ItemCursor;
 import com.daviancorp.android.loader.ItemListCursorLoader;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 import com.daviancorp.android.ui.detail.ItemDetailActivity;
 
 public class ItemListFragment extends ListFragment implements

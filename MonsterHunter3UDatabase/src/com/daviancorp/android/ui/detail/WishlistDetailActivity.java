@@ -8,7 +8,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 import com.daviancorp.android.ui.adapter.WishlistDetailPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 

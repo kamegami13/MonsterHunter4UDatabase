@@ -27,7 +27,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Location;
 import com.daviancorp.android.data.database.LocationCursor;
 import com.daviancorp.android.loader.LocationListCursorLoader;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 import com.daviancorp.android.ui.detail.LocationDetailActivity;
 
 public class LocationGridFragment extends Fragment implements

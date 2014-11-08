@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.SkillTree;
 import com.daviancorp.android.data.database.SkillTreeCursor;
 import com.daviancorp.android.loader.SkillTreeListCursorLoader;
-import com.daviancorp.android.monsterhunter3udatabase.R;
+import com.daviancorp.android.mh3udatabase.R;
 import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
 
 public class SkillTreeListFragment extends ListFragment implements
