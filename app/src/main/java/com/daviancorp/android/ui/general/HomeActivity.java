@@ -3,11 +3,8 @@ package com.daviancorp.android.ui.general;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 
-import com.actionbarsherlock.view.MenuItem;
-import com.daviancorp.android.mh3udatabase.R;
-import com.daviancorp.android.ui.dialog.AboutDialogFragment;
+import com.daviancorp.android.mh4udatabase.R;
 
 /*
  * The home screen activity upon starting the application

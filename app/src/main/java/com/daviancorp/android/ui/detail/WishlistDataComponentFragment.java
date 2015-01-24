@@ -36,7 +36,7 @@ import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.database.S;
 import com.daviancorp.android.data.database.WishlistComponentCursor;
 import com.daviancorp.android.loader.WishlistComponentListCursorLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.WishlistComponentEditDialogFragment;
 
 public class WishlistDataComponentFragment extends SherlockListFragment implements

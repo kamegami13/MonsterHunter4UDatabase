@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Monster Hunter 3U Database</string>
+    <string name="app_name">Monster Hunter 4U Database</string>
     <string name="about">About</string>
     <string name="action_settings">Settings</string>
     <string name="about_message">Created by: DavianCorp \n\nResources from:
@@ -35,6 +35,6 @@
     <string name="weapons">Weapons</string>
     <string name="arena_quests">Arena Quests</string>
     <string name="wishlist">Wishlists</string>
-    <string name="icon_name">MH3U DB</string>
+    <string name="icon_name">MH4U DB</string>
 
 </resources>

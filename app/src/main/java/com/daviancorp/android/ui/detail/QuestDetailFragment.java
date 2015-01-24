@@ -9,12 +9,11 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.loader.QuestLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class QuestDetailFragment extends Fragment {
 	private static final String ARG_QUEST_ID = "QUEST_ID";

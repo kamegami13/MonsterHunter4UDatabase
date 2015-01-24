@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.loader.ItemLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class ItemDetailFragment extends Fragment {
 	private static final String ARG_ITEM_ID = "ITEM_ID";

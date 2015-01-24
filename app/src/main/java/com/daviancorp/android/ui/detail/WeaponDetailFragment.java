@@ -4,19 +4,14 @@ import java.io.IOException;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.loader.WeaponLoader;
-import com.daviancorp.android.mh3udatabase.R;
-import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class WeaponDetailFragment extends Fragment {
 	protected static final String ARG_WEAPON_ID = "WEAPON_ID";

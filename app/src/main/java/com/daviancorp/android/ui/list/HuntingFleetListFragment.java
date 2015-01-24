@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.HuntingFleet;
 import com.daviancorp.android.data.database.HuntingFleetCursor;
 import com.daviancorp.android.loader.HuntingFleetListCursorLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.detail.ItemDetailActivity;
 
 public class HuntingFleetListFragment extends ListFragment implements

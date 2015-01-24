@@ -1,15 +1,11 @@
 package com.daviancorp.android.ui.detail;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -27,7 +23,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.MonsterToQuest;
 import com.daviancorp.android.data.database.MonsterToQuestCursor;
 import com.daviancorp.android.loader.MonsterToQuestListCursorLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class QuestMonsterFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

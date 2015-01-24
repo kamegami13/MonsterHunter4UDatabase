@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Armor;
 import com.daviancorp.android.data.database.S;
 import com.daviancorp.android.loader.ArmorLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class ArmorDetailFragment extends Fragment {
 	private static final String ARG_ARMOR_ID = "ARMOR_ID";

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class WeaponBowgunListFragment extends WeaponListFragment implements
 		LoaderCallbacks<Cursor> {

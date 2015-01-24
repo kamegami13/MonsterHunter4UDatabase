@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.loader.QuestLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.list.ArenaQuestListActivity;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
