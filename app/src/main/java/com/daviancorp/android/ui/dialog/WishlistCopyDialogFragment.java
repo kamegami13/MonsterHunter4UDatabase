@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class WishlistCopyDialogFragment extends DialogFragment {
 	public static final String EXTRA_COPY =

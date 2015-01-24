@@ -57,10 +57,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private static MonsterHunterDatabaseHelper mInstance = null;
 	
 	//The Android's default system path of your application database.
-	// /data/data/com.daviancorp.android.monsterhunter3udatabase/databases/
-    private static String DB_PATH = "/data/data/com.daviancorp.android.mh3udatabase/databases/";
-	private static String DB_NAME = "mh3u.db";
-	private static String DB_TEMP_NAME = "mh3u_temp.db";
+	// /data/data/com.daviancorp.android.monsterhunter4udatabase/databases/
+    private static String DB_PATH = "/data/data/com.daviancorp.android.mh4udatabase/databases/";
+	private static String DB_NAME = "mh4u.db";
+	private static String DB_TEMP_NAME = "mh4u_temp.db";
 	private static String ASSETS_DB_FOLDER = "db";
 	private static final int VERSION = 5; // EDIT
 

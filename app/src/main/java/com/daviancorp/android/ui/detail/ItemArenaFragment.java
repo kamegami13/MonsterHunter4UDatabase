@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.ArenaReward;
 import com.daviancorp.android.data.database.ArenaRewardCursor;
 import com.daviancorp.android.loader.ArenaQuestRewardListCursorLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class ItemArenaFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

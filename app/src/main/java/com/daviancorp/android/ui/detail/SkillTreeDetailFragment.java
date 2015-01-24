@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Skill;
 import com.daviancorp.android.data.database.SkillCursor;
 import com.daviancorp.android.loader.SkillListCursorLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class SkillTreeDetailFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

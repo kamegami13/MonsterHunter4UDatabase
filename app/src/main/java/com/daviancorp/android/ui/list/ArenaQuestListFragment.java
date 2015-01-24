@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.ArenaQuest;
 import com.daviancorp.android.data.database.ArenaQuestCursor;
 import com.daviancorp.android.loader.ArenaQuestListCursorLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.detail.ArenaQuestDetailActivity;
 
 public class ArenaQuestListFragment extends ListFragment implements

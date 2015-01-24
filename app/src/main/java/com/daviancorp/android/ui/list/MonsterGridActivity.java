@@ -9,7 +9,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.MonsterGridPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 
