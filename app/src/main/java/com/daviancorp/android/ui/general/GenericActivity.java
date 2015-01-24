@@ -13,7 +13,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 
 /*

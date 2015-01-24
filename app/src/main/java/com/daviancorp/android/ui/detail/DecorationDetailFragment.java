@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Decoration;
 import com.daviancorp.android.loader.DecorationLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class DecorationDetailFragment extends Fragment {
 	private static final String ARG_DECORATION_ID = "DECORATION_ID";

@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.ItemToSkillTree;
 import com.daviancorp.android.data.database.ItemToSkillTreeCursor;
 import com.daviancorp.android.loader.ItemToSkillTreeListCursorLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class SkillTreeArmorFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {

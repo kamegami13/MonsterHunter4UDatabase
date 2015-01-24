@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.QuestReward;
 import com.daviancorp.android.data.database.QuestRewardCursor;
 import com.daviancorp.android.loader.QuestRewardListCursorLoader;
-import com.daviancorp.android.mh3udatabase.R;
+import com.daviancorp.android.mh4udatabase.R;
 
 public class ItemQuestFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
