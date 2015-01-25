@@ -129,21 +129,9 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 * @return true if it exists, false if it doesn't
 	 */
 	private boolean checkDatabase() {
-		SQLiteDatabase checkDB = null;
-
-		try {
-			String myPath = DB_PATH + DB_NAME;
-			checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY|SQLiteDatabase.NO_LOCALIZED_COLLATORS);
-		}
-		catch (SQLiteException e) {
-			// database does't exist yet.
-		}
-
-		if (checkDB != null) {
-			checkDB.close();
-		}
-		return checkDB != null ? true : false;
-	}
+        File file = new File(DB_PATH + DB_NAME);
+        return file.exists() && !file.isDirectory();
+    }
 
 	/**
 	 * Copy distributed db in assets folder to data folder
