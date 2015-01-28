@@ -5,7 +5,7 @@ Source code for the Android app Monster Hunter 4U Database.
 
 List of To-Dos can be found here (thanks to kamegami):
 
-https://trello.com/b/3RYJT1lZ/monster-hunter-3u-database
+https://trello.com/b/OdgrIacq/monster-hunter-4u-database
 
 ### Database
 
