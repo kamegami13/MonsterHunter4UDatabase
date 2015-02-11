@@ -55,7 +55,6 @@ public class HomeFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_home, parent, false);
 		
 		mLogo = (ImageView) v.findViewById(R.id.logo);
-		mLogo.setImageResource(R.drawable.mh3_cleaned);
 		
 		mMonsters = (TextView) v.findViewById(R.id.monsters);
 		mWeapons = (TextView) v.findViewById(R.id.weapons);

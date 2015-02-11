@@ -11,6 +11,20 @@
     <string name="alert_rate">Rate!</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
+    <string-array name="drawer_items">
+        <item>"Monsters"</item>
+        <item>"Weapons"</item>
+        <item>"Armor"</item>
+        <item>"Quests"</item>
+        <item>"Items"</item>
+        <item>"Combining"</item>
+        <item>"Decorations"</item>
+        <item>"Skill Trees"</item>
+        <item>"Locations"</item>
+        <item>"Hunting Fleet"</item>
+        <item>"Arena Quests"</item>
+        <item>"Wishlists"</item>
+    </string-array>
     <string name="option_list">List</string>
     <string name="option_grid">Grid</string>
     <string name="option_wishlist_add">Add wishlist</string>

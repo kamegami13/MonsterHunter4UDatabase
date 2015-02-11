@@ -10,6 +10,7 @@
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
         android:layout_weight=".4"
+        android:src="@drawable/mh4u_logo"
         android:contentDescription="@string/app_name"
         android:paddingTop="5dp" />
 
