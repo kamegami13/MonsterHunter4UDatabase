@@ -243,7 +243,7 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 				DrawSharpness sharpnesstv;
                 sharpnesstv = (DrawSharpness) view.findViewById(R.id.sharpness);
                 String sharpString = weapon.getSharpness();
-                sharpnesstv.init(context, sharpString);
+                sharpnesstv.init(sharpString);
 			}
 		}
 		
