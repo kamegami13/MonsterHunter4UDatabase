@@ -137,7 +137,7 @@ public class DrawSharpness extends View {
 	public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int margins = (int) Math.floor(mheight/10);
+        int margins = (int) Math.floor(mheight/7);
         int scalefactor = (int) Math.floor((mwidth-(margins*2))/50);
 
 
