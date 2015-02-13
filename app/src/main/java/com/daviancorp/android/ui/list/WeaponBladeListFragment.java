@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.general.DrawSharpness;
 
 public class WeaponBladeListFragment extends WeaponListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -238,11 +239,11 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 			}
 			if (!type.equals("Light Bowgun") && !type.equals("Heavy Bowgun")
 					&& !type.equals("Bow")) {
-				ImageView sharpnesstv = (ImageView) view
-						.findViewById(R.id.sharpness);
-				String sharpFile = "icons_sharpness/"
-						+ weapon.getSharpnessFile();
-				sharpnesstv.setImageDrawable(getDrawable(context, sharpFile));
+                //procedurally draw sharpness
+				DrawSharpness sharpnesstv;
+                sharpnesstv = (DrawSharpness) view.findViewById(R.id.sharpness);
+                String sharpString = weapon.getSharpness();
+                sharpnesstv.init(context, sharpString);
 			}
 		}
 		

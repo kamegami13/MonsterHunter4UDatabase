@@ -44,7 +44,7 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 		mWeaponElementTextView = (TextView) view
 				.findViewById(R.id.detail_weapon_element);
 		mWeaponSharpnessImageView = (ImageView) view
-				.findViewById(R.id.detail_weapon_blade_sharpness);
+				.findViewById(R.id.detail_weapon_blade_sharpness); //TODO swap in drawn sharpness
 		mWeaponRarityTextView = (TextView) view
 				.findViewById(R.id.detail_weapon_rarity);
 		mWeaponSlotTextView = (TextView) view
