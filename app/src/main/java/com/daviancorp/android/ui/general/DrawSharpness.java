@@ -40,6 +40,9 @@ public class DrawSharpness extends View {
     private int mWhite2;
     private int mPurple2;
 
+    private int mheight;
+    private int mwidth;
+
 	int orangeColor = Color.rgb(255, 150, 0);
 	int purpleColor = Color.rgb(120, 81, 169);
 
@@ -97,21 +100,57 @@ public class DrawSharpness extends View {
         mPurple2 = sharpness2[6];
 	}
 
-	@Override
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+
+        // Get layout size to scale sharpness
+//        mheight = Math.abs(top-bottom);
+//        mwidth = Math.abs(left-right);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int width, height;
+
+        // Width should be no greater than 500px
+//
+            width = Math.min(500, MeasureSpec.getSize(widthMeasureSpec));
+        //else
+        //    width = MeasureSpec.getSize(widthMeasureSpec);
+
+        // Height should be no greater than 50px
+        //if(MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST)
+            height = Math.min(50, MeasureSpec.getSize(heightMeasureSpec));
+        //else
+        //    height = MeasureSpec.getSize(heightMeasureSpec);
+
+        mwidth = width;
+        mheight = height;
+
+        setMeasuredDimension(width, height);
+    }
+
+    @Override
 	public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        int margins = (int) Math.floor(mheight/10);
+        int scalefactor = (int) Math.floor((mwidth-(margins*2))/50);
+
 
         //DRAW TOP BAR-------------------------------------
-        int scalefactor = 8;
-        int bartop = 5;
-        int barbottom = 20;
+
+        int bartop = margins;
+        int barbottom = (int) Math.floor(mheight/2-(margins/2));
 
 		paint.setColor(Color.BLACK);
 		paint.setStrokeWidth(4);
-		canvas.drawRect(0, 0, 450, 50, paint);
+		canvas.drawRect(0, 0, mwidth, mheight, paint);
 
-		int start = 5;
+		int start = margins;
 		int end = start + mRed1*scalefactor;
 		paint.setStrokeWidth(0);
 		paint.setColor(Color.RED);
@@ -148,10 +187,10 @@ public class DrawSharpness extends View {
 		canvas.drawRect(start, bartop, end, barbottom, paint);
 
         //DRAW BOTTOM BAR-------------------------------------
-        int bartop2 = 30;
-        int barbottom2 = 45;
+        int bartop2 = (int) Math.floor(mheight/2+(margins/2));
+        int barbottom2 = mheight-margins;
 
-        start = 5;
+        start = margins;
         end = start + mRed2*scalefactor;
         paint.setStrokeWidth(0);
         paint.setColor(Color.RED);
