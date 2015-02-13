@@ -102,8 +102,12 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 			TextView affinitytv = (TextView) view.findViewById(R.id.affinity);
 			TextView defensetv = (TextView) view.findViewById(R.id.defense);
 			TextView specialtv = (TextView) view.findViewById(R.id.special);
+
+            // Set up the DrawSharpness View
+            DrawSharpness sharpnesstv = (DrawSharpness) view.findViewById(R.id.sharpness);
 			
 			// Need to reset drawables
+            sharpnesstv.invalidate();
 			elementtv.setCompoundDrawables(null, null, null, null);
 			specialtv.setCompoundDrawables(null, null, null, null);
 			specialtv.setText(null);
@@ -240,8 +244,6 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 			if (!type.equals("Light Bowgun") && !type.equals("Heavy Bowgun")
 					&& !type.equals("Bow")) {
                 //procedurally draw sharpness
-				DrawSharpness sharpnesstv;
-                sharpnesstv = (DrawSharpness) view.findViewById(R.id.sharpness);
                 String sharpString = weapon.getSharpness();
                 sharpnesstv.init(sharpString);
 			}
