@@ -14,12 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.general.DrawSharpness;
 
 public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 
 	private TextView mWeaponSpecialTypeTextView, mWeaponSpecialTextView;
-	private ImageView mWeaponSharpnessImageView, mWeaponNote1ImageView, 
+	private ImageView mWeaponNote1ImageView,
 			mWeaponNote2ImageView, mWeaponNote3ImageView;
+    private DrawSharpness mWeaponSharpnessDrawnView;
 
 	public static WeaponBladeDetailFragment newInstance(long weaponId) {
 		Bundle args = new Bundle();
@@ -43,8 +45,8 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 				.findViewById(R.id.detail_weapon_attack);
 		mWeaponElementTextView = (TextView) view
 				.findViewById(R.id.detail_weapon_element);
-		mWeaponSharpnessImageView = (ImageView) view
-				.findViewById(R.id.detail_weapon_blade_sharpness); //TODO swap in drawn sharpness
+		mWeaponSharpnessDrawnView = (DrawSharpness) view
+				.findViewById(R.id.detail_weapon_blade_sharpness);
 		mWeaponRarityTextView = (TextView) view
 				.findViewById(R.id.detail_weapon_rarity);
 		mWeaponSlotTextView = (TextView) view
@@ -77,26 +79,12 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 		super.updateUI();
 
 		/* Sharpness */
-		String cellImage = "icons_sharpness/" + mWeapon.getSharpnessFile();
+		mWeaponSharpnessDrawnView.init(mWeapon.getSharpness());
 
 		// Read a Bitmap from Assets
 		AssetManager manager = getActivity().getAssets();
 		InputStream open = null;
 		Bitmap bitmap = null;
-
-		try {
-			open = manager.open(cellImage);
-			bitmap = BitmapFactory.decodeStream(open);
-			// Assign the bitmap to an ImageView in this layout
-			mWeaponSharpnessImageView.setImageBitmap(Bitmap.createScaledBitmap(
-					bitmap, 380, 50, false));
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (open != null) {
-				open.close();
-			}
-		}
 		
 		/* Hunting Horn notes */
 		if (mWeapon.getWtype().equals("Hunting Horn")) {

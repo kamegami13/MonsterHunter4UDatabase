@@ -49,7 +49,7 @@ public class DrawSharpness extends View {
         super(context, attrs);
     }
 
-	public void init(Context context, String sharpness) {
+	public void init(String sharpness) {
 
         int[] sharpness1 = new int[7];
         int[] sharpness2 = new int[7];
@@ -101,45 +101,91 @@ public class DrawSharpness extends View {
 	public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+
+        //DRAW TOP BAR-------------------------------------
+        int scalefactor = 8;
+        int bartop = 5;
+        int barbottom = 20;
+
 		paint.setColor(Color.BLACK);
 		paint.setStrokeWidth(4);
-		canvas.drawRect(8, 8, 600, 52, paint);
+		canvas.drawRect(0, 0, 450, 50, paint);
 
-		int start = 10;
-		int end = start + mRed1;
+		int start = 5;
+		int end = start + mRed1*scalefactor;
 		paint.setStrokeWidth(0);
 		paint.setColor(Color.RED);
-		canvas.drawRect(start, 10, end, 50, paint);
+		canvas.drawRect(start, bartop, end, barbottom, paint);
 
 		start = end;
-		end = end + mOrange1;
+		end = end + mOrange1*scalefactor;
 		paint.setColor(orangeColor);
-		canvas.drawRect(start, 10, end, 50, paint);
+		canvas.drawRect(start, bartop, end, barbottom, paint);
 
 		start = end;
-		end = end + mYellow1;
+		end = end + mYellow1*scalefactor;
 		paint.setColor(Color.YELLOW);
-		canvas.drawRect(start, 10, end, 50, paint);
+		canvas.drawRect(start, bartop, end, barbottom, paint);
 
 		start = end;
-		end = end + mGreen1;
+		end = end + mGreen1*scalefactor;
 		paint.setColor(Color.GREEN);
-		canvas.drawRect(start, 10, end, 50, paint);
+		canvas.drawRect(start, bartop, end, barbottom, paint);
 
 		start = end;
-		end = end + mBlue1;
+		end = end + mBlue1*scalefactor;
 		paint.setColor(Color.BLUE);
-		canvas.drawRect(start, 10, end, 50, paint);
+		canvas.drawRect(start, bartop, end, barbottom, paint);
 
 		start = end;
-		end = end + mWhite1;
+		end = end + mWhite1*scalefactor;
 		paint.setColor(Color.WHITE);
-		canvas.drawRect(start, 10, end, 50, paint);
+		canvas.drawRect(start, bartop, end, barbottom, paint);
 
 		start = end;
-		end = end + mPurple1;
+		end = end + mPurple1*scalefactor;
 		paint.setColor(purpleColor);
-		canvas.drawRect(start, 10, end, 50, paint);
+		canvas.drawRect(start, bartop, end, barbottom, paint);
+
+        //DRAW BOTTOM BAR-------------------------------------
+        int bartop2 = 30;
+        int barbottom2 = 45;
+
+        start = 5;
+        end = start + mRed2*scalefactor;
+        paint.setStrokeWidth(0);
+        paint.setColor(Color.RED);
+        canvas.drawRect(start, bartop2, end, barbottom2, paint);
+
+        start = end;
+        end = end + mOrange2*scalefactor;
+        paint.setColor(orangeColor);
+        canvas.drawRect(start, bartop2, end, barbottom2, paint);
+
+        start = end;
+        end = end + mYellow2*scalefactor;
+        paint.setColor(Color.YELLOW);
+        canvas.drawRect(start, bartop2, end, barbottom2, paint);
+
+        start = end;
+        end = end + mGreen2*scalefactor;
+        paint.setColor(Color.GREEN);
+        canvas.drawRect(start, bartop2, end, barbottom2, paint);
+
+        start = end;
+        end = end + mBlue2*scalefactor;
+        paint.setColor(Color.BLUE);
+        canvas.drawRect(start, bartop2, end, barbottom2, paint);
+
+        start = end;
+        end = end + mWhite2*scalefactor;
+        paint.setColor(Color.WHITE);
+        canvas.drawRect(start, bartop2, end, barbottom2, paint);
+
+        start = end;
+        end = end + mPurple2*scalefactor;
+        paint.setColor(purpleColor);
+        canvas.drawRect(start, bartop2, end, barbottom2, paint);
 	}
 
 }
