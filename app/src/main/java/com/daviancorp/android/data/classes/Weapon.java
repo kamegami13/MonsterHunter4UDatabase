@@ -13,7 +13,7 @@ public class Weapon extends Item{
 	private String elemental_attack;			// Elemental attack damage
 	private String awakened_elemental_attack;	// Awakened elmeental attack damage
 	private int defense;						// Defense
-	private String sharpness;					// Sharpness values; unused at the moment
+	private String sharpness;					// Sharpness values
 	private int affinity;						// Affinity
 	private String horn_notes;					// Horn notes
 	private String shelling_type;				// Shelling type
