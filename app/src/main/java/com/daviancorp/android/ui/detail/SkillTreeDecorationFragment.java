@@ -58,10 +58,11 @@ public class SkillTreeDecorationFragment extends ListFragment implements
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// The id argument will be the Item ID; CursorAdapter gives us this
 		// for free
-		
-		Intent i = new Intent(getActivity(), DecorationDetailActivity.class);
-		i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, (long) v.getTag());
-		startActivity(i);
+
+        //TODO reenable when decorations are complete.
+//		Intent i = new Intent(getActivity(), DecorationDetailActivity.class);
+//		i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, (long) v.getTag());
+//		startActivity(i);
 	}
 
 

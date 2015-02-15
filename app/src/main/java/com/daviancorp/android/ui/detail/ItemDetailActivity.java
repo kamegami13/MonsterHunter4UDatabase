@@ -23,7 +23,9 @@ public class ItemDetailActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "Detail", "Usage", "Monster", "Quest", "Location", "Arena"};
+    //TODO reenable when Arena Quests are complete.
+//	private String[] tabs = { "Detail", "Usage", "Monster", "Quest", "Location", "Arena"};
+    private String[] tabs = { "Detail", "Usage", "Monster", "Quest", "Location"};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

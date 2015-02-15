@@ -55,6 +55,7 @@ public class ArenaQuestListFragment extends ListFragment implements
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// The id argument will be the Arena Quest ID; CursorAdapter gives us this for free
+        //TODO reenable when Arena quests are complete. Don't need to disable this because its recursive.
 		Intent i = new Intent(getActivity(), ArenaQuestDetailActivity.class);
 		i.putExtra(ArenaQuestDetailActivity.EXTRA_ARENA_QUEST_ID, id);
 		startActivity(i);

@@ -62,11 +62,11 @@ public class HomeFragment extends Fragment {
 		mQuests = (TextView) v.findViewById(R.id.quests);
 		mItems = (TextView) v.findViewById(R.id.items);
 		mCombining = (TextView) v.findViewById(R.id.combining);
-		mDecorations = (TextView) v.findViewById(R.id.decorations);
+		//mDecorations = (TextView) v.findViewById(R.id.decorations); // Disabled
 		mSkillTrees = (TextView) v.findViewById(R.id.skilltrees);
 		mLocations = (TextView) v.findViewById(R.id.locations);
-		mHuntingFleet = (TextView) v.findViewById(R.id.hunting_fleet);
-		mArenaQuests = (TextView) v.findViewById(R.id.arena_quests);
+		//mHuntingFleet = (TextView) v.findViewById(R.id.hunting_fleet); // Disabled
+		//mArenaQuests = (TextView) v.findViewById(R.id.arena_quests); // Disabled
 		mWishlists = (TextView) v.findViewById(R.id.wishlists);
 
 		mMonsters.setOnClickListener(new OnClickListener() {
@@ -117,13 +117,13 @@ public class HomeFragment extends Fragment {
 			}
 		});
 
-		mDecorations.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), DecorationListActivity.class);
-				startActivity(intent);
-			}
-		});
+//		mDecorations.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(getActivity(), DecorationListActivity.class);
+//				startActivity(intent);
+//			}
+//		});
 
 		mSkillTrees.setOnClickListener(new OnClickListener() {
 			@Override
@@ -141,21 +141,21 @@ public class HomeFragment extends Fragment {
 			}
 		});
 
-		mHuntingFleet.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), HuntingFleetListActivity.class);
-				startActivity(intent);
-			}
-		});
+//		mHuntingFleet.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(getActivity(), HuntingFleetListActivity.class);
+//				startActivity(intent);
+//			}
+//		});
 
-		mArenaQuests.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), ArenaQuestListActivity.class);
-				startActivity(intent);
-			}
-		});
+//		mArenaQuests.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(getActivity(), ArenaQuestListActivity.class);
+//				startActivity(intent);
+//			}
+//		});
 
 		mWishlists.setOnClickListener(new OnClickListener() {
 			@Override

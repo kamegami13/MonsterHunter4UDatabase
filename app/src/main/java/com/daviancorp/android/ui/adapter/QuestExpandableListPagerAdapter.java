@@ -22,9 +22,10 @@ public class QuestExpandableListPagerAdapter extends FragmentPagerAdapter {
 		case 1:
 			// Port Quests
 			return QuestExpandableListFragment.newInstance("Port");
-		case 2:
-			// DLC Quests
-			return QuestExpandableListFragment.newInstance("DLC");
+//		case 2:
+//			// DLC Quests
+//            //TODO reenable when DLC quests are complete.
+//			return QuestExpandableListFragment.newInstance("DLC");
 		default:
 			return null;
 		}
@@ -33,7 +34,7 @@ public class QuestExpandableListPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 3;
+		return 2;
 	}
 
 }
