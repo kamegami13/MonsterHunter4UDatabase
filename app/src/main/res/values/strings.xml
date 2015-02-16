@@ -4,9 +4,17 @@
     <string name="app_name">Monster Hunter 4U Database</string>
     <string name="about">About</string>
     <string name="action_settings">Settings</string>
-    <string name="about_message">Created by: DavianCorp \n\nResources from:
-        						 \n\n\t\t\t\t kiranico.com \n\t\t\t\t monsterhunter.wikia.com 
-        						 \n\t\t\t\t Ping\'s MH3G Dex \n\nPayPal donations accepted! \nhttp://bit.ly/1oSV8af </string>
+    <string name="about_message">Based on the open source app by: DavianCorp
+                                https://play.google.com/store/apps/details?id=com.daviancorp.android.mh3udatabase
+                                \n\n
+                                Contribute at:
+                                \n GitHub:
+        						\n\t\t\t\t
+                                https://github.com/kamegami13/MonsterHunter4UDatabase
+                                \n Google Groups:
+                                \n\t\t\t\t
+                                https://groups.google.com/forum/#!forum/monster-hunter-database-development
+        						</string>
     <string name="alert_button">Close</string>
     <string name="alert_rate">Rate!</string>
     <string name="cancel">Cancel</string>

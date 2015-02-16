@@ -4,8 +4,15 @@
     tools:context="com.daviancorp.android.monsterhunter4udatabase.MainActivity" >
 
     <item
+        android:id="@+id/send_feedback"
+        android:showAsAction="never"
+        android:title="Send Feedback"/>
+
+    <item
         android:id="@+id/about"
         android:showAsAction="never"
         android:title="@string/about"/>
+
+
 
 </menu>

@@ -63,8 +63,15 @@ public abstract class GenericActivity extends SherlockFragmentActivity {
 			FragmentManager fm = getSupportFragmentManager();
 			AboutDialogFragment dialog = new AboutDialogFragment();
 			dialog.show(fm, DIALOG_ABOUT);
-
 			return true;
+
+        case R.id.send_feedback:
+            Intent email = new Intent(Intent.ACTION_SEND);
+            email.setType("text/email");
+            email.putExtra(Intent.EXTRA_EMAIL, new String[]{"monster-hunter-database-feedback@googlegroups.com"});
+            email.putExtra(Intent.EXTRA_SUBJECT, "Monster Hunter 4U Database Feedback");
+            startActivity(Intent.createChooser(email, "Send Feedback:"));
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
