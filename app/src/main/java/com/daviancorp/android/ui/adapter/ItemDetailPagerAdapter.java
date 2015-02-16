@@ -39,9 +39,10 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 		case 4:
 			// Location drops; gathering
 			return ItemLocationFragment.newInstance(itemId);
-		case 5:
-			// ArenaQuest rewards
-			return ItemArenaFragment.newInstance(itemId);
+//		case 5:
+//			// ArenaQuest rewards
+//            //TODO reenable when arena quests are complete.
+//			return ItemArenaFragment.newInstance(itemId);
 		default:
 			return null;
 		}
@@ -50,7 +51,7 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 6;
+		return 5;
 	}
 
 }

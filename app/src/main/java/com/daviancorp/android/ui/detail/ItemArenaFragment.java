@@ -78,9 +78,10 @@ public class ItemArenaFragment extends ListFragment implements
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// The id argument will be the Monster ID; CursorAdapter gives us this
 		// for free
-		Intent i = new Intent(getActivity(), ArenaQuestDetailActivity.class);
-		i.putExtra(ArenaQuestDetailActivity.EXTRA_ARENA_QUEST_ID, (long) v.getTag());
-		startActivity(i);
+        //TODO reenable when arena quests are complete.
+//		Intent i = new Intent(getActivity(), ArenaQuestDetailActivity.class);
+//		i.putExtra(ArenaQuestDetailActivity.EXTRA_ARENA_QUEST_ID, (long) v.getTag());
+//		startActivity(i);
 	}
 
 	private static class ArenaQuestRewardListCursorAdapter extends CursorAdapter {

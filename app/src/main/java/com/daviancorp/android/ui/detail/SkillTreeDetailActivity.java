@@ -23,7 +23,9 @@ public class SkillTreeDetailActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "Detail" , "Head" , "Body" , "Arm" , "Waist", "Leg" , "Jewels" };
+    //TODO reenable when decorations are finished
+//	private String[] tabs = { "Detail" , "Head" , "Body" , "Arm" , "Waist", "Leg" , "Jewels" };
+    private String[] tabs = { "Detail" , "Head" , "Body" , "Arm" , "Waist", "Leg"};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
