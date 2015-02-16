@@ -32,17 +32,17 @@ public class AboutDialogFragment extends DialogFragment {
 
 		return new AlertDialog.Builder(getActivity())
 				.setTitle(R.string.about)
-				.setPositiveButton(R.string.alert_rate,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-						        Intent intent = new Intent();
-						        intent.setAction(Intent.ACTION_VIEW);
-						        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-						        intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.daviancorp.android.monsterhunter3udatabase"));
-						        startActivity(intent);
-								dialog.dismiss();
-							}
-						})
+//				.setPositiveButton(R.string.alert_rate, //TODO Update when the app has a launch page.
+//						new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog, int id) {
+//						        Intent intent = new Intent();
+//						        intent.setAction(Intent.ACTION_VIEW);
+//						        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+//						        intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.daviancorp.android.mh3udatabase"));
+//						        startActivity(intent);
+//								dialog.dismiss();
+//							}
+//						})
 				.setNegativeButton(R.string.alert_button,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
