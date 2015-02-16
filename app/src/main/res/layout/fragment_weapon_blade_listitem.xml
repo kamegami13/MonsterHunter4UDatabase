@@ -28,7 +28,7 @@
             <TextView
                 android:id="@+id/attack"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight=".35"
                 android:gravity="center" />
 
@@ -43,13 +43,13 @@
                 <TextView
                     android:id="@+id/awaken"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".1" />
 
                 <TextView
                     android:id="@+id/element"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight=".9" />
             </LinearLayout>
         </LinearLayout>
@@ -65,7 +65,7 @@
             <TextView
                 android:id="@+id/special"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1.0" />
 
             <ImageView
@@ -109,30 +109,31 @@
             <TextView
                 android:id="@+id/slot"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight=".333"
                 android:gravity="center" />
 
             <TextView
                 android:id="@+id/affinity"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight=".333"
                 android:gravity="center" />
 
             <TextView
                 android:id="@+id/defense"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight=".333"
                 android:gravity="center" />
         </LinearLayout>
 
-        <ImageView
+        <com.daviancorp.android.ui.general.DrawSharpness
             android:id="@+id/sharpness"
-            android:layout_width="133dp"
+            android:layout_width="match_parent"
             android:layout_height="18dp"
-            android:layout_weight=".5" />
+            android:layout_weight=".5"
+            android:layout_marginRight="5dp"/>
     </LinearLayout>
 
 </LinearLayout>

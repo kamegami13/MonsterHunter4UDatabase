@@ -89,12 +89,13 @@
             android:layout_weight=".3"
             android:text="Sharpness:" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.DrawSharpness
             android:id="@+id/detail_weapon_blade_sharpness"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight=".7"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="5dp"/>
             
     </TableRow>
 
