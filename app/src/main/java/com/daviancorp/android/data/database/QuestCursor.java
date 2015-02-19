@@ -35,7 +35,7 @@ public class QuestCursor extends CursorWrapper {
 		String type = getString(getColumnIndex(S.COLUMN_QUESTS_TYPE));
 		String stars = getString(getColumnIndex(S.COLUMN_QUESTS_STARS));
 		long locationId = getLong(getColumnIndex(S.COLUMN_QUESTS_LOCATION_ID));
-		String locationTime = getString(getColumnIndex(S.COLUMN_QUESTS_LOCATION_TIME));
+		//String locationTime = getString(getColumnIndex(S.COLUMN_QUESTS_LOCATION_TIME));
 		int timeLimit = getInt(getColumnIndex(S.COLUMN_QUESTS_TIME_LIMIT));
 		int fee = getInt(getColumnIndex(S.COLUMN_QUESTS_FEE));
 		int reward = getInt(getColumnIndex(S.COLUMN_QUESTS_REWARD));
@@ -51,7 +51,7 @@ public class QuestCursor extends CursorWrapper {
 		quest.setFee(fee);
 		quest.setReward(reward);
 		quest.setHrp(hrp);
-		quest.setLocationTime(locationTime);
+		//quest.setLocationTime(locationTime);
 		location.setId(locationId);
 		
 		String locName = getString(getColumnIndex("l" + S.COLUMN_LOCATIONS_NAME));

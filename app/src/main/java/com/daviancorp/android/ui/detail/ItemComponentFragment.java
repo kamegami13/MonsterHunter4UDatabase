@@ -152,10 +152,10 @@ public class ItemComponentFragment extends ListFragment implements
 			
 			Drawable i = null;
 			String cellImage = "";
-			
+
 			if (created.getType().equals("Decoration")) {
 				cellImage = "icons_items/" + created.getFileLocation();
-			} 
+			}
 			else if ((createdId >= S.SECTION_HEAD) && (createdId < S.SECTION_BODY)) {
 				cellImage = "icons_armor/icons_head/head" + created.getRarity() + ".png";
 			}
