@@ -10,8 +10,8 @@ import com.daviancorp.android.data.database.DataManager;
  *  how to call this loader
  */
 public class QuestListCursorLoader extends SQLiteCursorLoader {
-	public static String HUB_VILLAGE = "Village";
-	public static String HUB_PORT = "Port";
+	public static String HUB_CARAVAN = "Caravan";
+	public static String HUB_GUILD = "Guild";
 	public static String HUB_DLC = "DLC";
 	
 	private String hub; 	// "Village", "Port", or "DLC"

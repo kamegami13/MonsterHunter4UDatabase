@@ -18,10 +18,10 @@ public class QuestExpandableListPagerAdapter extends FragmentPagerAdapter {
 		switch (index) {
 		case 0:
 			// Village Quests
-			return QuestExpandableListFragment.newInstance("Village");
+			return QuestExpandableListFragment.newInstance("Caravan");
 		case 1:
 			// Port Quests
-			return QuestExpandableListFragment.newInstance("Port");
+			return QuestExpandableListFragment.newInstance("Guild");
 //		case 2:
 //			// DLC Quests
 //            //TODO reenable when DLC quests are complete.

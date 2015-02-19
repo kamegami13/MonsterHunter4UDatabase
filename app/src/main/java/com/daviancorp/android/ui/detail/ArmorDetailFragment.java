@@ -128,19 +128,19 @@ public class ArmorDetailFragment extends Fragment {
 		
 		long createdId = mArmor.getId();
 
-		 if ((createdId >= S.SECTION_HEAD) && (createdId < S.SECTION_BODY)) {
+		 if (mArmor.getSlot().equals("Head")) {
 				cellImage = "icons_armor/icons_head/head" + cellRare + ".png";
 			}
-			else if ((createdId >= S.SECTION_BODY) && (createdId < S.SECTION_ARMS)) {
+			else if (mArmor.getSlot().equals("Body")) {
 				cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
 			}
-			else if ((createdId >= S.SECTION_ARMS) && (createdId < S.SECTION_WAIST)) {
+			else if (mArmor.getSlot().equals("Arms")) {
 				cellImage = "icons_armor/icons_arms/arms" + cellRare + ".png";
 			}
-			else if ((createdId >= S.SECTION_WAIST) && (createdId < S.SECTION_LEGS)) {
+			else if (mArmor.getSlot().equals("Waist")) {
 				cellImage = "icons_armor/icons_waist/waist" + cellRare + ".png";
 			}
-			else if ((createdId >= S.SECTION_LEGS) && (createdId < S.SECTION_WEAPON)) {
+			else if (mArmor.getSlot().equals("Legs")) {
 				cellImage = "icons_armor/icons_legs/legs" + cellRare + ".png";
 			}
 		 

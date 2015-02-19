@@ -62,7 +62,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private static String DB_NAME = "mh4u.db";
 	private static String DB_TEMP_NAME = "mh4u_temp.db";
 	private static String ASSETS_DB_FOLDER = "db";
-	private static final int VERSION = 5; // EDIT
+	private static final int VERSION = 6; // EDIT
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;

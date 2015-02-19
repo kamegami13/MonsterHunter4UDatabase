@@ -23,12 +23,12 @@ public class QuestListActivity extends GenericTabActivity implements
 	// Tab titles
     // TODO reenable when dlc quests are complete
 //	private String[] tabs = {
-//			QuestListCursorLoader.HUB_VILLAGE,
-//			QuestListCursorLoader.HUB_PORT,
+//			QuestListCursorLoader.HUB_CARAVAN,
+//			QuestListCursorLoader.HUB_GUILD,
 //			QuestListCursorLoader.HUB_DLC };
     private String[] tabs = {
-			QuestListCursorLoader.HUB_VILLAGE,
-			QuestListCursorLoader.HUB_PORT};
+			QuestListCursorLoader.HUB_CARAVAN,
+			QuestListCursorLoader.HUB_GUILD};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

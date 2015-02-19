@@ -91,8 +91,8 @@ public class ItemComponentFragment extends ListFragment implements
 			i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, tagId);
 		}
 		else if (tagId >= S.SECTION_DECORATIONS) {
-//			i = new Intent(getActivity(), DecorationDetailActivity.class); //TODO reenable when decorations are complete.
-//			i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, tagId);
+			i = new Intent(getActivity(), DecorationDetailActivity.class);
+			i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, tagId);
 		}
 		else {
 			i = new Intent(getActivity(), ItemDetailActivity.class);

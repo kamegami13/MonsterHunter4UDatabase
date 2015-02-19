@@ -32,11 +32,11 @@ public class QuestExpandableListFragment extends Fragment {
 	private String mHub;
 	private static final String ARG_HUB = "QUEST_HUB";
 	private ArrayList<Quest> quests;
-	private String[] village = { "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ",
-			"8 ", "9 " };
+	private String[] caravan = { "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ",
+			"8 ", "9 ", "10 " };
 
-	private String[] port_dlc = { "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ",
-			"8 " };
+	private String[] guild = { "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ",
+			"8 ", "9 ", "10 " };
 
 	private ArrayList<ArrayList<Quest>> children;
 
@@ -73,6 +73,7 @@ public class QuestExpandableListFragment extends Fragment {
 		ArrayList<Quest> g7 = new ArrayList<Quest>();
 		ArrayList<Quest> g8 = new ArrayList<Quest>();
 		ArrayList<Quest> g9 = new ArrayList<Quest>();
+        ArrayList<Quest> g10 = new ArrayList<Quest>();
 		for (int i = 0; i < quests.size(); i++) {
 			switch (quests.get(i).getStars()) {
 
@@ -103,6 +104,9 @@ public class QuestExpandableListFragment extends Fragment {
 			case "9":
 				g9.add(quests.get(i));
 				break;
+            case "10":
+                g10.add(quests.get(i));
+                break;
 			default:
 				break;
 			}
@@ -116,6 +120,7 @@ public class QuestExpandableListFragment extends Fragment {
 		children.add(g7);
 		children.add(g8);
 		children.add(g9);
+        children.add(g10);
 	}
 
 	@Override
@@ -125,10 +130,10 @@ public class QuestExpandableListFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_quest_expandablelist, null);
 		ExpandableListView elv = (ExpandableListView) v
 				.findViewById(R.id.expandableListView);
-		if (mHub.equals("Village")) {
-			elv.setAdapter(new QuestListAdapter(village));
+		if (mHub.equals("Caravan")) {
+			elv.setAdapter(new QuestListAdapter(caravan));
 		} else {
-			elv.setAdapter(new QuestListAdapter(port_dlc));
+			elv.setAdapter(new QuestListAdapter(guild));
 		}
 
 		elv.setOnChildClickListener(new OnChildClickListener() {
