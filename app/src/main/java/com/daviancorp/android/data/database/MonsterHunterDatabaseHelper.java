@@ -62,7 +62,7 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private static String DB_NAME = "mh4u.db";
 	private static String DB_TEMP_NAME = "mh4u_temp.db";
 	private static String ASSETS_DB_FOLDER = "db";
-	private static final int VERSION = 9; // EDIT
+	private static final int VERSION = 10; // EDIT
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -219,6 +219,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// Transfer over the wishlist data
 		if (newVersion > oldVersion) {
+
+            File file = new File(DB_PATH + DB_TEMP_NAME);
+            if(file.exists())
+                file.delete();
 			
 			//query wishlist data with provided db instance
 			//Must NOT call getReadableDatabase() or loop will occur
@@ -276,29 +280,9 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 				newDb.close();
 			}
 
-            /*
-            String[] dbFiles = myContext.getAssets().list(ASSETS_DB_FOLDER);
-            String outFileName = DB_PATH + DB_NAME;
-            OutputStream myOutput = new FileOutputStream(outFileName);
-
-            for(int i =0; i < dbFiles.length; i++) {
-                InputStream myInput = myContext.getAssets().open(ASSETS_DB_FOLDER+"/"+dbFiles[i]);
-                byte[] buffer = new byte[1024];
-                int length;
-
-                while ((length = myInput.read(buffer)) > 0) {
-                    myOutput.write(buffer, 0, length);
-                }
-
-                myInput.close();
-            }
-            myOutput.flush();
-            myOutput.close();
-            */
-
-            File file = new File(DB_PATH + DB_NAME);
-            if(file.exists())
-                file.delete();
+            File file2 = new File(DB_PATH + DB_NAME);
+            if(file2.exists())
+                file2.delete();
 			
 			//Overwrite current db with temp db
 			//Overwriting with file streams as delete/rename doesn't seem to work correctly
@@ -320,6 +304,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 			} catch (IOException e) {
 				throw new Error("Error overwritting database");
 			}
+
+            File file3 = new File(DB_PATH + DB_TEMP_NAME);
+            if(file3.exists())
+                file3.delete();
 		}
 	}
 	

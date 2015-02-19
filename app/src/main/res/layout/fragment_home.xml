@@ -127,14 +127,14 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/wishlists"
+            android:id="@+id/decorations"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
             android:background="@drawable/weapon_clicked_states"
             android:layout_margin="2dp"
             android:gravity="center"
-            android:text="@string/wishlist"
+            android:text="@string/decorations"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -159,11 +159,23 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/wishlists"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
+            android:background="@drawable/weapon_clicked_states"
             android:layout_margin="2dp"
-            />
+            android:gravity="center"
+            android:text="@string/wishlist"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight=".5"-->
+            <!--android:layout_margin="2dp"-->
+            <!--/>-->
     </LinearLayout>
 
     <!--<LinearLayout-->

@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
 		mQuests = (TextView) v.findViewById(R.id.quests);
 		mItems = (TextView) v.findViewById(R.id.items);
 		mCombining = (TextView) v.findViewById(R.id.combining);
-		//mDecorations = (TextView) v.findViewById(R.id.decorations); // Disabled
+		mDecorations = (TextView) v.findViewById(R.id.decorations); // Disabled
 		mSkillTrees = (TextView) v.findViewById(R.id.skilltrees);
 		mLocations = (TextView) v.findViewById(R.id.locations);
 		//mHuntingFleet = (TextView) v.findViewById(R.id.hunting_fleet); // Disabled
@@ -117,13 +117,13 @@ public class HomeFragment extends Fragment {
 			}
 		});
 
-//		mDecorations.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(getActivity(), DecorationListActivity.class);
-//				startActivity(intent);
-//			}
-//		});
+		mDecorations.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), DecorationListActivity.class);
+				startActivity(intent);
+			}
+		});
 
 		mSkillTrees.setOnClickListener(new OnClickListener() {
 			@Override

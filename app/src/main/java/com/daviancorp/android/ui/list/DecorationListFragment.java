@@ -101,10 +101,9 @@ public class DecorationListFragment extends ListFragment implements
 		// The id argument will be the Monster ID; CursorAdapter gives us this
 		// for free
 
-        //TODO reenable when decorations are complete.
-//		Intent i = new Intent(getActivity(), DecorationDetailActivity.class);
-//		i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, (long) v.getTag());
-//		startActivity(i);
+		Intent i = new Intent(getActivity(), DecorationDetailActivity.class);
+		i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, (long) v.getTag());
+		startActivity(i);
 	}
 	
 
