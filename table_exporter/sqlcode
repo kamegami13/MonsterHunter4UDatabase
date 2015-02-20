@@ -1,0 +1,378 @@
+drop table if exists android_metadata;
+drop table if exists arena_quests;
+drop table if exists arena_rewards;
+drop table if exists armor;
+drop table if exists charms;
+drop table if exists combining;
+drop table if exists components;
+drop table if exists decorations;
+drop table if exists gathering;
+drop table if exists hunting_fleet;
+drop table if exists hunting_rewards;
+drop table if exists items;
+drop table if exists item_to_skill_tree;
+drop table if exists locations;
+drop table if exists moga_woods_rewards;
+drop table if exists monster_damage;
+drop table if exists monster_to_arena;
+drop table if exists monster_to_quest;
+drop table if exists monsters;
+drop table if exists planting;
+drop table if exists quest_rewards;
+drop table if exists quests;
+drop table if exists skill_trees;
+drop table if exists skills;
+drop table if exists trading;
+drop table if exists weapons;
+drop table if exists wishlist;
+drop table if exists wishlist_component;
+drop table if exists wishlist_data;
+
+CREATE TABLE `wishlist` (
+  `_id` integer primary key autoincrement,
+  `name` text NOT NULL
+);
+
+INSERT INTO `wishlist` (`_id`, `name`) VALUES (1, `My Wishlist`);
+
+CREATE TABLE `wishlist_data` (
+  `_id` integer primary key autoincrement,
+  `wishlist_id` integer NOT NULL,
+  `item_id` integer NOT NULL,
+  `quantity` integer NOT NULL,
+  `satisfied` integer DEFAULT 0,
+  `path` text NOT NULL,
+  foreign key (`wishlist_id`) references wishlist('_id'),
+  foreign key (`item_id`) references items('_id')
+);
+
+CREATE TABLE `wishlist_component` (
+  `_id` integer primary key autoincrement,
+  `wishlist_id` integer NOT NULL,
+  `component_id` integer NOT NULL,
+  `quantity` integer NOT NULL,
+  `notes` integer DEFAULT 0,
+  foreign key (`wishlist_id`) references wishlist('_id'),
+  foreign key (`component_id`) references items('_id')
+);
+
+CREATE TABLE "android_metadata" ("locale" TEXT DEFAULT 'en_US');
+
+CREATE TABLE `arena_quests` (
+  `_id` integer primary key autoincrement,
+  `name` text NOT NULL,
+  `goal` text NOT NULL,
+  `location_id` integer NOT NULL,
+  `reward` integer NOT NULL,
+  `num_participants` integer NOT NULL,
+  `time_s` text NOT NULL,
+  `time_a` text NOT NULL,
+  `time_b` text NOT NULL,
+  foreign key(`location_id`) references locations('_id')
+);
+
+CREATE TABLE `arena_rewards` (
+  `_id` integer primary key autoincrement,
+  `arena_id` integer NOT NULL,
+  `item_id` integer NOT NULL,
+  `percentage` integer NOT NULL,
+  `stack_size` integer NOT NULL,
+  foreign key('arena_id') references arena_quests('_id'),
+  foreign key('item_id') references items('_id')
+);
+
+CREATE TABLE `armor` (
+  `_id` integer primary key autoincrement,
+  `slot` text NOT NULL,
+  `defense` integer NOT NULL,
+  `max_defense` integer,
+  `fire_res` integer NOT NULL,
+  `thunder_res` integer NOT NULL,
+  `dragon_res` integer NOT NULL,
+  `water_res` integer NOT NULL,
+  `ice_res` integer NOT NULL,
+  `gender` text NOT NULL,
+  `hunter_type` text NOT NULL,
+  `num_slots` integer
+);
+
+CREATE TABLE `charms` (
+  `_id` integer primary key autoincrement,
+  `num_slots` integer NOT NULL,
+  `skill_tree_1_id` integer NOT NULL,
+  `skill_tree_1_amount` integer NOT NULL,
+  `skill_tree_2_id` integer DEFAULT NULL,
+  `skill_tree_2_amount` integer DEFAULT NULL,
+  foreign key('skill_tree_1_id') references skill_trees('_id'),
+  foreign key('skill_tree_2_id') references skill_trees('_id')
+);
+
+CREATE TABLE `combining` (
+  `_id` integer primary key autoincrement,
+  'created_item_id' integer NOT NULL,
+  `item_1_id` integer NOT NULL,
+  `item_2_id` integer NOT NULL,
+  `amount_made_min` integer NOT NULL,
+  `amount_made_max` integer NOT NULL,
+  `percentage` integer NOT NULL,
+  foreign key(`created_item_id`) references items('_id'),
+  foreign key(`item_1_id`) references items('_id'),
+  foreign key(`item_2_id`) references items('_id')
+);
+
+CREATE TABLE `components` (
+  `_id` integer primary key autoincrement,
+  'created_item_id' integer NOT NULL,
+  'component_item_id' integer NOT NULL,
+  `quantity` integer NOT NULL,
+  `type` text DEFAULT NULL,
+  foreign key(`created_item_id`) references items('_id'),
+  foreign key(`component_item_id`) references items('_id')
+);
+
+CREATE TABLE `decorations` (
+  `_id` integer primary key autoincrement,
+  `num_slots` integer NOT NULL
+);
+
+CREATE TABLE `gathering` (
+  `_id` integer primary key autoincrement,
+  'item_id' integer NOT NULL,
+  'location_id' integer NOT NULL,
+  `area` char(30) NOT NULL,
+  `site` varchar(30) NOT NULL,
+  `rank` text NOT NULL,
+  'quantity' integer DEFAULT NULL,
+  'percentage' integer DEFAULT NULL,
+  foreign key(`item_id`) references items('_id'),
+  foreign key(`location_id`) references locations('_id')
+);
+
+CREATE TABLE `hunting_fleet` (
+  `_id` integer primary key autoincrement,
+  `type` text NOT NULL,
+  `level` integer NOT NULL,
+  `location` text NOT NULL,
+  'item_id' integer NOT NULL,
+  `amount` integer NOT NULL,
+  `percentage` integer NOT NULL,
+  `rank` text NOT NULL,
+  foreign key(`item_id`) references items('_id')
+);
+
+CREATE TABLE `hunting_rewards` (
+  `_id` integer primary key autoincrement,
+  'item_id' integer NOT NULL,
+  `condition` text NOT NULL,
+  'monster_id' integer NOT NULL,
+  `rank` text NOT NULL,
+  `stack_size` integer NOT NULL,
+  `percentage` int(10) NOT NULL,
+  foreign key(`item_id`) references items('_id'),
+  foreign key(`monster_id`) references monsters('_id')
+);
+
+CREATE TABLE `items` (
+  `_id` integer primary key autoincrement,
+  `name` varchar(255) NOT NULL,
+  `jpn_name` text DEFAULT NULL,
+  `type` text NOT NULL,
+  `rarity` integer NOT NULL DEFAULT '0',
+  `carry_capacity` integer NOT NULL DEFAULT '0',
+  `buy` mediumint(8) DEFAULT NULL,
+  `sell` integer DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `icon_name` varchar(255) DEFAULT NULL,
+  `armor_dupe_name_fix` text NOT NULL DEFAULT ''
+);
+
+CREATE TABLE `item_to_skill_tree` (
+  `_id` integer primary key autoincrement,
+  'item_id' integer NOT NULL,
+  `skill_tree_id` integer NOT NULL,
+  `point_value` integer NOT NULL,
+  foreign key(`item_id`) references items('_id'),
+  foreign key('skill_tree_id') references skill_trees('_id')
+);
+
+CREATE TABLE `locations` (
+  `_id` integer primary key autoincrement,
+  `name` varchar(255) UNIQUE NOT NULL,
+  `map` varchar(255) NOT NULL,
+  `jpn_name` text
+);
+
+CREATE TABLE `moga_woods_rewards` (
+  `_id` integer primary key autoincrement,
+  `monster_id` integer NOT NULL,
+  `time` text NOT NULL,
+  `item_id` integer NOT NULL,
+  `commodity_stars` integer DEFAULT NULL,
+  `kill_percentage` integer NOT NULL,
+  `capture_percentage` integer DEFAULT NULL,
+  foreign key('monster_id') references monsters('_id'),
+  foreign key('item_id') references items('_id')
+);
+
+CREATE TABLE `monsters` (
+  `_id` integer primary key autoincrement,
+  `class` text NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `trait` text NOT NULL,
+  `icon_name` varchar(255) DEFAULT NULL,
+  `sort_name` text NOT NULL DEFAULT ''
+);
+
+CREATE TABLE `monster_damage` (
+  `_id` integer primary key autoincrement,
+  'monster_id' integer NOT NULL,
+  `body_part` text NOT NULL,
+  `cut`  integer DEFAULT NULL,
+  `impact`  integer DEFAULT NULL,
+  `shot`  integer DEFAULT NULL,
+  `fire`  integer DEFAULT NULL,
+  `water`  integer DEFAULT NULL,
+  `ice`  integer DEFAULT NULL,
+  `thunder`  integer DEFAULT NULL,
+  `dragon`  integer DEFAULT NULL,
+  `ko`  integer DEFAULT NULL,
+  foreign key('monster_id') references monsters('_id')
+);
+
+CREATE TABLE `monster_to_arena` (
+  '_id' integer primary key autoincrement,
+  `monster_id` integer NOT NULL,
+  `arena_id` integer NOT NULL,
+  foreign key(`monster_id`) references monsters('_id'),
+  foreign key(`arena_id`) references arena_quests('_id')
+);
+
+CREATE TABLE `monster_to_quest` (
+  '_id' integer primary key autoincrement,
+  `monster_id` integer NOT NULL,
+  `quest_id` integer NOT NULL,
+  'unstable' text,
+  foreign key(`monster_id`) references monsters('_id'),
+  foreign key(`quest_id`) references quests('_id')
+);
+
+CREATE TABLE `planting` (
+  `_id` integer primary key autoincrement,
+  `planted_item_id` integer NOT NULL,
+  `received_item_id` integer NOT NULL,
+  `stack_size` integer NOT NULL,
+  `percentage` integer NOT NULL,
+  `pool_type` text NOT NULL,
+  foreign key('planted_item_id') references items('_id'),
+  foreign key('received_item_id') references items('_id')
+);
+
+CREATE TABLE `quest_rewards` (
+  `_id` integer primary key autoincrement,
+  `quest_id` integer NOT NULL,
+  `item_id` integer NOT NULL,
+  `reward_slot` text NOT NULL,
+  `percentage` integer NOT NULL,
+  `stack_size` integer NOT NULL,
+  foreign key('quest_id') references quests('_id'),
+  foreign key('item_id') references items('_id')
+);
+
+CREATE TABLE `skills` (
+  `_id` integer primary key autoincrement,
+  `skill_tree_id` integer NOT NULL,
+  `required_skill_tree_points` integer NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `jpn_name` text NOT NULL,
+  `description` varchar(255) NOT NULL,
+  foreign key(`skill_tree_id`) references skill_tree('_id')
+
+);
+
+CREATE TABLE `skill_trees` (
+  `_id` integer primary key autoincrement,
+  `name` varchar(255) NOT NULL,
+  `jpn_name` text NOT NULL
+);
+
+CREATE TABLE `trading` (
+  `_id` integer primary key autoincrement,
+  `location_id` integer NOT NULL,
+  `offer_item_id` integer NOT NULL,
+  `receive_item_id` integer NOT NULL,
+  `percentage` integer NOT NULL,
+  foreign key (`location_id`) references locations('_id'),
+  foreign key (`offer_item_id`) references items('_id'),
+  foreign key (`receive_item_id`) references items('_id')
+);
+
+CREATE TABLE `weapons` (
+  `_id` integer primary key autoincrement,
+  `wtype` text NOT NULL,
+  `creation_cost` mediumint(8) DEFAULT NULL,
+  `upgrade_cost` mediumint(8) DEFAULT NULL,
+  `attack` integer NOT NULL,
+  `max_attack` integer DEFAULT NULL,
+  `elemental_attack` varchar(50) DEFAULT NULL,
+  `awakened_elemental_attack` varchar(50) DEFAULT NULL,
+  `defense` integer DEFAULT NULL,
+  `sharpness` varchar(50) DEFAULT NULL,
+  `affinity` varchar(20) NOT NULL,
+  `horn_notes` char(3) DEFAULT NULL,
+  `shelling_type` varchar(20) DEFAULT NULL,
+  `phial` varchar(20) DEFAULT NULL,
+  `charges` text DEFAULT NULL,
+  `coatings` text DEFAULT NULL,
+  `recoil` varchar(10) DEFAULT NULL,
+  `reload_speed` varchar(20) DEFAULT NULL,
+  `rapid_fire` text DEFAULT NULL,
+  `deviation` varchar(20) DEFAULT NULL,
+  `ammo` text DEFAULT NULL,
+  'sharpness_file' text DEFAULT NULL,
+  `num_slots` integer NOT NULL,
+  'tree_depth' integer NOT NULL,
+  'final' integer
+);
+
+CREATE TABLE `quests` (
+  `_id` integer primary key autoincrement,
+  `name` varchar(255) NOT NULL,
+  `goal` varchar(255) NOT NULL,
+  `hub` text NOT NULL,
+  `type` text NOT NULL,
+  `stars` char(2) NOT NULL,
+  `location_id` integer NOT NULL,
+  `time_limit` integer NOT NULL,
+  `fee` integer NOT NULL,
+  `reward` mediumint(8) NOT NULL,
+  `hrp` mediumint(8) DEFAULT NULL,
+  `sub_goal` varchar(255) DEFAULT NULL,
+  `sub_reward` integer DEFAULT NULL,
+  `sub_hrp` integer DEFAULT NULL,
+  foreign key('location_id') references locations('_id')
+);
+
+.mode tabs
+
+.import data/arena_quests.tsv arena_quests
+.import data/arena_rewards.tsv arena_rewards
+.import data/armor.tsv armor
+.import data/charms.tsv charms
+.import data/combining.tsv combining
+.import data/components.tsv components
+.import data/decorations.tsv decorations
+.import data/gathering.tsv gathering
+.import data/hunting_fleet.tsv hunting_fleet
+.import data/hunting_rewards.tsv hunting_rewards
+.import data/item_to_skill_tree.tsv item_to_skill_tree
+.import data/items.tsv items
+.import data/locations.tsv locations
+.import data/monster_damage.tsv monster_damage
+.import data/monster_to_quest.tsv monster_to_quest
+.import data/monsters.tsv monsters
+.import data/quest_rewards.tsv quest_rewards
+.import data/quests.tsv quests
+.import data/skill_trees.tsv skill_trees
+.import data/skills.tsv skills
+.import data/trading.tsv trading
+.import data/weapons.tsv weapons
