@@ -164,7 +164,7 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 				dEle = scaleDrawable(dEle, 35, 35);
 				elementtv.setCompoundDrawables(dEle, null, null, null);
 				
-				if ("".equals(awakenedElement)) {
+				if (!"".equals(awakenedElement)) {
 					elementText = elementText + ")";
 				}
 			}

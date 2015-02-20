@@ -118,12 +118,12 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 			String awakenText = "";
 			Drawable dEle = null;
 
-			if (awakenedElement != null) {
+			if (!"".equals(awakenedElement)) {
 				element = awakenedElement;
 				awakenText = "(";
 			}
 
-			if (element != null) {
+			if (!"".equals(element)) {
 				String[] elementData = getElementData(element);
 				elementText = elementData[0];
 				dEle = getDrawable(context, elementData[1]);
@@ -210,58 +210,32 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 			slimev.setImageDrawable(null);
 			paintv.setImageDrawable(null);
 
-			String[] coatings = weapon.getCoatings().split(" ");
+			String[] coatings = weapon.getCoatings().split("\\|");
 
-			if (!coatings[1].startsWith("0")) {
+			if (!coatings[0].startsWith("0")) {
 				powerv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Red.png"));
 			}
-			if (!coatings[2].startsWith("0")) {
+			if (!coatings[1].startsWith("0")) {
 				crangev.setImageDrawable(getDrawable(context, "icons_items/Bottle-White.png"));
 			}
-			if (!coatings[3].startsWith("0")) {
+			if (!coatings[2].startsWith("0")) {
 				poisonv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Purple.png"));
 			}
-			if (!coatings[4].startsWith("0")) {
+			if (!coatings[3].startsWith("0")) {
 				parav.setImageDrawable(getDrawable(context, "icons_items/Bottle-Yellow.png"));
 			}
-			if (!coatings[5].startsWith("0")) {
+			if (!coatings[4].startsWith("0")) {
 				sleepv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Cyan.png"));
 			}
-			if (!coatings[6].startsWith("0")) {
+			if (!coatings[5].startsWith("0")) {
 				exhaustv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Blue.png"));
 			}
-			if (!coatings[7].startsWith("0")) {
+			if (!coatings[6].startsWith("0")) {
 				slimev.setImageDrawable(getDrawable(context, "icons_items/Bottle-Slime.png"));
 			}
-			if (!coatings[8].startsWith("0")) {
+			if (!coatings[7].startsWith("0")) {
 				paintv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Pink.png"));
 			}
-
-			// ImageView powerv = (ImageView) view.findViewById(R.id.power);
-			// ImageView crangev = (ImageView) view.findViewById(R.id.crange);
-			// ImageView poisonv = (ImageView) view.findViewById(R.id.poison);
-			// ImageView parav = (ImageView) view.findViewById(R.id.para);
-			// ImageView sleepv = (ImageView) view.findViewById(R.id.sleep);
-			// ImageView exhaustv = (ImageView) view.findViewById(R.id.exhaust);
-			// ImageView slimev = (ImageView) view.findViewById(R.id.slime);
-			// ImageView paintv = (ImageView) view.findViewById(R.id.paint);
-			//
-			// powerv.setImageDrawable(getDrawable(context,
-			// "icons_items/Bottle-Red.png"));
-			// crangev.setImageDrawable(getDrawable(context,
-			// "icons_items/Bottle-White.png"));
-			// poisonv.setImageDrawable(getDrawable(context,
-			// "icons_items/Bottle-Purple.png"));
-			// parav.setImageDrawable(getDrawable(context,
-			// "icons_items/Bottle-Yellow.png"));
-			// sleepv.setImageDrawable(getDrawable(context,
-			// "icons_items/Bottle-Cyan.png"));
-			// exhaustv.setImageDrawable(getDrawable(context,
-			// "icons_items/Bottle-Blue.png"));
-			// slimev.setImageDrawable(getDrawable(context,
-			// "icons_items/Bottle-Slime.png"));
-			// paintv.setImageDrawable(getDrawable(context,
-			// "icons_items/Bottle-Pink.png"));
 
 		}
 
@@ -287,12 +261,12 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 			} else if (element.startsWith("PO")) {
 				return new String[] { element.substring(2),
 						"icons_monster_info/Poison.png" };
-			} else if (element.startsWith("SLP")) {
-				return new String[] { element.substring(3),
+			} else if (element.startsWith("SL")) {
+				return new String[] { element.substring(2),
 						"icons_monster_info/Sleep.png" };
-			} else if (element.startsWith("SLM")) {
-				return new String[] { element.substring(3),
-						"icons_monster_info/Slime.png" };
+			} else if (element.startsWith("BL")) {
+				return new String[] { element.substring(2),
+						"icons_monster_info/Blastblight.png" };
 			} else {
 				return null;
 			}
