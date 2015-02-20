@@ -116,12 +116,6 @@
                     android:layout_weight="0.125" />
                 
                 <ImageView
-                    android:id="@+id/crange"
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="0.125" />>
-                
-                <ImageView
                     android:id="@+id/poison"
                     android:layout_width="0dp"
                     android:layout_height="18dp"
@@ -140,19 +134,25 @@
                     android:layout_weight="0.125" />>
                 
                 <ImageView
-                    android:id="@+id/exhaust"
-                    android:layout_width="0dp"
-                    android:layout_height="18dp"
-                    android:layout_weight="0.125" />>
-                
-                <ImageView
-                    android:id="@+id/slime"
+                    android:id="@+id/crange"
                     android:layout_width="0dp"
                     android:layout_height="18dp"
                     android:layout_weight="0.125" />>
                 
                 <ImageView
                     android:id="@+id/paint"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="0.125" />>
+                
+                <ImageView
+                    android:id="@+id/exhaust"
+                    android:layout_width="0dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="0.125" />>
+                
+                <ImageView
+                    android:id="@+id/blast"
                     android:layout_width="0dp"
                     android:layout_height="18dp"
                     android:layout_weight="0.125" />

@@ -44,7 +44,7 @@ public class WeaponDetailActivity extends GenericTabActivity implements
 		setTitle(name);
 		// Initialization
 		viewPager = (ViewPager) findViewById(R.id.pager);
-		mAdapter = new WeaponDetailPagerAdapter(getSupportFragmentManager(), id);
+		mAdapter = new WeaponDetailPagerAdapter(getSupportFragmentManager(), getApplicationContext(), id);
 		viewPager.setAdapter(mAdapter);
 
 		actionBar = getSupportActionBar();

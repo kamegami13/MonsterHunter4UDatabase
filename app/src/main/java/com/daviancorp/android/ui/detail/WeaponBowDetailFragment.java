@@ -72,13 +72,13 @@ public class WeaponBowDetailFragment extends WeaponDetailFragment {
 				.findViewById(R.id.detail_weapon_bow_charge4);
 
 		mWeaponCoating1ImageView = (ImageView) view.findViewById(R.id.power);
-		mWeaponCoating2ImageView = (ImageView) view.findViewById(R.id.crange);
-		mWeaponCoating3ImageView = (ImageView) view.findViewById(R.id.poison);
-		mWeaponCoating4ImageView = (ImageView) view.findViewById(R.id.para);
-		mWeaponCoating5ImageView = (ImageView) view.findViewById(R.id.sleep);
-		mWeaponCoating6ImageView = (ImageView) view.findViewById(R.id.exhaust);
-		mWeaponCoating7ImageView = (ImageView) view.findViewById(R.id.slime);
-		mWeaponCoating8ImageView = (ImageView) view.findViewById(R.id.paint);
+		mWeaponCoating2ImageView = (ImageView) view.findViewById(R.id.poison);
+		mWeaponCoating3ImageView = (ImageView) view.findViewById(R.id.para);
+		mWeaponCoating4ImageView = (ImageView) view.findViewById(R.id.sleep);
+		mWeaponCoating5ImageView = (ImageView) view.findViewById(R.id.crange);
+		mWeaponCoating6ImageView = (ImageView) view.findViewById(R.id.paint);
+		mWeaponCoating7ImageView = (ImageView) view.findViewById(R.id.exhaust);
+		mWeaponCoating8ImageView = (ImageView) view.findViewById(R.id.blast);
 
 		return view;
 	}
@@ -103,53 +103,53 @@ public class WeaponBowDetailFragment extends WeaponDetailFragment {
 		Bitmap bitmap = null;
 
 		/* Coatings */
-		String[] coatings = mWeapon.getCoatings().split(" ");
+		String[] coatings = mWeapon.getCoatings().split("\\|");
 
 		try {
-			if (!coatings[1].startsWith("0")) {
+			if (!coatings[0].equals("-")) {
 				open = manager.open("icons_items/Bottle-Red.png");
 				bitmap = BitmapFactory.decodeStream(open);
 				mWeaponCoating1ImageView.setImageBitmap(Bitmap.createScaledBitmap(
 						bitmap, 50, 50, false));
 			}
-			if (!coatings[2].startsWith("0")) {
-				open = manager.open("icons_items/Bottle-White.png");
+			if (!coatings[1].equals("-")) {
+				open = manager.open("icons_items/Bottle-Purple.png");
 				bitmap = BitmapFactory.decodeStream(open);
 				mWeaponCoating2ImageView.setImageBitmap(Bitmap.createScaledBitmap(
 						bitmap, 50, 50, false));
 			}
-			if (!coatings[3].startsWith("0")) {
-				open = manager.open("icons_items/Bottle-Purple.png");
+			if (!coatings[2].equals("-")) {
+				open = manager.open("icons_items/Bottle-Yellow.png");
 				bitmap = BitmapFactory.decodeStream(open);
 				mWeaponCoating3ImageView.setImageBitmap(Bitmap.createScaledBitmap(
 						bitmap, 50, 50, false));
 			}
-			if (!coatings[4].startsWith("0")) {
-				open = manager.open("icons_items/Bottle-Yellow.png");
+			if (!coatings[3].equals("-")) {
+				open = manager.open("icons_items/Bottle-Cyan.png");
 				bitmap = BitmapFactory.decodeStream(open);
 				mWeaponCoating4ImageView.setImageBitmap(Bitmap.createScaledBitmap(
 						bitmap, 50, 50, false));
 			}
-			if (!coatings[5].startsWith("0")) {
-				open = manager.open("icons_items/Bottle-Cyan.png");
+			if (!coatings[4].equals("-")) {
+				open = manager.open("icons_items/Bottle-White.png");
 				bitmap = BitmapFactory.decodeStream(open);
 				mWeaponCoating5ImageView.setImageBitmap(Bitmap.createScaledBitmap(
 						bitmap, 50, 50, false));
 			}
-			if (!coatings[6].startsWith("0")) {
-				open = manager.open("icons_items/Bottle-Blue.png");
+			if (!coatings[5].equals("-")) {
+				open = manager.open("icons_items/Bottle-Pink.png");
 				bitmap = BitmapFactory.decodeStream(open);
 				mWeaponCoating6ImageView.setImageBitmap(Bitmap.createScaledBitmap(
 						bitmap, 50, 50, false));
 			}
-			if (!coatings[7].startsWith("0")) {
-				open = manager.open("icons_items/Bottle-Slime.png");
+			if (!coatings[6].equals("-")) {
+				open = manager.open("icons_items/Bottle-Blue.png");
 				bitmap = BitmapFactory.decodeStream(open);
 				mWeaponCoating7ImageView.setImageBitmap(Bitmap.createScaledBitmap(
 						bitmap, 50, 50, false));
 			}
-			if (!coatings[8].startsWith("0")) {
-				open = manager.open("icons_items/Bottle-Pink.png");
+			if (!coatings[7].equals("-")) {
+				open = manager.open("icons_items/Bottle-Orange.png");
 				bitmap = BitmapFactory.decodeStream(open);
 				mWeaponCoating8ImageView.setImageBitmap(Bitmap.createScaledBitmap(
 						bitmap, 50, 50, false));

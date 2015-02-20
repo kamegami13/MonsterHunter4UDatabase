@@ -131,18 +131,18 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 			Drawable dEle = null;
 			Drawable dDualEle = null;
 			
-			if (awakenedElement != null) {
+			if (!"".equals(awakenedElement)) {
 				element = awakenedElement;
 				awakenText = "(";
 			}
 			
-			if (element != null) {
+			if (!"".equals(element)) {
 				String[] elementData = getElementData(element);
 				elementText = elementData[0];
 				dEle = getDrawable(context, elementData[1]);
 				
 				if (element.contains(",")) {
-					String[] twoElements = elementText.split(", ");
+					String[] twoElements = elementText.split(",");
 					elementText = twoElements[0];
 					dualElement = twoElements[1];
 					
@@ -164,7 +164,7 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 				dEle = scaleDrawable(dEle, 35, 35);
 				elementtv.setCompoundDrawables(dEle, null, null, null);
 				
-				if (awakenedElement != null) {
+				if (!"".equals(awakenedElement)) {
 					elementText = elementText + ")";
 				}
 			}
@@ -264,10 +264,10 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 				return new String[] {element.substring(2), "icons_monster_info/Paralysis.png"};
 			} else if (element.startsWith("PO")) {
 				return new String[] {element.substring(2), "icons_monster_info/Poison.png"};
-			} else if (element.startsWith("SLP")) {
-				return new String[] {element.substring(3), "icons_monster_info/Sleep.png"};
-			} else if (element.startsWith("SLM")) {
-				return new String[] {element.substring(3), "icons_monster_info/Slime.png"};
+			} else if (element.startsWith("SL")) {
+				return new String[] {element.substring(2), "icons_monster_info/Sleep.png"};
+			} else if (element.startsWith("BL")) {
+				return new String[] {element.substring(2), "icons_monster_info/Blastblight.png"};
 			} else {
 				return null;
 			}

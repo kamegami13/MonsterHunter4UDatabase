@@ -19,7 +19,7 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 			mPellet1, mPellet2, mPellet3, mCrag1, mCrag2, mCrag3, mClust1,
 			mClust2, mClust3, mFlaming, mWater, mThunder, mFreeze, mDragon,
 			mPoison1, mPoison2, mPara1, mPara2, mSleep1, mSleep2, mSub1, mSub2,
-			mExhaust1, mExhaust2, mSlicing, mWyvernfire, mSlime, mRecov1, mRecov2,
+			mExhaust1, mExhaust2, mSlicing, mWyvernfire, mBlast, mRecov1, mRecov2,
 			mDemon, mArmor, mPaint, mTranq;
 	
 	private TextView mSpecial1, mSpecial2, mSpecial3, mSpecial4, mSpecial5,
@@ -101,7 +101,7 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 		mExhaust2 = (TextView) view.findViewById(R.id.exhaust2);
 		mSlicing = (TextView) view.findViewById(R.id.slicing);
 		mWyvernfire = (TextView) view.findViewById(R.id.wyvernfire);
-		mSlime = (TextView) view.findViewById(R.id.slime);
+		mBlast = (TextView) view.findViewById(R.id.blast);
 		mRecov1 = (TextView) view.findViewById(R.id.recov1);
 		mRecov2 = (TextView) view.findViewById(R.id.recov2);
 		mDemon = (TextView) view.findViewById(R.id.demon);
@@ -144,35 +144,37 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 		else if (mWeapon.getWtype().equals("Heavy Bowgun")) {
 			mWeaponSpecialTypeTextView.setText("Crouching Fire:");
 		}
-		
-		String[] specials = mWeapon.getRapidFire().split("\\|");
-		int numSpecial = specials.length;
-		
-		if (numSpecial >= 1) {
-			String[] tempSpecial = specials[0].split(" ");
-			mSpecial1.setText(tempSpecial[0]);
-			mValue1.setText(tempSpecial[1]);
-		}
-		if (numSpecial >= 2) {
-			String[] tempSpecial = specials[1].split(" ");
-			mSpecial2.setText(tempSpecial[0]);
-			mValue2.setText(tempSpecial[1]);
-		}
-		if (numSpecial >= 3) {
-			String[] tempSpecial = specials[2].split(" ");
-			mSpecial3.setText(tempSpecial[0]);
-			mValue3.setText(tempSpecial[1]);
-		}
-		if (numSpecial >= 4) {
-			String[] tempSpecial = specials[3].split(" ");
-			mSpecial4.setText(tempSpecial[0]);
-			mValue4.setText(tempSpecial[1]);
-		}
-		if (numSpecial >= 5) {
-			String[] tempSpecial = specials[4].split(" ");
-			mSpecial5.setText(tempSpecial[0]);
-			mValue5.setText(tempSpecial[1]);
-		}
+
+
+        //TODO Reenable when rapid fire data makes sense
+//		String[] specials = mWeapon.getRapidFire().split("\\|");
+//		int numSpecial = specials.length;
+//
+//		if (numSpecial >= 1) {
+//			String[] tempSpecial = specials[0].split(" ");
+//			mSpecial1.setText(tempSpecial[0]);
+//			mValue1.setText(tempSpecial[1]);
+//		}
+//		if (numSpecial >= 2) {
+//			String[] tempSpecial = specials[1].split(" ");
+//			mSpecial2.setText(tempSpecial[0]);
+//			mValue2.setText(tempSpecial[1]);
+//		}
+//		if (numSpecial >= 3) {
+//			String[] tempSpecial = specials[2].split(" ");
+//			mSpecial3.setText(tempSpecial[0]);
+//			mValue3.setText(tempSpecial[1]);
+//		}
+//		if (numSpecial >= 4) {
+//			String[] tempSpecial = specials[3].split(" ");
+//			mSpecial4.setText(tempSpecial[0]);
+//			mValue4.setText(tempSpecial[1]);
+//		}
+//		if (numSpecial >= 5) {
+//			String[] tempSpecial = specials[4].split(" ");
+//			mSpecial5.setText(tempSpecial[0]);
+//			mValue5.setText(tempSpecial[1]);
+//		}
 	}
 	
 	private void setAmmoText(String a) {
@@ -276,8 +278,8 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 		else if (ammo.equals("WyvernFire")) {
 			mWyvernfire.setText(amt);
 		}
-		else if (ammo.equals("Slime")) {
-			mSlime.setText(amt);
+		else if (ammo.equals("Blast")) {
+			mBlast.setText(amt);
 		}
 		else if (ammo.equals("Recov1")) {
 			mRecov1.setText(amt);
