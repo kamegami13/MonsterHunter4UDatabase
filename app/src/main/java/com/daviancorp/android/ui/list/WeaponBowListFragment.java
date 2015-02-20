@@ -130,7 +130,7 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 				dEle = scaleDrawable(dEle, 35, 35);
 				elementtv.setCompoundDrawables(dEle, null, null, null);
 
-				if (awakenedElement != null) {
+				if (!"".equals(awakenedElement)) {
 					elementText = elementText + ")";
 				}
 			}
@@ -192,13 +192,13 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 
 			// Coatings
 			ImageView powerv = (ImageView) view.findViewById(R.id.power);
-			ImageView crangev = (ImageView) view.findViewById(R.id.crange);
-			ImageView poisonv = (ImageView) view.findViewById(R.id.poison);
-			ImageView parav = (ImageView) view.findViewById(R.id.para);
-			ImageView sleepv = (ImageView) view.findViewById(R.id.sleep);
-			ImageView exhaustv = (ImageView) view.findViewById(R.id.exhaust);
-			ImageView slimev = (ImageView) view.findViewById(R.id.slime);
-			ImageView paintv = (ImageView) view.findViewById(R.id.paint);
+			ImageView crangev = (ImageView) view.findViewById(R.id.poison);
+			ImageView poisonv = (ImageView) view.findViewById(R.id.para);
+			ImageView parav = (ImageView) view.findViewById(R.id.sleep);
+			ImageView sleepv = (ImageView) view.findViewById(R.id.crange);
+			ImageView exhaustv = (ImageView) view.findViewById(R.id.paint);
+			ImageView slimev = (ImageView) view.findViewById(R.id.exhaust);
+			ImageView paintv = (ImageView) view.findViewById(R.id.blast);
 			
 			// Clear images
 			powerv.setImageDrawable(null);
@@ -212,29 +212,29 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 
 			String[] coatings = weapon.getCoatings().split("\\|");
 
-			if (!coatings[0].startsWith("0")) {
+			if (!coatings[0].equals("-")) {
 				powerv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Red.png"));
 			}
-			if (!coatings[1].startsWith("0")) {
-				crangev.setImageDrawable(getDrawable(context, "icons_items/Bottle-White.png"));
+			if (!coatings[1].equals("-")) {
+				crangev.setImageDrawable(getDrawable(context, "icons_items/Bottle-Purple.png"));
 			}
-			if (!coatings[2].startsWith("0")) {
-				poisonv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Purple.png"));
+			if (!coatings[2].equals("-")) {
+				poisonv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Yellow.png"));
 			}
-			if (!coatings[3].startsWith("0")) {
-				parav.setImageDrawable(getDrawable(context, "icons_items/Bottle-Yellow.png"));
+			if (!coatings[3].equals("-")) {
+				parav.setImageDrawable(getDrawable(context, "icons_items/Bottle-Cyan.png"));
 			}
-			if (!coatings[4].startsWith("0")) {
-				sleepv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Cyan.png"));
+			if (!coatings[4].equals("-")) {
+				sleepv.setImageDrawable(getDrawable(context, "icons_items/Bottle-White.png"));
 			}
-			if (!coatings[5].startsWith("0")) {
-				exhaustv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Blue.png"));
+			if (!coatings[5].equals("-")) {
+				exhaustv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Pink.png"));
 			}
-			if (!coatings[6].startsWith("0")) {
-				slimev.setImageDrawable(getDrawable(context, "icons_items/Bottle-Slime.png"));
+			if (!coatings[6].equals("-")) {
+				slimev.setImageDrawable(getDrawable(context, "icons_items/Bottle-Blue.png"));
 			}
-			if (!coatings[7].startsWith("0")) {
-				paintv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Pink.png"));
+			if (!coatings[7].equals("-")) {
+				paintv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Orange.png"));
 			}
 
 		}
@@ -275,7 +275,7 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 		private String getChargeData(String charge) {
 			String s = "";
 
-			if (charge.startsWith("Spread")) {
+			if (charge.startsWith("Scatter")) {
 				s = "S";
 			} else if (charge.startsWith("Rapid")) {
 				s = "R";

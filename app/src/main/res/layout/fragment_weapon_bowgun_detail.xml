@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".3"
+        android:layout_weight=".25"
         android:orientation="vertical"
         android:paddingLeft="10dp" >
 
@@ -210,42 +210,42 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="1" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="2" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="3" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="1" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="2" />
 
                 <TextView
@@ -264,7 +264,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Nrm" />
 
                 <TextView
@@ -272,7 +272,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -280,7 +280,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -288,14 +288,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Psn" />
 
                 <TextView
@@ -303,7 +303,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -311,14 +311,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Flm" />
 
                 <TextView
@@ -326,14 +326,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Wyv" />
 
                 <TextView
@@ -341,14 +341,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
             </TableRow>
 
@@ -360,7 +360,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Prc" />
 
                 <TextView
@@ -368,7 +368,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -376,7 +376,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -384,14 +384,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Par" />
 
                 <TextView
@@ -399,7 +399,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -407,14 +407,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Wtr" />
 
                 <TextView
@@ -422,29 +422,29 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
-                    android:text="Slm" />
+                    android:gravity="left"
+                    android:text="Blst" />
 
                 <TextView
-                    android:id="@+id/slime"
+                    android:id="@+id/blast"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
             </TableRow>
 
@@ -456,7 +456,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Plt" />
 
                 <TextView
@@ -464,7 +464,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -472,7 +472,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -480,14 +480,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Slp" />
 
                 <TextView
@@ -495,7 +495,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -503,14 +503,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Thd" />
 
                 <TextView
@@ -518,14 +518,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Dmn" />
 
                 <TextView
@@ -533,14 +533,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
             </TableRow>
 
@@ -552,7 +552,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Crg" />
 
                 <TextView
@@ -560,7 +560,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -568,7 +568,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -576,14 +576,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Sub" />
 
                 <TextView
@@ -591,7 +591,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -599,14 +599,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Ice" />
 
                 <TextView
@@ -614,14 +614,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Amr" />
 
                 <TextView
@@ -629,14 +629,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
             </TableRow>
 
@@ -648,7 +648,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Cls" />
 
                 <TextView
@@ -656,7 +656,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -664,7 +664,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -672,14 +672,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.08"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Exh" />
 
                 <TextView
@@ -687,7 +687,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -695,14 +695,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Drg" />
 
                 <TextView
@@ -710,14 +710,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Pnt" />
 
                 <TextView
@@ -725,14 +725,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
             </TableRow>
 
@@ -751,7 +751,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Rcv" />
 
                 <TextView
@@ -759,7 +759,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
@@ -767,14 +767,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.055"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Slc" />
 
                 <TextView
@@ -782,14 +782,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.125"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Trq" />
 
                 <TextView
@@ -797,14 +797,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.05"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="" />
             </TableRow>
         </TableLayout>

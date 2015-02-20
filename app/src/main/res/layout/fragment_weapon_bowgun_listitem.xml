@@ -40,12 +40,13 @@
                 android:orientation="horizontal"
                 android:paddingLeft="12dp" >
 
+                <!-- Are these ever used?-->
                 <TextView
                     android:id="@+id/awaken"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".1" />
-
+                <!-- Are these ever used?-->
                 <TextView
                     android:id="@+id/element"
                     android:layout_width="0dp"
@@ -86,7 +87,7 @@
                 android:id="@+id/reload"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_weight="0.2"
                 android:gravity="center" />
 
             <TextView
@@ -100,7 +101,7 @@
                 android:id="@+id/steady"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_weight="0.3"
                 android:gravity="center" />
         </LinearLayout>
     </LinearLayout>

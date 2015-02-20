@@ -83,7 +83,7 @@
             android:id="@+id/header7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".265"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="Reload"
             android:textColor="@color/white" />
@@ -92,7 +92,7 @@
             android:id="@+id/header8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".13"
+            android:layout_weight=".2"
             android:gravity="center"
             android:text="Recoil"
             android:textColor="@color/white" />
@@ -101,7 +101,7 @@
             android:id="@+id/header9"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".275"
+            android:layout_weight=".3"
             android:gravity="center"
             android:text="Steadiness"
             android:textColor="@color/white" />
