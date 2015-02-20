@@ -21,6 +21,7 @@ import android.util.Log;
 import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 /*
    QUERY REFERENCE:
@@ -51,7 +52,7 @@ For queries with JOINs:
 		
 */
 
-public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
+class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	private static final String TAG = "MonsterHunterDatabaseHelper";
 	
 	private static MonsterHunterDatabaseHelper mInstance = null;
@@ -62,7 +63,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	private static String DB_NAME = "mh4u.db";
 	private static String DB_TEMP_NAME = "mh4u_temp.db";
 	private static String ASSETS_DB_FOLDER = "db";
-	private static final int VERSION = 10; // EDIT
+	private static final int VERSION = 16; // EDIT
+
+    private static final String DATABASE_NAME = "mh4u.db";
+    private static final int DATABASE_VERSION = 19;
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -88,14 +92,16 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 	 * @param context
 	 */
 	private MonsterHunterDatabaseHelper(Context context) {
-		super(context, DB_NAME, null, VERSION);
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		myContext = context;
+
+        setForcedUpgrade();
 		
-		try {
+		/*try {
 			createDatabase();
 		} catch (IOException e) {
 			throw new Error("Error copying database");
-		}
+		}*/
 	}
 	
 	/**
@@ -209,13 +215,13 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 		super.close();
 	}
 
-	@Override
-	public void onCreate(SQLiteDatabase db) { }
+	//@Override
+	//public void onCreate(SQLiteDatabase db) { }
 
 	/**
 	 * Copy the new database and transfer the wishlist data
 	 */
-	@Override
+	/*@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// Transfer over the wishlist data
 		if (newVersion > oldVersion) {
@@ -280,6 +286,8 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
 				newDb.close();
 			}
 
+            db.close();
+
             File file2 = new File(DB_PATH + DB_NAME);
             if(file2.exists())
                 file2.delete();
@@ -309,10 +317,10 @@ public class MonsterHunterDatabaseHelper extends SQLiteOpenHelper {
             if(file3.exists())
                 file3.delete();
 		}
-	}
+	}*/
 	
-	@Override
-	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
+	//@Override
+	//public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
 	
 	//removed getWritableDatabase() and getReadableDatabase() overrides as they broke
 	//functionality such as onUpgrade()
