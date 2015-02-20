@@ -29,22 +29,24 @@ public class WeaponGridFragment extends Fragment {
 	private final static int HUNTING_HORN = 5;
 	private final static int LANCE = 6;
 	private final static int GUNLANCE = 7;
-	private final static int SWITCH_AXE = 8;
-	private final static int LIGHT_BOWGUN = 9;
-	private final static int HEAVY_BOWGUN = 10;
-	private final static int BOW = 11;
+	private final static int CHARGE_BLADE = 8;
+    private final static int INSECT_GLAIVE = 9;
+    private final static int SWITCH_AXE = 10;
+	private final static int LIGHT_BOWGUN = 11;
+	private final static int HEAVY_BOWGUN = 12;
+	private final static int BOW = 13;
 
 	static final String[] weapons = new String[] { "Great Sword", "Long Sword",
 			"Sword and Shield", "Dual Blades", "Hammer", "Hunting Horn",
-			"Lance", "Gunlance", "Switch Axe", "Light Bowgun", "Heavy Bowgun",
+			"Lance", "Gunlance", "Switch Axe", "Charge Blade", "Insect Glaive", "Light Bowgun", "Heavy Bowgun",
 			"Bow" };
 
 	static final Integer[] drawables = new Integer[] { R.drawable.great_sword1,
 			R.drawable.long_sword1, R.drawable.sword_and_shield1,
 			R.drawable.dual_blades1, R.drawable.hammer1,
 			R.drawable.hunting_horn1, R.drawable.lance1, R.drawable.gunlance1,
-			R.drawable.switch_axe1, R.drawable.light_bowgun1,
-			R.drawable.heavy_bowgun1, R.drawable.bow1 };
+			R.drawable.switch_axe1, R.drawable.charge_blade1, R.drawable.insect_glaive1,
+            R.drawable.light_bowgun1, R.drawable.heavy_bowgun1, R.drawable.bow1 };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -209,6 +211,14 @@ public class WeaponGridFragment extends Fragment {
 					intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
 							"Switch Axe");
 					break;
+                case CHARGE_BLADE:
+                    intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
+                            "Charge Blade");
+                    break;
+                case INSECT_GLAIVE:
+                    intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
+                            "Insect Glaive");
+                    break;
 				case LIGHT_BOWGUN:
 					intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
 							"Light Bowgun");

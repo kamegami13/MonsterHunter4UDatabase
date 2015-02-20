@@ -255,10 +255,10 @@ public class WishlistDataDetailFragment extends SherlockListFragment implements
 				i = new Intent(getActivity(), ItemDetailActivity.class);
 				i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, mId);
 			}
-//			else if (mId < S.SECTION_ARMOR) {
-//				i = new Intent(getActivity(), DecorationDetailActivity.class);
-//				i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, mId); //TODO reenable when decorations are complete.
-//			}
+			else if (mId < S.SECTION_ARMOR) {
+				i = new Intent(getActivity(), DecorationDetailActivity.class);
+				i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, mId);
+			}
 			else if (mId < S.SECTION_WEAPON) {
 				i = new Intent(getActivity(), ArmorDetailActivity.class);
 				i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, mId);

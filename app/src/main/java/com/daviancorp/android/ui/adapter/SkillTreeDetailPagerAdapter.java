@@ -45,11 +45,11 @@ public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
 			// List of "Legs" Armor with the SkillTree
 			return SkillTreeArmorFragment.newInstance(skillTreeId,  
 					ItemToSkillTreeListCursorLoader.TYPE_LEGS);
-//		case 6:
-//			// List of Decoration with the SkillTree
-//            //TODO reenable when decorations are complete
-//			return SkillTreeDecorationFragment.newInstance(skillTreeId,
-//					ItemToSkillTreeListCursorLoader.TYPE_DECORATION);
+		case 6:
+			// List of Decoration with the SkillTree
+            //TODO reenable when decorations are complete
+			return SkillTreeDecorationFragment.newInstance(skillTreeId,
+					ItemToSkillTreeListCursorLoader.TYPE_DECORATION);
 		default:
 			return null;
 		}
@@ -58,7 +58,7 @@ public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 6;
+		return 7;
 	}
 
 }
