@@ -16,10 +16,7 @@ import java.util.List;
 /*
  * Draws a sharpness level by values
  *
- * Max sharpness value on the Japanese wiki is 40
- * Max sharpness value in existing 3U db is 50
- *
- * Max sharpness units combined should not exceed 50
+ * Max sharpness units combined should not exceed the value of int maxsharpness
  */
 public class DrawSharpness extends View {
 
@@ -43,6 +40,8 @@ public class DrawSharpness extends View {
 
     private int mheight;
     private int mwidth;
+
+    private final int maxsharpness = 70;
 
 	int orangeColor = Color.rgb(255, 150, 0);
 	int purpleColor = Color.rgb(120, 81, 169);
@@ -135,7 +134,7 @@ public class DrawSharpness extends View {
         super.onDraw(canvas);
 
         int margins = (int) Math.floor(mheight/7);
-        int scalefactor = (int) Math.floor((mwidth-(margins*2))/50);
+        int scalefactor = (int) Math.floor((mwidth-(margins*2))/maxsharpness);
 
         // Draw the background
         paint.setColor(Color.BLACK);
