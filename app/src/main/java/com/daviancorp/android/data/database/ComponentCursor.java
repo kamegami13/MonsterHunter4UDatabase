@@ -8,7 +8,7 @@ import com.daviancorp.android.data.classes.Item;
 
 /**
  * A convenience class to wrap a cursor that returns rows from the "component"
- * table. The {@link getComponent()} method will give you a Component instance
+ * table. The getComponent() method will give you a Component instance
  * representing the current row.
  */
 public class ComponentCursor extends CursorWrapper {
@@ -21,6 +21,7 @@ public class ComponentCursor extends CursorWrapper {
 	 * Returns a Component object configured for the current row, or null if the
 	 * current row is invalid.
 	 */
+
 	public Component getComponent() {
 		if (isBeforeFirst() || isAfterLast())
 			return null;
@@ -37,7 +38,7 @@ public class ComponentCursor extends CursorWrapper {
 
 		// Get the created Item
 		Item created = new Item();
-		
+
 		long itemId1 = getLong(getColumnIndex(S.COLUMN_COMPONENTS_CREATED_ITEM_ID));
 		String itemName1 = getString(getColumnIndex("cr" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
@@ -63,7 +64,7 @@ public class ComponentCursor extends CursorWrapper {
 //			created.setArmorDupeNameFix(armor_dupe_name_fix);
 		
 		component.setCreated(created);
-	
+
 		// Get the component Item
 		Item comp = new Item();
 		
@@ -95,5 +96,10 @@ public class ComponentCursor extends CursorWrapper {
 		
 		return component;
 	}
+
+    public String getItemType(){
+        String itemtype = getString(getColumnIndex("cr" + S.COLUMN_ITEMS_TYPE));
+        return itemtype;
+    }
 
 }

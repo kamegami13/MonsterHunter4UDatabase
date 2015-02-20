@@ -81,23 +81,29 @@ public class ItemComponentFragment extends ListFragment implements
 		// for free
 		Intent i = null;
 		long tagId = (long) v.getTag();
-		
-		if (tagId >= S.SECTION_WEAPON) {
-			i = new Intent(getActivity(), WeaponDetailActivity.class);
-			i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, tagId);
-		}
-		else if (tagId >= S.SECTION_ARMOR) {
-			i = new Intent(getActivity(), ArmorDetailActivity.class);
-			i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, tagId);
-		}
-		else if (tagId >= S.SECTION_DECORATIONS) {
-			i = new Intent(getActivity(), DecorationDetailActivity.class);
-			i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, tagId);
-		}
-		else {
-			i = new Intent(getActivity(), ItemDetailActivity.class);
-			i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, tagId);
-		}
+        int clickedId = (int) id;
+        String itemtype;
+
+        ComponentCursor mycursor = (ComponentCursor) l.getItemAtPosition(position);
+        itemtype = mycursor.getItemType();
+
+        switch(itemtype){
+            case "Weapon":
+                i = new Intent(getActivity(), WeaponDetailActivity.class);
+                i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, tagId);
+                break;
+            case "Armor":
+                i = new Intent(getActivity(), ArmorDetailActivity.class);
+                i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, tagId);
+                break;
+            case "Decoration":
+                i = new Intent(getActivity(), DecorationDetailActivity.class);
+                i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, tagId);
+                break;
+            default:
+                i = new Intent(getActivity(), ItemDetailActivity.class);
+                i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, tagId);
+        }
 		if(i!=null)
             startActivity(i);
 	}
@@ -145,13 +151,34 @@ public class ItemComponentFragment extends ListFragment implements
 			String nameText = created.getName();
 			String amtText = "" + component.getQuantity();
 			String typeText = "" + component.getType();
-			
+		    //String itemType = mComponentCursor.getItemType();
+
 			itemTextView.setText(nameText);
 			amtTextView.setText(amtText);
 			typeTextView.setText(typeText);
 			
 			Drawable i = null;
 			String cellImage = "";
+
+//            switch (itemType){
+//                case "Decoration":
+//                    break;
+//                case "Head":
+//                    break;
+//                case "Body":
+//                    break;
+//                case "Arms":
+//                    break;
+//                case "Waist":
+//                    break;
+//                case "Legs":
+//                    break;
+//                case "Great Sword":
+//                    break;
+//                case "Hunting Horn":
+//                    break;
+//                //etc etc. finish after the first few work.
+//            }
 
 			if (created.getType().equals("Decoration")) {
 				cellImage = "icons_items/" + created.getFileLocation();
