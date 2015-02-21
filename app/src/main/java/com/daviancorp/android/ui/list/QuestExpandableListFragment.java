@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -216,9 +217,24 @@ public class QuestExpandableListFragment extends Fragment {
 					R.layout.fragment_quest_expandablelist_group_item,
 					viewGroup, false);
 
-			TextView armorGroupTextView = (TextView) v.findViewById(R.id.name);
+			TextView questGroupTextView = (TextView) v.findViewById(R.id.numstars);
+            ImageView[] stars = new ImageView[10];
+            stars[0] = (ImageView) v.findViewById(R.id.star1);
+            stars[1] = (ImageView) v.findViewById(R.id.star2);
+            stars[2] = (ImageView) v.findViewById(R.id.star3);
+            stars[3] = (ImageView) v.findViewById(R.id.star4);
+            stars[4] = (ImageView) v.findViewById(R.id.star5);
+            stars[5] = (ImageView) v.findViewById(R.id.star6);
+            stars[6] = (ImageView) v.findViewById(R.id.star7);
+            stars[7] = (ImageView) v.findViewById(R.id.star8);
+            stars[8] = (ImageView) v.findViewById(R.id.star9);
+            stars[9] = (ImageView) v.findViewById(R.id.star10);
 
-			armorGroupTextView.setText(getGroup(i).toString());
+            for(int j = 0; j<=i; j++){
+                stars[j].setVisibility(View.VISIBLE);
+            }
+
+            questGroupTextView.setText(getGroup(i).toString());
 
 			return v;
 		}
