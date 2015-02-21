@@ -190,8 +190,8 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 			}
 
 			String affinity = "";
-			if (weapon.getAffinity() != 0) {
-				affinity = "" + weapon.getAffinity() + "%";
+			if (weapon.getAffinity().length() > 0) {
+				affinity = weapon.getAffinity() + "%";
 			}
 
 			String defense = "";

@@ -14,7 +14,7 @@ public class Weapon extends Item{
 	private String awakened_elemental_attack;	// Awakened elmeental attack damage
 	private int defense;						// Defense
 	private String sharpness;					// Sharpness values
-	private int affinity;						// Affinity
+	private String affinity;				    // Affinity
 	private String horn_notes;					// Horn notes
 	private String shelling_type;				// Shelling type
 	private String phial;						// Phial type
@@ -42,7 +42,7 @@ public class Weapon extends Item{
 		this.awakened_elemental_attack = "";
 		this.defense = -1;
 		this.sharpness = "";
-		this.affinity = -1;
+		this.affinity = "";
 		this.horn_notes = "";
 		this.shelling_type = "";
 		this.phial = "";
@@ -131,11 +131,11 @@ public class Weapon extends Item{
 		this.sharpness = sharpness;
 	}
 
-	public int getAffinity() {
+	public String getAffinity() {
 		return affinity;
 	}
 
-	public void setAffinity(int affinity) {
+	public void setAffinity(String affinity) {
 		this.affinity = affinity;
 	}
 
