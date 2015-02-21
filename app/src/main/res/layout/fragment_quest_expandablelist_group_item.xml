@@ -11,7 +11,7 @@
     android:paddingTop="1dip" >
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/numstars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
@@ -19,11 +19,85 @@
         android:textSize="16sp" />
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/star1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
+        android:paddingLeft="3dp"
         android:paddingTop="4dp"
+        android:visibility="gone"
         android:src="@drawable/star" />
+    <ImageView
+        android:id="@+id/star2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:src="@drawable/star" />
+    <ImageView
+        android:id="@+id/star3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:src="@drawable/star" />
+    <ImageView
+        android:id="@+id/star4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:src="@drawable/star" />
+    <ImageView
+        android:id="@+id/star5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:src="@drawable/star" />
+    <ImageView
+        android:id="@+id/star6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:src="@drawable/star" />
+    <ImageView
+        android:id="@+id/star7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:src="@drawable/star" />
+    <ImageView
+        android:id="@+id/star8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:src="@drawable/star" />
+    <ImageView
+        android:id="@+id/star9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:src="@drawable/star" />
+    <ImageView
+        android:id="@+id/star10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="3dp"
+        android:paddingTop="4dp"
+        android:visibility="gone"
+        android:src="@drawable/star" />
+
 
 </LinearLayout>
