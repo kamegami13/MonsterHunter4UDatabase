@@ -58,21 +58,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_weight=".22"
+                android:layout_weight="0.18"
                 android:gravity="center" />
 
             <TextView
                 android:id="@+id/affinity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".18"
+                android:layout_weight=".24"
                 android:gravity="center" />
 
             <TextView
                 android:id="@+id/defense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight=".19"
+                android:layout_weight=".18"
                 android:gravity="center" />
         </LinearLayout>
 

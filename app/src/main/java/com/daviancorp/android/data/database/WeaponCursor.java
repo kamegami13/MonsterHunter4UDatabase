@@ -35,7 +35,7 @@ public class WeaponCursor extends CursorWrapper {
 		String awakened_elemental_attack = getString(getColumnIndex(S.COLUMN_WEAPONS_AWAKENED_ELEMENTAL_ATTACK));
 		int defense = getInt(getColumnIndex(S.COLUMN_WEAPONS_DEFENSE));
 		String sharpness = getString(getColumnIndex(S.COLUMN_WEAPONS_SHARPNESS));
-		int affinity = getInt(getColumnIndex(S.COLUMN_WEAPONS_AFFINITY));
+		String affinity = getString(getColumnIndex(S.COLUMN_WEAPONS_AFFINITY));
 		String horn_notes = getString(getColumnIndex(S.COLUMN_WEAPONS_HORN_NOTES));
 		String shelling_type = getString(getColumnIndex(S.COLUMN_WEAPONS_SHELLING_TYPE));
 		String phial = getString(getColumnIndex(S.COLUMN_WEAPONS_PHIAL));
