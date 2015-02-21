@@ -9,6 +9,7 @@ public class  Item {
 	private String name;					// Item name
 	private String jpn_name;				// Japanese name; unused at the moment
 	private String type;					// Item type
+    private String sub_type;			    // Item sub type
 	private int rarity;						// Rarity; 1-10
 	private int carry_capacity;				// Carry capacity in backpack
 	private int buy;						// Buy amount
@@ -23,6 +24,7 @@ public class  Item {
 		this.name = "";
 		this.jpn_name = "";
 		this.type = "";
+        this.sub_type = "";
 		this.rarity = -1;
 		this.carry_capacity = -1;
 		this.buy = -1;
@@ -68,9 +70,19 @@ public class  Item {
 	}
 
 
-	public void setType(String type) {
-		this.type = type;
+	public void setSubType(String sub_type) {
+		this.sub_type = sub_type;
 	}
+
+
+    public String getSubType() {
+        return sub_type;
+    }
+
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
 
 	public int getRarity() {

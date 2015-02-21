@@ -30,6 +30,7 @@ public class ItemCursor extends CursorWrapper {
 		String name = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
 		String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 		String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
+        String sub_type = getString(getColumnIndex(S.COLUMN_ITEMS_SUB_TYPE));
 		int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
 		int carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
 		int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
@@ -42,6 +43,7 @@ public class ItemCursor extends CursorWrapper {
 		item.setName(name);
 		item.setJpnName(jpnName);
 		item.setType(type);
+        item.setSubType(sub_type);
 		item.setRarity(rarity);
 		item.setCarryCapacity(carry_capacity);
 		item.setBuy(buy);

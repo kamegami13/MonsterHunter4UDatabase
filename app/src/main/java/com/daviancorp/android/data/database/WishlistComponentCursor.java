@@ -44,6 +44,7 @@ public class WishlistComponentCursor extends CursorWrapper {
 		String itemName = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
+            String sub_type = getString(getColumnIndex(S.COLUMN_ITEMS_SUB_TYPE));
 			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
 //			int carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
@@ -56,6 +57,7 @@ public class WishlistComponentCursor extends CursorWrapper {
 		item.setName(itemName);
 //			item.setJpnName(jpnName);
 			item.setType(type);
+            item.setSubType(sub_type);
 			item.setRarity(rarity);
 //			item.setCarryCapacity(carry_capacity);
 //			item.setBuy(buy);

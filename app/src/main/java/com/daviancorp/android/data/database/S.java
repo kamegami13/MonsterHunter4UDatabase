@@ -135,6 +135,7 @@ public class S {
 	static final String COLUMN_ITEMS_NAME = "name";
 	static final String COLUMN_ITEMS_JPN_NAME = "jpn_name";
 	static final String COLUMN_ITEMS_TYPE = "type";
+    static final String COLUMN_ITEMS_SUB_TYPE = "sub_type";
 	static final String COLUMN_ITEMS_RARITY = "rarity";
 	static final String COLUMN_ITEMS_CARRY_CAPACITY = "carry_capacity";
 	static final String COLUMN_ITEMS_BUY = "buy";

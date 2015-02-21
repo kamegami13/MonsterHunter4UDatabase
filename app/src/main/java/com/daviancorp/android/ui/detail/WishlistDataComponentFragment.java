@@ -32,6 +32,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.daviancorp.android.data.classes.WishlistComponent;
+import com.daviancorp.android.data.database.ComponentCursor;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.database.S;
 import com.daviancorp.android.data.database.WishlistComponentCursor;
@@ -235,19 +236,45 @@ public class WishlistDataComponentFragment extends SherlockListFragment implemen
             mListView.setItemChecked(position, false);
 			Intent i = null;
 			long mId = (long) v.getTag();
-			
-			if (mId < S.SECTION_ARMOR) {
-				i = new Intent(getActivity(), ItemDetailActivity.class);
-				i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, mId);
-			}
-			else if (mId < S.SECTION_WEAPON) {
-				i = new Intent(getActivity(), ArmorDetailActivity.class);
-				i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, mId);
-			}
-			else {
-				i = new Intent(getActivity(), WeaponDetailActivity.class);
-				i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, mId);
-			}
+            String itemtype;
+
+            WishlistComponent component;
+
+            WishlistComponentCursor mycursor = (WishlistComponentCursor) l.getItemAtPosition(position);
+            component = mycursor.getWishlistComponent();
+            itemtype = component.getItem().getType();
+
+//			if (mId < S.SECTION_ARMOR) {
+//				i = new Intent(getActivity(), ItemDetailActivity.class);
+//				i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, mId);
+//			}
+//			else if (mId < S.SECTION_WEAPON) {
+//				i = new Intent(getActivity(), ArmorDetailActivity.class);
+//				i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, mId);
+//			}
+//			else {
+//				i = new Intent(getActivity(), WeaponDetailActivity.class);
+//				i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, mId);
+//			}
+
+            switch(itemtype){
+                case "Weapon":
+                    i = new Intent(getActivity(), WeaponDetailActivity.class);
+                    i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, mId);
+                    break;
+                case "Armor":
+                    i = new Intent(getActivity(), ArmorDetailActivity.class);
+                    i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, mId);
+                    break;
+                case "Decoration":
+                    i = new Intent(getActivity(), DecorationDetailActivity.class);
+                    i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, mId);
+                    break;
+                default:
+                    i = new Intent(getActivity(), ItemDetailActivity.class);
+                    i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, mId);
+            }
+
 			startActivity(i);
 		}
 		// Contextual action bar options
@@ -335,8 +362,72 @@ public class WishlistDataComponentFragment extends SherlockListFragment implemen
 			Drawable i = null;
 			String cellImage = "";
 			String cellRare = "" + component.getItem().getRarity();
+
+            String sub_type = component.getItem().getSubType();
+
+            switch(sub_type){
+                case "Head":
+                    cellImage = "icons_armor/icons_head/head" + cellRare + ".png";
+                    break;
+                case "Body":
+                    cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
+                    break;
+                case "Arms":
+                    cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
+                    break;
+                case "Waist":
+                    cellImage = "icons_armor/icons_waist/waist" + cellRare + ".png";
+                    break;
+                case "Legs":
+                    cellImage = "icons_armor/icons_legs/legs" + cellRare + ".png";
+                    break;
+                case "Great Sword":
+                    cellImage = "icons_weapons/icons_great_sword/great_sword" + cellRare + ".png";
+                    break;
+                case "Long Sword":
+                    cellImage = "icons_weapons/icons_long_sword/long_sword" + cellRare + ".png";
+                    break;
+                case "Sword and Shield":
+                    cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + cellRare + ".png";
+                    break;
+                case "Dual Blades":
+                    cellImage = "icons_weapons/icons_dual_blades/dual_blades" + cellRare + ".png";
+                    break;
+                case "Hammer":
+                    cellImage = "icons_weapons/icons_hammer/hammer" + cellRare + ".png";
+                    break;
+                case "Hunting Horn":
+                    cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + cellRare + ".png";
+                    break;
+                case "Lance":
+                    cellImage = "icons_weapons/icons_hammer/hammer" + cellRare + ".png";
+                    break;
+                case "Gunlance":
+                    cellImage = "icons_weapons/icons_gunlance/gunlance" + cellRare + ".png";
+                    break;
+                case "Switch Axe":
+                    cellImage = "icons_weapons/icons_switch_axe/switch_axe" + cellRare + ".png";
+                    break;
+                case "Charge Blade":
+                    cellImage = "icons_weapons/icons_charge_blade/charge_blade" + cellRare + ".png";
+                    break;
+                case "Insect Glaive":
+                    cellImage = "icons_weapons/icons_insect_glaive/insect_glaive" + cellRare + ".png";
+                    break;
+                case "Light Bowgun":
+                    cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + cellRare + ".png";
+                    break;
+                case "Heavy Bowgun":
+                    cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + cellRare + ".png";
+                    break;
+                case "Bow":
+                    cellImage = "icons_weapons/icons_bow/bow" + cellRare + ".png";
+                    break;
+                default:
+                    cellImage = "icons_items/" + component.getItem().getFileLocation();
+            }
 			
-			if (id < S.SECTION_ARMOR) {
+			/*if (id < S.SECTION_ARMOR) {
 				cellImage = "icons_items/" + component.getItem().getFileLocation();
 			} 
 			else if ((id >= S.SECTION_HEAD) && (id < S.SECTION_BODY)) {
@@ -389,7 +480,7 @@ public class WishlistDataComponentFragment extends SherlockListFragment implemen
 			}
 			else if (id >= S.SECTION_BOW) {
 				cellImage = "icons_weapons/icons_bow/bow" + cellRare + ".png";
-			}
+			}*/
 			
 			try {
 				i = Drawable.createFromStream(
