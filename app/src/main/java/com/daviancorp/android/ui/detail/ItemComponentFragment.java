@@ -149,18 +149,6 @@ public class ItemComponentFragment extends ListFragment implements
 			
 			Item created = component.getCreated();
 			long createdId = created.getId();
-
-            // Get the subtype of armor/weapon
-            String subType;
-
-            if (component.getType() == "Weapon")
-            {
-
-            }
-            else if (component.getType() == "Armor")
-            {
-
-            }
 			
 			String nameText = created.getName();
 			String amtText = "" + component.getQuantity();

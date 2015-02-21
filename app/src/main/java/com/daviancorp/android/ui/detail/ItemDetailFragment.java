@@ -78,12 +78,76 @@ public class ItemDetailFragment extends Fragment {
 	
 	private void updateUI() throws IOException {
 		String cellText = mItem.getName();
-		String cellImage = "icons_items/" + mItem.getFileLocation();
+		String cellImage;
 		String cellRare = "" + mItem.getRarity();
 		String cellMax = "" + mItem.getCarryCapacity();
 		String cellSell = "" + mItem.getSell() + "z";
 		String cellBuy = "" + mItem.getBuy() + "z";
 		String cellDescription = "" + mItem.getDescription();
+
+        String sub_type =  mItem.getSubType();
+
+        switch(sub_type){
+            case "Head":
+                cellImage = "icons_armor/icons_head/head" + mItem.getRarity() + ".png";
+                break;
+            case "Body":
+                cellImage = "icons_armor/icons_body/body" + mItem.getRarity() + ".png";
+                break;
+            case "Arms":
+                cellImage = "icons_armor/icons_body/body" + mItem.getRarity() + ".png";
+                break;
+            case "Waist":
+                cellImage = "icons_armor/icons_waist/waist" + mItem.getRarity() + ".png";
+                break;
+            case "Legs":
+                cellImage = "icons_armor/icons_legs/legs" + mItem.getRarity() + ".png";
+                break;
+            case "Great Sword":
+                cellImage = "icons_weapons/icons_great_sword/great_sword" + mItem.getRarity() + ".png";
+                break;
+            case "Long Sword":
+                cellImage = "icons_weapons/icons_long_sword/long_sword" + mItem.getRarity() + ".png";
+                break;
+            case "Sword and Shield":
+                cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + mItem.getRarity() + ".png";
+                break;
+            case "Dual Blades":
+                cellImage = "icons_weapons/icons_dual_blades/dual_blades" + mItem.getRarity() + ".png";
+                break;
+            case "Hammer":
+                cellImage = "icons_weapons/icons_hammer/hammer" + mItem.getRarity() + ".png";
+                break;
+            case "Hunting Horn":
+                cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + mItem.getRarity() + ".png";
+                break;
+            case "Lance":
+                cellImage = "icons_weapons/icons_hammer/hammer" + mItem.getRarity() + ".png";
+                break;
+            case "Gunlance":
+                cellImage = "icons_weapons/icons_gunlance/gunlance" + mItem.getRarity() + ".png";
+                break;
+            case "Switch Axe":
+                cellImage = "icons_weapons/icons_switch_axe/switch_axe" + mItem.getRarity() + ".png";
+                break;
+            case "Charge Blade":
+                cellImage = "icons_weapons/icons_charge_blade/charge_blade" + mItem.getRarity() + ".png";
+                break;
+            case "Insect Glaive":
+                cellImage = "icons_weapons/icons_insect_glaive/insect_glaive" + mItem.getRarity() + ".png";
+                break;
+            case "Light Bowgun":
+                cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + mItem.getRarity() + ".png";
+                break;
+            case "Heavy Bowgun":
+                cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + mItem.getRarity() + ".png";
+                break;
+            case "Bow":
+                cellImage = "icons_weapons/icons_bow/bow" + mItem.getRarity() + ".png";
+                break;
+            default:
+                cellImage = "icons_items/" + mItem.getFileLocation();
+        }
 		
 		if (cellBuy.equals("0z")) {
 			cellBuy = "-";

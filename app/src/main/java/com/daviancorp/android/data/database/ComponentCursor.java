@@ -49,10 +49,12 @@ public class ComponentCursor extends CursorWrapper {
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
 //			String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
 			String fileLocation1 = getString(getColumnIndex("cr" + S.COLUMN_ITEMS_ICON_NAME));
-//			String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
+//			String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX))
+            String subtype = getString(getColumnIndex("cr" + S.COLUMN_ITEMS_SUB_TYPE));
 
 		created.setId(itemId1);
 		created.setName(itemName1);
+        created.setSubType(subtype);
 //			created.setJpnName(jpnName);
 			created.setType(type1);
 			created.setRarity(rarity1);
