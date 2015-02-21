@@ -135,11 +135,12 @@ public class DrawSharpness extends View {
 
         int margins = (int) Math.floor(mheight/7);
         int scalefactor = (int) Math.floor((mwidth-(margins*2))/maxsharpness);
+        int barwidth = (scalefactor * maxsharpness) + (margins*2);
 
         // Draw the background
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(4);
-        canvas.drawRect(0, 0, mwidth, mheight, paint);
+        canvas.drawRect(0, 0, barwidth, mheight, paint);
 
         // Draw top bar
         int bartop = margins;
