@@ -814,8 +814,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		QueryHelper qh = new QueryHelper();
 		qh.Columns = null;
 		qh.Table = S.TABLE_COMPONENTS;
-		qh.Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? " +
-				" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < " + S.SECTION_ARMOR;
+		qh.Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? ";
+				//s" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < " + S.SECTION_ARMOR;
 		qh.SelectionArgs = new String[]{"" + id};
 		qh.GroupBy = null;
 		qh.Having = null;
@@ -852,8 +852,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.Columns = null;
 		qh.Table = S.TABLE_COMPONENTS;
 		qh.Selection = "c." + S.COLUMN_COMPONENTS_CREATED_ITEM_ID + " = ? " +
-		//		" AND " + "c." + S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID + " < " + S.SECTION_ARMOR +
-				" AND " + "c." + S.COLUMN_COMPONENTS_TYPE + " = ?";
+                " AND " + "c." + S.COLUMN_COMPONENTS_TYPE + " = ?";
 		qh.SelectionArgs = new String[]{"" + id, type};
 		qh.GroupBy = null;
 		qh.Having = null;

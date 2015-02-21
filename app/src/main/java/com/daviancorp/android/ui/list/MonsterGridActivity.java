@@ -22,9 +22,11 @@ public class MonsterGridActivity extends GenericTabActivity implements
 	private int toggle;
 
 	// Tab titles
-	private String[] tabs = { "All", 
-			MonsterListCursorLoader.TAB_SMALL, 
-			MonsterListCursorLoader.TAB_LARGE };
+	private String[] tabs = {
+            MonsterListCursorLoader.TAB_LARGE,
+			MonsterListCursorLoader.TAB_SMALL,
+            "All"
+    };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

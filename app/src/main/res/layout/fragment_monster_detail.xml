@@ -46,6 +46,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/impact_area"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -103,6 +104,7 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:id="@+id/element_area"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
