@@ -29,9 +29,9 @@ public class WeaponGridFragment extends Fragment {
 	private final static int HUNTING_HORN = 5;
 	private final static int LANCE = 6;
 	private final static int GUNLANCE = 7;
-	private final static int CHARGE_BLADE = 8;
-    private final static int INSECT_GLAIVE = 9;
-    private final static int SWITCH_AXE = 10;
+    private final static int SWITCH_AXE = 8;
+	private final static int CHARGE_BLADE = 9;
+    private final static int INSECT_GLAIVE = 10;
 	private final static int LIGHT_BOWGUN = 11;
 	private final static int HEAVY_BOWGUN = 12;
 	private final static int BOW = 13;
