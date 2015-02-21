@@ -117,17 +117,20 @@ public class ItemLocationFragment extends ListFragment implements
 			TextView rankTextView = (TextView) view.findViewById(R.id.rank);
 			TextView areaTextView = (TextView) view.findViewById(R.id.area);
 			TextView methodTextView = (TextView) view.findViewById(R.id.method);
+            TextView rateTextView = (TextView) view.findViewById(R.id.rate);
 
 			
 			String mapName = gathering.getLocation().getName();
 			String rank = gathering.getRank();
 			String area = gathering.getArea();
 			String method = gathering.getSite();
+            long rate = (long) gathering.getRate();
 			
 			mapTextView.setText(mapName);
 			rankTextView.setText(rank);
 			areaTextView.setText(area);
 			methodTextView.setText(method);
+            rateTextView.setText(Long.toString(rate) + "%");
 			
 			itemLayout.setTag(gathering.getLocation().getId());
 		}

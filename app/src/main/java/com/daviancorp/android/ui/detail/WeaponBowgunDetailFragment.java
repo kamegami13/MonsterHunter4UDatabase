@@ -2,6 +2,7 @@ package com.daviancorp.android.ui.detail;
 
 import java.io.IOException;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +46,6 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 				.findViewById(R.id.detail_weapon_type);
 		mWeaponAttackTextView = (TextView) view
 				.findViewById(R.id.detail_weapon_attack);
-		mWeaponElementTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_element);
 		mWeaponRarityTextView = (TextView) view
 				.findViewById(R.id.detail_weapon_rarity);
 		mWeaponSlotTextView = (TextView) view
@@ -95,8 +94,6 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 		mPara2 = (TextView) view.findViewById(R.id.para2);
 		mSleep1 = (TextView) view.findViewById(R.id.sleep1);
 		mSleep2 = (TextView) view.findViewById(R.id.sleep2);
-		mSub1 = (TextView) view.findViewById(R.id.sub1);
-		mSub2 = (TextView) view.findViewById(R.id.sub2);
 		mExhaust1 = (TextView) view.findViewById(R.id.exhaust1);
 		mExhaust2 = (TextView) view.findViewById(R.id.exhaust2);
 		mSlicing = (TextView) view.findViewById(R.id.slicing);
@@ -133,9 +130,12 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 		mWeaponSteadinessTextView.setText(mWeapon.getDeviation());
 		
 		String[] ammos = mWeapon.getAmmo().split("\\|");
+
+        TextView ammoView;
 		
 		for(String a : ammos) {
-			setAmmoText(a);
+            ammoView = getAmmoType(a);
+			setAmmoText(a, ammoView);
 		}
 
 		if (mWeapon.getWtype().equals("Light Bowgun")) {
@@ -176,128 +176,142 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 //			mValue5.setText(tempSpecial[1]);
 //		}
 	}
+    
+    private TextView getAmmoType(String a)
+    {
+        TextView ammoView;
+        String[] temp = a.split(" ");
+        String ammo = temp[0];
+
+        if (ammo.equals("Normal1")) {
+            return mNormal1;
+        }
+        else if (ammo.equals("Normal2")) {
+            return mNormal2;
+        }
+        else if (ammo.equals("Normal3")) {
+            return mNormal3;
+        }
+        else if (ammo.equals("Pierce1")) {
+            return mPierce1;
+        }
+        else if (ammo.equals("Pierce2")) {
+            return mPierce2;
+        }
+        else if (ammo.equals("Pierce3")) {
+            return mPierce3;
+        }
+        else if (ammo.equals("Pellet1")) {
+            return mPellet1;
+        }
+        else if (ammo.equals("Pellet2")) {
+            return mPellet2;
+        }
+        else if (ammo.equals("Pellet3")) {
+            return mPellet3;
+        }
+        else if (ammo.equals("Crag1")) {
+            return mCrag1;
+        }
+        else if (ammo.equals("Crag2")) {
+            return mCrag2;
+        }
+        else if (ammo.equals("Crag3")) {
+            return mCrag3;
+        }
+        else if (ammo.equals("Clust1")) {
+            return mClust1;
+        }
+        else if (ammo.equals("Clust2")) {
+            return mClust2;
+        }
+        else if (ammo.equals("Clust3")) {
+            return mClust3;
+        }
+        else if (ammo.equals("Flaming")) {
+            return mFlaming;
+        }
+        else if (ammo.equals("Water")) {
+            return mWater;
+        }
+        else if (ammo.equals("Thunder")) {
+            return mThunder;
+        }
+        else if (ammo.equals("Freeze")) {
+            return mFreeze;
+        }
+        else if (ammo.equals("Dragon")) {
+            return mDragon;
+        }
+        else if (ammo.equals("Poison1")) {
+            return mPoison1;
+        }
+        else if (ammo.equals("Poison2")) {
+            return mPoison2;
+        }
+        else if (ammo.equals("Para1")) {
+            return mPara1;
+        }
+        else if (ammo.equals("Para2")) {
+            return mPara2;
+        }
+        else if (ammo.equals("Sleep1")) {
+            return mSleep1;
+        }
+        else if (ammo.equals("Sleep2")) {
+            return mSleep2;
+        }
+        else if (ammo.equals("Exhaust1")) {
+            return mExhaust1;
+        }
+        else if (ammo.equals("Exhaust2")) {
+            return mExhaust2;
+        }
+        else if (ammo.equals("Slicing")) {
+            return mSlicing;
+        }
+        else if (ammo.equals("WyvernFire")) {
+            return mWyvernfire;
+        }
+        else if (ammo.equals("Blast")) {
+            return mBlast;
+        }
+        else if (ammo.equals("Recov1")) {
+            return mRecov1;
+        }
+        else if (ammo.equals("Recov2")) {
+            return mRecov2;
+        }
+        else if (ammo.equals("Demon")) {
+            return mDemon;
+        }
+        else if (ammo.equals("Armor")) {
+            return mArmor;
+        }
+        else if (ammo.equals("Paint")) {
+            return mPaint;
+        }
+        else {
+            return mTranq;
+        }
+    }
 	
-	private void setAmmoText(String a) {
+	private void setAmmoText(String a, TextView ammoView) {
 		String[] temp = a.split(" ");
 		String ammo = temp[0];
 		String amt = temp[1];
-		
-		if (ammo.equals("Normal1")) {
-			mNormal1.setText(amt);
-		}
-		else if (ammo.equals("Normal2")) {
-			mNormal2.setText(amt);
-		}
-		else if (ammo.equals("Normal3")) {
-			mNormal3.setText(amt);
-		}
-		else if (ammo.equals("Pierce1")) {
-			mPierce1.setText(amt);
-		}
-		else if (ammo.equals("Pierce2")) {
-			mPierce2.setText(amt);
-		}
-		else if (ammo.equals("Pierce3")) {
-			mPierce3.setText(amt);
-		}
-		else if (ammo.equals("Pellet1")) {
-			mPellet1.setText(amt);
-		}
-		else if (ammo.equals("Pellet2")) {
-			mPellet2.setText(amt);
-		}
-		else if (ammo.equals("Pellet3")) {
-			mPellet3.setText(amt);
-		}
-		else if (ammo.equals("Crag1")) {
-			mCrag1.setText(amt);
-		}
-		else if (ammo.equals("Crag2")) {
-			mCrag2.setText(amt);
-		}
-		else if (ammo.equals("Crag3")) {
-			mCrag3.setText(amt);
-		}
-		else if (ammo.equals("Clust1")) {
-			mClust1.setText(amt);
-		}
-		else if (ammo.equals("Clust2")) {
-			mClust2.setText(amt);
-		}
-		else if (ammo.equals("Clust3")) {
-			mClust3.setText(amt);
-		}
-		else if (ammo.equals("Flaming")) {
-			mFlaming.setText(amt);
-		}
-		else if (ammo.equals("Water")) {
-			mWater.setText(amt);
-		}
-		else if (ammo.equals("Thunder")) {
-			mThunder.setText(amt);
-		}
-		else if (ammo.equals("Freeze")) {
-			mFreeze.setText(amt);
-		}
-		else if (ammo.equals("Dragon")) {
-			mDragon.setText(amt);
-		}
-		else if (ammo.equals("Poison1")) {
-			mPoison1.setText(amt);
-		}
-		else if (ammo.equals("Poison2")) {
-			mPoison2.setText(amt);
-		}
-		else if (ammo.equals("Para1")) {
-			mPara1.setText(amt);
-		}
-		else if (ammo.equals("Para2")) {
-			mPara2.setText(amt);
-		}
-		else if (ammo.equals("Sleep1")) {
-			mSleep1.setText(amt);
-		}
-		else if (ammo.equals("Sleep2")) {
-			mSleep2.setText(amt);
-		}
-		else if (ammo.equals("Sub1")) {
-			mSub1.setText(amt);
-		}
-		else if (ammo.equals("Sub2")) {
-			mSub2.setText(amt);
-		}
-		else if (ammo.equals("Exhaust1")) {
-			mExhaust1.setText(amt);
-		}
-		else if (ammo.equals("Exhaust2")) {
-			mExhaust2.setText(amt);
-		}
-		else if (ammo.equals("Slicing")) {
-			mSlicing.setText(amt);
-		}
-		else if (ammo.equals("WyvernFire")) {
-			mWyvernfire.setText(amt);
-		}
-		else if (ammo.equals("Blast")) {
-			mBlast.setText(amt);
-		}
-		else if (ammo.equals("Recov1")) {
-			mRecov1.setText(amt);
-		}
-		else if (ammo.equals("Recov2")) {
-			mRecov2.setText(amt);
-		}
-		else if (ammo.equals("Demon")) {
-			mDemon.setText(amt);
-		}
-		else if (ammo.equals("Armor")) {
-			mArmor.setText(amt);
-		}
-		else if (ammo.equals("Paint")) {
-			mPaint.setText(amt);
-		}
-		else if (ammo.equals("Tranq")) {
-			mTranq.setText(amt);
-		}
+        Boolean loadUp = false;
+
+        if (amt.contains("*"))
+        {
+            loadUp = true;
+            amt = amt.substring(0,amt.length()-1);
+        }
+
+        ammoView.setText(amt);
+
+        if (loadUp == true) {
+            ammoView.setTypeface(null, Typeface.BOLD);
+        }
 	}
 }

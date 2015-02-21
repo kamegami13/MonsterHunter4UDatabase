@@ -32,11 +32,13 @@ public class GatheringCursor extends CursorWrapper {
 		String area = getString(getColumnIndex(S.COLUMN_GATHERING_AREA));
 		String site = getString(getColumnIndex(S.COLUMN_GATHERING_SITE));
 		String rank = getString(getColumnIndex(S.COLUMN_GATHERING_RANK));
+        Float rate = getFloat(getColumnIndex(S.COLUMN_GATHERING_RATE));
 		
 		gathering.setId(id);
 		gathering.setArea(area);
 		gathering.setSite(site);
 		gathering.setRank(rank);
+        gathering.setRate(rate);
 		
 		// Get the Item
 		Item item = new Item();
