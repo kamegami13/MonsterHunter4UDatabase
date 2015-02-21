@@ -61,9 +61,8 @@ def main():
                 'trading' :
                     ['_id','location_id','offer_item_id','receive_item_id','percentage'],
               }
-
+    wb = xlrd.open_workbook('Monster Hunter 4U Database.xlsx')
     for table, col_list in columns.iteritems():
-        wb = xlrd.open_workbook('Monster Hunter 4U Database.xlsx')
         sh = wb.sheet_by_name(table)
         if not sh:
             print 'Table ', table, ' not found'
