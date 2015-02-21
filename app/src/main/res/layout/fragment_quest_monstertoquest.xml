@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listitem"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/generic_clicked_states"
     android:orientation="vertical" >
 
@@ -14,29 +14,29 @@
 
         <ImageView
             android:id="@+id/detail_monster_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@string/monster_image" >
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:contentDescription="@string/monster_image"
+            android:layout_gravity="center">
         </ImageView>
 
         <TextView
             android:id="@+id/detail_monster_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:gravity="center_vertical" />
 
         <TextView
             android:id="@+id/detail_monster_unstable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-            android:gravity="right"
-            android:textSize="15dp" />
+            android:gravity="center_vertical|right"
+            android:textSize="15dp"
+            android:layout_gravity="center" />
     </LinearLayout>
 
 </LinearLayout>
