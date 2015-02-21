@@ -31,7 +31,9 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
+import com.daviancorp.android.data.database.ComponentCursor;
 import com.daviancorp.android.data.database.S;
 import com.daviancorp.android.data.database.WishlistDataCursor;
 import com.daviancorp.android.loader.WishlistDataListCursorLoader;
@@ -250,23 +252,31 @@ public class WishlistDataDetailFragment extends SherlockListFragment implements
             mListView.setItemChecked(position, false);
 			Intent i = null;
 			long mId = (long) v.getTag();
-			
-			if (mId < S.SECTION_DECORATIONS) {
-				i = new Intent(getActivity(), ItemDetailActivity.class);
-				i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, mId);
-			}
-			else if (mId < S.SECTION_ARMOR) {
-				i = new Intent(getActivity(), DecorationDetailActivity.class);
-				i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, mId);
-			}
-			else if (mId < S.SECTION_WEAPON) {
-				i = new Intent(getActivity(), ArmorDetailActivity.class);
-				i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, mId);
-			}
-			else {
-				i = new Intent(getActivity(), WeaponDetailActivity.class);
-				i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, mId);
-			}
+            String itemtype;
+
+            WishlistData wishlistdata;
+
+            WishlistDataCursor mycursor = (WishlistDataCursor) l.getItemAtPosition(position);
+            wishlistdata = mycursor.getWishlistData();
+            itemtype = wishlistdata.getItem().getType();
+
+            switch(itemtype){
+                case "Weapon":
+                    i = new Intent(getActivity(), WeaponDetailActivity.class);
+                    i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, mId);
+                    break;
+                case "Armor":
+                    i = new Intent(getActivity(), ArmorDetailActivity.class);
+                    i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, mId);
+                    break;
+                case "Decoration":
+                    i = new Intent(getActivity(), DecorationDetailActivity.class);
+                    i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, mId);
+                    break;
+                default:
+                    i = new Intent(getActivity(), ItemDetailActivity.class);
+                    i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, mId);
+            }
 			startActivity(i);
 		}
 		// Contextual action bar options
@@ -351,61 +361,125 @@ public class WishlistDataDetailFragment extends SherlockListFragment implements
 			Drawable i = null;
 			String cellImage = "";
 			String cellRare = "" + data.getItem().getRarity();
+
+            String sub_type = data.getItem().getSubType();
+
+            switch(sub_type){
+                case "Head":
+                    cellImage = "icons_armor/icons_head/head" + cellRare + ".png";
+                    break;
+                case "Body":
+                    cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
+                    break;
+                case "Arms":
+                    cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
+                    break;
+                case "Waist":
+                    cellImage = "icons_armor/icons_waist/waist" + cellRare + ".png";
+                    break;
+                case "Legs":
+                    cellImage = "icons_armor/icons_legs/legs" + cellRare + ".png";
+                    break;
+                case "Great Sword":
+                    cellImage = "icons_weapons/icons_great_sword/great_sword" + cellRare + ".png";
+                    break;
+                case "Long Sword":
+                    cellImage = "icons_weapons/icons_long_sword/long_sword" + cellRare + ".png";
+                    break;
+                case "Sword and Shield":
+                    cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + cellRare + ".png";
+                    break;
+                case "Dual Blades":
+                    cellImage = "icons_weapons/icons_dual_blades/dual_blades" + cellRare + ".png";
+                    break;
+                case "Hammer":
+                    cellImage = "icons_weapons/icons_hammer/hammer" + cellRare + ".png";
+                    break;
+                case "Hunting Horn":
+                    cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + cellRare + ".png";
+                    break;
+                case "Lance":
+                    cellImage = "icons_weapons/icons_hammer/hammer" + cellRare + ".png";
+                    break;
+                case "Gunlance":
+                    cellImage = "icons_weapons/icons_gunlance/gunlance" + cellRare + ".png";
+                    break;
+                case "Switch Axe":
+                    cellImage = "icons_weapons/icons_switch_axe/switch_axe" + cellRare + ".png";
+                    break;
+                case "Charge Blade":
+                    cellImage = "icons_weapons/icons_charge_blade/charge_blade" + cellRare + ".png";
+                    break;
+                case "Insect Glaive":
+                    cellImage = "icons_weapons/icons_insect_glaive/insect_glaive" + cellRare + ".png";
+                    break;
+                case "Light Bowgun":
+                    cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + cellRare + ".png";
+                    break;
+                case "Heavy Bowgun":
+                    cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + cellRare + ".png";
+                    break;
+                case "Bow":
+                    cellImage = "icons_weapons/icons_bow/bow" + cellRare + ".png";
+                    break;
+                default:
+                    cellImage = "icons_items/" + data.getItem().getFileLocation();
+            }
 			
-			if (id < S.SECTION_ARMOR) {
-				cellImage = "icons_items/" + data.getItem().getFileLocation();
-			} 
-			else if ((id >= S.SECTION_HEAD) && (id < S.SECTION_BODY)) {
-				cellImage = "icons_armor/icons_head/head" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_BODY) && (id < S.SECTION_ARMS)) {
-				cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_ARMS) && (id < S.SECTION_WAIST)) {
-				cellImage = "icons_armor/icons_arms/arms" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_WAIST) && (id < S.SECTION_LEGS)) {
-				cellImage = "icons_armor/icons_waist/waist" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_LEGS) && (id < S.SECTION_GREAT_SWORD)) {
-				cellImage = "icons_armor/icons_legs/legs" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_GREAT_SWORD) && (id < S.SECTION_HUNTING_HORN)) {
-				cellImage = "icons_weapons/icons_great_sword/great_sword" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_HUNTING_HORN) && (id < S.SECTION_LONG_SWORD)) {
-				cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_LONG_SWORD) && (id < S.SECTION_SWORD_AND_SHIELD)) {
-				cellImage = "icons_weapons/icons_long_sword/long_sword" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_SWORD_AND_SHIELD) && (id < S.SECTION_DUAL_BLADES)) {
-				cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_DUAL_BLADES) && (id < S.SECTION_HAMMER)) {
-				cellImage = "icons_weapons/icons_dual_blades/dual_blades" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_HAMMER) && (id < S.SECTION_LANCE)) {
-				cellImage = "icons_weapons/icons_hammer/hammer" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_LANCE) && (id < S.SECTION_GUNLANCE)) {
-				cellImage = "icons_weapons/icons_lance/lance" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_GUNLANCE) && (id < S.SECTION_SWITCH_AXE)) {
-				cellImage = "icons_weapons/icons_gunlance/gunlance" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_SWITCH_AXE) && (id < S.SECTION_LIGHT_BOWGUN)) {
-				cellImage = "icons_weapons/icons_switch_axe/switch_axe" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_LIGHT_BOWGUN) && (id < S.SECTION_HEAVY_BOWGUN)) {
-				cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + cellRare + ".png";
-			}
-			else if ((id >= S.SECTION_HEAVY_BOWGUN) && (id < S.SECTION_BOW)) {
-				cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + cellRare + ".png";
-			}
-			else if (id >= S.SECTION_BOW) {
-				cellImage = "icons_weapons/icons_bow/bow" + cellRare + ".png";
-			}
+//			if (id < S.SECTION_ARMOR) {
+//				cellImage = "icons_items/" + data.getItem().getFileLocation();
+//			}
+//			else if ((id >= S.SECTION_HEAD) && (id < S.SECTION_BODY)) {
+//				cellImage = "icons_armor/icons_head/head" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_BODY) && (id < S.SECTION_ARMS)) {
+//				cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_ARMS) && (id < S.SECTION_WAIST)) {
+//				cellImage = "icons_armor/icons_arms/arms" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_WAIST) && (id < S.SECTION_LEGS)) {
+//				cellImage = "icons_armor/icons_waist/waist" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_LEGS) && (id < S.SECTION_GREAT_SWORD)) {
+//				cellImage = "icons_armor/icons_legs/legs" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_GREAT_SWORD) && (id < S.SECTION_HUNTING_HORN)) {
+//				cellImage = "icons_weapons/icons_great_sword/great_sword" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_HUNTING_HORN) && (id < S.SECTION_LONG_SWORD)) {
+//				cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_LONG_SWORD) && (id < S.SECTION_SWORD_AND_SHIELD)) {
+//				cellImage = "icons_weapons/icons_long_sword/long_sword" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_SWORD_AND_SHIELD) && (id < S.SECTION_DUAL_BLADES)) {
+//				cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_DUAL_BLADES) && (id < S.SECTION_HAMMER)) {
+//				cellImage = "icons_weapons/icons_dual_blades/dual_blades" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_HAMMER) && (id < S.SECTION_LANCE)) {
+//				cellImage = "icons_weapons/icons_hammer/hammer" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_LANCE) && (id < S.SECTION_GUNLANCE)) {
+//				cellImage = "icons_weapons/icons_lance/lance" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_GUNLANCE) && (id < S.SECTION_SWITCH_AXE)) {
+//				cellImage = "icons_weapons/icons_gunlance/gunlance" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_SWITCH_AXE) && (id < S.SECTION_LIGHT_BOWGUN)) {
+//				cellImage = "icons_weapons/icons_switch_axe/switch_axe" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_LIGHT_BOWGUN) && (id < S.SECTION_HEAVY_BOWGUN)) {
+//				cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + cellRare + ".png";
+//			}
+//			else if ((id >= S.SECTION_HEAVY_BOWGUN) && (id < S.SECTION_BOW)) {
+//				cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + cellRare + ".png";
+//			}
+//			else if (id >= S.SECTION_BOW) {
+//				cellImage = "icons_weapons/icons_bow/bow" + cellRare + ".png";
+//			}
 			
 			try {
 				i = Drawable.createFromStream(
