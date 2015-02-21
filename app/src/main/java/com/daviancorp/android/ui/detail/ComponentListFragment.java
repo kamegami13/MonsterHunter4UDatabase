@@ -83,7 +83,7 @@ public class ComponentListFragment extends ListFragment implements
         String itemtype;
 
         ComponentCursor mycursor = (ComponentCursor) l.getItemAtPosition(position);
-        itemtype = mycursor.getItemType();
+        itemtype = mycursor.getComponent().getComponent().getType();
 
         switch(itemtype){
             case "Weapon":
