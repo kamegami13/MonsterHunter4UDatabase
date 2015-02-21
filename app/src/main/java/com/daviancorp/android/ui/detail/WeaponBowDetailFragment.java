@@ -19,7 +19,8 @@ public class WeaponBowDetailFragment extends WeaponDetailFragment {
 
 	private TextView mWeaponArcTextView, mWeaponCharge1TextView,
 			mWeaponCharge2TextView, mWeaponCharge3TextView,
-			mWeaponCharge4TextView;
+			mWeaponCharge4TextView, mWeaponElementTextView;
+    ;
 	private ImageView mWeaponCoating1ImageView, mWeaponCoating2ImageView,
 			mWeaponCoating3ImageView, mWeaponCoating4ImageView,
 			mWeaponCoating5ImageView, mWeaponCoating6ImageView,
@@ -161,5 +162,37 @@ public class WeaponBowDetailFragment extends WeaponDetailFragment {
 				open.close();
 			}
 		}
+
+        /* Element */
+        String element = "";
+        if (!mWeapon.getElementalAttack().equals(""))
+        {
+            element = mWeapon.getElementalAttack();
+        }
+        else if (!mWeapon.getAwakenedElementalAttack().equals(""))
+        {
+            element = mWeapon.getAwakenedElementalAttack();
+        }
+        else
+        {
+            element = "None";
+        }
+
+        if (element.contains(",")) {
+            String[] twoElements = element.split(", ");
+            String elementOne = twoElements[0];
+            String elementTwo = twoElements[1];
+            element = getElementData(elementOne) + ", " + getElementData(elementTwo);
+        }
+        else {
+            element = getElementData(element);
+        }
+
+        if (!mWeapon.getAwakenedElementalAttack().equals(""))
+        {
+            element = "(" + element + ")";
+        }
+
+        mWeaponElementTextView.setText(element);
 	}
 }

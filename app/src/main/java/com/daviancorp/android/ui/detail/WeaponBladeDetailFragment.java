@@ -18,7 +18,8 @@ import com.daviancorp.android.ui.general.DrawSharpness;
 
 public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 
-	private TextView mWeaponSpecialTypeTextView, mWeaponSpecialTextView;
+	private TextView mWeaponSpecialTypeTextView, mWeaponSpecialTextView,
+            mWeaponElementTextView;
 	private ImageView mWeaponNote1ImageView,
 			mWeaponNote2ImageView, mWeaponNote3ImageView;
     private DrawSharpness mWeaponSharpnessDrawnView;
@@ -125,6 +126,38 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 			mWeaponSpecialTypeTextView.setText("Phial:");
 			mWeaponSpecialTextView.setText(mWeapon.getPhial());
 		}
+
+        		/* Element */
+        String element = "";
+        if (!mWeapon.getElementalAttack().equals(""))
+        {
+            element = mWeapon.getElementalAttack();
+        }
+        else if (!mWeapon.getAwakenedElementalAttack().equals(""))
+        {
+            element = mWeapon.getAwakenedElementalAttack();
+        }
+        else
+        {
+            element = "None";
+        }
+
+        if (element.contains(",")) {
+            String[] twoElements = element.split(", ");
+            String elementOne = twoElements[0];
+            String elementTwo = twoElements[1];
+            element = getElementData(elementOne) + ", " + getElementData(elementTwo);
+        }
+        else {
+            element = getElementData(element);
+        }
+
+        if (!mWeapon.getAwakenedElementalAttack().equals(""))
+        {
+            element = "(" + element + ")";
+        }
+
+        mWeaponElementTextView.setText(element);
 	}
 	
 	private String getNoteImage(char note) {

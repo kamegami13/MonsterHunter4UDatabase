@@ -22,7 +22,9 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Component;
 import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.data.database.ComponentCursor;
+import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.database.S;
+import com.daviancorp.android.loader.ArmorLoader;
 import com.daviancorp.android.loader.ComponentListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 
@@ -147,6 +149,18 @@ public class ItemComponentFragment extends ListFragment implements
 			
 			Item created = component.getCreated();
 			long createdId = created.getId();
+
+            // Get the subtype of armor/weapon
+            String subType;
+
+            if (component.getType() == "Weapon")
+            {
+
+            }
+            else if (component.getType() == "Armor")
+            {
+
+            }
 			
 			String nameText = created.getName();
 			String amtText = "" + component.getQuantity();

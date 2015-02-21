@@ -19,7 +19,7 @@ public class WeaponDetailFragment extends Fragment {
 	protected Weapon mWeapon;
 
 	protected TextView mWeaponLabelTextView, mWeaponTypeTextView,
-			mWeaponAttackTextView, mWeaponElementTextView,
+			mWeaponAttackTextView,
 			mWeaponRarityTextView, mWeaponSlotTextView,
 			mWeaponAffinityTextView, mWeaponDefenseTextView,
 			mWeaponCreationTextView, mWeaponUpgradeTextView;
@@ -55,8 +55,19 @@ public class WeaponDetailFragment extends Fragment {
 		mWeaponAttackTextView.setText("" + mWeapon.getAttack());
 		mWeaponRarityTextView.setText("" + mWeapon.getRarity());
 		mWeaponSlotTextView.setText("" + mWeapon.getNumSlots());
-		mWeaponAffinityTextView.setText("" + mWeapon.getAffinity() + "%");
 		mWeaponDefenseTextView.setText("" + mWeapon.getDefense());
+
+        String affinity;
+        if(!mWeapon.getAffinity().equals(""))
+        {
+            affinity = mWeapon.getAffinity();
+        }
+        else
+        {
+            affinity = "0";
+        }
+
+        mWeaponAffinityTextView.setText("" + affinity + "%");
 		
 		String createCost = "" + mWeapon.getCreationCost() + "z";
 		String upgradeCost = "" + mWeapon.getUpgradeCost() + "z";
@@ -70,34 +81,9 @@ public class WeaponDetailFragment extends Fragment {
 		
 		mWeaponCreationTextView.setText(createCost);
 		mWeaponUpgradeTextView.setText(upgradeCost);
-		
-		/* Element */
-		String element = "";
-		if (mWeapon.getElementalAttack() != null) {
-			element = mWeapon.getElementalAttack();
-		} else if (mWeapon.getAwakenedElementalAttack() != null) {
-			element = mWeapon.getAwakenedElementalAttack();
 		}
 
-		if (element.contains(",")) {
-			String[] twoElements = element.split(", ");
-			String elementOne = twoElements[0];
-			String elementTwo = twoElements[1];
-			element = getElementData(elementOne) + ", " + getElementData(elementTwo);
-		}
-		else {
-			element = getElementData(element);
-		}
-
-		if (mWeapon.getAwakenedElementalAttack() != null) {
-			element = "(" + element + ")";
-		}
-		
-		mWeaponElementTextView.setText(element);
-
-		}
-
-	private String getElementData(String element) {
+	protected String getElementData(String element) {
 		if (element.startsWith("FI")) {
 			return "Fire " + element.substring(2);
 		} else if (element.startsWith("WA")) {
@@ -112,10 +98,10 @@ public class WeaponDetailFragment extends Fragment {
 			return "Paralysis " + element.substring(2);
 		} else if (element.startsWith("PO")) {
 			return "Poison " + element.substring(2);
-		} else if (element.startsWith("SLP")) {
+		} else if (element.startsWith("SL")) {
 			return "Sleep " + element.substring(3);
-		} else if (element.startsWith("SLM")) {
-			return "Slime " + element.substring(3);
+		} else if (element.startsWith("BL")) {
+			return "Blast " + element.substring(3);
 		} else {
 			return "";
 		}
