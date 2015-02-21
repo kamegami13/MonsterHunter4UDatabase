@@ -20,7 +20,7 @@ public class ArmorListActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "Both", "Blade", "Gunner" };
+	private String[] tabs = { "Blade", "Gunner", "Both" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
