@@ -22,7 +22,9 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Component;
 import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.data.database.ComponentCursor;
+import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.data.database.S;
+import com.daviancorp.android.loader.ArmorLoader;
 import com.daviancorp.android.loader.ComponentListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 

@@ -11,6 +11,7 @@ public class Gathering {
 	private String area;		// Area # of location
 	private String site;		// Type of gathering node; bug, mine, fish, etc.
 	private String rank;		// Quest Rank found in
+    private float rate;         // Gather rate
 	
 	/* Default Constructor */
 	public Gathering() {
@@ -20,6 +21,7 @@ public class Gathering {
 		this.area = "";
 		this.site = "";
 		this.rank = "";
+        this.rate = 0;
 	}
 
 	/* Getters and Setters */
@@ -70,5 +72,13 @@ public class Gathering {
 	public void setRank(String rank) {
 		this.rank = rank;
 	}
+
+    public float getRate() {
+        return rate;
+    }
+
+    public void setRate(float rate) {
+        this.rate = rate;
+    }
 	
 }

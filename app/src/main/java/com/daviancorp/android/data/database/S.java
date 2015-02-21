@@ -107,6 +107,7 @@ public class S {
 	static final String COLUMN_GATHERING_AREA = "area";
 	static final String COLUMN_GATHERING_SITE = "site";
 	static final String COLUMN_GATHERING_RANK = "rank";
+    static final String COLUMN_GATHERING_RATE = "percentage";
 	
 	// Hunting Fleet
 	static final String TABLE_HUNTING_FLEET = "hunting_fleet";
