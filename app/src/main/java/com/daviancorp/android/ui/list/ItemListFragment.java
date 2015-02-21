@@ -25,7 +25,10 @@ import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.data.database.ItemCursor;
 import com.daviancorp.android.loader.ItemListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.detail.ArmorDetailActivity;
+import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 import com.daviancorp.android.ui.detail.ItemDetailActivity;
+import com.daviancorp.android.ui.detail.WeaponDetailActivity;
 
 public class ItemListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -97,8 +100,30 @@ public class ItemListFragment extends ListFragment implements
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// The id argument will be the Monster ID; CursorAdapter gives us this
 		// for free
-		Intent i = new Intent(getActivity(), ItemDetailActivity.class);
-		i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, id);
+        Intent i;
+        String itemtype;
+
+        ItemCursor mycursor = (ItemCursor) l.getItemAtPosition(position);
+        itemtype = mycursor.getItem().getType();
+        long item_id = mycursor.getItem().getId();
+
+        switch(itemtype){
+            case "Weapon":
+                i = new Intent(getActivity(), WeaponDetailActivity.class);
+                i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, item_id);
+                break;
+            case "Armor":
+                i = new Intent(getActivity(), ArmorDetailActivity.class);
+                i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, item_id);
+                break;
+            case "Decoration":
+                i = new Intent(getActivity(), DecorationDetailActivity.class);
+                i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, item_id);
+                break;
+            default:
+                i = new Intent(getActivity(), ItemDetailActivity.class);
+                i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, item_id);
+        }
 		startActivity(i);
 	}
 

@@ -66,7 +66,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	private static final int VERSION = 16; // EDIT*/
 
     private static final String DATABASE_NAME = "mh4u.db";
-    private static final int DATABASE_VERSION = 20;
+    private static final int DATABASE_VERSION = 1;
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -1325,14 +1325,13 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	 * Get all items
 	 */
 	public ItemCursor queryItems() {
-		// SELECT DISTINCT * FROM items WHERE NOT(
-		// type = 'Decoration' OR type = 'Armor' OR type = 'Weapon') ORDER BY _id
+		// SELECT DISTINCT * FROM items ORDER BY _id
 		
 		QueryHelper qh = new QueryHelper();
 		qh.Distinct = true;
 		qh.Table = S.TABLE_ITEMS;
 		qh.Columns = null;
-		qh.Selection = "NOT(type = 'Decoration' OR type = 'Armor' OR type = 'Weapon')";
+		qh.Selection = null;
 		qh.SelectionArgs = null;
 		qh.GroupBy = null;
 		qh.Having = null;
