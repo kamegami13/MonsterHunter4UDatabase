@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/header"
+        android:id="@+id/header_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/lightpurple"
@@ -15,7 +15,7 @@
             android:id="@+id/header1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".3"
+            android:layout_weight=".33"
             android:gravity="center"
             android:text="Weapon"
             android:textColor="@color/white" />
@@ -24,33 +24,25 @@
             android:id="@+id/header2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".15"
+            android:layout_weight=".165"
             android:gravity="center"
             android:text="Atk"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/header3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".15"
-            android:gravity="center"
             android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/header4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".14"
             android:gravity="center"
             android:text=" Slot"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_weight="0.165" />
 
         <TextView
             android:id="@+id/header5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".13"
+            android:layout_weight="0.165"
             android:gravity="center"
             android:text="Aff"
             android:textColor="@color/white" />
@@ -59,14 +51,14 @@
             android:id="@+id/header6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".13"
+            android:layout_weight="0.165"
             android:gravity="center"
             android:text="Def"
             android:textColor="@color/white" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/header"
+        android:id="@+id/header_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/lightpurple"
@@ -103,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3"
             android:gravity="center"
-            android:text="Steadiness"
+            android:text="Deviation"
             android:textColor="@color/white" />
     </LinearLayout>
 

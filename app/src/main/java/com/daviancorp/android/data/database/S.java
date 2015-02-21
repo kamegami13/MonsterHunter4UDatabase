@@ -288,6 +288,7 @@ public class S {
 	static final String COLUMN_WEAPONS_NUM_SLOTS = "num_slots";
 	static final String COLUMN_WEAPONS_SHARPNESS_FILE = "sharpness_file";
 	static final String COLUMN_WEAPONS_FINAL = "final";
+    static final String COLUMN_WEAPONS_TREE_DEPTH = "tree_depth";
 
 	// Wishlist
 	static final String TABLE_WISHLIST = "wishlist";

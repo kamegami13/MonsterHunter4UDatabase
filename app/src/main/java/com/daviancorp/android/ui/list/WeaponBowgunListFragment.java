@@ -95,10 +95,11 @@ public class WeaponBowgunListFragment extends WeaponListFragment implements
 			
 			String name = "";
 			int wFinal = weapon.getWFinal();
-			
-			if (wFinal != 0) {
-				name = "*";
-			}
+
+            for(int i = 0; i < weapon.getTree_Depth(); i++)
+            {
+                name = name + " ";
+            }
 			
 			name = name + weapon.getName();
 			String attack = "" + weapon.getAttack();
