@@ -27,6 +27,9 @@ public class QuestDetailFragment extends Fragment {
 	TextView questtv5;
 	TextView questtv6;
 	TextView questtv7;
+    TextView questtv8;
+    TextView questtv9;
+    TextView questtv10;
 
 	public static QuestDetailFragment newInstance(long questId) {
 		Bundle args = new Bundle();
@@ -63,6 +66,9 @@ public class QuestDetailFragment extends Fragment {
 		questtv5 = (TextView) view.findViewById(R.id.fee);
 		questtv6 = (TextView) view.findViewById(R.id.quest);
 		questtv7 = (TextView) view.findViewById(R.id.location);
+        questtv8 = (TextView) view.findViewById(R.id.subquest);
+        questtv9 = (TextView) view.findViewById(R.id.subhrp);
+        questtv10 = (TextView) view.findViewById(R.id.subreward);
 		
 		questtv7.setOnClickListener(new View.OnClickListener() {
 
@@ -88,6 +94,9 @@ public class QuestDetailFragment extends Fragment {
 		String cellFee = "" + mQuest.getFee() + "z";
 		//String time = mQuest.getLocationTime().equals("") ? "" : " (" + mQuest.getLocationTime() + ")";
 		String cellLocation = mQuest.getLocation().getName();
+        String cellSubGoal = mQuest.getSubGoal();
+        String cellSubHrp = "" + mQuest.getSubHrp();
+        String cellSubReward = "" + mQuest.getSubReward() + "z";
 		
 		questtv1.setText(cellLevels);
 		questtv2.setText(cellGoal);
@@ -97,6 +106,9 @@ public class QuestDetailFragment extends Fragment {
 		questtv6.setText(cellQuest);
 		questtv7.setText(cellLocation);
 		questtv7.setTag(mQuest.getLocation().getId());
+        questtv8.setText(cellSubGoal);
+        questtv9.setText(cellSubHrp);
+        questtv10.setText(cellSubReward);
 		
 	}
 	

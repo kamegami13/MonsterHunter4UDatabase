@@ -17,6 +17,9 @@ public class Quest {
 	private int fee;			// Quest fee
 	private int reward;			// Quest reward in zenny
 	private int hrp;			// Hunting rank points
+    private String sub_goal;		// Subquest Clear condition
+    private int sub_reward;			// Subquest reward in zenny
+    private int sub_hrp;			// Subquest Hunting rank points
 	
 	/* Default Constructor */
 	public Quest() {
@@ -32,6 +35,9 @@ public class Quest {
 		this.fee = -1;
 		this.reward = -1;
 		this.hrp = -1;
+        this.sub_goal = "";
+        this.sub_reward = -1;
+        this.sub_hrp = -1;
 	}
 
 	/* Getters and Setters */
@@ -130,6 +136,30 @@ public class Quest {
 	public void setHrp(int hrp) {
 		this.hrp = hrp;
 	}
+
+    public String getSubGoal() {
+        return sub_goal;
+    }
+
+    public void setSubGoal(String sub_goal) {
+        this.sub_goal = sub_goal;
+    }
+
+    public int getSubReward() {
+        return sub_reward;
+    }
+
+    public void setSubReward(int sub_reward) {
+        this.sub_reward = sub_reward;
+    }
+
+    public int getSubHrp() {
+        return sub_hrp;
+    }
+
+    public void setSubHrp(int sub_hrp) {
+        this.sub_hrp = sub_hrp;
+    }
 	
 	@Override
 	public String toString(){

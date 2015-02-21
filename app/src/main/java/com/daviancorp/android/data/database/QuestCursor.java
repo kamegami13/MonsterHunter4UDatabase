@@ -40,6 +40,9 @@ public class QuestCursor extends CursorWrapper {
 		int fee = getInt(getColumnIndex(S.COLUMN_QUESTS_FEE));
 		int reward = getInt(getColumnIndex(S.COLUMN_QUESTS_REWARD));
 		int hrp = getInt(getColumnIndex(S.COLUMN_QUESTS_HRP));
+        String sub_goal = getString(getColumnIndex(S.COLUMN_QUESTS_SUB_GOAL));
+        int sub_reward = getInt(getColumnIndex(S.COLUMN_QUESTS_SUB_REWARD));
+        int sub_hrp = getInt(getColumnIndex(S.COLUMN_QUESTS_SUB_HRP));
 
 		quest.setId(questId);
 		quest.setName(name);
@@ -51,6 +54,9 @@ public class QuestCursor extends CursorWrapper {
 		quest.setFee(fee);
 		quest.setReward(reward);
 		quest.setHrp(hrp);
+        quest.setSubGoal(sub_goal);
+        quest.setSubReward(sub_reward);
+        quest.setSubHrp(sub_hrp);
 		//quest.setLocationTime(locationTime);
 		location.setId(locationId);
 		

@@ -4,7 +4,7 @@ import timeit
 
 def main():
     columns = { 'items' :
-                    ['_id', 'name', 'jpn_name', 'type',
+                    ['_id', 'name', 'jpn_name', 'type', 'sub_type',
                      'rarity', 'carry_capacity', 'buy', 'sell', 'description',
                      'icon_name', 'armor_dupe_name_fix'],
                 'combining' :

@@ -226,6 +226,9 @@ public class S {
 	static final String COLUMN_QUESTS_FEE = "fee";
 	static final String COLUMN_QUESTS_REWARD = "reward";
 	static final String COLUMN_QUESTS_HRP = "hrp";
+    static final String COLUMN_QUESTS_SUB_GOAL = "sub_goal";
+    static final String COLUMN_QUESTS_SUB_REWARD = "sub_reward";
+    static final String COLUMN_QUESTS_SUB_HRP = "sub_hrp";
 	
 	// Quest Rewards
 	static final String TABLE_QUEST_REWARDS = "quest_rewards";

@@ -33,7 +33,7 @@ CREATE TABLE `wishlist` (
   `name` text NOT NULL
 );
 
-INSERT INTO `wishlist` (`_id`, `name`) VALUES (1, `My Wishlist`);
+INSERT INTO `wishlist` (`_id`, `name`) VALUES (1, 'My Wishlist');
 
 CREATE TABLE `wishlist_data` (
   `_id` integer primary key autoincrement,
@@ -177,6 +177,7 @@ CREATE TABLE `items` (
   `name` varchar(255) NOT NULL,
   `jpn_name` text DEFAULT NULL,
   `type` text NOT NULL,
+  `sub_type` text NOT NULL,
   `rarity` integer NOT NULL DEFAULT '0',
   `carry_capacity` integer NOT NULL DEFAULT '0',
   `buy` mediumint(8) DEFAULT NULL,

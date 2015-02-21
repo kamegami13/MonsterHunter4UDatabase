@@ -59,14 +59,14 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	
 	//The Android's default system path of your application database.
 	// /data/data/com.daviancorp.android.monsterhunter4udatabase/databases/
-    private static String DB_PATH = "/data/data/com.daviancorp.android.mh4udatabase/databases/";
+    /*private static String DB_PATH = "/data/data/com.daviancorp.android.mh4udatabase/databases/";
 	private static String DB_NAME = "mh4u.db";
 	private static String DB_TEMP_NAME = "mh4u_temp.db";
 	private static String ASSETS_DB_FOLDER = "db";
-	private static final int VERSION = 16; // EDIT
+	private static final int VERSION = 16; // EDIT*/
 
     private static final String DATABASE_NAME = "mh4u.db";
-    private static final int DATABASE_VERSION = 19;
+    private static final int DATABASE_VERSION = 20;
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -108,7 +108,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	 * Creates a empty database on the system and overwrite it with your own
 	 * database.
 	 **/
-	public void createDatabase() throws IOException {
+	/*public void createDatabase() throws IOException {
 	    boolean dbExist = checkDatabase();
 		if (!dbExist) {
 			super.getReadableDatabase();
@@ -126,7 +126,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 				close();
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * Check if the database already exist to avoid re-copying the file each
@@ -134,16 +134,16 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	 * 
 	 * @return true if it exists, false if it doesn't
 	 */
-	private boolean checkDatabase() {
+	/*private boolean checkDatabase() {
         File file = new File(DB_PATH + DB_NAME);
         return file.exists() && !file.isDirectory();
-    }
+    }*/
 
 	/**
 	 * Copy distributed db in assets folder to data folder
 	 * @throws IOException
 	 */
-	private void copyDatabase() throws IOException {
+	/*private void copyDatabase() throws IOException {
 		String[] dbFiles = myContext.getAssets().list(ASSETS_DB_FOLDER);
 		String outFileName = DB_PATH + DB_NAME;
 		OutputStream myOutput = new FileOutputStream(outFileName);		
@@ -161,13 +161,13 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		}
 		myOutput.flush();
 		myOutput.close();
-	}
+	}*/
 	
 	/**
 	 * Copy distributed db in assets folder to temp file for upgrade
 	 * @throws IOException
 	 */
-	private void copyTempDatabase() throws IOException {
+	/*private void copyTempDatabase() throws IOException {
 		String[] dbFiles = myContext.getAssets().list(ASSETS_DB_FOLDER);
 		String outFileName = DB_PATH + DB_TEMP_NAME;
 		OutputStream myOutput = new FileOutputStream(outFileName);		
@@ -185,7 +185,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		}
 		myOutput.flush();
 		myOutput.close();
-	}
+	}*/
 
 	/**
 	 * Set database instance
@@ -200,11 +200,11 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	 * @return The temp database object
 	 * @throws SQLException
 	 */
-	public SQLiteDatabase openTempDatabase() throws SQLException {
+	/*public SQLiteDatabase openTempDatabase() throws SQLException {
 		// Open the database
 		String myPath = DB_PATH + DB_TEMP_NAME;
 		return SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE|SQLiteDatabase.NO_LOCALIZED_COLLATORS);
-	}
+	}*/
 
 	/**
 	 * Close database
@@ -1321,18 +1321,19 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	 * Get all items
 	 */
 	public ItemCursor queryItems() {
-		// "SELECT DISTINCT * FROM items GROUP BY name LIMIT 1114"
+		// SELECT DISTINCT * FROM items WHERE NOT(
+		// type = 'Decoration' OR type = 'Armor' OR type = 'Weapon') ORDER BY _id
 		
 		QueryHelper qh = new QueryHelper();
 		qh.Distinct = true;
 		qh.Table = S.TABLE_ITEMS;
 		qh.Columns = null;
-		qh.Selection = null;
+		qh.Selection = "NOT(type = 'Decoration' OR type = 'Armor' OR type = 'Weapon')";
 		qh.SelectionArgs = null;
 		qh.GroupBy = null;
 		qh.Having = null;
-		qh.OrderBy = null;
-		qh.Limit = "1114";
+		qh.OrderBy = S.COLUMN_ITEMS_ID;
+		qh.Limit = null;
 		
 		return new ItemCursor(wrapHelper(qh));
 	}
@@ -1992,6 +1993,9 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		projectionMap.put(S.COLUMN_QUESTS_FEE, q + "." + S.COLUMN_QUESTS_FEE);
 		projectionMap.put(S.COLUMN_QUESTS_REWARD, q + "." + S.COLUMN_QUESTS_REWARD);
 		projectionMap.put(S.COLUMN_QUESTS_HRP, q + "." + S.COLUMN_QUESTS_HRP);
+        projectionMap.put(S.COLUMN_QUESTS_SUB_GOAL, q + "." + S.COLUMN_QUESTS_SUB_GOAL);
+        projectionMap.put(S.COLUMN_QUESTS_SUB_REWARD, q + "." + S.COLUMN_QUESTS_SUB_REWARD);
+        projectionMap.put(S.COLUMN_QUESTS_SUB_HRP, q + "." + S.COLUMN_QUESTS_SUB_HRP);
 		
 		projectionMap.put(l + S.COLUMN_LOCATIONS_NAME, l + "." + S.COLUMN_LOCATIONS_NAME + " AS " + l + S.COLUMN_LOCATIONS_NAME);
 		projectionMap.put(S.COLUMN_LOCATIONS_MAP, l + "." + S.COLUMN_LOCATIONS_MAP);
