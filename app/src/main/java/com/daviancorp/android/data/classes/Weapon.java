@@ -28,6 +28,7 @@ public class Weapon extends Item{
 	private int num_slots;						// Number of slots
 	private String sharpness_file;				// Sharpness image file location
 	private int wfinal;							// Final in weapon tree or not
+    private int tree_depth;                     // Depth of weapon in weapon tree
 	
 	/* Default Constructor */
 	public Weapon() {
@@ -56,6 +57,7 @@ public class Weapon extends Item{
 		this.num_slots = -1;
 		this.sharpness_file = "";
 		this.wfinal = -1;
+        this.tree_depth = 0;
 	}
 
 	/* Getters and Setters */
@@ -242,4 +244,12 @@ public class Weapon extends Item{
 	public void setWFinal(int wfinal) {
 		this.wfinal = wfinal;
 	}
+
+    public int getTree_Depth() {
+        return tree_depth;
+    }
+
+    public void setTree_Depth(int tree_depth) {
+        this.tree_depth = tree_depth;
+    }
 }

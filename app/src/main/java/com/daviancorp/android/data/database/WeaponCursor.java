@@ -49,6 +49,7 @@ public class WeaponCursor extends CursorWrapper {
 		int num_slots = getInt(getColumnIndex(S.COLUMN_WEAPONS_NUM_SLOTS));
 		String sharpness_file = getString(getColumnIndex(S.COLUMN_WEAPONS_SHARPNESS_FILE));
 		int wfinal = getInt(getColumnIndex(S.COLUMN_WEAPONS_FINAL));
+        int tree_depth = getInt(getColumnIndex(S.COLUMN_WEAPONS_TREE_DEPTH));
 
 		weapon.setWtype(wtype);
 		weapon.setCreationCost(creation_cost);
@@ -73,6 +74,7 @@ public class WeaponCursor extends CursorWrapper {
 		weapon.setNumSlots(num_slots);
 		weapon.setSharpnessFile(sharpness_file);
 		weapon.setWFinal(wfinal);
+        weapon.setTree_Depth(tree_depth);
 
 		long itemId = getLong(getColumnIndex(S.COLUMN_ITEMS_ID));
 		String name = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
