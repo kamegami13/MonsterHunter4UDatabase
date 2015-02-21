@@ -18,7 +18,7 @@ def main():
                     ['_id','wtype','creation_cost','upgrade_cost','attack','max_attack','elemental_attack',
                      'awakened_elemental_attack','defense','sharpness','affinity','horn_notes','shelling_type',
                      'phial','charges','coatings','recoil','reload_speed','rapid_fire','deviation','ammo',
-                     'num_slots','sharpness_file','tree_depth','final'],
+                     'sharpness_file','num_slots','tree_depth','final'],
                 'skill_trees' :
                     ['_id','name','jpn_name'],
                 'skills' :
