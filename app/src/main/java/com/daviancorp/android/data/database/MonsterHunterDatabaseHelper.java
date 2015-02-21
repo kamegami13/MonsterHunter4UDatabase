@@ -66,7 +66,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	private static final int VERSION = 16; // EDIT*/
 
     private static final String DATABASE_NAME = "mh4u.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;

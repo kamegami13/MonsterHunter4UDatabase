@@ -69,7 +69,7 @@ public abstract class GenericActivity extends SherlockFragmentActivity {
             Intent email = new Intent(Intent.ACTION_SEND);
             email.setType("text/email");
             email.putExtra(Intent.EXTRA_EMAIL, new String[]{"monster-hunter-database-feedback@googlegroups.com"});
-            email.putExtra(Intent.EXTRA_SUBJECT, "Monster Hunter 4U Database Feedback");
+            email.putExtra(Intent.EXTRA_SUBJECT, "MH4U Database Feedback");
             startActivity(Intent.createChooser(email, "Send Feedback:"));
 
 		default:

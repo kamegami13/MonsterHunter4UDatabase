@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Monster Hunter 4U Database</string>
+    <string name="app_name">MH4U Database</string>
     <string name="about">About</string>
     <string name="action_settings">Settings</string>
-    <string name="about_message">Based on the open source app by: DavianCorp
-                                https://play.google.com/store/apps/details?id=com.daviancorp.android.mh3udatabase
+    <string name="about_message">MH4U Database
                                 \n\n
                                 Contribute at:
-                                \n GitHub:
-        						\n\t\t\t\t
+                                \n GitHub:\n
                                 https://github.com/kamegami13/MonsterHunter4UDatabase
-                                \n Google Groups:
-                                \n\t\t\t\t
-                                https://groups.google.com/forum/#!forum/monster-hunter-database-development
+                                \n\n
+                                Based on data from:\n
+                                Ping\'s Dex\n
+                                monsterhunter.wikia.com/\n
+                                kiranico.com\n
+                                wiki.mh4g.org\n
+                                aegil.net
+                                \n\n
+                                A Special Thanks to:\n
+                                Kiranico\n
+                                Kogath at Monster Hunter Wikia\n
+                                Ping\n
+                                Aegil
+                                \n\n
+                                MONSTER HUNTER is a trademark of CAPCOM CO., LTD.
         						</string>
     <string name="alert_button">Close</string>
     <string name="alert_rate">Rate!</string>
