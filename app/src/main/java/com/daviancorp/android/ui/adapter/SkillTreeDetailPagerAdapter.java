@@ -47,7 +47,6 @@ public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
 					ItemToSkillTreeListCursorLoader.TYPE_LEGS);
 		case 6:
 			// List of Decoration with the SkillTree
-            //TODO reenable when decorations are complete
 			return SkillTreeDecorationFragment.newInstance(skillTreeId,
 					ItemToSkillTreeListCursorLoader.TYPE_DECORATION);
 		default:
