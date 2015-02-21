@@ -75,11 +75,35 @@ public class ComponentListFragment extends ListFragment implements
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Item ID; CursorAdapter gives us this
-		// for free
-		Intent i = new Intent(getActivity(), ItemDetailActivity.class);
-		i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, (long) v.getTag());
-		startActivity(i);
+        // The id argument will be the Item ID; CursorAdapter gives us this
+        // for free
+        Intent i = null;
+        long tagId = (long) v.getTag();
+        int clickedId = (int) id;
+        String itemtype;
+
+        ComponentCursor mycursor = (ComponentCursor) l.getItemAtPosition(position);
+        itemtype = mycursor.getItemType();
+
+        switch(itemtype){
+            case "Weapon":
+                i = new Intent(getActivity(), WeaponDetailActivity.class);
+                i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, tagId);
+                break;
+            case "Armor":
+                i = new Intent(getActivity(), ArmorDetailActivity.class);
+                i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, tagId);
+                break;
+            case "Decoration":
+                i = new Intent(getActivity(), DecorationDetailActivity.class);
+                i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, tagId);
+                break;
+            default:
+                i = new Intent(getActivity(), ItemDetailActivity.class);
+                i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, tagId);
+        }
+        if(i!=null)
+            startActivity(i);
 	}
 
 	@Override
@@ -128,7 +152,71 @@ public class ComponentListFragment extends ListFragment implements
 			typeTextView.setText(typeText);
 			
 			Drawable i = null;
-			String cellImage = "icons_items/" + component.getComponent().getFileLocation();
+            String cellImage;
+            
+            String sub_type = component.getComponent().getSubType();
+
+            switch(sub_type){
+                case "Head":
+                    cellImage = "icons_armor/icons_head/head" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Body":
+                    cellImage = "icons_armor/icons_body/body" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Arms":
+                    cellImage = "icons_armor/icons_body/body" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Waist":
+                    cellImage = "icons_armor/icons_waist/waist" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Legs":
+                    cellImage = "icons_armor/icons_legs/legs" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Great Sword":
+                    cellImage = "icons_weapons/icons_great_sword/great_sword" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Long Sword":
+                    cellImage = "icons_weapons/icons_long_sword/long_sword" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Sword and Shield":
+                    cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Dual Blades":
+                    cellImage = "icons_weapons/icons_dual_blades/dual_blades" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Hammer":
+                    cellImage = "icons_weapons/icons_hammer/hammer" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Hunting Horn":
+                    cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Lance":
+                    cellImage = "icons_weapons/icons_hammer/hammer" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Gunlance":
+                    cellImage = "icons_weapons/icons_gunlance/gunlance" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Switch Axe":
+                    cellImage = "icons_weapons/icons_switch_axe/switch_axe" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Charge Blade":
+                    cellImage = "icons_weapons/icons_charge_blade/charge_blade" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Insect Glaive":
+                    cellImage = "icons_weapons/icons_insect_glaive/insect_glaive" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Light Bowgun":
+                    cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Heavy Bowgun":
+                    cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + component.getComponent().getRarity() + ".png";
+                    break;
+                case "Bow":
+                    cellImage = "icons_weapons/icons_bow/bow" + component.getComponent().getRarity() + ".png";
+                    break;
+                default:
+                    cellImage = "icons_items/" + component.getComponent().getFileLocation();
+            }
 			try {
 				i = Drawable.createFromStream(
 						context.getAssets().open(cellImage), null);

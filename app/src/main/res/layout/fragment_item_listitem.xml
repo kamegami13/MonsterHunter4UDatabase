@@ -11,14 +11,15 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="24dip"
-        android:layout_height="24dip" />
+        android:layout_width="35dip"
+        android:layout_height="35dip" />
 
     <TextView
         android:id="@+id/text1"
         android:paddingLeft="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center"
+        android:gravity="center_vertical" />
 
 </LinearLayout>
