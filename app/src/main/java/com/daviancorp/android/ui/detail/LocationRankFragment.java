@@ -139,14 +139,17 @@ public class LocationRankFragment extends ListFragment implements
 			TextView itemTextView = (TextView) view.findViewById(R.id.item);
 			TextView areaTextView = (TextView) view.findViewById(R.id.area);
 			TextView methodTextView = (TextView) view.findViewById(R.id.method);
+            TextView rateTextView = (TextView) view.findViewById(R.id.rate);
 
 			String cellItemText = gathering.getItem().getName();
 			String cellAreaText = gathering.getArea();
 			String cellMethodText = gathering.getSite();
+            long rate = (long) gathering.getRate();
 
 			itemTextView.setText(cellItemText);
 			areaTextView.setText(cellAreaText);
 			methodTextView.setText(cellMethodText);
+            rateTextView.setText(Long.toString(rate) + "%");
 
 			Drawable i = null;
 			String cellImage = "icons_items/"
