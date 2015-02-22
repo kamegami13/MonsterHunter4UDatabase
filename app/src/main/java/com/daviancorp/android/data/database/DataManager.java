@@ -724,7 +724,17 @@ public class DataManager {
 		cursor.close();
 		return mtq;
 	}
-	
+
+/********************************* MONSTER HABITAT QUERIES ******************************************/
+	/* Get a Cursor that has a list of MonsterHabitats based on Monster */
+    public MonsterHabitatCursor queryHabitatMonster(long id) {
+        return mHelper.queryHabitatMonster(id);
+    }
+
+    /* Get a Cursor that has a list of MonsterHabitats based on Location */
+    public MonsterHabitatCursor queryHabitatLocation(long id) {
+        return mHelper.queryHabitatLocation(id);
+    }
 /********************************* QUEST QUERIES ******************************************/	
 
 	/* Get a Cursor that has a list of all Quests */

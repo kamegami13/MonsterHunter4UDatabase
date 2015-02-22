@@ -1,0 +1,16 @@
+Release Notes:
+Version 1.01
+	New Features:
+		- Monster Habitats now appear on the Monster Detail Page
+		- Monster Habitats are now listed on the Location Detail Page
+		
+	Bug Fixes:
+		- Fixed crash on dual element Dual Blades
+		- Fixed crash on Bows with less than three charges
+		- Fixed layout for skill descriptions; long descriptions will no longer be clipped.
+		- Added tabs for padding to the Bow/Bowgun weapon trees.
+		- Fixed small monster links being sent to wrong monster page
+		- Fixed icons for charge blade and insect glaive not appearing
+		
+Version 1.0
+	- Initial Release
