@@ -28,14 +28,14 @@ drop table if exists wishlist;
 drop table if exists wishlist_component;
 drop table if exists wishlist_data;
 
-CREATE TABLE `wishlist` (
+CREATE TABLE IF NOT EXISTS `wishlist` (
   `_id` integer primary key autoincrement,
   `name` text NOT NULL
 );
 
 INSERT INTO `wishlist` (`_id`, `name`) VALUES (1, 'My Wishlist');
 
-CREATE TABLE `wishlist_data` (
+CREATE TABLE IF NOT EXISTS `wishlist_data` (
   `_id` integer primary key autoincrement,
   `wishlist_id` integer NOT NULL,
   `item_id` integer NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE `wishlist_data` (
   foreign key (`item_id`) references items('_id')
 );
 
-CREATE TABLE `wishlist_component` (
+CREATE TABLE IF NOT EXISTS `wishlist_component` (
   `_id` integer primary key autoincrement,
   `wishlist_id` integer NOT NULL,
   `component_id` integer NOT NULL,
@@ -56,9 +56,9 @@ CREATE TABLE `wishlist_component` (
   foreign key (`component_id`) references items('_id')
 );
 
-CREATE TABLE "android_metadata" ("locale" TEXT DEFAULT 'en_US');
+CREATE TABLE IF NOT EXISTS "android_metadata" ("locale" TEXT DEFAULT 'en_US');
 
-CREATE TABLE `arena_quests` (
+CREATE TABLE IF NOT EXISTS `arena_quests` (
   `_id` integer primary key autoincrement,
   `name` text NOT NULL,
   `goal` text NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE `arena_quests` (
   foreign key(`location_id`) references locations('_id')
 );
 
-CREATE TABLE `arena_rewards` (
+CREATE TABLE IF NOT EXISTS `arena_rewards` (
   `_id` integer primary key autoincrement,
   `arena_id` integer NOT NULL,
   `item_id` integer NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `arena_rewards` (
   foreign key('item_id') references items('_id')
 );
 
-CREATE TABLE `armor` (
+CREATE TABLE IF NOT EXISTS `armor` (
   `_id` integer primary key autoincrement,
   `slot` text NOT NULL,
   `defense` integer NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE `armor` (
   `num_slots` integer
 );
 
-CREATE TABLE `charms` (
+CREATE TABLE IF NOT EXISTS `charms` (
   `_id` integer primary key autoincrement,
   `num_slots` integer NOT NULL,
   `skill_tree_1_id` integer NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE `charms` (
   foreign key('skill_tree_2_id') references skill_trees('_id')
 );
 
-CREATE TABLE `combining` (
+CREATE TABLE IF NOT EXISTS `combining` (
   `_id` integer primary key autoincrement,
   'created_item_id' integer NOT NULL,
   `item_1_id` integer NOT NULL,
@@ -120,7 +120,7 @@ CREATE TABLE `combining` (
   foreign key(`item_2_id`) references items('_id')
 );
 
-CREATE TABLE `components` (
+CREATE TABLE IF NOT EXISTS `components` (
   `_id` integer primary key autoincrement,
   'created_item_id' integer NOT NULL,
   'component_item_id' integer NOT NULL,
@@ -130,12 +130,12 @@ CREATE TABLE `components` (
   foreign key(`component_item_id`) references items('_id')
 );
 
-CREATE TABLE `decorations` (
+CREATE TABLE IF NOT EXISTS `decorations` (
   `_id` integer primary key autoincrement,
   `num_slots` integer NOT NULL
 );
 
-CREATE TABLE `gathering` (
+CREATE TABLE IF NOT EXISTS `gathering` (
   `_id` integer primary key autoincrement,
   'item_id' integer NOT NULL,
   'location_id' integer NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE `gathering` (
   foreign key(`location_id`) references locations('_id')
 );
 
-CREATE TABLE `hunting_fleet` (
+CREATE TABLE IF NOT EXISTS `hunting_fleet` (
   `_id` integer primary key autoincrement,
   `type` text NOT NULL,
   `level` integer NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE `hunting_fleet` (
   foreign key(`item_id`) references items('_id')
 );
 
-CREATE TABLE `hunting_rewards` (
+CREATE TABLE IF NOT EXISTS `hunting_rewards` (
   `_id` integer primary key autoincrement,
   'item_id' integer NOT NULL,
   `condition` text NOT NULL,
@@ -172,7 +172,7 @@ CREATE TABLE `hunting_rewards` (
   foreign key(`monster_id`) references monsters('_id')
 );
 
-CREATE TABLE `items` (
+CREATE TABLE IF NOT EXISTS `items` (
   `_id` integer primary key autoincrement,
   `name` varchar(255) NOT NULL,
   `jpn_name` text DEFAULT NULL,
@@ -187,7 +187,7 @@ CREATE TABLE `items` (
   `armor_dupe_name_fix` text NOT NULL DEFAULT ''
 );
 
-CREATE TABLE `item_to_skill_tree` (
+CREATE TABLE IF NOT EXISTS `item_to_skill_tree` (
   `_id` integer primary key autoincrement,
   'item_id' integer NOT NULL,
   `skill_tree_id` integer NOT NULL,
@@ -196,14 +196,14 @@ CREATE TABLE `item_to_skill_tree` (
   foreign key('skill_tree_id') references skill_trees('_id')
 );
 
-CREATE TABLE `locations` (
+CREATE TABLE IF NOT EXISTS `locations` (
   `_id` integer primary key autoincrement,
   `name` varchar(255) UNIQUE NOT NULL,
   `map` varchar(255) NOT NULL,
   `jpn_name` text
 );
 
-CREATE TABLE `moga_woods_rewards` (
+CREATE TABLE IF NOT EXISTS `moga_woods_rewards` (
   `_id` integer primary key autoincrement,
   `monster_id` integer NOT NULL,
   `time` text NOT NULL,
@@ -215,7 +215,7 @@ CREATE TABLE `moga_woods_rewards` (
   foreign key('item_id') references items('_id')
 );
 
-CREATE TABLE `monsters` (
+CREATE TABLE IF NOT EXISTS `monsters` (
   `_id` integer primary key autoincrement,
   `class` text NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -224,7 +224,7 @@ CREATE TABLE `monsters` (
   `sort_name` text NOT NULL DEFAULT ''
 );
 
-CREATE TABLE `monster_damage` (
+CREATE TABLE IF NOT EXISTS `monster_damage` (
   `_id` integer primary key autoincrement,
   'monster_id' integer NOT NULL,
   `body_part` text NOT NULL,
@@ -240,7 +240,7 @@ CREATE TABLE `monster_damage` (
   foreign key('monster_id') references monsters('_id')
 );
 
-CREATE TABLE `monster_to_arena` (
+CREATE TABLE IF NOT EXISTS `monster_to_arena` (
   '_id' integer primary key autoincrement,
   `monster_id` integer NOT NULL,
   `arena_id` integer NOT NULL,
@@ -248,7 +248,7 @@ CREATE TABLE `monster_to_arena` (
   foreign key(`arena_id`) references arena_quests('_id')
 );
 
-CREATE TABLE `monster_to_quest` (
+CREATE TABLE IF NOT EXISTS `monster_to_quest` (
   '_id' integer primary key autoincrement,
   `monster_id` integer NOT NULL,
   `quest_id` integer NOT NULL,
@@ -257,7 +257,7 @@ CREATE TABLE `monster_to_quest` (
   foreign key(`quest_id`) references quests('_id')
 );
 
-CREATE TABLE `planting` (
+CREATE TABLE IF NOT EXISTS `planting` (
   `_id` integer primary key autoincrement,
   `planted_item_id` integer NOT NULL,
   `received_item_id` integer NOT NULL,
@@ -268,7 +268,7 @@ CREATE TABLE `planting` (
   foreign key('received_item_id') references items('_id')
 );
 
-CREATE TABLE `quest_rewards` (
+CREATE TABLE IF NOT EXISTS `quest_rewards` (
   `_id` integer primary key autoincrement,
   `quest_id` integer NOT NULL,
   `item_id` integer NOT NULL,
@@ -279,7 +279,7 @@ CREATE TABLE `quest_rewards` (
   foreign key('item_id') references items('_id')
 );
 
-CREATE TABLE `skills` (
+CREATE TABLE IF NOT EXISTS `skills` (
   `_id` integer primary key autoincrement,
   `skill_tree_id` integer NOT NULL,
   `required_skill_tree_points` integer NOT NULL,
@@ -290,13 +290,13 @@ CREATE TABLE `skills` (
 
 );
 
-CREATE TABLE `skill_trees` (
+CREATE TABLE IF NOT EXISTS `skill_trees` (
   `_id` integer primary key autoincrement,
   `name` varchar(255) NOT NULL,
   `jpn_name` text NOT NULL
 );
 
-CREATE TABLE `trading` (
+CREATE TABLE IF NOT EXISTS `trading` (
   `_id` integer primary key autoincrement,
   `location_id` integer NOT NULL,
   `offer_item_id` integer NOT NULL,
@@ -307,7 +307,7 @@ CREATE TABLE `trading` (
   foreign key (`receive_item_id`) references items('_id')
 );
 
-CREATE TABLE `weapons` (
+CREATE TABLE IF NOT EXISTS `weapons` (
   `_id` integer primary key autoincrement,
   `wtype` text NOT NULL,
   `creation_cost` mediumint(8) DEFAULT NULL,
@@ -335,7 +335,7 @@ CREATE TABLE `weapons` (
   'final' integer
 );
 
-CREATE TABLE `quests` (
+CREATE TABLE IF NOT EXISTS `quests` (
   `_id` integer primary key autoincrement,
   `name` varchar(255) NOT NULL,
   `goal` varchar(255) NOT NULL,
@@ -351,6 +351,29 @@ CREATE TABLE `quests` (
   `sub_reward` integer DEFAULT NULL,
   `sub_hrp` integer DEFAULT NULL,
   foreign key('location_id') references locations('_id')
+);
+
+CREATE TABLE IF NOT EXISTS 'monster_habitat' (
+  '_id' integer primary key autoincrement,
+  'monster_id' integer NOT NULL,
+  'location_id' integer NOT NULL,
+  'start_area' integer DEFAULT NULL,
+  'move_area' varchar(20) DEFAULT NULL,
+  'rest_area' integer DEFAULT NULL,
+  foreign key('location_id') references locations('_id'),
+  foreign key('monster_id') references monsters('_id')
+);
+
+CREATE TABLE IF NOT EXISTS 'monster_status' (
+  '_id' integer primary key autoincrement,
+  'monster_id' integer NOT NULL,
+  'status' varchar(25) NOT NULL,
+  'initial' integer DEFAULT NULL,
+  'increase' integer DEFAULT NULL,
+  'max' integer DEFAULT NULL,
+  'duration' integer DEFAULT NULL,
+  'damage' integer DEFAULT NULL,
+  foreign key('monster_id') references monsters('id')
 );
 
 .mode tabs
@@ -369,6 +392,8 @@ CREATE TABLE `quests` (
 .import data/items.tsv items
 .import data/locations.tsv locations
 .import data/monster_damage.tsv monster_damage
+.import data/monster_habitat.tsv monster_habitat
+.import data/monster_status.tsv monster_status
 .import data/monster_to_quest.tsv monster_to_quest
 .import data/monsters.tsv monsters
 .import data/quest_rewards.tsv quest_rewards

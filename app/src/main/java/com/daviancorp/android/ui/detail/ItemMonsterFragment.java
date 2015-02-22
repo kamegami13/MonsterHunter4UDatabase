@@ -77,22 +77,6 @@ public class ItemMonsterFragment extends ListFragment implements
 		
 		long monsterId = (long) v.getTag();
 		
-		if (monsterId == 2) {
-			monsterId = 1;
-		}
-		else if (monsterId == 4) {
-			monsterId = 3;
-		}
-		else if ((monsterId >=6) && (monsterId <= 10)) {
-			monsterId = 5;
-		}
-		else if ((monsterId >= 12) && (monsterId <= 16)) {
-			monsterId = 11;
-		}
-		else if ((monsterId >= 18) && (monsterId <= 23)) {
-			monsterId = 17;
-		}
-		
 		Intent i = new Intent(getActivity(), MonsterDetailActivity.class);
 		i.putExtra(MonsterDetailActivity.EXTRA_MONSTER_ID, monsterId);
 		startActivity(i);

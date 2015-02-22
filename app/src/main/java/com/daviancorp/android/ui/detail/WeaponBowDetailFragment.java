@@ -6,6 +6,7 @@ import java.io.InputStream;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,7 +97,20 @@ public class WeaponBowDetailFragment extends WeaponDetailFragment {
 		mWeaponCharge1TextView.setText(charges[0]);
 		mWeaponCharge2TextView.setText(charges[1]);
 		mWeaponCharge3TextView.setText(charges[2]);
-		mWeaponCharge4TextView.setText(charges[3]);
+
+        if (charges[2].contains("*")){
+            mWeaponCharge2TextView.setTypeface(null, Typeface.BOLD);
+        }
+
+        if (charges.length == 4) {
+            mWeaponCharge4TextView.setText(charges[3]);
+            if (charges[3].contains("*")){
+                mWeaponCharge3TextView.setTypeface(null, Typeface.BOLD);
+            }
+        }
+        else {
+            mWeaponCharge4TextView.setText("None");
+        }
 
 		// Read a Bitmap from Assets
 		AssetManager manager = getActivity().getAssets();
