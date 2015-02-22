@@ -60,6 +60,10 @@ def main():
                     ['_id','quest_id','item_id','reward_slot','percentage','stack_size'],
                 'trading' :
                     ['_id','location_id','offer_item_id','receive_item_id','percentage'],
+                'monster_habitat' :
+                    ['_id', 'monster_id','location_id','start_area','move_area','rest_area'],
+                'monster_status' :
+                    ['_id', 'monster_id','status','initial','increase','max','duration','damage']
               }
     wb = xlrd.open_workbook('Monster Hunter 4U Database.xlsx')
     for table, col_list in columns.iteritems():
