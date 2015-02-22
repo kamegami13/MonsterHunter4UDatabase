@@ -1798,8 +1798,31 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         QB.setProjectionMap(projectionMap);
         return QB;
     }
-	
-/********************************* MONSTER DAMAGE QUERIES ******************************************/
+
+    /********************************* MONSTER STATUS QUERIES ******************************************/
+
+	/*
+	 * Get all monster status info for a monster
+	 * @param id The monster id
+	 */
+    public MonsterStatusCursor queryMonsterStatus(long id) {
+        // "SELECT * FROM monster_status WHERE monster_id = id"
+
+        QueryHelper qh = new QueryHelper();
+        qh.Distinct = false;
+        qh.Table = S.TABLE_MONSTER_STATUS;
+        qh.Columns = null;
+        qh.Selection = S.COLUMN_MONSTER_STATUS_MONSTER_ID + " = ?";
+        qh.SelectionArgs = new String[]{ String.valueOf(id) };
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new MonsterStatusCursor(wrapHelper(qh));
+    }
+
+    /********************************* MONSTER DAMAGE QUERIES ******************************************/
 	
 	/*
 	 * Get all monster damage for a monster

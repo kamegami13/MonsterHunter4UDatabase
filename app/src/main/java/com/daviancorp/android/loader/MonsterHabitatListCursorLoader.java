@@ -13,7 +13,7 @@ public class MonsterHabitatListCursorLoader extends SQLiteCursorLoader {
     public static String FROM_LOCATION = "location";
 
     private String from;	// "monster" or "location"
-    private long id; 		// Item or Location id
+    private long id; 		// monster or location id
 
     /**
      * Public constructor for the cursor loader

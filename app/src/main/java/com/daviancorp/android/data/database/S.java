@@ -186,6 +186,16 @@ public class S {
     static final String COLUMN_HABITAT_AREAS = "move_area";
     static final String COLUMN_HABITAT_REST = "rest_area";
 
+    // Monster Status
+    static final String TABLE_MONSTER_STATUS = "monster_status";
+    static final String COLUMN_MONSTER_STATUS_MONSTER_ID = "monster_id";
+    static final String COLUMN_MONSTER_STATUS_STATUS = "status";
+    static final String COLUMN_MONSTER_STATUS_INITIAL = "initial";
+    static final String COLUMN_MONSTER_STATUS_INCREASE = "increase";
+    static final String COLUMN_MONSTER_STATUS_MAX = "max";
+    static final String COLUMN_MONSTER_STATUS_DURATION = "duration";
+    static final String COLUMN_MONSTER_STATUS_DAMAGE = "damage";
+
 	// Monster Damage
 	static final String TABLE_MONSTER_DAMAGE = "monster_damage";
 	static final String COLUMN_MONSTER_DAMAGE_ID = "_id";

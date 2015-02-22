@@ -10,6 +10,7 @@ import com.daviancorp.android.ui.detail.MonsterHabitatFragment;
 import com.daviancorp.android.ui.detail.MonsterQuestFragment;
 import com.daviancorp.android.ui.detail.MonsterRewardFragment;
 import com.daviancorp.android.ui.detail.MonsterHabitatFragment;
+import com.daviancorp.android.ui.detail.MonsterStatusFragment;
 
 public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 	
@@ -28,18 +29,21 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 			// Monster detail
 			return MonsterDetailFragment.newInstance(monsterId);
         case 1:
+            // Monster Status
+            return MonsterStatusFragment.newInstance(monsterId);
+        case 2:
             // Monster Habitat
             return MonsterHabitatFragment.newInstance(monsterId);
-		case 2:
+		case 3:
 			// Low-rank drops
 			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_LR);
-		case 3:
+		case 4:
 			// High-rank drops
 			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_HR);
-		case 4:
+		case 5:
 			// G-rank drops
 			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_G);
-		case 5:
+		case 6:
 			// Quest appearance
 			return MonsterQuestFragment.newInstance(monsterId);
 		default:
@@ -50,7 +54,7 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 6;
+		return 7;
 	}
 
 }
