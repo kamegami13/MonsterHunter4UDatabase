@@ -3,16 +3,16 @@ package com.daviancorp.android.ui.general;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v7.app.ActionBarActivity
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 
@@ -22,7 +22,7 @@ import com.daviancorp.android.ui.dialog.AboutDialogFragment;
  *  - override createFragment() for detail fragments
  */
 
-public abstract class GenericActivity extends SherlockFragmentActivity {
+public abstract class GenericActivity extends ActionBarActivity {
 
 	protected static final String DIALOG_ABOUT = "about";
 
@@ -35,7 +35,7 @@ public abstract class GenericActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		FragmentManager fm = getSupportFragmentManager();
+		FragmentManager fm = getFragmentManager();
 		Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
 		if (fragment == null) {
@@ -60,7 +60,7 @@ public abstract class GenericActivity extends SherlockFragmentActivity {
 			startActivity(intent);
 			return true;
 		case R.id.about:
-			FragmentManager fm = getSupportFragmentManager();
+			FragmentManager fm = getFragmentManager();
 			AboutDialogFragment dialog = new AboutDialogFragment();
 			dialog.show(fm, DIALOG_ABOUT);
 			return true;
@@ -80,7 +80,7 @@ public abstract class GenericActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = getSupportMenuInflater();
+		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 		return true;
 	}

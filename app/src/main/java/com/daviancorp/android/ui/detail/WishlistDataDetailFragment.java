@@ -26,11 +26,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v4.app.ListFragment;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
 import com.daviancorp.android.data.database.ComponentCursor;
@@ -41,7 +41,7 @@ import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.WishlistDataDeleteDialogFragment;
 import com.daviancorp.android.ui.dialog.WishlistDataEditDialogFragment;
 
-public class WishlistDataDetailFragment extends SherlockListFragment implements
+public class WishlistDataDetailFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
 	public static final String EXTRA_DETAIL_REFRESH =
@@ -110,7 +110,7 @@ public class WishlistDataDetailFragment extends SherlockListFragment implements
 			                return false;
 			            }
 			
-			            mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
+			            mActionMode = getActivity().startActionMode(new mActionModeCallback());
 			            mActionMode.setTag(position);
 			            mListView.setItemChecked(position, true);
 			            return true;
@@ -137,7 +137,7 @@ public class WishlistDataDetailFragment extends SherlockListFragment implements
 		switch (item.getItemId()) {
 			case R.id.wishlist_edit:
 				if (mListView.getAdapter().getCount() > 0) {
-					mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
+					mActionMode = getActivity().startActionMode(new mActionModeCallback());
 		            mActionMode.setTag(0);
 					mListView.setItemChecked(0, true);
 				}
@@ -425,61 +425,6 @@ public class WishlistDataDetailFragment extends SherlockListFragment implements
                 default:
                     cellImage = "icons_items/" + data.getItem().getFileLocation();
             }
-			
-//			if (id < S.SECTION_ARMOR) {
-//				cellImage = "icons_items/" + data.getItem().getFileLocation();
-//			}
-//			else if ((id >= S.SECTION_HEAD) && (id < S.SECTION_BODY)) {
-//				cellImage = "icons_armor/icons_head/head" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_BODY) && (id < S.SECTION_ARMS)) {
-//				cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_ARMS) && (id < S.SECTION_WAIST)) {
-//				cellImage = "icons_armor/icons_arms/arms" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_WAIST) && (id < S.SECTION_LEGS)) {
-//				cellImage = "icons_armor/icons_waist/waist" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_LEGS) && (id < S.SECTION_GREAT_SWORD)) {
-//				cellImage = "icons_armor/icons_legs/legs" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_GREAT_SWORD) && (id < S.SECTION_HUNTING_HORN)) {
-//				cellImage = "icons_weapons/icons_great_sword/great_sword" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_HUNTING_HORN) && (id < S.SECTION_LONG_SWORD)) {
-//				cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_LONG_SWORD) && (id < S.SECTION_SWORD_AND_SHIELD)) {
-//				cellImage = "icons_weapons/icons_long_sword/long_sword" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_SWORD_AND_SHIELD) && (id < S.SECTION_DUAL_BLADES)) {
-//				cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_DUAL_BLADES) && (id < S.SECTION_HAMMER)) {
-//				cellImage = "icons_weapons/icons_dual_blades/dual_blades" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_HAMMER) && (id < S.SECTION_LANCE)) {
-//				cellImage = "icons_weapons/icons_hammer/hammer" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_LANCE) && (id < S.SECTION_GUNLANCE)) {
-//				cellImage = "icons_weapons/icons_lance/lance" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_GUNLANCE) && (id < S.SECTION_SWITCH_AXE)) {
-//				cellImage = "icons_weapons/icons_gunlance/gunlance" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_SWITCH_AXE) && (id < S.SECTION_LIGHT_BOWGUN)) {
-//				cellImage = "icons_weapons/icons_switch_axe/switch_axe" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_LIGHT_BOWGUN) && (id < S.SECTION_HEAVY_BOWGUN)) {
-//				cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + cellRare + ".png";
-//			}
-//			else if ((id >= S.SECTION_HEAVY_BOWGUN) && (id < S.SECTION_BOW)) {
-//				cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + cellRare + ".png";
-//			}
-//			else if (id >= S.SECTION_BOW) {
-//				cellImage = "icons_weapons/icons_bow/bow" + cellRare + ".png";
-//			}
 			
 			try {
 				i = Drawable.createFromStream(

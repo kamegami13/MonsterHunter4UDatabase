@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.view.Menu;
+import android.view.MenuItem;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorExpandableListPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;

@@ -10,10 +10,10 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v4.app.FragmentActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 
@@ -22,7 +22,7 @@ import com.daviancorp.android.ui.dialog.AboutDialogFragment;
  *  - override onCreate() to set title
  */
 
-public abstract class GenericTabActivity extends SherlockFragmentActivity {
+public abstract class GenericTabActivity extends ActionBarActivity {
 
 	protected static final String DIALOG_ABOUT = "about";
 
@@ -65,7 +65,7 @@ public abstract class GenericTabActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = getSupportMenuInflater();
+		MenuInflater inflater = MenuInflater();
 		inflater.inflate(R.menu.main, menu);
 		return true;
 	}

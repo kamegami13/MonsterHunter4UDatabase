@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.view.Menu;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.view.Menu;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.WishlistDetailPagerAdapter;
@@ -28,7 +28,7 @@ public class WishlistDetailActivity extends GenericTabActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		long id = getIntent().getLongExtra(EXTRA_WISHLIST_ID, -1);
 		setTitle(DataManager.get(getApplicationContext()).getWishlist(id).getName());
 
