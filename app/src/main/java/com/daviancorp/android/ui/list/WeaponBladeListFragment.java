@@ -241,7 +241,7 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 				specialtv.setText(special);
 				specialtv.setGravity(Gravity.CENTER);
 			}
-			if (type.equals("Switch Axe")) {
+			if (type.equals("Switch Axe") || type.equals("Charge Blade")) {
 				String special = weapon.getPhial();
 				specialtv.setText(special);
 				specialtv.setGravity(Gravity.CENTER);
