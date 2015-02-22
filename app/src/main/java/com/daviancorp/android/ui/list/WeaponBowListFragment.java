@@ -106,7 +106,7 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 
             for(int i = 0; i < weapon.getTree_Depth(); i++)
             {
-                name = name + " ";
+                name = name + "-";
             }
 			
 			name = name + weapon.getName();
