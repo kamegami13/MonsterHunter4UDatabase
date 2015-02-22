@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 
+import android.app.DownloadManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -1716,6 +1717,87 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		
 		return new MonsterCursor(wrapHelper(qh));
 	}
+
+/********************************* MONSTER HABITAT QUERIES ******************************************/
+
+    /**
+     * Get a cursor with a query to grab all habitats of a monster
+     * @param id id of the monster to query
+     * @return A habitat cursor
+     */
+    public MonsterHabitatCursor queryHabitatMonster(long id)
+    {
+        // Select * FROM monster_habitat WHERE monster_id = id
+        QueryHelper qh = new QueryHelper();
+        qh.Distinct = true;
+        qh.Table = S.TABLE_HABITAT;
+        qh.Columns = null;
+        qh.Selection = S.COLUMN_HABITAT_MONSTER_ID + " = ?";
+        qh.SelectionArgs = new String[]{ String.valueOf(id) };
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct),qh));
+    }
+
+    /**
+     * Get a cursor with a query to grab all monsters by a location
+     * @param id id of the location to query
+     * @return A habitat cursor
+     */
+    public MonsterHabitatCursor queryHabitatLocation(long id)
+    {
+        // Select * FROM monster_habitat WHERE location_id = id
+        QueryHelper qh = new QueryHelper();
+        qh.Distinct = true;
+        qh.Table = S.TABLE_HABITAT;
+        qh.Columns = null;
+        qh.Selection = S.COLUMN_HABITAT_LOCATION_ID + " = ?";
+        qh.SelectionArgs = new String[]{ String.valueOf(id) };
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct),qh));
+    }
+
+    /*
+ * Helper method to query for Habitat/Monster/Location
+ */
+    private SQLiteQueryBuilder builderHabitat(boolean Distinct) {
+        String h = "h";
+        String m = "m";
+        String l = "l";
+
+        HashMap<String, String> projectionMap = new HashMap<String, String>();
+
+        projectionMap.put("_id", h + "." + S.COLUMN_HABITAT_ID + " AS " + "_id");
+        projectionMap.put("start_area", h + "." + S.COLUMN_HABITAT_START + " AS " + "start_area");
+        projectionMap.put("move_area", h + "." + S.COLUMN_HABITAT_AREAS + " AS " + "move_area");
+        projectionMap.put("rest_area", h + "." + S.COLUMN_HABITAT_REST + " AS " + "rest_area");
+
+        projectionMap.put(l + S.COLUMN_LOCATIONS_ID, l + "." + S.COLUMN_LOCATIONS_ID + " AS " + l + S.COLUMN_LOCATIONS_ID );
+        projectionMap.put(l + S.COLUMN_LOCATIONS_NAME, l + "." + S.COLUMN_LOCATIONS_NAME + " AS " + l + S.COLUMN_LOCATIONS_NAME );
+
+        projectionMap.put(m + S.COLUMN_MONSTERS_ID, m+ "." + S.COLUMN_MONSTERS_ID + " AS " + m + S.COLUMN_MONSTERS_ID);
+        projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
+        projectionMap.put(m + S.COLUMN_MONSTERS_CLASS, m + "." + S.COLUMN_MONSTERS_CLASS + " AS " + m + S.COLUMN_MONSTERS_CLASS );
+        projectionMap.put(m + S.COLUMN_MONSTERS_FILE_LOCATION, m + "." + S.COLUMN_MONSTERS_FILE_LOCATION + " AS " + m + S.COLUMN_MONSTERS_FILE_LOCATION );
+
+        //Create new querybuilder
+        SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
+
+        QB.setTables(S.TABLE_HABITAT + " AS h" + " LEFT OUTER JOIN " + S.TABLE_MONSTERS + " AS m" + " ON " + "h." +
+                S.COLUMN_HABITAT_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID + " LEFT OUTER JOIN " + S.TABLE_LOCATIONS +
+                " AS l " + " ON " + "h." + S.COLUMN_HABITAT_LOCATION_ID + " = " + "l." + S.COLUMN_LOCATIONS_ID);
+
+        QB.setDistinct(Distinct);
+        QB.setProjectionMap(projectionMap);
+        return QB;
+    }
 	
 /********************************* MONSTER DAMAGE QUERIES ******************************************/
 	

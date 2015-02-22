@@ -13,12 +13,12 @@
                                 https://github.com/kamegami13/MonsterHunter4UDatabase
                                 \n Google Groups:
                                 \n\t\t\t\t
-                                https://groups.google.com/forum/#!forum/monster-hunter-database-development
-        						</string>
+                                https://groups.google.com/forum/#!forum/monster-hunter-database-development</string>
     <string name="alert_button">Close</string>
     <string name="alert_rate">Rate!</string>
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
+
     <string-array name="drawer_items">
         <item>"Monsters"</item>
         <item>"Weapons"</item>
@@ -33,6 +33,7 @@
         <item>"Arena Quests"</item>
         <item>"Wishlists"</item>
     </string-array>
+
     <string name="option_list">List</string>
     <string name="option_grid">Grid</string>
     <string name="option_wishlist_add">Add wishlist</string>
@@ -58,5 +59,6 @@
     <string name="arena_quests">Arena Quests</string>
     <string name="wishlist">Wishlists</string>
     <string name="icon_name">MH4U DB</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

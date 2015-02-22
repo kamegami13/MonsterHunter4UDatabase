@@ -6,8 +6,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.daviancorp.android.loader.HuntingRewardListCursorLoader;
 import com.daviancorp.android.ui.detail.MonsterDetailFragment;
+import com.daviancorp.android.ui.detail.MonsterHabitatFragment;
 import com.daviancorp.android.ui.detail.MonsterQuestFragment;
 import com.daviancorp.android.ui.detail.MonsterRewardFragment;
+import com.daviancorp.android.ui.detail.MonsterHabitatFragment;
 
 public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 	
@@ -25,16 +27,19 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			// Monster detail
 			return MonsterDetailFragment.newInstance(monsterId);
-		case 1:
+        case 1:
+            // Monster Habitat
+            return MonsterHabitatFragment.newInstance(monsterId);
+		case 2:
 			// Low-rank drops
 			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_LR);
-		case 2:
+		case 3:
 			// High-rank drops
 			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_HR);
-		case 3:
+		case 4:
 			// G-rank drops
 			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_G);
-		case 4:
+		case 5:
 			// Quest appearance
 			return MonsterQuestFragment.newInstance(monsterId);
 		default:
