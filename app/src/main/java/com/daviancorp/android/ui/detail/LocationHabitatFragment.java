@@ -1,65 +1,60 @@
 package com.daviancorp.android.ui.detail;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.support.v4.app.ListFragment;
-import android.app.LoaderManager;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
-import com.daviancorp.android.data.classes.Gathering;
 import com.daviancorp.android.data.classes.Habitat;
-import com.daviancorp.android.data.classes.Monster;
-import com.daviancorp.android.data.database.GatheringCursor;
 import com.daviancorp.android.data.database.MonsterHabitatCursor;
-import com.daviancorp.android.loader.GatheringListCursorLoader;
 import com.daviancorp.android.loader.MonsterHabitatListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 
+import java.io.IOException;
+
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link android.app.Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MonsterHabitatFragment.OnFragmentInteractionListener} interface
+ * {@link com.daviancorp.android.ui.detail.LocationHabitatFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MonsterHabitatFragment#newInstance} factory method to
+ * Use the {@link com.daviancorp.android.ui.detail.LocationHabitatFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MonsterHabitatFragment extends ListFragment implements
+public class LocationHabitatFragment extends ListFragment implements
         LoaderCallbacks<Cursor> {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_MONSTER_ID = "MONSTER_ID";
+    private static final String ARG_LOCATION_ID = "LOCATION_ID";
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param mon_id The id of the monster for the fragment
+     * @param loc_id The id of the location for the fragment
      *
      * @return A new instance of fragment MonsterHabitatFragment.
      */
-    public static MonsterHabitatFragment newInstance(long mon_id) {
-        MonsterHabitatFragment fragment = new MonsterHabitatFragment();
+    public static LocationHabitatFragment newInstance(long loc_id) {
+        LocationHabitatFragment fragment = new LocationHabitatFragment();
         Bundle args = new Bundle();
-        args.putLong(ARG_MONSTER_ID, mon_id);
+        args.putLong(ARG_LOCATION_ID, loc_id);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public MonsterHabitatFragment() {
+    public LocationHabitatFragment() {
         // Required empty public constructor
     }
 
@@ -81,10 +76,10 @@ public class MonsterHabitatFragment extends ListFragment implements
     @SuppressLint("NewApi")
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        long itemId = args.getLong(ARG_MONSTER_ID, -1);
+        long itemId = args.getLong(ARG_LOCATION_ID, -1);
 
         return new MonsterHabitatListCursorLoader(getActivity(),
-                MonsterHabitatListCursorLoader.FROM_MONSTER, itemId);
+                MonsterHabitatListCursorLoader.FROM_LOCATION, itemId);
     }
 
     @Override
@@ -107,8 +102,8 @@ public class MonsterHabitatFragment extends ListFragment implements
     public void onListItemClick(ListView l, View v, int position, long id) {
         // The id argument will be the Location ID set by adapter
 
-        Intent i = new Intent(getActivity(), LocationDetailActivity.class);
-        i.putExtra(LocationDetailActivity.EXTRA_LOCATION_ID, (long) v.getTag());
+        Intent i = new Intent(getActivity(), MonsterDetailActivity.class);
+        i.putExtra(MonsterDetailActivity.EXTRA_MONSTER_ID, (long) v.getTag());
         startActivity(i);
     }
 
@@ -127,7 +122,7 @@ public class MonsterHabitatFragment extends ListFragment implements
             // Use a layout inflater to get a row view
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            return inflater.inflate(R.layout.fragment_monster_habitat_listitem,
+            return inflater.inflate(R.layout.fragment_location_habitat_listitem,
                     parent, false);
         }
 
@@ -140,13 +135,12 @@ public class MonsterHabitatFragment extends ListFragment implements
             LinearLayout itemLayout = (LinearLayout) view
                     .findViewById(R.id.listitem);
 
-            TextView mapTextView = (TextView) view.findViewById(R.id.map);
+            ImageView monsterImageView = (ImageView) view.findViewById(R.id.monster_image);
+            TextView monsterTextView = (TextView) view.findViewById(R.id.monster);
             TextView startTextView = (TextView) view.findViewById(R.id.start);
             TextView areaTextView = (TextView) view.findViewById(R.id.move);
             TextView restTextView = (TextView) view.findViewById(R.id.rest);
 
-
-            String mapName = habitat.getLocation().getName();
             long start = habitat.getStart();
             long[] area = habitat.getAreas();
             long rest = habitat.getRest();
@@ -161,13 +155,25 @@ public class MonsterHabitatFragment extends ListFragment implements
                 }
             }
 
-            mapTextView.setText(mapName);
+            Drawable i = null;
+            String cellImage = "icons_monster/"
+                    + habitat.getMonster().getFileLocation();
+            try {
+                i = Drawable.createFromStream(
+                        context.getAssets().open(cellImage), null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            monsterImageView.setImageDrawable(i);
+
+            monsterTextView.setText(habitat.getMonster().getName());
             startTextView.setText(Long.toString(start));
             areaTextView.setText(areas);
             restTextView.setText(Long.toString(rest));
 
             // Set id of layout to location so clicking gives us the location
-            itemLayout.setTag(habitat.getLocation().getId());
+            itemLayout.setTag(habitat.getMonster().getId());
         }
     }
 
