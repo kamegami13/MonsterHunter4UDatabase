@@ -96,7 +96,13 @@ public class WeaponBowDetailFragment extends WeaponDetailFragment {
 		mWeaponCharge1TextView.setText(charges[0]);
 		mWeaponCharge2TextView.setText(charges[1]);
 		mWeaponCharge3TextView.setText(charges[2]);
-		mWeaponCharge4TextView.setText(charges[3]);
+
+        if (charges.length == 4) {
+            mWeaponCharge4TextView.setText(charges[3]);
+        }
+        else {
+            mWeaponCharge4TextView.setText("None");
+        }
 
 		// Read a Bitmap from Assets
 		AssetManager manager = getActivity().getAssets();
