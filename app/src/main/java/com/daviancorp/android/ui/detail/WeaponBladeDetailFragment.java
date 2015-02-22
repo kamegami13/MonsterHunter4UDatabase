@@ -127,7 +127,7 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 			mWeaponSpecialTextView.setText(mWeapon.getPhial());
 		}
 
-        		/* Element */
+        /* Element */
         String element = "";
         if (!mWeapon.getElementalAttack().equals(""))
         {
@@ -143,7 +143,7 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
         }
 
         if (element.contains(",")) {
-            String[] twoElements = element.split(", ");
+            String[] twoElements = element.split(",");
             String elementOne = twoElements[0];
             String elementTwo = twoElements[1];
             element = getElementData(elementOne) + ", " + getElementData(elementTwo);
