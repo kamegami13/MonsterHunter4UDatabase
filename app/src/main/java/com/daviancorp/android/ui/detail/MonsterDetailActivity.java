@@ -23,7 +23,7 @@ public class MonsterDetailActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "Detail", "Low-Rank", "High-Rank", "G-Rank", "Quest"};
+	private String[] tabs = { "Detail", "Habitat","Low-Rank", "High-Rank", "G-Rank", "Quest"};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
