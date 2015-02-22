@@ -176,7 +176,16 @@ public class S {
 	static final String COLUMN_MONSTERS_TRAIT = "trait";
 	static final String COLUMN_MONSTERS_FILE_LOCATION = "icon_name";
 	static final String COLUMN_MONSTERS_SORT_NAME = "sort_name";
-	
+
+    // Monster Habitat
+    static final String TABLE_HABITAT = "monster_habitat";
+    static final String COLUMN_HABITAT_ID = "_id";
+    static final String COLUMN_HABITAT_LOCATION_ID = "location_id";
+    static final String COLUMN_HABITAT_MONSTER_ID = "monster_id";
+    static final String COLUMN_HABITAT_START = "start_area";
+    static final String COLUMN_HABITAT_AREAS = "move_area";
+    static final String COLUMN_HABITAT_REST = "rest_area";
+
 	// Monster Damage
 	static final String TABLE_MONSTER_DAMAGE = "monster_damage";
 	static final String COLUMN_MONSTER_DAMAGE_ID = "_id";

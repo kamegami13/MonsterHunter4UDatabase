@@ -23,7 +23,7 @@ public class LocationDetailActivity extends GenericTabActivity implements
 	private ActionBar actionBar;
 
 	// Tab titles
-	private String[] tabs = { "Map" , "Low Rank" , "High Rank" , "G Rank" };
+	private String[] tabs = { "Map" ,"Monsters", "Low Rank" , "High Rank" , "G Rank" };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
