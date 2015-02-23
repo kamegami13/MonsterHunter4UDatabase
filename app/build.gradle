@@ -23,9 +23,9 @@ android {
 }
 
 dependencies {
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    //compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'com.android.support:support-v4:21.0.3'
-    //compile 'com.android.support:appcompat-v7:21.0.3'  Need to replace actionbarsherlock first
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'com.android.support:gridlayout-v7:21.0.3'
     compile 'com.android.support:cardview-v7:21.0.3'

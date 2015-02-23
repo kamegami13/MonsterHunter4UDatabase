@@ -9,10 +9,10 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 
@@ -22,7 +22,7 @@ import com.daviancorp.android.ui.dialog.AboutDialogFragment;
  *  - override createFragment() for detail fragments
  */
 
-public abstract class GenericActivity extends SherlockFragmentActivity {
+public abstract class GenericActivity extends ActionBarActivity {
 
 	protected static final String DIALOG_ABOUT = "about";
 
@@ -45,8 +45,8 @@ public abstract class GenericActivity extends SherlockFragmentActivity {
 		}
 		
 		setTitle(R.string.app_name);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 
 
@@ -80,7 +80,7 @@ public abstract class GenericActivity extends SherlockFragmentActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = getSupportMenuInflater();
+		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
 		return true;
 	}

@@ -26,11 +26,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockListFragment;
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v4.app.ListFragment;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.database.ComponentCursor;
 import com.daviancorp.android.data.database.DataManager;
@@ -40,7 +41,7 @@ import com.daviancorp.android.loader.WishlistComponentListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.WishlistComponentEditDialogFragment;
 
-public class WishlistDataComponentFragment extends SherlockListFragment implements
+public class WishlistDataComponentFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
 	public static final String EXTRA_COMPONENT_REFRESH =
@@ -105,7 +106,7 @@ public class WishlistDataComponentFragment extends SherlockListFragment implemen
 			                return false;
 			            }
 			
-			            mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
+			            mActionMode = getActivity().startActionMode(new mActionModeCallback());
 			            mActionMode.setTag(position);
 			            mListView.setItemChecked(position, true);
 			            return true;
@@ -132,7 +133,7 @@ public class WishlistDataComponentFragment extends SherlockListFragment implemen
 		switch (item.getItemId()) {
 			case R.id.wishlist_edit:
 				if (mListView.getAdapter().getCount() > 0) {
-					mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
+					mActionMode = getActivity().startActionMode(new mActionModeCallback());
 		            mActionMode.setTag(0);
 					mListView.setItemChecked(0, true);
 				}
