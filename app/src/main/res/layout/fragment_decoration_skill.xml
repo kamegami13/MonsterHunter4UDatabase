@@ -15,7 +15,8 @@
         android:textSize="15sp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:textColor="@color/primarytextcolor">
     </TextView>
 
     <TextView
@@ -25,7 +26,8 @@
         android:layout_weight=".6"
         android:gravity="center|center_vertical"
         android:textSize="15sp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:textColor="@color/primarytextcolor">
     </TextView>
 
 </LinearLayout>

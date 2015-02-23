@@ -16,58 +16,69 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Quest:" />
+            android:text="Quest:"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Level:" />
+            android:text="Level:"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HRP:" />
+            android:text="HRP:"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reward:" />
+            android:text="Reward:"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fee:" />
+            android:text="Fee:"
+            android:textColor="@color/primarytextcolor" />
         
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location:" />
+            android:text="Location:"
+            android:textColor="@color/primarytextcolor" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Goal:" />
+            android:text="Goal:"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Subquest:" />
+            android:text="Subquest:"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HRP:" />
+            android:text="HRP:"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reward:" />
+            android:text="Reward:"
+            android:textColor="@color/primarytextcolor" />
     </LinearLayout>
 
     <LinearLayout
@@ -81,56 +92,67 @@
             android:id="@+id/quest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/level"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/hrp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/reward"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/fee"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primarytextcolor" />
         
         <TextView
             android:id="@+id/location"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/goal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/subquest"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/subhrp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/subreward"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primarytextcolor" />
     </LinearLayout>
 
 </LinearLayout>

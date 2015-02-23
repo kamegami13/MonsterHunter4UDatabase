@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/header"
-        android:background="@color/darkgreen">
+        android:background="@color/primarycolor">
 
         <TextView
             android:layout_width="0dp"
@@ -19,7 +19,7 @@
             android:layout_weight="0.40"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/white" />
+            android:textColor="@color/texticonscolor" />
 
         <TextView
             android:layout_width="0dp"
@@ -28,7 +28,7 @@
             android:id="@+id/header2"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:layout_weight="0.15" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:id="@+id/header3"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:layout_weight="0.15" />
 
         <TextView
@@ -48,7 +48,7 @@
             android:id="@+id/header4"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:layout_weight="0.15" />
     </LinearLayout>
 

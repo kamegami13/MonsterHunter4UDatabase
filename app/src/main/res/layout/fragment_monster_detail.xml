@@ -30,7 +30,8 @@
                 android:paddingLeft="10dp"
                 android:text="@+id/label"
                 android:textSize="20sp"
-                android:textStyle="bold" >
+                android:textStyle="bold"
+                android:textColor="@color/primarytextcolor">
             </TextView>
         </LinearLayout>
 
@@ -51,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Area"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/primarytextcolor" />
 
             <ImageView
                 android:id="@+id/cut"
@@ -109,7 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Area"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/primarytextcolor" />
 
             <ImageView
                 android:id="@+id/fire"

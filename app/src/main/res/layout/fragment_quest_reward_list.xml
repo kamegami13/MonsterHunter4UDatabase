@@ -8,7 +8,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/darkgreen"
+        android:background="@color/primarycolor"
         android:orientation="horizontal" >
 
         <TextView
@@ -18,7 +18,7 @@
             android:layout_weight=".65"
             android:gravity="center"
             android:text="Reward"
-            android:textColor="@color/white" />
+            android:textColor="@color/texticonscolor" />
 
         <TextView
             android:id="@+id/header2"
@@ -27,7 +27,7 @@
             android:layout_weight=".15"
             android:gravity="center"
             android:text="Slot"
-            android:textColor="@color/white" />
+            android:textColor="@color/texticonscolor" />
 
         <TextView
             android:id="@+id/header3"
@@ -36,7 +36,7 @@
             android:layout_weight=".05"
             android:gravity="center"
             android:text="#"
-            android:textColor="@color/white" />
+            android:textColor="@color/texticonscolor" />
 
         <TextView
             android:id="@+id/header4"
@@ -45,7 +45,7 @@
             android:layout_weight=".15"
             android:gravity="center"
             android:text="%"
-            android:textColor="@color/white" />
+            android:textColor="@color/texticonscolor" />
     </LinearLayout>
 
     <ListView

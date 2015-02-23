@@ -12,14 +12,16 @@
         android:layout_height="wrap_content"
         android:layout_weight=".6"
         android:gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/primarytextcolor" />
 
     <TextView
         android:id="@+id/amount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".2"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/primarytextcolor" />
 
     <TextView
         android:id="@+id/percentage"
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_weight=".2"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/primarytextcolor" />
 
 </LinearLayout>

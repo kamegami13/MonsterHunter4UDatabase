@@ -25,7 +25,8 @@
             android:layout_weight="0.40"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="10dp"
+            android:textColor="@color/primarytextcolor" />
 
     </LinearLayout>
 
@@ -35,7 +36,8 @@
         android:id="@+id/start"
         android:layout_weight="0.15"
         android:layout_gravity="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/primarytextcolor" />
 
     <TextView
         android:layout_width="0dp"
@@ -43,7 +45,8 @@
         android:id="@+id/move"
         android:layout_weight="0.15"
         android:layout_gravity="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/primarytextcolor" />
 
     <TextView
         android:layout_width="0dp"
@@ -51,5 +54,6 @@
         android:id="@+id/rest"
         android:layout_weight="0.15"
         android:layout_gravity="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/primarytextcolor" />
 </LinearLayout>

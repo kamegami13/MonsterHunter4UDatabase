@@ -15,8 +15,10 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight=".3" />
+            android:layout_weight=".3"
+            android:textColor="@color/primarytextcolor"
+            android:paddingLeft="10dp"
+            android:background="@color/lightprimarycolor" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -48,19 +50,22 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight=".35"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:textColor="@color/primarytextcolor" />
 
                     <TextView
                         android:id="@+id/awaken"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight=".065" />
+                        android:layout_weight=".065"
+                        android:textColor="@color/primarytextcolor" />
 
                     <TextView
                         android:id="@+id/element"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight=".585" />
+                        android:layout_weight=".585"
+                        android:textColor="@color/primarytextcolor" />
 
                 </LinearLayout>
 
@@ -76,7 +81,8 @@
                         android:id="@+id/special"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.0" />
+                        android:layout_weight="1.0"
+                        android:textColor="@color/primarytextcolor" />
 
                     <ImageView
                         android:id="@+id/note1"
@@ -100,7 +106,8 @@
                         android:id="@+id/filler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.0" />
+                        android:layout_weight="0.0"
+                        android:textColor="@color/primarytextcolor" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -121,21 +128,24 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.3"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:textColor="@color/primarytextcolor" />
 
                     <TextView
                         android:id="@+id/affinity"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.4"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:textColor="@color/primarytextcolor" />
 
                     <TextView
                         android:id="@+id/defense"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.3"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:textColor="@color/primarytextcolor" />
                 </LinearLayout>
 
                 <com.daviancorp.android.ui.general.DrawSharpness

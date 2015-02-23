@@ -10,7 +10,8 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/primarytextcolor" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -40,7 +41,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_weight="0.25" />
+                    android:layout_weight="0.25"
+                    android:textColor="@color/primarytextcolor" />
 
                 <TextView
                     android:id="@+id/slot"
@@ -48,21 +50,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
-                    android:layout_weight="0.25" />
+                    android:layout_weight="0.25"
+                    android:textColor="@color/primarytextcolor" />
 
                 <TextView
                     android:id="@+id/affinity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_weight="0.25" />
+                    android:layout_weight="0.25"
+                    android:textColor="@color/primarytextcolor" />
 
                 <TextView
                     android:id="@+id/defense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_weight="0.25" />
+                    android:layout_weight="0.25"
+                    android:textColor="@color/primarytextcolor" />
             </LinearLayout>
 
             <LinearLayout
@@ -76,21 +81,24 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.33"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/primarytextcolor" />
 
                 <TextView
                     android:id="@+id/recoil"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.33"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/primarytextcolor" />
 
                 <TextView
                     android:id="@+id/steady"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.33"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textColor="@color/primarytextcolor" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

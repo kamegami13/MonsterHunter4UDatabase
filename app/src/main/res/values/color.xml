@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="orange">#FFA500</color>
-    <color name="black">#222222</color>
-    <color name="darkgreen">#008C00</color>
-    <color name="lightgreen">#52DC00</color>
-    <color name="white">#FFFFFF</color>
-    <color name="lightpurple">#6D76E3</color>
+    <color name="primarycolor">#795548</color>
+    <color name="darkprimarycolor">#5D4037</color>
+    <color name="lightprimarycolor">#D7CCC8</color>
+    <color name="texticonscolor">#FFFFFF</color>
+    <color name="accentcolor">#FF9800</color>
+    <color name="primarytextcolor">#212121</color>
+    <color name="secondarytextcolor">#727272</color>
+    <color name="dividercolor">#B6B6B6</color>
 
-    <!-- A light Holo shade of blue -->
-    <color name="holo_blue_light">#ff33b5e5</color>
+    <!-- used for making anything clickable have a clicked state -->
+    <color name="transparent">#00FFFFFF</color>
+    <color name="transparentlight">#80D7CCC8</color>
 
-    <!-- A really bright Holo shade of blue -->
-    <color name="holo_blue_bright">#ff00ddff</color>
-    
-    <color name="transparent">#00000000</color>
-    
-    <color name="highlight">#ff00ddff</color>
 
 </resources>

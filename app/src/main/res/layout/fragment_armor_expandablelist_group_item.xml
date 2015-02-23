@@ -7,7 +7,7 @@
     android:paddingEnd="8dip"
     android:paddingStart="8dip"
     android:paddingTop="1dip"
-    android:background="@color/darkgreen" >
+    android:background="@color/primarycolor" >
 
     <TextView
         android:id="@+id/name"
@@ -16,7 +16,7 @@
         android:paddingLeft="20dp"
         android:layout_gravity="center"
         android:textSize="16sp"
-        android:textColor="@color/white"
+        android:textColor="@color/texticonscolor"
         android:gravity="center_vertical" />
 
 </LinearLayout>
