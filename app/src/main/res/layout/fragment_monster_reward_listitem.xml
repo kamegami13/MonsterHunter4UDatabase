@@ -26,7 +26,8 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="10dp"
+            android:textColor="@color/primarytextcolor" />
     </LinearLayout>
 
     <LinearLayout
@@ -41,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".3"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/amount"
@@ -49,7 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_weight=".05"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/percentage"
@@ -58,7 +61,8 @@
             android:layout_gravity="center|end"
             android:layout_weight=".15"
             android:gravity="center_vertical|right"
-            android:paddingRight="5dp" />
+            android:paddingRight="5dp"
+            android:textColor="@color/primarytextcolor" />
     </LinearLayout>
 
 </LinearLayout>

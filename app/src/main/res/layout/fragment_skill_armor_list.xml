@@ -8,7 +8,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/darkgreen"
+        android:background="@color/primarycolor"
         android:orientation="horizontal" >
 
         <TextView
@@ -18,7 +18,7 @@
             android:layout_weight=".7"
             android:gravity="center"
             android:text="Item"
-            android:textColor="@color/white" />
+            android:textColor="@color/texticonscolor" />
 
         <TextView
             android:id="@+id/header2"
@@ -27,7 +27,7 @@
             android:layout_weight=".3"
             android:gravity="center"
             android:text="Points"
-            android:textColor="@color/white" />
+            android:textColor="@color/texticonscolor" />
     </LinearLayout>
 
     <ListView

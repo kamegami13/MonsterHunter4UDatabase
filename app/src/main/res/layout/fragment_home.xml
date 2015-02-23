@@ -25,11 +25,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/darkgreen"
+            android:background="@drawable/clicked_states_primary"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/monsters"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:textSize="20sp" />
 
         <TextView
@@ -37,11 +37,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/darkgreen"
+            android:background="@drawable/clicked_states_primary"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/weapons"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -56,11 +56,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/darkgreen"
+            android:background="@drawable/clicked_states_primary"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/armor"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:textSize="20sp" />
 
         <TextView
@@ -68,11 +68,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/darkgreen"
+            android:background="@drawable/clicked_states_primary"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/quests"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -87,11 +87,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/darkgreen"
+            android:background="@drawable/clicked_states_primary"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/items"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:textSize="20sp" />
 
         <TextView
@@ -99,11 +99,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/darkgreen"
+            android:background="@drawable/clicked_states_primary"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/combining"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -119,11 +119,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/darkgreen"
+            android:background="@drawable/clicked_states_primary"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/locations"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:textSize="20sp" />
 
         <TextView
@@ -131,11 +131,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/darkgreen"
+            android:background="@drawable/clicked_states_primary"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/decorations"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -151,11 +151,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/darkgreen"
+            android:background="@drawable/clicked_states_primary"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/skill_trees"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:textSize="20sp" />
 
         <TextView
@@ -163,11 +163,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/darkgreen"
+            android:background="@drawable/clicked_states_primary"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/wishlist"
-            android:textColor="@color/white"
+            android:textColor="@color/texticonscolor"
             android:textSize="20sp" />
 
         <!--<TextView-->
@@ -189,7 +189,7 @@
             <!--android:layout_width="0dp"-->
             <!--android:layout_height="match_parent"-->
             <!--android:layout_weight=".5"-->
-            <!--android:background="@color/darkgreen"-->
+            <!--android:background="@color/primarycolor"-->
             <!--android:layout_margin="2dp"-->
             <!--android:gravity="center"-->
             <!--android:text="@string/arena_quests"-->
@@ -201,7 +201,7 @@
             <!--android:layout_width="0dp"-->
             <!--android:layout_height="match_parent"-->
             <!--android:layout_weight=".5"-->
-            <!--android:background="@color/darkgreen"-->
+            <!--android:background="@color/primarycolor"-->
             <!--android:layout_margin="2dp"-->
             <!--android:gravity="center"-->
             <!--android:text="@string/hunting_fleet"-->
@@ -213,7 +213,7 @@
             <!--android:layout_width="0dp"-->
             <!--android:layout_height="match_parent"-->
             <!--android:layout_weight=".5"-->
-            <!--android:background="@color/darkgreen"-->
+            <!--android:background="@color/primarycolor"-->
             <!--android:layout_margin="2dp"-->
             <!--android:gravity="center"-->
             <!--android:text="@string/decorations"-->

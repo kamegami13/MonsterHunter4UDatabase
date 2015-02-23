@@ -28,7 +28,8 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:textColor="@color/primarytextcolor" />
 
         <TextView
             android:id="@+id/detail_monster_unstable"
@@ -36,7 +37,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical|right"
             android:textSize="15dp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:textColor="@color/primarytextcolor" />
     </LinearLayout>
 
 </LinearLayout>

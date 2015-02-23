@@ -5,41 +5,47 @@
         android:id="@+id/body_part"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".5" />
+        android:layout_weight=".5"
+        android:textColor="@color/primarytextcolor" />
 
     <TextView
         android:id="@+id/dmg1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".1"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/primarytextcolor" />
 
     <TextView
         android:id="@+id/dmg2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".1"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/primarytextcolor" />
 
     <TextView
         android:id="@+id/dmg3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".1"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/primarytextcolor" />
 
     <TextView
         android:id="@+id/dmg4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".1"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/primarytextcolor" />
 
     <TextView
         android:id="@+id/dmg5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".1" 
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/primarytextcolor" />
 
 </TableRow>

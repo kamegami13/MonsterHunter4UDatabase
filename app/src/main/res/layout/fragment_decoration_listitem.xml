@@ -27,7 +27,8 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="10dp"
+            android:textColor="@color/primarytextcolor" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,7 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".7"
                 android:layout_gravity="center"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:textColor="@color/primarytextcolor" />
 
             <TextView
                 android:id="@+id/skill1_amt"
@@ -59,7 +61,8 @@
                 android:layout_weight=".3"
                 android:paddingLeft="6dp"
                 android:layout_gravity="center"
-                android:gravity="center_vertical|right" />
+                android:gravity="center_vertical|right"
+                android:textColor="@color/primarytextcolor" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,7 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".7"
                 android:layout_gravity="center"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:textColor="@color/primarytextcolor" />
 
             <TextView
                 android:id="@+id/skill2_amt"
@@ -84,7 +88,8 @@
                 android:layout_weight=".3"
                 android:paddingLeft="6dp"
                 android:layout_gravity="center"
-                android:gravity="center_vertical|right" />
+                android:gravity="center_vertical|right"
+                android:textColor="@color/primarytextcolor" />
         </LinearLayout>
     </LinearLayout>
 
