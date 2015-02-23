@@ -7,7 +7,7 @@
     android:paddingEnd="8dip"
     android:paddingStart="8dip"
     android:paddingTop="1dip"
-    android:background="@color/lightpurple" >
+    android:background="@color/darkgreen" >
 
     <TextView
         android:id="@+id/name"

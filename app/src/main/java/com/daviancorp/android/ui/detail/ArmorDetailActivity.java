@@ -5,19 +5,19 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorDetailPagerAdapter;
 import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 
-public class ArmorDetailActivity extends GenericTabActivity implements
-		ActionBar.TabListener {
+public class ArmorDetailActivity extends GenericTabActivity
+        implements ActionBar.TabListener {
 	/** A key for passing a armor ID as a long */
 	public static final String EXTRA_ARMOR_ID =
 			"com.daviancorp.android.android.ui.detail.armor_id";
@@ -81,7 +81,7 @@ public class ArmorDetailActivity extends GenericTabActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = getSupportMenuInflater();
+		MenuInflater inflater = new MenuInflater(getApplicationContext());
 		inflater.inflate(R.menu.menu_wishlist_add, menu);
 		return true;
 	}

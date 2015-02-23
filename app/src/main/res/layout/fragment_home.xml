@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@drawable/weapon_clicked_states"
+            android:background="@color/darkgreen"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/monsters"
@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@drawable/weapon_clicked_states"
+            android:background="@color/darkgreen"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/weapons"
@@ -56,7 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@drawable/weapon_clicked_states"
+            android:background="@color/darkgreen"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/armor"
@@ -68,7 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@drawable/weapon_clicked_states"
+            android:background="@color/darkgreen"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/quests"
@@ -87,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@drawable/weapon_clicked_states"
+            android:background="@color/darkgreen"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/items"
@@ -99,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@drawable/weapon_clicked_states"
+            android:background="@color/darkgreen"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/combining"
@@ -119,7 +119,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@drawable/weapon_clicked_states"
+            android:background="@color/darkgreen"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/locations"
@@ -131,7 +131,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@drawable/weapon_clicked_states"
+            android:background="@color/darkgreen"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/decorations"
@@ -151,7 +151,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@drawable/weapon_clicked_states"
+            android:background="@color/darkgreen"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/skill_trees"
@@ -163,7 +163,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@drawable/weapon_clicked_states"
+            android:background="@color/darkgreen"
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/wishlist"
@@ -189,7 +189,7 @@
             <!--android:layout_width="0dp"-->
             <!--android:layout_height="match_parent"-->
             <!--android:layout_weight=".5"-->
-            <!--android:background="@drawable/weapon_clicked_states"-->
+            <!--android:background="@color/darkgreen"-->
             <!--android:layout_margin="2dp"-->
             <!--android:gravity="center"-->
             <!--android:text="@string/arena_quests"-->
@@ -201,7 +201,7 @@
             <!--android:layout_width="0dp"-->
             <!--android:layout_height="match_parent"-->
             <!--android:layout_weight=".5"-->
-            <!--android:background="@drawable/weapon_clicked_states"-->
+            <!--android:background="@color/darkgreen"-->
             <!--android:layout_margin="2dp"-->
             <!--android:gravity="center"-->
             <!--android:text="@string/hunting_fleet"-->
@@ -213,7 +213,7 @@
             <!--android:layout_width="0dp"-->
             <!--android:layout_height="match_parent"-->
             <!--android:layout_weight=".5"-->
-            <!--android:background="@drawable/weapon_clicked_states"-->
+            <!--android:background="@color/darkgreen"-->
             <!--android:layout_margin="2dp"-->
             <!--android:gravity="center"-->
             <!--android:text="@string/decorations"-->

@@ -12,7 +12,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Brachydios5">
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         <activity
             android:name="com.daviancorp.android.ui.general.HomeActivity"
             android:label="@string/app_name"
