@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/header"
-        android:background="@color/lightpurple">
+        android:background="@color/darkgreen">
 
         <TextView
             android:layout_width="0dp"
