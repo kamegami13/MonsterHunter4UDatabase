@@ -3,13 +3,13 @@ package com.daviancorp.android.ui.general;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
-import android.support.v7.app.ActionBarActivity
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,7 +35,7 @@ public abstract class GenericActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		FragmentManager fm = getFragmentManager();
+		FragmentManager fm = getSupportFragmentManager();
 		Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
 		if (fragment == null) {
@@ -45,8 +45,8 @@ public abstract class GenericActivity extends ActionBarActivity {
 		}
 		
 		setTitle(R.string.app_name);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 	}
 
 
@@ -60,7 +60,7 @@ public abstract class GenericActivity extends ActionBarActivity {
 			startActivity(intent);
 			return true;
 		case R.id.about:
-			FragmentManager fm = getFragmentManager();
+			FragmentManager fm = getSupportFragmentManager();
 			AboutDialogFragment dialog = new AboutDialogFragment();
 			dialog.show(fm, DIALOG_ABOUT);
 			return true;

@@ -1,11 +1,13 @@
 package com.daviancorp.android.ui.general;
 
 import android.annotation.SuppressLint;
+import android.support.v7.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -22,7 +24,7 @@ import com.daviancorp.android.ui.dialog.AboutDialogFragment;
  *  - override onCreate() to set title
  */
 
-public abstract class GenericTabActivity extends ActionBarActivity {
+public abstract class GenericTabActivity extends ActionBarActivity{
 
 	protected static final String DIALOG_ABOUT = "about";
 
@@ -34,8 +36,8 @@ public abstract class GenericTabActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 
 		setTitle(R.string.app_name);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 
 		setContentView(R.layout.activity_tab);
 
@@ -65,7 +67,7 @@ public abstract class GenericTabActivity extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = MenuInflater();
+		MenuInflater inflater = new MenuInflater(getApplicationContext());
 		inflater.inflate(R.menu.main, menu);
 		return true;
 	}

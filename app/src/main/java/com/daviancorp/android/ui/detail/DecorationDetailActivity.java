@@ -5,8 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 
-import android.app.ActionBar;
-import android.app.ActionBar.Tab;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -82,7 +82,7 @@ public class DecorationDetailActivity extends GenericTabActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		MenuInflater inflater = MenuInflater();
+		MenuInflater inflater = new MenuInflater(getApplicationContext());
 		inflater.inflate(R.menu.menu_wishlist_add, menu);
 		return true;
 	}
