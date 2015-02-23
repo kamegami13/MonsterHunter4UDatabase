@@ -21,6 +21,7 @@ import com.daviancorp.android.data.classes.Location;
 import com.daviancorp.android.data.classes.MogaWoodsReward;
 import com.daviancorp.android.data.classes.Monster;
 import com.daviancorp.android.data.classes.MonsterDamage;
+import com.daviancorp.android.data.classes.MonsterStatus;
 import com.daviancorp.android.data.classes.MonsterToArena;
 import com.daviancorp.android.data.classes.MonsterToQuest;
 import com.daviancorp.android.data.classes.Quest;
@@ -645,8 +646,25 @@ public class DataManager {
 		}
 		cursor.close();
 		return damages;
-	}	
-	
+	}
+
+/********************************* MONSTER STATUS QUERIES ******************************************/
+    /* Get an array of status objects for a monster */
+    public ArrayList<MonsterStatus> queryMonsterStatus(long id) {
+        ArrayList<MonsterStatus> monsterStatuses = new ArrayList<MonsterStatus>();
+
+        MonsterStatusCursor cursor = mHelper.queryMonsterStatus(id);
+
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()) {
+            monsterStatuses.add(cursor.getStatus());
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return monsterStatuses;
+    }
+
 /********************************* MONSTER TO ARENA QUERIES ******************************************/
 	/* Get a Cursor that has a list of MonsterToArena based on Monster */
 	public MonsterToArenaCursor queryMonsterToArenaMonster(long id) {
