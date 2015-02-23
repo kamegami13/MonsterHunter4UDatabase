@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.daviancorp.android.mh4udatabase"
-    android:versionCode="6"
-    android:versionName="1.05" >
+    android:versionCode="1"
+    android:versionName="1.01" >
 
     <uses-sdk
         android:minSdkVersion="14"
