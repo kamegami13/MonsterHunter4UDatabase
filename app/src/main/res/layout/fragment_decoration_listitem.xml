@@ -63,7 +63,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:id="@+id/skill2layout">
 
             <TextView
                 android:id="@+id/skill2"

@@ -69,13 +69,13 @@
     <style name="TextMedium" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:text">sans-serif-light</item>
+        <item name="android:typeface">sans</item>
     </style>
 
     <style name="TextSmall" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:text">sans-serif-light</item>
+        <item name="android:typeface">sans</item>
     </style>
 
     <style name="MainImage" parent="@style/Theme.AppCompat.Light.DarkActionBar">
