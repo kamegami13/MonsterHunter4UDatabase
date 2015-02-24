@@ -15,8 +15,9 @@ public class HomeActivity extends GenericActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-		getSupportActionBar().setHomeButtonEnabled(false);
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+//		getSupportActionBar().setHomeButtonEnabled(false);
+        super.enableDrawerIndicator();
 		setTitle(R.string.app_name);
 
 	}
