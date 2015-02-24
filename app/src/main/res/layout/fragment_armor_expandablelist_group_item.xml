@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/expandable_group"
     android:id="@+id/root"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="1dip"
-    android:paddingEnd="8dip"
-    android:paddingStart="8dip"
-    android:paddingTop="1dip"
-    android:background="@color/primary_color" >
+    android:orientation="vertical"
+    android:gravity="bottom">
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="35dip"
-        android:paddingLeft="20dp"
-        android:layout_gravity="center"
-        android:textSize="16sp"
-        android:textColor="@color/text_primary_color"
-        android:gravity="center_vertical" />
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        style="@style/text_medium_alt" />
 
 </LinearLayout>

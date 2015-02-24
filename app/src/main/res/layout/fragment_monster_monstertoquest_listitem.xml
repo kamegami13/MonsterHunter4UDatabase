@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listitem"
-    style="@style/ListItemContents"
+    style="@style/list_item"
     android:orientation="horizontal" >
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:gravity="center_vertical"
         android:textColor="@color/text_color"
-        style="@style/TextMedium"
+        style="@style/text_medium"
         android:layout_weight="0.8">
     </TextView>
 
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
-            style="@style/TextSmall"
+            style="@style/text_small"
             android:layout_centerHorizontal="true"
             android:gravity="right"
             android:visibility="visible">
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
-            style="@style/TextSmall"
+            style="@style/text_small"
             android:layout_below="@+id/quest_location"
             android:layout_centerHorizontal="true"
             android:gravity="right">

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listitem"
     android:orientation="horizontal"
-    style="@style/ListItemContents">
+    style="@style/list_item">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -13,7 +13,7 @@
         android:layout_gravity="center">
 
         <ImageView
-            style="@style/MainImage"
+            style="@style/main_image"
             android:id="@+id/item_image" />
 
         <TextView
@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:textColor="@color/text_color"
-            style="@style/TextMedium" />
+            style="@style/text_medium" />
     </LinearLayout>
 
     <RelativeLayout
@@ -47,7 +47,7 @@
             android:layout_alignParentStart="false"
             android:layout_alignParentEnd="false"
             android:layout_alignParentRight="false"
-            style="@style/TextSmall"
+            style="@style/text_small"
             android:text="test"
             android:layout_marginBottom="4dp" />
 
@@ -67,7 +67,7 @@
                 android:gravity="center"
                 android:textColor="@color/text_color"
                 android:layout_below="@+id/method"
-                style="@style/TextSmall"
+                style="@style/text_small"
                 android:text="test"
                 android:layout_marginRight="16dp" />
 
@@ -78,7 +78,7 @@
                 android:layout_gravity="center"
                 android:gravity="center|center_vertical"
                 android:textColor="@color/text_color"
-                style="@style/TextSmall"
+                style="@style/text_small"
                 android:layout_below="@+id/method"
                 android:layout_toRightOf="@+id/amount"
                 android:text="test" />

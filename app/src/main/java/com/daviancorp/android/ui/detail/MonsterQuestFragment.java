@@ -117,7 +117,6 @@ public class MonsterQuestFragment extends ListFragment implements
 			String cellUnstableText = monsterToQuest.getUnstable();
 			
 			if (cellUnstableText.equals("no")) {
-				cellUnstableText = "";
                 unstableTextView.setVisibility(View.GONE);
 			}
 			else {
