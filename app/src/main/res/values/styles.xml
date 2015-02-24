@@ -57,13 +57,8 @@
         <item name="android:dividerHeight">1dp</item>
     </style>
 
-    <style name="list_item" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:background">@drawable/clicked_states_white</item>
-        <item name="android:clickable">true</item>
-        <item name="android:layout_height">72dp</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:padding">16dp</item>
-        <item name="android:clipToPadding">false</item>
+    <style name="expandable_list" parent="@style/list">
+        <item name="android:groupIndicator">@null</item>
     </style>
 
     <style name="expandable_group" parent="@style/Theme.AppCompat.Light.DarkActionBar">
@@ -75,6 +70,15 @@
 
         <item name="android:paddingLeft">64dp</item>
 
+    </style>
+
+    <style name="list_item" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@drawable/clicked_states_white</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_height">72dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:clipToPadding">false</item>
     </style>
 
     <style name="text_medium" parent="@style/Theme.AppCompat.Light.DarkActionBar">

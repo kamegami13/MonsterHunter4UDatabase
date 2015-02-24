@@ -22,6 +22,7 @@ import com.daviancorp.android.data.classes.Armor;
 import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
 
 /**
@@ -34,9 +35,6 @@ import com.daviancorp.android.ui.detail.ArmorDetailActivity;
  */
 public class ArmorExpandableListFragment extends Fragment {
     private static final String ARG_TYPE = "ARMOR_TYPE";
-
-//	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
-//	private static final int REQUEST_ADD_MULTI = 0;
 
     private String mType;
     private ArrayList<Armor> armors;
@@ -113,26 +111,11 @@ public class ArmorExpandableListFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View v = inflater.inflate(R.layout.fragment_armor_expandablelist, null);
-//		setContextMenu(v);
 
         elv = (ExpandableListView) v
                 .findViewById(R.id.expandableListView);
 
         elv.setAdapter(new ArmorListAdapter(slots));
-
-        elv.setOnChildClickListener(new OnChildClickListener() {
-
-            @Override
-            public boolean onChildClick(ExpandableListView arg0, View arg1,
-                                        int arg2, int arg3, long id) {
-
-                Intent i = new Intent(getActivity(), ArmorDetailActivity.class);
-                i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, (long) arg1.getTag());
-                startActivity(i);
-
-                return false;
-            }
-        });
 
         return v;
     }
@@ -185,10 +168,6 @@ public class ArmorExpandableListFragment extends Fragment {
         @Override
         public View getGroupView(int i, boolean b, View view,
                                  ViewGroup viewGroup) {
-//			TextView textView = new TextView(
-//					ArmorExpandableListFragment.this.getActivity());
-//			textView.setText(getGroup(i).toString());
-//			return textView;
 
             View v = view;
             Context context = viewGroup.getContext();
@@ -243,8 +222,10 @@ public class ArmorExpandableListFragment extends Fragment {
 
             armorImageView.setImageDrawable(armorImage);
 
+            long armorId = ((Armor) getChild(groupPosition, childPosition)).getId();
 
-            root.setTag(((Armor) getChild(groupPosition, childPosition)).getId());
+            root.setTag(armorId);
+            root.setOnClickListener(new ArmorClickListener(context,armorId));
 
             return v;
 
