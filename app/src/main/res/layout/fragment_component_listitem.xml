@@ -1,53 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listitem"
-    android:layout_width="match_parent"
-    android:layout_height="35dip"
-    android:background="@drawable/generic_clicked_states"
+    style="@style/list_item"
     android:orientation="horizontal" >
 
     <LinearLayout
         android:id="@+id/item_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".5"
+        android:layout_weight=".7"
         android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:paddingLeft="10dp">
+        android:layout_gravity="center">
 
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="35dip"
-            android:layout_height="35dip"
+            style="@style/main_image"
             android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:textColor="@color/text_color" />
+            style="@style/text_medium"
+            android:layout_gravity="center_vertical" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/type"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".35"
-        android:gravity="center|center_vertical"
+        android:gravity="center_vertical|right"
         android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        style="@style/text_small"
+        android:layout_weight="0.2" />
 
     <TextView
         android:id="@+id/amt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".15"
-        android:gravity="center|center_vertical"
+        android:gravity="center_vertical|right"
         android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        style="@style/text_small"
+        android:layout_weight="0.1" />
 
 </LinearLayout>
