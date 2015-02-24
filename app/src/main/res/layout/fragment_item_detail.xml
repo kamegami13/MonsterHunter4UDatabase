@@ -27,7 +27,7 @@
             android:paddingLeft="10dp"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:textColor="@color/primarytextcolor">
+            android:textColor="@color/text_color">
         </TextView>
     </LinearLayout>
 
@@ -48,37 +48,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rare:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Max:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Buy:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sell:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Description:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -91,36 +91,36 @@
                 android:id="@+id/rare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/buy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/sell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
         </LinearLayout>
     </LinearLayout>
 

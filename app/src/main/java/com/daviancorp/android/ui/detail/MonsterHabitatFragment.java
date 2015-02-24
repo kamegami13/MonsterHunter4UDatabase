@@ -1,14 +1,11 @@
 package com.daviancorp.android.ui.detail;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.ListFragment;
-import android.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.content.Loader;
@@ -16,19 +13,18 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 
-import com.daviancorp.android.data.classes.Gathering;
 import com.daviancorp.android.data.classes.Habitat;
-import com.daviancorp.android.data.classes.Monster;
-import com.daviancorp.android.data.database.GatheringCursor;
 import com.daviancorp.android.data.database.MonsterHabitatCursor;
-import com.daviancorp.android.loader.GatheringListCursorLoader;
 import com.daviancorp.android.loader.MonsterHabitatListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.LocationClickListener;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,7 +71,7 @@ public class MonsterHabitatFragment extends ListFragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_monster_habitat_list, container, false);
+        return inflater.inflate(R.layout.fragment_generic_card_list, container, false);
     }
 
     @SuppressLint("NewApi")
@@ -103,14 +99,14 @@ public class MonsterHabitatFragment extends ListFragment implements
         setListAdapter(null);
     }
 
-    @Override
+    /*@Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         // The id argument will be the Location ID set by adapter
 
         Intent i = new Intent(getActivity(), LocationDetailActivity.class);
         i.putExtra(LocationDetailActivity.EXTRA_LOCATION_ID, (long) v.getTag());
         startActivity(i);
-    }
+    }*/
 
     private static class MonsterHabitatCursorAdapter extends CursorAdapter {
 
@@ -140,6 +136,8 @@ public class MonsterHabitatFragment extends ListFragment implements
             LinearLayout itemLayout = (LinearLayout) view
                     .findViewById(R.id.listitem);
 
+            ImageView mapView = (ImageView) view.findViewById(R.id.mapImage);
+
             TextView mapTextView = (TextView) view.findViewById(R.id.map);
             TextView startTextView = (TextView) view.findViewById(R.id.start);
             TextView areaTextView = (TextView) view.findViewById(R.id.move);
@@ -166,8 +164,22 @@ public class MonsterHabitatFragment extends ListFragment implements
             areaTextView.setText(areas);
             restTextView.setText(Long.toString(rest));
 
+            Drawable i = null;
+            String cellImage = "icons_location/"
+                    + habitat.getLocation().getFileLocation();
+            try {
+                i = Drawable.createFromStream(
+                        context.getAssets().open(cellImage), null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            mapView.setImageDrawable(i);
+
             // Set id of layout to location so clicking gives us the location
             itemLayout.setTag(habitat.getLocation().getId());
+            itemLayout.setOnClickListener(new LocationClickListener(context,
+                    habitat.getLocation().getId()));
         }
     }
 

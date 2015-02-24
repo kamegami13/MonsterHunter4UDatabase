@@ -14,7 +14,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/headerRow"
-            android:background="@color/primarycolor">
+            android:background="@color/primary_color">
 
             <TextView
                 android:layout_width="0dp"
@@ -23,7 +23,7 @@
                 android:layout_weight="1"
                 android:text="Status"
                 android:gravity="center"
-                android:textColor="@color/texticonscolor" />
+                android:textColor="@color/text_primary_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -32,7 +32,7 @@
                 android:text="Initial"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/texticonscolor" />
+                android:textColor="@color/text_primary_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -41,7 +41,7 @@
                 android:text="Increase"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/texticonscolor" />
+                android:textColor="@color/text_primary_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -50,7 +50,7 @@
                 android:text="Max"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/texticonscolor" />
+                android:textColor="@color/text_primary_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -59,7 +59,7 @@
                 android:text="Duration"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/texticonscolor" />
+                android:textColor="@color/text_primary_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -68,7 +68,7 @@
                 android:text="Damage"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/texticonscolor" />
+                android:textColor="@color/text_primary_color" />
         </TableRow>
 
     </TableLayout>

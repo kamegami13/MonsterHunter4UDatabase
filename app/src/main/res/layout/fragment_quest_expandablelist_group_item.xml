@@ -3,7 +3,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="35dip"
-    android:background="@color/primarycolor"
+    android:background="@color/primary_color"
     android:orientation="horizontal"
     android:paddingBottom="1dip"
     android:paddingEnd="8dip"
@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
-        android:textColor="@color/texticonscolor"
+        android:textColor="@color/text_primary_color"
         android:textSize="16sp"
         android:layout_gravity="center"
         android:gravity="center_vertical" />

@@ -16,9 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
-            android:textColor="@color/primarytextcolor"
+            android:textColor="@color/text_color"
             android:paddingLeft="10dp"
-            android:background="@color/lightprimarycolor" />
+            android:background="@color/light_primary_color" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -51,21 +51,21 @@
                         android:layout_height="match_parent"
                         android:layout_weight=".35"
                         android:gravity="center"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                     <TextView
                         android:id="@+id/awaken"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight=".065"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                     <TextView
                         android:id="@+id/element"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight=".585"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                 </LinearLayout>
 
@@ -82,7 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1.0"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                     <ImageView
                         android:id="@+id/note1"
@@ -107,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.0"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -129,7 +129,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.3"
                         android:gravity="center"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                     <TextView
                         android:id="@+id/affinity"
@@ -137,7 +137,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.4"
                         android:gravity="center"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                     <TextView
                         android:id="@+id/defense"
@@ -145,7 +145,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.3"
                         android:gravity="center"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
                 </LinearLayout>
 
                 <com.daviancorp.android.ui.general.DrawSharpness

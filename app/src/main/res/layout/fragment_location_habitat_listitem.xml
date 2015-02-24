@@ -26,7 +26,7 @@
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:textColor="@color/primarytextcolor" />
+            android:textColor="@color/text_color" />
 
     </LinearLayout>
 
@@ -37,7 +37,7 @@
         android:layout_weight="0.15"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:layout_width="0dp"
@@ -46,7 +46,7 @@
         android:layout_weight="0.15"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:layout_width="0dp"
@@ -55,5 +55,5 @@
         android:layout_weight="0.15"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 </LinearLayout>

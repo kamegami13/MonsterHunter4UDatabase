@@ -3,10 +3,10 @@
 
     <item android:state_focused="false"
         android:state_pressed="false"
-        android:drawable="@color/primarycolor"/>
+        android:drawable="@color/primary_color"/>
 
     <item android:state_enabled="true"
         android:state_pressed="true"
-        android:drawable="@color/darkprimarycolor"/>
+        android:drawable="@color/dark_primary_color"/>
 
 </selector>

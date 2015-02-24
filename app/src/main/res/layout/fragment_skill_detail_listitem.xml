@@ -13,7 +13,7 @@
         android:gravity="center|center_vertical"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/pts"
@@ -22,7 +22,7 @@
         android:layout_weight=".1"
         android:gravity="center|center_vertical"
         android:layout_gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/description"
@@ -33,6 +33,6 @@
         android:paddingRight="5dp"
         android:layout_gravity="center"
         android:gravity="center_vertical"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
 </LinearLayout>

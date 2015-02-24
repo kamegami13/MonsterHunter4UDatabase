@@ -29,7 +29,7 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/monsters"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:textSize="20sp" />
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/weapons"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -60,7 +60,7 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/armor"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:textSize="20sp" />
 
         <TextView
@@ -72,7 +72,7 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/quests"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -91,7 +91,7 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/items"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:textSize="20sp" />
 
         <TextView
@@ -103,7 +103,7 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/combining"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -123,7 +123,7 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/locations"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:textSize="20sp" />
 
         <TextView
@@ -135,7 +135,7 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/decorations"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -155,7 +155,7 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/skill_trees"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:textSize="20sp" />
 
         <TextView
@@ -167,7 +167,7 @@
             android:layout_margin="2dp"
             android:gravity="center"
             android:text="@string/wishlist"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:textSize="20sp" />
 
         <!--<TextView-->

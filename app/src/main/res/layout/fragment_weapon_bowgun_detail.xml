@@ -22,73 +22,73 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="Name:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Type"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Attack:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rarity:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Slots:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Affinity:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Defense:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Creation Cost:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Upgrade Cost:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reload:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Recoil:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Steadiness:"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
         </LinearLayout>
 
@@ -103,73 +103,73 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_attack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_rarity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_slot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_affinity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_defense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_creation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_upgrade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_bowgun_reload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_bowgun_recoil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_bowgun_steadiness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
         </LinearLayout>
     </LinearLayout>
@@ -183,7 +183,7 @@
         android:gravity="center"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -202,7 +202,7 @@
                 android:layout_weight="0.125"
                 android:gravity="center"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -210,7 +210,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text="1"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -218,7 +218,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text="2"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -226,7 +226,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text="3"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -234,7 +234,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -242,7 +242,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text="1"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -250,7 +250,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text="2"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -258,7 +258,7 @@
                 android:layout_weight="0.35"
                 android:gravity="center"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
         </TableRow>
 
         <TableRow
@@ -271,7 +271,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Nrm"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/normal1"
@@ -280,7 +280,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/normal2"
@@ -289,7 +289,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/normal3"
@@ -298,7 +298,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -306,7 +306,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Psn"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/poison1"
@@ -315,7 +315,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/poison2"
@@ -324,7 +324,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -332,7 +332,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Flm"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/flaming"
@@ -341,7 +341,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -349,7 +349,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Wyv"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/wyvernfire"
@@ -358,7 +358,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
         </TableRow>
 
@@ -372,7 +372,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Prc"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/pierce1"
@@ -381,7 +381,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/pierce2"
@@ -390,7 +390,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/pierce3"
@@ -399,7 +399,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -407,7 +407,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Par"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/para1"
@@ -416,7 +416,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/para2"
@@ -425,7 +425,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -433,7 +433,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Wtr"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/water"
@@ -442,7 +442,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -450,7 +450,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Blst"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/blast"
@@ -459,7 +459,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
         </TableRow>
 
@@ -473,7 +473,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Plt"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/pellet1"
@@ -482,7 +482,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/pellet2"
@@ -491,7 +491,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/pellet3"
@@ -500,7 +500,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -508,7 +508,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Slp"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/sleep1"
@@ -517,7 +517,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/sleep2"
@@ -526,7 +526,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -534,7 +534,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Thd"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/thunder"
@@ -543,7 +543,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -551,7 +551,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Dmn"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/demon"
@@ -560,7 +560,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
         </TableRow>
 
@@ -574,7 +574,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Crg"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/crag1"
@@ -583,7 +583,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/crag2"
@@ -592,7 +592,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/crag3"
@@ -601,7 +601,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -609,7 +609,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Exh"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/exhaust1"
@@ -618,7 +618,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/exhaust2"
@@ -627,7 +627,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -635,7 +635,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Ice"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/freeze"
@@ -644,7 +644,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -652,7 +652,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Amr"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/armor"
@@ -661,7 +661,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
         </TableRow>
 
@@ -675,7 +675,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Cls"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/clust1"
@@ -684,7 +684,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/clust2"
@@ -693,7 +693,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/clust3"
@@ -702,7 +702,7 @@
                 android:layout_weight="0.08"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -710,7 +710,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Rec"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/recov1"
@@ -719,7 +719,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/recov2"
@@ -728,7 +728,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -736,7 +736,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Drg"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/dragon"
@@ -745,7 +745,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -753,7 +753,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Pnt"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/paint"
@@ -762,7 +762,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
         </TableRow>
 
@@ -776,14 +776,14 @@
                 android:layout_weight="0.365"
                 android:gravity="center"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.125"
                 android:gravity="left"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -791,7 +791,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -799,7 +799,7 @@
                 android:layout_weight="0.055"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -807,7 +807,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Slc"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/slicing"
@@ -816,7 +816,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -824,7 +824,7 @@
                 android:layout_weight="0.125"
                 android:gravity="left"
                 android:text="Trq"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/tranq"
@@ -833,7 +833,7 @@
                 android:layout_weight="0.05"
                 android:gravity="left"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
         </TableRow>
     </TableLayout>
@@ -852,43 +852,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/detail_weapon_bowgun_special"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primarytextcolor" />
+                android:textColor="@color/text_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -906,7 +906,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                     <TextView
                         android:id="@+id/value1"
@@ -914,7 +914,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:layout_weight="0.7"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
                 </TableRow>
             </TableLayout>
 
@@ -928,7 +928,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                     <TextView
                         android:id="@+id/value2"
@@ -936,7 +936,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:layout_weight="0.7"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
                 </TableRow>
             </TableLayout>
 
@@ -950,7 +950,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                     <TextView
                         android:id="@+id/value3"
@@ -958,7 +958,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:layout_weight="0.7"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
                 </TableRow>
             </TableLayout>
 
@@ -972,7 +972,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                     <TextView
                         android:id="@+id/value4"
@@ -980,7 +980,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:layout_weight="0.7"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
                 </TableRow>
             </TableLayout>
 
@@ -994,7 +994,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
 
                     <TextView
                         android:id="@+id/value5"
@@ -1002,7 +1002,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:layout_weight="0.7"
-                        android:textColor="@color/primarytextcolor" />
+                        android:textColor="@color/text_color" />
                 </TableRow>
             </TableLayout>
         </LinearLayout>

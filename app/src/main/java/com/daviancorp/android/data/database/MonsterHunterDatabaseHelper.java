@@ -1781,6 +1781,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
         projectionMap.put(l + S.COLUMN_LOCATIONS_ID, l + "." + S.COLUMN_LOCATIONS_ID + " AS " + l + S.COLUMN_LOCATIONS_ID );
         projectionMap.put(l + S.COLUMN_LOCATIONS_NAME, l + "." + S.COLUMN_LOCATIONS_NAME + " AS " + l + S.COLUMN_LOCATIONS_NAME );
+        projectionMap.put(l + S.COLUMN_LOCATIONS_MAP, l + "." + S.COLUMN_LOCATIONS_MAP + " AS " + l + S.COLUMN_LOCATIONS_MAP );
 
         projectionMap.put(m + S.COLUMN_MONSTERS_ID, m+ "." + S.COLUMN_MONSTERS_ID + " AS " + m + S.COLUMN_MONSTERS_ID);
         projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
