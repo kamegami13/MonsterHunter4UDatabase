@@ -16,7 +16,8 @@
             android:layout_width="260dp"
             android:layout_height="match_parent"
             android:layout_gravity="left|start"
-            android:background="#ffeeeeee"/>
+            android:textColor="@color/primarytextcolor"
+            android:background="@color/primarycolor"/> <!-- change this to a generic color-->
 
 
 
