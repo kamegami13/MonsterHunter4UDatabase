@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Spannable;
@@ -102,6 +103,7 @@ public class GenericActionBarActivity extends ActionBarActivity {
                         break;
                 }
                 startActivity(intent);
+                mDrawerLayout.closeDrawers();
             }
         });
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close){
@@ -159,10 +161,7 @@ public class GenericActionBarActivity extends ActionBarActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 // TODO For the love of god fix this. Proper back navigation goes here I think.
-                // Whenever the home button is pressed, go back to home and clear the stack of activities
-//                Intent intent = new Intent(GenericActionBarActivity.this, HomeActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(intent);
+                super.onBackPressed(); // Emulate back button when up is pressed. This isn't ideal and kind of hackey.
                 return true;
             case R.id.about:
                 FragmentManager fm = getSupportFragmentManager();
@@ -201,6 +200,16 @@ public class GenericActionBarActivity extends ActionBarActivity {
             mi.setTitle(newTitle);
         }
         return true;
+    }
+
+    public void onBackPressed(){
+        // If back is pressed while drawer is open, close drawer.
+        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            mDrawerLayout.closeDrawers();
+        }
+        else{
+            super.onBackPressed();
+        }
     }
 
     public Fragment getDetail() {
