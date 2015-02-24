@@ -27,6 +27,10 @@ import com.daviancorp.android.data.database.S;
 import com.daviancorp.android.loader.ArmorLoader;
 import com.daviancorp.android.loader.ComponentListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
+import com.daviancorp.android.ui.ClickListeners.DecorationClickListener;
+import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
+import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
 
 public class ItemComponentFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -76,39 +80,6 @@ public class ItemComponentFragment extends ListFragment implements
 		setListAdapter(adapter);
 
 	}
-	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Item ID; CursorAdapter gives us this
-		// for free
-		Intent i = null;
-		long tagId = (long) v.getTag();
-        int clickedId = (int) id;
-        String itemtype;
-
-        ComponentCursor mycursor = (ComponentCursor) l.getItemAtPosition(position);
-        itemtype = mycursor.getItemType();
-
-        switch(itemtype){
-            case "Weapon":
-                i = new Intent(getActivity(), WeaponDetailActivity.class);
-                i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, tagId);
-                break;
-            case "Armor":
-                i = new Intent(getActivity(), ArmorDetailActivity.class);
-                i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, tagId);
-                break;
-            case "Decoration":
-                i = new Intent(getActivity(), DecorationDetailActivity.class);
-                i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, tagId);
-                break;
-            default:
-                i = new Intent(getActivity(), ItemDetailActivity.class);
-                i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, tagId);
-        }
-		if(i!=null)
-            startActivity(i);
-	}
 
 	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
@@ -116,7 +87,7 @@ public class ItemComponentFragment extends ListFragment implements
 		setListAdapter(null);
 	}
 
-	private static class ComponentListCursorAdapter extends CursorAdapter {
+	protected static class ComponentListCursorAdapter extends CursorAdapter {
 
 		private ComponentCursor mComponentCursor;
 
@@ -153,7 +124,6 @@ public class ItemComponentFragment extends ListFragment implements
 			String nameText = created.getName();
 			String amtText = "" + component.getQuantity();
 			String typeText = "" + component.getType();
-		    //String itemType = mComponentCursor.getItemType();
 
 			itemTextView.setText(nameText);
 			amtTextView.setText(amtText);
@@ -161,26 +131,6 @@ public class ItemComponentFragment extends ListFragment implements
 			
 			Drawable i = null;
 			String cellImage = "";
-
-//            switch (itemType){
-//                case "Decoration":
-//                    break;
-//                case "Head":
-//                    break;
-//                case "Body":
-//                    break;
-//                case "Arms":
-//                    break;
-//                case "Waist":
-//                    break;
-//                case "Legs":
-//                    break;
-//                case "Great Sword":
-//                    break;
-//                case "Hunting Horn":
-//                    break;
-//                //etc etc. finish after the first few work.
-//            }
 
             String sub_type = created.getSubType();
 
@@ -246,61 +196,6 @@ public class ItemComponentFragment extends ListFragment implements
                     cellImage = "icons_items/" + created.getFileLocation();
             }
 
-//			if (created.getType().equals("Decoration")) {
-//				cellImage = "icons_items/" + created.getFileLocation();
-//			}
-//			else if ((createdId >= S.SECTION_HEAD) && (createdId < S.SECTION_BODY)) {
-//				cellImage = "icons_armor/icons_head/head" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_BODY) && (createdId < S.SECTION_ARMS)) {
-//				cellImage = "icons_armor/icons_body/body" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_ARMS) && (createdId < S.SECTION_WAIST)) {
-//				cellImage = "icons_armor/icons_arms/arms" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_WAIST) && (createdId < S.SECTION_LEGS)) {
-//				cellImage = "icons_armor/icons_waist/waist" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_LEGS) && (createdId < S.SECTION_GREAT_SWORD)) {
-//				cellImage = "icons_armor/icons_legs/legs" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_GREAT_SWORD) && (createdId < S.SECTION_HUNTING_HORN)) {
-//				cellImage = "icons_weapons/icons_great_sword/great_sword" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_HUNTING_HORN) && (createdId < S.SECTION_LONG_SWORD)) {
-//				cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_LONG_SWORD) && (createdId < S.SECTION_SWORD_AND_SHIELD)) {
-//				cellImage = "icons_weapons/icons_long_sword/long_sword" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_SWORD_AND_SHIELD) && (createdId < S.SECTION_DUAL_BLADES)) {
-//				cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_DUAL_BLADES) && (createdId < S.SECTION_HAMMER)) {
-//				cellImage = "icons_weapons/icons_dual_blades/dual_blades" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_HAMMER) && (createdId < S.SECTION_LANCE)) {
-//				cellImage = "icons_weapons/icons_hammer/hammer" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_LANCE) && (createdId < S.SECTION_GUNLANCE)) {
-//				cellImage = "icons_weapons/icons_lance/lance" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_GUNLANCE) && (createdId < S.SECTION_SWITCH_AXE)) {
-//				cellImage = "icons_weapons/icons_gunlance/gunlance" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_SWITCH_AXE) && (createdId < S.SECTION_LIGHT_BOWGUN)) {
-//				cellImage = "icons_weapons/icons_switch_axe/switch_axe" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_LIGHT_BOWGUN) && (createdId < S.SECTION_HEAVY_BOWGUN)) {
-//				cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + created.getRarity() + ".png";
-//			}
-//			else if ((createdId >= S.SECTION_HEAVY_BOWGUN) && (createdId < S.SECTION_BOW)) {
-//				cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + created.getRarity() + ".png";
-//			}
-//			else if (createdId >= S.SECTION_BOW) {
-//				cellImage = "icons_weapons/icons_bow/bow" + created.getRarity() + ".png";
-//			}
-			
 			try {
 				i = Drawable.createFromStream(
 						context.getAssets().open(cellImage), null);
@@ -311,6 +206,24 @@ public class ItemComponentFragment extends ListFragment implements
 			itemImageView.setImageDrawable(i);
 
 			itemLayout.setTag(createdId);
+
+            String itemtype = created.getType();
+
+            switch(itemtype){
+                case "Weapon":
+                    itemLayout.setOnClickListener(new WeaponClickListener(context, createdId));
+                    break;
+                case "Armor":
+                    itemLayout.setOnClickListener(new ArmorClickListener(context, createdId));
+                    break;
+                case "Decoration":
+                    itemLayout.setOnClickListener(new DecorationClickListener(context, createdId));
+                    break;
+                default:
+                    itemLayout.setOnClickListener(new ItemClickListener(context, createdId));
+                    break;
+            }
+
 		}
 	}
 

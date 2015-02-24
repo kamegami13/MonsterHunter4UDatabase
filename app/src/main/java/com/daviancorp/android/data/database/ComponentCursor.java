@@ -72,6 +72,7 @@ public class ComponentCursor extends CursorWrapper {
 		
 		long itemId2 = getLong(getColumnIndex(S.COLUMN_COMPONENTS_COMPONENT_ITEM_ID));
 		String itemName2 = getString(getColumnIndex("co" + S.COLUMN_ITEMS_NAME));
+        String itemType2 = getString(getColumnIndex("co" + S.COLUMN_ITEMS_TYPE));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 //			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
         int rarity2 = getInt(getColumnIndex("co" + S.COLUMN_ITEMS_RARITY));
@@ -87,6 +88,7 @@ public class ComponentCursor extends CursorWrapper {
 		comp.setName(itemName2);
         comp.setSubType(subtype2);
         comp.setRarity(rarity2);
+        comp.setType(itemType2);
 //			comp.setJpnName(jpnName);
 //			comp.setType(type);
 //			comp.setRarity(rarity2);

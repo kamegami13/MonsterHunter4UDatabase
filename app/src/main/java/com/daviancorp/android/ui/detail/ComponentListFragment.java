@@ -23,6 +23,10 @@ import com.daviancorp.android.data.classes.Component;
 import com.daviancorp.android.data.database.ComponentCursor;
 import com.daviancorp.android.loader.ComponentListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
+import com.daviancorp.android.ui.ClickListeners.DecorationClickListener;
+import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
+import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
 
 public class ComponentListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -71,39 +75,6 @@ public class ComponentListFragment extends ListFragment implements
 				getActivity(), (ComponentCursor) cursor);
 		setListAdapter(adapter);
 
-	}
-	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-        // The id argument will be the Item ID; CursorAdapter gives us this
-        // for free
-        Intent i = null;
-        long tagId = (long) v.getTag();
-        int clickedId = (int) id;
-        String itemtype;
-
-        ComponentCursor mycursor = (ComponentCursor) l.getItemAtPosition(position);
-        itemtype = mycursor.getComponent().getComponent().getType();
-
-        switch(itemtype){
-            case "Weapon":
-                i = new Intent(getActivity(), WeaponDetailActivity.class);
-                i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, tagId);
-                break;
-            case "Armor":
-                i = new Intent(getActivity(), ArmorDetailActivity.class);
-                i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, tagId);
-                break;
-            case "Decoration":
-                i = new Intent(getActivity(), DecorationDetailActivity.class);
-                i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, tagId);
-                break;
-            default:
-                i = new Intent(getActivity(), ItemDetailActivity.class);
-                i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, tagId);
-        }
-        if(i!=null)
-            startActivity(i);
 	}
 
 	@Override
@@ -226,7 +197,24 @@ public class ComponentListFragment extends ListFragment implements
 			
 			itemImageView.setImageDrawable(i);
 
-			itemLayout.setTag(component.getComponent().getId());
+            long id = component.getComponent().getId();
+			itemLayout.setTag(id);
+
+            String itemtype = component.getComponent().getType();
+            switch(itemtype){
+                case "Weapon":
+                    itemLayout.setOnClickListener(new WeaponClickListener(context, id));
+                    break;
+                case "Armor":
+                    itemLayout.setOnClickListener(new ArmorClickListener(context, id));
+                    break;
+                case "Decoration":
+                    itemLayout.setOnClickListener(new DecorationClickListener(context, id));
+                    break;
+                default:
+                    itemLayout.setOnClickListener(new ItemClickListener(context, id));
+                    break;
+            }
 		}
 	}
 
