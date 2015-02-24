@@ -29,7 +29,7 @@
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:textColor="@color/primarytextcolor" />
+            android:textColor="@color/text_color" />
     </LinearLayout>
 
     <TextView
@@ -39,7 +39,7 @@
         android:layout_weight=".35"
         android:gravity="center|center_vertical"
         android:layout_gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/amt"
@@ -48,6 +48,6 @@
         android:layout_weight=".15"
         android:gravity="center|center_vertical"
         android:layout_gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
 </LinearLayout>

@@ -8,7 +8,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primarycolor"
+        android:background="@color/primary_color"
         android:orientation="horizontal" >
 
         <TextView
@@ -18,7 +18,7 @@
             android:layout_weight=".4"
             android:gravity="center"
             android:text="Map"
-            android:textColor="@color/texticonscolor" />
+            android:textColor="@color/text_primary_color" />
 
         <TextView
             android:id="@+id/header2"
@@ -27,14 +27,14 @@
             android:layout_weight=".2"
             android:gravity="center"
             android:text="Rank"
-            android:textColor="@color/texticonscolor" />
+            android:textColor="@color/text_primary_color" />
 
         <TextView
             android:id="@+id/header3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".2"
-            android:textColor="@color/texticonscolor"
+            android:textColor="@color/text_primary_color"
             android:gravity="center"
             android:text="Area" />
 
@@ -45,7 +45,7 @@
             android:layout_weight=".2"
             android:gravity="center"
             android:text="Method"
-            android:textColor="@color/texticonscolor" />
+            android:textColor="@color/text_primary_color" />
 
         <TextView
             android:id="@+id/header5"
@@ -54,7 +54,7 @@
             android:layout_weight=".2"
             android:gravity="center"
             android:text="Rate"
-            android:textColor="@color/texticonscolor" />
+            android:textColor="@color/text_primary_color" />
 
     </LinearLayout>
 

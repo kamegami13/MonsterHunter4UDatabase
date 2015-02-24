@@ -56,9 +56,11 @@ public class MonsterHabitatCursor extends CursorWrapper {
 
         long loc_id = getLong(getColumnIndex("l" + S.COLUMN_LOCATIONS_ID));
         String loc_name = getString(getColumnIndex("l" + S.COLUMN_LOCATIONS_NAME));
+        String loc_file = getString(getColumnIndex("l" + S.COLUMN_LOCATIONS_MAP));
 
         location.setId(loc_id);
         location.setName(loc_name);
+        location.setFileLocation(loc_file);
 
         habitat.setLocation(location);
 

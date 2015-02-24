@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textColor="@color/primarytextcolor" />
+            android:textColor="@color/text_color" />
     </LinearLayout>
 
     <TextView
@@ -32,7 +32,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:layout_gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/increase"
@@ -41,7 +41,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:layout_gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/max"
@@ -50,7 +50,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:layout_gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/duration"
@@ -59,7 +59,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:layout_gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/damage"
@@ -68,6 +68,6 @@
         android:layout_weight="1"
         android:gravity="center"
         android:layout_gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:textColor="@color/text_color" />
 
 </TableRow>

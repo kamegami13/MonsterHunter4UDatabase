@@ -6,19 +6,95 @@
 
 
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
 
 
-        -->
+           -->
+
+
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:windowBackground">@color/background_color</item>
+
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+        <item name="actionBarStyle">@style/ActionBar</item>
+
+        <item name="android:colorPrimary">@color/primary_color</item>
+        <item name="android:colorPrimaryDark">@color/dark_primary_color</item>
+        <item name="android:colorAccent">@color/accent_color</item>
+
+        <item name="actionBarTabStyle">@style/MyActionBarTabs</item>
     </style>
+
+    <!-- ActionBar Tab styles -->
+    <style name="MyActionBarTabs"
+        parent="@style/Widget.AppCompat.ActionBar.TabView">
+        <item name="android:background">@drawable/action_bar_tab_indicator</item>
+    </style>
+
+
+    <!-- ActionBar styles -->
+    <style name="ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/primary_color</item>
+        <item name="background">@color/primary_color</item>
+    </style>
+
+    <!-- Begin styles for lists -->
+
+    <style name="ListStyle" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:id">@android:id/list</item>
+        <item name="android:divider">@color/divider_color</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <style name="ListItemContents" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@drawable/clicked_states_white</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_height">72dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="TextMedium" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:text">sans-serif-light</item>
+    </style>
+
+    <style name="TextSmall" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:text">sans-serif-light</item>
+    </style>
+
+    <style name="MainImage" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="LargeImage" parent="@style/MainImage">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">48dp</item>
+    </style>
+
+    <style name="SmallImage" parent="@style/MainImage">
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_width">24dp</item>
+    </style>
+
+    <!-- End styles for elevated lists -->
 
 </resources>

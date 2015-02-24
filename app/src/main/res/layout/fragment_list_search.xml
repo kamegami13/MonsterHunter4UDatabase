@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:hint="Search..."
         android:inputType="textVisiblePassword"
-        android:textColor="@color/secondarytextcolor" />
+        android:textColor="@color/text_color_secondary" />
 
     <ListView
         android:id="@android:id/list"

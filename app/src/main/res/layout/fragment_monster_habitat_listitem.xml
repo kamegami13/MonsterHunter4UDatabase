@@ -1,44 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/listitem">
+    android:orientation="horizontal"
+    android:id="@+id/listitem"
+    style="@style/ListItemContents">
+
+    <ImageView
+        android:id="@+id/mapImage"
+        style="@style/LargeImage"
+        android:padding="4dp" />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/map"
         android:textStyle="bold"
-        android:layout_weight="0.40"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:paddingLeft="10dp"
-        android:textColor="@color/primarytextcolor" />
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        style="@style/TextMedium"
+        android:text="Frozen Seaway"
+        android:layout_weight="0.5" />
 
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="0dp"
-        android:layout_height="35dip"
-        android:id="@+id/start"
-        android:layout_weight="0.15"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        android:layout_height="fill_parent"
+        android:layout_weight="0.5"
+        android:gravity="center">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="35dip"
-        android:id="@+id/move"
-        android:layout_weight="0.15"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/start"
+            android:layout_gravity="center"
+            style="@style/TextSmall"
+            android:text="1,2"
+            android:gravity="center"
+            android:layout_marginRight="4dp" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="35dip"
-        android:id="@+id/rest"
-        android:layout_weight="0.15"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/primarytextcolor" />
+        <view
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            class="com.daviancorp.android.ui.general.DrawArrow"
+            android:id="@+id/view"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/move"
+            android:layout_gravity="center"
+            style="@style/TextSmall"
+            android:text="1,2"
+            android:gravity="center"
+            android:layout_marginRight="4dp" />
+
+        <view
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            class="com.daviancorp.android.ui.general.DrawArrow"
+            android:id="@+id/view2"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rest"
+            android:layout_gravity="center"
+            style="@style/TextSmall"
+            android:text="1,2"
+            android:gravity="center" />
+    </LinearLayout>
+
 </LinearLayout>

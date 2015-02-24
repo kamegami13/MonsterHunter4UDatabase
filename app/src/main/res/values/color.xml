@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="primarycolor">#795548</color>
-    <color name="darkprimarycolor">#5D4037</color>
-    <color name="lightprimarycolor">#D7CCC8</color>
-    <color name="texticonscolor">#FFFFFF</color>
-    <color name="accentcolor">#FF9800</color>
-    <color name="primarytextcolor">#212121</color>
-    <color name="secondarytextcolor">#727272</color>
-    <color name="dividercolor">#B6B6B6</color>
+    <color name="primary_color">#795548</color>
+    <color name="dark_primary_color">#5D4037</color>
+    <color name="light_primary_color">#D7CCC8</color>
+    <color name="text_primary_color">#f5f5f5</color>
+    <color name="accent_color">#FF9800</color>
+    <color name="text_color_secondary">#727272</color>
+    <color name="divider_color">#B6B6B6</color>
+
+    <color name="text_color">#333333</color>
+    <color name="background_color">#f5f5f5</color>
 
     <!-- used for making anything clickable have a clicked state -->
     <color name="transparent">#00FFFFFF</color>
-    <color name="transparentlight">#80D7CCC8</color>
+    <color name="transparentlight">#90D7CCC8</color>
 
 
 </resources>

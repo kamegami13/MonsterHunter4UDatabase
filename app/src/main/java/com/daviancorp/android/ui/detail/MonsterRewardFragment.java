@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,13 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.HuntingReward;
 import com.daviancorp.android.data.database.HuntingRewardCursor;
 import com.daviancorp.android.loader.HuntingRewardListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
 
 public class MonsterRewardFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -50,7 +49,7 @@ public class MonsterRewardFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_monster_reward_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_card_list, null);
 		return v;
 	}
 
@@ -81,14 +80,14 @@ public class MonsterRewardFragment extends ListFragment implements
 		setListAdapter(null);
 	}
 
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this
-		// for free
-		Intent i = new Intent(getActivity(), ItemDetailActivity.class);
-		i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, (long) v.getTag());
-		startActivity(i);
-	}
+//	@Override
+//	public void onListItemClick(ListView l, View v, int position, long id) {
+//		// The id argument will be the Monster ID; CursorAdapter gives us this
+//		// for free
+//		Intent i = new Intent(getActivity(), ItemDetailActivity.class);
+//		i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, (long) v.getTag());
+//		startActivity(i);
+//	}
 
 	private static class MonsterHuntingRewardListCursorAdapter extends CursorAdapter {
 
@@ -154,6 +153,7 @@ public class MonsterRewardFragment extends ListFragment implements
 			itemImageView.setImageDrawable(i);
 
 			itemLayout.setTag(huntingReward.getItem().getId());
+            itemLayout.setOnClickListener(new ItemClickListener(context, huntingReward.getItem().getId()));
 		}
 	}
 

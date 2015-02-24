@@ -12,7 +12,7 @@
         android:textSize="25sp"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:textColor="@color/primarytextcolor">
+        android:textColor="@color/text_color">
     </TextView>
 
     <ImageView
