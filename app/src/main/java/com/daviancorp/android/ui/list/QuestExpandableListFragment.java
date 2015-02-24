@@ -129,7 +129,7 @@ public class QuestExpandableListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View v = inflater.inflate(R.layout.fragment_quest_expandablelist, null);
+		View v = inflater.inflate(R.layout.fragment_generic_expandable_list, null);
 		ExpandableListView elv = (ExpandableListView) v
 				.findViewById(R.id.expandableListView);
 		if (mHub.equals("Caravan")) {
