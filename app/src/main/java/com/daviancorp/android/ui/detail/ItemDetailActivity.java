@@ -30,7 +30,6 @@ public class ItemDetailActivity extends GenericTabActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		long id = getIntent().getLongExtra(EXTRA_ITEM_ID, -1);
 		setTitle(DataManager.get(getApplicationContext()).getItem(id).getName());
 
