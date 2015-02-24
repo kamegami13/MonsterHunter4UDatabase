@@ -29,8 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
             style="@style/text_small"
-            android:layout_centerHorizontal="true"
-            android:gravity="right"
             android:visibility="visible">
         </TextView>
 
@@ -40,8 +38,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|right"
             style="@style/text_small"
-            android:layout_below="@+id/quest_location"
-            android:layout_centerHorizontal="true"
             android:gravity="right">
         </TextView>
     </LinearLayout>
