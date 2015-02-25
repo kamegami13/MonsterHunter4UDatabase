@@ -30,6 +30,8 @@
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
     <string-array name="drawer_items">
         <item>"Monsters"</item>
         <item>"Weapons"</item>
@@ -37,11 +39,9 @@
         <item>"Quests"</item>
         <item>"Items"</item>
         <item>"Combining"</item>
+        <item>"Locations"</item>
         <item>"Decorations"</item>
         <item>"Skill Trees"</item>
-        <item>"Locations"</item>
-        <item>"Hunting Fleet"</item>
-        <item>"Arena Quests"</item>
         <item>"Wishlists"</item>
     </string-array>
 
@@ -70,7 +70,7 @@
     <string name="arena_quests">Arena Quests</string>
     <string name="wishlist">Wishlists</string>
     <string name="icon_name">MH4U DB</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <string name="activity_armor_set_builder">Armor Set Builder</string>
     <string name="armor_set_builder_add_piece">Add a piece</string>

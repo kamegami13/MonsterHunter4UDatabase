@@ -13,7 +13,8 @@
         android:layout_weight=".45"
         android:gravity="center"
         android:textStyle="bold"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/level"
@@ -21,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
         android:gravity="center"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/slot"
@@ -29,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/amount"
@@ -37,7 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_weight=".05"
         android:gravity="center"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/percentage"
@@ -45,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|end"
         android:layout_weight="0.1"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/text_color" />
 
 </LinearLayout>

@@ -28,7 +28,8 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="10dp"
+            android:textColor="@color/text_color" />
     </LinearLayout>
 
     <TextView
@@ -37,7 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_weight=".35"
         android:gravity="center|center_vertical"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/amt"
@@ -45,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_weight=".15"
         android:gravity="center|center_vertical"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:textColor="@color/text_color" />
 
 </LinearLayout>

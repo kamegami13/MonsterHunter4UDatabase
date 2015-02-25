@@ -17,12 +17,9 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.loader.QuestLoader;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
-import com.daviancorp.android.ui.list.ArenaQuestListActivity;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
 import com.daviancorp.android.ui.list.DecorationListActivity;
-import com.daviancorp.android.ui.list.HuntingFleetListActivity;
 import com.daviancorp.android.ui.list.ItemListActivity;
 import com.daviancorp.android.ui.list.LocationGridActivity;
 import com.daviancorp.android.ui.list.MonsterGridActivity;
@@ -66,7 +63,6 @@ public class HomeFragment extends Fragment {
 		mDecorations = (TextView) v.findViewById(R.id.decorations); // Disabled
 		mSkillTrees = (TextView) v.findViewById(R.id.skilltrees);
 		mLocations = (TextView) v.findViewById(R.id.locations);
-		//mHuntingFleet = (TextView) v.findViewById(R.id.hunting_fleet); // Disabled
 		//mArenaQuests = (TextView) v.findViewById(R.id.arena_quests); // Disabled
 		mWishlists = (TextView) v.findViewById(R.id.wishlists);
 
@@ -142,14 +138,6 @@ public class HomeFragment extends Fragment {
 			}
 		});
 
-//		mHuntingFleet.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(getActivity(), HuntingFleetListActivity.class);
-//				startActivity(intent);
-//			}
-//		});
-
 //		mArenaQuests.setOnClickListener(new OnClickListener() {
 //			@Override
 //			public void onClick(View v) {
@@ -165,14 +153,6 @@ public class HomeFragment extends Fragment {
 				startActivity(intent);
 			}
 		});
-
-        mLogo.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ArmorSetBuilderActivity.class);
-                startActivity(intent);
-            }
-        });
 
 		return v;
 	}

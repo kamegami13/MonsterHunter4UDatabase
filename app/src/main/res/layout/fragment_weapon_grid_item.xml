@@ -10,7 +10,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:background="@drawable/weapon_clicked_states" >
+        android:background="@drawable/clicked_states_primary" >
     </ImageView>
 
     <TextView
@@ -18,11 +18,10 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:background="@drawable/transparent_states"
         android:gravity="center"
-        android:textColorHighlight="@color/transparent"
         android:textSize="10sp"
-        android:textStyle="bold" >
+        android:textStyle="bold"
+        android:textColor="@color/text_color">
     </TextView>
 
 </LinearLayout>

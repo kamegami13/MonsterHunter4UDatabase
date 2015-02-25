@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listitem"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/generic_clicked_states"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    style="@style/ListItemContents">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:paddingLeft="10dp">
+        android:layout_weight="0.7"
+        android:gravity="center_vertical"
+        android:layout_gravity="center">
 
         <ImageView
-            android:id="@+id/item_image"
-            android:layout_width="35dip"
-            android:layout_height="35dip"
-            android:paddingRight="5dp" />
+            style="@style/MainImage"
+            android:id="@+id/item_image" />
 
         <TextView
             android:id="@+id/item"
@@ -26,39 +23,67 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:paddingLeft="10dp" />
+            android:textColor="@color/text_color"
+            style="@style/TextMedium" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="0dp"
-        android:layout_height="35dip"
-        android:layout_weight="0.5">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:gravity="center"
+        android:layout_gravity="center">
 
         <TextView
             android:id="@+id/method"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight=".3"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="@color/text_color"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="false"
+            style="@style/TextSmall"
+            android:text="test"
+            android:layout_marginBottom="4dp" />
 
-        <TextView
-            android:id="@+id/amount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".05"
-            android:layout_gravity="center"
-            android:gravity="center" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/method"
+            android:layout_centerInParent="true"
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/percentage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|end"
-            android:layout_weight=".15"
-            android:gravity="center_vertical|right"
-            android:paddingRight="5dp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/method"
+                style="@style/TextSmall"
+                android:text="test"
+                android:layout_marginRight="16dp" />
+
+            <TextView
+                android:id="@+id/percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center|center_vertical"
+                android:textColor="@color/text_color"
+                style="@style/TextSmall"
+                android:layout_below="@+id/method"
+                android:layout_toRightOf="@+id/amount"
+                android:text="test" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

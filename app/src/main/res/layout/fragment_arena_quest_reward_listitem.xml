@@ -24,7 +24,8 @@
             android:id="@+id/item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/text_color" />
     </LinearLayout>
 
     <TextView
@@ -32,13 +33,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".25"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/percentage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".25"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/text_color" />
 
 </LinearLayout>

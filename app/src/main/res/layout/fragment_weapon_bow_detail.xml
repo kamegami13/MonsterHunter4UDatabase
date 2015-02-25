@@ -16,82 +16,98 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Name:" />
+            android:text="Name:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type" />
+            android:text="Type"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Attack:" />
+            android:text="Attack:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Element:" />
+            android:text="Element:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rarity:" />
+            android:text="Rarity:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Slots:" />
+            android:text="Slots:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Affinity:" />
+            android:text="Affinity:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Defense:" />
+            android:text="Defense:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Creation Cost:" />
+            android:text="Creation Cost:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upgrade Cost:" />
+            android:text="Upgrade Cost:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arc" />
+            android:text="Arc"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Charge 1:" />
+            android:text="Charge 1:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Charge 2:" />
+            android:text="Charge 2:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Charge 3:" />
+            android:text="Charge 3:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Charge 4:" />
+            android:text="Charge 4:"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coatings:" />
+            android:text="Coatings:"
+            android:textColor="@color/text_color" />
     </LinearLayout>
 
     <LinearLayout
@@ -104,77 +120,92 @@
             android:id="@+id/detail_weapon_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_type"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_attack"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_element"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_rarity"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_slot"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_affinity"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_defense"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
         
         <TextView
             android:id="@+id/detail_weapon_creation"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_upgrade"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
         
         <TextView
             android:id="@+id/detail_weapon_bow_arc"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_bow_charge1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_bow_charge2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_bow_charge3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
 
         <TextView
             android:id="@+id/detail_weapon_bow_charge4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color" />
         
         <LinearLayout
             android:layout_width="match_parent"

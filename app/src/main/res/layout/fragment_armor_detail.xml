@@ -24,7 +24,8 @@
             android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
             android:textSize="20sp"
-            android:textStyle="bold" >
+            android:textStyle="bold"
+            android:textColor="@color/text_color">
         </TextView>
     </LinearLayout>
 
@@ -44,57 +45,68 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Part:" />
+                android:text="Part:"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Defense:" />
+                android:text="Defense:"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Slot:" />
+                android:text="Slot:"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rare:" />
+                android:text="Rare:"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buy:" />
+                android:text="Buy:"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text=""
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fire Res:" />
+                android:text="Fire Res:"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Water Res:" />
+                android:text="Water Res:"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ice Res:" />
+                android:text="Ice Res:"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thunder Res:" />
+                android:text="Thunder Res:"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dragon Res:" />
+                android:text="Dragon Res:"
+                android:textColor="@color/text_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -106,57 +118,68 @@
             <TextView
                 android:id="@+id/part"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/defense"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/slot"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/rare"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/buy"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text=""
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/fire_res"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/water_res"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/ice_res"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/thunder_res"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:id="@+id/dragon_res"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
         </LinearLayout>
     </LinearLayout>
 
