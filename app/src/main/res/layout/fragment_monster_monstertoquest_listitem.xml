@@ -8,7 +8,6 @@
         android:id="@+id/quest_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:layout_gravity="center"
         android:gravity="center_vertical"
         android:textColor="@color/text_color"

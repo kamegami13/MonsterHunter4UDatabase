@@ -1,61 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listitem"
-    android:layout_width="match_parent"
-    android:layout_height="35dip"
-    android:background="@drawable/generic_clicked_states"
-    android:orientation="horizontal" >
+    style = "@style/list_item" >
 
     <LinearLayout
         android:id="@+id/item_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".65"
+        android:layout_weight=".7"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:layout_gravity="center">
 
         <ImageView
-            android:id="@+id/item_image"
-            android:layout_width="35dip"
-            android:layout_height="35dip" />
+            style="@style/main_image"
+            android:id="@+id/item_image" />
 
         <TextView
             android:id="@+id/item"
+            style="@style/text_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:paddingLeft="10dp"
             android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:textColor="@color/text_color" />
+            android:gravity="center_vertical" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/slot"
+    <RelativeLayout
+        android:orientation="horizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".15"
-        android:gravity="center|center_vertical"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        android:layout_weight="0.3"
+        android:gravity="center_vertical|right"
+        android:layout_gravity="center" >
 
-    <TextView
-        android:id="@+id/amount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".05"
-        android:gravity="center|center_vertical"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        <TextView
+            style="@style/text_small"
+            android:id="@+id/slot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center|right"
+            android:textColor="@color/text_color"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="false" />
 
-    <TextView
-        android:id="@+id/percentage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|end"
-        android:layout_weight=".15"
-        android:gravity="center|center_vertical"
-        android:textColor="@color/text_color" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/slot"
+            android:layout_centerInParent="true"
+            android:gravity="right" >
+
+            <TextView
+                style="@style/text_small"
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/textView7"
+                android:layout_marginRight="16dp" />
+
+            <TextView
+                style="@style/text_small"
+                android:id="@+id/percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center|center_vertical"
+                android:textColor="@color/text_color"
+                android:layout_below="@+id/textView7"
+                android:layout_toRightOf="@+id/textView8"
+                android:text="test" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

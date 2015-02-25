@@ -13,7 +13,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/map"
-        android:textStyle="bold"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         style="@style/text_medium"
