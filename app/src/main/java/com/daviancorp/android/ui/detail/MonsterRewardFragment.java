@@ -49,7 +49,7 @@ public class MonsterRewardFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_card_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 

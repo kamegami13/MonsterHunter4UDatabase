@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.QuestClickListener;
 import com.daviancorp.android.ui.detail.QuestDetailActivity;
 
 /**
@@ -128,7 +129,7 @@ public class QuestExpandableListFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View v = inflater.inflate(R.layout.fragment_quest_expandablelist, null);
+		View v = inflater.inflate(R.layout.fragment_generic_expandable_list, null);
 		ExpandableListView elv = (ExpandableListView) v
 				.findViewById(R.id.expandableListView);
 		if (mHub.equals("Caravan")) {
@@ -136,21 +137,6 @@ public class QuestExpandableListFragment extends Fragment {
 		} else {
 			elv.setAdapter(new QuestListAdapter(guild));
 		}
-
-		elv.setOnChildClickListener(new OnChildClickListener() {
-
-			@Override
-			public boolean onChildClick(ExpandableListView arg0, View arg1,
-					int arg2, int arg3, long id) {
-
-				Intent i = new Intent(getActivity(), QuestDetailActivity.class);
-				i.putExtra(QuestDetailActivity.EXTRA_QUEST_ID,
-						(long) arg1.getTag());
-				startActivity(i);
-
-				return false;
-			}
-		});
 
 		return v;
 
@@ -265,7 +251,10 @@ public class QuestExpandableListFragment extends Fragment {
 			}
 			keyChildTextView.setText(key);
 
-			root.setTag(((Quest) getChild(i, i1)).getId());
+            long questId = ((Quest) getChild(i, i1)).getId();
+
+			root.setTag(questId);
+            root.setOnClickListener(new QuestClickListener(context, questId));
 			return v;
 		}
 

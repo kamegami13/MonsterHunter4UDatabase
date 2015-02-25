@@ -1,55 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/list_item"
     android:id="@+id/listitem"
-    android:layout_width="match_parent"
-    android:layout_height="35dip"
-    android:background="@drawable/generic_clicked_states"
     android:orientation="horizontal" >
+    <!--
+        <ImageView
+            android:id="@+id/map_image"
+            style="@style/main_image" />
+        -->
 
     <TextView
         android:id="@+id/map"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".4"
-        android:gravity="center"
-        android:textStyle="bold"
+        android:layout_weight=".7"
         android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        style="@style/text_medium" />
 
-    <TextView
-        android:id="@+id/rank"
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".2"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        android:layout_weight="0.3"
+        android:layout_gravity="right">
 
-    <TextView
-        android:id="@+id/area"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".2"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        <TextView
+            android:id="@+id/area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".2"
+            android:layout_gravity="center"
+            style="@style/text_small"
+            android:text="test"
+            android:layout_alignTop="@+id/rank"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="4dp"
+            android:gravity="right" />
 
-    <TextView
-        android:id="@+id/method"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".2"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        <TextView
+            android:id="@+id/rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".2"
+            android:layout_gravity="center"
+            style="@style/text_small"
+            android:text="test"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="false"
+            android:layout_toLeftOf="@+id/area"
+            android:gravity="right" />
 
-    <TextView
-        android:id="@+id/rate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".2"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        <TextView
+            android:id="@+id/method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".2"
+            android:layout_gravity="center"
+            style="@style/text_small"
+            android:text="test"
+            android:gravity="right"
+            android:layout_toLeftOf="@+id/rate"
+            android:layout_alignTop="@+id/rate" />
+
+        <TextView
+            android:id="@+id/rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".2"
+            android:layout_gravity="center"
+            style="@style/text_small"
+            android:text="test"
+            android:gravity="right"
+            android:layout_below="@+id/area"
+            android:layout_alignRight="@+id/area"
+            android:paddingLeft="4dp" />
+    </RelativeLayout>
 
 </LinearLayout>

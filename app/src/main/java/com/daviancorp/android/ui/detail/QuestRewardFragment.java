@@ -24,6 +24,7 @@ import com.daviancorp.android.data.classes.QuestReward;
 import com.daviancorp.android.data.database.QuestRewardCursor;
 import com.daviancorp.android.loader.QuestRewardListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
 
 public class QuestRewardFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -48,7 +49,7 @@ public class QuestRewardFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_quest_reward_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 
@@ -76,15 +77,6 @@ public class QuestRewardFragment extends ListFragment implements
 	public void onLoaderReset(Loader<Cursor> loader) {
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
-	}
-
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this
-		// for free
-		Intent i = new Intent(getActivity(), ItemDetailActivity.class);
-		i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, (long) v.getTag());
-		startActivity(i);
 	}
 
 	private static class QuestRewardListCursorAdapter extends CursorAdapter {
@@ -124,11 +116,23 @@ public class QuestRewardFragment extends ListFragment implements
 
 			String cellItemText = questReward.getItem().getName();
 			String cellSlotText = questReward.getRewardSlot();
+            String slotText;
 			int cellAmountText = questReward.getStackSize();
 			int cellPercentageText = questReward.getPercentage();
 
+            switch(cellSlotText) {
+                case("A"):
+                    slotText = "Primary";
+                    break;
+                case("B"):
+                    slotText = "Secondary";
+                    break;
+                default:
+                    slotText = "Subquest";
+            }
+
 			itemTextView.setText(cellItemText);
-			slotTextView.setText(cellSlotText);
+			slotTextView.setText(slotText);
 			amountTextView.setText("" + cellAmountText);
 
 			String percent = "" + cellPercentageText + "%";
@@ -147,6 +151,8 @@ public class QuestRewardFragment extends ListFragment implements
 			itemImageView.setImageDrawable(i);
 
 			itemLayout.setTag(questReward.getItem().getId());
+            itemLayout.setOnClickListener(new ItemClickListener(context, questReward.getItem()
+                    .getId()));
 		}
 	}
 

@@ -892,7 +892,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		projectionMap.put(cr + S.COLUMN_ITEMS_ICON_NAME, cr + "." + S.COLUMN_ITEMS_ICON_NAME + " AS " + cr + S.COLUMN_ITEMS_ICON_NAME);
 		
 		projectionMap.put(co + S.COLUMN_ITEMS_NAME, co + "." + S.COLUMN_ITEMS_NAME + " AS " + co + S.COLUMN_ITEMS_NAME);
-		projectionMap.put(co + S.COLUMN_ITEMS_ICON_NAME, co + "." + S.COLUMN_ITEMS_ICON_NAME + " AS " + co + S.COLUMN_ITEMS_ICON_NAME);
+        projectionMap.put(co + S.COLUMN_ITEMS_TYPE, co + "." + S.COLUMN_ITEMS_TYPE + " AS " + co + S.COLUMN_ITEMS_TYPE);
+        projectionMap.put(co + S.COLUMN_ITEMS_ICON_NAME, co + "." + S.COLUMN_ITEMS_ICON_NAME + " AS " + co + S.COLUMN_ITEMS_ICON_NAME);
         projectionMap.put(co + S.COLUMN_ITEMS_SUB_TYPE, co + "." + S.COLUMN_ITEMS_SUB_TYPE + " AS " + co + S.COLUMN_ITEMS_SUB_TYPE);
         projectionMap.put(co + S.COLUMN_ITEMS_RARITY, co + "." + S.COLUMN_ITEMS_RARITY + " AS " + co + S.COLUMN_ITEMS_RARITY);
 
@@ -1083,6 +1084,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
 		projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
 		projectionMap.put(l + S.COLUMN_LOCATIONS_NAME, l + "." + S.COLUMN_LOCATIONS_NAME + " AS " + l + S.COLUMN_LOCATIONS_NAME);
+        projectionMap.put(l + S.COLUMN_LOCATIONS_MAP, l + "." + S.COLUMN_LOCATIONS_MAP + " AS " + l + S.COLUMN_LOCATIONS_MAP);
 
 		//Create new querybuilder
 		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();

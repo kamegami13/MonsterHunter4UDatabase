@@ -74,11 +74,11 @@ public class GatheringCursor extends CursorWrapper {
 
 		long locationId = getLong(getColumnIndex(S.COLUMN_GATHERING_LOCATION_ID));
 		String locationName = getString(getColumnIndex("l" + S.COLUMN_LOCATIONS_NAME));
-//			String fileLocation = getString(getColumnIndex(S.COLUMN_LOCATIONS_MAP));
+	    String fileLocationLoc = getString(getColumnIndex("l" + S.COLUMN_LOCATIONS_MAP));
 
 		location.setId(locationId);
 		location.setName(locationName);
-//			location.setFileLocation(fileLocation);
+        location.setFileLocation(fileLocationLoc);
 		
 		gathering.setLocation(location);
 		

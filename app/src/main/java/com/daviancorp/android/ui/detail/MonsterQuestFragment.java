@@ -2,7 +2,6 @@ package com.daviancorp.android.ui.detail;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -13,13 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.MonsterToQuest;
 import com.daviancorp.android.data.database.MonsterToQuestCursor;
 import com.daviancorp.android.loader.MonsterToQuestListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.QuestClickListener;
 
 public class MonsterQuestFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -44,7 +43,7 @@ public class MonsterQuestFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_monster_monstertoquest_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 
@@ -73,15 +72,6 @@ public class MonsterQuestFragment extends ListFragment implements
 	public void onLoaderReset(Loader<Cursor> loader) {
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
-	}
-
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this
-		// for free
-		Intent i = new Intent(getActivity(), QuestDetailActivity.class);
-		i.putExtra(QuestDetailActivity.EXTRA_QUEST_ID, (long) v.getTag());
-		startActivity(i);
 	}
 
 	private static class MonsterToQuestListCursorAdapter extends CursorAdapter {
@@ -125,17 +115,19 @@ public class MonsterQuestFragment extends ListFragment implements
 			String cellUnstableText = monsterToQuest.getUnstable();
 			
 			if (cellUnstableText.equals("no")) {
-				cellUnstableText = "";
+                unstableTextView.setVisibility(View.GONE);
 			}
 			else {
 				cellUnstableText = "Unstable";
+                unstableTextView.setText(cellUnstableText);
 			}
 			
 			questTextView.setText(cellQuestText);
 			locationTextView.setText(cellLocationText);
-			unstableTextView.setText(cellUnstableText);
 
 			itemLayout.setTag(monsterToQuest.getQuest().getId());
+            itemLayout.setOnClickListener(new QuestClickListener(context,monsterToQuest
+                    .getQuest().getId()));
 		}
 	}
 

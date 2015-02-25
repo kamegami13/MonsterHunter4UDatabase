@@ -2,21 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:id="@+id/listitem"
-    style="@style/ListItemContents">
+    style="@style/list_item">
 
     <ImageView
         android:id="@+id/mapImage"
-        style="@style/LargeImage"
+        style="@style/main_image"
         android:padding="4dp" />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/map"
-        android:textStyle="bold"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
-        style="@style/TextMedium"
+        style="@style/text_medium"
         android:text="Frozen Seaway"
         android:layout_weight="0.5" />
 
@@ -32,7 +31,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/start"
             android:layout_gravity="center"
-            style="@style/TextSmall"
+            style="@style/text_small"
             android:text="1,2"
             android:gravity="center"
             android:layout_marginRight="4dp" />
@@ -49,7 +48,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/move"
             android:layout_gravity="center"
-            style="@style/TextSmall"
+            style="@style/text_small"
             android:text="1,2"
             android:gravity="center"
             android:layout_marginRight="4dp" />
@@ -66,7 +65,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/rest"
             android:layout_gravity="center"
-            style="@style/TextSmall"
+            style="@style/text_small"
             android:text="1,2"
             android:gravity="center" />
     </LinearLayout>

@@ -1,55 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listitem"
-    android:layout_width="match_parent"
-    android:layout_height="35dip"
-    android:background="@drawable/generic_clicked_states"
+    style="@style/list_item"
     android:orientation="horizontal" >
 
     <TextView
         android:id="@+id/quest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".45"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        android:layout_weight=".7"
+        style="@style/text_medium"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/level"
+    <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.3"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        android:layout_height="fill_parent"
+        android:layout_weight="0.3">
 
-    <TextView
-        android:id="@+id/slot"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        <TextView
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:gravity="center|right"
+            android:layout_gravity="center"
+            style="@style/text_small"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:text="test" />
 
-    <TextView
-        android:id="@+id/amount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".05"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        <TextView
+            android:id="@+id/slot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:gravity="center|right"
+            android:layout_gravity="center"
+            style="@style/text_small"
+            android:layout_toLeftOf="@+id/amount"
+            android:layout_alignTop="@+id/amount"
+            android:text="test" />
 
-    <TextView
-        android:id="@+id/percentage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|end"
-        android:layout_weight="0.1"
-        android:gravity="center"
-        android:textColor="@color/text_color" />
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".05"
+            android:gravity="center|right"
+            android:layout_gravity="center"
+            style="@style/text_small"
+            android:layout_alignTop="@+id/percentage"
+            android:layout_toLeftOf="@+id/percentage"
+            android:text="test"
+            android:layout_marginLeft="8dp" />
+
+        <TextView
+            android:id="@+id/percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:layout_weight="0.1"
+            style="@style/text_small"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/level"
+            android:text="test"
+            android:gravity="right"
+            android:layout_marginLeft="8dp" />
+    </RelativeLayout>
 
 </LinearLayout>

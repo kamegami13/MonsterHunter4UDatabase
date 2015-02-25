@@ -1,55 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listitem"
-    android:layout_width="match_parent"
-    android:layout_height="35dip"
-    android:background="@drawable/generic_clicked_states"
-    android:orientation="horizontal" >
+    style="@style/list_item"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/rank"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".15"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+
+    <ImageView
+        android:id="@+id/monster_image"
+        style="@style/main_image"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
 
     <TextView
         android:id="@+id/monster"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight=".3"
-        android:gravity="center"
-        android:textStyle="bold"
+        android:layout_weight=".7"
+        android:gravity="center_vertical|left"
         android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        style="@style/text_medium"
+        android:text="Emerald Congalala"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/monster_image"
+        android:layout_alignWithParentIfMissing="false" />
+
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        style="@style/text_small"
+        android:layout_alignParentRight="false"
+        android:gravity="center_vertical|right"
+        android:text="LR"
+        android:layout_below="@+id/monster"
+        android:layout_alignLeft="@+id/monster" />
 
     <TextView
         android:id="@+id/method"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight=".3"
-        android:gravity="center"
         android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        style="@style/text_small"
+        android:layout_alignParentRight="false"
+        android:paddingLeft="4dp"
+        android:gravity="center_vertical|right"
+        android:text="Shiny Drop (Mushroom)"
+        android:layout_toRightOf="@+id/rank"
+        android:layout_alignTop="@+id/rank"
+        android:layout_alignParentBottom="false" />
 
     <TextView
         android:id="@+id/amount"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight=".05"
-        android:gravity="center"
         android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        style="@style/text_small"
+        android:layout_toLeftOf="@+id/percentage"
+        android:layout_alignTop="@+id/percentage"
+        android:gravity="center_vertical|right"
+        android:text="3"
+        android:layout_centerVertical="true" />
 
     <TextView
         android:id="@+id/percentage"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|end"
-        android:layout_weight=".15"
-        android:gravity="center"
-        android:textColor="@color/text_color" />
+        style="@style/text_small"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical|right"
+        android:paddingLeft="16dp"
+        android:text="25%"
+        android:layout_centerVertical="true" />
 
-</LinearLayout>
+</RelativeLayout>
