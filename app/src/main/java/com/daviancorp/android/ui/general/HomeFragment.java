@@ -30,113 +30,113 @@ import com.daviancorp.android.ui.list.WishlistListActivity;
 
 public class HomeFragment extends Fragment {
 
-	private ImageView mLogo;		// Image logo for home screen
-	
-	// Options to navigate
-	private TextView mMonsters, mWeapons, mArmors, mQuests, mItems, mCombining,
-		mDecorations, mSkillTrees, mLocations, mHuntingFleet, mArenaQuests, mWishlists;
+    private ImageView mLogo;		// Image logo for home screen
 
-	private ProgressDialog progress;	// Progress spinner upon creating/updating database
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		// Make a dummy query to create/update database if needed
-		LoaderManager lm = getLoaderManager();
-		lm.initLoader(R.id.home_fragment, null, new DummyLoaderCallbacks());
-	}
+    // Options to navigate
+    private TextView mMonsters, mWeapons, mArmors, mQuests, mItems, mCombining,
+            mDecorations, mSkillTrees, mLocations, mHuntingFleet, mArenaQuests, mWishlists;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_home, parent, false);
-		
-		mLogo = (ImageView) v.findViewById(R.id.logo);
-		
-		mMonsters = (TextView) v.findViewById(R.id.monsters);
-		mWeapons = (TextView) v.findViewById(R.id.weapons);
-		mArmors = (TextView) v.findViewById(R.id.armors);
-		mQuests = (TextView) v.findViewById(R.id.quests);
-		mItems = (TextView) v.findViewById(R.id.items);
-		mCombining = (TextView) v.findViewById(R.id.combining);
-		mDecorations = (TextView) v.findViewById(R.id.decorations); // Disabled
-		mSkillTrees = (TextView) v.findViewById(R.id.skilltrees);
-		mLocations = (TextView) v.findViewById(R.id.locations);
-		//mArenaQuests = (TextView) v.findViewById(R.id.arena_quests); // Disabled
-		mWishlists = (TextView) v.findViewById(R.id.wishlists);
+    private ProgressDialog progress;	// Progress spinner upon creating/updating database
 
-		mMonsters.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(),MonsterGridActivity.class);
-				startActivity(intent);
-			}
-		});
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		mWeapons.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), WeaponGridActivity.class);
-				startActivity(intent);
-			}
-		});
+        // Make a dummy query to create/update database if needed
+        LoaderManager lm = getLoaderManager();
+        lm.initLoader(R.id.home_fragment, null, new DummyLoaderCallbacks());
+    }
 
-		mArmors.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), ArmorListActivity.class);
-				startActivity(intent);
-			}
-		});
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-		mQuests.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), QuestListActivity.class);
-				startActivity(intent);
-			}
-		});
+        mLogo = (ImageView) v.findViewById(R.id.logo);
 
-		mItems.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), ItemListActivity.class);
-				startActivity(intent);
-			}
-		});
+        mMonsters = (TextView) v.findViewById(R.id.monsters);
+        mWeapons = (TextView) v.findViewById(R.id.weapons);
+        mArmors = (TextView) v.findViewById(R.id.armors);
+        mQuests = (TextView) v.findViewById(R.id.quests);
+        mItems = (TextView) v.findViewById(R.id.items);
+        mCombining = (TextView) v.findViewById(R.id.combining);
+        mDecorations = (TextView) v.findViewById(R.id.decorations); // Disabled
+        mSkillTrees = (TextView) v.findViewById(R.id.skilltrees);
+        mLocations = (TextView) v.findViewById(R.id.locations);
+        //mArenaQuests = (TextView) v.findViewById(R.id.arena_quests); // Disabled
+        mWishlists = (TextView) v.findViewById(R.id.wishlists);
 
-		mCombining.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), CombiningListActivity.class);
-				startActivity(intent);
-			}
-		});
+        mMonsters.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),MonsterGridActivity.class);
+                startActivity(intent);
+            }
+        });
 
-		mDecorations.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), DecorationListActivity.class);
-				startActivity(intent);
-			}
-		});
+        mWeapons.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WeaponGridActivity.class);
+                startActivity(intent);
+            }
+        });
 
-		mSkillTrees.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), SkillTreeListActivity.class);
-				startActivity(intent);
-			}
-		});
+        mArmors.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ArmorListActivity.class);
+                startActivity(intent);
+            }
+        });
 
-		mLocations.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), LocationGridActivity.class);
-				startActivity(intent);
-			}
-		});
+        mQuests.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), QuestListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mItems.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ItemListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mCombining.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CombiningListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mDecorations.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DecorationListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mSkillTrees.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SkillTreeListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mLocations.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LocationGridActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //		mArenaQuests.setOnClickListener(new OnClickListener() {
 //			@Override
@@ -146,39 +146,39 @@ public class HomeFragment extends Fragment {
 //			}
 //		});
 
-		mWishlists.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), WishlistListActivity.class);
-				startActivity(intent);
-			}
-		});
+        mWishlists.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WishlistListActivity.class);
+                startActivity(intent);
+            }
+        });
 
-		return v;
-	}
-	
-	/*
-	 * For dummy query
-	 */
-	private class DummyLoaderCallbacks implements LoaderCallbacks<Quest> {
-		
-		@Override
-		public Loader<Quest> onCreateLoader(int id, Bundle args) {
-			progress = new ProgressDialog(getActivity());
-			progress.setTitle("Loading");
-			progress.setMessage("Loading database...");
-			progress.show();
-			return new QuestLoader(getActivity(), 1);
-		}
-		
-		@Override
-		public void onLoadFinished(Loader<Quest> loader, Quest dummy) {
-			progress.dismiss();
-		}
-		
-		@Override
-		public void onLoaderReset(Loader<Quest> loader) {
-			// Do nothing
-		}
-	}
+        return v;
+    }
+
+    /*
+     * For dummy query
+     */
+    private class DummyLoaderCallbacks implements LoaderCallbacks<Quest> {
+
+        @Override
+        public Loader<Quest> onCreateLoader(int id, Bundle args) {
+            progress = new ProgressDialog(getActivity());
+            progress.setTitle("Loading");
+            progress.setMessage("Loading database...");
+            progress.show();
+            return new QuestLoader(getActivity(), 1);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Quest> loader, Quest dummy) {
+            progress.dismiss();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Quest> loader) {
+            // Do nothing
+        }
+    }
 }
