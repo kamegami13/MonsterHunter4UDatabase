@@ -39,7 +39,7 @@ public class CombiningListFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_combining_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 
@@ -151,10 +151,6 @@ public class CombiningListFragment extends ListFragment implements
 			itemtv1.setText(item1);
 			itemtv2.setText(item2);
 			itemtv3.setText(item3);
-			
-//			itemlayout1.setBackgroundResource(android.R.drawable.list_selector_background);
-//			itemlayout2.setBackgroundResource(android.R.drawable.list_selector_background);
-//			itemlayout3.setBackgroundResource(android.R.drawable.list_selector_background);
 
 			itemlayout1.setOnClickListener(new ItemClickListener(context, item.getItem1().getId()));
 			itemlayout2.setOnClickListener(new ItemClickListener(context, item.getItem2().getId()));

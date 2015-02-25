@@ -3,10 +3,11 @@
     style="@style/list_item"
     android:id="@+id/listitem"
     android:orientation="horizontal" >
-
-    <ImageView
-        android:id="@+id/map_image"
-        style="@style/large_image" />
+    <!--
+        <ImageView
+            android:id="@+id/map_image"
+            style="@style/main_image" />
+        -->
 
     <TextView
         android:id="@+id/map"

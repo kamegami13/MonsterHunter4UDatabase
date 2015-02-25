@@ -6,7 +6,7 @@
 
     <ImageView
         android:id="@+id/mapImage"
-        style="@style/large_image"
+        style="@style/main_image"
         android:padding="4dp" />
 
     <TextView
