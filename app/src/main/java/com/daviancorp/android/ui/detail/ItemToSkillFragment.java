@@ -2,7 +2,6 @@ package com.daviancorp.android.ui.detail;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -13,13 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.ItemToSkillTree;
 import com.daviancorp.android.data.database.ItemToSkillTreeCursor;
 import com.daviancorp.android.loader.ItemToSkillTreeListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.SkillClickListener;
 
 public class ItemToSkillFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -46,7 +45,7 @@ public class ItemToSkillFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_decoration_skill_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 
@@ -76,15 +75,6 @@ public class ItemToSkillFragment extends ListFragment implements
 		setListAdapter(null);
 	}
 
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this
-		// for free
-		Intent i = new Intent(getActivity(), SkillTreeDetailActivity.class);
-		i.putExtra(SkillTreeDetailActivity.EXTRA_SKILLTREE_ID, (long) v.getTag());
-		startActivity(i);
-	}
-
 	private static class ItemToSkillTreeListCursorAdapter extends CursorAdapter {
 
 		private ItemToSkillTreeCursor mItemToSkillTreeCursor;
@@ -100,7 +90,7 @@ public class ItemToSkillFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_decoration_skill,
+			return inflater.inflate(R.layout.fragment_item_to_skill,
 					parent, false);
 		}
 
@@ -125,6 +115,8 @@ public class ItemToSkillFragment extends ListFragment implements
 			pointTextView.setText(cellPoints);
 
 			itemLayout.setTag(itemToSkillTree.getSkillTree().getId());
+            itemLayout.setOnClickListener(new SkillClickListener(context,itemToSkillTree
+                    .getSkillTree().getId()));
 		}
 	}
 

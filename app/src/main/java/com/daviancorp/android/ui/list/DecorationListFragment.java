@@ -44,7 +44,7 @@ public class DecorationListFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_card_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 	
@@ -115,6 +115,7 @@ public class DecorationListFragment extends ListFragment implements
 			TextView skill1amtTextView = (TextView) view.findViewById(R.id.skill1_amt);
 			TextView skill2TextView = (TextView) view.findViewById(R.id.skill2);
 			TextView skill2amtTextView = (TextView) view.findViewById(R.id.skill2_amt);
+            LinearLayout skill2layout = (LinearLayout) view.findViewById(R.id.skill2layout);
 			
 			String decorationNameText = decoration.getName();
 			String skill1Text = decoration.getSkill1Name();
@@ -139,8 +140,13 @@ public class DecorationListFragment extends ListFragment implements
 			decorationNameTextView.setText(decorationNameText);
 			skill1TextView.setText(skill1Text);
 			skill1amtTextView.setText(skill1amtText);
-			skill2TextView.setText(skill2Text);
-			skill2amtTextView.setText(skill2amtText);
+
+            skill2layout.setVisibility(View.GONE);
+            if(skill2Text != null) {
+                skill2TextView.setText(skill2Text);
+                skill2amtTextView.setText(skill2amtText);
+                skill2layout.setVisibility(View.VISIBLE);
+            }
 			
 			itemLayout.setTag(decoration.getId());
             itemLayout.setOnClickListener(new DecorationClickListener(context,decoration.getId()));
