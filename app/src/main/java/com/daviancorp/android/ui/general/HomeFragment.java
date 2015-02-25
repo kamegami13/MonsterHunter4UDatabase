@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.loader.QuestLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 import com.daviancorp.android.ui.list.ArenaQuestListActivity;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
@@ -164,6 +165,14 @@ public class HomeFragment extends Fragment {
 				startActivity(intent);
 			}
 		});
+
+        mLogo.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ArmorSetBuilderActivity.class);
+                startActivity(intent);
+            }
+        });
 
 		return v;
 	}

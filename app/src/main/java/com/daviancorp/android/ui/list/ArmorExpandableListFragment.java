@@ -23,6 +23,7 @@ import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
+import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 
 /**
  * Pieced together from: Android samples:
@@ -66,6 +67,7 @@ public class ArmorExpandableListFragment extends Fragment {
 		populateList();
 
 	}
+
 
 	private void populateList() {
 		children = new ArrayList<ArrayList<Armor>>();
@@ -128,7 +130,17 @@ public class ArmorExpandableListFragment extends Fragment {
 				
 				Intent i = new Intent(getActivity(), ArmorDetailActivity.class);
 				i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, (long) arg1.getTag());
-				startActivity(i);
+
+                boolean fromSetBuilder = getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false);
+                if (fromSetBuilder) {
+                    i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                    i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
+                    getActivity().startActivity(i);
+                    getActivity().finish();
+                }
+                else {
+                    startActivity(i);
+                }
 
 				return false;
 			}
