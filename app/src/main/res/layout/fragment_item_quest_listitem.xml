@@ -8,15 +8,16 @@
         android:id="@+id/quest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".7"
+        android:layout_weight=".75"
         style="@style/text_medium"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical" />
 
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.3">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3"
+        android:layout_gravity="center_vertical">
 
         <TextView
             android:id="@+id/level"
@@ -41,7 +42,7 @@
             style="@style/text_small"
             android:layout_toLeftOf="@+id/amount"
             android:layout_alignTop="@+id/amount"
-            android:text="test" />
+            android:text="A" />
 
         <TextView
             android:id="@+id/amount"

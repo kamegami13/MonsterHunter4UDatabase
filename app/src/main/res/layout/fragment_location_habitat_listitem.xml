@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/listitem">
+    android:id="@+id/listitem"
+    style="@style/list_item_large">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -15,18 +17,18 @@
             android:layout_width="50dip"
             android:layout_height="50dip"
             android:id="@+id/monster_image"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            style="@style/large_image" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/monster"
-            android:textStyle="bold"
             android:layout_weight="0.40"
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:textColor="@color/text_color" />
+            style="@style/text_medium" />
 
     </LinearLayout>
 
@@ -37,7 +39,7 @@
         android:layout_weight="0.15"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/text_color" />
+        style="@style/text_small" />
 
     <TextView
         android:layout_width="0dp"
@@ -46,7 +48,7 @@
         android:layout_weight="0.15"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/text_color" />
+        style="@style/text_small" />
 
     <TextView
         android:layout_width="0dp"
@@ -55,5 +57,5 @@
         android:layout_weight="0.15"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/text_color" />
+        style="@style/text_small" />
 </LinearLayout>
