@@ -176,7 +176,7 @@ public class ItemListFragment extends ListFragment implements
                     cellImage = "icons_armor/icons_body/body" + item.getRarity() + ".png";
                     break;
                 case "Arms":
-                    cellImage = "icons_armor/icons_body/body" + item.getRarity() + ".png";
+                    cellImage = "icons_armor/icons_body/arms" + item.getRarity() + ".png";
                     break;
                 case "Waist":
                     cellImage = "icons_armor/icons_waist/waist" + item.getRarity() + ".png";
