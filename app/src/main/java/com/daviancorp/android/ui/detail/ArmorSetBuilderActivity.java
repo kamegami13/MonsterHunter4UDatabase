@@ -108,7 +108,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Actio
                         Log.d("SetBuilder", "Setting body piece.");
                         session.setBody(DataManager.get(getApplicationContext()).getArmor(id));
                         break;
-                    case "arms":
+                    case "Arms":
                         Log.d("SetBuilder", "Setting arms piece.");
                         session.setArms(DataManager.get(getApplicationContext()).getArmor(id));
                         break;

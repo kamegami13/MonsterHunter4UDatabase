@@ -90,7 +90,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
             headText.setText(s.getHead().getName());
             headImage.setImageBitmap(fetchIcon("Head", s.getHead().getRarity()));
         }
-        if (s.isBodySelected()) { // We can use else-if since only one armor piece will be selected at a time.
+        if (s.isBodySelected()) {
             bodyText.setText(s.getBody().getName());
             bodyImage.setImageBitmap(fetchIcon("Body", s.getBody().getRarity()));
         }
