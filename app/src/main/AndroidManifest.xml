@@ -49,6 +49,10 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.daviancorp.android.ui.list.HuntingFleetListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.daviancorp.android.ui.list.ArenaQuestListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
