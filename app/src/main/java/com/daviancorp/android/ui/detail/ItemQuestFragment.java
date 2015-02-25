@@ -20,6 +20,7 @@ import com.daviancorp.android.data.classes.QuestReward;
 import com.daviancorp.android.data.database.QuestRewardCursor;
 import com.daviancorp.android.loader.QuestRewardListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.QuestClickListener;
 
 public class ItemQuestFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -44,7 +45,7 @@ public class ItemQuestFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_item_quest_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 
@@ -72,15 +73,6 @@ public class ItemQuestFragment extends ListFragment implements
 	public void onLoaderReset(Loader<Cursor> loader) {
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
-	}
-
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this
-		// for free
-		Intent i = new Intent(getActivity(), QuestDetailActivity.class);
-		i.putExtra(QuestDetailActivity.EXTRA_QUEST_ID, (long) v.getTag());
-		startActivity(i);
 	}
 
 	private static class QuestRewardListCursorAdapter extends CursorAdapter {
@@ -133,6 +125,8 @@ public class ItemQuestFragment extends ListFragment implements
 			percentageTextView.setText(percent);
 
 			itemLayout.setTag(questReward.getQuest().getId());
+            itemLayout.setOnClickListener(new QuestClickListener(context,
+                    questReward.getQuest().getId()));
 		}
 	}
 

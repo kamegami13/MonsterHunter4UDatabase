@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -12,6 +13,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +22,9 @@ import com.daviancorp.android.data.classes.Gathering;
 import com.daviancorp.android.data.database.GatheringCursor;
 import com.daviancorp.android.loader.GatheringListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.LocationClickListener;
+
+import java.io.IOException;
 
 public class ItemLocationFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -45,7 +50,7 @@ public class ItemLocationFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_item_location_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 	
@@ -74,15 +79,6 @@ public class ItemLocationFragment extends ListFragment implements
 	public void onLoaderReset(Loader<Cursor> loader) {
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
-	}
-
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this
-		// for free
-		Intent i = new Intent(getActivity(), LocationDetailActivity.class);
-		i.putExtra(LocationDetailActivity.EXTRA_LOCATION_ID, (long) v.getTag());
-		startActivity(i);
 	}
 
 	private static class GatheringListCursorAdapter extends CursorAdapter {
@@ -118,6 +114,7 @@ public class ItemLocationFragment extends ListFragment implements
 			TextView areaTextView = (TextView) view.findViewById(R.id.area);
 			TextView methodTextView = (TextView) view.findViewById(R.id.method);
             TextView rateTextView = (TextView) view.findViewById(R.id.rate);
+            ImageView mapView = (ImageView) view.findViewById(R.id.map_image);
 
 			
 			String mapName = gathering.getLocation().getName();
@@ -133,6 +130,24 @@ public class ItemLocationFragment extends ListFragment implements
             rateTextView.setText(Long.toString(rate) + "%");
 			
 			itemLayout.setTag(gathering.getLocation().getId());
+            itemLayout.setOnClickListener(new LocationClickListener(context,
+                    gathering.getLocation().getId()));
+
+            //This code is too slow, needs async
+            /*
+            Drawable i = null;
+            String cellImage = "icons_location/"
+                    + gathering.getLocation().getFileLocation();
+            try {
+                i = Drawable.createFromStream(
+                        context.getAssets().open(cellImage), null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            mapView.setImageDrawable(i);
+            */
+
 		}
 	}
 

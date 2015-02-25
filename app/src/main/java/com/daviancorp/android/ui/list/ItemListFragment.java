@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +26,10 @@ import com.daviancorp.android.data.classes.Item;
 import com.daviancorp.android.data.database.ItemCursor;
 import com.daviancorp.android.loader.ItemListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
+import com.daviancorp.android.ui.ClickListeners.DecorationClickListener;
+import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
+import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
 import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 import com.daviancorp.android.ui.detail.ItemDetailActivity;
@@ -49,7 +54,7 @@ public class ItemListFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_list_search, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list_search, null);
 		
 		EditText inputSearch = (EditText) v.findViewById(R.id.input_search);
 		inputSearch.addTextChangedListener(new TextWatcher() {
@@ -96,36 +101,36 @@ public class ItemListFragment extends ListFragment implements
 		setListAdapter(null);
 	}
 
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this
-		// for free
-        Intent i;
-        String itemtype;
-
-        ItemCursor mycursor = (ItemCursor) l.getItemAtPosition(position);
-        itemtype = mycursor.getItem().getType();
-        long item_id = mycursor.getItem().getId();
-
-        switch(itemtype){
-            case "Weapon":
-                i = new Intent(getActivity(), WeaponDetailActivity.class);
-                i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, item_id);
-                break;
-            case "Armor":
-                i = new Intent(getActivity(), ArmorDetailActivity.class);
-                i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, item_id);
-                break;
-            case "Decoration":
-                i = new Intent(getActivity(), DecorationDetailActivity.class);
-                i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, item_id);
-                break;
-            default:
-                i = new Intent(getActivity(), ItemDetailActivity.class);
-                i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, item_id);
-        }
-		startActivity(i);
-	}
+//	@Override
+//	public void onListItemClick(ListView l, View v, int position, long id) {
+//		// The id argument will be the Monster ID; CursorAdapter gives us this
+//		// for free
+//        Intent i;
+//        String itemtype;
+//
+//        ItemCursor mycursor = (ItemCursor) l.getItemAtPosition(position);
+//        itemtype = mycursor.getItem().getType();
+//        long item_id = mycursor.getItem().getId();
+//
+//        switch(itemtype){
+//            case "Weapon":
+//                i = new Intent(getActivity(), WeaponDetailActivity.class);
+//                i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, item_id);
+//                break;
+//            case "Armor":
+//                i = new Intent(getActivity(), ArmorDetailActivity.class);
+//                i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, item_id);
+//                break;
+//            case "Decoration":
+//                i = new Intent(getActivity(), DecorationDetailActivity.class);
+//                i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, item_id);
+//                break;
+//            default:
+//                i = new Intent(getActivity(), ItemDetailActivity.class);
+//                i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, item_id);
+//        }
+//		startActivity(i);
+//	}
 
 	private static class ItemListCursorAdapter extends CursorAdapter {
 
@@ -152,6 +157,8 @@ public class ItemListFragment extends ListFragment implements
 			Item item = mItemCursor.getItem();
 
 			// Set up the text view
+            LinearLayout clickView = (LinearLayout) view.findViewById(R.id.listitem);
+
 			TextView itemNameTextView = (TextView) view
 					.findViewById(R.id.text1);
 			ImageView itemImageView = (ImageView) view
@@ -236,6 +243,23 @@ public class ItemListFragment extends ListFragment implements
 			}
 
 			itemImageView.setImageDrawable(itemImage);
+            String itemtype = item.getType();
+            long id = item.getId();
+
+            switch(itemtype){
+                case "Weapon":
+                    clickView.setOnClickListener(new WeaponClickListener(context, id));
+                    break;
+                case "Armor":
+                    clickView.setOnClickListener(new ArmorClickListener(context, id));
+                    break;
+                case "Decoration":
+                    clickView.setOnClickListener(new DecorationClickListener(context, id));
+                    break;
+                default:
+                    clickView.setOnClickListener(new ItemClickListener(context, id));
+                    break;
+            }
 
 		}
 	}
