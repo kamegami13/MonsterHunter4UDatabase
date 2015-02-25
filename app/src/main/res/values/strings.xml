@@ -72,4 +72,11 @@
     <string name="icon_name">MH4U DB</string>
 
 
+    <string name="activity_armor_set_builder">Armor Set Builder</string>
+    <string name="armor_set_builder_add_piece">Add a piece</string>
+    <string name="armor_set_builder_helmet">Helmet</string>
+    <string name="armor_set_builder_body">Body</string>
+    <string name="armor_set_builder_arms">Arms</string>
+    <string name="armor_set_builder_waist">Waist</string>
+    <string name="armor_set_builder_legs">Legs</string>
 </resources>

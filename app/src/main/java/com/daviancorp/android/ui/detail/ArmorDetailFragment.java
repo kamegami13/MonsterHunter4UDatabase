@@ -3,6 +3,8 @@ package com.daviancorp.android.ui.detail;
 import java.io.IOException;
 import java.io.InputStream;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,11 +16,11 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Armor;
-import com.daviancorp.android.data.database.S;
 import com.daviancorp.android.loader.ArmorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 
@@ -90,6 +92,22 @@ public class ArmorDetailFragment extends Fragment {
 		iceResTextView = (TextView) view.findViewById(R.id.ice_res);
 		thunderResTextView = (TextView) view.findViewById(R.id.thunder_res);
 		dragonResTextView = (TextView) view.findViewById(R.id.dragon_res);
+
+        // If the originator of this fragment's activity was the Armor Set Builder...
+        if (getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            Button selectButton = new Button(getActivity().getApplicationContext());
+            selectButton.setText("Select");
+            selectButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = getActivity().getIntent();
+                    intent.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, getArguments().getLong(ARG_ARMOR_ID)); // We put the armor's ID number as an extra of the intent.
+                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    getActivity().finish();
+                }
+            });
+            ((ViewGroup) view).addView(selectButton);
+        }
 		
 		return view;
 	}
