@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_weight=".7"
         android:orientation="horizontal"
-        android:paddingLeft="10dp"
         android:layout_gravity="center">
 
         <ImageView
@@ -50,7 +49,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/slot"
             android:layout_centerInParent="true"
             android:gravity="right" >

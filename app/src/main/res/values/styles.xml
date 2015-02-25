@@ -31,6 +31,8 @@
         <item name="android:colorPrimaryDark">@color/dark_primary_color</item>
         <item name="android:colorAccent">@color/accent_color</item>
 
+        <item name="android:clipToPadding">false</item>
+
         <item name="actionBarTabStyle">@style/MyActionBarTabs</item>
     </style>
 
@@ -65,7 +67,7 @@
     </style>
 
     <style name="expandable_group" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_height">32dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingTop">4dp</item>
         <item name="android:paddingBottom">4dp</item>
@@ -78,11 +80,10 @@
     <style name="list_item" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:background">@drawable/clicked_states_white</item>
         <item name="android:clickable">true</item>
-        <item name="android:layout_height">72dp</item>
+        <item name="android:layout_height">48dp</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:padding">16dp</item>
-        <item name="android:clipToPadding">false</item>
-        <item name="android:clipChildren">false</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
     </style>
 
     <style name="text_medium" parent="@style/Theme.AppCompat.Light.DarkActionBar">
@@ -108,11 +109,6 @@
         <item name="android:layout_width">32dp</item>
         <item name="android:layout_marginRight">16dp</item>
         <item name="android:layout_gravity">center</item>
-    </style>
-
-    <style name="large_image" parent="@style/main_image">
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_width">48dp</item>
     </style>
 
     <style name="small_image" parent="@style/main_image">

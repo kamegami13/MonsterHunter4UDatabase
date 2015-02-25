@@ -5,13 +5,13 @@
     android:orientation="horizontal"
     android:layout_height="wrap_content">
 
-    <!--
+
     <ImageView
         android:id="@+id/monster_image"
-        style="@style/large_image"
+        style="@style/main_image"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" />
-        -->
+
 
     <TextView
         android:id="@+id/monster"
