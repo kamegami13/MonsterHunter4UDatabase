@@ -23,6 +23,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Actio
     private ArmorSetBuilderSession session; //ASSSIGN
 
     private ArmorSetChangedListener changeListener;
+    private ArmorSetChangedListener skillChangeListener;
 
     private ViewPager viewPager;
     private ArmorSetBuilderPagerAdapter adapter;
@@ -127,6 +128,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Actio
             }
 
             changeListener.updateContents(session);
+            skillChangeListener.updateContents(session);
         }
     }
 
@@ -154,6 +156,11 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Actio
     public void setOnArmorSetChangedListener(ArmorSetChangedListener listener) {
         this.changeListener = listener;
     }
+
+    public void setOnArmorSetChangedSkillListener(ArmorSetChangedListener listener) {
+        this.skillChangeListener = listener;
+    }
+
 
     public static interface ArmorSetChangedListener {
         public void updateContents(ArmorSetBuilderSession s);

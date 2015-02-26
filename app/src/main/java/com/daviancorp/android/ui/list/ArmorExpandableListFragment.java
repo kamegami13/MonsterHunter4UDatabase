@@ -112,7 +112,7 @@ public class ArmorExpandableListFragment extends Fragment {
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		
-		View v = inflater.inflate(R.layout.fragment_armor_expandablelist, null);
+		View v = inflater.inflate(R.layout.fragment_generic_expandable_list, null);
 //		setContextMenu(v);
 		
 		elv = (ExpandableListView) v

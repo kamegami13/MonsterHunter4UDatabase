@@ -51,7 +51,6 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         return f;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,7 +150,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
             }
         }
         else {
-            Log.e("SET BUILDER", "Invalid slot argument!");
+            Log.e("SetBuilder", "Invalid slot argument!");
         }
         return null;
     }
@@ -159,7 +158,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
     /**
      * Helper method that turns the properties {@code android:longClickable}, {@code android:focusable}, and {@code android:focusableInTouchMode} on.
      * @param target The view on which to perform these actions.
-     **/
+     */
     private void enableClickableFocusable(View target) {
         target.setLongClickable(true);
         target.setFocusable(true);
@@ -169,7 +168,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
     /**
      * Helper method that turns the properties {@code android:longClickable}, {@code android:focusable}, and {@code android:focusableInTouchMode} off.
      * @param target The view on which to perform these actions.
-     **/
+     */
     private void disableClickableFocusable(View target) {
         target.setLongClickable(false);
         target.setFocusable(false);
