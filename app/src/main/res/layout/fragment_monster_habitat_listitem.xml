@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:id="@+id/listitem"
-    style="@style/list_item">
+    style="@style/list_item_large">
 
     <ImageView
         android:id="@+id/mapImage"
@@ -24,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="0.5"
-        android:gravity="center">
+        android:gravity="center|right">
 
         <TextView
             android:layout_width="wrap_content"

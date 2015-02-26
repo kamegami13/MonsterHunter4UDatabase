@@ -23,6 +23,7 @@ import com.daviancorp.android.data.classes.Combining;
 import com.daviancorp.android.data.database.CombiningCursor;
 import com.daviancorp.android.loader.CombiningListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
 import com.daviancorp.android.ui.detail.ItemDetailActivity;
 
 public class CombiningListFragment extends ListFragment implements
@@ -39,7 +40,7 @@ public class CombiningListFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_combining_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 
@@ -109,7 +110,9 @@ public class CombiningListFragment extends ListFragment implements
 				temp = temp + "-" + max;
 			}
 			
-			String percentage = "" + percent + "%"; 
+			String percentage = "" + percent + "%";
+
+            LinearLayout baseLayout = (LinearLayout) v.findViewById(R.id.listitem);
 
 			TextView itemtv1 = (TextView) v.findViewById(R.id.item_text1);
 			TextView itemtv2 = (TextView) v.findViewById(R.id.item_text2);
@@ -151,40 +154,18 @@ public class CombiningListFragment extends ListFragment implements
 			itemtv1.setText(item1);
 			itemtv2.setText(item2);
 			itemtv3.setText(item3);
-			
-//			itemlayout1.setBackgroundResource(android.R.drawable.list_selector_background);
-//			itemlayout2.setBackgroundResource(android.R.drawable.list_selector_background);
-//			itemlayout3.setBackgroundResource(android.R.drawable.list_selector_background);
 
 			itemlayout1.setOnClickListener(new ItemClickListener(context, item.getItem1().getId()));
 			itemlayout2.setOnClickListener(new ItemClickListener(context, item.getItem2().getId()));
 			itemlayout3.setOnClickListener(new ItemClickListener(context, item.getCreatedItem().getId()));
+            baseLayout.setOnClickListener(new ItemClickListener(context, item.getCreatedItem().getId()));
+
 		}
 		
 		@Override
 		public boolean isEnabled(int position) {
 			return false;
 		}
-
-		private static class ItemClickListener implements OnClickListener {
-			private Context c;
-			private Long id;
-
-			public ItemClickListener(Context context, Long id) {
-				super();
-				this.id = id;
-				this.c = context;
-			}
-
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(c, ItemDetailActivity.class);
-				i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, id);
-				c.startActivity(i);
-			}
-		}
-
-
 
 	}
 

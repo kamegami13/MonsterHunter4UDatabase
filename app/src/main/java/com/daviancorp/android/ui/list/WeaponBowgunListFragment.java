@@ -85,11 +85,11 @@ public class WeaponBowgunListFragment extends WeaponListFragment implements
 			Weapon weapon = mWeaponCursor.getWeapon();
 			
 			// Set up the text view
-			TextView nametv = (TextView) view.findViewById(R.id.name);
+			TextView nametv = (TextView) view.findViewById(R.id.name_text);
 			TextView attacktv = (TextView) view.findViewById(R.id.attack);
 			TextView slottv = (TextView) view.findViewById(R.id.slot);
 			TextView affinitytv = (TextView) view.findViewById(R.id.affinity);
-			TextView defensetv = (TextView) view.findViewById(R.id.defense);
+			TextView defensetv = (TextView) view.findViewById(R.id.defense_text);
 
 			// Need to reset drawables
 			

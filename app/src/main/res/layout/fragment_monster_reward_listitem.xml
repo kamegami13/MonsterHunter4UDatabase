@@ -47,13 +47,12 @@
             android:layout_alignParentEnd="false"
             android:layout_alignParentRight="false"
             style="@style/text_small"
-            android:text="test"
-            android:layout_marginBottom="4dp" />
+            android:text="test" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/method"
             android:layout_centerInParent="true"
             android:gravity="right">

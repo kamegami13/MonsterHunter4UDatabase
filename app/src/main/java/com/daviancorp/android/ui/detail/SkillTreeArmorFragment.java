@@ -23,6 +23,7 @@ import com.daviancorp.android.data.classes.ItemToSkillTree;
 import com.daviancorp.android.data.database.ItemToSkillTreeCursor;
 import com.daviancorp.android.loader.ItemToSkillTreeListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
 
 public class SkillTreeArmorFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -71,7 +72,7 @@ public class SkillTreeArmorFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_skill_armor_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 
@@ -129,7 +130,7 @@ public class SkillTreeArmorFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_skill_armor_listitem,
+			return inflater.inflate(R.layout.fragment_skill_item_listitem,
 					parent, false);
 		}
 
@@ -178,6 +179,7 @@ public class SkillTreeArmorFragment extends ListFragment implements
 			skillItemImageView.setImageDrawable(i);
 
 			root.setTag(skill.getItem().getId());
+            root.setOnClickListener(new ArmorClickListener(context, skill.getItem().getId()));
 		}
 	}
 
