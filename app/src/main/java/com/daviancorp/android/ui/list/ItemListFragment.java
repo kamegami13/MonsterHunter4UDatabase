@@ -203,7 +203,7 @@ public class ItemListFragment extends ListFragment implements
                     cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + item.getRarity() + ".png";
                     break;
                 case "Lance":
-                    cellImage = "icons_weapons/icons_hammer/hammer" + item.getRarity() + ".png";
+                    cellImage = "icons_weapons/icons_hammer/lance" + item.getRarity() + ".png";
                     break;
                 case "Gunlance":
                     cellImage = "icons_weapons/icons_gunlance/gunlance" + item.getRarity() + ".png";
