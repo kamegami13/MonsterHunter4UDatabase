@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/pts"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         style="@style/text_small"
         android:text="10"
         android:layout_alignParentRight="true"
