@@ -205,7 +205,6 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
             if (!"".equals(awakenedElement)) {
                 element = awakenedElement;
                 awakenText = "(";
-                elementText = elementText + ")";
             }
             else
             {
@@ -240,6 +239,10 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
                     elementtv2.setText("");
                     element2Icon.setImageDrawable(null);
                     element2Icon.setVisibility(view.GONE);
+                }
+
+                if (!"".equals(awakenedElement)) {
+                    elementText = elementText + ")";
                 }
 
                 elementtv.setText(elementText);
