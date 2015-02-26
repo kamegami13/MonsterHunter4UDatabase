@@ -11,6 +11,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.daviancorp.android.data.classes.SkillTree;
 import com.daviancorp.android.data.database.SkillTreeCursor;
 import com.daviancorp.android.loader.SkillTreeListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.SkillClickListener;
 import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
 
 public class SkillTreeListFragment extends ListFragment implements
@@ -83,13 +85,14 @@ public class SkillTreeListFragment extends ListFragment implements
 		public void bindView(View view, Context context, Cursor cursor) {
 			// Get the skill for the current row
 			SkillTree skilltree = mSkillTreeCursor.getSkillTree();
+            LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.listitem);
 
 			// Set up the text view
 			TextView skilltreeNameTextView = (TextView) view.findViewById(R.id.item);
 			String cellText = skilltree.getName();
 			skilltreeNameTextView.setText(cellText);
-			
-			
+
+            itemLayout.setOnClickListener(new SkillClickListener(context, skilltree.getId()));
 		}
 	}
 
