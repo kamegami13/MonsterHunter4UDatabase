@@ -74,7 +74,7 @@
                 android:gravity="center|center_vertical"
                 android:textColor="@color/text_color"
                 android:layout_below="@+id/name_text"
-                android:layout_toRightOf="@+id/textView8"
+                android:layout_toRightOf="@+id/element_text"
                 android:text="test" />
         </LinearLayout>
     </RelativeLayout>

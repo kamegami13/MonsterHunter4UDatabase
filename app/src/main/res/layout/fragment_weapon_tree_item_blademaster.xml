@@ -133,7 +133,7 @@
             android:gravity="right" />
 
         <TextView
-            android:layout_width="64dp"
+            android:layout_width="54dp"
             android:layout_height="wrap_content"
             android:text="OOO"
             android:id="@+id/slots_text"
@@ -142,9 +142,9 @@
             android:layout_alignParentRight="true" />
 
         <TextView
-            android:layout_width="64dp"
+            android:layout_width="54dp"
             android:layout_height="wrap_content"
-            android:text="-20/40%"
+            android:text="-25/40%"
             android:id="@+id/affinity_text"
             android:gravity="right|top"
             android:layout_alignParentRight="true"
