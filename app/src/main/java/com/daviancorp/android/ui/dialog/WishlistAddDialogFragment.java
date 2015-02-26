@@ -35,7 +35,7 @@ public class WishlistAddDialogFragment extends DialogFragment {
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		
 		View addView = inflater.inflate(R.layout.dialog_wishlist_add, null);
-		final EditText nameInput = (EditText) addView.findViewById(R.id.name);
+		final EditText nameInput = (EditText) addView.findViewById(R.id.name_text);
 		
 		return new AlertDialog.Builder(getActivity())
 			.setTitle(R.string.option_wishlist_add)

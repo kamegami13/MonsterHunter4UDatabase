@@ -82,7 +82,7 @@ public class ArmorDetailFragment extends Fragment {
 				.findViewById(R.id.detail_armor_image);
 
 		partTextView = (TextView) view.findViewById(R.id.part);
-		defenseTextView = (TextView) view.findViewById(R.id.defense);
+		defenseTextView = (TextView) view.findViewById(R.id.defense_text);
 		slotTextView = (TextView) view.findViewById(R.id.slot);
 		rareTextView = (TextView) view.findViewById(R.id.rare);
 		buyTextView = (TextView) view.findViewById(R.id.buy);
