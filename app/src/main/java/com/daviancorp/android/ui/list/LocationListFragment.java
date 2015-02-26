@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
@@ -22,19 +23,21 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Location;
 import com.daviancorp.android.data.database.LocationCursor;
 import com.daviancorp.android.loader.LocationListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.LocationClickListener;
 import com.daviancorp.android.ui.detail.LocationDetailActivity;
 
-public class LocationGridFragment extends Fragment implements
+public class LocationListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
-	private GridView mGridView;
-	private LocationGridCursorAdapter mAdapter;
+	private LocationListCursorAdapter mAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,11 +50,8 @@ public class LocationGridFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_location_grid, parent,
+		View v = inflater.inflate(R.layout.fragment_generic_list, parent,
 				false);
-
-		mGridView = (GridView) v.findViewById(R.id.grid_locations);
-		mGridView.setAdapter(mAdapter);
 
 		return v;
 	}
@@ -59,43 +59,28 @@ public class LocationGridFragment extends Fragment implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
-
 		return new LocationListCursorLoader(getActivity());
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		// Create an adapter to point at this cursor
-		mAdapter = new LocationGridCursorAdapter(getActivity(),
+		mAdapter = new LocationListCursorAdapter(getActivity(),
 				(LocationCursor) cursor);
-		if (mGridView != null) {
-			mGridView.setAdapter(mAdapter);
-		}
-
-		mGridView.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
-
-				Intent i = new Intent(getActivity(),
-						LocationDetailActivity.class);
-				i.putExtra(LocationDetailActivity.EXTRA_LOCATION_ID, id);
-				startActivity(i);
-
-			}
-		});
+        setListAdapter(mAdapter);
 	}
 
 	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
 		// Stop using the cursor (via the adapter)
-		mGridView.setAdapter(null);
+		setListAdapter(null);
 	}
 
-	private static class LocationGridCursorAdapter extends CursorAdapter {
+	private static class LocationListCursorAdapter extends CursorAdapter {
 
 		private LocationCursor mLocationCursor;
 
-		public LocationGridCursorAdapter(Context context, LocationCursor cursor) {
+		public LocationListCursorAdapter(Context context, LocationCursor cursor) {
 			super(context, cursor, 0);
 			mLocationCursor = cursor;
 		}
@@ -105,7 +90,7 @@ public class LocationGridFragment extends Fragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_location_griditem,
+			return inflater.inflate(R.layout.fragment_location_listitem,
 					parent, false);
 		}
 
@@ -115,8 +100,8 @@ public class LocationGridFragment extends Fragment implements
 			Location location = mLocationCursor.getLocation();
 			AssetManager manager = context.getAssets();
 
-			LinearLayout gridLayout = (LinearLayout) view
-					.findViewById(R.id.gridLayout);
+			RelativeLayout listLayout = (RelativeLayout) view
+					.findViewById(R.id.listitem);
 
 			// Set up the text view
 			TextView locationNameTextView = (TextView) view
@@ -139,7 +124,8 @@ public class LocationGridFragment extends Fragment implements
 				e.printStackTrace();
 			}
 
-			gridLayout.setTag(location.getId());
+			listLayout.setTag(location.getId());
+            listLayout.setOnClickListener(new LocationClickListener(context, location.getId()));
 		}
 	}
 

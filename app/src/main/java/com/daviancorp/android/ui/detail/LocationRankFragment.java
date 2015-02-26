@@ -23,6 +23,7 @@ import com.daviancorp.android.data.classes.Gathering;
 import com.daviancorp.android.data.database.GatheringCursor;
 import com.daviancorp.android.loader.GatheringListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
 
 public class LocationRankFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -63,7 +64,7 @@ public class LocationRankFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_location_rank_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 
@@ -165,6 +166,8 @@ public class LocationRankFragment extends ListFragment implements
 			itemImageView.setImageDrawable(i);
 
 			itemLayout.setTag(gathering.getItem().getId());
+            itemLayout.setOnClickListener(new ItemClickListener(context,
+                    gathering.getItem().getId()));
 
 		}
 
