@@ -7,7 +7,7 @@ import android.view.Menu;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.general.GenericActivity;
 
-public class WeaponGridActivity extends GenericActivity {
+public class WeaponSelectionListActivity extends GenericActivity {
 
 
 	@Override
@@ -18,7 +18,7 @@ public class WeaponGridActivity extends GenericActivity {
 
 	@Override
 	protected Fragment createFragment() {
-		super.detail = new WeaponGridFragment();
+		super.detail = new WeaponSelectionListFragment();
 		return super.detail;
 	}
 	

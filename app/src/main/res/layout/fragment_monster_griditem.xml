@@ -7,7 +7,7 @@
     android:padding="4dp" >
 
     <ImageView
-        android:id="@+id/grid_item_image"
+        android:id="@+id/item_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"

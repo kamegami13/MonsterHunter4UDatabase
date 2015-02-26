@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,11 +28,11 @@ import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
 import com.daviancorp.android.ui.list.DecorationListActivity;
 import com.daviancorp.android.ui.list.ItemListActivity;
-import com.daviancorp.android.ui.list.LocationGridActivity;
-import com.daviancorp.android.ui.list.MonsterGridActivity;
+import com.daviancorp.android.ui.list.LocationListActivity;
+import com.daviancorp.android.ui.list.MonsterListActivity;
 import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
-import com.daviancorp.android.ui.list.WeaponGridActivity;
+import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
 import com.daviancorp.android.ui.list.WishlistListActivity;
 
 /*
@@ -72,10 +71,10 @@ public class GenericActionBarActivity extends ActionBarActivity {
 
                 switch (position){
                     case 0: // Monsters
-                        intent = new Intent(getApplicationContext(),MonsterGridActivity.class);
+                        intent = new Intent(getApplicationContext(),MonsterListActivity.class);
                         break;
                     case 1: // Weapons
-                        intent = new Intent(getApplicationContext(), WeaponGridActivity.class);
+                        intent = new Intent(getApplicationContext(), WeaponSelectionListActivity.class);
                         break;
                     case 2: // Armor
                         intent = new Intent(getApplicationContext(), ArmorListActivity.class);
@@ -90,7 +89,7 @@ public class GenericActionBarActivity extends ActionBarActivity {
                         intent = new Intent(getApplicationContext(), CombiningListActivity.class);
                         break;
                     case 6: // Locations
-                        intent = new Intent(getApplicationContext(), LocationGridActivity.class);
+                        intent = new Intent(getApplicationContext(), LocationListActivity.class);
                         break;
                     case 7: // Decorations
                         intent = new Intent(getApplicationContext(), DecorationListActivity.class);

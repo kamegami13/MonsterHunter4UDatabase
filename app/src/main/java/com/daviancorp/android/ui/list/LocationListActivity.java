@@ -7,7 +7,7 @@ import android.view.Menu;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.general.GenericActivity;
 
-public class LocationGridActivity extends GenericActivity {
+public class LocationListActivity extends GenericActivity {
 
 
 	@Override
