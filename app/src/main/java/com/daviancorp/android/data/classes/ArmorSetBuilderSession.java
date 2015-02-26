@@ -1,80 +1,131 @@
 package com.daviancorp.android.data.classes;
 
+import android.content.Context;
+import com.daviancorp.android.data.database.DataManager;
+import com.daviancorp.android.data.database.ItemToSkillTreeCursor;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ArmorSetBuilderSession {
     private static Armor none = new Armor();
 
-    private Armor head;
-    private Armor body;
-    private Armor arms;
-    private Armor waist;
-    private Armor legs;
+    /**
+     * The array of armor pieces in the set.
+     * <li>
+     * 0: Head
+     * </li>
+     * <li>
+     * 1: Body
+     * </li>
+     * <li>
+     * 2: Arms
+     * </li>
+     * <li>
+     * 3: Waist
+     * </li>
+     * <li>
+     * 4: Legs
+     * </li>
+     */
+    private Armor[] armors;
 
-    /** Default constructor. */
+    /**
+     * Default constructor.
+     */
     public ArmorSetBuilderSession() {
-        head = none;
-        body = none;
-        arms = none;
-        waist = none;
-        legs = none;
+        Armor head = none;
+        Armor body = none;
+        Armor arms = none;
+        Armor waist = none;
+        Armor legs = none;
+
+        armors = new Armor[5];
+        armors[0] = head;
+        armors[1] = body;
+        armors[2] = arms;
+        armors[3] = waist;
+        armors[4] = legs;
     }
 
     public boolean isHeadSelected() {
-        return head != none;
+        return armors[0] != none;
     }
 
     public boolean isBodySelected() {
-        return body != none;
+        return armors[1] != none;
     }
 
     public boolean isArmsSelected() {
-        return arms != none;
+        return armors[2] != none;
     }
 
     public boolean isWaistSelected() {
-        return waist != none;
+        return armors[3] != none;
     }
 
     public boolean isLegsSelected() {
-        return legs != none;
+        return armors[4] != none;
     }
 
     public void setHead(Armor head) {
-            this.head = head;
+        armors[0] = head;
     }
 
     public void setBody(Armor body) {
-            this.body = body;
+        armors[1] = body;
     }
 
     public void setArms(Armor arms) {
-            this.arms = arms;
+        armors[2] = arms;
     }
 
     public void setWaist(Armor waist) {
-            this.waist = waist;
+        armors[3] = waist;
     }
 
     public void setLegs(Armor legs) {
-            this.legs = legs;
+        armors[4] = legs;
     }
 
     public Armor getHead() {
-        return head;
+        return armors[0];
     }
 
     public Armor getBody() {
-        return body;
+        return armors[1];
     }
 
     public Armor getArms() {
-        return arms;
+        return armors[2];
     }
 
     public Armor getWaist() {
-        return waist;
+        return armors[3];
     }
 
     public Armor getLegs() {
-        return legs;
+        return armors[4];
+    }
+
+    /**
+     * @return A map of all the skills the armor piece provides along with the number of points in each.
+     * @param piece The piece of armor to get the skills from.
+     * <li>0: Head</li>
+     * <li>1: Body</li>
+     * <li>2: Arms</li>
+     * <li>3: Waist</li>
+     * <li>4: Legs</li>
+     * @param context A context with which to access the database.
+     */
+    public Map<SkillTree, Integer> getSkillsFromArmorPiece(int piece, Context context) {
+        Map<SkillTree, Integer> skills = new HashMap<>();
+
+        for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(armors[piece].getId())) {
+            // TODO
+        }
+
+        return skills;
     }
 }

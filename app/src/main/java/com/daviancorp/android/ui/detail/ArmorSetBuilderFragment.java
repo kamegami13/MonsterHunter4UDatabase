@@ -22,19 +22,24 @@ import java.io.InputStream;
  * This is where the magic happens baby. Users can define a custom armor set in this fragment.
  */
 public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilderActivity.ArmorSetChangedListener {
-    
+
+    View headView;
     ImageView headImage;
     TextView headText;
 
+    View bodyView;
     ImageView bodyImage;
     TextView bodyText;
 
+    View armsView;
     ImageView armsImage;
     TextView armsText;
 
+    View waistView;
     ImageView waistImage;
     TextView waistText;
 
+    View legsView;
     ImageView legsImage;
     TextView legsText;
 
@@ -55,11 +60,11 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_armor_set_builder, container, false);
-        View headView = view.findViewById(R.id.armor_builder_helmet);
-        View bodyView = view.findViewById(R.id.armor_builder_body);
-        View armsView = view.findViewById(R.id.armor_builder_arms);
-        View waistView = view.findViewById(R.id.armor_builder_waist);
-        View legsView = view.findViewById(R.id.armor_builder_legs);
+        headView = view.findViewById(R.id.armor_builder_helmet);
+        bodyView = view.findViewById(R.id.armor_builder_body);
+        armsView = view.findViewById(R.id.armor_builder_arms);
+        waistView = view.findViewById(R.id.armor_builder_waist);
+        legsView = view.findViewById(R.id.armor_builder_legs);
         
         headText = (TextView) headView.findViewById(R.id.armor_builder_item_name);
         headImage = (ImageView) headView.findViewById(R.id.armor_builder_item_icon);
@@ -89,22 +94,27 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         if (s.isHeadSelected()) {
             headText.setText(s.getHead().getName());
             headImage.setImageBitmap(fetchIcon("Head", s.getHead().getRarity()));
+            enableClickableFocusable(headView);
         }
         if (s.isBodySelected()) {
             bodyText.setText(s.getBody().getName());
             bodyImage.setImageBitmap(fetchIcon("Body", s.getBody().getRarity()));
+            enableClickableFocusable(bodyView);
         }
         if (s.isArmsSelected()) {
             armsText.setText(s.getArms().getName());
             armsImage.setImageBitmap(fetchIcon("Arms", s.getArms().getRarity()));
+            enableClickableFocusable(armsView);
         }
         if (s.isWaistSelected()) {
             waistText.setText(s.getWaist().getName());
             waistImage.setImageBitmap(fetchIcon("Waist", s.getWaist().getRarity()));
+            enableClickableFocusable(waistView);
         }
         if (s.isLegsSelected()) {
             legsText.setText(s.getLegs().getName());
             legsImage.setImageBitmap(fetchIcon("Legs", s.getLegs().getRarity()));
+            enableClickableFocusable(legsView);
         }
     }
 
@@ -144,5 +154,25 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
             Log.e("SET BUILDER", "Invalid slot argument!");
         }
         return null;
+    }
+
+    /**
+     * Helper method that turns the properties {@code android:longClickable}, {@code android:focusable}, and {@code android:focusableInTouchMode} on.
+     * @param target The view on which to perform these actions.
+     **/
+    private void enableClickableFocusable(View target) {
+        target.setLongClickable(true);
+        target.setFocusable(true);
+        target.setFocusableInTouchMode(true);
+    }
+
+    /**
+     * Helper method that turns the properties {@code android:longClickable}, {@code android:focusable}, and {@code android:focusableInTouchMode} off.
+     * @param target The view on which to perform these actions.
+     **/
+    private void disableClickableFocusable(View target) {
+        target.setLongClickable(false);
+        target.setFocusable(false);
+        target.setFocusableInTouchMode(false);
     }
 }

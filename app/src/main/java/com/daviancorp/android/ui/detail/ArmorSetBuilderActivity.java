@@ -121,7 +121,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Actio
                         session.setLegs(DataManager.get(getApplicationContext()).getArmor(id));
                         break;
                     default:
-                        Log.d("SetBuilder", "The armor type did not match any of the cases.");
+                        Log.e("SetBuilder", "The armor type did not match any of the cases.");
                         break;
                 }
             }
