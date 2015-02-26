@@ -4,13 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
@@ -18,12 +16,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,7 +25,6 @@ import com.daviancorp.android.data.database.LocationCursor;
 import com.daviancorp.android.loader.LocationListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.LocationClickListener;
-import com.daviancorp.android.ui.detail.LocationDetailActivity;
 
 public class LocationListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -90,7 +82,7 @@ public class LocationListFragment extends ListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_location_listitem,
+			return inflater.inflate(R.layout.fragment_list_item_basic,
 					parent, false);
 		}
 
@@ -105,9 +97,9 @@ public class LocationListFragment extends ListFragment implements
 
 			// Set up the text view
 			TextView locationNameTextView = (TextView) view
-					.findViewById(R.id.grid_item_label);
+					.findViewById(R.id.item_label);
 			ImageView locationImage = (ImageView) view
-					.findViewById(R.id.grid_item_image);
+					.findViewById(R.id.item_image);
 
 			String cellText = location.getName();
 			String cellImage = "icons_location/" + location.getFileLocation();

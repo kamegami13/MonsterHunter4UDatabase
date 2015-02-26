@@ -101,8 +101,8 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
             // Get the monster for the current row
             Weapon weapon = mWeaponCursor.getWeapon();
 
-
             TextView specialtv = (TextView) view.findViewById(R.id.special_text);
+
 
             DrawSharpness sharpnessDrawable = (DrawSharpness) view.findViewById(R.id.sharpness);
 

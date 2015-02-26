@@ -21,11 +21,11 @@ import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
 import com.daviancorp.android.ui.list.DecorationListActivity;
 import com.daviancorp.android.ui.list.ItemListActivity;
-import com.daviancorp.android.ui.list.LocationGridActivity;
-import com.daviancorp.android.ui.list.MonsterGridActivity;
+import com.daviancorp.android.ui.list.LocationListActivity;
+import com.daviancorp.android.ui.list.MonsterListActivity;
 import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
-import com.daviancorp.android.ui.list.WeaponGridActivity;
+import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
 import com.daviancorp.android.ui.list.WishlistListActivity;
 
 public class HomeFragment extends Fragment {
@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
         mMonsters.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),MonsterGridActivity.class);
+                Intent intent = new Intent(getActivity(),MonsterListActivity.class);
                 startActivity(intent);
             }
         });
@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
         mWeapons.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WeaponGridActivity.class);
+                Intent intent = new Intent(getActivity(), WeaponSelectionListActivity.class);
                 startActivity(intent);
             }
         });
@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment {
         mLocations.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LocationGridActivity.class);
+                Intent intent = new Intent(getActivity(), LocationListActivity.class);
                 startActivity(intent);
             }
         });
