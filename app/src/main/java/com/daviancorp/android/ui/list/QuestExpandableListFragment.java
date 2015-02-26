@@ -3,7 +3,6 @@ package com.daviancorp.android.ui.list;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +18,6 @@ import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.QuestClickListener;
-import com.daviancorp.android.ui.detail.QuestDetailActivity;
 
 /**
  * Pieced together from: Android samples:
@@ -239,7 +236,7 @@ public class QuestExpandableListFragment extends Fragment {
 					R.layout.fragment_quest_expandablelist_child_item,
 					viewGroup, false);
 
-			TextView questChildTextView = (TextView) v.findViewById(R.id.name);
+			TextView questChildTextView = (TextView) v.findViewById(R.id.name_text);
 			TextView keyChildTextView = (TextView) v.findViewById(R.id.key);
 			LinearLayout root = (LinearLayout) v.findViewById(R.id.root);
 

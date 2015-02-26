@@ -53,14 +53,6 @@ public class SkillTreeListFragment extends ListFragment implements
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
 	}
-	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Skill ID; CursorAdapter gives us this for free
-		Intent i = new Intent(getActivity(), SkillTreeDetailActivity.class);
-		i.putExtra(SkillTreeDetailActivity.EXTRA_SKILLTREE_ID, id);
-		startActivity(i);
-	}
 
 	private static class SkillTreeListCursorAdapter extends CursorAdapter {
 

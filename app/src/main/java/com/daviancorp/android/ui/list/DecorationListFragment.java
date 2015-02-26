@@ -68,18 +68,6 @@ public class DecorationListFragment extends ListFragment implements
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
 	}
-
-    /*
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this
-		// for free
-
-		Intent i = new Intent(getActivity(), DecorationDetailActivity.class);
-		i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, (long) v.getTag());
-		startActivity(i);
-	}
-	*/
 	
 
 	private static class DecorationListCursorAdapter extends CursorAdapter {

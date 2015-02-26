@@ -62,7 +62,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:textColor="@color/text_color"
-                android:layout_below="@+id/textView7"
+                android:layout_below="@+id/name_text"
                 android:layout_marginRight="16dp" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_gravity="center"
                 android:gravity="center|center_vertical"
                 android:textColor="@color/text_color"
-                android:layout_below="@+id/textView7"
+                android:layout_below="@+id/name_text"
                 android:layout_toRightOf="@+id/textView8"
                 android:text="test" />
         </LinearLayout>

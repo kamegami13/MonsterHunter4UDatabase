@@ -122,7 +122,7 @@
                 android:textColor="@color/text_color" />
 
             <TextView
-                android:id="@+id/defense"
+                android:id="@+id/defense_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_color" />

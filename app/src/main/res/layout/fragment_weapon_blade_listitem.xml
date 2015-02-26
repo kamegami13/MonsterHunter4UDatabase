@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".3"
@@ -70,7 +70,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/notes"
+                    android:id="@+id/special_layout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
@@ -140,7 +140,7 @@
                         android:textColor="@color/text_color" />
 
                     <TextView
-                        android:id="@+id/defense"
+                        android:id="@+id/defense_text"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.3"

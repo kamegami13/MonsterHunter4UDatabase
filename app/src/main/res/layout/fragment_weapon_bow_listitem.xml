@@ -7,7 +7,7 @@
     android:background="@drawable/generic_clicked_states">
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/name_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -101,7 +101,7 @@
                     android:textColor="@color/text_color" />
 
                 <TextView
-                    android:id="@+id/defense"
+                    android:id="@+id/defense_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".18"

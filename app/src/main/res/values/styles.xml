@@ -87,6 +87,13 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <style name="list_sub_item" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+    </style>
+
     <style name="list_item_large" parent="@style/list_item">
         <item name="android:layout_height">64dp</item>
     </style>
@@ -124,6 +131,13 @@
     <style name="small_image" parent="@style/main_image">
         <item name="android:layout_height">24dp</item>
         <item name="android:layout_width">24dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+    </style>
+
+    <style name="tiny_image" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:layout_height">16dp</item>
+        <item name="android:layout_width">16dp</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <!-- End styles for elevated lists -->

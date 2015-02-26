@@ -1,7 +1,6 @@
 package com.daviancorp.android.ui.detail;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,13 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.loader.WeaponTreeListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
 
 public class WeaponTreeFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -64,15 +63,6 @@ public class WeaponTreeFragment extends ListFragment implements
 		// Stop using the cursor (via the adapter)
 		setListAdapter(null);
 	}
-	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Weapon ID; CursorAdapter gives us this
-		// for free
-		Intent i = new Intent(getActivity(), WeaponDetailActivity.class);
-		i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, (long) v.getTag());
-		startActivity(i);
-	}
 
 	private static class WeaponTreeListCursorAdapter extends CursorAdapter {
 
@@ -102,8 +92,9 @@ public class WeaponTreeFragment extends ListFragment implements
 			// Set up the text view
 			LinearLayout weaponLayout = (LinearLayout) view.findViewById(R.id.listitem);
 			weaponLayout.setTag(weapon.getId());
+            weaponLayout.setOnClickListener(new WeaponClickListener(context, weapon.getId()));
 			
-			TextView weaponView = (TextView) view.findViewById(R.id.name);
+			TextView weaponView = (TextView) view.findViewById(R.id.name_text);
 			String cellWeaponText = weapon.getName();
 			weaponView.setText(cellWeaponText);
 			
