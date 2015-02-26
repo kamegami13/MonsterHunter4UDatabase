@@ -142,7 +142,7 @@ public class ItemComponentFragment extends ListFragment implements
                     cellImage = "icons_armor/icons_body/body" + created.getRarity() + ".png";
                     break;
                 case "Arms":
-                    cellImage = "icons_armor/icons_body/arms" + created.getRarity() + ".png";
+                    cellImage = "icons_armor/icons_arms/arms" + created.getRarity() + ".png";
                     break;
                 case "Waist":
                     cellImage = "icons_armor/icons_waist/waist" + created.getRarity() + ".png";
@@ -169,7 +169,7 @@ public class ItemComponentFragment extends ListFragment implements
                     cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + created.getRarity() + ".png";
                     break;
                 case "Lance":
-                    cellImage = "icons_weapons/icons_hammer/lance" + created.getRarity() + ".png";
+                    cellImage = "icons_weapons/icons_lance/lance" + created.getRarity() + ".png";
                     break;
                 case "Gunlance":
                     cellImage = "icons_weapons/icons_gunlance/gunlance" + created.getRarity() + ".png";
