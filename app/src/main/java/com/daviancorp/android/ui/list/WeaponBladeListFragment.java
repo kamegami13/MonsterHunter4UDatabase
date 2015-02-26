@@ -293,7 +293,6 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
             // Set remaining items
             //
             nametv.setText(name);
-            nametv.setTypeface(null, Typeface.BOLD);
             attacktv.setText(attack);
             awakentv.setText(awakenText);
             slottv.setText(slot);

@@ -63,16 +63,17 @@
         android:layout_below="@+id/top_layout"
         style="@style/list_sub_item"
         android:id="@+id/bottom_layout"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="114dp"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="false"
             android:id="@+id/element_layout"
             android:gravity="center_vertical|right"
-            android:layout_alignParentRight="true">
+            android:layout_toLeftOf="@+id/slots_text">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,14 +89,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="350"
+                android:text="350)"
                 android:id="@+id/element_text"
                 style="@style/text_small" />
 
             <ImageView
                 style="@style/tiny_image"
                 android:id="@+id/element_image2"
-                android:layout_gravity="center_vertical" />
+                android:layout_marginLeft="8dp" />
 
             <TextView
                 style="@style/text_small"
@@ -115,39 +116,40 @@
             android:layout_alignLeft="@+id/sharpness" />
 
         <view
-            android:layout_width="144dp"
+            android:layout_width="112dp"
             android:layout_height="16dp"
             class="com.daviancorp.android.ui.general.DrawSharpness"
             android:id="@+id/sharpness"
             android:layout_toLeftOf="@+id/defense_text"
-            android:layout_marginRight="16dp"
             android:layout_alignTop="@+id/defense_text" />
 
         <TextView
-            android:layout_width="72dp"
+            android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:text="10"
             android:id="@+id/defense_text"
             android:layout_below="@+id/element_layout"
-            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@+id/affinity_text"
             android:gravity="right" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
-            android:text="---"
+            android:text="OOO"
             android:id="@+id/slots_text"
             style="@style/text_small"
-            android:layout_below="@+id/defense_text"
-            android:layout_alignLeft="@+id/sharpness" />
+            android:gravity="right|top"
+            android:layout_alignParentRight="true" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
-            android:text="20%"
+            android:text="-20/40%"
             android:id="@+id/affinity_text"
-            android:layout_alignRight="@+id/defense_text"
-            android:layout_below="@+id/defense_text" />
+            android:gravity="right|top"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/slots_text"
+            android:paddingBottom="4dp" />
 
     </RelativeLayout>
 
