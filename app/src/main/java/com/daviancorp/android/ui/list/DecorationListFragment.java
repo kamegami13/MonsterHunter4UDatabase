@@ -129,8 +129,14 @@ public class DecorationListFragment extends ListFragment implements
 			skill1TextView.setText(skill1Text);
 			skill1amtTextView.setText(skill1amtText);
 
-            skill2TextView.setText(skill2Text);
-            skill2amtTextView.setText(skill2amtText);
+            skill2TextView.setVisibility(view.GONE);
+            skill2amtTextView.setVisibility(view.GONE);
+            if(!skill1amtText.equals(null)) {
+                skill2TextView.setText(skill2Text);
+                skill2amtTextView.setText(skill2amtText);
+                skill2TextView.setVisibility(view.VISIBLE);
+                skill2amtTextView.setVisibility(view.VISIBLE);
+            }
 			
 			itemLayout.setTag(decoration.getId());
             itemLayout.setOnClickListener(new DecorationClickListener(context,decoration.getId()));
