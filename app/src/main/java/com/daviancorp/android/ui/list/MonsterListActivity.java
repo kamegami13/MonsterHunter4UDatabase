@@ -40,9 +40,12 @@ public class MonsterListActivity extends GenericTabActivity implements
 		viewPager.setAdapter(mAdapter);
 
 		actionBar = getSupportActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); // This needs to be replaced once ActionBar is migrated to Toolbar
 
-		// Adding Tabs
+        // Enable drawer button instead of back button
+        super.enableDrawerIndicator();
+
+        // Adding Tabs
 		for (String tab_name : tabs) {
 			actionBar.addTab(actionBar.newTab().setText(tab_name)
 					.setTabListener(this));

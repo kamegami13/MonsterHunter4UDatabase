@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navList"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="left|start"
+    android:choiceMode="singleChoice"
+    android:background="@color/navbar_background_color"
+    android:fitsSystemWindows="true"
+    tools:layout_gravity="" />

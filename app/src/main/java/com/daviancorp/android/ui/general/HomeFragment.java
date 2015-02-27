@@ -52,8 +52,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, parent, false);
 
-        mLogo = (ImageView) v.findViewById(R.id.logo);
-
         mMonsters = (TextView) v.findViewById(R.id.monsters);
         mWeapons = (TextView) v.findViewById(R.id.weapons);
         mArmors = (TextView) v.findViewById(R.id.armors);

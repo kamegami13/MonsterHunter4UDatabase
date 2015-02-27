@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawer_text_item"
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:textColor="@color/accent_color"
-    android:textStyle="bold"
-/>
+    android:layout_gravity="center_vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:textSize="14sp"
+    android:textAppearance="?android:attr/textAppearanceListItem"
+    android:textColor="@color/navbar_text_color"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    tools:layout_gravity=""
+    tools:text="List Item 1"/>

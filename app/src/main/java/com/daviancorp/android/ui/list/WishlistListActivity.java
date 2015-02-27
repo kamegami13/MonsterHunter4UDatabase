@@ -14,6 +14,11 @@ public class WishlistListActivity extends GenericTabActivity {
 		super.onCreate(savedInstanceState);
 		setTitle(R.string.wishlist);
 
+        // Enable drawer button instead of back button
+        super.enableDrawerIndicator();
+
+        setContentView(R.layout.activity_main);
+
 		FragmentManager fm = getSupportFragmentManager();
 		Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 

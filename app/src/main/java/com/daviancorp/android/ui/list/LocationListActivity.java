@@ -14,7 +14,10 @@ public class LocationListActivity extends GenericActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle(R.string.locations);
-	}
+
+        // Enable drawer button instead of back button
+        super.enableDrawerIndicator();
+    }
 
 	@Override
 	protected Fragment createFragment() {
