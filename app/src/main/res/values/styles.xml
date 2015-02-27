@@ -6,7 +6,7 @@
 
 
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar"> <!-- change to .NoActionBar when integrating Toolbar-->
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -33,6 +33,8 @@
 
         <item name="android:clipToPadding">false</item>
 
+        <item name="android:actionMenuTextColor">#000000</item> <!-- thought this would fix white menu text but it doesnt -->
+
         <item name="actionBarTabStyle">@style/MyActionBarTabs</item>
     </style>
 
@@ -41,7 +43,6 @@
         parent="@style/Widget.AppCompat.ActionBar.TabView">
         <item name="android:background">@drawable/action_bar_tab_indicator</item>
     </style>
-
 
     <!-- ActionBar styles -->
     <style name="ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">

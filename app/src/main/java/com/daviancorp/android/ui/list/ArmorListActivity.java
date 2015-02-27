@@ -35,7 +35,10 @@ public class ArmorListActivity extends GenericTabActivity implements
 		actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		// Adding Tabs
+        // Enable drawer button instead of back button
+        super.enableDrawerIndicator();
+
+        // Adding Tabs
 		for (String tab_name : tabs) {
 			actionBar.addTab(actionBar.newTab().setText(tab_name)
 					.setTabListener(this));

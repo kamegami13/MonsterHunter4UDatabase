@@ -12,7 +12,10 @@ public class DecorationListActivity extends GenericActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle(R.string.decorations);
-	}
+
+        // Enable drawer button instead of back button
+        super.enableDrawerIndicator();
+    }
 
 	@Override
 	protected Fragment createFragment() {

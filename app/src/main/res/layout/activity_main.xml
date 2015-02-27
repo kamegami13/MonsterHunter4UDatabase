@@ -9,16 +9,11 @@
         <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_container"/>
+        android:id="@+id/fragment_container">
 
-        <ListView
-            android:id="@+id/navList"
-            android:layout_width="260dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="left|start"
-            android:textColor="@color/text_primary_color"
-            android:background="@color/primary_color"/> <!-- change this to a generic color-->
+            <!--include layout="@layout/toolbar"/-->
+        </RelativeLayout>
 
-
+    <include layout="@layout/drawer_list"/>
 
 </android.support.v4.widget.DrawerLayout>

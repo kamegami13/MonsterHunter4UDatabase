@@ -13,7 +13,10 @@ public class ItemListActivity extends GenericActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle(R.string.items);
-	}
+
+        // Enable drawer button instead of back button
+        super.enableDrawerIndicator();
+    }
 
 	@Override
 	protected Fragment createFragment() {

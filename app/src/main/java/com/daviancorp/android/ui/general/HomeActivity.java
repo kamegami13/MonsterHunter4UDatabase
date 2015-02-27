@@ -17,7 +17,7 @@ public class HomeActivity extends GenericActivity {
 		super.onCreate(savedInstanceState);
 //		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 //		getSupportActionBar().setHomeButtonEnabled(false);
-        super.enableDrawerIndicator();
+        super.enableDrawerIndicator(); // Enable drawer button instead of back button
 		setTitle(R.string.app_name);
 
 	}

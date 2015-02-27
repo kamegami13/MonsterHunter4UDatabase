@@ -1,23 +1,10 @@
 package com.daviancorp.android.ui.general;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.ActionBar;
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 
-import android.support.v4.app.FragmentActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 
 /*
  * Any subclass needs to:
@@ -33,11 +20,15 @@ public abstract class GenericTabActivity extends GenericActionBarActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setTitle(R.string.app_name);
+        setContentView(R.layout.activity_tab);
+        setTitle(R.string.app_name);
+
+        // Integrate Toolbar so sliding drawer can go over toolbar
+//        android.support.v7.widget.Toolbar mtoolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(mtoolbar);
+
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
-
-		setContentView(R.layout.activity_tab);
         setupDrawer(); // Needs to be called after setContentView
 	}
 }
