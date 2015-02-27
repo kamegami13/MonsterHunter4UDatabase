@@ -41,7 +41,6 @@ public abstract class GenericActivity extends GenericActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        super.setupDrawer(); // Needs to be called after setContentView
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
@@ -52,7 +51,13 @@ public abstract class GenericActivity extends GenericActionBarActivity {
         }
 
         setTitle(R.string.app_name);
+
+        // Integrate Toolbar so sliding drawer can go over toolbar
+//        android.support.v7.widget.Toolbar mtoolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(mtoolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        super.setupDrawer(); // Needs to be called after setContentView
     }
 }

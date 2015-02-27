@@ -7,4 +7,5 @@
     android:layout_gravity="left|start"
     android:choiceMode="singleChoice"
     android:background="@color/navbar_background_color"
+    android:fitsSystemWindows="true"
     tools:layout_gravity="" />

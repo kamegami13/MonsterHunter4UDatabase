@@ -27,7 +27,7 @@
             android:name="com.daviancorp.android.ui.list.ItemListActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.daviancorp.android.ui.list.ArmorListActivity"
             android:label="@string/app_name"
