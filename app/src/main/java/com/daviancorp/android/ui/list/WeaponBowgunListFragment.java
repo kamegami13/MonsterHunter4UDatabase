@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.adapter.WeaponListGeneralAdapter;
 
 public class WeaponBowgunListFragment extends WeaponListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -31,8 +32,7 @@ public class WeaponBowgunListFragment extends WeaponListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_weapon_bowgun_list, null);
-//		super.setContextMenu(v);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 		return v;
 	}
 	
@@ -61,13 +61,10 @@ public class WeaponBowgunListFragment extends WeaponListFragment implements
 
 	}
 
-	private static class WeaponBowgunListCursorAdapter extends CursorAdapter {
-
-		private WeaponCursor mWeaponCursor;
+	private static class WeaponBowgunListCursorAdapter extends WeaponListGeneralAdapter {
 
 		public WeaponBowgunListCursorAdapter(Context context, WeaponCursor cursor) {
-			super(context, cursor, 0);
-			mWeaponCursor = cursor;
+			super(context, cursor);
 		}
 
 		@Override
@@ -75,97 +72,35 @@ public class WeaponBowgunListFragment extends WeaponListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_weapon_bowgun_listitem,
+			return inflater.inflate(R.layout.fragment_weapon_tree_item_bowgun,
 					parent, false);
 		}
 
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
+            super.bindView(view, context, cursor);
+
 			// Get the monster for the current row
 			Weapon weapon = mWeaponCursor.getWeapon();
-			
-			// Set up the text view
-			TextView nametv = (TextView) view.findViewById(R.id.name_text);
-			TextView attacktv = (TextView) view.findViewById(R.id.attack);
-			TextView slottv = (TextView) view.findViewById(R.id.slot);
-			TextView affinitytv = (TextView) view.findViewById(R.id.affinity);
-			TextView defensetv = (TextView) view.findViewById(R.id.defense_text);
-
-			// Need to reset drawables
-			
-			String name = "";
-			int wFinal = weapon.getWFinal();
-
-            for(int i = 0; i < weapon.getTree_Depth(); i++)
-            {
-                name = name + "-";
-            }
-			
-			name = name + weapon.getName();
-			String attack = "" + weapon.getAttack();
-
-			// Set the slot to view
-			String slot = "";
-			switch (weapon.getNumSlots()) {
-			case 0:
-				slot = "---";
-				break;
-			case 1:
-				slot = "O--";
-				break;
-			case 2:
-				slot = "OO-";
-				break;
-			case 3:
-				slot = "OOO";
-				break;
-			default:
-				slot = "error!!";
-				break;
-			}
-
-			String affinity = "";
-			if (weapon.getAffinity().length() > 0) {
-				affinity = weapon.getAffinity() + "%";
-			}
-
-			String defense = "";
-			if (weapon.getDefense() != 0) {
-				defense = "" + weapon.getDefense();
-			}
-
-			nametv.setText(name);
-			nametv.setTypeface(null, Typeface.BOLD);
-			attacktv.setText(attack);
-			slottv.setText(slot);
-			affinitytv.setText(affinity);
-			defensetv.setText(defense);
 
 			// Bowgun stuff
-			TextView reloadtv = (TextView) view.findViewById(R.id.reload);
-			TextView recoiltv = (TextView) view.findViewById(R.id.recoil);
-			TextView steadytv = (TextView) view.findViewById(R.id.steady);
+			TextView reloadtv = (TextView) view.findViewById(R.id.reload_text);
+			TextView recoiltv = (TextView) view.findViewById(R.id.recoil_text);
+			TextView steadytv = (TextView) view.findViewById(R.id.deviation_text);
 
 			String reload = weapon.getReloadSpeed();
 			String recoil = weapon.getRecoil();
 			String steady = weapon.getDeviation();
-			
-			if (reload.equals("Average")) {
-				reload = "Avg";
-			} else if (reload.equals("Above Average")) {
-				reload = "Above Avg";
-			} else if (reload.equals("Below Average")) {
-				reload = "Below Avg";
-			}
-			
-			if (recoil.equals("Average")) {
-				recoil = "Avg";
-			}
+
 			
 			if (steady.startsWith("Left/Right")) {
 				String[] tempSteady = steady.split(":");
 				steady = "L/R:" + tempSteady[1];
 			}
+            else if (steady.equals("None"))
+            {
+                steady = "";
+            }
 
 			reloadtv.setText(reload);
 			recoiltv.setText(recoil);
