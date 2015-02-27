@@ -41,8 +41,9 @@
         android:layout_gravity="center"
         android:layout_toLeftOf="@+id/move"
         android:layout_centerVertical="true"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp" />
+        android:layout_marginLeft="8dp"
+        android:paddingRight="0dp"
+        android:paddingLeft="0dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,7 +64,6 @@
         android:layout_gravity="center"
         android:layout_toLeftOf="@+id/rest"
         android:layout_centerVertical="true"
-        android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp" />
 
     <TextView
