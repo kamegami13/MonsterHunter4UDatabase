@@ -105,7 +105,8 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 
 
             DrawSharpness sharpnessDrawable = (DrawSharpness) view.findViewById(R.id.sharpness);
-
+            // Need to reset sharpness so it gets redrawn, not recycled
+            sharpnessDrawable.invalidate();
             //
             // Set special text fields
             //
