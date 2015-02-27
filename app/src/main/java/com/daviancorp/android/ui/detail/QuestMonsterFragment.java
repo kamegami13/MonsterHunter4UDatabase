@@ -24,6 +24,7 @@ import com.daviancorp.android.data.classes.MonsterToQuest;
 import com.daviancorp.android.data.database.MonsterToQuestCursor;
 import com.daviancorp.android.loader.MonsterToQuestListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.MonsterClickListener;
 
 public class QuestMonsterFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -146,6 +147,8 @@ public class QuestMonsterFragment extends ListFragment implements
 			monsterImageView.setImageDrawable(i);
 
 			itemLayout.setTag(monsterToQuest.getMonster().getId());
+            itemLayout.setOnClickListener(new MonsterClickListener(context,
+                    monsterToQuest.getMonster().getId()));
 		}
 	}
 
