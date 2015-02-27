@@ -46,8 +46,8 @@
 
     <!-- ActionBar styles -->
     <style name="ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/primary_color</item>
-        <item name="background">@color/primary_color</item>
+        <item name="android:background">@color/dark_primary_color</item>
+        <item name="background">@color/dark_primary_color</item>
     </style>
 
     <!-- Begin styles for lists -->

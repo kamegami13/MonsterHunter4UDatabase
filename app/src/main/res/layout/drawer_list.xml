@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     android:layout_gravity="left|start"
     android:choiceMode="singleChoice"
-    android:background="@color/navbar_background_color"
+    android:background="@color/dark_primary_color"
     android:fitsSystemWindows="true"
     tools:layout_gravity="" />

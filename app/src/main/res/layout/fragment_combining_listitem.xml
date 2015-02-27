@@ -13,7 +13,9 @@
         android:id="@+id/item3"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:background="@drawable/clicked_states_white">
+        android:background="@drawable/clicked_states_white"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="8dp">
 
         <TextView
             android:id="@+id/percentage"
@@ -42,8 +44,7 @@
             android:id="@+id/item_img3"
             style="@style/main_image"
             android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="16dp" />
+            android:layout_alignParentLeft="true" />
 
         <TextView
             android:id="@+id/item_text3"
