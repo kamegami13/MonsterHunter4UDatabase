@@ -8,12 +8,11 @@
         android:id="@+id/quest_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:layout_gravity="center"
         android:gravity="center_vertical"
         android:textColor="@color/text_color"
         style="@style/text_medium"
-        android:layout_weight="0.8">
+        android:layout_weight="0.75">
     </TextView>
 
     <LinearLayout
@@ -21,7 +20,7 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical|right"
         android:orientation="vertical"
-        android:layout_weight="0.2">
+        android:layout_weight="0.25">
 
         <TextView
             android:id="@+id/quest_location"

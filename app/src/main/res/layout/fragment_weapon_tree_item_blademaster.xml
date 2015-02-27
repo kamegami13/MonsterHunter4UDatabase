@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/main_layout"
+    android:clickable="true"
+    android:background="@drawable/clicked_states_white">
+
+    <RelativeLayout
+        android:id="@+id/item3"
+        style="@style/list_sub_item">
+
+        <ImageView
+            android:id="@+id/weapon_icon"
+            style="@style/small_image"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leidenskraft"
+            android:id="@+id/name_text"
+            style="@style/text_medium"
+            android:layout_toRightOf="@+id/weapon_icon"
+            android:layout_centerVertical="true" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/special_layout">
+
+            <TextView
+                android:id="@+id/special_text"
+                style="@style/text_small"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Impact"
+                android:layout_alignParentRight="true" />
+
+            <ImageView
+                android:id="@+id/note_image_1"
+                style="@style/tiny_image"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/note_image_2" />
+
+            <ImageView
+                android:id="@+id/note_image_2"
+                style="@style/tiny_image"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/note_image_3" />
+
+            <ImageView
+                android:id="@+id/note_image_3"
+                style="@style/tiny_image"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/item3"
+        style="@style/list_sub_item"
+        android:id="@+id/bottom_layout"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="114dp"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:id="@+id/element_layout"
+            android:gravity="center_vertical|right"
+            android:layout_toLeftOf="@+id/slots_text">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="("
+                android:id="@+id/awaken_text"
+                style="@style/text_small" />
+
+            <ImageView
+                android:id="@+id/element_image"
+                style="@style/tiny_image" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="350)"
+                android:id="@+id/element_text"
+                style="@style/text_small" />
+
+            <ImageView
+                style="@style/tiny_image"
+                android:id="@+id/element_image2"
+                android:layout_marginLeft="8dp" />
+
+            <TextView
+                style="@style/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/element_text2" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="750"
+            android:id="@+id/attack_text"
+            style="@style/text_small"
+            android:layout_gravity="left"
+            android:layout_alignLeft="@+id/sharpness" />
+
+        <view
+            android:layout_width="112dp"
+            android:layout_height="16dp"
+            class="com.daviancorp.android.ui.general.DrawSharpness"
+            android:id="@+id/sharpness"
+            android:layout_toLeftOf="@+id/defense_text"
+            android:layout_alignTop="@+id/defense_text" />
+
+        <TextView
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:id="@+id/defense_text"
+            android:layout_below="@+id/element_layout"
+            android:layout_toLeftOf="@+id/affinity_text"
+            android:gravity="right" />
+
+        <TextView
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:text="OOO"
+            android:id="@+id/slots_text"
+            style="@style/text_small"
+            android:gravity="right|top"
+            android:layout_alignParentRight="true" />
+
+        <TextView
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:text="-25/40%"
+            android:id="@+id/affinity_text"
+            android:gravity="right|top"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/slots_text"
+            android:paddingBottom="4dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

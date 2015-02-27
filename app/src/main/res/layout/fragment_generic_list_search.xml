@@ -10,11 +10,13 @@
         android:layout_height="wrap_content"
         android:hint="Search..."
         android:inputType="textVisiblePassword"
-        android:textColor="@color/text_color_secondary" />
+        android:layout_marginLeft="62dp"
+        style="@style/text_medium" />
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        style="@style/list"/>
 
 </LinearLayout>

@@ -7,21 +7,20 @@ import android.view.Menu;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.general.GenericActivity;
 
-public class LocationGridActivity extends GenericActivity {
+public class WeaponSelectionListActivity extends GenericActivity {
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(R.string.locations);
-
+		setTitle(R.string.weapons);
         // Enable drawer button instead of back button
         super.enableDrawerIndicator();
     }
 
 	@Override
 	protected Fragment createFragment() {
-		super.detail = new LocationGridFragment();
+		super.detail = new WeaponSelectionListFragment();
 		return super.detail;
 	}
 	

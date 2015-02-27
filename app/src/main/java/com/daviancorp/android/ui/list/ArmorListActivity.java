@@ -66,6 +66,8 @@ public class ArmorListActivity extends GenericTabActivity implements
 		});
 	}
 
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);

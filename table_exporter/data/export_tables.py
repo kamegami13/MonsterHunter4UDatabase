@@ -2,6 +2,7 @@ import xlrd
 import unicodecsv
 import timeit
 
+
 def main():
     columns = { 'items' :
                     ['_id', 'name', 'jpn_name', 'type', 'sub_type',
@@ -42,14 +43,10 @@ def main():
                      'time_s','time_a','time_b'],
                 'arena_rewards' : 
                     ['_id','arena_id','item_id','percentage','stack_size'],
-                'charms' :
-                    ['_id','num_slots','skill_tree_1_id','skill_tree_1_amount','skill_tree_2_id','skill_tree_2_amount'],
                 'decorations' : 
                     ['_id','num_slots'],
                 'gathering' :
                     ['_id','item_id','location_id','area','site','rank','quantity','percentage'],
-                'hunting_fleet' :
-                    ['_id','type','level','location','item_id','amount','percentage','rank'],
                 'hunting_rewards' :
                     ['_id','item_id','condition','monster_id','rank','stack_size','percentage'],
                 'monster_to_arena' :
@@ -65,10 +62,21 @@ def main():
                 'monster_status' :
                     ['_id', 'monster_id','status','initial','increase','max','duration','damage']
               }
-    wb = xlrd.open_workbook('Monster Hunter 4U Database.xlsx')
+              
+    wbl = []
+    wbl.append(xlrd.open_workbook('Monster Hunter 4U Database.xlsx'))
+    wbl.append(xlrd.open_workbook('Monster Hunter 4U Database 2.xlsx'))
     for table, col_list in columns.iteritems():
-        sh = wb.sheet_by_name(table)
-        if not sh:
+        sheet_found = False
+        sh = ""
+        for wb in wbl:
+            try:
+                sh = wb.sheet_by_name(table)
+            except xlrd.biffh.XLRDError:
+                #print 'Table ', table, ' not found'
+                continue
+            sheet_found = True
+        if not sheet_found:
             print 'Table ', table, ' not found'
             continue
         your_csv_file = open(table + '.tsv', 'wb')
@@ -89,7 +97,6 @@ def main():
             if first:
                 first = False
                 continue
-                
             row = sh.row_values(rownum)
             arranged_row = [ clean_row(row[i]) for i in arranged_order]
             wr.writerow(arranged_row)
