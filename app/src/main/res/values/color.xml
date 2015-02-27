@@ -12,6 +12,9 @@
     <color name="text_color">#333333</color>
     <color name="background_color">#f5f5f5</color>
 
+    <color name="navbar_item_color">#000000</color>
+    <color name="navbar_background_color">#FFFFFF</color>
+
     <!-- used for making anything clickable have a clicked state -->
     <color name="transparent">#00FFFFFF</color>
     <color name="transparentlight">#90D7CCC8</color>
