@@ -19,6 +19,6 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/drawer_list_item"/>
+    <include layout="@layout/drawer_list"/>
 
 </android.support.v4.widget.DrawerLayout>

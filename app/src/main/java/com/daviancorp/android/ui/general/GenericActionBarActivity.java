@@ -126,7 +126,7 @@ public class GenericActionBarActivity extends ActionBarActivity {
     // Set up drawer menu options
     private void addDrawerItems(){
         String[] menuArray = getResources().getStringArray(R.array.drawer_items);
-        mDrawerAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, menuArray);
+        mDrawerAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.drawer_list_item, menuArray);
         mDrawerList.setAdapter(mDrawerAdapter);
     }
 
