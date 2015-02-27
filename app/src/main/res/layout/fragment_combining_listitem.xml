@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    style="@style/list_item">
+    style="@style/list_item"
+    android:gravity="center_vertical"
+    android:id="@+id/listitem">
 
     <LinearLayout
         android:id="@+id/item3"

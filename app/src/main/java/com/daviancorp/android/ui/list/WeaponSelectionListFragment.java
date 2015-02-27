@@ -1,12 +1,15 @@
 package com.daviancorp.android.ui.list;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,13 +17,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.mh4udatabase.R;
 
-public class WeaponGridFragment extends Fragment {
+public class WeaponSelectionListFragment extends ListFragment {
 
-	private GridView gridView;
+    private WeaponItemAdapter mAdapter = null;
+
 	private final static int GREAT_SWORD = 0;
 	private final static int LONG_SWORD = 1;
 	private final static int SWORD_AND_SHIELD = 2;
@@ -41,96 +47,50 @@ public class WeaponGridFragment extends Fragment {
 			"Lance", "Gunlance", "Switch Axe", "Charge Blade", "Insect Glaive", "Light Bowgun", "Heavy Bowgun",
 			"Bow" };
 
-	static final Integer[] drawables = new Integer[] { R.drawable.great_sword1,
-			R.drawable.long_sword1, R.drawable.sword_and_shield1,
-			R.drawable.dual_blades1, R.drawable.hammer1,
-			R.drawable.hunting_horn1, R.drawable.lance1, R.drawable.gunlance1,
-			R.drawable.switch_axe1, R.drawable.charge_blade1, R.drawable.insect_glaive1,
-            R.drawable.light_bowgun1, R.drawable.heavy_bowgun1, R.drawable.bow1 };
+	static final Drawable[] drawables = new Drawable[14];
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_weapon_grid, parent, false);
+		View v = inflater.inflate(R.layout.fragment_generic_list, parent, false);
 
-		ArrayList<Integer> mItems = new ArrayList<Integer>(
-				Arrays.asList(drawables));
+        String imageLocation = "";
+        for(int i = 0; i < weapons.length; i++)
+        {
+            imageLocation = weapons[i].toLowerCase().replaceAll(" ","_");
+            imageLocation = "icons_weapons/icons_" + imageLocation + "/" + imageLocation + "1.png";
 
-		gridView = (GridView) v.findViewById(R.id.grid_home);
-		gridView.setAdapter(new WeaponItemAdapter(mItems));
+            Drawable d = null;
 
-		// gridView.setOnItemClickListener(new OnItemClickListener() {
-		// public void onItemClick(AdapterView<?> parent, View v,
-		// int position, long id) {
-		//
-		// Intent intent = new Intent(getActivity(),
-		// WeaponListActivity.class);
-		//
-		// Log.d("helpme", "pos: " + position);
-		// switch (position) {
-		// case GREAT_SWORD:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Great Sword");
-		// break;
-		// case LONG_SWORD:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Long Sword");
-		// break;
-		// case SWORD_AND_SHIELD:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Sword and Shield");
-		// break;
-		// case DUAL_BLADES:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Dual Blades");
-		// break;
-		// case HAMMER:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Hammer");
-		// break;
-		// case HUNTING_HORN:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Hunting Horn");
-		// break;
-		// case LANCE:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Lance");
-		// break;
-		// case GUNLANCE:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Gunlance");
-		// break;
-		// case SWITCH_AXE:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Switch Axe");
-		// break;
-		// case LIGHT_BOWGUN:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Light Bowgun");
-		// break;
-		// case HEAVY_BOWGUN:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE,
-		// "Heavy Bowgun");
-		// break;
-		// case BOW:
-		// intent.putExtra(WeaponListActivity.EXTRA_WEAPON_TYPE, "Bow");
-		// break;
-		// }
-		// Log.d("helpme", "before startActivity");
-		// startActivity(intent);
-		// }
-		// });
+            try {
+                d = Drawable.createFromStream(parent.getContext().getAssets().open(imageLocation),
+                        null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            drawables[i] = d;
+        }
+
+        ArrayList<Drawable> mItems = new ArrayList<Drawable>(
+                Arrays.asList(drawables));
+
+        mAdapter = new WeaponItemAdapter(mItems);
+
+        setListAdapter(mAdapter);
 
 		return v;
 	}
 
-	private class WeaponItemAdapter extends ArrayAdapter<Integer> {
-		public WeaponItemAdapter(ArrayList<Integer> items) {
+	private class WeaponItemAdapter extends ArrayAdapter<Drawable> {
+		public WeaponItemAdapter(ArrayList<Drawable> items) {
 			super(getActivity(), 0, items);
 		}
 
@@ -143,28 +103,30 @@ public class WeaponGridFragment extends Fragment {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
 				convertView = getActivity().getLayoutInflater().inflate(
-						R.layout.fragment_weapon_grid_item, parent, false);
+						R.layout.fragment_list_item_basic, parent, false);
 			}
 
-			Integer item = getItem(position);
-			TextView textView = (TextView) convertView.findViewById(R.id.text);
+			Drawable item = getItem(position);
+
+			TextView textView = (TextView) convertView.findViewById(R.id.item_label);
 			ImageView imageView = (ImageView) convertView
-					.findViewById(R.id.image);
+					.findViewById(R.id.item_image);
+
+            RelativeLayout itemLayout = (RelativeLayout) convertView.findViewById(R.id.listitem);
 
 			textView.setText(weapons[position]);
-			imageView.setImageResource(item);
+			imageView.setImageDrawable(item);
 
-			imageView.setOnClickListener(new GridItemClickListener(
-					getContext(), position));
+			itemLayout.setOnClickListener(new WeaponListClickListener(convertView.getContext(), position));
 
 			return convertView;
 		}
 
-		private class GridItemClickListener implements OnClickListener {
+		private class WeaponListClickListener implements OnClickListener {
 			private Context c;
 			private int position;
 
-			public GridItemClickListener(Context context, int position) {
+			public WeaponListClickListener(Context context, int position) {
 				super();
 				this.position = position;
 				this.c = context;

@@ -381,12 +381,10 @@ CREATE TABLE IF NOT EXISTS 'monster_status' (
 .import data/arena_quests.tsv arena_quests
 .import data/arena_rewards.tsv arena_rewards
 .import data/armor.tsv armor
-.import data/charms.tsv charms
 .import data/combining.tsv combining
 .import data/components.tsv components
 .import data/decorations.tsv decorations
 .import data/gathering.tsv gathering
-.import data/hunting_fleet.tsv hunting_fleet
 .import data/hunting_rewards.tsv hunting_rewards
 .import data/item_to_skill_tree.tsv item_to_skill_tree
 .import data/items.tsv items

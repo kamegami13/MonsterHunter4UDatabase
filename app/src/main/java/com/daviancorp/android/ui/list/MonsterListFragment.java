@@ -4,42 +4,38 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Monster;
 import com.daviancorp.android.data.database.MonsterCursor;
 import com.daviancorp.android.loader.MonsterListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.detail.MonsterDetailActivity;
+import com.daviancorp.android.ui.ClickListeners.MonsterClickListener;
 
-public class MonsterGridFragment extends Fragment implements
+public class MonsterListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 	private static final String ARG_TAB = "MONSTER_TAB";
 
-	private GridView mGridView;
 	private MonsterGridCursorAdapter mAdapter;
 
-	public static MonsterGridFragment newInstance(String tab) {
+	public static MonsterListFragment newInstance(String tab) {
 		Bundle args = new Bundle();
 		args.putString(ARG_TAB, tab);
-		MonsterGridFragment f = new MonsterGridFragment();
+		MonsterListFragment f = new MonsterListFragment();
 		f.setArguments(args);
 		return f;
 	}
@@ -56,21 +52,7 @@ public class MonsterGridFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
 		View v = inflater
-				.inflate(R.layout.fragment_monster_grid, parent, false);
-
-		mGridView = (GridView) v.findViewById(R.id.grid_monsters);
-		mGridView.setAdapter(mAdapter);
-		
-		mGridView.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View v,
-					int position, long id) {
-				
-				Intent i = new Intent(getActivity(), MonsterDetailActivity.class);
-				i.putExtra(MonsterDetailActivity.EXTRA_MONSTER_ID, id);
-				startActivity(i);
-				
-			}
-		});
+				.inflate(R.layout.fragment_generic_list, parent, false);
 
 		return v;
 	}
@@ -91,15 +73,13 @@ public class MonsterGridFragment extends Fragment implements
 		// Create an adapter to point at this cursor
 		mAdapter = new MonsterGridCursorAdapter(getActivity(),
 				(MonsterCursor) cursor);
-		if (mGridView != null) {
-			mGridView.setAdapter(mAdapter);
-		}
+		setListAdapter(mAdapter);
 	}
 
 	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
 		// Stop using the cursor (via the adapter)
-		mGridView.setAdapter(null);
+		setListAdapter(mAdapter);
 	}
 	
 
@@ -118,7 +98,7 @@ public class MonsterGridFragment extends Fragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_monster_griditem,
+			return inflater.inflate(R.layout.fragment_list_item_basic,
 					parent, false);
 		}
 
@@ -127,12 +107,12 @@ public class MonsterGridFragment extends Fragment implements
 			// Get the monster for the current row
 			Monster monster = mMonsterCursor.getMonster();
 	        AssetManager manager = context.getAssets();
-	        
-
 
 			// Set up the text view
-			TextView monsterNameTextView = (TextView) view.findViewById(R.id.grid_item_label);
-			ImageView monsterImage = (ImageView) view.findViewById(R.id.grid_item_image);
+			TextView monsterNameTextView = (TextView) view.findViewById(R.id.item_label);
+			ImageView monsterImage = (ImageView) view.findViewById(R.id.item_image);
+
+            RelativeLayout itemLayout = (RelativeLayout) view.findViewById(R.id.listitem);
 			
 			String cellText = monster.getName();
 			String cellImage = "icons_monster/" + monster.getFileLocation();
@@ -147,7 +127,10 @@ public class MonsterGridFragment extends Fragment implements
 	            monsterImage.setImageBitmap(bitmap);
 	        } catch (IOException e) {
 	            e.printStackTrace();
-	        } 
+	        }
+
+            itemLayout.setTag(monster.getId());
+            itemLayout.setOnClickListener(new MonsterClickListener(context, monster.getId()));
 		}
 	}
 

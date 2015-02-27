@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.daviancorp.android.ui.list.MonsterGridFragment;
+import com.daviancorp.android.ui.list.MonsterListFragment;
 
 public class MonsterGridPagerAdapter extends FragmentPagerAdapter {
 
@@ -18,13 +18,13 @@ public class MonsterGridPagerAdapter extends FragmentPagerAdapter {
 		switch (index) {
 		case 0:
             // Monster grid (large monsters)
-            return MonsterGridFragment.newInstance("Large");
+            return MonsterListFragment.newInstance("Large");
 		case 1:
 			// Monster grid (small monsters)
-			return MonsterGridFragment.newInstance("Small");
+			return MonsterListFragment.newInstance("Small");
 		case 2:
             // Monster grid (all monsters)
-            return MonsterGridFragment.newInstance(null);
+            return MonsterListFragment.newInstance(null);
 		default:
 			return null;
 		}

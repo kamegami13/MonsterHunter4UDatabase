@@ -22,6 +22,7 @@ import com.daviancorp.android.data.classes.Habitat;
 import com.daviancorp.android.data.database.MonsterHabitatCursor;
 import com.daviancorp.android.loader.MonsterHabitatListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.MonsterClickListener;
 
 import java.io.IOException;
 
@@ -98,15 +99,6 @@ public class LocationHabitatFragment extends ListFragment implements
         setListAdapter(null);
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        // The id argument will be the Location ID set by adapter
-
-        Intent i = new Intent(getActivity(), MonsterDetailActivity.class);
-        i.putExtra(MonsterDetailActivity.EXTRA_MONSTER_ID, (long) v.getTag());
-        startActivity(i);
-    }
-
     private static class MonsterHabitatCursorAdapter extends CursorAdapter {
 
         private MonsterHabitatCursor mHabitatCursor;
@@ -122,7 +114,7 @@ public class LocationHabitatFragment extends ListFragment implements
             // Use a layout inflater to get a row view
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            return inflater.inflate(R.layout.fragment_location_habitat_listitem,
+            return inflater.inflate(R.layout.fragment_monster_habitat_listitem,
                     parent, false);
         }
 
@@ -135,8 +127,8 @@ public class LocationHabitatFragment extends ListFragment implements
             LinearLayout itemLayout = (LinearLayout) view
                     .findViewById(R.id.listitem);
 
-            ImageView monsterImageView = (ImageView) view.findViewById(R.id.monster_image);
-            TextView monsterTextView = (TextView) view.findViewById(R.id.monster);
+            ImageView monsterImageView = (ImageView) view.findViewById(R.id.mapImage);
+            TextView monsterTextView = (TextView) view.findViewById(R.id.map);
             TextView startTextView = (TextView) view.findViewById(R.id.start);
             TextView areaTextView = (TextView) view.findViewById(R.id.move);
             TextView restTextView = (TextView) view.findViewById(R.id.rest);
@@ -174,6 +166,8 @@ public class LocationHabitatFragment extends ListFragment implements
 
             // Set id of layout to location so clicking gives us the location
             itemLayout.setTag(habitat.getMonster().getId());
+            itemLayout.setOnClickListener(new MonsterClickListener(context, habitat.getMonster()
+                    .getId()));
         }
     }
 

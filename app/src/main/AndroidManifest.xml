@@ -33,7 +33,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daviancorp.android.ui.list.LocationGridActivity"
+            android:name="com.daviancorp.android.ui.list.LocationListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
@@ -45,7 +45,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daviancorp.android.ui.list.MonsterGridActivity"
+            android:name="com.daviancorp.android.ui.list.MonsterListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
@@ -65,7 +65,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daviancorp.android.ui.list.WeaponGridActivity"
+            android:name="com.daviancorp.android.ui.list.WeaponSelectionListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity

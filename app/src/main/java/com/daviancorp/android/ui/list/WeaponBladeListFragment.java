@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,14 +14,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
+import com.daviancorp.android.ui.adapter.WeaponListElementAdapter;
 import com.daviancorp.android.ui.general.DrawSharpness;
 
 public class WeaponBladeListFragment extends WeaponListFragment implements
@@ -36,11 +35,20 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 		f.setArguments(args);
 		return f;
 	}
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+        // Initialize the loader to load the list of runs
+        getLoaderManager().initLoader(R.id.weapon_list_fragment, null, this);
+    }
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_weapon_blade_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
 //		super.setContextMenu(v);
 		return v;
 	}
@@ -70,13 +78,11 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 
 	}
 
-	private static class WeaponBladeListCursorAdapter extends CursorAdapter {
+	private static class WeaponBladeListCursorAdapter extends WeaponListElementAdapter {
 
-		private WeaponCursor mWeaponCursor;
 
 		public WeaponBladeListCursorAdapter(Context context, WeaponCursor cursor) {
-			super(context, cursor, 0);
-			mWeaponCursor = cursor;
+			super(context, cursor);
 		}
 
 		@Override
@@ -84,203 +90,59 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_weapon_blade_listitem, parent,
+			return inflater.inflate(R.layout.fragment_weapon_tree_item_blademaster, parent,
 					false);
 		}
 
 		@Override
-		public void bindView(View view, Context context, Cursor cursor) {
-			// Get the monster for the current row
-			Weapon weapon = mWeaponCursor.getWeapon();
+        public void bindView(View view, Context context, Cursor cursor) {
+            super.bindView(view, context, cursor);
 
-			// Set up the text view
-			TextView nametv = (TextView) view.findViewById(R.id.name);
-			TextView attacktv = (TextView) view.findViewById(R.id.attack);
-			TextView elementtv = (TextView) view.findViewById(R.id.element);
-			TextView awakentv = (TextView) view.findViewById(R.id.awaken);
-			TextView slottv = (TextView) view.findViewById(R.id.slot);
-			TextView affinitytv = (TextView) view.findViewById(R.id.affinity);
-			TextView defensetv = (TextView) view.findViewById(R.id.defense);
-			TextView specialtv = (TextView) view.findViewById(R.id.special);
+            // Get the monster for the current row
+            Weapon weapon = mWeaponCursor.getWeapon();
 
-            // Set up the DrawSharpness View
-            DrawSharpness sharpnesstv = (DrawSharpness) view.findViewById(R.id.sharpness);
-			
-			// Need to reset drawables
-            sharpnesstv.invalidate();
-			elementtv.setCompoundDrawables(null, null, null, null);
-			specialtv.setCompoundDrawables(null, null, null, null);
-			specialtv.setText(null);
-			
-			String name = "";
-			int wFinal = weapon.getWFinal();
-			
-//			if (wFinal != 0) {
-//				name = "*";
-//			}
+            TextView specialtv = (TextView) view.findViewById(R.id.special_text);
 
-            for(int i = 0; i < weapon.getTree_Depth(); i++)
-            {
-                name = name + "-";
+
+            DrawSharpness sharpnessDrawable = (DrawSharpness) view.findViewById(R.id.sharpness);
+
+            //
+            // Set special text fields
+            //
+            specialtv.setText("");
+            String type = weapon.getWtype();
+            if (type.equals("Hunting Horn")) {
+                String special = weapon.getHornNotes();
+
+                ImageView note1v = (ImageView) view.findViewById(R.id.note_image_1);
+                ImageView note2v = (ImageView) view.findViewById(R.id.note_image_2);
+                ImageView note3v = (ImageView) view.findViewById(R.id.note_image_3);
+
+                note1v.setImageDrawable(getNoteDrawable(context, special.charAt(0)));
+                note2v.setImageDrawable(getNoteDrawable(context, special.charAt(1)));
+                note3v.setImageDrawable(getNoteDrawable(context, special.charAt(2)));
+
             }
-			
-			name = name + weapon.getName();
-			String attack = "" + weapon.getAttack();
-			
-			// Set the element to view
-			String element = weapon.getElementalAttack();
-			String awakenedElement = weapon.getAwakenedElementalAttack();
-			String dualElement = null;
-			String elementText = "";
-			String awakenText = "";
-			Drawable dEle = null;
-			Drawable dDualEle = null;
-			
-			if (!"".equals(awakenedElement)) {
-				element = awakenedElement;
-				awakenText = "(";
-			}
-			
-			if (!"".equals(element)) {
-				String[] elementData = getElementData(element);
-				elementText = elementData[0];
-				dEle = getDrawable(context, elementData[1]);
-				
-				if (element.contains(",")) {
-					String[] twoElements = elementText.split(",");
-					elementText = twoElements[0];
-					dualElement = twoElements[1];
-					
-					String[] dualElementData = getElementData(dualElement);
-					
-					specialtv.setText(dualElementData[0]);
-					dDualEle = getDrawable(context, dualElementData[1]);
+            else if (type.equals("Gunlance")) {
+                String special = weapon.getShellingType();
+                specialtv.setText(special);
+                specialtv.setGravity(Gravity.CENTER);
+            }
+            else if (type.equals("Switch Axe") || type.equals("Charge Blade")) {
+                String special = weapon.getPhial();
+                specialtv.setText(special);
+                specialtv.setGravity(Gravity.CENTER);
+            }
 
-					dDualEle = scaleDrawable(dDualEle, 35, 35);
-					specialtv.setCompoundDrawables(dDualEle, null, null, null);
-					
-					// reposition dual element
-					android.view.Display display = ((android.view.WindowManager)context
-							.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-					// x position: 185
-					specialtv.setPadding((int) (display.getWidth()*0.16), 0, 0, 0);
-				}
-			
-				dEle = scaleDrawable(dEle, 35, 35);
-				elementtv.setCompoundDrawables(dEle, null, null, null);
-				
-				if (!"".equals(awakenedElement)) {
-					elementText = elementText + ")";
-				}
-			}
-			
-			// Set the slot to view
-			String slot = "";
-			switch (weapon.getNumSlots()) {
-			case 0:
-				slot = "---";
-				break;
-			case 1:
-				slot = "O--";
-				break;
-			case 2:
-				slot = "OO-";
-				break;
-			case 3:
-				slot = "OOO";
-				break;
-			default:
-				slot = "error!!";
-				break;
-			}
+            // Set sharpness
+            String sharpString = weapon.getSharpness();
+            sharpnessDrawable.init(sharpString);
+        }
 
-			String affinity = "";
-			if (weapon.getAffinity().length() > 0) {
-				affinity = weapon.getAffinity() + "%";
-			}
 
-			String defense = "";
-			if (weapon.getDefense() != 0) {
-				defense = "" + weapon.getDefense();
-			}
-
-			nametv.setText(name);
-			nametv.setTypeface(null, Typeface.BOLD);
-			attacktv.setText(attack);
-			elementtv.setText(elementText);
-			awakentv.setText(awakenText);
-			slottv.setText(slot);
-			affinitytv.setText(affinity);
-			defensetv.setText(defense);
-
-			String type = weapon.getWtype();
-			if (type.equals("Hunting Horn")) {
-				String special = weapon.getHornNotes();
-				specialtv.setLayoutParams(new LinearLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT, 
-						LayoutParams.WRAP_CONTENT, 0.3f));
-				
-				ImageView note1v = (ImageView) view.findViewById(R.id.note1);
-				ImageView note2v = (ImageView) view.findViewById(R.id.note2);
-				ImageView note3v = (ImageView) view.findViewById(R.id.note3);
-				TextView fillerv = (TextView) view.findViewById(R.id.filler);
-				
-				note1v.setImageDrawable(getNoteDrawable(context, special.charAt(0)));
-				note2v.setImageDrawable(getNoteDrawable(context, special.charAt(1)));
-				note3v.setImageDrawable(getNoteDrawable(context, special.charAt(2)));
-				
-				fillerv.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, 
-						LayoutParams.WRAP_CONTENT, 0.4f));
-				note1v.setLayoutParams(new LinearLayout.LayoutParams(0, 50, 0.1f));
-				note2v.setLayoutParams(new LinearLayout.LayoutParams(0, 50, 0.1f));
-				note3v.setLayoutParams(new LinearLayout.LayoutParams(0, 50, 0.1f));
-				
-			}
-			if (type.equals("Gunlance")) {
-				String special = weapon.getShellingType();
-				specialtv.setText(special);
-				specialtv.setGravity(Gravity.CENTER);
-			}
-			if (type.equals("Switch Axe") || type.equals("Charge Blade")) {
-				String special = weapon.getPhial();
-				specialtv.setText(special);
-				specialtv.setGravity(Gravity.CENTER);
-			}
-			if (!type.equals("Light Bowgun") && !type.equals("Heavy Bowgun")
-					&& !type.equals("Bow")) {
-                //procedurally draw sharpness
-                String sharpString = weapon.getSharpness();
-                sharpnesstv.init(sharpString);
-			}
-		}
-		
-		private String[] getElementData(String element) {
-			if (element.startsWith("FI")) {
-				return new String[] {element.substring(2), "icons_monster_info/Fire.png"};
-			} else if (element.startsWith("WA")) {
-				return new String[] {element.substring(2), "icons_monster_info/Water.png"};
-			} else if (element.startsWith("IC")) {
-				return new String[] {element.substring(2), "icons_monster_info/Ice.png"};
-			} else if (element.startsWith("TH")) {
-				return new String[] {element.substring(2), "icons_monster_info/Thunder.png"};
-			} else if (element.startsWith("DR")) {
-				return new String[] {element.substring(2), "icons_monster_info/Dragon.png"};
-			} else if (element.startsWith("PA")) {
-				return new String[] {element.substring(2), "icons_monster_info/Paralysis.png"};
-			} else if (element.startsWith("PO")) {
-				return new String[] {element.substring(2), "icons_monster_info/Poison.png"};
-			} else if (element.startsWith("SL")) {
-				return new String[] {element.substring(2), "icons_monster_info/Sleep.png"};
-			} else if (element.startsWith("BL")) {
-				return new String[] {element.substring(2), "icons_monster_info/Blastblight.png"};
-			} else {
-				return null;
-			}
-		}
-		
 		private Drawable getNoteDrawable(Context c, char note) {
 			String file = "icons_monster_info/";
-			
+
 			switch (note) {
 				case 'B':
 					file = file + "Note.blue.png";
@@ -307,33 +169,8 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 					file = file + "Note.yellow.png";
 					break;
 			}
-			
+
 			return getDrawable(c, file);
-		}
-
-		private Drawable getDrawable(Context c, String location) {
-			Drawable d = null;
-
-			try {
-				d = Drawable.createFromStream(c.getAssets().open(location),
-						null);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			return d;
-		}
-
-		// found on Google
-		private Drawable scaleDrawable(Drawable drawable, int width, int height) {
-			int wi = drawable.getIntrinsicWidth();
-			int hi = drawable.getIntrinsicHeight();
-			int dimDiff = Math.abs(wi - width) - Math.abs(hi - height);
-			float scale = (dimDiff > 0) ? width / (float) wi : height
-					/ (float) hi;
-			Rect bounds = new Rect(0, 0, (int) (scale * wi), (int) (scale * hi));
-			drawable.setBounds(bounds);
-			return drawable;
 		}
 	}
 
