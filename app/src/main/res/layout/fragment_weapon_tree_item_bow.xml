@@ -134,7 +134,7 @@
 
         <TextView
             style="@style/text_small"
-            android:layout_width="36dp"
+            android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:text="750"
             android:id="@+id/attack_text"
