@@ -134,20 +134,21 @@
 
         <TextView
             style="@style/text_small"
-            android:layout_width="wrap_content"
+            android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:text="750"
             android:id="@+id/attack_text"
             android:layout_gravity="left"
-            android:layout_alignLeft="@+id/charge_text" />
+            android:layout_toLeftOf="@+id/linearLayout"
+            android:layout_marginRight="16dp" />
 
         <TextView
-            android:layout_width="90dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="R1|R1|R1|R1*|"
             android:id="@+id/charge_text"
             android:layout_alignTop="@+id/defense_text"
-            android:layout_toLeftOf="@+id/defense_text" />
+            android:layout_alignLeft="@+id/attack_text" />
 
         <TextView
             android:layout_width="32dp"

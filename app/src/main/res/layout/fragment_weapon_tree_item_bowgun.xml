@@ -96,7 +96,7 @@
             android:gravity="right" />
 
         <TextView
-            android:layout_width="72dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="Average[2]"
             android:id="@+id/recoil_text"
@@ -104,7 +104,7 @@
             android:gravity="right" />
 
         <TextView
-            android:layout_width="72dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="Slower"
             android:id="@+id/reload_text"
