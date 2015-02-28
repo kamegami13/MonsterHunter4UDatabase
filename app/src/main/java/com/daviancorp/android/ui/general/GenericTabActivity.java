@@ -1,6 +1,7 @@
 package com.daviancorp.android.ui.general;
 
 import android.annotation.SuppressLint;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -33,7 +34,15 @@ public abstract class GenericTabActivity extends GenericActionBarActivity{
         // Set up tabs
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setCustomTabView(R.layout.sliding_tab_layout, R.id.text1);
+
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+
+        int width = size.x;
+
+        mSlidingTabLayout.setMinimumWidth(width);
         mSlidingTabLayout.setDistributeEvenly(true);
+
 
         setTitle(R.string.app_name);
         setupDrawer(); // Needs to be called after setContentView
