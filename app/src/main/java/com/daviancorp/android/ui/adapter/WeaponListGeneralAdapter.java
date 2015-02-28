@@ -1,11 +1,15 @@
 package com.daviancorp.android.ui.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -72,7 +76,7 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
                 cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + weapon.getRarity() + ".png";
                 break;
             case "Lance":
-                cellImage = "icons_weapons/icons_hammer/hammer" + weapon.getRarity() + ".png";
+                cellImage = "icons_weapons/icons_lance/lance" + weapon.getRarity() + ".png";
                 break;
             case "Gunlance":
                 cellImage = "icons_weapons/icons_gunlance/gunlance" + weapon.getRarity() + ".png";
@@ -104,9 +108,9 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         //
         String name = "";
         int wFinal = weapon.getWFinal();
-        for (int i = 0; i < weapon.getTree_Depth(); i++) {
+        /*for (int i = 0; i < weapon.getTree_Depth(); i++) {
             name = name + "-";
-        }
+        }*/
         name = name + weapon.getName();
 
         // Get the weapons attack
@@ -154,6 +158,38 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         slottv.setText(slot);
         affinitytv.setText(affinity);
         defensetv.setText(defense);
+
+
+        // Indent the tree
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) weaponIcon.getLayoutParams();
+        int spacing = (int) (4.0f * Resources.getSystem().getDisplayMetrics().density + 0.5)
+                * weapon.getTree_Depth();
+
+        params.leftMargin = 0;
+        params.leftMargin = params.leftMargin + spacing;
+
+        LinearLayout lineLayout = (LinearLayout) view.findViewById(R.id.tree_lines);
+        lineLayout.getLayoutParams().width = spacing;
+        lineLayout.setBackgroundColor(context.getResources().getColor(R.color.divider_color));
+
+
+        /*
+        for(int i = 0; i < weapon.getTree_Depth(); i++) {
+            newView = new View(lineLayout.getContext());
+            lineLayout.addView(newView, i);
+
+            lineLayout.getChildAt(i).setLayoutParams(new LinearLayout.LayoutParams(
+                    (int) (1.0f * Resources.getSystem().getDisplayMetrics().density + 0.5),
+                    (int) (4.0f * Resources.getSystem().getDisplayMetrics().density + 0.5)
+            ));
+            lineLayout.getChildAt(i)
+                    .setBackgroundColor(context.getResources().getColor(R.color.divider_color));
+
+            /*params2 = (LinearLayout.LayoutParams) lineLayout.getChildAt(i).getLayoutParams();
+            params2.leftMargin = params2.leftMargin +
+                    (int) (8.0f * Resources.getSystem().getDisplayMetrics().density + 0.5);
+        }
+        */
     }
 
 
