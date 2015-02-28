@@ -13,20 +13,11 @@ import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.MonsterGridPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 
-public class MonsterListActivity extends GenericTabActivity implements
-		ActionBar.TabListener {
+public class MonsterListActivity extends GenericTabActivity {
 
 	private ViewPager viewPager;
 	private MonsterGridPagerAdapter mAdapter;
-	private ActionBar actionBar;
 	private int toggle;
-
-	// Tab titles
-	private String[] tabs = {
-            MonsterListCursorLoader.TAB_LARGE,
-			MonsterListCursorLoader.TAB_SMALL,
-            "All"
-    };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,38 +30,10 @@ public class MonsterListActivity extends GenericTabActivity implements
 		mAdapter = new MonsterGridPagerAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(mAdapter);
 
-		actionBar = getSupportActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS); // This needs to be replaced once ActionBar is migrated to Toolbar
+        mSlidingTabLayout.setViewPager(viewPager);
 
         // Enable drawer button instead of back button
         super.enableDrawerIndicator();
-
-        // Adding Tabs
-		for (String tab_name : tabs) {
-			actionBar.addTab(actionBar.newTab().setText(tab_name)
-					.setTabListener(this));
-		}
-
-		/**
-		 * on swiping the viewpager make respective tab selected
-		 * */
-		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-			@Override
-			public void onPageSelected(int position) {
-				// on changing the page
-				// make respected tab selected
-				actionBar.setSelectedNavigationItem(position);
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-			}
-		});
 	}
 
 	@Override
@@ -102,26 +65,6 @@ public class MonsterListActivity extends GenericTabActivity implements
 		if (toggle == 1) {
 			finish();
 		}
-	}
-
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// on tab selected
-		// show respected fragment view
-		viewPager.setCurrentItem(tab.getPosition());
-
-	}
-
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

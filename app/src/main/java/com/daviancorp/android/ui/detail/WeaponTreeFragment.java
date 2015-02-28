@@ -4,15 +4,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.sax.RootElement;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
@@ -90,20 +93,21 @@ public class WeaponTreeFragment extends ListFragment implements
 			Weapon weapon = mWeaponCursor.getWeapon();
 
 			// Set up the text view
-			LinearLayout weaponLayout = (LinearLayout) view.findViewById(R.id.listitem);
+			RelativeLayout weaponLayout = (RelativeLayout) view.findViewById(R.id.listitem);
 			weaponLayout.setTag(weapon.getId());
             weaponLayout.setOnClickListener(new WeaponClickListener(context, weapon.getId()));
 			
 			TextView weaponView = (TextView) view.findViewById(R.id.name_text);
 			String cellWeaponText = weapon.getName();
 			weaponView.setText(cellWeaponText);
-			
+
+            View arrowView = (View) view.findViewById(R.id.arrow);
+            arrowView.setVisibility(view.GONE);
 			if ((weapon.getId() <= weaponId) && (weapon.getWFinal() == 0)) {
-				ImageView arrowView = (ImageView) view.findViewById(R.id.arrow);
-				arrowView.setImageResource(R.drawable.arrow_down_float);
+				arrowView.setVisibility(view.VISIBLE);
 			}
 			if (weapon.getId() == weaponId) {
-				weaponView.setTextColor(Color.RED);
+				weaponView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 			}
 		}
 	}

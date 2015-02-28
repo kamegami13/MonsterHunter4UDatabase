@@ -6,7 +6,7 @@
 
 
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar"> <!-- change to .NoActionBar when integrating Toolbar-->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar"> <!-- change to .NoActionBar when integrating Toolbar-->
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -24,35 +24,18 @@
         <item name="android:textColor">@color/text_color</item>
         <item name="android:windowBackground">@color/background_color</item>
 
-        <item name="android:actionBarStyle">@style/ActionBar</item>
-        <item name="actionBarStyle">@style/ActionBar</item>
-
         <item name="android:colorPrimary">@color/primary_color</item>
         <item name="android:colorPrimaryDark">@color/dark_primary_color</item>
         <item name="android:colorAccent">@color/accent_color</item>
 
         <item name="android:clipToPadding">false</item>
 
-        <item name="android:actionMenuTextColor">#000000</item> <!-- thought this would fix white menu text but it doesnt -->
-
-        <item name="actionBarTabStyle">@style/MyActionBarTabs</item>
     </style>
 
-    <!-- ActionBar Tab styles -->
-    <style name="MyActionBarTabs"
-        parent="@style/Widget.AppCompat.ActionBar.TabView">
-        <item name="android:background">@drawable/action_bar_tab_indicator</item>
-    </style>
-
-    <!-- ActionBar styles -->
-    <style name="ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/primary_color</item>
-        <item name="background">@color/primary_color</item>
-    </style>
 
     <!-- Begin styles for lists -->
 
-    <style name="list" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="list" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:id">@android:id/list</item>
@@ -68,7 +51,7 @@
         <item name="android:groupIndicator">@null</item>
     </style>
 
-    <style name="expandable_group" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="expandable_group" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:layout_height">32dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingTop">4dp</item>
@@ -79,7 +62,7 @@
 
     </style>
 
-    <style name="list_item" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="list_item" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@drawable/clicked_states_white</item>
         <item name="android:clickable">true</item>
         <item name="android:layout_height">48dp</item>
@@ -89,7 +72,7 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="list_sub_item" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="list_sub_item" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:paddingLeft">16dp</item>
@@ -100,25 +83,25 @@
         <item name="android:layout_height">64dp</item>
     </style>
 
-    <style name="text_medium" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="text_medium" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">18sp</item>
         <item name="android:typeface">sans</item>
     </style>
 
-    <style name="text_medium_alt" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="text_medium_alt" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColor">@color/text_primary_color</item>
         <item name="android:textSize">18sp</item>
         <item name="android:typeface">sans</item>
     </style>
 
-    <style name="text_small" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="text_small" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">14sp</item>
         <item name="android:typeface">sans</item>
     </style>
 
-    <style name="main_image" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="main_image" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:layout_height">32dp</item>
         <item name="android:layout_width">32dp</item>
         <item name="android:layout_marginRight">16dp</item>
@@ -136,7 +119,7 @@
         <item name="android:layout_marginRight">8dp</item>
     </style>
 
-    <style name="tiny_image" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="tiny_image" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:layout_height">16dp</item>
         <item name="android:layout_width">16dp</item>
         <item name="android:layout_gravity">center</item>

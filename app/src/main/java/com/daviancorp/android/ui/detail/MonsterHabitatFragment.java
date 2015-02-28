@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -133,7 +134,7 @@ public class MonsterHabitatFragment extends ListFragment implements
             Habitat habitat = mHabitatCursor.getHabitat();
 
             // Set up the text view
-            LinearLayout itemLayout = (LinearLayout) view
+            RelativeLayout itemLayout = (RelativeLayout) view
                     .findViewById(R.id.listitem);
 
             ImageView mapView = (ImageView) view.findViewById(R.id.mapImage);

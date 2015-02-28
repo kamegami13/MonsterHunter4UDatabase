@@ -12,7 +12,7 @@
     android:paddingBottom="16dp"
     android:textSize="14sp"
     android:textAppearance="?android:attr/textAppearanceListItem"
-    android:textColor="@color/navbar_text_color"
-    android:background="?android:attr/activatedBackgroundIndicator"
+    android:textColor="@color/text_primary_color"
+    android:background="@drawable/generic_clicked_states"
     tools:layout_gravity=""
     tools:text="List Item 1"/>

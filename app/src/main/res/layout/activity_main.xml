@@ -6,13 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <RelativeLayout
-        android:layout_width="match_parent"
+        <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_container">
+        android:id="@+id/fragment_container"
+        android:orientation="vertical">
 
-            <!--include layout="@layout/toolbar"/-->
-        </RelativeLayout>
+
+            <include layout="@layout/toolbar"/>
+        </LinearLayout>
 
     <include layout="@layout/drawer_list"/>
 
