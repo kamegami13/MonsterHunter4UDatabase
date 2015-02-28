@@ -12,6 +12,9 @@ public class DecorationDetailPagerAdapter extends FragmentPagerAdapter {
 	
 	private long decorationId;
 
+    // Tab titles
+    private String[] tabs = { "Detail", "Skills", "Components" };
+
 	public DecorationDetailPagerAdapter(FragmentManager fm, long id) {
 		super(fm);
 		this.decorationId = id;
@@ -34,6 +37,11 @@ public class DecorationDetailPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

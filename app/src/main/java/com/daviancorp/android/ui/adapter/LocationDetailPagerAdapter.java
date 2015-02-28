@@ -13,6 +13,9 @@ public class LocationDetailPagerAdapter extends FragmentPagerAdapter {
 	
 	private long locationId;
 
+    // Tab titles
+    private String[] tabs = { "Map" ,"Monsters", "Low Rank" , "High Rank" , "G Rank" };
+
 	public LocationDetailPagerAdapter(FragmentManager fm, long id) {
 		super(fm);
 		this.locationId = id;
@@ -41,6 +44,11 @@ public class LocationDetailPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

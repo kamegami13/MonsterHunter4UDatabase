@@ -13,6 +13,10 @@ public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
 	
 	private long skillTreeId;
 
+    // Tab titles
+    //TODO reenable when decorations are finished
+    private String[] tabs = { "Detail" , "Head" , "Body" , "Arm" , "Waist", "Leg" , "Jewels" };
+
 	public SkillTreeDetailPagerAdapter(FragmentManager fm, long id) {
 		super(fm);
 		this.skillTreeId = id;
@@ -53,6 +57,11 @@ public class SkillTreeDetailPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

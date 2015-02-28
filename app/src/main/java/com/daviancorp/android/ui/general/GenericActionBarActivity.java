@@ -54,7 +54,6 @@ public class GenericActionBarActivity extends ActionBarActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setupDrawer();
     }
 
     // Set up drawer toggle actions
