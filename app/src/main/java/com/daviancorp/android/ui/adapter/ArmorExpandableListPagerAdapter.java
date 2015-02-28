@@ -8,6 +8,9 @@ import com.daviancorp.android.ui.list.ArmorExpandableListFragment;
 
 public class ArmorExpandableListPagerAdapter extends FragmentPagerAdapter {
 
+    // Tab titles
+    private String[] tabs = { "Blade", "Gunner", "Both" };
+
 	public ArmorExpandableListPagerAdapter(FragmentManager fm) {
 		super(fm);
 	}
@@ -29,6 +32,11 @@ public class ArmorExpandableListPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

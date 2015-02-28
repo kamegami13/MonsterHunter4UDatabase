@@ -13,6 +13,6 @@
     android:textSize="14sp"
     android:textAppearance="?android:attr/textAppearanceListItem"
     android:textColor="@color/text_primary_color"
-    android:background="?android:attr/activatedBackgroundIndicator"
+    android:background="@drawable/generic_clicked_states"
     tools:layout_gravity=""
     tools:text="List Item 1"/>

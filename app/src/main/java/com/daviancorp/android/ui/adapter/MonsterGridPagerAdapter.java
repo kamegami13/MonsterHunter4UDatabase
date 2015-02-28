@@ -4,9 +4,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.daviancorp.android.loader.MonsterListCursorLoader;
 import com.daviancorp.android.ui.list.MonsterListFragment;
 
 public class MonsterGridPagerAdapter extends FragmentPagerAdapter {
+
+    // Tab titles
+    private String[] tabs = {
+            MonsterListCursorLoader.TAB_LARGE,
+            MonsterListCursorLoader.TAB_SMALL,
+            "All"
+    };
 
 	public MonsterGridPagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -29,6 +37,11 @@ public class MonsterGridPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

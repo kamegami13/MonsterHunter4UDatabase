@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_below="@+id/toolbar"
     android:id="@+id/drawer_layout"
     android:elevation="7sp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!--include layout="@layout/toolbar"/-->
+        <include layout="@layout/toolbar"/>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <com.daviancorp.android.ui.general.SlidingTabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/sliding_tabs"
+                android:background="@color/primary_color">
+            </com.daviancorp.android.ui.general.SlidingTabLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:background="@android:color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <include layout="@layout/drawer_list"/>
 

@@ -9,6 +9,9 @@ import com.daviancorp.android.ui.detail.ComponentListFragment;
 import com.daviancorp.android.ui.detail.ItemToSkillFragment;
 
 public class ArmorDetailPagerAdapter extends FragmentPagerAdapter {
+
+    // Tab titles
+    private String[] tabs = { "Detail", "Skills", "Components"};
 	
 	private long armorId;
 
@@ -34,6 +37,11 @@ public class ArmorDetailPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

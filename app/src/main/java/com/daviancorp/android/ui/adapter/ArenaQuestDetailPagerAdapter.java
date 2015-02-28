@@ -12,6 +12,9 @@ public class ArenaQuestDetailPagerAdapter extends FragmentPagerAdapter {
 	
 	private long arenaQuestId;
 
+    // Tab titles
+    private String[] tabs = { "Detail", "Monsters", "Rewards"};
+
 	public ArenaQuestDetailPagerAdapter(FragmentManager fm, long id) {
 		super(fm);
 		this.arenaQuestId = id;
@@ -35,6 +38,11 @@ public class ArenaQuestDetailPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {
