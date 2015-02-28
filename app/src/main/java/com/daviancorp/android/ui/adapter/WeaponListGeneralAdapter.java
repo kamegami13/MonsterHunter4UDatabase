@@ -171,25 +171,6 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         LinearLayout lineLayout = (LinearLayout) view.findViewById(R.id.tree_lines);
         lineLayout.getLayoutParams().width = spacing;
         lineLayout.setBackgroundColor(context.getResources().getColor(R.color.divider_color));
-
-
-        /*
-        for(int i = 0; i < weapon.getTree_Depth(); i++) {
-            newView = new View(lineLayout.getContext());
-            lineLayout.addView(newView, i);
-
-            lineLayout.getChildAt(i).setLayoutParams(new LinearLayout.LayoutParams(
-                    (int) (1.0f * Resources.getSystem().getDisplayMetrics().density + 0.5),
-                    (int) (4.0f * Resources.getSystem().getDisplayMetrics().density + 0.5)
-            ));
-            lineLayout.getChildAt(i)
-                    .setBackgroundColor(context.getResources().getColor(R.color.divider_color));
-
-            /*params2 = (LinearLayout.LayoutParams) lineLayout.getChildAt(i).getLayoutParams();
-            params2.leftMargin = params2.leftMargin +
-                    (int) (8.0f * Resources.getSystem().getDisplayMetrics().density + 0.5);
-        }
-        */
     }
 
 
