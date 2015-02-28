@@ -192,6 +192,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) tabView.getLayoutParams();
                 lp.width = 0;
                 lp.weight = 1;
+
+                tabView.setMinimumWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
             }
 
             tabTitleView.setText(adapter.getPageTitle(i));
