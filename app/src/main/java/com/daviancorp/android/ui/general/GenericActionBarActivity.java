@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
@@ -99,6 +100,9 @@ public class GenericActionBarActivity extends ActionBarActivity {
                         break;
                     case 9: // Wishlists
                         intent = new Intent(getApplicationContext(), WishlistListActivity.class);
+                        break;
+                    case 10:
+                        intent = new Intent(getApplicationContext(), ArmorSetBuilderActivity.class);
                         break;
                 }
                 startActivity(intent);

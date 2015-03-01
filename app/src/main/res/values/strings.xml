@@ -43,6 +43,7 @@
         <item>"Decorations"</item>
         <item>"Skill Trees"</item>
         <item>"Wishlists"</item>
+        <item>"Armor Set Builder"</item>
     </string-array>
 
     <string name="option_list">List</string>

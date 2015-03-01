@@ -16,25 +16,21 @@ import com.daviancorp.android.ui.adapter.ArmorSetBuilderPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 
-public class ArmorSetBuilderActivity extends GenericTabActivity implements ActionBar.TabListener {
+public class ArmorSetBuilderActivity extends GenericTabActivity {
     public static final String EXTRA_FROM_SET_BUILDER = "com.daviancorp.android.ui.detail.from_set_builder";
     public static final int REQUEST_CODE = 537;
 
-    private ArmorSetBuilderSession session; //ASSSIGN
+    private ArmorSetBuilderSession session;
 
     private ArmorSetChangedListener changeListener;
     private ArmorSetChangedListener skillChangeListener;
 
     private ViewPager viewPager;
     private ArmorSetBuilderPagerAdapter adapter;
-    private ActionBar actionBar;
-
-    private String[] tabs = {"Pieces", "Skills"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(getString(R.string.activity_armor_set_builder));
 
         session = new ArmorSetBuilderSession();
 
@@ -43,28 +39,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Actio
         adapter = new ArmorSetBuilderPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
-        actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        for (String tab : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab).setTabListener(this));
-        }
-
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                // On changing the page, make the desired tab the selected one
-                actionBar.setSelectedNavigationItem(position);
-            }
-
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-            }
-        });
+        mSlidingTabLayout.setViewPager(viewPager);
     }
 
     @Override
@@ -135,22 +110,6 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Actio
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        // Obviously, changes to the selected tab when said tab is selected
-        viewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
     }
 
     public void setOnArmorSetChangedListener(ArmorSetChangedListener listener) {

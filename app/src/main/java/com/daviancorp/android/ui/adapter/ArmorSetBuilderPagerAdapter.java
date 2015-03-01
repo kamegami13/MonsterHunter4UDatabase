@@ -11,6 +11,8 @@ import com.daviancorp.android.ui.list.ArmorSetBuilderSkillsListFragment;
  */
 public class ArmorSetBuilderPagerAdapter extends FragmentPagerAdapter {
 
+    private String[] tabs = {"Pieces", "Skills"};
+
     public ArmorSetBuilderPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -28,6 +30,11 @@ public class ArmorSetBuilderPagerAdapter extends FragmentPagerAdapter {
                 // Something went wrong oh god
                 return null;
         }
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabs[position];
     }
 
     @Override
