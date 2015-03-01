@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
+import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 
 /**
  * Pieced together from: Android samples:
@@ -129,7 +131,18 @@ public class ArmorExpandableListFragment extends Fragment {
 
                 Intent i = new Intent(getActivity(), ArmorDetailActivity.class);
                 i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, (long) arg1.getTag());
-                startActivity(i);
+
+                // If the intent is coming from the set builder...
+                if (getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
+                    i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
+                    i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                    Log.d("SetBuilder", "Launching ArmorDetailActivity with EXTRA_FROM_SET_BUILDER.");
+                    startActivity(i);
+                    getActivity().finish();
+                }
+                else {
+                    startActivity(i);
+                }
 
                 return false;
             }
