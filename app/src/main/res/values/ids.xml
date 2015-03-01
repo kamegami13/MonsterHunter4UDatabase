@@ -35,6 +35,9 @@
 	<item name="weapon_tree_fragment" type="id"/>
 	<item name="wishlist_data_component_fragment" type="id"/>
 	<item name="wishlist_data_detail_fragment" type="id"/>
+    <item type="id" name="monster_small_loader" />
+    <item type="id" name="monster_large_loader" />
+    <item type="id" name="monster_all_loader" />
 	    
     <!-- ui.general -->
 	<item name="home_fragment" type="id"/>
