@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:id="@+id/listitem"
     style="@style/list_item_large">
@@ -7,67 +7,75 @@
     <ImageView
         android:id="@+id/mapImage"
         style="@style/large_image"
-        android:padding="4dp" />
+        android:padding="4dp"
+        android:layout_centerVertical="true" />
 
     <TextView
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/map"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         style="@style/text_medium"
         android:text="Frozen Seaway"
-        android:layout_weight="0.5" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="0dp"
-        android:layout_height="fill_parent"
         android:layout_weight="0.5"
-        android:gravity="center|right">
+        android:layout_toRightOf="@+id/mapImage"
+        android:layout_centerVertical="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/start"
-            android:layout_gravity="center"
-            style="@style/text_small"
-            android:text="1,2"
-            android:gravity="center"
-            android:layout_marginRight="4dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/start"
+        android:layout_gravity="center"
+        style="@style/text_small"
+        android:text="1,2"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/viewStub" />
 
-        <view
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            class="com.daviancorp.android.ui.general.DrawArrow"
-            android:id="@+id/view"
-            android:layout_gravity="center" />
+    <View
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:id="@+id/viewStub"
+        android:rotation="90"
+        android:background="@drawable/arrow"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/move"
+        android:layout_marginLeft="6dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/move"
-            android:layout_gravity="center"
-            style="@style/text_small"
-            android:text="1,2"
-            android:gravity="center"
-            android:layout_marginRight="4dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/move"
+        android:layout_gravity="center"
+        style="@style/text_small"
+        android:text="1,2"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/viewStub2" />
 
-        <view
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            class="com.daviancorp.android.ui.general.DrawArrow"
-            android:id="@+id/view2"
-            android:layout_gravity="center" />
+    <View
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:id="@+id/viewStub2"
+        android:rotation="90"
+        android:background="@drawable/arrow"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/rest"
+        android:layout_marginLeft="6dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rest"
-            android:layout_gravity="center"
-            style="@style/text_small"
-            android:text="1,2"
-            android:gravity="center" />
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rest"
+        android:layout_gravity="center"
+        style="@style/text_small"
+        android:text="1,2"
+        android:gravity="center"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
 
-</LinearLayout>
+</RelativeLayout>

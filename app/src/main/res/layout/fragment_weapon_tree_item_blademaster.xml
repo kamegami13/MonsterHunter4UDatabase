@@ -6,8 +6,14 @@
     android:clickable="true"
     android:background="@drawable/clicked_states_white">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:id="@+id/tree_lines"></LinearLayout>
+
     <RelativeLayout
-        android:id="@+id/top_layout"
+        android:id="@+id/item3"
         style="@style/list_sub_item">
 
         <ImageView
@@ -60,10 +66,10 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@+id/top_layout"
+        android:layout_below="@+id/item3"
         style="@style/list_sub_item"
         android:id="@+id/bottom_layout"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:gravity="center_vertical">
 
         <LinearLayout

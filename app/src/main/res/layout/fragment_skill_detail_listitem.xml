@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listitem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <TextView
         android:id="@+id/skill"
-        android:layout_width="0dp"
-        android:layout_height="35dip"
-        android:layout_weight=".3"
-        android:gravity="center|center_vertical"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        style="@style/text_medium"
+        android:text="Enlightened Blade"
+        android:gravity="center_vertical" />
 
     <TextView
         android:id="@+id/pts"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:gravity="center|center_vertical"
-        android:layout_gravity="center"
-        android:textColor="@color/text_color" />
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        style="@style/text_small"
+        android:text="10"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical" />
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="0dp"
+        android:layout_width="216dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".6"
-        android:paddingLeft="10dp"
-        android:paddingRight="5dp"
-        android:layout_gravity="center"
-        android:gravity="center_vertical"
-        android:textColor="@color/text_color" />
+        style="@style/text_small"
+        android:text="Unlocks latent weapon elements, and powers up elemental and abnormal status attacks."
+        android:layout_below="@+id/skill"
+        android:layout_alignParentRight="true"
+        android:paddingBottom="8dp" />
 
-</LinearLayout>
+</RelativeLayout>

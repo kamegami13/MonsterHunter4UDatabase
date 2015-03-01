@@ -1,87 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listitem"
     android:orientation="horizontal"
     style="@style/list_item">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="0dp"
+    <ImageView
+        style="@style/main_image"
+        android:id="@+id/item_image"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/item"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.7"
+        android:layout_gravity="center"
         android:gravity="center_vertical"
-        android:layout_gravity="center">
-
-        <ImageView
-            style="@style/main_image"
-            android:id="@+id/item_image" />
-
-        <TextView
-            android:id="@+id/item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:textColor="@color/text_color"
-            style="@style/text_medium" />
-    </LinearLayout>
+        style="@style/text_medium"
+        android:text="Akantor Carapace"
+        android:layout_toRightOf="@+id/item_image"
+        android:layout_centerVertical="true" />
 
     <RelativeLayout
         android:orientation="horizontal"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
-        android:gravity="right"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:layout_centerVertical="true">
 
         <TextView
             android:id="@+id/method"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center|right"
-            android:textColor="@color/text_color"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="false"
             android:layout_alignParentEnd="false"
-            android:layout_alignParentRight="false"
+            android:layout_alignParentRight="true"
             style="@style/text_small"
-            android:text="test" />
+            android:text="Break Front Leg" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_below="@+id/method"
-            android:layout_centerInParent="true"
-            android:gravity="right">
+            style="@style/text_small"
+            android:text="1"
+            android:layout_toLeftOf="@+id/percentage" />
 
-            <TextView
-                android:id="@+id/amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/text_color"
-                android:layout_below="@+id/method"
-                style="@style/text_small"
-                android:text="test"
-                android:layout_marginRight="16dp" />
-
-            <TextView
-                android:id="@+id/percentage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center|center_vertical"
-                android:textColor="@color/text_color"
-                style="@style/text_small"
-                android:layout_below="@+id/method"
-                android:layout_toRightOf="@+id/amount"
-                android:text="test" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/percentage"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/text_small"
+            android:layout_below="@+id/method"
+            android:text="4%"
+            android:layout_alignParentRight="true"
+            android:gravity="right" />
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

@@ -1,89 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/list_item"
     android:layout_width="match_parent"
     android:id="@+id/listitem">
 
-    <LinearLayout
-        android:layout_width="0dp"
+    <ImageView
+        android:id="@+id/item_image"
+        style="@style/main_image"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/item"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight=".7"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        style="@style/text_medium"
+        android:text="Trekker Jewel"
+        android:layout_toRightOf="@+id/item_image"
+        android:layout_centerVertical="true" />
 
-        <ImageView
-            android:id="@+id/item_image"
-            style="@style/main_image" />
-
-        <TextView
-            android:id="@+id/item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            style="@style/text_medium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="0.3"
         android:orientation="vertical"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="false"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/skill1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_weight="1">
+            android:layout_weight=".8"
+            android:layout_gravity="center_vertical|right"
+            android:gravity="center_vertical"
+            style="@style/text_small"
+            android:text="Sleep"
+            android:layout_toLeftOf="@+id/skill1_amt" />
 
-            <TextView
-                android:id="@+id/skill1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".8"
-                android:layout_gravity="center_vertical|right"
-                android:gravity="center_vertical"
-                style="@style/text_small" />
-
-            <TextView
-                android:id="@+id/skill1_amt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
-                android:layout_gravity="center_vertical|right"
-                android:gravity="center_vertical|right"
-                style="@style/text_small" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/skill1_amt"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/skill2layout">
+            android:layout_weight=".3"
+            android:layout_gravity="center_vertical|right"
+            android:gravity="center_vertical|right"
+            style="@style/text_small"
+            android:text="3"
+            android:layout_alignParentRight="true" />
 
-            <TextView
-                android:id="@+id/skill2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".8"
-                android:layout_gravity="center_vertical|right"
-                android:gravity="center_vertical"
-                style="@style/text_small" />
+        <TextView
+            android:id="@+id/skill2_amt"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:layout_gravity="center_vertical|right"
+            android:gravity="center_vertical|right"
+            style="@style/text_small"
+            android:text="-1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="false"
+            android:layout_below="@+id/skill1_amt" />
 
-            <TextView
-                android:id="@+id/skill2_amt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".3"
-                android:layout_gravity="center_vertical|right"
-                android:gravity="center_vertical|right"
-                style="@style/text_small" />
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/skill2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:layout_gravity="center_vertical|right"
+            android:gravity="center_vertical"
+            style="@style/text_small"
+            android:text="Mud/Snow"
+            android:layout_marginLeft="8dp"
+            android:layout_toLeftOf="@+id/skill2_amt"
+            android:layout_alignTop="@+id/skill2_amt" />
+    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

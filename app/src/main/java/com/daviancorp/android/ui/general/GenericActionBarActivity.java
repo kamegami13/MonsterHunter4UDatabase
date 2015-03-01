@@ -54,12 +54,12 @@ public class GenericActionBarActivity extends ActionBarActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setupDrawer();
     }
 
     // Set up drawer toggle actions
     public void setupDrawer(){
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        //mDrawerLayout.setStatusBarBackgroundColor(#000000); // I think this is used to have the drawer behind the status bar
         // Populate navigation drawer
         mDrawerList = (ListView)findViewById(R.id.navList);
         addDrawerItems();
@@ -126,7 +126,7 @@ public class GenericActionBarActivity extends ActionBarActivity {
     // Set up drawer menu options
     private void addDrawerItems(){
         String[] menuArray = getResources().getStringArray(R.array.drawer_items);
-        mDrawerAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, menuArray);
+        mDrawerAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.drawer_list_item, menuArray);
         mDrawerList.setAdapter(mDrawerAdapter);
     }
 

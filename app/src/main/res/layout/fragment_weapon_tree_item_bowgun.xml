@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/main_layout"
+    android:clickable="true"
+    android:background="@drawable/clicked_states_white">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:id="@+id/tree_lines" />
+
+    <RelativeLayout
+        android:id="@+id/item3"
+        style="@style/list_sub_item">
+
+        <ImageView
+            android:id="@+id/weapon_icon"
+            style="@style/small_image"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leidenskraft"
+            android:id="@+id/name_text"
+            style="@style/text_medium"
+            android:layout_toRightOf="@+id/weapon_icon"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Right: High"
+            android:id="@+id/deviation_text"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/item3"
+        style="@style/list_sub_item"
+        android:id="@+id/bottom_layout"
+        android:layout_height="40dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="750"
+            android:id="@+id/attack_text"
+            style="@style/text_small"
+            android:layout_gravity="left"
+            android:layout_alignRight="@+id/defense_text" />
+
+        <TextView
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:id="@+id/defense_text"
+            android:layout_toLeftOf="@+id/affinity_text"
+            android:gravity="right"
+            android:layout_alignTop="@+id/affinity_text" />
+
+        <TextView
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:text="OOO"
+            android:id="@+id/slots_text"
+            style="@style/text_small"
+            android:gravity="right|top"
+            android:layout_toLeftOf="@+id/textView8" />
+
+        <TextView
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:text="-25/40%"
+            android:id="@+id/affinity_text"
+            android:gravity="right|top"
+            android:layout_below="@+id/slots_text"
+            android:paddingBottom="4dp"
+            android:layout_alignRight="@+id/slots_text" />
+
+        <TextView
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:text="Reload: "
+            android:id="@+id/textView7"
+            android:layout_toLeftOf="@+id/reload_text"
+            android:layout_alignTop="@+id/reload_text"
+            android:gravity="right" />
+
+        <TextView
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:text="Recoil: "
+            android:id="@+id/textView8"
+            android:layout_toLeftOf="@+id/recoil_text"
+            android:gravity="right" />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Average[2]"
+            android:id="@+id/recoil_text"
+            android:layout_alignParentRight="true"
+            android:gravity="right" />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Slower"
+            android:id="@+id/reload_text"
+            android:layout_alignRight="@+id/recoil_text"
+            android:layout_below="@+id/recoil_text"
+            android:gravity="right" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

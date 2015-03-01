@@ -16,8 +16,7 @@ import com.daviancorp.android.ui.adapter.WeaponDetailPagerAdapter;
 import com.daviancorp.android.ui.dialog.WishlistDataAddDialogFragment;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 
-public class WeaponDetailActivity extends GenericTabActivity implements
-		ActionBar.TabListener {
+public class WeaponDetailActivity extends GenericTabActivity {
 	/** A key for passing a weapon ID as a long */
 	public static final String EXTRA_WEAPON_ID =
 			"com.daviancorp.android.android.ui.detail.weapon_id";
@@ -27,13 +26,10 @@ public class WeaponDetailActivity extends GenericTabActivity implements
 	
 	private ViewPager viewPager;
 	private WeaponDetailPagerAdapter mAdapter;
-	private ActionBar actionBar;
 	
 	private long id;
 	private String name;
-	
-	// Tab titles
-	private String[] tabs = { "Detail", "Family Tree", "Components"};
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,35 +43,7 @@ public class WeaponDetailActivity extends GenericTabActivity implements
 		mAdapter = new WeaponDetailPagerAdapter(getSupportFragmentManager(), getApplicationContext(), id);
 		viewPager.setAdapter(mAdapter);
 
-		actionBar = getSupportActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		// Adding Tabs
-		for (String tab_name : tabs) {
-			actionBar.addTab(actionBar.newTab().setText(tab_name)
-					.setTabListener(this));
-		}
-
-		/**
-		 * on swiping the viewpager make respective tab selected
-		 * */
-		viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-			@Override
-			public void onPageSelected(int position) {
-				// on changing the page
-				// make respected tab selected
-				actionBar.setSelectedNavigationItem(position);
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-			}
-		});
+		mSlidingTabLayout.setViewPager(viewPager);
 	}
 	
 	@Override
@@ -103,26 +71,6 @@ public class WeaponDetailActivity extends GenericTabActivity implements
 	@Override
 	public void onPause() {
 		super.onPause();
-	}
-
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// on tab selected
-		// show respected fragment view
-		viewPager.setCurrentItem(tab.getPosition());
-
-	}
-
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

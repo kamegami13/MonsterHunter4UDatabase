@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.HuntingReward;
@@ -113,7 +114,7 @@ public class MonsterRewardFragment extends ListFragment implements
 			HuntingReward huntingReward = mHuntingRewardCursor.getHuntingReward();
 
 			// Set up the text view
-			LinearLayout itemLayout = (LinearLayout) view
+			RelativeLayout itemLayout = (RelativeLayout) view
 					.findViewById(R.id.listitem);
 			ImageView itemImageView = (ImageView) view
 					.findViewById(R.id.item_image);

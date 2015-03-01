@@ -15,6 +15,10 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 	
 	private long itemId;
 
+    // Tab titles
+    // TODO: Reenable arena quest tab
+    private String[] tabs = { "Detail", "Usage", "Monster", "Quest", "Location"};
+
 	public ItemDetailPagerAdapter(FragmentManager fm, long id) {
 		super(fm);
 		this.itemId = id;
@@ -47,6 +51,11 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

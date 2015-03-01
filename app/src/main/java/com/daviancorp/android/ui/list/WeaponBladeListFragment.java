@@ -137,6 +137,7 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
             // Set sharpness
             String sharpString = weapon.getSharpness();
             sharpnessDrawable.init(sharpString);
+            sharpnessDrawable.invalidate();
         }
 
 
