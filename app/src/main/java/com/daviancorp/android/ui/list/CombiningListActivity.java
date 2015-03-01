@@ -19,7 +19,7 @@ public class CombiningListActivity extends GenericActivity {
 
 	@Override
 	protected Fragment createFragment() {
-		super.detail = new CombiningListFragment();
+		super.detail = CombiningListFragment.newInstance(-1);
 		return super.detail;
 	}
 
