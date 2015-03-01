@@ -5,15 +5,25 @@ import android.database.Cursor;
 
 import com.daviancorp.android.data.database.DataManager;
 
+import java.util.PriorityQueue;
+
 public class CombiningListCursorLoader extends SQLiteCursorLoader {
 
-	public CombiningListCursorLoader(Context context) {
+    private long id;
+
+	public CombiningListCursorLoader(Context context, long id) {
 		super(context);
+        this.id = id;
 	}
 
 	@Override
 	protected Cursor loadCursor() {
 		// Query the list of all combinings
-		return DataManager.get(getContext()).queryCombinings();
+        if (id == -1) {
+            return DataManager.get(getContext()).queryCombinings();
+        }
+        else {
+            return DataManager.get(getContext()).queryCombiningOnItemID(id);
+        }
 	}
 }

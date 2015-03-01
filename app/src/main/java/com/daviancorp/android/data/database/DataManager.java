@@ -180,6 +180,10 @@ public class DataManager {
 		cursor.close();
 		return combining;
 	}
+
+    public CombiningCursor queryCombiningOnItemID(long id) {
+         return mHelper.queryCombinationsOnItemID(id);
+    }
 	
 /********************************* COMPONENT QUERIES ******************************************/
 	/* Get a Cursor that has a list of Components based on the created Item */

@@ -744,7 +744,25 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.Limit = "1";
 		
 		return new CombiningCursor(wrapJoinHelper(builderCursor(), qh));
-	}	
+	}
+
+    public CombiningCursor queryCombinationsOnItemID(long id) {
+        QueryHelper qh = new QueryHelper();
+        qh.Columns = null;
+        qh.Table = S.TABLE_COMBINING;
+        qh.Selection = "crt._id" + " = ?" +
+                       " OR mat1._id" + " = ?" +
+                       " OR mat2._id" + " = ?";
+        qh.SelectionArgs = new String[]{ String.valueOf(id),
+                                         String.valueOf(id),
+                                         String.valueOf(id)};
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new CombiningCursor(wrapJoinHelper(builderCursor(), qh));
+    }
 	
 	private SQLiteQueryBuilder builderCursor()  {
 //		SELECT c._id AS _id, c.amount_made_min,  c.amount_made_max, c.percentage, 
