@@ -10,6 +10,7 @@ import com.daviancorp.android.ui.detail.ItemDetailFragment;
 import com.daviancorp.android.ui.detail.ItemLocationFragment;
 import com.daviancorp.android.ui.detail.ItemMonsterFragment;
 import com.daviancorp.android.ui.detail.ItemQuestFragment;
+import com.daviancorp.android.ui.list.CombiningListFragment;
 
 public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 	
@@ -17,7 +18,7 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 
     // Tab titles
     // TODO: Reenable arena quest tab
-    private String[] tabs = { "Detail", "Usage", "Monster", "Quest", "Location"};
+    private String[] tabs = { "Detail", "Combining", "Usage", "Monster", "Quest", "Location"};
 
 	public ItemDetailPagerAdapter(FragmentManager fm, long id) {
 		super(fm);
@@ -31,16 +32,18 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			// Item detail
 			return ItemDetailFragment.newInstance(itemId);
-		case 1:
+        case 1:
+            return CombiningListFragment.newInstance(itemId);
+		case 2:
 			// List of Armor, Decoration, and Weapon the Item can be used for
 			return ItemComponentFragment.newInstance(itemId);
-		case 2:
+		case 3:
 			// Monster drops
 			return ItemMonsterFragment.newInstance(itemId);
-		case 3:
+		case 4:
 			// Quest rewards
 			return ItemQuestFragment.newInstance(itemId);
-		case 4:
+		case 5:
 			// Location drops; gathering
 			return ItemLocationFragment.newInstance(itemId);
 //		case 5:
@@ -60,7 +63,7 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 5;
+		return 6;
 	}
 
 }

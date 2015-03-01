@@ -35,8 +35,16 @@ public class CombiningListFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 		
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(R.id.combining_list_fragment, null, this);
+		getLoaderManager().initLoader(R.id.combining_list_fragment, getArguments(), this);
 	}
+
+    public static CombiningListFragment newInstance(long id) {
+        Bundle args = new Bundle();
+        args.putLong("ID", id);
+        CombiningListFragment f = new CombiningListFragment();
+        f.setArguments(args);
+        return f;
+    }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +56,8 @@ public class CombiningListFragment extends ListFragment implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
-		return new CombiningListCursorLoader(getActivity());
+		return new CombiningListCursorLoader(getActivity(),
+                args.getLong("ID"));
 	}
 
 	@Override
