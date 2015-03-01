@@ -158,10 +158,6 @@ public class GenericActionBarActivity extends ActionBarActivity {
 
         // Detect home and or expansion menu item selections
         switch (item.getItemId()) {
-            case android.R.id.home:
-                // TODO For the love of god fix this. Proper back navigation goes here I think.
-                super.onBackPressed(); // Emulate back button when up is pressed. This isn't ideal and kind of hackey.
-                return true;
             case R.id.about:
                 FragmentManager fm = getSupportFragmentManager();
                 AboutDialogFragment dialog = new AboutDialogFragment();

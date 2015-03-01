@@ -56,10 +56,8 @@ public abstract class GenericActivity extends GenericActionBarActivity {
         android.support.v7.widget.Toolbar mtoolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mtoolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
         setTitle(R.string.app_name);
         super.setupDrawer(); // Needs to be called after setContentView
+        super.enableDrawerIndicator(); // Enable drawer toggle button
     }
 }

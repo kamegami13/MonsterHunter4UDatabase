@@ -28,8 +28,6 @@ public abstract class GenericTabActivity extends GenericActionBarActivity{
         // Integrate Toolbar so sliding drawer can go over toolbar
         android.support.v7.widget.Toolbar mtoolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mtoolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
 
         // Set up tabs
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
@@ -45,6 +43,7 @@ public abstract class GenericTabActivity extends GenericActionBarActivity{
 
 
         setTitle(R.string.app_name);
-        setupDrawer(); // Needs to be called after setContentView
+        super.setupDrawer(); // Needs to be called after setContentView
+        super.enableDrawerIndicator(); // Enable drawer toggle button
 	}
 }
