@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,12 +21,13 @@ import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Mark on 2/26/2015.
  * Does work that is common to all weapons for list items
  */
-public abstract class WeaponListGeneralAdapter extends CursorAdapter {
+public abstract class WeaponListGeneralAdapter extends ArrayAdapter<Weapon> {
 
     protected static class GeneralViewHolder {
         // General
@@ -39,22 +41,19 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         public View lineLayout;
     }
 
-    protected WeaponCursor mWeaponCursor;
-
-    public WeaponListGeneralAdapter(Context context, WeaponCursor cursor) {
-        super(context, cursor, 0);
-        mWeaponCursor = cursor;
+    public WeaponListGeneralAdapter(Context context, ArrayList<Weapon> weapons) {
+        super(context,0, weapons);
     }
 
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         // Get the monster for the current row
-        Weapon weapon = mWeaponCursor.getWeapon();
+        Weapon weapon = getItem(position);
 
-        GeneralViewHolder holder = (GeneralViewHolder) view.getTag();
+        GeneralViewHolder holder = (GeneralViewHolder) convertView.getTag();
 
         // Set the layout id
-        holder.weaponLayout.setOnClickListener(new WeaponClickListener(context, weapon.getId()));
+        holder.weaponLayout.setOnClickListener(new WeaponClickListener(getContext(), weapon.getId()));
 
         //
         // Set the image for the weapon
@@ -104,7 +103,9 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         params.leftMargin = params.leftMargin + spacing;
 
         holder.lineLayout.getLayoutParams().width = spacing;
-        holder.lineLayout.setBackgroundColor(context.getResources().getColor(R.color.divider_color));
+        holder.lineLayout.setBackgroundColor(getContext().getResources().getColor(R.color.divider_color));
+
+        return convertView;
     }
 
 
