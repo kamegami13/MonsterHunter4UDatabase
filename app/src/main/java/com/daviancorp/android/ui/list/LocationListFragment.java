@@ -103,7 +103,7 @@ public class LocationListFragment extends ListFragment implements
 					.findViewById(R.id.item_image);
 
 			String cellText = location.getName();
-			String cellImage = "icons_location/" + location.getFileLocation();
+			String cellImage = "icons_location/" + location.getFileLocationMini();
 
 			locationNameTextView.setText(cellText);
 

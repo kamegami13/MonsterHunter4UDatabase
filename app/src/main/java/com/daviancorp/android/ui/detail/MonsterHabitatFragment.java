@@ -167,7 +167,7 @@ public class MonsterHabitatFragment extends ListFragment implements
 
             Drawable i = null;
             String cellImage = "icons_location/"
-                    + habitat.getLocation().getFileLocation();
+                    + habitat.getLocation().getFileLocationMini();
             try {
                 i = Drawable.createFromStream(
                         context.getAssets().open(cellImage), null);
