@@ -105,8 +105,13 @@ public class WeaponCursor extends CursorWrapper {
 		weapon.setBuy(buy);
 		weapon.setSell(sell);
 		weapon.setDescription(description);
-		weapon.setFileLocation(fileLocation);
+		weapon.setFileLocation();
 		weapon.setArmorDupeNameFix(armor_dupe_name_fix);
+
+        if (!weapon.getWtype().equals("Bow") && !weapon.getWtype().equals("Light Bowgun")
+            && !weapon.getWtype().equals("Heavy Bowgun")) {
+            weapon.initializeSharpness();
+        }
 
 		return weapon;
 	}

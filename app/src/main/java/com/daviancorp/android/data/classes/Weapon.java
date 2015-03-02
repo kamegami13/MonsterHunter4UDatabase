@@ -1,5 +1,11 @@
 package com.daviancorp.android.data.classes;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /*
  * Class for Weapon
  */
@@ -33,6 +39,11 @@ public class Weapon extends Item{
 	private String sharpness_file;				// Sharpness image file location
 	private int wfinal;							// Final in weapon tree or not
     private int tree_depth;                     // Depth of weapon in weapon tree
+    
+    private String mSlotString;
+    private String file_location;
+    private int[] mSharpness1;
+    private int[] mSharpness2;
 	
 	/* Default Constructor */
 	public Weapon() {
@@ -216,6 +227,28 @@ public class Weapon extends Item{
 
 	public void setNumSlots(int num_slots) {
 		this.num_slots = num_slots;
+
+        // Set the slot to view
+        String slot = "";
+        switch (this.num_slots) {
+            case 0:
+                slot = "---";
+                break;
+            case 1:
+                slot = "O--";
+                break;
+            case 2:
+                slot = "OO-";
+                break;
+            case 3:
+                slot = "OOO";
+                break;
+            default:
+                slot = "error!!";
+                break;
+        }
+        
+        this.mSlotString = slot;
 	}
 	
 	public String getSharpnessFile() {
@@ -288,5 +321,122 @@ public class Weapon extends Item{
 
     public void setAwakenAttack(long awaken_attack) {
         this.awaken_attack = awaken_attack;
+    }
+
+    public String getSlotString() {
+        return mSlotString;
+    }
+    
+    public void setFileLocation() {
+        
+        String cellImage = "";
+        switch (this.wtype) {
+            case "Great Sword":
+                cellImage = "icons_weapons/icons_great_sword/great_sword" + this.getRarity() + ".png";
+                break;
+            case "Long Sword":
+                cellImage = "icons_weapons/icons_long_sword/long_sword" + this.getRarity() + ".png";
+                break;
+            case "Sword and Shield":
+                cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + this.getRarity() + ".png";
+                break;
+            case "Dual Blades":
+                cellImage = "icons_weapons/icons_dual_blades/dual_blades" + this.getRarity() + ".png";
+                break;
+            case "Hammer":
+                cellImage = "icons_weapons/icons_hammer/hammer" + this.getRarity() + ".png";
+                break;
+            case "Hunting Horn":
+                cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + this.getRarity() + ".png";
+                break;
+            case "Lance":
+                cellImage = "icons_weapons/icons_lance/lance" + this.getRarity() + ".png";
+                break;
+            case "Gunlance":
+                cellImage = "icons_weapons/icons_gunlance/gunlance" + this.getRarity() + ".png";
+                break;
+            case "Switch Axe":
+                cellImage = "icons_weapons/icons_switch_axe/switch_axe" + this.getRarity() + ".png";
+                break;
+            case "Charge Blade":
+                cellImage = "icons_weapons/icons_charge_blade/charge_blade" + this.getRarity() + ".png";
+                break;
+            case "Insect Glaive":
+                cellImage = "icons_weapons/icons_insect_glaive/insect_glaive" + this.getRarity() + ".png";
+                break;
+            case "Light Bowgun":
+                cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + this.getRarity() + ".png";
+                break;
+            case "Heavy Bowgun":
+                cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + this.getRarity() + ".png";
+                break;
+            case "Bow":
+                cellImage = "icons_weapons/icons_bow/bow" + this.getRarity() + ".png";
+                break;
+        }
+        this.file_location = cellImage;
+    }
+
+    public String getFileLocation() {
+        return this.file_location;
+    }
+
+    public void initializeSharpness() {
+        // Sharpness is in the format "1.1.1.1.1.1.1 1.1.1.1.1.1.1" where each
+        // 1 is an int representing the sharpness value of a certain color.
+        // The order is red, orange, yellow, green, white, purple.
+        // First set is for regular sharpness, second set is for sharpness+1
+        int[] sharpness1 = new int[7];
+        int[] sharpness2 = new int[7];
+
+        String[] strSharpnessBoth;
+        List<String> strSharpness1;
+        List<String> strSharpness2;
+
+        //separate both sets of sharpness
+        strSharpnessBoth = sharpness.split(" ");
+
+        //convert sharpness strings to arrays
+        strSharpness1 = new ArrayList<>(Arrays.asList(strSharpnessBoth[0].split("\\.")));
+        strSharpness2 = new ArrayList<>(Arrays.asList(strSharpnessBoth[1].split("\\.")));
+
+        //add leading 0s to those with less than purple sharpness
+        while (strSharpness1.size() <= 7) {
+            strSharpness1.add("0");
+        }
+        while (strSharpness2.size() <= 7) {
+            strSharpness2.add("0");
+        }
+
+        // Error handling logs error and passes empty sharpness bars
+        for (int i = 0; i < 7; i++) {
+            try {
+                sharpness1[i] = Integer.parseInt(strSharpness1.get(i));
+            } catch (Exception e) {
+                Log.v("ParseSharpness", "Error in sharpness " + sharpness);
+                sharpness1 = new int[]{0, 0, 0, 0, 0, 0, 0};
+                break;
+            }
+        }
+        for (int i = 0; i < 7; i++) {
+            try {
+                sharpness2[i] = Integer.parseInt(strSharpness2.get(i));
+            } catch (Exception e) {
+                Log.v("ParseSharpness", "Error in sharpness " + sharpness);
+                sharpness2 = new int[]{0, 0, 0, 0, 0, 0, 0};
+                break;
+            }
+        }
+
+        mSharpness1 = sharpness1;
+        mSharpness2 = sharpness2;
+    }
+
+    public int[] getSharpness1() {
+        return mSharpness1;
+    }
+
+    public int[] getSharpness2() {
+        return mSharpness2;
     }
 }

@@ -80,7 +80,7 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 		super.updateUI();
 
 		/* Sharpness */
-		mWeaponSharpnessDrawnView.init(mWeapon.getSharpness());
+		mWeaponSharpnessDrawnView.init(mWeapon.getSharpness1(),mWeapon.getSharpness2());
 
 		// Read a Bitmap from Assets
 		AssetManager manager = getActivity().getAssets();

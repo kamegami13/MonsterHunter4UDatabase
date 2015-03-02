@@ -59,54 +59,8 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         //
         // Set the image for the weapon
         //
-        String cellImage = "";
-        switch (weapon.getWtype()) {
-            case "Great Sword":
-                cellImage = "icons_weapons/icons_great_sword/great_sword" + weapon.getRarity() + ".png";
-                break;
-            case "Long Sword":
-                cellImage = "icons_weapons/icons_long_sword/long_sword" + weapon.getRarity() + ".png";
-                break;
-            case "Sword and Shield":
-                cellImage = "icons_weapons/icons_sword_and_shield/sword_and_shield" + weapon.getRarity() + ".png";
-                break;
-            case "Dual Blades":
-                cellImage = "icons_weapons/icons_dual_blades/dual_blades" + weapon.getRarity() + ".png";
-                break;
-            case "Hammer":
-                cellImage = "icons_weapons/icons_hammer/hammer" + weapon.getRarity() + ".png";
-                break;
-            case "Hunting Horn":
-                cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + weapon.getRarity() + ".png";
-                break;
-            case "Lance":
-                cellImage = "icons_weapons/icons_lance/lance" + weapon.getRarity() + ".png";
-                break;
-            case "Gunlance":
-                cellImage = "icons_weapons/icons_gunlance/gunlance" + weapon.getRarity() + ".png";
-                break;
-            case "Switch Axe":
-                cellImage = "icons_weapons/icons_switch_axe/switch_axe" + weapon.getRarity() + ".png";
-                break;
-            case "Charge Blade":
-                cellImage = "icons_weapons/icons_charge_blade/charge_blade" + weapon.getRarity() + ".png";
-                break;
-            case "Insect Glaive":
-                cellImage = "icons_weapons/icons_insect_glaive/insect_glaive" + weapon.getRarity() + ".png";
-                break;
-            case "Light Bowgun":
-                cellImage = "icons_weapons/icons_light_bowgun/light_bowgun" + weapon.getRarity() + ".png";
-                break;
-            case "Heavy Bowgun":
-                cellImage = "icons_weapons/icons_heavy_bowgun/heavy_bowgun" + weapon.getRarity() + ".png";
-                break;
-            case "Bow":
-                cellImage = "icons_weapons/icons_bow/bow" + weapon.getRarity() + ".png";
-                break;
-        }
-        //weaponIcon.setImageDrawable(getDrawable(context, cellImage));
         holder.weaponIcon.setTag(weapon.getId());
-        new LoadImage(holder.weaponIcon, cellImage).execute();
+        new LoadImage(holder.weaponIcon, weapon.getFileLocation()).execute();
 
         //
         // Get the weapons name
@@ -117,27 +71,6 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
 
         // Get the weapons attack
         String attack = Long.toString(weapon.getAttack());
-
-
-        // Set the slot to view
-        String slot = "";
-        switch (weapon.getNumSlots()) {
-            case 0:
-                slot = "---";
-                break;
-            case 1:
-                slot = "O--";
-                break;
-            case 2:
-                slot = "OO-";
-                break;
-            case 3:
-                slot = "OOO";
-                break;
-            default:
-                slot = "error!!";
-                break;
-        }
 
         //
         // Get affinity and defense
@@ -157,7 +90,7 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         //
         holder.nametv.setText(name);
         holder.attacktv.setText(attack);
-        holder.slottv.setText(slot);
+        holder.slottv.setText(weapon.getSlotString());
         holder.affinitytv.setText(affinity);
         holder.defensetv.setText(defense);
 

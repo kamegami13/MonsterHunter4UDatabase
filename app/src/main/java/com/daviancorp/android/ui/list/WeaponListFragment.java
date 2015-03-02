@@ -54,7 +54,7 @@ public abstract class WeaponListFragment extends ListFragment implements
 	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Monster ID; CursorAdapter gives us this
+		// The id argument will be the Weapon ID; CursorAdapter gives us this
 		// for free
 		Intent i = new Intent(getActivity(), WeaponDetailActivity.class);
 		i.putExtra(WeaponDetailActivity.EXTRA_WEAPON_ID, id);
