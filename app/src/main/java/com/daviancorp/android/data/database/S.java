@@ -291,8 +291,12 @@ public class S {
 	static final String COLUMN_WEAPONS_UPGRADE_COST = "upgrade_cost";
 	static final String COLUMN_WEAPONS_ATTACK = "attack";
 	static final String COLUMN_WEAPONS_MAX_ATTACK = "max_attack";
-	static final String COLUMN_WEAPONS_ELEMENTAL_ATTACK = "elemental_attack";
-	static final String COLUMN_WEAPONS_AWAKENED_ELEMENTAL_ATTACK = "awakened_elemental_attack";
+	static final String COLUMN_WEAPONS_ELEMENT = "element";
+	static final String COLUMN_WEAPONS_AWAKEN = "awaken";
+    static final String COLUMN_WEAPONS_ELEMENT_2 = "element_2";
+    static final String COLUMN_WEAPONS_AWAKEN_ATTACK = "awaken_attack";
+    static final String COLUMN_WEAPONS_ELEMENT_ATTACK = "element_attack";
+    static final String COLUMN_WEAPONS_ELEMENT_2_ATTACK = "element_2_attack";
 	static final String COLUMN_WEAPONS_DEFENSE = "defense";
 	static final String COLUMN_WEAPONS_SHARPNESS = "sharpness";
 	static final String COLUMN_WEAPONS_AFFINITY = "affinity";

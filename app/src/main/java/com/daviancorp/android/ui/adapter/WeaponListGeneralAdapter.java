@@ -113,9 +113,6 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         //
         String name = "";
         int wFinal = weapon.getWFinal();
-        /*for (int i = 0; i < weapon.getTree_Depth(); i++) {
-            name = name + "-";
-        }*/
         name = name + weapon.getName();
 
         // Get the weapons attack
@@ -180,14 +177,7 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
 
     protected Drawable getDrawable(Context c, String location) {
         Drawable d = null;
-
-        try {
-            d = Drawable.createFromStream(c.getAssets().open(location),
-                    null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        d = Drawable.createFromPath(location);
         return d;
     }
 

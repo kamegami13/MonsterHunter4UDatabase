@@ -193,6 +193,7 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 
 			String[] coatings = weapon.getCoatings().split("\\|");
 
+
 			if (!coatings[0].equals("-")) {
                 holder.powerv.setTag(weapon.getId());
                 new LoadImage(holder.powerv, "icons_items/Bottle-Red.png").execute();
@@ -233,6 +234,7 @@ public class WeaponBowListFragment extends WeaponListFragment implements
                 new LoadImage(holder.slimev, "icons_items/Bottle-Orange.png").execute();
                 holder.slimev.setVisibility(view.VISIBLE);
 			}
+
 
 		}
 
