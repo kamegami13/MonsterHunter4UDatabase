@@ -1,8 +1,5 @@
 package com.daviancorp.android.ui.list;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
@@ -28,6 +25,9 @@ import com.daviancorp.android.loader.LocationListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.LocationClickListener;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class LocationListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
@@ -44,10 +44,9 @@ public class LocationListFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list, parent,
-				false);
 
-		return v;
+        return inflater.inflate(R.layout.fragment_generic_list, parent,
+                false);
 	}
 
 	@Override

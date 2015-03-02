@@ -1,12 +1,7 @@
 package com.daviancorp.android.ui.list;
 
-import java.io.IOException;
-
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -23,7 +18,6 @@ import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.WeaponListElementAdapter;
-import com.daviancorp.android.ui.general.DrawSharpness;
 
 public class WeaponBowListFragment extends WeaponListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -39,9 +33,8 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list, null);
-//		super.setContextMenu(v);
-		return v;
+        //		super.setContextMenu(v);
+		return inflater.inflate(R.layout.fragment_generic_list, container,false);
 	}
 	
 	@Override
@@ -172,7 +165,7 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 			holder.chargetv.setText(chargeText);
 			
 			// Clear images
-            holder.powerv.setImageDrawable(null);
+			holder.powerv.setImageDrawable(null);
             holder.crangev.setImageDrawable(null);
             holder.poisonv.setImageDrawable(null);
             holder.parav.setImageDrawable(null);
@@ -181,58 +174,50 @@ public class WeaponBowListFragment extends WeaponListFragment implements
             holder.slimev.setImageDrawable(null);
             holder.paintv.setImageDrawable(null);
 
-            holder.powerv.setVisibility(view.GONE);
-            holder.crangev.setVisibility(view.GONE);
-            holder.poisonv.setVisibility(view.GONE);
-            holder.parav.setVisibility(view.GONE);
-            holder.sleepv.setVisibility(view.GONE);
-            holder.exhaustv.setVisibility(view.GONE);
-            holder.slimev.setVisibility(view.GONE);
-            holder.paintv.setVisibility(view.GONE);
+            holder.powerv.setVisibility(View.GONE);
+            holder.crangev.setVisibility(View.GONE);
+            holder.poisonv.setVisibility(View.GONE);
+            holder.parav.setVisibility(View.GONE);
+            holder.sleepv.setVisibility(View.GONE);
+            holder.exhaustv.setVisibility(View.GONE);
+            holder.slimev.setVisibility(View.GONE);
+            holder.paintv.setVisibility(View.GONE);
 
 
 			String[] coatings = weapon.getCoatings().split("\\|");
 
 
 			if (!coatings[0].equals("-")) {
-                holder.powerv.setTag(weapon.getId());
-                new LoadImage(holder.powerv, "icons_items/Bottle-Red.png").execute();
-                holder.powerv.setVisibility(view.VISIBLE);
+                holder.powerv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Red.png"));
+                holder.powerv.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[1].equals("-")) {
-                holder.poisonv.setTag(weapon.getId());
-                new LoadImage(holder.poisonv, "icons_items/Bottle-Purple.png").execute();
-                holder.poisonv.setVisibility(view.VISIBLE);
+                holder.poisonv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Purple.png"));
+                holder.poisonv.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[2].equals("-")) {
-                holder.parav.setTag(weapon.getId());
-                new LoadImage(holder.parav, "icons_items/Bottle-Yellow.png").execute();
-                holder.parav.setVisibility(view.VISIBLE);
+                holder.parav.setImageDrawable(getDrawable(context, "icons_items/Bottle-Yellow.png"));
+                holder.parav.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[3].equals("-")) {
-                holder.sleepv.setTag(weapon.getId());
-                new LoadImage(holder.sleepv, "icons_items/Bottle-Cyan.png").execute();
-                holder.sleepv.setVisibility(view.VISIBLE);
+                holder.sleepv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Cyan.png"));
+                holder.sleepv.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[4].equals("-")) {
-                holder.crangev.setTag(weapon.getId());
-                new LoadImage(holder.crangev, "icons_items/Bottle-White.png").execute();
-                holder.crangev.setVisibility(view.VISIBLE);
+                holder.crangev.setImageDrawable(getDrawable(context, "icons_items/Bottle-White.png"));
+                holder.crangev.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[5].equals("-")) {
-                holder.paintv.setTag(weapon.getId());
-                new LoadImage(holder.paintv, "icons_items/Bottle-Pink.png").execute();
-                holder.paintv.setVisibility(view.VISIBLE);
+                holder.paintv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Pink.png"));
+                holder.paintv.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[6].equals("-")) {
-                holder.exhaustv.setTag(weapon.getId());
-                new LoadImage(holder.exhaustv, "icons_items/Bottle-Blue.png").execute();
-                holder.exhaustv.setVisibility(view.VISIBLE);
+                holder.exhaustv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Blue.png"));
+                holder.exhaustv.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[7].equals("-")) {
-                holder.slimev.setTag(weapon.getId());
-                new LoadImage(holder.slimev, "icons_items/Bottle-Orange.png").execute();
-                holder.slimev.setVisibility(view.VISIBLE);
+                holder.slimev.setImageDrawable(getDrawable(context, "icons_items/Bottle-Orange.png"));
+                holder.slimev.setVisibility(View.VISIBLE);
 			}
 
 

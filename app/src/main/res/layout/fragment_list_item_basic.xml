@@ -14,7 +14,7 @@
         android:id="@+id/item_label"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@+id/label"
+        android:text="@string/placeholder_unknown"
         style="@style/text_medium"
         android:layout_toRightOf="@+id/item_image"
         android:layout_centerVertical="true">

@@ -1,26 +1,35 @@
 package com.daviancorp.android.ui.general;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
@@ -34,6 +43,10 @@ import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
 import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
 import com.daviancorp.android.ui.list.WishlistListActivity;
+import com.daviancorp.android.ui.list.adapter.MenuDrawerListAdapter;
+import com.daviancorp.android.ui.list.adapter.MenuSection;
+
+import java.io.IOException;
 
 /*
  * Any subclass needs to:
@@ -41,13 +54,13 @@ import com.daviancorp.android.ui.list.WishlistListActivity;
  *  - override createFragment() for detail fragments
  */
 
-public class GenericActionBarActivity extends ActionBarActivity {
+public abstract class GenericActionBarActivity extends ActionBarActivity {
 
     protected static final String DIALOG_ABOUT = "about";
 
     protected Fragment detail;
     private ListView mDrawerList;
-    private ArrayAdapter<String> mDrawerAdapter;
+    private DrawerAdapter mDrawerAdapter;
     public ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
 
@@ -56,12 +69,13 @@ public class GenericActionBarActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
     }
 
+
     // Set up drawer toggle actions
-    public void setupDrawer(){
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+    public void setupDrawer() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         //mDrawerLayout.setStatusBarBackgroundColor(#000000); // I think this is used to have the drawer behind the status bar
         // Populate navigation drawer
-        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerList = (ListView) findViewById(R.id.navList);
         addDrawerItems();
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -69,9 +83,9 @@ public class GenericActionBarActivity extends ActionBarActivity {
                 // Set navigation actions
                 Intent intent = new Intent();
 
-                switch (position){
+                switch (position) {
                     case 0: // Monsters
-                        intent = new Intent(getApplicationContext(),MonsterListActivity.class);
+                        intent = new Intent(getApplicationContext(), MonsterListActivity.class);
                         break;
                     case 1: // Weapons
                         intent = new Intent(getApplicationContext(), WeaponSelectionListActivity.class);
@@ -105,14 +119,15 @@ public class GenericActionBarActivity extends ActionBarActivity {
                 mDrawerLayout.closeDrawers();
             }
         });
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close){
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
             /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView){
+            public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu(); // Creates call to onPrepareOptionsMenu()
             }
+
             /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view){
+            public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu(); // Creates call to onPrepareOptionsMenu()
             }
@@ -124,26 +139,38 @@ public class GenericActionBarActivity extends ActionBarActivity {
     }
 
     // Set up drawer menu options
-    private void addDrawerItems(){
+    private void addDrawerItems() {
         String[] menuArray = getResources().getStringArray(R.array.drawer_items);
-        mDrawerAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.drawer_list_item, menuArray);
+
+        mDrawerAdapter = new DrawerAdapter(getApplicationContext(), R.layout.drawer_list_item, menuArray);
         mDrawerList.setAdapter(mDrawerAdapter);
     }
 
-    public void enableDrawerIndicator(){
+
+    public void enableDrawerIndicator() {
         mDrawerToggle.setDrawerIndicatorEnabled(true);
     }
 
     // Sync button animation sync with drawer state
     @Override
-    protected void onPostCreate(Bundle savedInstanceState){
+    protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /*if (mDrawerAdapter != null) {
+            mDrawerAdapter.setSelectedIndex(getSelectedSection().menuListPosition);
+        }*/
+    }
+
+    protected abstract MenuSection getSelectedSection();
+
     // Handle toggle state sync across configuration changes (rotation)
     @Override
-    public void onConfigurationChanged(Configuration newConfig){
+    public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
@@ -152,16 +179,12 @@ public class GenericActionBarActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         // Detect navigation drawer item selected
-        if(mDrawerToggle.onOptionsItemSelected(item)){
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
         // Detect home and or expansion menu item selections
         switch (item.getItemId()) {
-            case android.R.id.home:
-                // TODO For the love of god fix this. Proper back navigation goes here I think.
-                super.onBackPressed(); // Emulate back button when up is pressed. This isn't ideal and kind of hackey.
-                return true;
             case R.id.about:
                 FragmentManager fm = getSupportFragmentManager();
                 AboutDialogFragment dialog = new AboutDialogFragment();
@@ -201,17 +224,78 @@ public class GenericActionBarActivity extends ActionBarActivity {
         return true;
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         // If back is pressed while drawer is open, close drawer.
-        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
 
     public Fragment getDetail() {
         return detail;
+    }
+
+
+    // Custom adapter needed to display list items with icons
+    public class DrawerAdapter extends ArrayAdapter{
+
+        Context context;
+        int layoutResourceId;
+        String[] items;
+
+        public DrawerAdapter(Context context, int layoutResourceId, String[] items) {
+            super(context, layoutResourceId, items);
+            this.layoutResourceId = layoutResourceId;
+            this.context = context;
+            this.items = items;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View row = convertView;
+            ItemHolder holder = null;
+
+            if(row == null)
+            {
+                LayoutInflater inflater = (LayoutInflater) context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                row = inflater.inflate(layoutResourceId, parent, false);
+
+                holder = new ItemHolder();
+                holder.imgIcon = (ImageView)row.findViewById(R.id.nav_list_icon);
+                holder.txtTitle = (TextView)row.findViewById(R.id.nav_list_item);
+
+                row.setTag(holder);
+            }
+            else
+            {
+                holder = (ItemHolder)row.getTag();
+            }
+
+            String[] singleItem = items[position].split(",");
+            holder.txtTitle.setText(singleItem[0]);
+
+            // Attempt to retrieve drawable
+            Drawable i = null;
+            String cellImage = singleItem[1];
+            try {
+                i = Drawable.createFromStream(
+                        context.getAssets().open(cellImage), null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            holder.imgIcon.setImageDrawable(i);
+
+            return row;
+        }
+
+
+        class ItemHolder{
+            ImageView imgIcon;
+            TextView txtTitle;
+        }
     }
 }

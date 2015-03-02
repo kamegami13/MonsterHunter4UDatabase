@@ -2,7 +2,6 @@ package com.daviancorp.android.ui.list;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -36,7 +35,7 @@ public class WeaponBowgunListFragment extends WeaponListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list, null);
+		View v = inflater.inflate(R.layout.fragment_generic_list, container,false);
 		return v;
 	}
 	

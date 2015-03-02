@@ -32,17 +32,18 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="logo_description">Logo</string>
     <string-array name="drawer_items">
-        <item>"Monsters"</item>
-        <item>"Weapons"</item>
-        <item>"Armor"</item>
-        <item>"Quests"</item>
-        <item>"Items"</item>
-        <item>"Combining"</item>
-        <item>"Locations"</item>
-        <item>"Decorations"</item>
-        <item>"Skill Trees"</item>
-        <item>"Wishlists"</item>
+        <item>"Monsters,icons_items/Book-White.png"</item>
+        <item>"Weapons,icons_weapons/icons_sword_and_shield/sword_and_shield1.png"</item>
+        <item>"Armor,icons_armor/icons_body/body1.png"</item>
+        <item>"Quests,icons_items/Ticket-White.png"</item>
+        <item>"Items,icons_items/Ore-White.png"</item>
+        <item>"Combining,icons_items/Liquid-White.png"</item>
+        <item>"Locations,icons_items/Ticket-White.png"</item>
+        <item>"Decorations,icons_items/Jewel-White.png"</item>
+        <item>"Skill Trees,icons_items/Monster-Jewel-White.png"</item>
+        <item>"Wishlists,icons_items/Mantle-White.png"</item>
     </string-array>
 
     <string name="option_list">List</string>
@@ -79,4 +80,5 @@
     <string name="armor_set_builder_arms">Arms</string>
     <string name="armor_set_builder_waist">Waist</string>
     <string name="armor_set_builder_legs">Legs</string>
+    <string name="placeholder_unknown">Unknown</string>
 </resources>
