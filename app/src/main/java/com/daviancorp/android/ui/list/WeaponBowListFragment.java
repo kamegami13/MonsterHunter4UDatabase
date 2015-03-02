@@ -187,39 +187,46 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 			String[] coatings = weapon.getCoatings().split("\\|");
 
 
-			if (!coatings[0].equals("-")) {
-                holder.powerv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Red.png"));
-                holder.powerv.setVisibility(View.VISIBLE);
-			}
-			if (!coatings[1].equals("-")) {
-                holder.poisonv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Purple.png"));
-                holder.poisonv.setVisibility(View.VISIBLE);
-			}
-			if (!coatings[2].equals("-")) {
-                holder.parav.setImageDrawable(getDrawable(context, "icons_items/Bottle-Yellow.png"));
-                holder.parav.setVisibility(View.VISIBLE);
-			}
-			if (!coatings[3].equals("-")) {
-                holder.sleepv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Cyan.png"));
-                holder.sleepv.setVisibility(View.VISIBLE);
-			}
-			if (!coatings[4].equals("-")) {
-                holder.crangev.setImageDrawable(getDrawable(context, "icons_items/Bottle-White.png"));
-                holder.crangev.setVisibility(View.VISIBLE);
-			}
-			if (!coatings[5].equals("-")) {
-                holder.paintv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Pink.png"));
-                holder.paintv.setVisibility(View.VISIBLE);
-			}
-			if (!coatings[6].equals("-")) {
-                holder.exhaustv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Blue.png"));
-                holder.exhaustv.setVisibility(View.VISIBLE);
-			}
-			if (!coatings[7].equals("-")) {
-                holder.slimev.setImageDrawable(getDrawable(context, "icons_items/Bottle-Orange.png"));
-                holder.slimev.setVisibility(View.VISIBLE);
-			}
-
+            if (!coatings[0].equals("-")) {
+                holder.powerv.setTag(weapon.getId());
+                new LoadImage(holder.powerv, "icons_items/Bottle-Red.png").execute();
+                holder.powerv.setVisibility(view.VISIBLE);
+            }
+            if (!coatings[1].equals("-")) {
+                holder.poisonv.setTag(weapon.getId());
+                new LoadImage(holder.poisonv, "icons_items/Bottle-Purple.png").execute();
+                holder.poisonv.setVisibility(view.VISIBLE);
+            }
+            if (!coatings[2].equals("-")) {
+                holder.parav.setTag(weapon.getId());
+                new LoadImage(holder.parav, "icons_items/Bottle-Yellow.png").execute();
+                holder.parav.setVisibility(view.VISIBLE);
+            }
+            if (!coatings[3].equals("-")) {
+                holder.sleepv.setTag(weapon.getId());
+                new LoadImage(holder.sleepv, "icons_items/Bottle-Cyan.png").execute();
+                holder.sleepv.setVisibility(view.VISIBLE);
+            }
+            if (!coatings[4].equals("-")) {
+                holder.crangev.setTag(weapon.getId());
+                new LoadImage(holder.crangev, "icons_items/Bottle-White.png").execute();
+                holder.crangev.setVisibility(view.VISIBLE);
+            }
+            if (!coatings[5].equals("-")) {
+                holder.paintv.setTag(weapon.getId());
+                new LoadImage(holder.paintv, "icons_items/Bottle-Pink.png").execute();
+                holder.paintv.setVisibility(view.VISIBLE);
+            }
+            if (!coatings[6].equals("-")) {
+                holder.exhaustv.setTag(weapon.getId());
+                new LoadImage(holder.exhaustv, "icons_items/Bottle-Blue.png").execute();
+                holder.exhaustv.setVisibility(view.VISIBLE);
+            }
+            if (!coatings[7].equals("-")) {
+                holder.slimev.setTag(weapon.getId());
+                new LoadImage(holder.slimev, "icons_items/Bottle-Orange.png").execute();
+                holder.slimev.setVisibility(view.VISIBLE);
+            }
 
 		}
 
