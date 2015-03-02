@@ -190,42 +190,42 @@ public class WeaponBowListFragment extends WeaponListFragment implements
             if (!coatings[0].equals("-")) {
                 holder.powerv.setTag(weapon.getId());
                 new LoadImage(holder.powerv, "icons_items/Bottle-Red.png").execute();
-                holder.powerv.setVisibility(view.VISIBLE);
+                holder.powerv.setVisibility(View.VISIBLE);
             }
             if (!coatings[1].equals("-")) {
                 holder.poisonv.setTag(weapon.getId());
                 new LoadImage(holder.poisonv, "icons_items/Bottle-Purple.png").execute();
-                holder.poisonv.setVisibility(view.VISIBLE);
+                holder.poisonv.setVisibility(View.VISIBLE);
             }
             if (!coatings[2].equals("-")) {
                 holder.parav.setTag(weapon.getId());
                 new LoadImage(holder.parav, "icons_items/Bottle-Yellow.png").execute();
-                holder.parav.setVisibility(view.VISIBLE);
+                holder.parav.setVisibility(View.VISIBLE);
             }
             if (!coatings[3].equals("-")) {
                 holder.sleepv.setTag(weapon.getId());
                 new LoadImage(holder.sleepv, "icons_items/Bottle-Cyan.png").execute();
-                holder.sleepv.setVisibility(view.VISIBLE);
+                holder.sleepv.setVisibility(View.VISIBLE);
             }
             if (!coatings[4].equals("-")) {
                 holder.crangev.setTag(weapon.getId());
                 new LoadImage(holder.crangev, "icons_items/Bottle-White.png").execute();
-                holder.crangev.setVisibility(view.VISIBLE);
+                holder.crangev.setVisibility(View.VISIBLE);
             }
             if (!coatings[5].equals("-")) {
                 holder.paintv.setTag(weapon.getId());
                 new LoadImage(holder.paintv, "icons_items/Bottle-Pink.png").execute();
-                holder.paintv.setVisibility(view.VISIBLE);
+                holder.paintv.setVisibility(View.VISIBLE);
             }
             if (!coatings[6].equals("-")) {
                 holder.exhaustv.setTag(weapon.getId());
                 new LoadImage(holder.exhaustv, "icons_items/Bottle-Blue.png").execute();
-                holder.exhaustv.setVisibility(view.VISIBLE);
+                holder.exhaustv.setVisibility(View.VISIBLE);
             }
             if (!coatings[7].equals("-")) {
                 holder.slimev.setTag(weapon.getId());
                 new LoadImage(holder.slimev, "icons_items/Bottle-Orange.png").execute();
-                holder.slimev.setVisibility(view.VISIBLE);
+                holder.slimev.setVisibility(View.VISIBLE);
             }
 
 		}
