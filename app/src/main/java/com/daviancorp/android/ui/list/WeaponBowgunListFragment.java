@@ -10,12 +10,16 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.adapter.WeaponListElementAdapter;
 import com.daviancorp.android.ui.adapter.WeaponListGeneralAdapter;
+import com.daviancorp.android.ui.general.DrawSharpness;
 
 public class WeaponBowgunListFragment extends WeaponListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -62,6 +66,13 @@ public class WeaponBowgunListFragment extends WeaponListFragment implements
 
 	private static class WeaponBowgunListCursorAdapter extends WeaponListGeneralAdapter {
 
+        private static class ViewHolder extends GeneralViewHolder {
+            // Gunner
+            TextView recoiltv;
+            TextView steadytv;
+            TextView reloadtv;
+        }
+
 		public WeaponBowgunListCursorAdapter(Context context, WeaponCursor cursor) {
 			super(context, cursor);
 		}
@@ -71,21 +82,45 @@ public class WeaponBowgunListFragment extends WeaponListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_weapon_tree_item_bowgun,
-					parent, false);
+            View view = inflater.inflate(R.layout.fragment_weapon_tree_item_bowgun, parent,
+                    false);
+
+            ViewHolder holder = new ViewHolder();
+
+            //
+            // GENERAL VIEWS
+            //
+
+            // Set the layout id
+            holder.weaponLayout = (RelativeLayout) view.findViewById(R.id.main_layout);
+
+            // Find all views
+            holder.nametv = (TextView) view.findViewById(R.id.name_text);
+            holder.attacktv = (TextView) view.findViewById(R.id.attack_text);
+            holder.slottv = (TextView) view.findViewById(R.id.slots_text);
+            holder.affinitytv = (TextView) view.findViewById(R.id.affinity_text);
+            holder.defensetv = (TextView) view.findViewById(R.id.defense_text);
+            holder.weaponIcon = (ImageView) view.findViewById(R.id.weapon_icon);
+            holder.lineLayout = (View) view.findViewById(R.id.tree_lines);
+
+            // Bowgun stuff
+            holder.reloadtv = (TextView) view.findViewById(R.id.reload_text);
+            holder.recoiltv = (TextView) view.findViewById(R.id.recoil_text);
+            holder.steadytv = (TextView) view.findViewById(R.id.deviation_text);
+
+            view.setTag(holder);
+
+            return view;
 		}
 
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
             super.bindView(view, context, cursor);
 
+            ViewHolder holder = (ViewHolder) view.getTag();
+
 			// Get the monster for the current row
 			Weapon weapon = mWeaponCursor.getWeapon();
-
-			// Bowgun stuff
-			TextView reloadtv = (TextView) view.findViewById(R.id.reload_text);
-			TextView recoiltv = (TextView) view.findViewById(R.id.recoil_text);
-			TextView steadytv = (TextView) view.findViewById(R.id.deviation_text);
 
 			String reload = weapon.getReloadSpeed();
 			String recoil = weapon.getRecoil();
@@ -101,9 +136,9 @@ public class WeaponBowgunListFragment extends WeaponListFragment implements
                 steady = "";
             }
 
-			reloadtv.setText(reload);
-			recoiltv.setText(recoil);
-			steadytv.setText(steady);
+			holder.reloadtv.setText(reload);
+			holder.recoiltv.setText(recoil);
+			holder.steadytv.setText(steady);
 
 		}
 	}

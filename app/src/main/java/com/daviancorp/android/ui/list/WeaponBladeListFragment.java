@@ -1,8 +1,13 @@
 package com.daviancorp.android.ui.list;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -13,6 +18,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
@@ -44,8 +52,12 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-        //		super.setContextMenu(v);
-		return inflater.inflate(R.layout.fragment_generic_list, container,false);
+		View v = inflater.inflate(R.layout.fragment_generic_list, null);
+
+        ListView view = (ListView) v.findViewById(android.R.id.list);
+
+//		super.setContextMenu(v);
+		return v;
 	}
 
 	@Override
@@ -75,6 +87,16 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 
 	private static class WeaponBladeListCursorAdapter extends WeaponListElementAdapter {
 
+        private static class ViewHolder extends ElementViewHolder {
+            // Blade
+
+            TextView specialtv;
+            DrawSharpness sharpnessDrawable;
+            ImageView note1v;
+            ImageView note2v;
+            ImageView note3v;
+        }
+
 
 		public WeaponBladeListCursorAdapter(Context context, WeaponCursor cursor) {
 			super(context, cursor);
@@ -85,55 +107,90 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_weapon_tree_item_blademaster, parent,
+			View view = inflater.inflate(R.layout.fragment_weapon_tree_item_blademaster, parent,
 					false);
+
+            ViewHolder holder = new ViewHolder();
+
+            //
+            // GENERAL VIEWS
+            //
+
+            // Set the layout id
+            holder.weaponLayout = (RelativeLayout) view.findViewById(R.id.main_layout);
+
+            // Find all views
+            holder.nametv = (TextView) view.findViewById(R.id.name_text);
+            holder.attacktv = (TextView) view.findViewById(R.id.attack_text);
+            holder.slottv = (TextView) view.findViewById(R.id.slots_text);
+            holder.affinitytv = (TextView) view.findViewById(R.id.affinity_text);
+            holder.defensetv = (TextView) view.findViewById(R.id.defense_text);
+            holder.weaponIcon = (ImageView) view.findViewById(R.id.weapon_icon);
+            holder.lineLayout = (View) view.findViewById(R.id.tree_lines);
+
+            //
+            // ELEMENT VIEWS
+            //
+
+            holder.elementtv = (TextView) view.findViewById(R.id.element_text);
+            holder.elementtv2 = (TextView) view.findViewById(R.id.element_text2);
+            holder.awakentv = (TextView) view.findViewById(R.id.awaken_text);
+            holder.elementIcon = (ImageView) view.findViewById(R.id.element_image);
+            holder.element2Icon = (ImageView) view.findViewById(R.id.element_image2);
+
+            //
+            // BLADE VIEWS
+
+            holder.specialtv = (TextView) view.findViewById(R.id.special_text);
+            holder.sharpnessDrawable = (DrawSharpness) view.findViewById(R.id.sharpness);
+
+
+            holder.note1v = (ImageView) view.findViewById(R.id.note_image_1);
+            holder.note2v = (ImageView) view.findViewById(R.id.note_image_2);
+            holder.note3v = (ImageView) view.findViewById(R.id.note_image_3);
+
+            view.setTag(holder);
+
+            return view;
 		}
 
 		@Override
         public void bindView(View view, Context context, Cursor cursor) {
             super.bindView(view, context, cursor);
 
+            ViewHolder holder = (ViewHolder) view.getTag();
+
             // Get the monster for the current row
             Weapon weapon = mWeaponCursor.getWeapon();
 
-            TextView specialtv = (TextView) view.findViewById(R.id.special_text);
-
-
-            DrawSharpness sharpnessDrawable = (DrawSharpness) view.findViewById(R.id.sharpness);
-            // Need to reset sharpness so it gets redrawn, not recycled
-            sharpnessDrawable.invalidate();
             //
             // Set special text fields
             //
-            specialtv.setText("");
+            holder.specialtv.setText("");
             String type = weapon.getWtype();
             if (type.equals("Hunting Horn")) {
                 String special = weapon.getHornNotes();
 
-                ImageView note1v = (ImageView) view.findViewById(R.id.note_image_1);
-                ImageView note2v = (ImageView) view.findViewById(R.id.note_image_2);
-                ImageView note3v = (ImageView) view.findViewById(R.id.note_image_3);
-
-                note1v.setImageDrawable(getNoteDrawable(context, special.charAt(0)));
-                note2v.setImageDrawable(getNoteDrawable(context, special.charAt(1)));
-                note3v.setImageDrawable(getNoteDrawable(context, special.charAt(2)));
+                holder.note1v.setImageDrawable(getNoteDrawable(context, special.charAt(0)));
+                holder.note2v.setImageDrawable(getNoteDrawable(context, special.charAt(1)));
+                holder.note3v.setImageDrawable(getNoteDrawable(context, special.charAt(2)));
 
             }
             else if (type.equals("Gunlance")) {
                 String special = weapon.getShellingType();
-                specialtv.setText(special);
-                specialtv.setGravity(Gravity.CENTER);
+                holder.specialtv.setText(special);
+                holder.specialtv.setGravity(Gravity.CENTER);
             }
             else if (type.equals("Switch Axe") || type.equals("Charge Blade")) {
                 String special = weapon.getPhial();
-                specialtv.setText(special);
-                specialtv.setGravity(Gravity.CENTER);
+                holder.specialtv.setText(special);
+                holder.specialtv.setGravity(Gravity.CENTER);
             }
 
             // Set sharpness
             String sharpString = weapon.getSharpness();
-            sharpnessDrawable.init(sharpString);
-            sharpnessDrawable.invalidate();
+            holder.sharpnessDrawable.init(sharpString);
+            holder.sharpnessDrawable.invalidate();
         }
 
 
@@ -169,6 +226,7 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 
 			return getDrawable(c, file);
 		}
+
 	}
 
 }
