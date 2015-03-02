@@ -171,9 +171,13 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
             if (type.equals("Hunting Horn")) {
                 String special = weapon.getHornNotes();
 
-                holder.note1v.setImageDrawable(getNoteDrawable(context, special.charAt(0)));
-                holder.note2v.setImageDrawable(getNoteDrawable(context, special.charAt(1)));
-                holder.note3v.setImageDrawable(getNoteDrawable(context, special.charAt(2)));
+                holder.note1v.setTag(weapon.getId());
+                holder.note2v.setTag(weapon.getId());
+                holder.note3v.setTag(weapon.getId());
+
+                new LoadImage(holder.note1v, getNoteDrawable(special.charAt(0))).execute();
+                new LoadImage(holder.note2v, getNoteDrawable(special.charAt(1))).execute();
+                new LoadImage(holder.note3v, getNoteDrawable(special.charAt(2))).execute();
 
             }
             else if (type.equals("Gunlance")) {
@@ -194,7 +198,7 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
         }
 
 
-		private Drawable getNoteDrawable(Context c, char note) {
+		private String getNoteDrawable(char note) {
 			String file = "icons_monster_info/";
 
 			switch (note) {
@@ -224,7 +228,7 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 					break;
 			}
 
-			return getDrawable(c, file);
+			return file;
 		}
 
 	}
