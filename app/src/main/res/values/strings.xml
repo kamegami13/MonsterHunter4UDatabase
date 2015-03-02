@@ -32,6 +32,7 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="logo_description">Logo</string>
     <string-array name="drawer_items">
         <item>"Monsters"</item>
         <item>"Weapons"</item>
