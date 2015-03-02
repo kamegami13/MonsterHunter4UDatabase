@@ -49,9 +49,10 @@ public class ArmorSetBuilderSkillsListFragment extends ListFragment implements A
     }
 
     private static class ArmorSetBuilderSkillsAdapter extends ArrayAdapter<ArmorSetBuilderSession.ArmorSetSkillTreePoints> {
-
+        
         public ArmorSetBuilderSkillsAdapter(Context context, List<ArmorSetBuilderSession.ArmorSetSkillTreePoints> trees) {
             super(context, R.layout.fragment_armor_set_builder_skills_item, trees);
+            skills = trees;
         }
 
         @Override
