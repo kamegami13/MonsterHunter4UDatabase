@@ -28,11 +28,11 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:paddingLeft="10dp"
-                android:text="@+id/label"
+                android:text="@string/placeholder_unknown"
+                android:textColor="@color/text_color"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_color">
-            </TextView>
+                android:textStyle="bold"/>
+            
         </LinearLayout>
 
         <View
@@ -52,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Area"
-                android:textStyle="bold"
-                android:textColor="@color/text_color" />
+                android:textColor="@color/text_color"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/cut"
@@ -111,8 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Area"
-                android:textStyle="bold"
-                android:textColor="@color/text_color" />
+                android:textColor="@color/text_color"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/fire"

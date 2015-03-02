@@ -1,9 +1,6 @@
 package com.daviancorp.android.ui.list;
 
-import java.io.IOException;
-
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,10 +10,8 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,7 +20,8 @@ import com.daviancorp.android.data.database.CombiningCursor;
 import com.daviancorp.android.loader.CombiningListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
-import com.daviancorp.android.ui.detail.ItemDetailActivity;
+
+import java.io.IOException;
 
 public class CombiningListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -33,7 +29,7 @@ public class CombiningListFragment extends ListFragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		// Initialize the loader to load the list of runs
 		getLoaderManager().initLoader(R.id.combining_list_fragment, getArguments(), this);
 	}
@@ -49,8 +45,7 @@ public class CombiningListFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list, null);
-		return v;
+        return inflater.inflate(R.layout.fragment_generic_list, container,false);
 	}
 
 	@Override
@@ -105,35 +100,35 @@ public class CombiningListFragment extends ListFragment implements
 			String item1 = item.getItem1().getName();
 			String item2 = item.getItem2().getName();
 			String item3 = item.getCreatedItem().getName();
-			
+
 			String cellImage1 = "icons_items/" + item.getItem1().getFileLocation();
 			String cellImage2 = "icons_items/" + item.getItem2().getFileLocation();
 			String cellImage3 = "icons_items/" + item.getCreatedItem().getFileLocation();
-			
+
 			int percent = item.getPercentage();
 			int min = item.getAmountMadeMin();
 			int max = item.getAmountMadeMax();
-			
+
 			String temp = "" + min;
-			
+
 			if (min != max){
 				temp = temp + "-" + max;
 			}
-			
+
 			String percentage = "" + percent + "%";
 
 			TextView itemtv1 = (TextView) v.findViewById(R.id.item_text1);
 			TextView itemtv2 = (TextView) v.findViewById(R.id.item_text2);
 			TextView itemtv3 = (TextView) v.findViewById(R.id.item_text3);
-			
+
 			ImageView itemiv1 = (ImageView) v.findViewById(R.id.item_img1);
 			ImageView itemiv2 = (ImageView) v.findViewById(R.id.item_img2);
 			ImageView itemiv3 = (ImageView) v.findViewById(R.id.item_img3);
-			
+
 			RelativeLayout itemlayout1 = (RelativeLayout) v.findViewById(R.id.item1);
 			RelativeLayout itemlayout2 = (RelativeLayout) v.findViewById(R.id.item2);
 			RelativeLayout itemlayout3 = (RelativeLayout) v.findViewById(R.id.item3);
-			
+
 			TextView percenttv = (TextView) v.findViewById(R.id.percentage);
 			TextView amttv = (TextView) v.findViewById(R.id.amt);
 
@@ -155,10 +150,10 @@ public class CombiningListFragment extends ListFragment implements
 			itemiv1.setImageDrawable(i1);
 			itemiv2.setImageDrawable(i2);
 			itemiv3.setImageDrawable(i3);
-			
+
 			percenttv.setText(percentage);
 			amttv.setText(temp);
-			
+
 			itemtv1.setText(item1);
 			itemtv2.setText(item2);
 			itemtv3.setText(item3);
@@ -168,7 +163,7 @@ public class CombiningListFragment extends ListFragment implements
 			itemlayout3.setOnClickListener(new ItemClickListener(context, item.getCreatedItem().getId()));
 
 		}
-		
+
 		@Override
 		public boolean isEnabled(int position) {
 			return false;
