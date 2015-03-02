@@ -10,8 +10,12 @@ public class Weapon extends Item{
 	private int upgrade_cost;					// Cost to upgrade
 	private int attack;							// Attack damage
 	private int max_attack;						// Max attack damage; unused at the moment
-	private String elemental_attack;			// Elemental attack damage
-	private String awakened_elemental_attack;	// Awakened elmeental attack damage
+	private String element;			            // Elemental type
+	private String awaken;                  	// Awakened elmeental type
+    private String element_2;                   // Second element type
+    private long element_attack;
+    private long element_2_attack;
+    private long awaken_attack;
 	private int defense;						// Defense
 	private String sharpness;					// Sharpness values
 	private String affinity;				    // Affinity
@@ -39,8 +43,9 @@ public class Weapon extends Item{
 		this.upgrade_cost = -1;
 		this.attack = -1;
 		this.max_attack = -1;
-		this.elemental_attack = "";
-		this.awakened_elemental_attack = "";
+		this.element = "";
+        this.element_2 = "";
+        this.awaken = "";
 		this.defense = -1;
 		this.sharpness = "";
 		this.affinity = "";
@@ -99,22 +104,6 @@ public class Weapon extends Item{
 
 	public void setMaxAttack(int max_attack) {
 		this.max_attack = max_attack;
-	}
-
-	public String getElementalAttack() {
-		return elemental_attack;
-	}
-
-	public void setElementalAttack(String elemental_attack) {
-		this.elemental_attack = elemental_attack;
-	}
-
-	public String getAwakenedElementalAttack() {
-		return awakened_elemental_attack;
-	}
-
-	public void setAwakenedElementalAttack(String awakened_elemental_attack) {
-		this.awakened_elemental_attack = awakened_elemental_attack;
 	}
 
 	public int getDefense() {
@@ -251,5 +240,53 @@ public class Weapon extends Item{
 
     public void setTree_Depth(int tree_depth) {
         this.tree_depth = tree_depth;
+    }
+
+    public String getElement() {
+        return element;
+    }
+
+    public void setElement(String element) {
+        this.element = element;
+    }
+
+    public String getAwaken() {
+        return awaken;
+    }
+
+    public void setAwaken(String awaken) {
+        this.awaken = awaken;
+    }
+
+    public String getElement2() {
+        return element_2;
+    }
+
+    public void setElement2(String element_2) {
+        this.element_2 = element_2;
+    }
+
+    public long getElementAttack() {
+        return element_attack;
+    }
+
+    public void setElementAttack(long element_attack) {
+        this.element_attack = element_attack;
+    }
+
+    public long getElement2Attack() {
+        return element_2_attack;
+    }
+
+    public void setElement2Attack(long element_2_attack) {
+        this.element_2_attack = element_2_attack;
+    }
+
+    public long getAwakenAttack() {
+        return awaken_attack;
+    }
+
+    public void setAwakenAttack(long awaken_attack) {
+        this.awaken_attack = awaken_attack;
     }
 }
