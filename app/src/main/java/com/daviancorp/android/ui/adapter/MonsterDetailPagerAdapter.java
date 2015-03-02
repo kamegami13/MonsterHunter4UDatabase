@@ -21,6 +21,9 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 		this.monsterId = id;
 	}
 
+    // Tab titles
+    private String[] tabs = { "Detail","Status","Habitat","Low-Rank", "High-Rank", "G-Rank", "Quest"};
+
 	@Override
 	public Fragment getItem(int index) {
 
@@ -50,6 +53,11 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

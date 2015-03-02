@@ -8,6 +8,9 @@ import com.daviancorp.android.ui.detail.WishlistDataComponentFragment;
 import com.daviancorp.android.ui.detail.WishlistDataDetailFragment;
 
 public class WishlistDetailPagerAdapter extends FragmentPagerAdapter {
+    // Tab titles
+    private String[] tabs = { "Wishlist" , "Materials"};
+
 	private static final int REQUEST_REFRESH = 0;
 	
 	private long wishlistId;
@@ -49,6 +52,11 @@ public class WishlistDetailPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

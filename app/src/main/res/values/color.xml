@@ -14,7 +14,7 @@
 
     <!-- used for making anything clickable have a clicked state -->
     <color name="transparent">#00FFFFFF</color>
-    <color name="transparentlight">#90D7CCC8</color>
+    <color name="transparentlight">#20D7CCC8</color>
 
 
 </resources>

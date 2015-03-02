@@ -12,6 +12,9 @@ public class QuestDetailPagerAdapter extends FragmentPagerAdapter {
 	
 	private long questId;
 
+    // Tab titles
+    private String[] tabs = { "Detail", "Monsters", "Rewards"};
+
 	public QuestDetailPagerAdapter(FragmentManager fm, long id) {
 		super(fm);
 		this.questId = id;
@@ -34,6 +37,11 @@ public class QuestDetailPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

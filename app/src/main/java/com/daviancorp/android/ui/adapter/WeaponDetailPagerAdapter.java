@@ -18,6 +18,9 @@ public class WeaponDetailPagerAdapter extends FragmentPagerAdapter {
 	private long weaponId;
     private Context mcontext;
 
+    // Tab titles
+    private String[] tabs = { "Detail", "Family Tree", "Components"};
+
 	public WeaponDetailPagerAdapter(FragmentManager fm, Context context, long id) {
 		super(fm);
 		this.weaponId = id;
@@ -50,6 +53,11 @@ public class WeaponDetailPagerAdapter extends FragmentPagerAdapter {
 			return null;
 		}
 	}
+
+    @Override
+    public CharSequence getPageTitle(int index) {
+        return tabs[index];
+    }
 
 	@Override
 	public int getCount() {

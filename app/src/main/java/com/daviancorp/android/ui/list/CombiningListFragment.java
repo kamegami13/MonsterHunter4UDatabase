@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Combining;
@@ -34,8 +35,16 @@ public class CombiningListFragment extends ListFragment implements
 		super.onCreate(savedInstanceState);
 		
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(R.id.combining_list_fragment, null, this);
+		getLoaderManager().initLoader(R.id.combining_list_fragment, getArguments(), this);
 	}
+
+    public static CombiningListFragment newInstance(long id) {
+        Bundle args = new Bundle();
+        args.putLong("ID", id);
+        CombiningListFragment f = new CombiningListFragment();
+        f.setArguments(args);
+        return f;
+    }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +56,8 @@ public class CombiningListFragment extends ListFragment implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// You only ever load the runs, so assume this is the case
-		return new CombiningListCursorLoader(getActivity());
+		return new CombiningListCursorLoader(getActivity(),
+                args.getLong("ID"));
 	}
 
 	@Override
@@ -112,8 +122,6 @@ public class CombiningListFragment extends ListFragment implements
 			
 			String percentage = "" + percent + "%";
 
-            LinearLayout baseLayout = (LinearLayout) v.findViewById(R.id.listitem);
-
 			TextView itemtv1 = (TextView) v.findViewById(R.id.item_text1);
 			TextView itemtv2 = (TextView) v.findViewById(R.id.item_text2);
 			TextView itemtv3 = (TextView) v.findViewById(R.id.item_text3);
@@ -122,9 +130,9 @@ public class CombiningListFragment extends ListFragment implements
 			ImageView itemiv2 = (ImageView) v.findViewById(R.id.item_img2);
 			ImageView itemiv3 = (ImageView) v.findViewById(R.id.item_img3);
 			
-			LinearLayout itemlayout1 = (LinearLayout) v.findViewById(R.id.item1);
-			LinearLayout itemlayout2 = (LinearLayout) v.findViewById(R.id.item2);
-			LinearLayout itemlayout3 = (LinearLayout) v.findViewById(R.id.item3);
+			RelativeLayout itemlayout1 = (RelativeLayout) v.findViewById(R.id.item1);
+			RelativeLayout itemlayout2 = (RelativeLayout) v.findViewById(R.id.item2);
+			RelativeLayout itemlayout3 = (RelativeLayout) v.findViewById(R.id.item3);
 			
 			TextView percenttv = (TextView) v.findViewById(R.id.percentage);
 			TextView amttv = (TextView) v.findViewById(R.id.amt);
@@ -158,7 +166,6 @@ public class CombiningListFragment extends ListFragment implements
 			itemlayout1.setOnClickListener(new ItemClickListener(context, item.getItem1().getId()));
 			itemlayout2.setOnClickListener(new ItemClickListener(context, item.getItem2().getId()));
 			itemlayout3.setOnClickListener(new ItemClickListener(context, item.getCreatedItem().getId()));
-            baseLayout.setOnClickListener(new ItemClickListener(context, item.getCreatedItem().getId()));
 
 		}
 		

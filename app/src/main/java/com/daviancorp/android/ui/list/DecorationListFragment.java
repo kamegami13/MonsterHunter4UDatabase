@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Decoration;
@@ -94,7 +95,7 @@ public class DecorationListFragment extends ListFragment implements
 			// Get the decoration for the current row
 			Decoration decoration = mDecorationCursor.getDecoration();
 			
-			LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.listitem);
+			RelativeLayout itemLayout = (RelativeLayout) view.findViewById(R.id.listitem);
 
 			// Set up the text view
 			ImageView itemImageView = (ImageView) view.findViewById(R.id.item_image);
@@ -103,7 +104,6 @@ public class DecorationListFragment extends ListFragment implements
 			TextView skill1amtTextView = (TextView) view.findViewById(R.id.skill1_amt);
 			TextView skill2TextView = (TextView) view.findViewById(R.id.skill2);
 			TextView skill2amtTextView = (TextView) view.findViewById(R.id.skill2_amt);
-            LinearLayout skill2layout = (LinearLayout) view.findViewById(R.id.skill2layout);
 			
 			String decorationNameText = decoration.getName();
 			String skill1Text = decoration.getSkill1Name();
@@ -129,11 +129,14 @@ public class DecorationListFragment extends ListFragment implements
 			skill1TextView.setText(skill1Text);
 			skill1amtTextView.setText(skill1amtText);
 
-            skill2layout.setVisibility(View.GONE);
-            if(skill2Text != null) {
+            skill2TextView.setVisibility(view.GONE);
+            skill2amtTextView.setVisibility(view.GONE);
+
+            if(!skill2amtText.equals("")) {
                 skill2TextView.setText(skill2Text);
                 skill2amtTextView.setText(skill2amtText);
-                skill2layout.setVisibility(View.VISIBLE);
+                skill2TextView.setVisibility(view.VISIBLE);
+                skill2amtTextView.setVisibility(view.VISIBLE);
             }
 			
 			itemLayout.setTag(decoration.getId());
