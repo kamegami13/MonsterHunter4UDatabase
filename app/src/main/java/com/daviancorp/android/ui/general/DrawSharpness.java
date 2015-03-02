@@ -54,6 +54,10 @@ public class DrawSharpness extends View {
 
 	public void init(String sharpness) {
 
+        // Sharpness is in the format "1.1.1.1.1.1.1 1.1.1.1.1.1.1" where each
+        // 1 is an int representing the sharpness value of a certain color.
+        // The order is red, orange, yellow, green, white, purple.
+        // First set is for regular sharpness, second set is for sharpness+1
         int[] sharpness1 = new int[7];
         int[] sharpness2 = new int[7];
 
@@ -96,6 +100,7 @@ public class DrawSharpness extends View {
             }
         }
 
+        // Assign sharpness array 1
 		mRed1 = sharpness1[0];
 		mOrange1 = sharpness1[1];
 		mYellow1 = sharpness1[2];
@@ -104,6 +109,7 @@ public class DrawSharpness extends View {
 		mWhite1 = sharpness1[5];
 		mPurple1 = sharpness1[6];
 
+        // Assign sharpness array 2
         mRed2 = sharpness2[0];
         mOrange2 = sharpness2[1];
         mYellow2 = sharpness2[2];
@@ -133,8 +139,11 @@ public class DrawSharpness extends View {
 	public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        // Margins are defined by height/7. 7 can be changed.
         int margins = (int) Math.floor(mheight/7);
+        // Scale factor is used to multiply sharpness values to make sure full sharpness fills the bar
         int scalefactor = (int) Math.floor((mwidth-(margins*2))/maxsharpness);
+        // specify the width of each bar
         int barwidth = (scalefactor * maxsharpness) + (margins*2);
 
         // Draw the background
@@ -160,6 +169,7 @@ public class DrawSharpness extends View {
                          int ired, int iorange, int iyellow,
                          int igreen, int iblue, int iwhite, int ipurple){
 
+        // Run through the bar and accumulate sharpness
         int start = margins;
         int end = start + ired*scalefactor;
         paint.setStrokeWidth(0);
