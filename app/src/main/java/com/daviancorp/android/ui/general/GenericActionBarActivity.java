@@ -8,18 +8,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.daviancorp.android.mh4udatabase.R;
@@ -35,6 +33,8 @@ import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
 import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
 import com.daviancorp.android.ui.list.WishlistListActivity;
+import com.daviancorp.android.ui.list.adapter.MenuDrawerListAdapter;
+import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 /*
  * Any subclass needs to:
@@ -42,13 +42,13 @@ import com.daviancorp.android.ui.list.WishlistListActivity;
  *  - override createFragment() for detail fragments
  */
 
-public class GenericActionBarActivity extends ActionBarActivity {
+public abstract class GenericActionBarActivity extends ActionBarActivity {
 
     protected static final String DIALOG_ABOUT = "about";
 
     protected Fragment detail;
     private ListView mDrawerList;
-    private ArrayAdapter<String> mDrawerAdapter;
+    private MenuDrawerListAdapter mDrawerAdapter;
     public ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
 
@@ -57,12 +57,13 @@ public class GenericActionBarActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
     }
 
+
     // Set up drawer toggle actions
-    public void setupDrawer(){
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+    public void setupDrawer() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         //mDrawerLayout.setStatusBarBackgroundColor(#000000); // I think this is used to have the drawer behind the status bar
         // Populate navigation drawer
-        mDrawerList = (ListView)findViewById(R.id.navList);
+        mDrawerList = (ListView) findViewById(R.id.navList);
         addDrawerItems();
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,9 +71,9 @@ public class GenericActionBarActivity extends ActionBarActivity {
                 // Set navigation actions
                 Intent intent = new Intent();
 
-                switch (position){
+                switch (position) {
                     case 0: // Monsters
-                        intent = new Intent(getApplicationContext(),MonsterListActivity.class);
+                        intent = new Intent(getApplicationContext(), MonsterListActivity.class);
                         break;
                     case 1: // Weapons
                         intent = new Intent(getApplicationContext(), WeaponSelectionListActivity.class);
@@ -109,14 +110,15 @@ public class GenericActionBarActivity extends ActionBarActivity {
                 mDrawerLayout.closeDrawers();
             }
         });
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close){
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
             /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView){
+            public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu(); // Creates call to onPrepareOptionsMenu()
             }
+
             /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view){
+            public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu(); // Creates call to onPrepareOptionsMenu()
             }
@@ -128,26 +130,37 @@ public class GenericActionBarActivity extends ActionBarActivity {
     }
 
     // Set up drawer menu options
-    private void addDrawerItems(){
+    private void addDrawerItems() {
         String[] menuArray = getResources().getStringArray(R.array.drawer_items);
-        mDrawerAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.drawer_list_item, menuArray);
+        mDrawerAdapter = new MenuDrawerListAdapter(menuArray);
         mDrawerList.setAdapter(mDrawerAdapter);
     }
 
-    public void enableDrawerIndicator(){
+
+    public void enableDrawerIndicator() {
         mDrawerToggle.setDrawerIndicatorEnabled(true);
     }
 
     // Sync button animation sync with drawer state
     @Override
-    protected void onPostCreate(Bundle savedInstanceState){
+    protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mDrawerAdapter != null) {
+            mDrawerAdapter.setSelectedIndex(getSelectedSection().menuListPosition);
+        }
+    }
+
+    protected abstract MenuSection getSelectedSection();
+
     // Handle toggle state sync across configuration changes (rotation)
     @Override
-    public void onConfigurationChanged(Configuration newConfig){
+    public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
@@ -156,7 +169,7 @@ public class GenericActionBarActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         // Detect navigation drawer item selected
-        if(mDrawerToggle.onOptionsItemSelected(item)){
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
@@ -205,12 +218,11 @@ public class GenericActionBarActivity extends ActionBarActivity {
         return true;
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         // If back is pressed while drawer is open, close drawer.
-        if(mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }

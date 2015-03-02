@@ -32,7 +32,7 @@ public class MonsterGridPagerAdapter extends FragmentPagerAdapter {
 			return MonsterListFragment.newInstance("Small");
 		case 2:
             // Monster grid (all monsters)
-            return MonsterListFragment.newInstance(null);
+            return MonsterListFragment.newInstance("All");
 		default:
 			return null;
 		}

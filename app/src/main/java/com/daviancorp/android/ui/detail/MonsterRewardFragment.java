@@ -43,8 +43,22 @@ public class MonsterRewardFragment extends ListFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+        int id = 0;
+
+        switch(getArguments().getString(ARG_RANK)) {
+            case "LR":
+                id = R.id.monster_reward_low;
+                break;
+            case "HR":
+                id = R.id.monster_reward_high;
+                break;
+            default:
+                id = R.id.monster_reward_g;
+                break;
+        }
+
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(R.id.monster_reward_fragment, getArguments(), this);
+		getLoaderManager().initLoader(id, getArguments(), this);
 	}
 
 	@Override

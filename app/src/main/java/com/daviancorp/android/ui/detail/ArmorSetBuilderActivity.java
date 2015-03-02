@@ -7,13 +7,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorSetBuilderPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.ArmorListActivity;
+<<<<<<< HEAD
 import com.daviancorp.android.ui.list.ArmorSetBuilderSkillsListFragment;
+=======
+import com.daviancorp.android.ui.list.adapter.MenuSection;
+>>>>>>> origin/master
 
 public class ArmorSetBuilderActivity extends GenericTabActivity {
     public static final String EXTRA_FROM_SET_BUILDER = "com.daviancorp.android.ui.detail.from_set_builder";
@@ -39,6 +44,11 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
         viewPager.setAdapter(adapter);
 
         mSlidingTabLayout.setViewPager(viewPager);
+    }
+
+    @Override
+    protected MenuSection getSelectedSection() {
+        return MenuSection.ARMOR;
     }
 
     @Override

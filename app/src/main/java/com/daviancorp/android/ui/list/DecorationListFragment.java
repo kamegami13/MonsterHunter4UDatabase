@@ -131,7 +131,8 @@ public class DecorationListFragment extends ListFragment implements
 
             skill2TextView.setVisibility(view.GONE);
             skill2amtTextView.setVisibility(view.GONE);
-            if(!skill1amtText.equals(null)) {
+
+            if(!skill2amtText.equals("")) {
                 skill2TextView.setText(skill2Text);
                 skill2amtTextView.setText(skill2amtText);
                 skill2TextView.setVisibility(view.VISIBLE);

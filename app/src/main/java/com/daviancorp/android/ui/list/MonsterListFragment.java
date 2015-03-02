@@ -43,9 +43,22 @@ public class MonsterListFragment extends ListFragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        int id = 0;
+
+        switch(getArguments().getString("MONSTER_TAB")) {
+            case "Large":
+                id = R.id.monster_large_loader;
+                break;
+            case "Small":
+                id = R.id.monster_small_loader;
+                break;
+            default:
+                id = R.id.monster_all_loader;
+                break;
+        }
 
 		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(R.id.monster_grid_fragment, getArguments(), this);
+		getLoaderManager().initLoader(id, getArguments(), this);
 	}
 
 	@Override
