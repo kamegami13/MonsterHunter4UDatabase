@@ -8,6 +8,7 @@ public class Location {
 	private long id;				// Location id
 	private String name;			// Location name
 	private String file_location;	// File location for image
+    private String file_location_mini; // File location for small image
 	
 	/* Default Constructor */
 	public Location() {
@@ -40,5 +41,12 @@ public class Location {
 	public void setFileLocation(String file_location) {
 		this.file_location = file_location;
 	}
-	
+
+    public String getFileLocationMini() {
+        return file_location_mini;
+    }
+
+    public void setFileLocationMini(String file_location_mini) {
+        this.file_location_mini = file_location_mini;
+    }
 }

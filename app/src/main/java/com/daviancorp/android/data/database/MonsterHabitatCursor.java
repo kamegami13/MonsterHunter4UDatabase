@@ -62,6 +62,9 @@ public class MonsterHabitatCursor extends CursorWrapper {
         location.setName(loc_name);
         location.setFileLocation(loc_file);
 
+        String mini_file_location = loc_file.substring(0, loc_file.length()-4) + "_mini.png";
+        location.setFileLocationMini(mini_file_location);
+
         habitat.setLocation(location);
 
         //Get Monster
