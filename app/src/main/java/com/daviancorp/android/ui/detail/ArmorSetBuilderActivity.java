@@ -2,9 +2,7 @@ package com.daviancorp.android.ui.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +13,7 @@ import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorSetBuilderPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.ArmorListActivity;
+import com.daviancorp.android.ui.list.ArmorSetBuilderSkillsListFragment;
 
 public class ArmorSetBuilderActivity extends GenericTabActivity {
     public static final String EXTRA_FROM_SET_BUILDER = "com.daviancorp.android.ui.detail.from_set_builder";
@@ -119,7 +118,6 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
     public void setOnArmorSetChangedSkillListener(ArmorSetChangedListener listener) {
         this.skillChangeListener = listener;
     }
-
 
     public static interface ArmorSetChangedListener {
         public void updateContents(ArmorSetBuilderSession s);

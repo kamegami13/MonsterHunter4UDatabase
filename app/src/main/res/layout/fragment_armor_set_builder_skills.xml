@@ -59,7 +59,7 @@
                   android:gravity="center"/>
     </LinearLayout>
 
-    <ListView android:id="@android:id/list"
+    <ListView android:id="@+id/list"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 

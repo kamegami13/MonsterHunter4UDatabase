@@ -67,7 +67,6 @@ public class ArmorExpandableListFragment extends Fragment {
             mType = args.getString(ARG_TYPE);
         }
         populateList();
-
     }
 
     private void populateList() {
@@ -132,17 +131,7 @@ public class ArmorExpandableListFragment extends Fragment {
                 Intent i = new Intent(getActivity(), ArmorDetailActivity.class);
                 i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, (long) arg1.getTag());
 
-                // If the intent is coming from the set builder...
-                if (getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
-                    i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
-                    i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                    Log.d("SetBuilder", "Launching ArmorDetailActivity with EXTRA_FROM_SET_BUILDER.");
-                    startActivity(i);
-                    getActivity().finish();
-                }
-                else {
-                    startActivity(i);
-                }
+                startActivity(i);
 
                 return false;
             }
@@ -260,7 +249,7 @@ public class ArmorExpandableListFragment extends Fragment {
             long armorId = ((Armor) getChild(groupPosition, childPosition)).getId();
 
             root.setTag(armorId);
-            root.setOnClickListener(new ArmorClickListener(context, armorId));
+            root.setOnClickListener(new ArmorClickListener(context, armorId, getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)));
 
             return v;
 

@@ -50,4 +50,5 @@
 	<item name="skill_tree_list_fragment" type="id"/>
 	<item name="weapon_list_fragment" type="id"/>
 	<item name="wishlist_list_fragment" type="id"/>
+    <item name="armor_set_builder_skills_list_fragment" type="id"/>
 </resources>

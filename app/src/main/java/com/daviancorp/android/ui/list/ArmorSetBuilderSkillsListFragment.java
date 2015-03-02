@@ -3,11 +3,13 @@ package com.daviancorp.android.ui.list;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
 import com.daviancorp.android.mh4udatabase.R;
@@ -15,13 +17,14 @@ import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 
 import java.util.List;
 
-public class ArmorSetBuilderSkillsListFragment extends ListFragment implements ArmorSetBuilderActivity.ArmorSetChangedListener {
+public class ArmorSetBuilderSkillsListFragment extends Fragment implements ArmorSetBuilderActivity.ArmorSetChangedListener {
+
+    private ListView listView;
 
     public static ArmorSetBuilderSkillsListFragment newInstance() {
         Bundle args = new Bundle();
         ArmorSetBuilderSkillsListFragment f = new ArmorSetBuilderSkillsListFragment();
         f.setArguments(args);
-
         return f;
     }
 
@@ -32,14 +35,15 @@ public class ArmorSetBuilderSkillsListFragment extends ListFragment implements A
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_armor_set_builder_skills, null);
+        View v = inflater.inflate(R.layout.fragment_armor_set_builder_skills, container, false);
+        listView = (ListView) v.findViewById(R.id.list);
         return v;
     }
 
     @Override
     public void updateContents(ArmorSetBuilderSession s) {
         ArmorSetBuilderSkillsAdapter adapter = new ArmorSetBuilderSkillsAdapter(getActivity().getApplicationContext(), s.generateSkillTreePoints(getActivity().getApplicationContext()));
-        setListAdapter(adapter);
+        listView.setAdapter(adapter);
     }
 
     @Override
