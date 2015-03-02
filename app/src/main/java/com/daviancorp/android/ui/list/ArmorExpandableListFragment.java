@@ -1,8 +1,5 @@
 package com.daviancorp.android.ui.list;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -24,6 +21,9 @@ import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Pieced together from: Android samples:
@@ -113,7 +113,7 @@ public class ArmorExpandableListFragment extends Fragment {
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View v = inflater.inflate(R.layout.fragment_generic_expandable_list, null);
+        View v = inflater.inflate(R.layout.fragment_generic_expandable_list, container, false);
 //		setContextMenu(v);
 
         elv = (ExpandableListView) v

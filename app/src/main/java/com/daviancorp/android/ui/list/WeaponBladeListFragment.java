@@ -1,7 +1,5 @@
 package com.daviancorp.android.ui.list;
 
-import java.io.IOException;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -15,13 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
 import com.daviancorp.android.ui.adapter.WeaponListElementAdapter;
 import com.daviancorp.android.ui.general.DrawSharpness;
 
@@ -44,26 +40,25 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
         // Initialize the loader to load the list of runs
         getLoaderManager().initLoader(R.id.weapon_list_fragment, null, this);
     }
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list, null);
-//		super.setContextMenu(v);
-		return v;
+        //		super.setContextMenu(v);
+		return inflater.inflate(R.layout.fragment_generic_list, container,false);
 	}
-	
+
 	@Override
 	protected CursorAdapter getDetailAdapter() {
 		return (CursorAdapter) getListAdapter();
 	}
-	
+
 	@Override
 	protected Weapon getDetailWeapon(int position) {
 		WeaponBladeListCursorAdapter adapter = (WeaponBladeListCursorAdapter) getListAdapter();
 		return((WeaponCursor) adapter.getItem(position)).getWeapon();
 	}
-	
+
 	@Override
 	protected Fragment getThisFragment() {
 		return this;

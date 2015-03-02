@@ -1,12 +1,7 @@
 package com.daviancorp.android.ui.list;
 
-import java.io.IOException;
-
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -37,9 +32,8 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list, null);
-//		super.setContextMenu(v);
-		return v;
+        //		super.setContextMenu(v);
+		return inflater.inflate(R.layout.fragment_generic_list, container,false);
 	}
 	
 	@Override
@@ -126,49 +120,49 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 			slimev.setImageDrawable(null);
 			paintv.setImageDrawable(null);
 
-            powerv.setVisibility(view.GONE);
-            crangev.setVisibility(view.GONE);
-            poisonv.setVisibility(view.GONE);
-            parav.setVisibility(view.GONE);
-            sleepv.setVisibility(view.GONE);
-            exhaustv.setVisibility(view.GONE);
-            slimev.setVisibility(view.GONE);
-            paintv.setVisibility(view.GONE);
+            powerv.setVisibility(View.GONE);
+            crangev.setVisibility(View.GONE);
+            poisonv.setVisibility(View.GONE);
+            parav.setVisibility(View.GONE);
+            sleepv.setVisibility(View.GONE);
+            exhaustv.setVisibility(View.GONE);
+            slimev.setVisibility(View.GONE);
+            paintv.setVisibility(View.GONE);
 
 
 			String[] coatings = weapon.getCoatings().split("\\|");
 
 			if (!coatings[0].equals("-")) {
 				powerv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Red.png"));
-                powerv.setVisibility(view.VISIBLE);
+                powerv.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[1].equals("-")) {
 				poisonv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Purple.png"));
-                poisonv.setVisibility(view.VISIBLE);
+                poisonv.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[2].equals("-")) {
 				parav.setImageDrawable(getDrawable(context, "icons_items/Bottle-Yellow.png"));
-                parav.setVisibility(view.VISIBLE);
+                parav.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[3].equals("-")) {
 				sleepv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Cyan.png"));
-                sleepv.setVisibility(view.VISIBLE);
+                sleepv.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[4].equals("-")) {
 				crangev.setImageDrawable(getDrawable(context, "icons_items/Bottle-White.png"));
-                crangev.setVisibility(view.VISIBLE);
+                crangev.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[5].equals("-")) {
 				paintv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Pink.png"));
-                paintv.setVisibility(view.VISIBLE);
+                paintv.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[6].equals("-")) {
 				exhaustv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Blue.png"));
-                exhaustv.setVisibility(view.VISIBLE);
+                exhaustv.setVisibility(View.VISIBLE);
 			}
 			if (!coatings[7].equals("-")) {
 				slimev.setImageDrawable(getDrawable(context, "icons_items/Bottle-Orange.png"));
-                slimev.setVisibility(view.VISIBLE);
+                slimev.setVisibility(View.VISIBLE);
 			}
 
 		}

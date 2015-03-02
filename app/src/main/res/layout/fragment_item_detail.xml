@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@+id/label"
+            android:text="@string/placeholder_unknown"
             android:paddingLeft="10dp"
             android:textStyle="bold"
             android:textSize="20dp"
