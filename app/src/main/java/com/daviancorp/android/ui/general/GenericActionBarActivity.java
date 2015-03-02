@@ -1,8 +1,11 @@
 package com.daviancorp.android.ui.general;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,13 +17,18 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
@@ -35,6 +43,8 @@ import com.daviancorp.android.ui.list.SkillTreeListActivity;
 import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
 import com.daviancorp.android.ui.list.WishlistListActivity;
 
+import java.io.IOException;
+
 /*
  * Any subclass needs to:
  *  - override onCreate() to set title
@@ -47,7 +57,7 @@ public class GenericActionBarActivity extends ActionBarActivity {
 
     protected Fragment detail;
     private ListView mDrawerList;
-    private ArrayAdapter<String> mDrawerAdapter;
+    private DrawerAdapter mDrawerAdapter;
     public ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
 
@@ -126,7 +136,7 @@ public class GenericActionBarActivity extends ActionBarActivity {
     // Set up drawer menu options
     private void addDrawerItems(){
         String[] menuArray = getResources().getStringArray(R.array.drawer_items);
-        mDrawerAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.drawer_list_item, menuArray);
+        mDrawerAdapter = new DrawerAdapter(getApplicationContext(), R.layout.drawer_list_item, menuArray);
         mDrawerList.setAdapter(mDrawerAdapter);
     }
 
@@ -209,5 +219,67 @@ public class GenericActionBarActivity extends ActionBarActivity {
 
     public Fragment getDetail() {
         return detail;
+    }
+
+
+    // Custom adapter needed to display list items with icons
+    public class DrawerAdapter extends ArrayAdapter{
+
+        Context context;
+        int layoutResourceId;
+        String[] items;
+
+        public DrawerAdapter(Context context, int layoutResourceId, String[] items) {
+            super(context, layoutResourceId, items);
+            this.layoutResourceId = layoutResourceId;
+            this.context = context;
+            this.items = items;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View row = convertView;
+            ItemHolder holder = null;
+
+            if(row == null)
+            {
+                LayoutInflater inflater = (LayoutInflater) context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                row = inflater.inflate(layoutResourceId, parent, false);
+
+                holder = new ItemHolder();
+                holder.imgIcon = (ImageView)row.findViewById(R.id.nav_list_icon);
+                holder.txtTitle = (TextView)row.findViewById(R.id.nav_list_item);
+
+                row.setTag(holder);
+            }
+            else
+            {
+                holder = (ItemHolder)row.getTag();
+            }
+
+            String[] singleItem = items[position].split(",");
+            holder.txtTitle.setText(singleItem[0]);
+
+            // Attempt to retrieve drawable
+            Drawable i = null;
+            String cellImage = singleItem[1];
+            try {
+                i = Drawable.createFromStream(
+                        context.getAssets().open(cellImage), null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            holder.imgIcon.setImageDrawable(i);
+
+            return row;
+        }
+
+
+        class ItemHolder{
+            ImageView imgIcon;
+            TextView txtTitle;
+        }
     }
 }
