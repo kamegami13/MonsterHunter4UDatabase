@@ -2,35 +2,41 @@ package com.daviancorp.android.ui.list;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
 import android.view.MenuItem;
+
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.general.GenericActivity;
+import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 public class ItemListActivity extends GenericActivity {
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(R.string.items);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setTitle(R.string.items);
 
         // Enable drawer button instead of back button
         super.enableDrawerIndicator();
     }
 
-	@Override
-	protected Fragment createFragment() {
-		super.detail = new ItemListFragment();
-		return super.detail;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    protected MenuSection getSelectedSection() {
+        return MenuSection.ITEMS;
+    }
+
+    @Override
+    protected Fragment createFragment() {
+        super.detail = new ItemListFragment();
+        return super.detail;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
 //		Fragment newFragment;
 //		FragmentTransaction transaction;
 
-		switch (item.getItemId()) {
+        switch (item.getItemId()) {
 //		case R.id.about:
 //			
 //			newFragment = QuestExpandableListFragment.newInstance("DLC");
@@ -43,9 +49,9 @@ public class ItemListActivity extends GenericActivity {
 //			transaction.commit();
 //
 //			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

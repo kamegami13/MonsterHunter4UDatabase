@@ -9,12 +9,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorSetBuilderPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.ArmorListActivity;
+import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 public class ArmorSetBuilderActivity extends GenericTabActivity implements ActionBar.TabListener {
     public static final String EXTRA_FROM_SET_BUILDER = "com.daviancorp.android.ui.detail.from_set_builder";
@@ -64,6 +66,11 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Actio
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+    }
+
+    @Override
+    protected MenuSection getSelectedSection() {
+        return MenuSection.ARMOR;
     }
 
     @Override
