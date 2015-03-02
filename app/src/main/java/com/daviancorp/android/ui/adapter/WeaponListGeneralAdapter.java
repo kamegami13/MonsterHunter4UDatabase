@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,18 @@ import java.io.IOException;
  */
 public abstract class WeaponListGeneralAdapter extends CursorAdapter {
 
+    protected static class GeneralViewHolder {
+        // General
+        public RelativeLayout weaponLayout;
+        public TextView nametv;
+        public TextView attacktv;
+        public TextView slottv;
+        public TextView affinitytv;
+        public TextView defensetv;
+        public ImageView weaponIcon;
+        public View lineLayout;
+    }
+
     protected WeaponCursor mWeaponCursor;
 
     public WeaponListGeneralAdapter(Context context, WeaponCursor cursor) {
@@ -38,19 +51,10 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         // Get the monster for the current row
         Weapon weapon = mWeaponCursor.getWeapon();
 
+        GeneralViewHolder holder = (GeneralViewHolder) view.getTag();
+
         // Set the layout id
-        RelativeLayout weaponLayout = (RelativeLayout) view.findViewById(R.id.main_layout);
-        weaponLayout.setTag(weapon.getId());
-        weaponLayout.setOnClickListener(new WeaponClickListener(context, weapon.getId()));
-
-        // Find all views
-        TextView nametv = (TextView) view.findViewById(R.id.name_text);
-        TextView attacktv = (TextView) view.findViewById(R.id.attack_text);
-        TextView slottv = (TextView) view.findViewById(R.id.slots_text);
-        TextView affinitytv = (TextView) view.findViewById(R.id.affinity_text);
-        TextView defensetv = (TextView) view.findViewById(R.id.defense_text);
-
-        ImageView weaponIcon = (ImageView) view.findViewById(R.id.weapon_icon);
+        holder.weaponLayout.setOnClickListener(new WeaponClickListener(context, weapon.getId()));
 
         //
         // Set the image for the weapon
@@ -100,8 +104,9 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
                 cellImage = "icons_weapons/icons_bow/bow" + weapon.getRarity() + ".png";
                 break;
         }
-        weaponIcon.setImageDrawable(getDrawable(context, cellImage));
-
+        //weaponIcon.setImageDrawable(getDrawable(context, cellImage));
+        holder.weaponIcon.setTag(weapon.getId());
+        new LoadImage(holder.weaponIcon, cellImage).execute();
 
         //
         // Get the weapons name
@@ -153,24 +158,23 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         //
         // Set remaining items
         //
-        nametv.setText(name);
-        attacktv.setText(attack);
-        slottv.setText(slot);
-        affinitytv.setText(affinity);
-        defensetv.setText(defense);
+        holder.nametv.setText(name);
+        holder.attacktv.setText(attack);
+        holder.slottv.setText(slot);
+        holder.affinitytv.setText(affinity);
+        holder.defensetv.setText(defense);
 
 
         // Indent the tree
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) weaponIcon.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.weaponIcon.getLayoutParams();
         int spacing = (int) (4.0f * Resources.getSystem().getDisplayMetrics().density + 0.5)
                 * weapon.getTree_Depth();
 
         params.leftMargin = 0;
         params.leftMargin = params.leftMargin + spacing;
 
-        LinearLayout lineLayout = (LinearLayout) view.findViewById(R.id.tree_lines);
-        lineLayout.getLayoutParams().width = spacing;
-        lineLayout.setBackgroundColor(context.getResources().getColor(R.color.divider_color));
+        holder.lineLayout.getLayoutParams().width = spacing;
+        holder.lineLayout.setBackgroundColor(context.getResources().getColor(R.color.divider_color));
     }
 
 
@@ -185,5 +189,37 @@ public abstract class WeaponListGeneralAdapter extends CursorAdapter {
         }
 
         return d;
+    }
+
+    protected class LoadImage extends AsyncTask<Void,Void,Drawable> {
+        private ImageView mImage;
+        private String path;
+        private String imagePath;
+
+        public LoadImage(ImageView imv, String imagePath) {
+            this.mImage = imv;
+            this.path = imv.getTag().toString();
+            this.imagePath = imagePath;
+        }
+
+        @Override
+        protected Drawable doInBackground(Void... arg0) {
+            Drawable d = null;
+
+            try {
+                d = Drawable.createFromStream(mImage.getContext().getAssets().open(imagePath),
+                        null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return d;
+        }
+
+        protected void onPostExecute(Drawable result) {
+            if (mImage.getTag().toString().equals(path)) {
+                mImage.setImageDrawable(result);
+            }
+        }
     }
 }

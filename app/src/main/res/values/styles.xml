@@ -44,6 +44,7 @@
         <item name="android:cacheColorHint">@android:color/transparent</item>
         <item name="android:persistentDrawingCache">scrolling</item>
         <item name="android:scrollingCache">false</item>
+        <item name="android:animationCache">false</item>
         <item name="android:fastScrollEnabled">true</item>
     </style>
 

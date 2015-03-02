@@ -6,11 +6,10 @@
     android:clickable="true"
     android:background="@drawable/clicked_states_white">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <View
         android:layout_width="wrap_content"
         android:layout_height="80dp"
-        android:id="@+id/tree_lines"></LinearLayout>
+        android:id="@+id/tree_lines"/>
 
     <RelativeLayout
         android:id="@+id/item3"
@@ -72,46 +71,6 @@
         android:layout_height="40dp"
         android:gravity="center_vertical">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="114dp"
-            android:layout_height="wrap_content"
-            android:focusableInTouchMode="false"
-            android:id="@+id/element_layout"
-            android:gravity="center_vertical|right"
-            android:layout_toLeftOf="@+id/slots_text">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="("
-                android:id="@+id/awaken_text"
-                style="@style/text_small" />
-
-            <ImageView
-                android:id="@+id/element_image"
-                style="@style/tiny_image" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="350)"
-                android:id="@+id/element_text"
-                style="@style/text_small" />
-
-            <ImageView
-                style="@style/tiny_image"
-                android:id="@+id/element_image2"
-                android:layout_marginLeft="8dp" />
-
-            <TextView
-                style="@style/text_small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/element_text2" />
-
-        </LinearLayout>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -134,9 +93,9 @@
             android:layout_height="wrap_content"
             android:text="10"
             android:id="@+id/defense_text"
-            android:layout_below="@+id/element_layout"
             android:layout_toLeftOf="@+id/affinity_text"
-            android:gravity="right" />
+            android:gravity="right"
+            android:layout_below="@+id/slots_text" />
 
         <TextView
             android:layout_width="54dp"
@@ -156,6 +115,43 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/slots_text"
             android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="("
+            android:id="@+id/awaken_text"
+            style="@style/text_small"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="0dp"
+            android:layout_toLeftOf="@+id/element_image" />
+
+        <ImageView
+            android:id="@+id/element_image"
+            style="@style/tiny_image"
+            android:layout_toLeftOf="@+id/element_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="350)"
+            android:id="@+id/element_text"
+            style="@style/text_small"
+            android:layout_toLeftOf="@+id/element_image2"
+            android:layout_marginRight="8dp" />
+
+        <ImageView
+            style="@style/tiny_image"
+            android:id="@+id/element_image2"
+            android:layout_toLeftOf="@+id/element_text2" />
+
+        <TextView
+            style="@style/text_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/element_text2"
+            android:layout_alignRight="@+id/defense_text"
+            android:text=")" />
 
     </RelativeLayout>
 

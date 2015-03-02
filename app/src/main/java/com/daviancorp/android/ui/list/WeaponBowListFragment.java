@@ -16,12 +16,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.WeaponListElementAdapter;
+import com.daviancorp.android.ui.general.DrawSharpness;
 
 public class WeaponBowListFragment extends WeaponListFragment implements
 		LoaderCallbacks<Cursor> {
@@ -69,6 +71,22 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 
 	private static class WeaponBowListCursorAdapter extends WeaponListElementAdapter {
 
+        private static class ViewHolder extends ElementViewHolder {
+            // Bow
+
+            ImageView powerv;
+            ImageView crangev;
+            ImageView poisonv;
+            ImageView parav;
+            ImageView sleepv;
+            ImageView exhaustv;
+            ImageView slimev;
+            ImageView paintv;
+
+            TextView arctv;
+            TextView chargetv;
+        }
+
 		public WeaponBowListCursorAdapter(Context context, WeaponCursor cursor) {
 			super(context, cursor);
 		}
@@ -78,8 +96,57 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 			// Use a layout inflater to get a row view
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_weapon_tree_item_bow,
-					parent, false);
+            View view = inflater.inflate(R.layout.fragment_weapon_tree_item_bow, parent,
+                    false);
+
+            ViewHolder holder = new ViewHolder();
+
+            //
+            // GENERAL VIEWS
+            //
+
+            // Set the layout id
+            holder.weaponLayout = (RelativeLayout) view.findViewById(R.id.main_layout);
+
+            // Find all views
+            holder.nametv = (TextView) view.findViewById(R.id.name_text);
+            holder.attacktv = (TextView) view.findViewById(R.id.attack_text);
+            holder.slottv = (TextView) view.findViewById(R.id.slots_text);
+            holder.affinitytv = (TextView) view.findViewById(R.id.affinity_text);
+            holder.defensetv = (TextView) view.findViewById(R.id.defense_text);
+            holder.weaponIcon = (ImageView) view.findViewById(R.id.weapon_icon);
+            holder.lineLayout = (View) view.findViewById(R.id.tree_lines);
+
+            //
+            // ELEMENT VIEWS
+            //
+
+            holder.elementtv = (TextView) view.findViewById(R.id.element_text);
+            holder.elementtv2 = (TextView) view.findViewById(R.id.element_text2);
+            holder.awakentv = (TextView) view.findViewById(R.id.awaken_text);
+            holder.elementIcon = (ImageView) view.findViewById(R.id.element_image);
+            holder.element2Icon = (ImageView) view.findViewById(R.id.element_image2);
+
+            //
+            // BOW VIEWS
+            holder.arctv = (TextView) view.findViewById(R.id.arc_shot_text);
+            holder.chargetv = (TextView) view.findViewById(R.id.charge_text);
+
+            // Coatings
+            holder.powerv = (ImageView) view.findViewById(R.id.power);
+            holder.crangev = (ImageView) view.findViewById(R.id.crange);
+            holder.poisonv = (ImageView) view.findViewById(R.id.poison);
+            holder.parav = (ImageView) view.findViewById(R.id.para);
+            holder.sleepv = (ImageView) view.findViewById(R.id.sleep);
+            holder.exhaustv = (ImageView) view.findViewById(R.id.exhaust);
+            holder.slimev = (ImageView) view.findViewById(R.id.blast);
+            holder.paintv = (ImageView) view.findViewById(R.id.paint);
+
+
+
+            view.setTag(holder);
+
+            return view;
 		}
 
 		public void bindView(View view, Context context, Cursor cursor) {
@@ -87,12 +154,10 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 
             super.bindView(view, context, cursor);
 
+            ViewHolder holder = (ViewHolder) view.getTag();
+
 			// Get the weapon for the current row
 			Weapon weapon = mWeaponCursor.getWeapon();
-
-			// Bow stuff
-			TextView arctv = (TextView) view.findViewById(R.id.arc_shot_text);
-			TextView chargetv = (TextView) view.findViewById(R.id.charge_text);
 
 			String arc = weapon.getRecoil();
 			String charge = weapon.getCharges();
@@ -103,72 +168,70 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 				chargeText = chargeText + getChargeData(c);
 			}
 
-			arctv.setText(arc);
-			chargetv.setText(chargeText);
-
-			// Coatings
-			ImageView powerv = (ImageView) view.findViewById(R.id.power);
-			ImageView crangev = (ImageView) view.findViewById(R.id.crange);
-			ImageView poisonv = (ImageView) view.findViewById(R.id.poison);
-			ImageView parav = (ImageView) view.findViewById(R.id.para);
-			ImageView sleepv = (ImageView) view.findViewById(R.id.sleep);
-			ImageView exhaustv = (ImageView) view.findViewById(R.id.exhaust);
-			ImageView slimev = (ImageView) view.findViewById(R.id.blast);
-			ImageView paintv = (ImageView) view.findViewById(R.id.paint);
+			holder.arctv.setText(arc);
+			holder.chargetv.setText(chargeText);
 			
 			// Clear images
-			powerv.setImageDrawable(null);
-			crangev.setImageDrawable(null);
-			poisonv.setImageDrawable(null);
-			parav.setImageDrawable(null);
-			sleepv.setImageDrawable(null);
-			exhaustv.setImageDrawable(null);
-			slimev.setImageDrawable(null);
-			paintv.setImageDrawable(null);
+            holder.powerv.setImageDrawable(null);
+            holder.crangev.setImageDrawable(null);
+            holder.poisonv.setImageDrawable(null);
+            holder.parav.setImageDrawable(null);
+            holder.sleepv.setImageDrawable(null);
+            holder.exhaustv.setImageDrawable(null);
+            holder.slimev.setImageDrawable(null);
+            holder.paintv.setImageDrawable(null);
 
-            powerv.setVisibility(view.GONE);
-            crangev.setVisibility(view.GONE);
-            poisonv.setVisibility(view.GONE);
-            parav.setVisibility(view.GONE);
-            sleepv.setVisibility(view.GONE);
-            exhaustv.setVisibility(view.GONE);
-            slimev.setVisibility(view.GONE);
-            paintv.setVisibility(view.GONE);
+            holder.powerv.setVisibility(view.GONE);
+            holder.crangev.setVisibility(view.GONE);
+            holder.poisonv.setVisibility(view.GONE);
+            holder.parav.setVisibility(view.GONE);
+            holder.sleepv.setVisibility(view.GONE);
+            holder.exhaustv.setVisibility(view.GONE);
+            holder.slimev.setVisibility(view.GONE);
+            holder.paintv.setVisibility(view.GONE);
 
 
 			String[] coatings = weapon.getCoatings().split("\\|");
 
 			if (!coatings[0].equals("-")) {
-				powerv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Red.png"));
-                powerv.setVisibility(view.VISIBLE);
+                holder.powerv.setTag(weapon.getId());
+                new LoadImage(holder.powerv, "icons_items/Bottle-Red.png").execute();
+                holder.powerv.setVisibility(view.VISIBLE);
 			}
 			if (!coatings[1].equals("-")) {
-				poisonv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Purple.png"));
-                poisonv.setVisibility(view.VISIBLE);
+                holder.poisonv.setTag(weapon.getId());
+                new LoadImage(holder.poisonv, "icons_items/Bottle-Purple.png").execute();
+                holder.poisonv.setVisibility(view.VISIBLE);
 			}
 			if (!coatings[2].equals("-")) {
-				parav.setImageDrawable(getDrawable(context, "icons_items/Bottle-Yellow.png"));
-                parav.setVisibility(view.VISIBLE);
+                holder.parav.setTag(weapon.getId());
+                new LoadImage(holder.parav, "icons_items/Bottle-Yellow.png").execute();
+                holder.parav.setVisibility(view.VISIBLE);
 			}
 			if (!coatings[3].equals("-")) {
-				sleepv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Cyan.png"));
-                sleepv.setVisibility(view.VISIBLE);
+                holder.sleepv.setTag(weapon.getId());
+                new LoadImage(holder.sleepv, "icons_items/Bottle-Cyan.png").execute();
+                holder.sleepv.setVisibility(view.VISIBLE);
 			}
 			if (!coatings[4].equals("-")) {
-				crangev.setImageDrawable(getDrawable(context, "icons_items/Bottle-White.png"));
-                crangev.setVisibility(view.VISIBLE);
+                holder.crangev.setTag(weapon.getId());
+                new LoadImage(holder.crangev, "icons_items/Bottle-White.png").execute();
+                holder.crangev.setVisibility(view.VISIBLE);
 			}
 			if (!coatings[5].equals("-")) {
-				paintv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Pink.png"));
-                paintv.setVisibility(view.VISIBLE);
+                holder.paintv.setTag(weapon.getId());
+                new LoadImage(holder.paintv, "icons_items/Bottle-Pink.png").execute();
+                holder.paintv.setVisibility(view.VISIBLE);
 			}
 			if (!coatings[6].equals("-")) {
-				exhaustv.setImageDrawable(getDrawable(context, "icons_items/Bottle-Blue.png"));
-                exhaustv.setVisibility(view.VISIBLE);
+                holder.exhaustv.setTag(weapon.getId());
+                new LoadImage(holder.exhaustv, "icons_items/Bottle-Blue.png").execute();
+                holder.exhaustv.setVisibility(view.VISIBLE);
 			}
 			if (!coatings[7].equals("-")) {
-				slimev.setImageDrawable(getDrawable(context, "icons_items/Bottle-Orange.png"));
-                slimev.setVisibility(view.VISIBLE);
+                holder.slimev.setTag(weapon.getId());
+                new LoadImage(holder.slimev, "icons_items/Bottle-Orange.png").execute();
+                holder.slimev.setVisibility(view.VISIBLE);
 			}
 
 		}

@@ -3,19 +3,31 @@ package com.daviancorp.android.ui.adapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.general.DrawSharpness;
 
 /**
  * Created by Mark on 2/26/2015.
  * Abstract adapter for weapons with element (blade, bow)
  */
 public abstract class WeaponListElementAdapter extends WeaponListGeneralAdapter {
+
+    protected static class ElementViewHolder extends GeneralViewHolder {
+        // Element
+        public TextView elementtv;
+        public TextView elementtv2;
+        public TextView awakentv;
+        public ImageView elementIcon;
+        public ImageView element2Icon;
+    }
 
     public WeaponListElementAdapter(Context context, WeaponCursor cursor) {
         super(context, cursor);
@@ -24,16 +36,10 @@ public abstract class WeaponListElementAdapter extends WeaponListGeneralAdapter 
     public void bindView(View view, Context context, Cursor cursor) {
         super.bindView(view, context, cursor);
 
+        ElementViewHolder holder = (ElementViewHolder) view.getTag();
+
         // Get the weapon for the current row
         Weapon weapon = mWeaponCursor.getWeapon();
-
-        // Find all views
-        TextView elementtv = (TextView) view.findViewById(R.id.element_text);
-        TextView elementtv2 = (TextView) view.findViewById(R.id.element_text2);
-        TextView awakentv = (TextView) view.findViewById(R.id.awaken_text);
-
-        ImageView elementIcon = (ImageView) view.findViewById(R.id.element_image);
-        ImageView element2Icon = (ImageView) view.findViewById(R.id.element_image2);
 
         // Set the element to view
         String element = weapon.getElementalAttack();
@@ -58,9 +64,14 @@ public abstract class WeaponListElementAdapter extends WeaponListGeneralAdapter 
         if (!"".equals(element)) {
             String[] elementData = getElementData(element);
             elementText = elementData[0];
-            dEle = getDrawable(context, elementData[1]);
-            elementIcon.setImageDrawable(dEle);
-            elementIcon.setVisibility(view.VISIBLE);
+
+            // Load drawable
+            //dEle = getDrawable(context, elementData[1]);
+            //elementIcon.setImageDrawable(dEle);
+
+            holder.elementIcon.setTag(weapon.getId());
+            new LoadImage(holder.elementIcon, elementData[1]).execute();
+            holder.elementIcon.setVisibility(view.VISIBLE);
 
             if (element.contains(",")) {
                 String[] twoElements = elementText.split(",");
@@ -68,32 +79,35 @@ public abstract class WeaponListElementAdapter extends WeaponListGeneralAdapter 
                 dualElement = twoElements[1];
 
                 String[] dualElementData = getElementData(dualElement);
-                dDualEle = getDrawable(context, dualElementData[1]);
 
-                elementtv2.setText(dualElementData[0]);
-                element2Icon.setImageDrawable(dDualEle);
-                element2Icon.setVisibility(view.VISIBLE);
+
+                holder.elementtv2.setText(dualElementData[0]);
+
+                // Load drawable
+                holder.element2Icon.setTag(weapon.getId());
+                new LoadImage(holder.element2Icon, dualElementData[1]).execute();
+                holder.element2Icon.setVisibility(view.VISIBLE);
             } else {
-                elementtv2.setText("");
-                element2Icon.setImageDrawable(null);
-                element2Icon.setVisibility(view.GONE);
+                holder.elementtv2.setText("");
+                holder.element2Icon.setImageDrawable(null);
+                holder.element2Icon.setVisibility(view.GONE);
             }
 
             if (!"".equals(awakenedElement)) {
                 elementText = elementText + ")";
             }
 
-            elementtv.setText(elementText);
+            holder.elementtv.setText(elementText);
         } else {
-            elementtv.setText("");
-            elementIcon.setImageDrawable(null);
-            elementtv2.setText("");
-            element2Icon.setImageDrawable(null);
-            elementIcon.setVisibility(view.GONE);
-            element2Icon.setVisibility(view.GONE);
+            holder.elementtv.setText("");
+            holder.elementIcon.setImageDrawable(null);
+            holder.elementtv2.setText("");
+            holder.element2Icon.setImageDrawable(null);
+            holder.elementIcon.setVisibility(view.GONE);
+            holder.element2Icon.setVisibility(view.GONE);
         }
 
-        awakentv.setText(awakenText);
+        holder.awakentv.setText(awakenText);
     }
 
     private String[] getElementData(String element) {
