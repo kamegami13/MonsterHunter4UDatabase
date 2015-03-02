@@ -24,9 +24,15 @@
         <item name="android:textColor">@color/text_color</item>
         <item name="android:windowBackground">@color/background_color</item>
 
-        <item name="android:colorPrimary">@color/primary_color</item>
-        <item name="android:colorPrimaryDark">@color/dark_primary_color</item>
-        <item name="android:colorAccent">@color/accent_color</item>
+        <!--<item name="android:colorPrimary">@color/primary_color</item>-->
+        <!--<item name="android:colorPrimaryDark">@color/dark_primary_color</item>-->
+        <!--<item name="android:colorAccent">@color/accent_color</item>-->
+
+        <!--Appcompat Theme Omits the android prefix -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryDark">@color/dark_primary_color</item>
+        <item name="colorAccent">@color/accent_color</item>
+
 
         <item name="android:clipToPadding">false</item>
 
@@ -44,6 +50,7 @@
         <item name="android:cacheColorHint">@android:color/transparent</item>
         <item name="android:persistentDrawingCache">scrolling</item>
         <item name="android:scrollingCache">false</item>
+        <item name="android:animationCache">false</item>
         <item name="android:fastScrollEnabled">true</item>
     </style>
 

@@ -129,30 +129,24 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 
         /* Element */
         String element = "";
-        if (!mWeapon.getElementalAttack().equals(""))
+        if (!mWeapon.getElement().equals(""))
         {
-            element = mWeapon.getElementalAttack();
+            element = mWeapon.getElement() + " " + mWeapon.getElementAttack();
         }
-        else if (!mWeapon.getAwakenedElementalAttack().equals(""))
+        else if (!mWeapon.getAwaken().equals(""))
         {
-            element = mWeapon.getAwakenedElementalAttack();
+            element = mWeapon.getAwaken() + " " + mWeapon.getAwakenAttack();
         }
         else
         {
             element = "None";
         }
 
-        if (element.contains(",")) {
-            String[] twoElements = element.split(",");
-            String elementOne = twoElements[0];
-            String elementTwo = twoElements[1];
-            element = getElementData(elementOne) + ", " + getElementData(elementTwo);
-        }
-        else {
-            element = getElementData(element);
+        if (!"".equals(mWeapon.getElement2())) {
+            element = element + ", " + mWeapon.getElement2() + " " + mWeapon.getElement2Attack();
         }
 
-        if (!mWeapon.getAwakenedElementalAttack().equals(""))
+        if (!mWeapon.getAwaken().equals(""))
         {
             element = "(" + element + ")";
         }

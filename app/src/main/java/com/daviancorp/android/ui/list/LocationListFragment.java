@@ -1,13 +1,12 @@
 package com.daviancorp.android.ui.list;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -26,6 +25,9 @@ import com.daviancorp.android.loader.LocationListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.LocationClickListener;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class LocationListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
@@ -42,10 +44,9 @@ public class LocationListFragment extends ListFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list, parent,
-				false);
 
-		return v;
+        return inflater.inflate(R.layout.fragment_generic_list, parent,
+                false);
 	}
 
 	@Override
@@ -102,23 +103,49 @@ public class LocationListFragment extends ListFragment implements
 					.findViewById(R.id.item_image);
 
 			String cellText = location.getName();
-			String cellImage = "icons_location/" + location.getFileLocation();
+			String cellImage = "icons_location/" + location.getFileLocationMini();
 
 			locationNameTextView.setText(cellText);
 
 			// Read a Bitmap from Assets
-			try {
-				InputStream open = manager.open(cellImage);
-				Bitmap bitmap = BitmapFactory.decodeStream(open);
-				// Assign the bitmap to an ImageView in this layout
-				locationImage.setImageBitmap(bitmap);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+            locationImage.setTag(location.getId());
+			new LoadImage(locationImage, cellImage).execute();
 
 			listLayout.setTag(location.getId());
             listLayout.setOnClickListener(new LocationClickListener(context, location.getId()));
 		}
+
+        protected class LoadImage extends AsyncTask<Void,Void,Drawable> {
+            private ImageView mImage;
+            private String path;
+            private String imagePath;
+
+            public LoadImage(ImageView imv, String imagePath) {
+                this.mImage = imv;
+                this.path = imv.getTag().toString();
+                this.imagePath = imagePath;
+            }
+
+            @Override
+            protected Drawable doInBackground(Void... arg0) {
+                Drawable d = null;
+
+                try {
+                    d = Drawable.createFromStream(mImage.getContext().getAssets().open(imagePath),
+                            null);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return d;
+            }
+
+            protected void onPostExecute(Drawable result) {
+                if (mImage.getTag().toString().equals(path)) {
+                    mImage.setImageDrawable(result);
+                }
+            }
+        }
 	}
 
 }

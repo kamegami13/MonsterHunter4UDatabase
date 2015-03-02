@@ -34,6 +34,9 @@ public class LocationCursor extends CursorWrapper {
 		location.setName(name);
 		location.setFileLocation(fileLocation);
 
+        String mini_file_location = fileLocation.substring(0, fileLocation.length()-4) + "_mini.png";
+        location.setFileLocationMini(mini_file_location);
+
 		return location;
 	}
 }

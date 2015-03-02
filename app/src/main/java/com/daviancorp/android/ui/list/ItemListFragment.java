@@ -1,9 +1,6 @@
 package com.daviancorp.android.ui.list;
 
-import java.io.IOException;
-
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Item;
@@ -30,55 +26,53 @@ import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
 import com.daviancorp.android.ui.ClickListeners.DecorationClickListener;
 import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
 import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
-import com.daviancorp.android.ui.detail.ArmorDetailActivity;
-import com.daviancorp.android.ui.detail.DecorationDetailActivity;
-import com.daviancorp.android.ui.detail.ItemDetailActivity;
-import com.daviancorp.android.ui.detail.WeaponDetailActivity;
+
+import java.io.IOException;
 
 public class ItemListFragment extends ListFragment implements
 		LoaderCallbacks<Cursor> {
 
 	private ItemListCursorAdapter mAdapter;
 	private String mFilter;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// Initialize the loader to load the list of runs
 		getLoaderManager().initLoader(R.id.item_list_fragment, null, this);
-		
+
 		mFilter = "";
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list_search, null);
-		
+		View v = inflater.inflate(R.layout.fragment_generic_list_search, container,false);
+
 		EditText inputSearch = (EditText) v.findViewById(R.id.input_search);
 		inputSearch.addTextChangedListener(new TextWatcher() {
-		     
+
 		    @Override
 		    public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
 		        // When user changed the Text
 		    	mFilter = cs.toString();
 		    	getLoaderManager().restartLoader(0, null, ItemListFragment.this);
 		    }
-		     
+
 		    @Override
 		    public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
 		            int arg3) {
 		        // TODO Auto-generated method stub
-		         
+
 		    }
-		     
+
 		    @Override
 		    public void afterTextChanged(Editable arg0) {
-		        // TODO Auto-generated method stub                          
+		        // TODO Auto-generated method stub
 		    }
 		});
-		
+
 		return v;
 	}
 

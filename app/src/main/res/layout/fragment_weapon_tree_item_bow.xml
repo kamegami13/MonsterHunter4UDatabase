@@ -6,8 +6,7 @@
     android:clickable="true"
     android:background="@drawable/clicked_states_white">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <View
         android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:id="@+id/tree_lines" />
@@ -45,98 +44,8 @@
         android:layout_below="@+id/item3"
         android:id="@+id/relativeLayout"
         android:layout_height="40dp"
-        android:gravity="center_vertical"
-        android:layout_width="wrap_content" >
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:focusableInTouchMode="false"
-            android:id="@+id/linearLayout"
-            android:gravity="center_vertical|right"
-            android:layout_toLeftOf="@+id/slots_text" >
-
-            <TextView
-                style="@style/text_small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="("
-                android:id="@+id/awaken_text" />
-
-            <ImageView
-                style="@style/tiny_image"
-                android:id="@+id/element_image" />
-
-            <TextView
-                style="@style/text_small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="350)"
-                android:id="@+id/element_text" />
-
-            <ImageView
-                style="@style/tiny_image"
-                android:id="@+id/element_image2"
-                android:layout_marginLeft="8dp" />
-
-            <TextView
-                style="@style/text_small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/element_text2" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/charge_text"
-            android:layout_centerVertical="true"
-            android:gravity="right"
-            android:layout_marginRight="8dp">
-
-            <ImageView
-                android:id="@+id/power"
-                style="@style/tiny_image"
-                android:layout_gravity="right" />
-
-            <ImageView
-                android:id="@+id/poison"
-                style="@style/tiny_image"
-                android:layout_gravity="right" />
-
-            <ImageView
-                android:id="@+id/sleep"
-                style="@style/tiny_image"
-                android:layout_gravity="right" />
-
-            <ImageView
-                android:id="@+id/para"
-                style="@style/tiny_image"
-                android:layout_gravity="right" />
-
-            <ImageView
-                android:id="@+id/crange"
-                style="@style/tiny_image"
-                android:layout_gravity="right" />
-
-            <ImageView
-                android:id="@+id/paint"
-                style="@style/tiny_image"
-                android:layout_gravity="right" />
-
-            <ImageView
-                android:id="@+id/exhaust"
-                style="@style/tiny_image"
-                android:layout_gravity="right" />
-
-            <ImageView
-                android:id="@+id/blast"
-                style="@style/tiny_image"
-                android:layout_gravity="right" />
-        </LinearLayout>
+        android:layout_width="wrap_content"
+        android:paddingTop="2dp">
 
         <TextView
             style="@style/text_small"
@@ -145,25 +54,26 @@
             android:text="750"
             android:id="@+id/attack_text"
             android:layout_gravity="left"
-            android:layout_toLeftOf="@+id/linearLayout"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/slots_text"
+            android:layout_alignLeft="@+id/charge_text" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="112dp"
             android:layout_height="wrap_content"
             android:text="R1|R1|R1|R1*|"
             android:id="@+id/charge_text"
             android:layout_alignTop="@+id/defense_text"
-            android:layout_alignLeft="@+id/attack_text" />
+            android:layout_toLeftOf="@+id/defense_text" />
 
         <TextView
             android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:text="10"
             android:id="@+id/defense_text"
-            android:layout_below="@+id/linearLayout"
             android:layout_toLeftOf="@+id/affinity_text"
-            android:gravity="right" />
+            android:gravity="right"
+            android:layout_alignTop="@+id/affinity_text" />
 
         <TextView
             style="@style/text_small"
@@ -183,5 +93,96 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/slots_text"
             android:paddingBottom="4dp" />
+
+        <ImageView
+            android:id="@+id/power"
+            style="@style/tiny_image"
+            android:layout_gravity="right"
+            android:layout_toLeftOf="@+id/poison"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/poison"
+            style="@style/tiny_image"
+            android:layout_gravity="right"
+            android:layout_toLeftOf="@+id/sleep"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/sleep"
+            style="@style/tiny_image"
+            android:layout_gravity="right"
+            android:layout_toLeftOf="@+id/para"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/para"
+            style="@style/tiny_image"
+            android:layout_gravity="right"
+            android:layout_toLeftOf="@+id/crange"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/crange"
+            style="@style/tiny_image"
+            android:layout_gravity="right"
+            android:layout_toLeftOf="@+id/paint"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/paint"
+            style="@style/tiny_image"
+            android:layout_gravity="right"
+            android:layout_toLeftOf="@+id/exhaust"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/exhaust"
+            style="@style/tiny_image"
+            android:layout_gravity="right"
+            android:layout_toLeftOf="@+id/blast"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/blast"
+            style="@style/tiny_image"
+            android:layout_gravity="right"
+            android:layout_toLeftOf="@+id/attack_text"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            style="@style/text_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="("
+            android:id="@+id/awaken_text"
+            android:layout_toLeftOf="@+id/element_image" />
+
+        <ImageView
+            style="@style/tiny_image"
+            android:id="@+id/element_image"
+            android:layout_toLeftOf="@+id/element_text" />
+
+        <TextView
+            style="@style/text_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="350)"
+            android:id="@+id/element_text"
+            android:layout_toLeftOf="@+id/element_image2"
+            android:layout_marginRight="8dp" />
+
+        <ImageView
+            style="@style/tiny_image"
+            android:id="@+id/element_image2"
+            android:layout_marginLeft="8dp"
+            android:layout_toLeftOf="@+id/element_text2" />
+
+        <TextView
+            style="@style/text_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/element_text2"
+            android:layout_alignRight="@+id/defense_text" />
     </RelativeLayout>
 </RelativeLayout>

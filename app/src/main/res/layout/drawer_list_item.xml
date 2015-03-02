@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_list_item"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    android:textSize="14sp"
-    android:textAppearance="?android:attr/textAppearanceListItem"
-    android:textColor="@color/text_primary_color"
-    android:background="@drawable/generic_clicked_states"
-    tools:layout_gravity=""
-    tools:text="List Item 1"/>
+    android:layout_height="48dp"
+    android:layout_width="match_parent">
+    
+    <ImageView
+        android:id="@+id/nav_list_icon"
+        android:layout_width="56dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        tools:src="@drawable/great_sword1"/>
+
+    <TextView
+        android:id="@+id/nav_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|start"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/nav_list_icon"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textSize="14sp"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:textColor="@color/list_text"
+        android:textStyle="bold"
+        android:background="@drawable/generic_clicked_states"
+        tools:layout_gravity=""
+        tools:text="List Item 1"/>
+
+</RelativeLayout>
+
