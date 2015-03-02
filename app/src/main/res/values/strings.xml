@@ -44,7 +44,7 @@
         <item>"Decorations,icons_items/Jewel-White.png"</item>
         <item>"Skill Trees,icons_items/Monster-Jewel-White.png"</item>
         <item>"Wishlists,icons_items/Mantle-White.png"</item>
-    </string-array>
+    </string-array> 
 
     <string name="option_list">List</string>
     <string name="option_grid">Grid</string>

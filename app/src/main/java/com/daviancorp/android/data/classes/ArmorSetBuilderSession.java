@@ -201,7 +201,7 @@ public class ArmorSetBuilderSession {
         
         for (int i = 0; i < armors.length; i++) {
             
-            for (SkillTree skillTree : getSkillsFromArmorPiece(armors[i], context).keySet()) {
+            for (SkillTree skillTree : getSkillsFromArmorPiece(i, context).keySet()) {
                 
                 skillTrees.add(skillTree);
                 
@@ -219,19 +219,19 @@ public class ArmorSetBuilderSession {
                 
                 switch (i) {
                     case 0:
-                        s.setHeadPoints(getSkillsFromArmorPiece(armors[i], context).get(skillTree));
+                        s.setHeadPoints(getSkillsFromArmorPiece(i, context).get(skillTree));
                         break;
                     case 1:
-                        s.setBodyPoints(getSkillsFromArmorPiece(armors[i], context).get(skillTree));
+                        s.setBodyPoints(getSkillsFromArmorPiece(i, context).get(skillTree));
                         break;
                     case 2:
-                        s.setArmsPoints(getSkillsFromArmorPiece(armors[i], context).get(skillTree));
+                        s.setArmsPoints(getSkillsFromArmorPiece(i, context).get(skillTree));
                         break;
                     case 3:
-                        s.setWaistPoints(getSkillsFromArmorPiece(armors[i], context).get(skillTree));
+                        s.setWaistPoints(getSkillsFromArmorPiece(i, context).get(skillTree));
                         break;
                     case 4:
-                        s.setLegsPoints(getSkillsFromArmorPiece(armors[i], context).get(skillTree));
+                        s.setLegsPoints(getSkillsFromArmorPiece(i, context).get(skillTree));
                         break;
                 }
                 
@@ -259,7 +259,7 @@ public class ArmorSetBuilderSession {
     public Map<SkillTree, Integer> getSkillsFromArmorPiece(int pieceIndex, Context context) {
         Map<SkillTree, Integer> skills = new HashMap<>();
 
-        for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(armors[piece].getId())) {
+        for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(armors[pieceIndex].getId())) {
             skills.put(itemToSkillTree.getSkillTree(), itemToSkillTree.getPoints());
         }
 
@@ -289,10 +289,6 @@ public class ArmorSetBuilderSession {
         private int armsPoints;
         private int waistPoints;
         private int legsPoints;
-        
-        public ArmorSetSkillTreePoints(SkillTree skillTree) {
-            this.skillTree = skillTree;
-        }
 
         public SkillTree getSkillTree() {
             return skillTree;
