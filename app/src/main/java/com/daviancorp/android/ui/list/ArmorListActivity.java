@@ -16,20 +16,6 @@ public class ArmorListActivity extends GenericTabActivity {
     private ViewPager viewPager;
     private ArmorExpandableListPagerAdapter mAdapter;
 
-<<<<<<< HEAD
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(R.string.armor);
-
-        boolean fromArmorSetBuilder = getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false);
-
-		// Initialization
-		viewPager = (ViewPager) findViewById(R.id.pager);
-		mAdapter = new ArmorExpandableListPagerAdapter(getSupportFragmentManager());
-		viewPager.setAdapter(mAdapter);
-=======
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,25 +25,9 @@ public class ArmorListActivity extends GenericTabActivity {
         viewPager = (ViewPager) findViewById(R.id.pager);
         mAdapter = new ArmorExpandableListPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
->>>>>>> origin/master
 
         mSlidingTabLayout.setViewPager(viewPager);
 
-<<<<<<< HEAD
-        if (!fromArmorSetBuilder) {
-            // If we're not coming from the armor set builder, we want to enable drawer button instead of back button
-            super.enableDrawerIndicator();
-        }
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		// MenuInflater inflater = getMenuInflater();
-		// inflater.inflate(R.menu.monsterlist, menu);
-		return true;
-	}
-=======
         // Enable drawer button instead of back button
         super.enableDrawerIndicator();
     }
@@ -75,7 +45,6 @@ public class ArmorListActivity extends GenericTabActivity {
         // inflater.inflate(R.menu.monsterlist, menu);
         return true;
     }
->>>>>>> origin/master
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
