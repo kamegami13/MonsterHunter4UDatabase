@@ -4,7 +4,7 @@
     <string name="app_name">MH4U Database</string>
     <string name="about">About</string>
     <string name="action_settings">Settings</string>
-    <string name="about_message">MH4U Database v1.01
+    <string name="about_message">MH4U Database v1.02
                                 \n\n
                                 Contribute at:\n
                                 https://github.com/kamegami13/MonsterHunter4UDatabase
@@ -22,8 +22,6 @@
                                 kaiiboraka\n
                                 Ping\n
                                 Aegil
-                                \n\n
-                                MONSTER HUNTER is a trademark of CAPCOM CO., LTD.
         						</string>
     <string name="alert_button">Close</string>
     <string name="alert_rate">Rate!</string>
