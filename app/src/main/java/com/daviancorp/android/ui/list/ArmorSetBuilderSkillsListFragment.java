@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +18,14 @@ import java.util.List;
 
 public class ArmorSetBuilderSkillsListFragment extends Fragment implements ArmorSetBuilderActivity.ArmorSetChangedListener {
 
-    private ListView listView;
+    private ArmorSetBuilderSession session;
+    private ArmorSetBuilderSkillsAdapter adapter;
 
-    public static ArmorSetBuilderSkillsListFragment newInstance() {
+    public static ArmorSetBuilderSkillsListFragment newInstance(ArmorSetBuilderSession session) {
         Bundle args = new Bundle();
         ArmorSetBuilderSkillsListFragment f = new ArmorSetBuilderSkillsListFragment();
         f.setArguments(args);
+        f.session = session;
         return f;
     }
 
@@ -36,14 +37,19 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_armor_set_builder_skills, container, false);
-        listView = (ListView) v.findViewById(R.id.list);
+
+        ListView listView = (ListView) v.findViewById(R.id.list);
+
+        adapter = new ArmorSetBuilderSkillsAdapter(getActivity().getApplicationContext(), session.getSkillTreePointsSets(), session);
+        listView.setAdapter(adapter);
+
         return v;
     }
 
     @Override
     public void updateContents(ArmorSetBuilderSession s) {
-        ArmorSetBuilderSkillsAdapter adapter = new ArmorSetBuilderSkillsAdapter(getActivity().getApplicationContext(), s.generateSkillTreePoints(getActivity().getApplicationContext()));
-        listView.setAdapter(adapter);
+        session.updateSkillTreePointsSets(getActivity().getApplicationContext());
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -52,17 +58,19 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
         ((ArmorSetBuilderActivity) getActivity()).setOnArmorSetChangedSkillListener(this);
     }
 
-    private static class ArmorSetBuilderSkillsAdapter extends ArrayAdapter<ArmorSetBuilderSession.ArmorSetSkillTreePoints> {
-        
-        public ArmorSetBuilderSkillsAdapter(Context context, List<ArmorSetBuilderSession.ArmorSetSkillTreePoints> trees) {
+    private static class ArmorSetBuilderSkillsAdapter extends ArrayAdapter<ArmorSetBuilderSession.SkillTreePointsSet> {
+
+        private ArmorSetBuilderSession session;
+
+        public ArmorSetBuilderSkillsAdapter(Context context, List<ArmorSetBuilderSession.SkillTreePointsSet> trees, ArmorSetBuilderSession session) {
             super(context, R.layout.fragment_armor_set_builder_skills_item, trees);
-            skills = trees;
+            this.session = session;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater.from(getContext()));
-            View itemView = inflater.inflate(R.layout.fragment_armor_set_builder_skills_item, parent, false);
+            View itemView = inflater.inflate(R.layout.fragment_armor_set_builder_skills_item, parent, false); // Conditional inflation really isn't necessary simply because of how many skills you'd have to have.
 
             TextView treeName = (TextView) itemView.findViewById(R.id.skill_tree_name);
             TextView headPoints = (TextView) itemView.findViewById(R.id.helmet);
@@ -70,13 +78,31 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
             TextView armsPoints = (TextView) itemView.findViewById(R.id.arms);
             TextView waistPoints = (TextView) itemView.findViewById(R.id.waist);
             TextView legsPoints = (TextView) itemView.findViewById(R.id.legs);
+            TextView totalPoints = (TextView) itemView.findViewById(R.id.total);
 
             treeName.setText(getItem(position).getSkillTree().getName());
-            headPoints.setText(getItem(position).getHeadPoints());
-            bodyPoints.setText(getItem(position).getBodyPoints());
-            armsPoints.setText(getItem(position).getArmsPoints());
-            waistPoints.setText(getItem(position).getWaistPoints());
-            legsPoints.setText(getItem(position).getLegsPoints());
+
+            if (session.isHeadSelected()) {
+                headPoints.setText(String.valueOf(getItem(position).getHeadPoints()));
+            }
+
+            if (session.isBodySelected()) {
+                bodyPoints.setText(String.valueOf(getItem(position).getBodyPoints()));
+            }
+
+            if (session.isArmsSelected()) {
+                armsPoints.setText(String.valueOf(getItem(position).getArmsPoints()));
+            }
+
+            if (session.isWaistSelected()) {
+                waistPoints.setText(String.valueOf(getItem(position).getWaistPoints()));
+            }
+
+            if (session.isLegsSelected()) {
+                legsPoints.setText(String.valueOf(getItem(position).getLegsPoints()));
+            }
+
+            totalPoints.setText(String.valueOf(getItem(position).getTotal()));
 
             return itemView;
         }

@@ -28,8 +28,10 @@ public class ArmorListActivity extends GenericTabActivity {
 
         mSlidingTabLayout.setViewPager(viewPager);
 
-        // Enable drawer button instead of back button
-        super.enableDrawerIndicator();
+        // Enable back button if we're coming from the set builder
+        if (getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            super.disableDrawerIndicator();
+        }
     }
 
     @Override

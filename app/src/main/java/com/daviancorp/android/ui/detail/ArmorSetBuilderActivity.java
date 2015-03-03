@@ -36,7 +36,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
 
         // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
-        adapter = new ArmorSetBuilderPagerAdapter(getSupportFragmentManager());
+        adapter = new ArmorSetBuilderPagerAdapter(getSupportFragmentManager(), session);
         viewPager.setAdapter(adapter);
 
         mSlidingTabLayout.setViewPager(viewPager);
@@ -100,9 +100,6 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
                     case "Legs":
                         Log.d("SetBuilder", "Setting legs piece.");
                         session.setLegs(DataManager.get(getApplicationContext()).getArmor(id));
-                        break;
-                    default:
-                        Log.e("SetBuilder", "The armor type did not match any of the cases.");
                         break;
                 }
             }

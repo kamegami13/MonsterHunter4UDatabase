@@ -155,6 +155,10 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
         mDrawerToggle.setDrawerIndicatorEnabled(true);
     }
 
+    public void disableDrawerIndicator() {
+        mDrawerToggle.setDrawerIndicatorEnabled(false);
+    }
+
     // Sync button animation sync with drawer state
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

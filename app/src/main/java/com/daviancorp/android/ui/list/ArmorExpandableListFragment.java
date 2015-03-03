@@ -249,7 +249,7 @@ public class ArmorExpandableListFragment extends Fragment {
             long armorId = ((Armor) getChild(groupPosition, childPosition)).getId();
 
             root.setTag(armorId);
-            root.setOnClickListener(new ArmorClickListener(context, armorId, getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)));
+            root.setOnClickListener(new ArmorClickListener(context, armorId, getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false), getActivity()));
 
             return v;
 

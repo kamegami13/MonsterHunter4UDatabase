@@ -1,13 +1,10 @@
 package com.daviancorp.android.data.classes;
 
 import android.content.Context;
+import android.util.Log;
 import com.daviancorp.android.data.database.DataManager;
-import com.daviancorp.android.data.database.ItemToSkillTreeCursor;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents a session of the user's interaction with the Armor Set Builder.
@@ -27,7 +24,7 @@ public class ArmorSetBuilderSession {
      */
     private Armor[] armors;
     
-    private List<ArmorSetSkillTreePoints> skillTreePoints;
+    private List<SkillTreePointsSet> skillTreePointsSets;
 
     /**
      * Default constructor.
@@ -46,7 +43,7 @@ public class ArmorSetBuilderSession {
         armors[3] = waist;
         armors[4] = legs;
         
-        skillTreePoints = new ArrayList<ArmorSetSkillTreePoints>();
+        skillTreePointsSets = new ArrayList<>();
     }
 
     /** @return Whether the user has selected a head piece or not. */
@@ -119,131 +116,64 @@ public class ArmorSetBuilderSession {
         return armors[4];
     }
 
-    @Deprecated
-    public List<ArmorSetSkillTreePoints> generateSkillTreePoints(Context context) {
-        List<ArmorSetSkillTreePoints> skillTreePoints = new ArrayList<>();
-        
-        // TODO: Make this method not be awful
-
-        for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(getHead().getId())) {
-            ArmorSetSkillTreePoints s = new ArmorSetSkillTreePoints();
-            s.setSkillTree(itemToSkillTree.getSkillTree());
-            s.setHeadPoints(itemToSkillTree.getPoints());
-        }
-
-        for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(getBody().getId())) {
-
-            ArmorSetSkillTreePoints s = new ArmorSetSkillTreePoints();
-            s.setSkillTree(itemToSkillTree.getSkillTree());
-            s.setBodyPoints(itemToSkillTree.getPoints());
-            skillTreePoints.add(s);
-
-            for (ArmorSetSkillTreePoints armorSkillTree : skillTreePoints) { // Since we could have some repeated skills, we have to flush them.
-                if (itemToSkillTree.getSkillTree() == armorSkillTree.getSkillTree()) {
-                    armorSkillTree.setBodyPoints(itemToSkillTree.getPoints());
-                    skillTreePoints.remove(s);
-                }
-            }
-        }
-
-        for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(getArms().getId())) {
-
-            ArmorSetSkillTreePoints s = new ArmorSetSkillTreePoints();
-            s.setSkillTree(itemToSkillTree.getSkillTree());
-            s.setArmsPoints(itemToSkillTree.getPoints());
-            skillTreePoints.add(s);
-
-            for (ArmorSetSkillTreePoints armorSkillTree : skillTreePoints) {
-                if (itemToSkillTree.getSkillTree() == armorSkillTree.getSkillTree()) {
-                    armorSkillTree.setArmsPoints(itemToSkillTree.getPoints());
-                    skillTreePoints.remove(s);
-                }
-            }
-        }
-
-        for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(getWaist().getId())) {
-
-            ArmorSetSkillTreePoints s = new ArmorSetSkillTreePoints();
-            s.setSkillTree(itemToSkillTree.getSkillTree());
-            s.setWaistPoints(itemToSkillTree.getPoints());
-            skillTreePoints.add(s);
-
-            for (ArmorSetSkillTreePoints armorSkillTree : skillTreePoints) {
-                if (itemToSkillTree.getSkillTree() == armorSkillTree.getSkillTree()) {
-                    armorSkillTree.setWaistPoints(itemToSkillTree.getPoints());
-                    skillTreePoints.remove(s);
-                }
-            }
-        }
-
-        for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(getLegs().getId())) {
-
-            ArmorSetSkillTreePoints s = new ArmorSetSkillTreePoints();
-            s.setSkillTree(itemToSkillTree.getSkillTree());
-            s.setLegsPoints(itemToSkillTree.getPoints());
-            skillTreePoints.add(s);
-
-            for (ArmorSetSkillTreePoints armorSkillTree : skillTreePoints) {
-                if (itemToSkillTree.getSkillTree() == armorSkillTree.getSkillTree()) {
-                    armorSkillTree.setLegsPoints(itemToSkillTree.getPoints());
-                    skillTreePoints.remove(s);
-                }
-            }
-        }
-
-        return skillTreePoints;
+    public List<SkillTreePointsSet> getSkillTreePointsSets() {
+        return skillTreePointsSets;
     }
     
     /** Adds any skills to the armor set's skill trees that were not there before, and removes those no longer there. */
-    public void updateArmorSetSkillTreePoints(Context context) {
+    public void updateSkillTreePointsSets(Context context) {
+
+        skillTreePointsSets.clear();
         
-        List<SkillTree> skillTrees = new ArrayList<>(); // We keep an array list of all the skills in the set to help when we go to remove skills
-        
+        Map<Long, SkillTreePointsSet> skillTreeToSkillTreePointsSet = new HashMap<>(); // A map of the current skill trees' ID's in the set and their associated SkillTreePointsSets
+
+        for (SkillTreePointsSet pointsSet : skillTreePointsSets) {
+            skillTreeToSkillTreePointsSet.put(pointsSet.getSkillTree().getId(), pointsSet);
+        }
+
         for (int i = 0; i < armors.length; i++) {
-            
-            for (SkillTree skillTree : getSkillsFromArmorPiece(i, context).keySet()) {
-                
-                skillTrees.add(skillTree);
-                
-                ArmorSetSkillTreePoints s;
-                
-                if (findArmorSetSkillTreePointsBySkillTree(skillTreePoints, skillTree) == null) { // If the armor set does not yet have this skill tree registered...
-                    
-                    s = new ArmorSetSkillTreePoints(); // We add it...
+
+            Map<SkillTree, Integer> armorSkillTreePoints = getSkillsFromArmorPiece(i, context); // A map of the current piece of armor's skills
+
+            for (SkillTree skillTree : armorSkillTreePoints.keySet()) {
+
+                SkillTreePointsSet s; // The actual points set that we are working with that will be shown to the user
+
+                if (!skillTreeToSkillTreePointsSet.containsKey(skillTree.getId())) { // If the armor set does not yet have this skill tree registered...
+                    Log.d("SetBuilder", "Registering skill tree...");
+
+                    s = new SkillTreePointsSet(); // We add it...
                     s.setSkillTree(skillTree);
-                    skillTreePoints.add(s);
+                    skillTreePointsSets.add(s);
+
+                    skillTreeToSkillTreePointsSet.put(skillTree.getId(), s);
                 }
                 else {
-                    s = findArmorSetSkillTreePointsBySkillTree(skillTreePoints, skillTree); // Otherwise, we just find the skill tree set that's already there
+                    Log.d("SetBuilder", "Skill tree already registered!");
+                    s = skillTreeToSkillTreePointsSet.get(skillTree.getId()); // Otherwise, we just find the skill tree set that's already there
                 }
-                
+
                 switch (i) {
                     case 0:
-                        s.setHeadPoints(getSkillsFromArmorPiece(i, context).get(skillTree));
+                        s.setHeadPoints(armorSkillTreePoints.get(skillTree));
                         break;
                     case 1:
-                        s.setBodyPoints(getSkillsFromArmorPiece(i, context).get(skillTree));
+                        s.setBodyPoints(armorSkillTreePoints.get(skillTree));
                         break;
                     case 2:
-                        s.setArmsPoints(getSkillsFromArmorPiece(i, context).get(skillTree));
+                        s.setArmsPoints(armorSkillTreePoints.get(skillTree));
                         break;
                     case 3:
-                        s.setWaistPoints(getSkillsFromArmorPiece(i, context).get(skillTree));
+                        s.setWaistPoints(armorSkillTreePoints.get(skillTree));
                         break;
                     case 4:
-                        s.setLegsPoints(getSkillsFromArmorPiece(i, context).get(skillTree));
+                        s.setLegsPoints(armorSkillTreePoints.get(skillTree));
                         break;
                 }
                 
             }
         }
-        
-        for (ArmorSetSkillTreePoints s : skillTreePoints) { // Finally, we remove any skill tree points sets that aren't actually present in the set anymore
-            if (!skillTrees.contains(s.getSkillTree())) {
-                skillTreePoints.remove(s);
-            }
-        }
-        
+
     }
 
     /**
@@ -265,23 +195,9 @@ public class ArmorSetBuilderSession {
 
         return skills;
     }
-    
-    /** Utility method for finding a specific {@code ArmorSetSkillTreePoints} from a list given a specific {@code SkillTree}. */
-    private ArmorSetSkillTreePoints findArmorSetSkillTreePointsBySkillTree(List<ArmorSetSkillTreePoints> skillTreePoints, SkillTree skillTree) {
-        for (ArmorSetSkillTreePoints s : skillTreePoints) {
-            if (s.getSkillTree() == skillTree) {
-                return s;
-            }
-        }
-        
-        return null;
-    }
 
-
-    /**
-     * A container class that represents a skill tree as well as a specific number of points provided by each armor piece in a set.
-     */
-    public static class ArmorSetSkillTreePoints { // TODO: Rename this to SkillTreePointsSet
+    /** A container class that represents a skill tree as well as a specific number of points provided by each armor piece in a set. */
+    public static class SkillTreePointsSet {
         
         private SkillTree skillTree;
         private int headPoints;
@@ -314,6 +230,10 @@ public class ArmorSetBuilderSession {
             return legsPoints;
         }
 
+        public int getTotal() {
+            return getHeadPoints() + getBodyPoints() + getArmsPoints() + getWaistPoints() + getLegsPoints();
+        }
+
         public void setSkillTree(SkillTree skillTree) {
             this.skillTree = skillTree;
         }
@@ -337,5 +257,6 @@ public class ArmorSetBuilderSession {
         public void setLegsPoints(int legsPoints) {
             this.legsPoints = legsPoints;
         }
+
     }
 }
