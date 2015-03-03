@@ -372,7 +372,7 @@ public class WishlistDataDetailFragment extends ListFragment implements
                     cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
                     break;
                 case "Arms":
-                    cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
+                    cellImage = "icons_armor/icons_arms/arms" + cellRare + ".png";
                     break;
                 case "Waist":
                     cellImage = "icons_armor/icons_waist/waist" + cellRare + ".png";
@@ -399,7 +399,7 @@ public class WishlistDataDetailFragment extends ListFragment implements
                     cellImage = "icons_weapons/icons_hunting_horn/hunting_horn" + cellRare + ".png";
                     break;
                 case "Lance":
-                    cellImage = "icons_weapons/icons_hammer/hammer" + cellRare + ".png";
+                    cellImage = "icons_weapons/icons_lance/lance" + cellRare + ".png";
                     break;
                 case "Gunlance":
                     cellImage = "icons_weapons/icons_gunlance/gunlance" + cellRare + ".png";

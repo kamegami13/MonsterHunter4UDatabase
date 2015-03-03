@@ -19,8 +19,10 @@ import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.WeaponListElementAdapter;
 
+import java.util.ArrayList;
+
 public class WeaponBowListFragment extends WeaponListFragment implements
-		LoaderCallbacks<Cursor> {
+		LoaderCallbacks<ArrayList<Weapon>> {
 
 	public static WeaponBowListFragment newInstance(String type) {
 		Bundle args = new Bundle();
@@ -30,14 +32,23 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 		return f;
 	}
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+        // Initialize the loader to load the list of runs
+        getLoaderManager().initLoader(R.id.weapon_list_fragment, getArguments(), this).forceLoad();
+    }
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
         //		super.setContextMenu(v);
-		return inflater.inflate(R.layout.fragment_generic_list, container,false);
+		return inflater.inflate(R.layout.fragment_generic_list, null);
 	}
 	
-	@Override
+	/*@Override
 	protected CursorAdapter getDetailAdapter() {
 		return (CursorAdapter) getListAdapter();
 	}
@@ -51,18 +62,18 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 	@Override
 	protected Fragment getThisFragment() {
 		return this;
-	}
+	}*/
 	
 	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+	public void onLoadFinished(Loader<ArrayList<Weapon>> loader, ArrayList<Weapon> weapons) {
 		// Create an adapter to point at this cursor
-		WeaponBowListCursorAdapter adapter = new WeaponBowListCursorAdapter(
-				getActivity(), (WeaponCursor) cursor);
+		WeaponBowListAdapter adapter = new WeaponBowListAdapter(
+				getActivity(), weapons);
 		setListAdapter(adapter);
 
 	}
 
-	private static class WeaponBowListCursorAdapter extends WeaponListElementAdapter {
+	private static class WeaponBowListAdapter extends WeaponListElementAdapter {
 
         private static class ViewHolder extends ElementViewHolder {
             // Bow
@@ -80,92 +91,89 @@ public class WeaponBowListFragment extends WeaponListFragment implements
             TextView chargetv;
         }
 
-		public WeaponBowListCursorAdapter(Context context, WeaponCursor cursor) {
-			super(context, cursor);
-		}
+        public WeaponBowListAdapter(Context context, ArrayList<Weapon> weapons) {
+            super(context, weapons);
+        }
 
-		@Override
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
-			// Use a layout inflater to get a row view
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.fragment_weapon_tree_item_bow, parent,
-                    false);
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
 
-            ViewHolder holder = new ViewHolder();
+            ViewHolder holder;
+            if (convertView == null) {
+                holder = new ViewHolder();
 
-            //
-            // GENERAL VIEWS
-            //
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                convertView = inflater.inflate(R.layout.fragment_weapon_tree_item_bow,
+                        parent, false);
 
-            // Set the layout id
-            holder.weaponLayout = (RelativeLayout) view.findViewById(R.id.main_layout);
+                //
+                // GENERAL VIEWS
+                //
 
-            // Find all views
-            holder.nametv = (TextView) view.findViewById(R.id.name_text);
-            holder.attacktv = (TextView) view.findViewById(R.id.attack_text);
-            holder.slottv = (TextView) view.findViewById(R.id.slots_text);
-            holder.affinitytv = (TextView) view.findViewById(R.id.affinity_text);
-            holder.defensetv = (TextView) view.findViewById(R.id.defense_text);
-            holder.weaponIcon = (ImageView) view.findViewById(R.id.weapon_icon);
-            holder.lineLayout = (View) view.findViewById(R.id.tree_lines);
+                // Set the layout id
+                holder.weaponLayout = (RelativeLayout) convertView.findViewById(R.id.main_layout);
 
-            //
-            // ELEMENT VIEWS
-            //
+                // Find all views
+                holder.nametv = (TextView) convertView.findViewById(R.id.name_text);
+                holder.attacktv = (TextView) convertView.findViewById(R.id.attack_text);
+                holder.slottv = (TextView) convertView.findViewById(R.id.slots_text);
+                holder.affinitytv = (TextView) convertView.findViewById(R.id.affinity_text);
+                holder.defensetv = (TextView) convertView.findViewById(R.id.defense_text);
+                holder.weaponIcon = (ImageView) convertView.findViewById(R.id.weapon_icon);
+                holder.lineLayout = (View) convertView.findViewById(R.id.tree_lines);
 
-            holder.elementtv = (TextView) view.findViewById(R.id.element_text);
-            holder.elementtv2 = (TextView) view.findViewById(R.id.element_text2);
-            holder.awakentv = (TextView) view.findViewById(R.id.awaken_text);
-            holder.elementIcon = (ImageView) view.findViewById(R.id.element_image);
-            holder.element2Icon = (ImageView) view.findViewById(R.id.element_image2);
+                //
+                // ELEMENT VIEWS
+                //
 
-            //
-            // BOW VIEWS
-            holder.arctv = (TextView) view.findViewById(R.id.arc_shot_text);
-            holder.chargetv = (TextView) view.findViewById(R.id.charge_text);
-
-            // Coatings
-            holder.powerv = (ImageView) view.findViewById(R.id.power);
-            holder.crangev = (ImageView) view.findViewById(R.id.crange);
-            holder.poisonv = (ImageView) view.findViewById(R.id.poison);
-            holder.parav = (ImageView) view.findViewById(R.id.para);
-            holder.sleepv = (ImageView) view.findViewById(R.id.sleep);
-            holder.exhaustv = (ImageView) view.findViewById(R.id.exhaust);
-            holder.slimev = (ImageView) view.findViewById(R.id.blast);
-            holder.paintv = (ImageView) view.findViewById(R.id.paint);
+                holder.elementtv = (TextView) convertView.findViewById(R.id.element_text);
+                holder.elementtv2 = (TextView) convertView.findViewById(R.id.element_text2);
+                holder.awakentv = (TextView) convertView.findViewById(R.id.awaken_text);
+                holder.elementIcon = (ImageView) convertView.findViewById(R.id.element_image);
+                holder.element2Icon = (ImageView) convertView.findViewById(R.id.element_image2);
 
 
+                //
+                // BOW VIEWS
+                holder.arctv = (TextView) convertView.findViewById(R.id.arc_shot_text);
+                holder.chargetv = (TextView) convertView.findViewById(R.id.charge_text);
 
-            view.setTag(holder);
+                // Coatings
+                holder.powerv = (ImageView) convertView.findViewById(R.id.power);
+                holder.crangev = (ImageView) convertView.findViewById(R.id.crange);
+                holder.poisonv = (ImageView) convertView.findViewById(R.id.poison);
+                holder.parav = (ImageView) convertView.findViewById(R.id.para);
+                holder.sleepv = (ImageView) convertView.findViewById(R.id.sleep);
+                holder.exhaustv = (ImageView) convertView.findViewById(R.id.exhaust);
+                holder.slimev = (ImageView) convertView.findViewById(R.id.blast);
+                holder.paintv = (ImageView) convertView.findViewById(R.id.paint);
 
-            return view;
-		}
 
-		public void bindView(View view, Context context, Cursor cursor) {
-            String a = "";
+                convertView.setTag(holder);
 
-            super.bindView(view, context, cursor);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
 
-            ViewHolder holder = (ViewHolder) view.getTag();
+            super.getView(position, convertView, parent);
 
-			// Get the weapon for the current row
-			Weapon weapon = mWeaponCursor.getWeapon();
+            // Get the weapon for the current row
+            Weapon weapon = getItem(position);
 
-			String arc = weapon.getRecoil();
-			String charge = weapon.getCharges();
-			String chargeText = "|";
+            String arc = weapon.getRecoil();
+            String charge = weapon.getCharges();
+            String chargeText = "|";
 
-			String[] charges = charge.split("\\|");
-			for (String c : charges) {
-				chargeText = chargeText + getChargeData(c);
-			}
+            String[] charges = charge.split("\\|");
+            for (String c : charges) {
+                chargeText = chargeText + getChargeData(c);
+            }
 
-			holder.arctv.setText(arc);
-			holder.chargetv.setText(chargeText);
-			
-			// Clear images
-			holder.powerv.setImageDrawable(null);
+            holder.arctv.setText(arc);
+            holder.chargetv.setText(chargeText);
+
+            // Clear images
+            holder.powerv.setImageDrawable(null);
             holder.crangev.setImageDrawable(null);
             holder.poisonv.setImageDrawable(null);
             holder.parav.setImageDrawable(null);
@@ -184,7 +192,7 @@ public class WeaponBowListFragment extends WeaponListFragment implements
             holder.paintv.setVisibility(View.GONE);
 
 
-			String[] coatings = weapon.getCoatings().split("\\|");
+            String[] coatings = weapon.getCoatings().split("\\|");
 
 
             if (!coatings[0].equals("-")) {
@@ -228,7 +236,8 @@ public class WeaponBowListFragment extends WeaponListFragment implements
                 holder.slimev.setVisibility(View.VISIBLE);
             }
 
-		}
+            return convertView;
+        }
 
 		private String getChargeData(String charge) {
 			String s = "";
