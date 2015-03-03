@@ -18,6 +18,7 @@ import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 public class ArmorSetBuilderActivity extends GenericTabActivity {
     public static final String EXTRA_FROM_SET_BUILDER = "com.daviancorp.android.ui.detail.from_set_builder";
+    public static final String EXTRA_REMAINING_SOCKETS = "com.daviancorp.android.ui.detail.remaining_sockets";
     public static final int REQUEST_CODE = 537;
 
     private ArmorSetBuilderSession session;
