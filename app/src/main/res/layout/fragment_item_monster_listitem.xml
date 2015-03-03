@@ -29,7 +29,6 @@
             android:text="Emerald Congalala"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/monster_image"
             android:layout_alignWithParentIfMissing="false" />
 
         <TextView
