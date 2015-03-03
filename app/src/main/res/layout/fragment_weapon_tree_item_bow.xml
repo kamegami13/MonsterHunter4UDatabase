@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="84dp"
     android:id="@+id/main_layout"
     android:clickable="true"
     android:background="@drawable/clicked_states_white">
 
     <View
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="84dp"
         android:id="@+id/tree_lines" />
 
     <RelativeLayout
         style="@style/list_sub_item"
         android:id="@+id/item3" >
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             style="@style/small_image"
             android:id="@+id/weapon_icon"
             android:layout_centerVertical="true" />
@@ -44,7 +44,7 @@
         android:layout_below="@+id/item3"
         android:id="@+id/relativeLayout"
         android:layout_height="40dp"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:paddingTop="2dp">
 
         <TextView
@@ -94,56 +94,56 @@
             android:layout_below="@+id/slots_text"
             android:paddingBottom="4dp" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/power"
             style="@style/tiny_image"
             android:layout_gravity="right"
             android:layout_toLeftOf="@+id/poison"
             android:layout_centerVertical="true" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/poison"
             style="@style/tiny_image"
             android:layout_gravity="right"
             android:layout_toLeftOf="@+id/sleep"
             android:layout_centerVertical="true" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/sleep"
             style="@style/tiny_image"
             android:layout_gravity="right"
             android:layout_toLeftOf="@+id/para"
             android:layout_centerVertical="true" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/para"
             style="@style/tiny_image"
             android:layout_gravity="right"
             android:layout_toLeftOf="@+id/crange"
             android:layout_centerVertical="true" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/crange"
             style="@style/tiny_image"
             android:layout_gravity="right"
             android:layout_toLeftOf="@+id/paint"
             android:layout_centerVertical="true" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/paint"
             style="@style/tiny_image"
             android:layout_gravity="right"
             android:layout_toLeftOf="@+id/exhaust"
             android:layout_centerVertical="true" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/exhaust"
             style="@style/tiny_image"
             android:layout_gravity="right"
             android:layout_toLeftOf="@+id/blast"
             android:layout_centerVertical="true" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/blast"
             style="@style/tiny_image"
             android:layout_gravity="right"
@@ -152,27 +152,29 @@
 
         <TextView
             style="@style/text_small"
-            android:layout_width="wrap_content"
+            android:layout_width="12dp"
             android:layout_height="wrap_content"
             android:text="("
             android:id="@+id/awaken_text"
-            android:layout_toLeftOf="@+id/element_image" />
+            android:layout_toLeftOf="@+id/element_image"
+            android:gravity="right" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             style="@style/tiny_image"
             android:id="@+id/element_image"
             android:layout_toLeftOf="@+id/element_text" />
 
         <TextView
             style="@style/text_small"
-            android:layout_width="wrap_content"
+            android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:text="350)"
             android:id="@+id/element_text"
             android:layout_toLeftOf="@+id/element_image2"
-            android:layout_marginRight="8dp" />
+            android:layout_marginRight="8dp"
+            android:gravity="right" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             style="@style/tiny_image"
             android:id="@+id/element_image2"
             android:layout_marginLeft="8dp"

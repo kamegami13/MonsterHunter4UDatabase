@@ -15,7 +15,7 @@
         android:id="@+id/item3"
         style="@style/list_sub_item">
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/weapon_icon"
             style="@style/small_image"
             android:layout_centerVertical="true" />
@@ -44,19 +44,19 @@
                 android:text="Impact"
                 android:layout_alignParentRight="true" />
 
-            <ImageView
+            <com.daviancorp.android.ui.general.FixedImageView
                 android:id="@+id/note_image_1"
                 style="@style/tiny_image"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/note_image_2" />
 
-            <ImageView
+            <com.daviancorp.android.ui.general.FixedImageView
                 android:id="@+id/note_image_2"
                 style="@style/tiny_image"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/note_image_3" />
 
-            <ImageView
+            <com.daviancorp.android.ui.general.FixedImageView
                 android:id="@+id/note_image_3"
                 style="@style/tiny_image"
                 android:layout_centerVertical="true"
@@ -126,7 +126,7 @@
             android:layout_marginTop="0dp"
             android:layout_toLeftOf="@+id/element_image" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/element_image"
             style="@style/tiny_image"
             android:layout_toLeftOf="@+id/element_text" />
@@ -140,7 +140,7 @@
             android:layout_toLeftOf="@+id/element_image2"
             android:layout_marginRight="8dp" />
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             style="@style/tiny_image"
             android:id="@+id/element_image2"
             android:layout_toLeftOf="@+id/element_text2" />

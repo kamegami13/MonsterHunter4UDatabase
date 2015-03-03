@@ -16,7 +16,7 @@
         android:id="@+id/item3"
         style="@style/list_sub_item">
 
-        <ImageView
+        <com.daviancorp.android.ui.general.FixedImageView
             android:id="@+id/weapon_icon"
             style="@style/small_image"
             android:layout_centerVertical="true" />

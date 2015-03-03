@@ -44,6 +44,8 @@ public class Weapon extends Item{
     private String file_location;
     private int[] mSharpness1;
     private int[] mSharpness2;
+    private String[] coatings_array;
+    private String chargeString;
 	
 	/* Default Constructor */
 	public Weapon() {
@@ -74,6 +76,7 @@ public class Weapon extends Item{
 		this.sharpness_file = "";
 		this.wfinal = -1;
         this.tree_depth = 0;
+        this.chargeString = "|";
 	}
 
 	/* Getters and Setters */
@@ -171,7 +174,29 @@ public class Weapon extends Item{
 
 	public void setCharges(String charges) {
 		this.charges = charges;
-	}
+
+        String[] new_charges = charges.split("\\|");
+        for (String c : new_charges) {
+            String s = "";
+
+            if (c.startsWith("Scatter")) {
+                s = "S";
+            } else if (c.startsWith("Rapid")) {
+                s = "R";
+            } else if (c.startsWith("Pierce")) {
+                s = "P";
+            }
+
+            if (c.endsWith("*")) {
+                s = s + c.charAt(c.length() - 2) + "*|";
+            }
+            else {
+                s = s + c.charAt(c.length() - 1) + "|";
+            }
+
+            this.chargeString = this.chargeString + s;
+        }
+    }
 
 	public String getCoatings() {
 		return coatings;
@@ -179,6 +204,8 @@ public class Weapon extends Item{
 
 	public void setCoatings(String coatings) {
 		this.coatings = coatings;
+
+        this.coatings_array = coatings.split("\\|");
 	}
 
 	public String getRecoil() {
@@ -438,5 +465,13 @@ public class Weapon extends Item{
 
     public int[] getSharpness2() {
         return mSharpness2;
+    }
+
+    public String getChargeString() {
+        return chargeString;
+    }
+
+    public String[] getCoatingsArray() {
+        return coatings_array;
     }
 }

@@ -2,6 +2,9 @@ package com.daviancorp.android.ui.list;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -18,8 +21,14 @@ import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.WeaponListElementAdapter;
+import com.daviancorp.android.ui.general.FixedImageView;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class WeaponBowListFragment extends WeaponListFragment implements
 		LoaderCallbacks<ArrayList<Weapon>> {
@@ -78,17 +87,21 @@ public class WeaponBowListFragment extends WeaponListFragment implements
         private static class ViewHolder extends ElementViewHolder {
             // Bow
 
-            ImageView powerv;
-            ImageView crangev;
-            ImageView poisonv;
-            ImageView parav;
-            ImageView sleepv;
-            ImageView exhaustv;
-            ImageView slimev;
-            ImageView paintv;
+            FixedImageView powerv;
+            FixedImageView crangev;
+            FixedImageView poisonv;
+            FixedImageView parav;
+            FixedImageView sleepv;
+            FixedImageView exhaustv;
+            FixedImageView slimev;
+            FixedImageView paintv;
 
             TextView arctv;
             TextView chargetv;
+
+            int position;
+
+            Context context;
         }
 
         public WeaponBowListAdapter(Context context, ArrayList<Weapon> weapons) {
@@ -139,14 +152,14 @@ public class WeaponBowListFragment extends WeaponListFragment implements
                 holder.chargetv = (TextView) convertView.findViewById(R.id.charge_text);
 
                 // Coatings
-                holder.powerv = (ImageView) convertView.findViewById(R.id.power);
-                holder.crangev = (ImageView) convertView.findViewById(R.id.crange);
-                holder.poisonv = (ImageView) convertView.findViewById(R.id.poison);
-                holder.parav = (ImageView) convertView.findViewById(R.id.para);
-                holder.sleepv = (ImageView) convertView.findViewById(R.id.sleep);
-                holder.exhaustv = (ImageView) convertView.findViewById(R.id.exhaust);
-                holder.slimev = (ImageView) convertView.findViewById(R.id.blast);
-                holder.paintv = (ImageView) convertView.findViewById(R.id.paint);
+                holder.powerv = (FixedImageView) convertView.findViewById(R.id.power);
+                holder.crangev = (FixedImageView) convertView.findViewById(R.id.crange);
+                holder.poisonv = (FixedImageView) convertView.findViewById(R.id.poison);
+                holder.parav = (FixedImageView) convertView.findViewById(R.id.para);
+                holder.sleepv = (FixedImageView) convertView.findViewById(R.id.sleep);
+                holder.exhaustv = (FixedImageView) convertView.findViewById(R.id.exhaust);
+                holder.slimev = (FixedImageView) convertView.findViewById(R.id.blast);
+                holder.paintv = (FixedImageView) convertView.findViewById(R.id.paint);
 
 
                 convertView.setTag(holder);
@@ -155,22 +168,18 @@ public class WeaponBowListFragment extends WeaponListFragment implements
                 holder = (ViewHolder) convertView.getTag();
             }
 
+            holder.position = position;
+            holder.context = convertView.getContext();
+
             super.getView(position, convertView, parent);
 
             // Get the weapon for the current row
             Weapon weapon = getItem(position);
 
             String arc = weapon.getRecoil();
-            String charge = weapon.getCharges();
-            String chargeText = "|";
-
-            String[] charges = charge.split("\\|");
-            for (String c : charges) {
-                chargeText = chargeText + getChargeData(c);
-            }
 
             holder.arctv.setText(arc);
-            holder.chargetv.setText(chargeText);
+            holder.chargetv.setText(weapon.getChargeString());
 
             // Clear images
             holder.powerv.setImageDrawable(null);
@@ -192,72 +201,124 @@ public class WeaponBowListFragment extends WeaponListFragment implements
             holder.paintv.setVisibility(View.GONE);
 
 
-            String[] coatings = weapon.getCoatings().split("\\|");
+            String[] coatings = weapon.getCoatingsArray();
 
+            //LoadPhials task = new LoadPhials(holder, coatings);
+            //task.execute();
 
             if (!coatings[0].equals("-")) {
                 holder.powerv.setTag(weapon.getId());
-                new LoadImage(holder.powerv, "icons_items/Bottle-Red.png").execute();
+                new LoadImage(holder.powerv, "icons_items/Bottle-Red.png").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 holder.powerv.setVisibility(View.VISIBLE);
             }
             if (!coatings[1].equals("-")) {
                 holder.poisonv.setTag(weapon.getId());
-                new LoadImage(holder.poisonv, "icons_items/Bottle-Purple.png").execute();
+                new LoadImage(holder.poisonv, "icons_items/Bottle-Purple.png").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 holder.poisonv.setVisibility(View.VISIBLE);
             }
             if (!coatings[2].equals("-")) {
                 holder.parav.setTag(weapon.getId());
-                new LoadImage(holder.parav, "icons_items/Bottle-Yellow.png").execute();
+                new LoadImage(holder.parav, "icons_items/Bottle-Yellow.png").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 holder.parav.setVisibility(View.VISIBLE);
             }
             if (!coatings[3].equals("-")) {
                 holder.sleepv.setTag(weapon.getId());
-                new LoadImage(holder.sleepv, "icons_items/Bottle-Cyan.png").execute();
+                new LoadImage(holder.sleepv, "icons_items/Bottle-Cyan.png").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 holder.sleepv.setVisibility(View.VISIBLE);
             }
             if (!coatings[4].equals("-")) {
                 holder.crangev.setTag(weapon.getId());
-                new LoadImage(holder.crangev, "icons_items/Bottle-White.png").execute();
+                new LoadImage(holder.crangev, "icons_items/Bottle-White.png").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 holder.crangev.setVisibility(View.VISIBLE);
             }
             if (!coatings[5].equals("-")) {
                 holder.paintv.setTag(weapon.getId());
-                new LoadImage(holder.paintv, "icons_items/Bottle-Pink.png").execute();
+                new LoadImage(holder.paintv, "icons_items/Bottle-Pink.png").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 holder.paintv.setVisibility(View.VISIBLE);
             }
             if (!coatings[6].equals("-")) {
                 holder.exhaustv.setTag(weapon.getId());
-                new LoadImage(holder.exhaustv, "icons_items/Bottle-Blue.png").execute();
+                new LoadImage(holder.exhaustv, "icons_items/Bottle-Blue.png").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 holder.exhaustv.setVisibility(View.VISIBLE);
             }
             if (!coatings[7].equals("-")) {
                 holder.slimev.setTag(weapon.getId());
-                new LoadImage(holder.slimev, "icons_items/Bottle-Orange.png").execute();
+                new LoadImage(holder.slimev, "icons_items/Bottle-Orange.png").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 holder.slimev.setVisibility(View.VISIBLE);
             }
 
+
             return convertView;
         }
-
-		private String getChargeData(String charge) {
-			String s = "";
-
-			if (charge.startsWith("Scatter")) {
-				s = "S";
-			} else if (charge.startsWith("Rapid")) {
-				s = "R";
-			} else if (charge.startsWith("Pierce")) {
-				s = "P";
-			}
-
-            if (charge.endsWith("*")) {
-                s = s + charge.charAt(charge.length() - 2) + "|";
-            }
-            else {
-                s = s + charge.charAt(charge.length() - 1) + "|";
-            }
-			return s;
-		}
 	}
+
+    private static class LoadPhials extends AsyncTask<Void,Void,HashMap<ImageView,Drawable>> {
+        private WeaponBowListAdapter.ViewHolder holder;
+        private int position;
+        private String[] coatings;
+
+        public LoadPhials(WeaponBowListAdapter.ViewHolder imv, String[] coatings) {
+            this.holder = imv;
+            this.position = holder.position;
+            this.coatings = coatings;
+        }
+
+        @Override
+        protected HashMap<ImageView, Drawable> doInBackground(Void... arg0) {
+            HashMap<ImageView, Drawable> map = new HashMap<>();
+
+            if (!coatings[0].equals("-")) {
+                map.put(holder.powerv, loadDrawable("icons_items/Bottle-Red.png"));
+            } else {
+
+            }
+            if (!coatings[1].equals("-")) {
+                map.put(holder.poisonv, loadDrawable("icons_items/Bottle-Purple.png"));
+            }
+            if (!coatings[2].equals("-")) {
+                map.put(holder.parav, loadDrawable("icons_items/Bottle-Yellow.png"));
+            }
+            if (!coatings[3].equals("-")) {
+                map.put(holder.sleepv, loadDrawable("icons_items/Bottle-Cyan.png"));
+            }
+            if (!coatings[4].equals("-")) {
+                map.put(holder.crangev, loadDrawable("icons_items/Bottle-White.png"));
+            }
+            if (!coatings[6].equals("-")) {
+                map.put(holder.exhaustv, loadDrawable("icons_items/Bottle-Blue.png"));
+            }
+            if (!coatings[7].equals("-")) {
+                map.put(holder.slimev, loadDrawable("icons_items/Bottle-Orange.png"));
+            }
+
+            return map;
+        }
+
+        @Override
+        protected void onPostExecute(HashMap<ImageView,Drawable> result) {
+            if(position == holder.position) {
+                Iterator it = result.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry<ImageView,Drawable> pair = (Map.Entry<ImageView,Drawable>) it.next();
+
+                    pair.getKey().setImageDrawable(pair.getValue());
+                    pair.getKey().setVisibility(View.VISIBLE);
+                }
+            }
+        }
+
+        protected Drawable loadDrawable(String path) {
+            Drawable d = null;
+
+            try {
+                d = Drawable.createFromStream(holder.context.getAssets().open(path),
+                        null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return d;
+        }
+    }
 
 }
