@@ -1,4 +1,19 @@
 Release Notes:
+Version 1.02
+	- Migrated from ActionBarSherlock to AppCompat
+	- Added monster status resistances
+	- Updated color scheme across app
+	- Updated list view styles across app
+	- Added navigation drawer
+	- Compressed art assets to reduce application size
+	- Fixed some icons which were displaying incorrectly (Lances, Armor Arms)
+	- Fixed super broken phials for Bows
+	- Added fastscroll support
+	- Added support for asynchronous image loading in heavy load listviews
+	- Added support for preloading weapons for weapon trees to remove load from list adapter
+	- Added combination list to item details page, displays all relevant combos
+	- Added alternate low-res maps to improve list loading
+	- Fixed incorrect Monster All list after fast tabbing
 Version 1.01
 	New Features:
 		- Monster Habitats now appear on the Monster Detail Page
