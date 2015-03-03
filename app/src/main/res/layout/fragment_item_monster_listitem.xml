@@ -10,7 +10,6 @@
         android:id="@+id/monster_image"
         style="@style/large_image"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true" />
 
 
