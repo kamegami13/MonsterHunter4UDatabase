@@ -72,8 +72,10 @@ public class WeaponCursor extends CursorWrapper {
 		weapon.setHornNotes(horn_notes);
 		weapon.setShellingType(shelling_type);
 		weapon.setPhial(phial);
-		weapon.setCharges(charges);
-		weapon.setCoatings(coatings);
+        if(weapon.getWtype().equals("Bow")) {
+            weapon.setCharges(charges);
+            weapon.setCoatings(coatings);
+        }
 		weapon.setRecoil(recoil);
 		weapon.setReloadSpeed(reload_speed);
 		weapon.setRapidFire(rapid_fire);

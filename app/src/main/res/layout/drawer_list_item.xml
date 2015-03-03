@@ -7,8 +7,6 @@
     
     <ImageView
         android:id="@+id/nav_list_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         tools:src="@drawable/great_sword1"
         style="@style/main_image"
