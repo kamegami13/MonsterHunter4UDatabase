@@ -52,53 +52,7 @@ public class DrawSharpness extends View {
         super(context, attrs);
     }
 
-	public void init(String sharpness) {
-
-        // Sharpness is in the format "1.1.1.1.1.1.1 1.1.1.1.1.1.1" where each
-        // 1 is an int representing the sharpness value of a certain color.
-        // The order is red, orange, yellow, green, white, purple.
-        // First set is for regular sharpness, second set is for sharpness+1
-        int[] sharpness1 = new int[7];
-        int[] sharpness2 = new int[7];
-
-        String[] strSharpnessBoth;
-        List<String> strSharpness1;
-        List<String> strSharpness2;
-
-        //separate both sets of sharpness
-        strSharpnessBoth = sharpness.split(" ");
-
-        //convert sharpness strings to arrays
-        strSharpness1 = new ArrayList<>(Arrays.asList(strSharpnessBoth[0].split("\\.")));
-        strSharpness2 = new ArrayList<>(Arrays.asList(strSharpnessBoth[1].split("\\.")));
-
-        //add leading 0s to those with less than purple sharpness
-        while(strSharpness1.size()<=7){
-            strSharpness1.add("0");
-        }
-        while(strSharpness2.size()<=7){
-            strSharpness2.add("0");
-        }
-
-        // Error handling logs error and passes empty sharpness bars
-        for(int i = 0; i<7; i++){
-            try{
-                sharpness1[i] = Integer.parseInt(strSharpness1.get(i));
-            } catch(Exception e){
-                Log.v(TAG, "Error in sharpness " + sharpness);
-                sharpness1 = new int[]{0, 0, 0, 0, 0, 0, 0};
-                break;
-            }
-        }
-        for(int i = 0; i<7; i++){
-            try{
-                sharpness2[i] = Integer.parseInt(strSharpness2.get(i));
-            } catch(Exception e){
-                Log.v(TAG, "Error in sharpness " + sharpness);
-                sharpness2 = new int[]{0, 0, 0, 0, 0, 0, 0};
-                break;
-            }
-        }
+	public void init(int[] sharpness1, int[] sharpness2) {
 
         // Assign sharpness array 1
 		mRed1 = sharpness1[0];

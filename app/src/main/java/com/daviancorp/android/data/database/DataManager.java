@@ -904,6 +904,24 @@ public class DataManager {
 	public WeaponCursor queryWeaponType(String type) {
 		return mHelper.queryWeaponType(type);
 	}
+
+    /* Get an array that has a list of Weapons based on weapon type
+    * This method is for preloading info for weapons to prevent lots of
+    * work in binding a view to a list */
+    public ArrayList<Weapon> queryWeaponTypeArray(String type) {
+        WeaponCursor cursor = mHelper.queryWeaponType(type);
+
+        cursor.moveToFirst();
+        ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+        int i = 0;
+
+        while(cursor.isAfterLast() == false) {
+            weapons.add(cursor.getWeapon());
+            cursor.moveToNext();
+        }
+
+        return weapons;
+    }
 	
 	/* Get a Cursor that has a list of Weapons in the weapon tree for a specified weapon */
 	public WeaponCursor queryWeaponTree(long id) {

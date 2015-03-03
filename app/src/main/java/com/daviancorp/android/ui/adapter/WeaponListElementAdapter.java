@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,6 +14,8 @@ import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.WeaponCursor;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.general.DrawSharpness;
+
+import java.util.ArrayList;
 
 /**
  * Created by Mark on 2/26/2015.
@@ -29,17 +32,17 @@ public abstract class WeaponListElementAdapter extends WeaponListGeneralAdapter 
         public ImageView element2Icon;
     }
 
-    public WeaponListElementAdapter(Context context, WeaponCursor cursor) {
-        super(context, cursor);
+    public WeaponListElementAdapter(Context context, ArrayList<Weapon> weapons) {
+        super(context, weapons);
     }
 
-    public void bindView(View view, Context context, Cursor cursor) {
-        super.bindView(view, context, cursor);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        super.getView(position, convertView, parent);
 
-        ElementViewHolder holder = (ElementViewHolder) view.getTag();
+        ElementViewHolder holder = (ElementViewHolder) convertView.getTag();
 
         // Get the weapon for the current row
-        Weapon weapon = mWeaponCursor.getWeapon();
+        Weapon weapon = getItem(position);
 
         // Set the element to view
         String element = weapon.getElement();
@@ -53,8 +56,8 @@ public abstract class WeaponListElementAdapter extends WeaponListGeneralAdapter 
 
         holder.elementtv.setText("");
         holder.elementtv2.setText("");
-        holder.elementIcon.setVisibility(view.GONE);
-        holder.element2Icon.setVisibility(view.GONE);
+        holder.elementIcon.setVisibility(View.GONE);
+        holder.element2Icon.setVisibility(View.GONE);
 
         if (!"".equals(element) || !"".equals(awakenedElement)) {
             if (!"".equals(awakenedElement)) {
@@ -68,17 +71,18 @@ public abstract class WeaponListElementAdapter extends WeaponListGeneralAdapter 
 
             holder.elementIcon.setTag(weapon.getId());
             new LoadImage(holder.elementIcon, "icons_monster_info/" + element + ".png").execute();
-            holder.elementIcon.setVisibility(view.VISIBLE);
+            holder.elementIcon.setVisibility(View.VISIBLE);
 
         }
         if(!"".equals(element2)) {
             holder.element2Icon.setTag(weapon.getId());
             new LoadImage(holder.element2Icon, "icons_monster_info/" + element2 + ".png").execute();
-            holder.element2Icon.setVisibility(view.VISIBLE);
+            holder.element2Icon.setVisibility(View.VISIBLE);
 
             holder.elementtv2.setText("" + element_2_attack);
         }
         holder.awakentv.setText(awakenText);
 
+        return convertView;
     }
 }

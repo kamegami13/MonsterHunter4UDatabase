@@ -1,8 +1,10 @@
 package com.daviancorp.android.ui.list;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -30,7 +32,7 @@ import com.daviancorp.android.ui.adapter.WeaponListElementAdapter;
 import com.daviancorp.android.ui.general.DrawSharpness;
 
 public class WeaponBladeListFragment extends WeaponListFragment implements
-		LoaderCallbacks<Cursor> {
+		LoaderCallbacks<ArrayList<Weapon>> {
 
 	public static WeaponBladeListFragment newInstance(String type) {
 		Bundle args = new Bundle();
@@ -46,46 +48,26 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
 
         setHasOptionsMenu(true);
         // Initialize the loader to load the list of runs
-        getLoaderManager().initLoader(R.id.weapon_list_fragment, null, this);
+        getLoaderManager().initLoader(R.id.weapon_list_fragment, getArguments(), this).forceLoad();
     }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_generic_list, null);
-
-        ListView view = (ListView) v.findViewById(android.R.id.list);
-
-//		super.setContextMenu(v);
 		return v;
 	}
 
 	@Override
-	protected CursorAdapter getDetailAdapter() {
-		return (CursorAdapter) getListAdapter();
-	}
-
-	@Override
-	protected Weapon getDetailWeapon(int position) {
-		WeaponBladeListCursorAdapter adapter = (WeaponBladeListCursorAdapter) getListAdapter();
-		return((WeaponCursor) adapter.getItem(position)).getWeapon();
-	}
-
-	@Override
-	protected Fragment getThisFragment() {
-		return this;
-	}
-
-	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+	public void onLoadFinished(Loader<ArrayList<Weapon>> loader, ArrayList<Weapon> weapons) {
 		// Create an adapter to point at this cursor
-		WeaponBladeListCursorAdapter adapter = new WeaponBladeListCursorAdapter(
-				getActivity(), (WeaponCursor) cursor);
+		WeaponListBladeAdapter adapter = new WeaponListBladeAdapter(
+				getActivity(), weapons);
 		setListAdapter(adapter);
 
 	}
 
-	private static class WeaponBladeListCursorAdapter extends WeaponListElementAdapter {
+	private static class WeaponListBladeAdapter extends WeaponListElementAdapter {
 
         private static class ViewHolder extends ElementViewHolder {
             // Blade
@@ -98,70 +80,70 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
         }
 
 
-		public WeaponBladeListCursorAdapter(Context context, WeaponCursor cursor) {
-			super(context, cursor);
-		}
+        public WeaponListBladeAdapter(Context context, ArrayList<Weapon> weapons) {
+            super(context, weapons);
+        }
 
 		@Override
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
-			// Use a layout inflater to get a row view
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View view = inflater.inflate(R.layout.fragment_weapon_tree_item_blademaster, parent,
-					false);
+        public View getView(int position, View convertView, ViewGroup parent) {
 
-            ViewHolder holder = new ViewHolder();
+            ViewHolder holder;
+            if(convertView == null) {
+                holder = new ViewHolder();
 
-            //
-            // GENERAL VIEWS
-            //
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                convertView = inflater.inflate(R.layout.fragment_weapon_tree_item_blademaster,
+                        parent, false);
 
-            // Set the layout id
-            holder.weaponLayout = (RelativeLayout) view.findViewById(R.id.main_layout);
+                //
+                // GENERAL VIEWS
+                //
 
-            // Find all views
-            holder.nametv = (TextView) view.findViewById(R.id.name_text);
-            holder.attacktv = (TextView) view.findViewById(R.id.attack_text);
-            holder.slottv = (TextView) view.findViewById(R.id.slots_text);
-            holder.affinitytv = (TextView) view.findViewById(R.id.affinity_text);
-            holder.defensetv = (TextView) view.findViewById(R.id.defense_text);
-            holder.weaponIcon = (ImageView) view.findViewById(R.id.weapon_icon);
-            holder.lineLayout = (View) view.findViewById(R.id.tree_lines);
+                // Set the layout id
+                holder.weaponLayout = (RelativeLayout) convertView.findViewById(R.id.main_layout);
 
-            //
-            // ELEMENT VIEWS
-            //
+                // Find all views
+                holder.nametv = (TextView) convertView.findViewById(R.id.name_text);
+                holder.attacktv = (TextView) convertView.findViewById(R.id.attack_text);
+                holder.slottv = (TextView) convertView.findViewById(R.id.slots_text);
+                holder.affinitytv = (TextView) convertView.findViewById(R.id.affinity_text);
+                holder.defensetv = (TextView) convertView.findViewById(R.id.defense_text);
+                holder.weaponIcon = (ImageView) convertView.findViewById(R.id.weapon_icon);
+                holder.lineLayout = (View) convertView.findViewById(R.id.tree_lines);
 
-            holder.elementtv = (TextView) view.findViewById(R.id.element_text);
-            holder.elementtv2 = (TextView) view.findViewById(R.id.element_text2);
-            holder.awakentv = (TextView) view.findViewById(R.id.awaken_text);
-            holder.elementIcon = (ImageView) view.findViewById(R.id.element_image);
-            holder.element2Icon = (ImageView) view.findViewById(R.id.element_image2);
+                //
+                // ELEMENT VIEWS
+                //
 
-            //
-            // BLADE VIEWS
+                holder.elementtv = (TextView) convertView.findViewById(R.id.element_text);
+                holder.elementtv2 = (TextView) convertView.findViewById(R.id.element_text2);
+                holder.awakentv = (TextView) convertView.findViewById(R.id.awaken_text);
+                holder.elementIcon = (ImageView) convertView.findViewById(R.id.element_image);
+                holder.element2Icon = (ImageView) convertView.findViewById(R.id.element_image2);
 
-            holder.specialtv = (TextView) view.findViewById(R.id.special_text);
-            holder.sharpnessDrawable = (DrawSharpness) view.findViewById(R.id.sharpness);
+                //
+                // BLADE VIEWS
+
+                holder.specialtv = (TextView) convertView.findViewById(R.id.special_text);
+                holder.sharpnessDrawable = (DrawSharpness) convertView.findViewById(R.id.sharpness);
 
 
-            holder.note1v = (ImageView) view.findViewById(R.id.note_image_1);
-            holder.note2v = (ImageView) view.findViewById(R.id.note_image_2);
-            holder.note3v = (ImageView) view.findViewById(R.id.note_image_3);
+                holder.note1v = (ImageView) convertView.findViewById(R.id.note_image_1);
+                holder.note2v = (ImageView) convertView.findViewById(R.id.note_image_2);
+                holder.note3v = (ImageView) convertView.findViewById(R.id.note_image_3);
 
-            view.setTag(holder);
+                convertView.setTag(holder);
 
-            return view;
-		}
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
 
-		@Override
-        public void bindView(View view, Context context, Cursor cursor) {
-            super.bindView(view, context, cursor);
 
-            ViewHolder holder = (ViewHolder) view.getTag();
+
+            super.getView(position, convertView, parent);
 
             // Get the monster for the current row
-            Weapon weapon = mWeaponCursor.getWeapon();
+            Weapon weapon = getItem(position);
 
             //
             // Set special text fields
@@ -192,9 +174,10 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
             }
 
             // Set sharpness
-            String sharpString = weapon.getSharpness();
-            holder.sharpnessDrawable.init(sharpString);
+            holder.sharpnessDrawable.init(weapon.getSharpness1(), weapon.getSharpness2());
             holder.sharpnessDrawable.invalidate();
+
+            return convertView;
         }
 
 
