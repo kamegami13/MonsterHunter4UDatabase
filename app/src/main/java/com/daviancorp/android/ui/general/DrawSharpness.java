@@ -96,9 +96,10 @@ public class DrawSharpness extends View {
         // Margins are defined by height/7. 7 can be changed.
         int margins = (int) Math.floor(mheight/7);
         // Scale factor is used to multiply sharpness values to make sure full sharpness fills the bar
-        int scalefactor = (int) Math.floor((mwidth-(margins*2))/maxsharpness);
+        // Must be a float to retain accuracy until pixel conversion
+        float scalefactor = (float) (mwidth-(margins*2))/maxsharpness;
         // specify the width of each bar
-        int barwidth = (scalefactor * maxsharpness) + (margins*2);
+        int barwidth = (int) (scalefactor * maxsharpness) + (margins*2);
 
         // Draw the background
         paint.setColor(Color.BLACK);
@@ -119,44 +120,44 @@ public class DrawSharpness extends View {
 
 	}
 
-    private void drawBar(Canvas canvas, int margins, int scalefactor, int bartop, int barbottom,
+    private void drawBar(Canvas canvas, int margins, float scalefactor, int bartop, int barbottom,
                          int ired, int iorange, int iyellow,
                          int igreen, int iblue, int iwhite, int ipurple){
 
         // Run through the bar and accumulate sharpness
         int start = margins;
-        int end = start + ired*scalefactor;
+        int end = start + (int) (ired*scalefactor);
         paint.setStrokeWidth(0);
         paint.setColor(Color.RED);
         canvas.drawRect(start, bartop, end, barbottom, paint);
 
         start = end;
-        end = end + iorange*scalefactor;
+        end = end + (int) (iorange*scalefactor);
         paint.setColor(orangeColor);
         canvas.drawRect(start, bartop, end, barbottom, paint);
 
         start = end;
-        end = end + iyellow*scalefactor;
+        end = end + (int) (iyellow*scalefactor);
         paint.setColor(Color.YELLOW);
         canvas.drawRect(start, bartop, end, barbottom, paint);
 
         start = end;
-        end = end + igreen*scalefactor;
+        end = end + (int) (igreen*scalefactor);
         paint.setColor(Color.GREEN);
         canvas.drawRect(start, bartop, end, barbottom, paint);
 
         start = end;
-        end = end + iblue*scalefactor;
+        end = end + (int) (iblue*scalefactor);
         paint.setColor(Color.BLUE);
         canvas.drawRect(start, bartop, end, barbottom, paint);
 
         start = end;
-        end = end + iwhite*scalefactor;
+        end = end + (int) (iwhite*scalefactor);
         paint.setColor(Color.WHITE);
         canvas.drawRect(start, bartop, end, barbottom, paint);
 
         start = end;
-        end = end + ipurple*scalefactor;
+        end = end + (int) (ipurple*scalefactor);
         paint.setColor(purpleColor);
         canvas.drawRect(start, bartop, end, barbottom, paint);
     }
