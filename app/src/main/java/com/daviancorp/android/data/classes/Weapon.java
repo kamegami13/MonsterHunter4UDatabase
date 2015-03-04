@@ -39,6 +39,8 @@ public class Weapon extends Item{
 	private String sharpness_file;				// Sharpness image file location
 	private int wfinal;							// Final in weapon tree or not
     private int tree_depth;                     // Depth of weapon in weapon tree
+
+    private int parent_id;
     
     private String mSlotString;
     private String file_location;
@@ -473,5 +475,13 @@ public class Weapon extends Item{
 
     public String[] getCoatingsArray() {
         return coatings_array;
+    }
+
+    public int getParentId() {
+        return parent_id;
+    }
+
+    public void setParentId(int parent_id) {
+        this.parent_id = parent_id;
     }
 }

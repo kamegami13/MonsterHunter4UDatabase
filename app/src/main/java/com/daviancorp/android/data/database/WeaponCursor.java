@@ -54,6 +54,7 @@ public class WeaponCursor extends CursorWrapper {
 		String sharpness_file = getString(getColumnIndex(S.COLUMN_WEAPONS_SHARPNESS_FILE));
 		int wfinal = getInt(getColumnIndex(S.COLUMN_WEAPONS_FINAL));
         int tree_depth = getInt(getColumnIndex(S.COLUMN_WEAPONS_TREE_DEPTH));
+        int parent_id = getInt(getColumnIndex(S.COLUMN_WEAPONS_PARENT_ID));
 
 		weapon.setWtype(wtype);
 		weapon.setCreationCost(creation_cost);
@@ -109,6 +110,7 @@ public class WeaponCursor extends CursorWrapper {
 		weapon.setDescription(description);
 		weapon.setFileLocation();
 		weapon.setArmorDupeNameFix(armor_dupe_name_fix);
+        weapon.setParentId(parent_id);
 
         if (!weapon.getWtype().equals("Bow") && !weapon.getWtype().equals("Light Bowgun")
             && !weapon.getWtype().equals("Heavy Bowgun")) {
