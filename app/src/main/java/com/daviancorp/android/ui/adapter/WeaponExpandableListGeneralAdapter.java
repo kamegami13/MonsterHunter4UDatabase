@@ -1,6 +1,7 @@
 package com.daviancorp.android.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
@@ -53,6 +54,14 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
 
         public ImageView iconView;
 
+        public View colorBand;
+        public View indentView;
+
+        private static final int[] indColors = {R.color.rare_1, R.color.rare_2,
+                R.color.rare_3, R.color.rare_4, R.color.rare_5,
+                R.color.rare_6, R.color.rare_7, R.color.rare_8, R.color.rare_9,
+                R.color.rare_10};
+
         public WeaponViewHolder(View weaponView) {
             super(weaponView);
             view = weaponView;
@@ -72,11 +81,18 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
             defenseView = (TextView) weaponView.findViewById(R.id.defense_text);
             iconView = (ImageView) weaponView.findViewById(R.id.weapon_icon);
             
-            //holder.lineLayout = (View) weaponView.findViewById(R.id.tree_lines);
+            colorBand = weaponView.findViewById(R.id.color_band);
+            indentView = weaponView.findViewById(R.id.indent_view);
         }
 
         public void setPaddingLeft(int paddingLeft) {
-            view.setPadding(paddingLeft,0,0,0);
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) indentView.getLayoutParams();
+            params.width = paddingLeft;
+        }
+
+        public void setColorBandColor(int indentation) {
+            int color = view.getContext().getResources().getColor(indColors[indentation]);
+            colorBand.setBackgroundColor(color);
         }
     }
 
@@ -130,7 +146,11 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
 
         if (weaponEntry.getIndentation() == 0) {
             holder.setPaddingLeft(0);
+            holder.colorBand.setVisibility(View.GONE);
         } else {
+            holder.colorBand.setVisibility(View.VISIBLE);
+            holder.setColorBandColor(weapon.getRarity()-1);
+
             int leftPadding = Utils.getPaddingPixels(mContext, mPaddingDP)
                     * (weaponEntry.getIndentation());
             holder.setPaddingLeft(leftPadding);
