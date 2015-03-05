@@ -1,6 +1,7 @@
 package com.daviancorp.android.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +17,7 @@ import com.daviancorp.android.ui.general.WeaponListEntry;
  */
 public abstract class WeaponExpandableListElementAdapter extends WeaponExpandableListGeneralAdapter {
 
-    public WeaponExpandableListElementAdapter(Context context, View.OnClickListener listener) {
+    public WeaponExpandableListElementAdapter(Context context, View.OnLongClickListener listener) {
         super(context, listener);
     }
 
@@ -65,27 +66,38 @@ public abstract class WeaponExpandableListElementAdapter extends WeaponExpandabl
 
         holder.elementView.setText("");
         holder.elementView2.setText("");
-        holder.elementIconView.setVisibility(View.GONE);
-        holder.elementIconView2.setVisibility(View.GONE);
+        holder.elementIconView.setVisibility(View.INVISIBLE);
+        holder.elementIconView2.setVisibility(View.INVISIBLE);
 
         if (!"".equals(element) || !"".equals(awakenedElement)) {
             if (!"".equals(awakenedElement)) {
                 element = awakenedElement;
                 element_attack = awaken_attack;
                 awakenText = "(";
-                holder.elementView.setText("" + element_attack + ")");
+                holder.elementView.setText(Long.toString(element_attack) + ")");
             } else {
-                holder.elementView.setText("" + element_attack);
+                holder.elementView.setText(Long.toString(element_attack));
             }
 
             holder.elementIconView.setTag(weapon.getId());
-            new LoadImage(holder.elementIconView, "icons_monster_info/" + element + ".png").execute();
             holder.elementIconView.setVisibility(View.VISIBLE);
+
+            final Bitmap bitmap = getBitmapFromMemCache("icons_monster_info/" + element + ".png");
+            if(bitmap != null) {
+                holder.elementIconView.setImageBitmap(bitmap);
+            } else {
+                new LoadImage(holder.elementIconView, "icons_monster_info/" + element + ".png").execute();
+            }
 
         }
         if(!"".equals(element2)) {
             holder.elementIconView2.setTag(weapon.getId());
-            new LoadImage(holder.elementIconView2, "icons_monster_info/" + element2 + ".png").execute();
+            final Bitmap bitmap = getBitmapFromMemCache("icons_monster_info/" + element2 + ".png");
+            if(bitmap != null) {
+                holder.elementIconView2.setImageBitmap(bitmap);
+            } else {
+                new LoadImage(holder.elementIconView2, "icons_monster_info/" + element2 + ".png").execute();
+            }
             holder.elementIconView2.setVisibility(View.VISIBLE);
 
             holder.elementView2.setText("" + element_2_attack);

@@ -48,6 +48,7 @@ public class Weapon extends Item{
     private int[] mSharpness2;
     private String[] coatings_array;
     private String chargeString;
+    private String attackString;
 	
 	/* Default Constructor */
 	public Weapon() {
@@ -111,7 +112,7 @@ public class Weapon extends Item{
 	}
 
 	public void setAttack(int attack) {
-		this.attack = attack;
+		this.attack = attack; this.attackString = Integer.toString(attack);
 	}
 
 	public int getMaxAttack() {
@@ -483,5 +484,9 @@ public class Weapon extends Item{
 
     public void setParentId(int parent_id) {
         this.parent_id = parent_id;
+    }
+
+    public String getAttackString() {
+        return attackString;
     }
 }

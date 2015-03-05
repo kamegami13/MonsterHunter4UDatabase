@@ -90,6 +90,13 @@ public class DrawSharpness extends View {
     }
 
     @Override
+    public void requestLayout() {
+        /*
+         * Do nothing here
+         */
+    }
+
+    @Override
 	public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 

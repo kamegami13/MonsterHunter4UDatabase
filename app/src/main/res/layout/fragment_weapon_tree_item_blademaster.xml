@@ -1,142 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/main_layout"
-    android:clickable="false">
+    android:clickable="true"
+    android:orientation="horizontal">
 
     <View
-        android:layout_width="0dp"
-        android:layout_height="81dp"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
         android:id="@+id/indent_view"
         android:background="@color/divider_color" />
 
     <View
         android:layout_width="4dp"
-        android:layout_height="81dp"
+        android:layout_height="match_parent"
         android:id="@+id/color_band"
         android:layout_alignWithParentIfMissing="true"
         android:layout_toRightOf="@+id/indent_view" />
 
-    <View android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:id="@+id/divider"
-        android:background="@color/divider_color"
-        android:layout_toRightOf="@+id/color_band" />
-
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/clickable_layout"
         android:layout_toRightOf="@+id/color_band"
         android:layout_below="@+id/divider"
-        android:clickable="true"
-        android:background="@drawable/clicked_states_white">
+        android:clickable="false"
+        android:background="@drawable/clicked_states_white"
+        android:paddingBottom="4dp">
+
+        <View android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:id="@+id/divider"
+            android:background="@color/divider_color" />
 
         <RelativeLayout
             android:id="@+id/item3"
-            style="@style/list_sub_item">
-
-            <com.daviancorp.android.ui.general.FixedImageView
-                android:id="@+id/weapon_icon"
-                style="@style/small_image"
-                android:layout_centerVertical="true" />
+            style="@style/list_sub_item"
+            android:layout_below="@+id/divider"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingLeft="12dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Leidenskraft"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:text="Rathalos Gleamsword"
                 android:id="@+id/name_text"
                 style="@style/text_medium"
-                android:layout_toRightOf="@+id/weapon_icon"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/special_layout">
-
-                <TextView
-                    android:id="@+id/special_text"
-                    style="@style/text_small"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Impact"
-                    android:layout_alignParentRight="true" />
-
-                <com.daviancorp.android.ui.general.FixedImageView
-                    android:id="@+id/note_image_1"
-                    style="@style/tiny_image"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/note_image_2" />
-
-                <com.daviancorp.android.ui.general.FixedImageView
-                    android:id="@+id/note_image_2"
-                    style="@style/tiny_image"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/note_image_3" />
-
-                <com.daviancorp.android.ui.general.FixedImageView
-                    android:id="@+id/note_image_3"
-                    style="@style/tiny_image"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+            <view
+                android:layout_width="92dp"
+                android:layout_height="16dp"
+                class="com.daviancorp.android.ui.general.DrawSharpness"
+                android:id="@+id/sharpness"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_below="@+id/item3"
             style="@style/list_sub_item"
             android:id="@+id/bottom_layout"
-            android:layout_height="40dp"
-            android:gravity="center_vertical">
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:layout_width="fill_parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="750"
+                android:text="DMG: 7777"
                 android:id="@+id/attack_text"
                 style="@style/text_small"
                 android:layout_gravity="left"
-                android:layout_alignLeft="@+id/sharpness" />
-
-            <view
-                android:layout_width="112dp"
-                android:layout_height="16dp"
-                class="com.daviancorp.android.ui.general.DrawSharpness"
-                android:id="@+id/sharpness"
-                android:layout_toLeftOf="@+id/defense_text"
-                android:layout_alignTop="@+id/defense_text" />
+                android:textSize="12sp" />
 
             <TextView
-                android:layout_width="32dp"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:id="@+id/defense_text"
-                android:layout_toLeftOf="@+id/affinity_text"
-                android:gravity="right"
-                android:layout_below="@+id/slots_text" />
-
-            <TextView
-                android:layout_width="54dp"
+                android:layout_width="44dp"
                 android:layout_height="wrap_content"
                 android:text="OOO"
                 android:id="@+id/slots_text"
                 style="@style/text_small"
                 android:gravity="right|top"
+                android:textSize="12sp"
+                android:layout_weight="1"
                 android:layout_alignParentRight="true" />
 
             <TextView
-                android:layout_width="54dp"
+                android:layout_width="52dp"
+                android:layout_height="wrap_content"
+                android:text="DEF: 50"
+                android:id="@+id/defense_text"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:layout_toLeftOf="@+id/affinity_text" />
+
+            <TextView
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:text="-25/40%"
                 android:id="@+id/affinity_text"
                 android:gravity="right|top"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/slots_text"
-                android:paddingBottom="4dp" />
+                android:layout_alignParentRight="false"
+                android:textSize="12sp"
+                android:layout_toLeftOf="@+id/slots_text" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -144,14 +113,15 @@
                 android:text="("
                 android:id="@+id/awaken_text"
                 style="@style/text_small"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="0dp"
-                android:layout_toLeftOf="@+id/element_image" />
+                android:layout_marginLeft="2dp"
+                android:textSize="12sp"
+                android:gravity="right"
+                android:layout_toRightOf="@+id/attack_text" />
 
             <com.daviancorp.android.ui.general.FixedImageView
                 android:id="@+id/element_image"
                 style="@style/tiny_image"
-                android:layout_toLeftOf="@+id/element_text" />
+                android:layout_toRightOf="@+id/awaken_text" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -159,23 +129,75 @@
                 android:text="350)"
                 android:id="@+id/element_text"
                 style="@style/text_small"
-                android:layout_toLeftOf="@+id/element_image2"
-                android:layout_marginRight="8dp" />
+                android:layout_marginRight="4dp"
+                android:textSize="12sp"
+                android:layout_toRightOf="@+id/element_image" />
 
             <com.daviancorp.android.ui.general.FixedImageView
                 style="@style/tiny_image"
                 android:id="@+id/element_image2"
-                android:layout_toLeftOf="@+id/element_text2" />
+                android:layout_toRightOf="@+id/element_text" />
 
             <TextView
                 style="@style/text_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/element_text2"
-                android:layout_alignRight="@+id/defense_text"
-                android:text=")" />
+                android:text="350"
+                android:textSize="12sp"
+                android:layout_toRightOf="@+id/element_image2" />
+
+            <TextView
+                android:id="@+id/special_text"
+                style="@style/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NOTES: "
+                android:textSize="12sp"
+                android:layout_below="@+id/attack_text"
+                android:layout_alignParentLeft="false"
+                android:visibility="gone"
+                android:layout_marginBottom="4dp"
+                android:layout_alignParentRight="false"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_toLeftOf="@+id/note_image_1" />
+
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/note_image_1"
+                style="@style/tiny_image"
+                android:layout_below="@+id/attack_text"
+                android:visibility="gone"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toLeftOf="@+id/note_image_2" />
+
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/note_image_2"
+                style="@style/tiny_image"
+                android:layout_alignTop="@+id/note_image_1"
+                android:visibility="gone"
+                android:layout_marginBottom="4dp"
+                android:layout_toLeftOf="@+id/note_image_3" />
+
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/note_image_3"
+                style="@style/tiny_image"
+                android:layout_alignTop="@+id/note_image_2"
+                android:visibility="gone"
+                android:layout_marginBottom="4dp"
+                android:layout_alignParentRight="true" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@drawable/arrow"
+                android:rotation="180"
+                android:id="@+id/arrow"
+                android:layout_below="@+id/attack_text"
+                android:layout_centerHorizontal="true"
+                android:visibility="visible" />
 
         </RelativeLayout>
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

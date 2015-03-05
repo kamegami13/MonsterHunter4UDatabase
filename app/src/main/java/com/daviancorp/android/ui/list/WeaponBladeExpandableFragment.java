@@ -59,11 +59,13 @@ public class WeaponBladeExpandableFragment extends Fragment implements
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new WeaponExpandableListBladeAdapter(getActivity(), new View.OnClickListener() {
+        mAdapter = new WeaponExpandableListBladeAdapter(getActivity(), new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onLongClick(View v) {
                 int position = mRecyclerView.getChildPosition(v);
                 mAdapter.toggleGroup(position);
+
+                return true;
             }
         });
         mRecyclerView.setAdapter(mAdapter);

@@ -1,18 +1,23 @@
 package com.daviancorp.android.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.util.LruCache;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
 import com.daviancorp.android.ui.general.WeaponListEntry;
 import com.oissela.software.multilevelexpindlistview.MultiLevelExpIndListAdapter;
 import com.oissela.software.multilevelexpindlistview.Utils;
@@ -27,7 +32,7 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
     /**
      * This is called when the user click on an item or group.
      */
-    protected final View.OnClickListener mListener;
+    protected final View.OnLongClickListener mListener;
 
     protected final Context mContext;
 
@@ -36,15 +41,47 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
      */
     private final int mPaddingDP = 4;
 
-    public WeaponExpandableListGeneralAdapter(Context context, View.OnClickListener listener) {
+    // Image cache
+    protected LruCache<String, Bitmap> mImageCache;
+
+    public WeaponExpandableListGeneralAdapter(Context context, View.OnLongClickListener listener) {
         this.mContext = context;
         this.mListener = listener;
+
+        // Get max available VM memory, exceeding this amount will throw an
+        // OutOfMemory exception. Stored in kilobytes as LruCache takes an
+        // int in its constructor.
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+
+        // Use 1/8th of the available memory for this memory cache.
+        final int cacheSize = maxMemory / 8;
+
+        mImageCache = new LruCache<String, Bitmap>(cacheSize) {
+            @Override
+            protected int sizeOf(String key, Bitmap draw) {
+                // The cache size will be measured in kilobytes rather than
+                // number of items.
+                return draw.getByteCount() / 1024;
+            }
+        };
+    }
+
+
+    public Bitmap getBitmapFromMemCache(String key) {
+        return mImageCache.get(key);
+    }
+
+    public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+        if (getBitmapFromMemCache(key) == null) {
+            mImageCache.put(key, bitmap);
+        }
     }
 
     protected static class WeaponViewHolder extends RecyclerView.ViewHolder {
         private View view;
 
-        public RelativeLayout weaponLayout;
+        public LinearLayout weaponLayout;
+        public RelativeLayout clickableLayout;
 
         public TextView nameView;
         public TextView attackView;
@@ -56,6 +93,7 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
 
         public View colorBand;
         public View indentView;
+        public View arrow;
 
         private static final int[] indColors = {R.color.rare_1, R.color.rare_2,
                 R.color.rare_3, R.color.rare_4, R.color.rare_5,
@@ -71,7 +109,8 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
             //
 
             // Set the layout id
-            weaponLayout = (RelativeLayout) weaponView.findViewById(R.id.main_layout);
+            weaponLayout = (LinearLayout) weaponView.findViewById(R.id.main_layout);
+            clickableLayout = (RelativeLayout) weaponView.findViewById(R.id.clickable_layout);
 
             // Find all views
             nameView = (TextView) weaponView.findViewById(R.id.name_text);
@@ -83,10 +122,11 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
             
             colorBand = weaponView.findViewById(R.id.color_band);
             indentView = weaponView.findViewById(R.id.indent_view);
+            arrow = weaponView.findViewById(R.id.arrow);
         }
 
         public void setPaddingLeft(int paddingLeft) {
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) indentView.getLayoutParams();
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) indentView.getLayoutParams();
             params.width = paddingLeft;
         }
 
@@ -105,9 +145,15 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         //
         // Set the image for the weapon
         //
+        /*
         holder.iconView.setTag(weapon.getId());
-        new LoadImage(holder.iconView, weapon.getFileLocation()).execute();
-
+        final Bitmap bitmap = getBitmapFromMemCache(weapon.getFileLocation());
+        if(bitmap != null) {
+            holder.iconView.setImageBitmap(bitmap);
+        } else {
+            new LoadImage(holder.iconView, weapon.getFileLocation()).execute();
+        }
+        */
         //
         // Get the weapons name
         //
@@ -116,7 +162,7 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         name = name + weapon.getName();
 
         // Get the weapons attack
-        String attack = Long.toString(weapon.getAttack());
+        String attack = "DMG: " + weapon.getAttackString();
 
         //
         // Get affinity and defense
@@ -126,9 +172,10 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
             affinity = weapon.getAffinity() + "%";
         }
 
+
         String defense = "";
         if (weapon.getDefense() != 0) {
-            defense = "" + weapon.getDefense();
+            defense = "DEF: " + weapon.getDefense();
         }
 
         //
@@ -140,24 +187,29 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         holder.affinityView.setText(affinity);
         holder.defenseView.setText(defense);
 
+        holder.view.setOnClickListener(new WeaponClickListener(mContext, weapon.getId()));
+
         //
         // Handle indentation
         //
 
-        if (weaponEntry.getIndentation() == 0) {
-            holder.setPaddingLeft(0);
-            holder.colorBand.setVisibility(View.GONE);
-        } else {
-            holder.colorBand.setVisibility(View.VISIBLE);
-            holder.setColorBandColor(weapon.getRarity()-1);
+        //holder.colorBand.setVisibility(View.VISIBLE);
+        holder.setColorBandColor(weapon.getRarity()-1);
 
-            int leftPadding = Utils.getPaddingPixels(mContext, mPaddingDP)
-                    * (weaponEntry.getIndentation());
-            holder.setPaddingLeft(leftPadding);
+        int leftPadding = Utils.getPaddingPixels(mContext, mPaddingDP)
+                * (weaponEntry.getIndentation());
+        holder.setPaddingLeft(leftPadding);
+
+        //
+        // Handle groups
+        //
+        holder.arrow.setVisibility(View.GONE);
+        if (weaponEntry.isGroup() && weaponEntry.getGroupSize() > 0) {
+            holder.arrow.setVisibility(View.VISIBLE);
         }
     }
 
-    protected class LoadImage extends AsyncTask<Void,Void,Drawable> {
+    protected class LoadImage extends AsyncTask<Void,Void,Bitmap> {
         private ImageView mImage;
         private String path;
         private String imagePath;
@@ -169,22 +221,22 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         }
 
         @Override
-        protected Drawable doInBackground(Void... arg0) {
-            Drawable d = null;
-
+        protected Bitmap doInBackground(Void... arg0) {
+            Bitmap d = null;
             try {
-                d = Drawable.createFromStream(mImage.getContext().getAssets().open(imagePath),
-                        null);
+                d = BitmapFactory.decodeStream(mImage.getContext().getAssets().open(imagePath));
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
+            addBitmapToMemoryCache(imagePath, d);
+
             return d;
         }
 
-        protected void onPostExecute(Drawable result) {
+        protected void onPostExecute(Bitmap result) {
             if (mImage.getTag().toString().equals(path)) {
-                mImage.setImageDrawable(result);
+                mImage.setImageBitmap(result);
             }
         }
     }
