@@ -107,9 +107,10 @@
             style="@style/list_sub_item"
             android:layout_below="@+id/item3"
             android:id="@+id/relativeLayout"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_width="fill_parent"
-            android:paddingLeft="12dp">
+            android:paddingLeft="12dp"
+            android:paddingBottom="4dp">
 
             <TextView
                 style="@style/text_small"
