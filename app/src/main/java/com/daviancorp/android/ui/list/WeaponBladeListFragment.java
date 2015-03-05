@@ -125,7 +125,7 @@ public class WeaponBladeListFragment extends WeaponListFragment implements
                 // BLADE VIEWS
 
                 holder.specialtv = (TextView) convertView.findViewById(R.id.special_text);
-                holder.sharpnessDrawable = (DrawSharpness) convertView.findViewById(R.id.sharpness);
+                //holder.sharpnessDrawable = (DrawSharpness) convertView.findViewById(R.id.sharpness);
 
 
                 holder.note1v = (ImageView) convertView.findViewById(R.id.note_image_1);

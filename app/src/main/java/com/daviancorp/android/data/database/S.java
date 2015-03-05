@@ -314,6 +314,7 @@ public class S {
 	static final String COLUMN_WEAPONS_SHARPNESS_FILE = "sharpness_file";
 	static final String COLUMN_WEAPONS_FINAL = "final";
     static final String COLUMN_WEAPONS_TREE_DEPTH = "tree_depth";
+    static final String COLUMN_WEAPONS_PARENT_ID = "parent_id";
 
 	// Wishlist
 	static final String TABLE_WISHLIST = "wishlist";

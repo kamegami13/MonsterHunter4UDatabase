@@ -7,10 +7,10 @@
     <color name="text_primary_color">#f5f5f5</color>
     <color name="accent_color">#FF9800</color>
     <color name="text_color_secondary">#727272</color>
-    <color name="divider_color">#B6B6B6</color>
+    <color name="divider_color">#e5e5e5</color>
 
     <color name="list_background">#ffffff</color>
-    <color name="list_text">#000000</color>
+    <color name="list_text">#333333</color>
 
     <color name="text_color">#333333</color>
     <color name="background_color">#f5f5f5</color>
@@ -19,5 +19,16 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="transparentlight">#20D7CCC8</color>
 
+    <!-- RARITY COLORS -->
+    <color name="rare_1">#757575</color>
+    <color name="rare_2">#B53BC6</color>
+    <color name="rare_3">#FBD646</color>
+    <color name="rare_4">#F287A2</color>
+    <color name="rare_5">#57D284</color>
+    <color name="rare_6">#7F6DFF</color>
+    <color name="rare_7">#FF3E56</color>
+    <color name="rare_8">#9ACCFF</color>
+    <color name="rare_9">#FF9A53</color>
+    <color name="rare_10">#FF33FF</color>
 
 </resources>

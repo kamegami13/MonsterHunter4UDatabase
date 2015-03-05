@@ -39,6 +39,8 @@ public class Weapon extends Item{
 	private String sharpness_file;				// Sharpness image file location
 	private int wfinal;							// Final in weapon tree or not
     private int tree_depth;                     // Depth of weapon in weapon tree
+
+    private int parent_id;
     
     private String mSlotString;
     private String file_location;
@@ -46,6 +48,7 @@ public class Weapon extends Item{
     private int[] mSharpness2;
     private String[] coatings_array;
     private String chargeString;
+    private String attackString;
 	
 	/* Default Constructor */
 	public Weapon() {
@@ -109,7 +112,7 @@ public class Weapon extends Item{
 	}
 
 	public void setAttack(int attack) {
-		this.attack = attack;
+		this.attack = attack; this.attackString = Integer.toString(attack);
 	}
 
 	public int getMaxAttack() {
@@ -473,5 +476,17 @@ public class Weapon extends Item{
 
     public String[] getCoatingsArray() {
         return coatings_array;
+    }
+
+    public int getParentId() {
+        return parent_id;
+    }
+
+    public void setParentId(int parent_id) {
+        this.parent_id = parent_id;
+    }
+
+    public String getAttackString() {
+        return attackString;
     }
 }

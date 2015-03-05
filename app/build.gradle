@@ -32,4 +32,5 @@ dependencies {
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1' // Support library for tab navigation with new Toolbar object
     // integration instructions here https://github.com/astuetz/PagerSlidingTabStrip
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
+    compile project(':multilevelexpindlistview')
 }

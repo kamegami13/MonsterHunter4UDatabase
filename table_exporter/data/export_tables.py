@@ -16,7 +16,7 @@ def main():
                      'fire_res','thunder_res','dragon_res','water_res','ice_res',
                      'gender','hunter_type','num_slots'],
                 'weapons' : 
-                    ['_id','wtype','creation_cost','upgrade_cost','attack','max_attack','element','element_attack',
+                    ['_id','parent_id','wtype','creation_cost','upgrade_cost','attack','max_attack','element','element_attack',
                      'element_2','element_2_attack','awaken_element','awaken_element_attack',
                      'defense','sharpness','affinity','horn_notes','shelling_type',
                      'phial','charges','coatings','recoil','reload_speed','rapid_fire','deviation','ammo',
