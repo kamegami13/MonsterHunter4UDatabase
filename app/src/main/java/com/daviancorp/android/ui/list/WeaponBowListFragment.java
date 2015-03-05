@@ -203,9 +203,6 @@ public class WeaponBowListFragment extends WeaponListFragment implements
 
             String[] coatings = weapon.getCoatingsArray();
 
-            //LoadPhials task = new LoadPhials(holder, coatings);
-            //task.execute();
-
             if (!coatings[0].equals("-")) {
                 holder.powerv.setTag(weapon.getId());
                 new LoadImage(holder.powerv, "icons_items/Bottle-Red.png").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

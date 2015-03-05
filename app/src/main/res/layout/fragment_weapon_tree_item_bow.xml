@@ -1,190 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="84dp"
+    android:layout_height="wrap_content"
     android:id="@+id/main_layout"
-    android:clickable="true"
-    android:background="@drawable/clicked_states_white">
+    android:clickable="false"
+    android:orientation="horizontal">
 
     <View
-        android:layout_width="wrap_content"
-        android:layout_height="84dp"
-        android:id="@+id/tree_lines" />
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:id="@+id/indent_view"
+        android:background="@color/divider_color" />
+
+    <View
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:id="@+id/color_band" />
 
     <RelativeLayout
-        style="@style/list_sub_item"
-        android:id="@+id/item3" >
-
-        <com.daviancorp.android.ui.general.FixedImageView
-            style="@style/small_image"
-            android:id="@+id/weapon_icon"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            style="@style/text_medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Leidenskraft"
-            android:id="@+id/name_text"
-            android:layout_toRightOf="@+id/weapon_icon"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Power"
-            android:id="@+id/arc_shot_text"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        style="@style/list_sub_item"
-        android:layout_below="@+id/item3"
-        android:id="@+id/relativeLayout"
-        android:layout_height="40dp"
         android:layout_width="fill_parent"
-        android:paddingTop="2dp">
+        android:layout_height="wrap_content"
+        android:background="@drawable/clicked_states_white"
+        android:id="@+id/clickable_layout">
 
-        <TextView
-            style="@style/text_small"
-            android:layout_width="32dp"
+        <RelativeLayout
+            style="@style/list_sub_item"
+            android:id="@+id/item3"
+            android:paddingLeft="12dp"
             android:layout_height="wrap_content"
-            android:text="750"
-            android:id="@+id/attack_text"
-            android:layout_gravity="left"
-            android:layout_marginRight="16dp"
-            android:layout_toLeftOf="@+id/slots_text"
-            android:layout_alignLeft="@+id/charge_text" />
+            android:paddingTop="8dp">
 
-        <TextView
-            android:layout_width="112dp"
-            android:layout_height="wrap_content"
-            android:text="R1|R1|R1|R1*|"
-            android:id="@+id/charge_text"
-            android:layout_alignTop="@+id/defense_text"
-            android:layout_toLeftOf="@+id/defense_text" />
+            <TextView
+                style="@style/text_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leidenskraft"
+                android:id="@+id/name_text"
+                android:layout_centerVertical="true" />
 
-        <TextView
-            android:layout_width="32dp"
-            android:layout_height="wrap_content"
-            android:text="10"
-            android:id="@+id/defense_text"
-            android:layout_toLeftOf="@+id/affinity_text"
-            android:gravity="right"
-            android:layout_alignTop="@+id/affinity_text" />
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/power"
+                style="@style/tiny_image"
+                android:layout_gravity="right"
+                android:layout_toLeftOf="@+id/poison"
+                android:layout_centerVertical="true"
+                android:layout_alignWithParentIfMissing="true" />
 
-        <TextView
-            style="@style/text_small"
-            android:layout_width="54dp"
-            android:layout_height="wrap_content"
-            android:text="OOO"
-            android:id="@+id/slots_text"
-            android:gravity="right|top"
-            android:layout_alignParentRight="true" />
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/poison"
+                style="@style/tiny_image"
+                android:layout_gravity="right"
+                android:layout_toLeftOf="@+id/sleep"
+                android:layout_centerVertical="true"
+                android:layout_alignWithParentIfMissing="true" />
 
-        <TextView
-            android:layout_width="54dp"
-            android:layout_height="wrap_content"
-            android:text="40%"
-            android:id="@+id/affinity_text"
-            android:gravity="right|top"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/slots_text"
-            android:paddingBottom="4dp" />
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/sleep"
+                style="@style/tiny_image"
+                android:layout_gravity="right"
+                android:layout_toLeftOf="@+id/para"
+                android:layout_centerVertical="true"
+                android:layout_alignWithParentIfMissing="true" />
 
-        <com.daviancorp.android.ui.general.FixedImageView
-            android:id="@+id/power"
-            style="@style/tiny_image"
-            android:layout_gravity="right"
-            android:layout_toLeftOf="@+id/poison"
-            android:layout_centerVertical="true" />
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/para"
+                style="@style/tiny_image"
+                android:layout_gravity="right"
+                android:layout_toLeftOf="@+id/crange"
+                android:layout_centerVertical="true"
+                android:layout_alignWithParentIfMissing="true" />
 
-        <com.daviancorp.android.ui.general.FixedImageView
-            android:id="@+id/poison"
-            style="@style/tiny_image"
-            android:layout_gravity="right"
-            android:layout_toLeftOf="@+id/sleep"
-            android:layout_centerVertical="true" />
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/crange"
+                style="@style/tiny_image"
+                android:layout_gravity="right"
+                android:layout_toLeftOf="@+id/paint"
+                android:layout_centerVertical="true"
+                android:layout_alignWithParentIfMissing="true" />
 
-        <com.daviancorp.android.ui.general.FixedImageView
-            android:id="@+id/sleep"
-            style="@style/tiny_image"
-            android:layout_gravity="right"
-            android:layout_toLeftOf="@+id/para"
-            android:layout_centerVertical="true" />
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/paint"
+                style="@style/tiny_image"
+                android:layout_gravity="right"
+                android:layout_toLeftOf="@+id/exhaust"
+                android:layout_centerVertical="true"
+                android:layout_alignWithParentIfMissing="true" />
 
-        <com.daviancorp.android.ui.general.FixedImageView
-            android:id="@+id/para"
-            style="@style/tiny_image"
-            android:layout_gravity="right"
-            android:layout_toLeftOf="@+id/crange"
-            android:layout_centerVertical="true" />
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/exhaust"
+                style="@style/tiny_image"
+                android:layout_gravity="right"
+                android:layout_toLeftOf="@+id/blast"
+                android:layout_centerVertical="true"
+                android:layout_alignWithParentIfMissing="true" />
 
-        <com.daviancorp.android.ui.general.FixedImageView
-            android:id="@+id/crange"
-            style="@style/tiny_image"
-            android:layout_gravity="right"
-            android:layout_toLeftOf="@+id/paint"
-            android:layout_centerVertical="true" />
+            <com.daviancorp.android.ui.general.FixedImageView
+                android:id="@+id/blast"
+                style="@style/tiny_image"
+                android:layout_gravity="right"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true" />
 
-        <com.daviancorp.android.ui.general.FixedImageView
-            android:id="@+id/paint"
-            style="@style/tiny_image"
-            android:layout_gravity="right"
-            android:layout_toLeftOf="@+id/exhaust"
-            android:layout_centerVertical="true" />
+        </RelativeLayout>
 
-        <com.daviancorp.android.ui.general.FixedImageView
-            android:id="@+id/exhaust"
-            style="@style/tiny_image"
-            android:layout_gravity="right"
-            android:layout_toLeftOf="@+id/blast"
-            android:layout_centerVertical="true" />
+        <RelativeLayout
+            style="@style/list_sub_item"
+            android:layout_below="@+id/item3"
+            android:id="@+id/relativeLayout"
+            android:layout_height="40dp"
+            android:layout_width="fill_parent"
+            android:paddingLeft="12dp">
 
-        <com.daviancorp.android.ui.general.FixedImageView
-            android:id="@+id/blast"
-            style="@style/tiny_image"
-            android:layout_gravity="right"
-            android:layout_toLeftOf="@+id/attack_text"
-            android:layout_centerVertical="true" />
+            <TextView
+                style="@style/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DMG: 7777"
+                android:id="@+id/attack_text"
+                android:layout_gravity="left"
+                android:layout_marginRight="4dp"
+                android:textSize="12sp" />
 
-        <TextView
-            style="@style/text_small"
-            android:layout_width="12dp"
-            android:layout_height="wrap_content"
-            android:text="("
-            android:id="@+id/awaken_text"
-            android:layout_toLeftOf="@+id/element_image"
-            android:gravity="right" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spread 1 / Spread 2 / Spread 3 / Spread 4"
+                android:id="@+id/charge_text"
+                android:layout_below="@+id/attack_text"
+                android:textSize="12sp" />
 
-        <com.daviancorp.android.ui.general.FixedImageView
-            style="@style/tiny_image"
-            android:id="@+id/element_image"
-            android:layout_toLeftOf="@+id/element_text" />
+            <TextView
+                android:layout_width="52dp"
+                android:layout_height="wrap_content"
+                android:text="DEF: 50"
+                android:id="@+id/defense_text"
+                android:layout_toLeftOf="@+id/affinity_text"
+                android:layout_alignTop="@+id/affinity_text"
+                android:textSize="12sp" />
 
-        <TextView
-            style="@style/text_small"
-            android:layout_width="36dp"
-            android:layout_height="wrap_content"
-            android:text="350)"
-            android:id="@+id/element_text"
-            android:layout_toLeftOf="@+id/element_image2"
-            android:layout_marginRight="8dp"
-            android:gravity="right" />
+            <TextView
+                style="@style/text_small"
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:text="OOO"
+                android:id="@+id/slots_text"
+                android:gravity="right|top"
+                android:layout_alignParentRight="true"
+                android:textSize="14sp" />
 
-        <com.daviancorp.android.ui.general.FixedImageView
-            style="@style/tiny_image"
-            android:id="@+id/element_image2"
-            android:layout_marginLeft="8dp"
-            android:layout_toLeftOf="@+id/element_text2" />
+            <TextView
+                android:layout_width="54dp"
+                android:layout_height="wrap_content"
+                android:text="-25/40%"
+                android:id="@+id/affinity_text"
+                android:gravity="right|top"
+                android:layout_toLeftOf="@+id/slots_text"
+                android:textSize="12sp" />
 
-        <TextView
-            style="@style/text_small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/element_text2"
-            android:layout_alignRight="@+id/defense_text" />
+            <TextView
+                style="@style/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="("
+                android:id="@+id/awaken_text"
+                android:gravity="right"
+                android:layout_toRightOf="@+id/attack_text"
+                android:textSize="12sp" />
+
+            <com.daviancorp.android.ui.general.FixedImageView
+                style="@style/tiny_image"
+                android:id="@+id/element_image"
+                android:layout_toRightOf="@+id/awaken_text" />
+
+            <TextView
+                style="@style/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="350)"
+                android:id="@+id/element_text"
+                android:layout_marginRight="8dp"
+                android:gravity="right"
+                android:layout_toRightOf="@+id/element_image"
+                android:textSize="12sp" />
+
+            <com.daviancorp.android.ui.general.FixedImageView
+                style="@style/tiny_image"
+                android:id="@+id/element_image2"
+                android:visibility="gone" />
+
+            <TextView
+                style="@style/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/element_text2"
+                android:visibility="gone"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:text="Power"
+                android:id="@+id/arc_shot_text"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/attack_text"
+                android:textSize="12sp"
+                android:gravity="right" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@drawable/arrow"
+                android:rotation="180"
+                android:id="@+id/arrow"
+                android:layout_below="@+id/attack_text"
+                android:visibility="invisible"
+                android:layout_toLeftOf="@+id/arc_shot_text"
+                android:layout_marginRight="4dp" />
+        </RelativeLayout>
+
+        <View android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:id="@+id/divider"
+            android:background="@color/divider_color" />
     </RelativeLayout>
-</RelativeLayout>
+
+</LinearLayout>
