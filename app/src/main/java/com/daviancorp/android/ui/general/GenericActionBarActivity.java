@@ -59,6 +59,13 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
     public ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
 
+    public interface ActionOnCloseListener {
+        void actionOnClose();
+
+    }
+
+    public ActionOnCloseListener actionOnCloseListener;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,27 +118,13 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                         break;
                 }
                 final Intent finalIntent = intent;
-                mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+                actionOnCloseListener = new ActionOnCloseListener() {
                     @Override
-                    public void onDrawerSlide(View drawerView, float slideOffset) {
-
-                    }
-
-                    @Override
-                    public void onDrawerOpened(View drawerView) {
-
-                    }
-
-                    @Override
-                    public void onDrawerClosed(View drawerView) {
+                    public void actionOnClose() {
                         startActivity(finalIntent);
                     }
+                };
 
-                    @Override
-                    public void onDrawerStateChanged(int newState) {
-
-                    }
-                });
                 mDrawerLayout.closeDrawers();
             }
         });
@@ -146,6 +139,10 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu(); // Creates call to onPrepareOptionsMenu()
+                if (actionOnCloseListener != null) {
+                    actionOnCloseListener.actionOnClose();
+                    actionOnCloseListener = null;
+                }
             }
         };
 
@@ -278,7 +275,7 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View row = convertView;
-            ItemHolder holder = null;
+            ItemHolder holder;
 
             if (row == null) {
                 LayoutInflater inflater = (LayoutInflater) context
