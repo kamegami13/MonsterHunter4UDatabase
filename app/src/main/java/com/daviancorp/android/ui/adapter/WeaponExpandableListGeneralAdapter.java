@@ -203,7 +203,7 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         //
         // Handle groups
         //
-        holder.arrow.setVisibility(View.GONE);
+        holder.arrow.setVisibility(View.INVISIBLE);
         if (weaponEntry.isGroup() && weaponEntry.getGroupSize() > 0) {
             holder.arrow.setVisibility(View.VISIBLE);
         }

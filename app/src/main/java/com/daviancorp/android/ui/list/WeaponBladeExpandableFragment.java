@@ -33,7 +33,7 @@ public class WeaponBladeExpandableFragment extends Fragment implements
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
     private static final String GROUPS_KEY = "groups_key";
-    private Bundle mSavedState;
+    private Bundle savedState;
 
     public static WeaponBladeExpandableFragment newInstance(String type) {
         Bundle args = new Bundle();
@@ -48,6 +48,11 @@ public class WeaponBladeExpandableFragment extends Fragment implements
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
+
+        savedState = savedInstanceState;
+
+        // Initialize the loader to load the list of runs
+        getLoaderManager().initLoader(R.id.weapon_list_fragment, getArguments(), this).forceLoad();
     }
 
     @Override
@@ -70,16 +75,24 @@ public class WeaponBladeExpandableFragment extends Fragment implements
         });
         mRecyclerView.setAdapter(mAdapter);
 
-        mSavedState = savedInstanceState;
-
-        //
-        // Add content to adapter (Just need to change loader to maintain parent/child!)
-        //
-
-        // Initialize the loader to load the list of runs
-        getLoaderManager().initLoader(R.id.weapon_list_fragment, getArguments(), this).forceLoad();
+        // Restores old groups if we are returning to the fragment
+        if (savedInstanceState != null) {
+            List<Integer> groups = savedInstanceState.getIntegerArrayList(GROUPS_KEY);
+            mAdapter.restoreGroups(groups);
+        }
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // Restores old groups if we are returning to the fragment
+        if (savedInstanceState != null) {
+            List<Integer> groups = savedInstanceState.getIntegerArrayList(GROUPS_KEY);
+            mAdapter.restoreGroups(groups);
+        }
     }
 
     //
@@ -97,11 +110,7 @@ public class WeaponBladeExpandableFragment extends Fragment implements
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.addAll(weapons);
 
-        // Restores old groups if we are returning to the fragment
-        if (mSavedState != null) {
-            List<Integer> groups = mSavedState.getIntegerArrayList(GROUPS_KEY);
-            mAdapter.restoreGroups(groups);
-        }
+
     }
 
     @Override
@@ -131,5 +140,20 @@ public class WeaponBladeExpandableFragment extends Fragment implements
         public ArrayList<WeaponListEntry> loadInBackground() {
             return DataManager.get(getContext()).queryWeaponTreeArray(mType);
         }
+    }
+
+    @Override
+    public void onPause() {
+        savedState = new Bundle();
+        savedState.putIntegerArrayList(GROUPS_KEY, mAdapter.saveGroups());
+        super.onPause();
+    }
+
+    @Override public void onResume() {
+        if (savedState != null) {
+            List<Integer> groups = savedState.getIntegerArrayList(GROUPS_KEY);
+            mAdapter.restoreGroups(groups);
+        }
+        super.onResume();
     }
 }
