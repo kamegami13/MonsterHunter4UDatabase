@@ -1,275 +1,292 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   	android:paddingLeft="10dp"
-    android:baselineAligned="false" >
-
-    <TableRow 
+    android:layout_height="match_parent">
+    <TableLayout
+        android:id="@+id/details_table"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:baselineAligned="false" >
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:textStyle="bold"
-            android:text="Name:"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/detail_weapon_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:textStyle="bold"
-            android:textColor="@color/text_color" />
-
-    </TableRow>
-
-    <TableRow 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Type:"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/detail_weapon_type"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:textColor="@color/text_color" />
-            
-    </TableRow>
-
-    <TableRow 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Attack:"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/detail_weapon_attack"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:textColor="@color/text_color" />
-            
-    </TableRow>
-
-    <TableRow 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Element:"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/detail_weapon_element"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:textColor="@color/text_color" />
-            
-    </TableRow>
-
-    <TableRow 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Sharpness:"
-            android:textColor="@color/text_color" />
-
-        <com.daviancorp.android.ui.general.DrawSharpness
-            android:id="@+id/detail_weapon_blade_sharpness"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".7"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="5dp"/>
-            
-    </TableRow>
-
-    <TableRow 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Rarity:"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/detail_weapon_rarity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:textColor="@color/text_color" />
-            
-    </TableRow>
-
-    <TableRow 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Slots:"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/detail_weapon_slot"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:textColor="@color/text_color" />
-            
-    </TableRow>
-
-    <TableRow 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Affinity:"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/detail_weapon_affinity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:textColor="@color/text_color" />
-            
-    </TableRow>
-
-    <TableRow 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Defense:"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/detail_weapon_defense"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:textColor="@color/text_color" />
-            
-    </TableRow>
-
-    <TableRow 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/detail_weapon_blade_special"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:textColor="@color/text_color" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight=".7" >
-
-            <ImageView
-                android:id="@+id/detail_weapon_blade_note1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp" />
-
-            <ImageView
-                android:id="@+id/detail_weapon_blade_note2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp" />
-
-            <ImageView
-                android:id="@+id/detail_weapon_blade_note3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/detail_weapon_blade_special_value"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:textStyle="bold"
+                android:text="Name:"
                 android:textColor="@color/text_color" />
-        </LinearLayout>
-            
-    </TableRow>
 
-    <TableRow 
+            <TextView
+                android:id="@+id/detail_weapon_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:textStyle="bold"
+                android:textColor="@color/text_color" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="Type:"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/detail_weapon_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:textColor="@color/text_color" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="Attack:"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/detail_weapon_attack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:textColor="@color/text_color" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="Element:"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/detail_weapon_element"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:textColor="@color/text_color" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="Sharpness:"
+                android:textColor="@color/text_color" />
+
+            <com.daviancorp.android.ui.general.DrawSharpness
+                android:id="@+id/detail_weapon_blade_sharpness"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".7"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="5dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="Rarity:"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/detail_weapon_rarity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:textColor="@color/text_color" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="Slots:"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/detail_weapon_slot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:textColor="@color/text_color" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="Affinity:"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/detail_weapon_affinity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:textColor="@color/text_color" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="Defense:"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/detail_weapon_defense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:textColor="@color/text_color" />
+
+        </TableRow>
+
+        <!-- TODO This row should be set to GONE if it's empty -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/detail_weapon_blade_special"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:textColor="@color/text_color" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight=".7" >
+
+                <ImageView
+                    android:id="@+id/detail_weapon_blade_note1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp" />
+
+                <ImageView
+                    android:id="@+id/detail_weapon_blade_note2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp" />
+
+                <ImageView
+                    android:id="@+id/detail_weapon_blade_note3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp" />
+
+                <TextView
+                    android:id="@+id/detail_weapon_blade_special_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="Creation Cost:"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/detail_weapon_creation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:textColor="@color/text_color" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:text="Upgrade Cost:"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/detail_weapon_upgrade"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:textColor="@color/text_color" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <ListView
+        android:id="@+id/horn_melodies_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_aligntop="@+id/details_table"
+        android:layout_below="@+id/details_table"
+        tools:listitem="@layout/fragment_horn_melody_listitem"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Creation Cost:"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/detail_weapon_creation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:textColor="@color/text_color" />
-            
-    </TableRow>
-
-    <TableRow 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:text="Upgrade Cost:"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/detail_weapon_upgrade"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:textColor="@color/text_color" />
-            
-    </TableRow>
-
-</TableLayout>
+</RelativeLayout>

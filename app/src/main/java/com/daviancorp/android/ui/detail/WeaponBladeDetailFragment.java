@@ -122,6 +122,8 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 			mWeaponSpecialTypeTextView.setText("Shelling:");
 			mWeaponSpecialTextView.setText(mWeapon.getShellingType());
 		}
+
+        /* Switch Axe */
 		else if (mWeapon.getWtype().equals("Switch Axe")) {
 			mWeaponSpecialTypeTextView.setText("Phial:");
 			mWeaponSpecialTextView.setText(mWeapon.getPhial());
