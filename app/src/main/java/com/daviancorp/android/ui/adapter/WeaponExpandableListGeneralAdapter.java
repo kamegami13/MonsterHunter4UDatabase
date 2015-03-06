@@ -118,7 +118,6 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
             slotView = (TextView) weaponView.findViewById(R.id.slots_text);
             affinityView = (TextView) weaponView.findViewById(R.id.affinity_text);
             defenseView = (TextView) weaponView.findViewById(R.id.defense_text);
-            iconView = (ImageView) weaponView.findViewById(R.id.weapon_icon);
             
             colorBand = weaponView.findViewById(R.id.color_band);
             indentView = weaponView.findViewById(R.id.indent_view);

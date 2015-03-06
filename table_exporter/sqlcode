@@ -6,16 +6,22 @@ drop table if exists charms;
 drop table if exists combining;
 drop table if exists components;
 drop table if exists decorations;
+drop table if exists felyne_skills;
+drop table if exists food_combos;
 drop table if exists gathering;
 drop table if exists hunting_fleet;
 drop table if exists hunting_rewards;
+drop table if exists horn_melodies;
+drop table if exists ingredients;
 drop table if exists items;
 drop table if exists item_to_skill_tree;
 drop table if exists locations;
 drop table if exists moga_woods_rewards;
+drop table if exists monster_ailment;
 drop table if exists monster_damage;
 drop table if exists monster_to_arena;
 drop table if exists monster_to_quest;
+drop table if exists monster_weakness;
 drop table if exists monsters;
 drop table if exists planting;
 drop table if exists quest_rewards;
@@ -27,6 +33,7 @@ drop table if exists weapons;
 drop table if exists wishlist;
 drop table if exists wishlist_component;
 drop table if exists wishlist_data;
+drop table if exists wyporium;
 
 CREATE TABLE IF NOT EXISTS `wishlist` (
   `_id` integer primary key autoincrement,
@@ -135,6 +142,27 @@ CREATE TABLE IF NOT EXISTS `decorations` (
   `num_slots` integer NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS 'felyne_skills' (
+  '_id' integer primary key autoincrement,
+  'skill_name' varchar(50) NOT NULL,
+  'description' varchar(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS 'food_combos' (
+  '_id' integer primary key autoincrement,
+  'ingredient1' varchar(30) NOT NULL,
+  'ingredient2' varchar(30) NOT NULL,
+  'cooked' varchar(30) NOT NULL,
+  'bonus' varchar(30) NOT NULL,
+  'skill1_id' integer,
+  'skill2_id' integer,
+  'skill3_id' integer,
+  foreign key('skill1_id') references felyne_skills('_id'),
+  foreign key('skill2_id') references felyne_skills('_id'),
+  foreign key('skill3_id') references felyne_skills('_id')
+);
+  
+
 CREATE TABLE IF NOT EXISTS `gathering` (
   `_id` integer primary key autoincrement,
   'item_id' integer NOT NULL,
@@ -170,6 +198,25 @@ CREATE TABLE IF NOT EXISTS `hunting_rewards` (
   `percentage` int(10) NOT NULL,
   foreign key(`item_id`) references items('_id'),
   foreign key(`monster_id`) references monsters('_id')
+);
+
+CREATE TABLE IF NOT EXISTS 'horn_melodies' (
+  '_id' integer primary key autoincrement,
+  'notes' varchar(3) NOT NULL,
+  'song' varchar(5) NOT NULL,
+  'effect1' varchar(55) NOT NULL,
+  'effect2' varchar(55) NOT NULL,
+  'duration' varchar(10) NOT NULL,
+  'extension' varchar(10) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS 'ingredients' (
+  '_id' integer primary key autoincrement,
+  'ingredient' varchar(30) NOT NULL,
+  'name' varchar(30) NOT NULL,
+  'level' integer,
+  'quest_id' integer,
+  foreign key('quest_id') references quests('_id')
 );
 
 CREATE TABLE IF NOT EXISTS `items` (
@@ -224,6 +271,13 @@ CREATE TABLE IF NOT EXISTS `monsters` (
   `sort_name` text NOT NULL DEFAULT ''
 );
 
+CREATE TABLE IF NOT EXISTS 'monster_ailment' (
+  '_id' integer primary key autoincrement,
+  'monster_id' integer NOT NULL,
+  'ailment' varchar(30) NOT NULL,
+  foreign key('monster_id') references monsters('_id')
+);
+
 CREATE TABLE IF NOT EXISTS `monster_damage` (
   `_id` integer primary key autoincrement,
   'monster_id' integer NOT NULL,
@@ -255,6 +309,27 @@ CREATE TABLE IF NOT EXISTS `monster_to_quest` (
   'unstable' text,
   foreign key(`monster_id`) references monsters('_id'),
   foreign key(`quest_id`) references quests('_id')
+);
+
+CREATE TABLE IF NOT EXISTS 'monster_weakness' (
+  '_id' integer primary key autoincrement,
+  'monster_id' integer NOT NULL,
+  'state' varchar(30) NOT NULL,
+  'fire' integer NOT NULL,
+  'water' integer NOT NULL,
+  'thunder' integer NOT NULL,
+  'ice' integer NOT NULL,
+  'dragon' integer NOT NULL,
+  'poison' integer NOT NULL,
+  'paralysis' integer NOT NULL,
+  'sleep' integer NOT NULL,
+  'pitfall_trap' integer NOT NULL,
+  'shock_trap' integer NOT NULL,
+  'flash_bomb' integer NOT NULL,
+  'sonic_bomb' integer NOT NULL,
+  'dung_bomb' integer NOT NULL,
+  'meat' integer NOT NULL,
+  foreign key('monster_id') references monsters('_id')
 );
 
 CREATE TABLE IF NOT EXISTS `planting` (
@@ -381,6 +456,15 @@ CREATE TABLE IF NOT EXISTS 'monster_status' (
   foreign key('monster_id') references monsters('id')
 );
 
+CREATE TABLE IF NOT EXISTS 'wyporium' (
+  '_id' integer primary key autoincrement,
+  'item_in_id' integer NOT NULL,
+  'item_out_id' integer NOT NULL,
+  'unlock_quest_id' integer,
+  foreign key('item_in_id') references items('_id'),
+  foreign key('item_out_id') references items('_id')
+);
+
 .mode tabs
 
 .import data/arena_quests.tsv arena_quests
@@ -389,8 +473,12 @@ CREATE TABLE IF NOT EXISTS 'monster_status' (
 .import data/combining.tsv combining
 .import data/components.tsv components
 .import data/decorations.tsv decorations
+.import data/felyne_skills.tsv felyne_skills
+.import data/food_combos.tsv food_combos
 .import data/gathering.tsv gathering
 .import data/hunting_rewards.tsv hunting_rewards
+.import data/horn_melodies.tsv horn_melodies
+.import data/ingredients.tsv ingredients
 .import data/item_to_skill_tree.tsv item_to_skill_tree
 .import data/items.tsv items
 .import data/locations.tsv locations
@@ -399,9 +487,12 @@ CREATE TABLE IF NOT EXISTS 'monster_status' (
 .import data/monster_status.tsv monster_status
 .import data/monster_to_quest.tsv monster_to_quest
 .import data/monsters.tsv monsters
+.import data/monster_ailment.tsv monster_ailment
+.import data/monster_weakness.tsv monster_weakness
 .import data/quest_rewards.tsv quest_rewards
 .import data/quests.tsv quests
 .import data/skill_trees.tsv skill_trees
 .import data/skills.tsv skills
 .import data/trading.tsv trading
 .import data/weapons.tsv weapons
+.import data/wyporium.tsv wyporium

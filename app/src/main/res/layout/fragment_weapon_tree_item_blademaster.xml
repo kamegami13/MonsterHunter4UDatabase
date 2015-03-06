@@ -15,9 +15,7 @@
     <View
         android:layout_width="4dp"
         android:layout_height="match_parent"
-        android:id="@+id/color_band"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_toRightOf="@+id/indent_view" />
+        android:id="@+id/color_band" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -44,7 +42,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_height="wrap_content"
                 android:text="Rathalos Gleamsword"
                 android:id="@+id/name_text"
                 style="@style/text_medium"
@@ -84,7 +82,7 @@
                 android:id="@+id/slots_text"
                 style="@style/text_small"
                 android:gravity="right|top"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:layout_weight="1"
                 android:layout_alignParentRight="true" />
 
