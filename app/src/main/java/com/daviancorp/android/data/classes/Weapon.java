@@ -79,7 +79,7 @@ public class Weapon extends Item{
 		this.sharpness_file = "";
 		this.wfinal = -1;
         this.tree_depth = 0;
-        this.chargeString = "|";
+        this.chargeString = "";
 	}
 
 	/* Getters and Setters */
@@ -177,28 +177,22 @@ public class Weapon extends Item{
 
 	public void setCharges(String charges) {
 		this.charges = charges;
+        String charge = "";
+        String level = "";
 
         String[] new_charges = charges.split("\\|");
         for (String c : new_charges) {
-            String s = "";
-
-            if (c.startsWith("Scatter")) {
-                s = "S";
-            } else if (c.startsWith("Rapid")) {
-                s = "R";
-            } else if (c.startsWith("Pierce")) {
-                s = "P";
-            }
 
             if (c.endsWith("*")) {
-                s = s + c.charAt(c.length() - 2) + "*|";
+                charge = "(" + c.substring(0,c.length()-3) + c.charAt(c.length() - 2) + ")";
             }
             else {
-                s = s + c.charAt(c.length() - 1) + "|";
+                charge = c.substring(0,c.length()-2) + c.charAt(c.length()-1);
             }
 
-            this.chargeString = this.chargeString + s;
+            this.chargeString = this.chargeString + charge + " / ";
         }
+        chargeString = chargeString.substring(0, this.chargeString.length()-3);
     }
 
 	public String getCoatings() {
@@ -262,16 +256,16 @@ public class Weapon extends Item{
         String slot = "";
         switch (this.num_slots) {
             case 0:
-                slot = "---";
+                slot = "○○○";
                 break;
             case 1:
-                slot = "O--";
+                slot = "●○○";
                 break;
             case 2:
-                slot = "OO-";
+                slot = "●●○";
                 break;
             case 3:
-                slot = "OOO";
+                slot = "●●●";
                 break;
             default:
                 slot = "error!!";

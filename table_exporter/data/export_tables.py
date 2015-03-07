@@ -61,7 +61,23 @@ def main():
                 'monster_habitat' :
                     ['_id', 'monster_id','location_id','start_area','move_area','rest_area'],
                 'monster_status' :
-                    ['_id', 'monster_id','status','initial','increase','max','duration','damage']
+                    ['_id', 'monster_id','status','initial','increase','max','duration','damage'],
+                'wyporium' :
+                    ['_id', 'item_in_id', 'item_out_id', 'unlock_quest_id'],
+                'felyne_skills' :
+                    ['_id', 'skill_name', 'description'],
+                'ingredients' :
+                    ['_id', 'ingredient', 'name', 'level', 'quest_id'],
+                'food_combos' :
+                    ['_id', 'ingredient1', 'ingredient2', 'cooked', 'bonus', 'skill1_id','skill2_id', 'skill3_id'],
+                'horn_melodies' :
+                    ['_id', 'notes', 'song', 'effect1', 'effect2', 'duration', 'extension'],
+                'monster_ailment' :
+                    ['_id', 'monster_id', 'ailment'],
+                'monster_weakness' :
+                    ['_id', 'monster_id', 'state', 'fire', 'water', 'thunder', 'ice',
+                     'dragon', 'poison','paralysis','sleep','pitfall_trap','shock_trap',
+                     'flash_bomb','sonic_bomb','dung_bomb','meat']
               }
               
     wbl = []
