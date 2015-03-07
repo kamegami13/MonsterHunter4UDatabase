@@ -1537,8 +1537,30 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		
 		return new LocationCursor(wrapHelper(qh));
 	}
-	
-/********************************* MOGA WOODS REWARD QUERIES ******************************************/
+
+    /******************************** HORN MELODIES QUERIES ***********************************************/
+
+    /*
+     * Get all melodies available from a given set of notes
+     */
+    public HornMelodiesCursor queryMelodiesFromNotes(String notes) {
+        // "SELECT * FROM horn_melodies WHERE notes = notes"
+
+        QueryHelper qh = new QueryHelper();
+        qh.Distinct = false;
+        qh.Table = S.TABLE_HORN_MELODIES;
+        qh.Columns = null;
+        qh.Selection = S.COLUMN_HORN_MELODIES_NOTES + " = ?";
+        qh.SelectionArgs = new String[]{notes};
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new HornMelodiesCursor(wrapHelper(qh));
+    }
+
+    /********************************* MOGA WOODS REWARD QUERIES ******************************************/
 	
 	/*
 	 * Get all moga woods reward monsters based on item

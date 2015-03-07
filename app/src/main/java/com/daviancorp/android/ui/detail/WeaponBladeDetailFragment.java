@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.mh4udatabase.R;
@@ -23,6 +24,7 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 	private ImageView mWeaponNote1ImageView,
 			mWeaponNote2ImageView, mWeaponNote3ImageView;
     private DrawSharpness mWeaponSharpnessDrawnView;
+    private ListView mWeaponHornMelodiesListView;
 
 	public static WeaponBladeDetailFragment newInstance(long weaponId) {
 		Bundle args = new Bundle();
@@ -71,7 +73,10 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 				.findViewById(R.id.detail_weapon_blade_note2);		
 		mWeaponNote3ImageView = (ImageView) view
 				.findViewById(R.id.detail_weapon_blade_note3);
-		
+
+		mWeaponHornMelodiesListView = (ListView) view
+                .findViewById(R.id.horn_melodies_list);
+
 		return view;
 	}
 
@@ -82,6 +87,9 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 		/* Sharpness */
 		mWeaponSharpnessDrawnView.init(mWeapon.getSharpness1(),mWeapon.getSharpness2());
 
+        // String notes to use in notes display and song list
+        String notes = "";
+
 		// Read a Bitmap from Assets
 		AssetManager manager = getActivity().getAssets();
 		InputStream open = null;
@@ -91,7 +99,7 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
 		if (mWeapon.getWtype().equals("Hunting Horn")) {
 			mWeaponSpecialTypeTextView.setText("Horn Notes:");
 			
-			String notes = mWeapon.getHornNotes();
+			notes = mWeapon.getHornNotes();
 			
 			try {
 				open = manager.open(getNoteImage(notes.charAt(0)));
@@ -154,6 +162,12 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment {
         }
 
         mWeaponElementTextView.setText(element);
+
+        // Set up Horn Melodies ListView
+        if (mWeapon.getWtype().equals("Hunting Horn")) {
+            mHornMelodiesAdapter = new HornMelodiesAdapter(getApplicationContext(), R.layout.fragment_horn_melody_listitem, notes);
+            mWeaponHornMelodiesListView.setAdapter(mHornMelodiesAdapter);
+        }
 	}
 	
 	private String getNoteImage(char note) {

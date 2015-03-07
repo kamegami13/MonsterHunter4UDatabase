@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/melody_listitem"
     android:layout_width="match_parent"
     android:layout_height="47dp"
     android:paddingLeft="14dp"
     android:paddingRight="14dp">
 
     <TextView
+        android:id="@+id/effect1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        tools:text="Movement Speed Up"/>
+
+    <TextView
+        android:id="@+id/effect2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        tools:text="Movement Speed Up"/>
+
+    <TextView
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        tools:text="Movement Speed Up"/>
+
+    <TextView
+        android:id="@+id/extension"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"

@@ -529,7 +529,15 @@ public class DataManager {
 		cursor.close();
 		return location;
 	}
-	
+
+/********************************* MELODY QUERIES ******************************************/
+
+	/* Get a Cursor that has a list of all Melodies from a specific set of notes */
+    public HornMelodiesCursor queryMelodiesFromNotes(String notes) {
+        return mHelper.queryMelodiesFromNotes(notes);
+    }
+
+
 /********************************* MOGA WOODS REWARD QUERIES ******************************************/
 	/* Get a Cursor that has a list of MogaWoodsReward based on Item */
 	public MogaWoodsRewardCursor queryMogaWoodsRewardItem(long id) {
