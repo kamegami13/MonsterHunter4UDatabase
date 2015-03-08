@@ -67,7 +67,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	private static final int VERSION = 16; // EDIT*/
 
     private static final String DATABASE_NAME = "mh4u.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -1959,7 +1959,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.SelectionArgs = new String[]{"" + id};
 		qh.GroupBy = "q." + S.COLUMN_QUESTS_NAME;
 		qh.Having = null;
-		qh.OrderBy = null;
+		qh.OrderBy = "q." + S.COLUMN_QUESTS_HUB + " ASC, " + "q." + S.COLUMN_QUESTS_STARS + " ASC";
 		qh.Limit = null;
 		
 		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest(qh.Distinct), qh));
