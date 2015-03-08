@@ -941,7 +941,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.SelectionArgs = null;
 		qh.GroupBy = null;
 		qh.Having = null;
-		qh.OrderBy = null;
+		qh.OrderBy = "skill_1_name ASC";
 		qh.Limit = null;
 
 		return new DecorationCursor(wrapJoinHelper(builderDecoration(), qh));
@@ -1779,7 +1779,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         qh.SelectionArgs = new String[]{ String.valueOf(id) };
         qh.GroupBy = null;
         qh.Having = null;
-        qh.OrderBy = null;
+        qh.OrderBy = "m" + S.COLUMN_MONSTERS_SORT_NAME + " ASC";
         qh.Limit = null;
 
         return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct),qh));
@@ -1805,6 +1805,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         projectionMap.put(l + S.COLUMN_LOCATIONS_MAP, l + "." + S.COLUMN_LOCATIONS_MAP + " AS " + l + S.COLUMN_LOCATIONS_MAP );
 
         projectionMap.put(m + S.COLUMN_MONSTERS_ID, m+ "." + S.COLUMN_MONSTERS_ID + " AS " + m + S.COLUMN_MONSTERS_ID);
+        projectionMap.put(m + S.COLUMN_MONSTERS_SORT_NAME, m + "." + S.COLUMN_MONSTERS_SORT_NAME + " AS " + m + S.COLUMN_MONSTERS_SORT_NAME);
         projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
         projectionMap.put(m + S.COLUMN_MONSTERS_CLASS, m + "." + S.COLUMN_MONSTERS_CLASS + " AS " + m + S.COLUMN_MONSTERS_CLASS );
         projectionMap.put(m + S.COLUMN_MONSTERS_FILE_LOCATION, m + "." + S.COLUMN_MONSTERS_FILE_LOCATION + " AS " + m + S.COLUMN_MONSTERS_FILE_LOCATION );
