@@ -285,7 +285,6 @@
         android:id="@+id/horn_melodies_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_aligntop="@+id/details_table"
         android:layout_below="@+id/details_table"
         tools:listitem="@layout/fragment_horn_melody_listitem"/>
 

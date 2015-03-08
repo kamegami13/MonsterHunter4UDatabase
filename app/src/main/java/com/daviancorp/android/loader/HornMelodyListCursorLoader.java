@@ -5,10 +5,10 @@ import android.database.Cursor;
 
 import com.daviancorp.android.data.database.DataManager;
 
-public class MelodyListCursorLoader extends SQLiteCursorLoader {
+public class HornMelodyListCursorLoader extends SQLiteCursorLoader {
     private String notes; 		// Notes available in a horn
 
-    public MelodyListCursorLoader(Context context, String notes) {
+    public HornMelodyListCursorLoader(Context context, String notes) {
         super(context);
         this.notes = notes;
     }

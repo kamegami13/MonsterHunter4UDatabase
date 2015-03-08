@@ -7,45 +7,65 @@
     android:paddingLeft="14dp"
     android:paddingRight="14dp">
 
-    <TextView
-        android:id="@+id/effect1"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        tools:text="Movement Speed Up"/>
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/note_display"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/effect2"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        tools:text="Movement Speed Up"/>
+        <TextView
+            android:id="@+id/effect1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            tools:text="Movement Speed Up" />
 
-    <TextView
-        android:id="@+id/duration"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        tools:text="Movement Speed Up"/>
-
-    <TextView
-        android:id="@+id/extension"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        tools:text="Movement Speed Up"/>
+        <TextView
+            android:id="@+id/effect2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            tools:text="Attack Deflection Prevention" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            tools:text="180(240)" />
+
+        <TextView
+            android:id="@+id/extension"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            tools:text="+90(+120)" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/note_display"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentLeft="true">
+
         <ImageView
             android:id="@+id/horn_note1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="2dp"
-            tools:src="@drawable/impact"/>
+            tools:src="@drawable/impact" />
 
         <ImageView
             android:id="@+id/horn_note2"
@@ -53,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="2dp"
-            tools:src="@drawable/impact"/>
+            tools:src="@drawable/impact" />
 
         <ImageView
             android:id="@+id/horn_note3"
@@ -61,13 +81,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="2dp"
-            tools:src="@drawable/impact"/>
+            tools:src="@drawable/impact" />
+
         <ImageView
             android:id="@+id/horn_note4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="2dp"
-            tools:src="@drawable/impact"/>
+            tools:src="@drawable/impact" />
     </LinearLayout>
 </RelativeLayout>
