@@ -1030,7 +1030,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.SelectionArgs = new String[]{"" + id};
 		qh.GroupBy = null;
 		qh.Having = null;
-		qh.OrderBy = null;
+		qh.OrderBy = "g." + S.COLUMN_GATHERING_RANK + " DESC, " + "l." + S.COLUMN_LOCATIONS_MAP
+                + " ASC";
 		qh.Limit = null;
 		
 		return new GatheringCursor(wrapJoinHelper(builderGathering(), qh));
@@ -2157,7 +2158,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.SelectionArgs = new String[]{"" + id};
 		qh.GroupBy = null;
 		qh.Having = null;
-		qh.OrderBy = "qr." + S.COLUMN_QUEST_REWARDS_PERCENTAGE + " DESC";
+		qh.OrderBy = "q." + S.COLUMN_QUESTS_HUB + " ASC, " + "q." + S.COLUMN_QUESTS_STARS + " ASC";
 		qh.Limit = null;
 		
 		return new QuestRewardCursor(wrapJoinHelper(builderQuestReward(), qh));
