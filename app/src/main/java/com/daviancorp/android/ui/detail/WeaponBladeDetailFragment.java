@@ -25,14 +25,16 @@ import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.general.DrawSharpness;
 import com.daviancorp.android.loader.HornMelodyListCursorLoader;
 
-public class WeaponBladeDetailFragment extends WeaponDetailFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 
 	private TextView mWeaponSpecialTypeTextView, mWeaponSpecialTextView,
             mWeaponElementTextView;
 	private ImageView mWeaponNote1ImageView,
 			mWeaponNote2ImageView, mWeaponNote3ImageView;
     private DrawSharpness mWeaponSharpnessDrawnView;
-    private ListView mWeaponHornMelodiesListView;
+
+    // Public because this needs to be accessed by superclass WeaponDetailFragment
+    public  ListView mWeaponHornMelodiesListView;
 
 	public static WeaponBladeDetailFragment newInstance(long weaponId) {
 		Bundle args = new Bundle();
@@ -46,8 +48,8 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment implements L
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initialize the loader to load the list of runs
-        getLoaderManager().initLoader(R.id.horn_melodies_list, null, this);
+        // Initialize the loader to load the list horn melodies
+        getLoaderManager().initLoader(R.id.horn_melodies_list, null, new HornMelodiesLoaderCallbacks());
     }
 
 	@Override
@@ -180,30 +182,6 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment implements L
         mWeaponElementTextView.setText(element);
 	}
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args){
-        // Pass empty string if HornNotes is null
-        return new HornMelodyListCursorLoader(getActivity(), ((mWeapon.getHornNotes()==null) ? "" : mWeapon.getHornNotes()));
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        // Assign adapter to horn songs listview only if weapon is horn
-        if(mWeapon.getType().equals("Hunting Horn")) {
-            HornMelodiesCursorAdapter adapter = new HornMelodiesCursorAdapter(
-                    getActivity(), (HornMelodiesCursor) cursor);
-            mWeaponHornMelodiesListView.setAdapter(adapter);
-        }
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        // Stop using the cursor (via the adapter)
-        mWeaponHornMelodiesListView.setAdapter(null);
-    }
-
-
-
     public static class HornMelodiesCursorAdapter extends CursorAdapter {
 
         private HornMelodiesCursor mHornMelodiesCursor;
@@ -328,5 +306,29 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment implements L
                 return file + "Note.yellow.png";
         }
         return "";
+    }
+
+    private class HornMelodiesLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cursor> {
+        @Override
+        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+            // Pass empty string if HornNotes is null
+            return new HornMelodyListCursorLoader(getActivity(), "PGB"); //((mWeapon.getHornNotes() == null) ? "" : mWeapon.getHornNotes()));
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+            // Assign adapter to horn songs listview only if weapon is horn
+            //if (mWeapon.getType().equals("Hunting Horn")) {
+                WeaponBladeDetailFragment.HornMelodiesCursorAdapter adapter = new WeaponBladeDetailFragment.HornMelodiesCursorAdapter(
+                        getActivity(), (HornMelodiesCursor) cursor);
+                mWeaponHornMelodiesListView.setAdapter(adapter);
+            //}
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Cursor> loader) {
+            // Stop using the cursor (via the adapter)
+            mWeaponHornMelodiesListView.setAdapter(null);
+        }
     }
 }

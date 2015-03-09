@@ -3,19 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/melody_listitem"
     android:layout_width="match_parent"
-    android:layout_height="47dp"
+    android:layout_height="58dp"
     android:paddingLeft="14dp"
     android:paddingRight="14dp">
 
     <LinearLayout
+        android:id="@+id/effects"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/note_display"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/effect1"
+            style="@style/text_medium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -23,41 +26,43 @@
 
         <TextView
             android:id="@+id/effect2"
+            style="@style/text_medium"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            tools:text="Attack Deflection Prevention" />
+            tools:text="Attack Deflection" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:gravity="right"
-        android:orientation="vertical">
+        android:paddingBottom="4dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/duration"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            tools:text="180(240)" />
+            android:layout_height="wrap_content"
+            tools:text="DUR: 180(240)" />
 
         <TextView
             android:id="@+id/extension"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            tools:text="+90(+120)" />
+            android:layout_height="wrap_content"
+            tools:text="EXT: +90(+120)" />
     </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/note_display"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
+        android:paddingRight="14dp">
 
         <ImageView
             android:id="@+id/horn_note1"
