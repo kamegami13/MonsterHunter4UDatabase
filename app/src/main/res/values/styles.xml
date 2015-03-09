@@ -38,17 +38,21 @@
 
     </style>
 
+    <!-- USE FOR ALL FULLSCREEN ACTIVITIES WHERE VIEWS COVER ALL BACKGROUD TO REDUCE OVERDRAW -->
+    <style name="FullScreenActivity" parent = "AppTheme">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
 
     <!-- Begin styles for lists -->
 
     <style name="list" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_width">fill_parent</item>
         <item name="android:id">@android:id/list</item>
         <item name="android:divider">@color/divider_color</item>
         <item name="android:dividerHeight">1dp</item>
-        <item name="android:cacheColorHint">@android:color/transparent</item>
-        <item name="android:persistentDrawingCache">scrolling</item>
         <item name="android:scrollingCache">false</item>
         <item name="android:animationCache">false</item>
         <item name="android:fastScrollEnabled">true</item>

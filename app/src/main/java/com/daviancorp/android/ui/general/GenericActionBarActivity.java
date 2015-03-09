@@ -1,6 +1,5 @@
 package com.daviancorp.android.ui.general;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -16,15 +15,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -44,7 +40,6 @@ import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
 import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
 import com.daviancorp.android.ui.list.WishlistListActivity;
-import com.daviancorp.android.ui.list.adapter.MenuDrawerListAdapter;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 import java.io.IOException;
@@ -64,6 +59,13 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
     private DrawerAdapter mDrawerAdapter;
     public ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
+
+    public interface ActionOnCloseListener {
+        void actionOnClose();
+
+    }
+
+    public ActionOnCloseListener actionOnCloseListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,7 +121,14 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                         intent = new Intent(getApplicationContext(), ArmorSetBuilderActivity.class);
                         break;
                 }
-                startActivity(intent);
+                final Intent finalIntent = intent;
+                actionOnCloseListener = new ActionOnCloseListener() {
+                    @Override
+                    public void actionOnClose() {
+                        startActivity(finalIntent);
+                    }
+                };
+
                 mDrawerLayout.closeDrawers();
             }
         });
@@ -134,6 +143,10 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu(); // Creates call to onPrepareOptionsMenu()
+                if (actionOnCloseListener != null) {
+                    actionOnCloseListener.actionOnClose();
+                    actionOnCloseListener = null;
+                }
             }
         };
 
@@ -169,9 +182,9 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        /*if (mDrawerAdapter != null) {
+        if (mDrawerAdapter != null) {
             mDrawerAdapter.setSelectedIndex(getSelectedSection().menuListPosition);
-        }*/
+        }
     }
 
     protected abstract MenuSection getSelectedSection();
@@ -247,11 +260,18 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
 
 
     // Custom adapter needed to display list items with icons
-    public class DrawerAdapter extends ArrayAdapter{
+    public class DrawerAdapter extends ArrayAdapter<String> {
 
         Context context;
         int layoutResourceId;
         String[] items;
+
+        public void setSelectedIndex(int selectedIndex) {
+            this.selectedIndex = selectedIndex;
+        }
+
+        int selectedIndex;
+
 
         public DrawerAdapter(Context context, int layoutResourceId, String[] items) {
             super(context, layoutResourceId, items);
@@ -263,27 +283,25 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View row = convertView;
-            ItemHolder holder = null;
+            ItemHolder holder;
 
-            if(row == null)
-            {
+            if (row == null) {
                 LayoutInflater inflater = (LayoutInflater) context
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 row = inflater.inflate(layoutResourceId, parent, false);
 
                 holder = new ItemHolder();
-                holder.imgIcon = (ImageView)row.findViewById(R.id.nav_list_icon);
-                holder.txtTitle = (TextView)row.findViewById(R.id.nav_list_item);
+                holder.imgIcon = (ImageView) row.findViewById(R.id.nav_list_icon);
+                holder.txtTitle = (TextView) row.findViewById(R.id.nav_list_item);
 
                 row.setTag(holder);
-            }
-            else
-            {
-                holder = (ItemHolder)row.getTag();
+            } else {
+                holder = (ItemHolder) row.getTag();
             }
 
             String[] singleItem = items[position].split(",");
             holder.txtTitle.setText(singleItem[0]);
+            holder.txtTitle.setTextColor(getResources().getColor(position == selectedIndex ? R.color.accent_color : R.color.list_text));
 
             // Attempt to retrieve drawable
             Drawable i = null;
@@ -301,7 +319,7 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
         }
 
 
-        class ItemHolder{
+        class ItemHolder {
             ImageView imgIcon;
             TextView txtTitle;
         }

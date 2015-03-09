@@ -39,11 +39,16 @@ public class Weapon extends Item{
 	private String sharpness_file;				// Sharpness image file location
 	private int wfinal;							// Final in weapon tree or not
     private int tree_depth;                     // Depth of weapon in weapon tree
+
+    private int parent_id;
     
     private String mSlotString;
     private String file_location;
     private int[] mSharpness1;
     private int[] mSharpness2;
+    private String[] coatings_array;
+    private String chargeString;
+    private String attackString;
 	
 	/* Default Constructor */
 	public Weapon() {
@@ -74,6 +79,7 @@ public class Weapon extends Item{
 		this.sharpness_file = "";
 		this.wfinal = -1;
         this.tree_depth = 0;
+        this.chargeString = "";
 	}
 
 	/* Getters and Setters */
@@ -106,7 +112,7 @@ public class Weapon extends Item{
 	}
 
 	public void setAttack(int attack) {
-		this.attack = attack;
+		this.attack = attack; this.attackString = Integer.toString(attack);
 	}
 
 	public int getMaxAttack() {
@@ -171,7 +177,23 @@ public class Weapon extends Item{
 
 	public void setCharges(String charges) {
 		this.charges = charges;
-	}
+        String charge = "";
+        String level = "";
+
+        String[] new_charges = charges.split("\\|");
+        for (String c : new_charges) {
+
+            if (c.endsWith("*")) {
+                charge = "(" + c.substring(0,c.length()-3) + c.charAt(c.length() - 2) + ")";
+            }
+            else {
+                charge = c.substring(0,c.length()-2) + c.charAt(c.length()-1);
+            }
+
+            this.chargeString = this.chargeString + charge + " / ";
+        }
+        chargeString = chargeString.substring(0, this.chargeString.length()-3);
+    }
 
 	public String getCoatings() {
 		return coatings;
@@ -179,6 +201,8 @@ public class Weapon extends Item{
 
 	public void setCoatings(String coatings) {
 		this.coatings = coatings;
+
+        this.coatings_array = coatings.split("\\|");
 	}
 
 	public String getRecoil() {
@@ -232,16 +256,16 @@ public class Weapon extends Item{
         String slot = "";
         switch (this.num_slots) {
             case 0:
-                slot = "---";
+                slot = "○○○";
                 break;
             case 1:
-                slot = "O--";
+                slot = "●○○";
                 break;
             case 2:
-                slot = "OO-";
+                slot = "●●○";
                 break;
             case 3:
-                slot = "OOO";
+                slot = "●●●";
                 break;
             default:
                 slot = "error!!";
@@ -438,5 +462,25 @@ public class Weapon extends Item{
 
     public int[] getSharpness2() {
         return mSharpness2;
+    }
+
+    public String getChargeString() {
+        return chargeString;
+    }
+
+    public String[] getCoatingsArray() {
+        return coatings_array;
+    }
+
+    public int getParentId() {
+        return parent_id;
+    }
+
+    public void setParentId(int parent_id) {
+        this.parent_id = parent_id;
+    }
+
+    public String getAttackString() {
+        return attackString;
     }
 }

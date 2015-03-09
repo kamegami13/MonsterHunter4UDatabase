@@ -157,7 +157,8 @@
         <activity
             android:name="com.daviancorp.android.ui.list.WeaponListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenActivity">
             <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.daviancorp.android.ui.list.WeaponSelectionListActivity" />

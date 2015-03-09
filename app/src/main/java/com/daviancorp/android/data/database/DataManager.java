@@ -32,6 +32,7 @@ import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
+import com.daviancorp.android.ui.general.WeaponListEntry;
 
 /*
  * Singleton class
@@ -917,6 +918,39 @@ public class DataManager {
 
         while(cursor.isAfterLast() == false) {
             weapons.add(cursor.getWeapon());
+            cursor.moveToNext();
+        }
+
+        return weapons;
+    }
+
+    /* Get an array of weapon expandable list items
+    * */
+    public ArrayList<WeaponListEntry> queryWeaponTreeArray(String type) {
+        WeaponCursor cursor = mHelper.queryWeaponType(type);
+
+        cursor.moveToFirst();
+        ArrayList<WeaponListEntry> weapons = new ArrayList<WeaponListEntry>();
+        WeaponListEntry currentEntry;
+        Weapon currentWeapon;
+
+        int i = 0;
+        int id_offset = (int) cursor.getWeapon().getId();
+        int parent_id;
+        int absolute_position;
+
+        while(cursor.isAfterLast() == false) {
+            currentWeapon = cursor.getWeapon();
+            currentEntry = new WeaponListEntry(currentWeapon);
+
+            parent_id = (int) currentWeapon.getParentId();
+
+            if(parent_id != 0) {
+                absolute_position = parent_id - id_offset;
+                weapons.get(absolute_position).addChild(currentEntry);
+            }
+
+            weapons.add(currentEntry);
             cursor.moveToNext();
         }
 
