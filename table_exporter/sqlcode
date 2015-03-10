@@ -421,7 +421,7 @@ CREATE TABLE IF NOT EXISTS `quests` (
   `goal` varchar(255) NOT NULL,
   `hub` text NOT NULL,
   `type` text NOT NULL,
-  `stars` char(2) NOT NULL,
+  `stars` integer NOT NULL,
   `location_id` integer NOT NULL,
   `time_limit` integer NOT NULL,
   `fee` integer NOT NULL,
