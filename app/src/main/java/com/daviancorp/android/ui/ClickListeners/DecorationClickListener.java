@@ -1,9 +1,11 @@
 package com.daviancorp.android.ui.ClickListeners;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 
 /**
@@ -13,16 +15,34 @@ public class DecorationClickListener implements View.OnClickListener {
     private Context c;
     private Long id;
 
+    private boolean fromArmorSetBuilder;
+    private Activity activity;
+
     public DecorationClickListener(Context context, Long id) {
         super();
         this.id = id;
         this.c = context;
     }
 
+    public DecorationClickListener(Context context, Long id, boolean fromArmorSetBuilder, Activity activity) {
+        this(context, id);
+        this.fromArmorSetBuilder = fromArmorSetBuilder;
+        this.activity = activity;
+    }
+
     @Override
     public void onClick(View v) {
         Intent i = new Intent(c, DecorationDetailActivity.class);
         i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, id);
-        c.startActivity(i);
+
+        if (fromArmorSetBuilder) {
+            i.putExtras(activity.getIntent());
+            i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            c.startActivity(i);
+            activity.finish();
+        }
+        else {
+            c.startActivity(i);
+        }
     }
 }

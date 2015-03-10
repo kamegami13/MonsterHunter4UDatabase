@@ -23,9 +23,10 @@ import java.io.InputStream;
  */
 public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilderActivity.ArmorSetChangedListener {
 
-    View headView;
+    ViewGroup headView;
     ImageView headImage;
     TextView headText;
+    ArmorSetBuilderDecorationsContainer headDecorations;
 
     View bodyView;
     ImageView bodyImage;
@@ -51,6 +52,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         return f;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +60,9 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_armor_set_builder, container, false);
-        headView = view.findViewById(R.id.armor_builder_helmet);
+        headView = (ViewGroup) view.findViewById(R.id.armor_builder_helmet);
         bodyView = view.findViewById(R.id.armor_builder_body);
         armsView = view.findViewById(R.id.armor_builder_arms);
         waistView = view.findViewById(R.id.armor_builder_waist);
@@ -68,6 +71,8 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         headText = (TextView) headView.findViewById(R.id.armor_builder_item_name);
         headImage = (ImageView) headView.findViewById(R.id.armor_builder_item_icon);
         headImage.setImageBitmap(fetchIcon("Head", 1));
+        headDecorations = (ArmorSetBuilderDecorationsContainer) headView.findViewById(R.id.armor_set_builder_decoration_container);
+        headDecorations.initialize(0);
 
         bodyText = (TextView) bodyView.findViewById(R.id.armor_builder_item_name);
         bodyImage = (ImageView) bodyView.findViewById(R.id.armor_builder_item_icon);
@@ -94,6 +99,8 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
             headText.setText(s.getHead().getName());
             headImage.setImageBitmap(fetchIcon("Head", s.getHead().getRarity()));
             enableClickableFocusable(headView);
+
+            headDecorations.updateContents(s);
         }
         if (s.isBodySelected()) {
             bodyText.setText(s.getBody().getName());
@@ -123,7 +130,8 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
 
         // We have to check to make sure that the Activity that this is being attached to is connected to the callback interface for this fragment.
         try {
-            ((ArmorSetBuilderActivity) getActivity()).setOnArmorSetChangedListener(this);
+            ArmorSetBuilderActivity a = (ArmorSetBuilderActivity) getActivity();
+            a.addArmorSetChangedListener(this);
         }
         catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() + " must be a ArmorSetBuilderActivity.");

@@ -55,7 +55,7 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((ArmorSetBuilderActivity) getActivity()).setOnArmorSetChangedSkillListener(this);
+        ((ArmorSetBuilderActivity) getActivity()).addArmorSetChangedListener(this);
     }
 
     private static class ArmorSetBuilderSkillsAdapter extends ArrayAdapter<ArmorSetBuilderSession.SkillTreePointsSet> {

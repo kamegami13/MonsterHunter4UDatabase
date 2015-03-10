@@ -8,21 +8,41 @@ import java.util.*;
 
 /**
  * Represents a session of the user's interaction with the Armor Set Builder.
+ * <p>
+ * For using armor arrays:
+ * <li>0: Head
+ * <li>1: Body
+ * <li>2: Arms
+ * <li>3: Waist
+ * <li>4: Legs
  */
 public class ArmorSetBuilderSession {
+
+    public static final int HEAD = 0;
+    public static final int BODY = 1;
+    public static final int ARMS = 2;
+    public static final int WAIST = 3;
+    public static final int LEGS = 4;
     
     /** A singleton {@code Armor} that represents the absence of armor. */
-    private static Armor none = new Armor();
+    private static Armor noArmor = new Armor();
+
+    /** A singleton {@code Decoration} that represents the absence of a decoration. */
+    private static Decoration noDecoration = new Decoration();
+
+    public static Decoration dummy = new Decoration();
 
     /**
      * The array of armor pieces in the set.
-     * <li>0: Head
-     * <li>1: Body
-     * <li>2: Arms
-     * <li>3: Waist
-     * <li>4: Legs
+     * @see com.daviancorp.android.data.classes.ArmorSetBuilderSession
      */
     private Armor[] armors;
+
+    /**
+     * The array of socketed decorations for each armor piece.
+     * @see com.daviancorp.android.data.classes.ArmorSetBuilderSession
+     */
+    private Decoration[][] decorations;
     
     private List<SkillTreePointsSet> skillTreePointsSets;
 
@@ -30,45 +50,85 @@ public class ArmorSetBuilderSession {
      * Default constructor.
      */
     public ArmorSetBuilderSession() {
-        Armor head = none;
-        Armor body = none;
-        Armor arms = none;
-        Armor waist = none;
-        Armor legs = none;
 
         armors = new Armor[5];
-        armors[0] = head;
-        armors[1] = body;
-        armors[2] = arms;
-        armors[3] = waist;
-        armors[4] = legs;
-        
+        for (int i = 0; i < armors.length; i++) {
+            armors[i] = noArmor;
+        }
+
+        decorations = new Decoration[5][3];
+        for (int i = 0; i < decorations.length; i++) {
+            for (int j = 0; j < decorations[i].length; j++) {
+                decorations[i][j] = noDecoration;
+            }
+        }
+
         skillTreePointsSets = new ArrayList<>();
+    }
+
+    /**
+     * Attempts to add an decoration to the specified armor piece.
+     * @param pieceIndex The index of a piece in the set to fetch, according to {@link com.daviancorp.android.data.classes.ArmorSetBuilderSession}.
+     * @param decoration The decoration to add.
+     * @return True if the piece was successfuly added, otherwise false.
+     */
+    public boolean addDecoration(int pieceIndex, Decoration decoration) {
+        if (getAvailableSlots(pieceIndex) >= decoration.getNumSlots()) { // TODO
+            int i = 0;
+            while (decorations[pieceIndex][i] != noDecoration) {
+                i++;
+            }
+
+            decorations[pieceIndex][i] = decoration;
+            if (decoration.getNumSlots() == 2) {
+                decorations[pieceIndex][i + 1] = dummy;
+            }
+
+            if (decoration.getNumSlots() == 3) {
+                decorations[pieceIndex][i + 2] = dummy;
+            }
+
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public int getAvailableSlots(int pieceIndex) {
+        int decorationCount = 0;
+        for (Decoration d : decorations[pieceIndex]) {
+            if (d != noDecoration) {
+                decorationCount++;
+            }
+        }
+
+        return armors[pieceIndex].getNumSlots() - decorationCount;
     }
 
     /** @return Whether the user has selected a head piece or not. */
     public boolean isHeadSelected() {
-        return armors[0] != none;
+        return armors[0] != noArmor;
     }
 
     /** @return Whether the user has selected a body piece or not. */
     public boolean isBodySelected() {
-        return armors[1] != none;
+        return armors[1] != noArmor;
     }
 
     /** @return Whether the user has selected a arms piece or not. */
     public boolean isArmsSelected() {
-        return armors[2] != none;
+        return armors[2] != noArmor;
     }
 
     /** @return Whether the user has selected a waist piece or not. */
     public boolean isWaistSelected() {
-        return armors[3] != none;
+        return armors[3] != noArmor;
     }
 
     /** @return Whether the user has selected a legs piece or not. */
     public boolean isLegsSelected() {
-        return armors[4] != none;
+        return armors[4] != noArmor;
     }
 
     public void setHead(Armor head) {
@@ -91,14 +151,35 @@ public class ArmorSetBuilderSession {
         armors[4] = legs;
     }
 
+    public Decoration getDecoration(int pieceIndex, int decorationIndex) {
+        return decorations[pieceIndex][decorationIndex];
+    }
+
+    /** @return True if the designated slot is actually in use, false if it is empty. */
+    public boolean decorationIsReal(int pieceIndex, int decorationIndex) {
+        return decorations[pieceIndex][decorationIndex] == noDecoration;
+    }
+
+    public boolean decorationIsDummy(int pieceIndex, int decorationIndex) {
+        return getDecoration(pieceIndex, decorationIndex) == dummy;
+    }
+
+    /**
+     * @return A set of the armor set based on the provided piece index.
+     * @see com.daviancorp.android.data.classes.ArmorSetBuilderSession
+     */
+    public Armor getArmor(int pieceIndex) {
+        return armors[pieceIndex];
+    }
+
     /** @return The armor set's head piece. */
     public Armor getHead() {
-        return armors[0];
+        return armors[HEAD];
     }
 
     /** @return The armor set's body piece. */
     public Armor getBody() {
-        return armors[1];
+        return armors[BODY];
     }
 
     /** @return The armor set's arms piece. */

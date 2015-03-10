@@ -16,6 +16,7 @@ public class ArmorListActivity extends GenericTabActivity {
     private ViewPager viewPager;
     private ArmorExpandableListPagerAdapter mAdapter;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
