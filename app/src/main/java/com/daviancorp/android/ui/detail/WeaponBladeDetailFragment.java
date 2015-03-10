@@ -20,7 +20,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Melody;
+import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.HornMelodiesCursor;
+import com.daviancorp.android.loader.WeaponLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.general.DrawSharpness;
 import com.daviancorp.android.loader.HornMelodyListCursorLoader;
@@ -48,8 +50,21 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initialize the loader to load the list horn melodies
-        getLoaderManager().initLoader(R.id.horn_melodies_list, null, new HornMelodiesLoaderCallbacks());
+        // Override and recreate calls from WeaponDetailFragment
+        // so we can call HornMelodyLoader after WeaponLoader is finished ----------------------
+        setRetainInstance(true);
+
+        // Check for a Weapon ID as an argument, and find the weapon
+        Bundle args = getArguments();
+        if (args != null) {
+            long weaponId = args.getLong(ARG_WEAPON_ID, -1);
+            if (weaponId != -1) {
+                LoaderManager lm = getLoaderManager();
+                lm.initLoader(R.id.weapon_detail_fragment, args, new WeaponLoaderCallbacks2());
+            }
+        }
+        //-------------------------------------------------------------------------------------
+
     }
 
 	@Override
@@ -227,11 +242,11 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
             effect2TextView.setText(cellText);
 
             // Assign Duration
-            cellText = melody.getDuration();
+            cellText = "DUR: " + melody.getDuration();
             durationTextView.setText(cellText);
 
             // Assign Extension
-            cellText = melody.getExtension();
+            cellText = "EXT: " + melody.getExtension();
             extensionTextView.setText(cellText);
 
             // Get string version of song
@@ -312,23 +327,53 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
         @Override
         public Loader<Cursor> onCreateLoader(int id, Bundle args) {
             // Pass empty string if HornNotes is null
-            return new HornMelodyListCursorLoader(getActivity(), "PGB"); //((mWeapon.getHornNotes() == null) ? "" : mWeapon.getHornNotes()));
+            return new HornMelodyListCursorLoader(getActivity(), (mWeapon.getHornNotes() == null) ? "" : mWeapon.getHornNotes());
         }
 
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
             // Assign adapter to horn songs listview only if weapon is horn
-            //if (mWeapon.getType().equals("Hunting Horn")) {
                 WeaponBladeDetailFragment.HornMelodiesCursorAdapter adapter = new WeaponBladeDetailFragment.HornMelodiesCursorAdapter(
                         getActivity(), (HornMelodiesCursor) cursor);
                 mWeaponHornMelodiesListView.setAdapter(adapter);
-            //}
         }
 
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {
             // Stop using the cursor (via the adapter)
             mWeaponHornMelodiesListView.setAdapter(null);
+        }
+    }
+
+
+    // This class is replicating the one from WeaponDetailFragment so we can load HornMelodiesLoaderCallbacks afterwards
+    public class WeaponLoaderCallbacks2 implements LoaderManager.LoaderCallbacks<Weapon> {
+
+        @Override
+        public Loader<Weapon> onCreateLoader(int id, Bundle args) {
+            return new WeaponLoader(getActivity(), args.getLong(ARG_WEAPON_ID));
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Weapon> loader, Weapon run) {
+            mWeapon = run;
+
+            try {
+                updateUI();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            if(mWeapon.getWtype().equals("Hunting Horn")) {
+                // Initialize the loader to load the list horn melodies
+                getLoaderManager().initLoader(R.id.horn_melodies_list, null, new HornMelodiesLoaderCallbacks());
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Weapon> loader) {
+            // Do nothing
         }
     }
 }
