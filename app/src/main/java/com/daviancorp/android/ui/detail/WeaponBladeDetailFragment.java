@@ -262,29 +262,33 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
                     open = manager.open(getNoteImage(song.charAt(0)));
                     bitmap = BitmapFactory.decodeStream(open);
                     note1ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-                            bitmap, 50, 50, false));
+                            bitmap, 75, 75, false));
                 }
+                else note1ImageView.setImageBitmap(null);
                 // Note 2
                 if(song.length()>=2) {
                     open = manager.open(getNoteImage(song.charAt(1)));
                     bitmap = BitmapFactory.decodeStream(open);
                     note2ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-                            bitmap, 50, 50, false));
+                            bitmap, 75, 75, false));
                 }
+                else note2ImageView.setImageBitmap(null);
                 // Note 3
                 if(song.length()>=3) {
                     open = manager.open(getNoteImage(song.charAt(2)));
                     bitmap = BitmapFactory.decodeStream(open);
                     note3ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-                            bitmap, 50, 50, false));
+                            bitmap, 75, 75, false));
                 }
+                else note3ImageView.setImageBitmap(null);
                 // Note 4
                 if(song.length()>=4) {
                     open = manager.open(getNoteImage(song.charAt(3)));
                     bitmap = BitmapFactory.decodeStream(open);
                     note4ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-                            bitmap, 50, 50, false));
+                            bitmap, 75, 75, false));
                 }
+                else note4ImageView.setImageBitmap(null);
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
