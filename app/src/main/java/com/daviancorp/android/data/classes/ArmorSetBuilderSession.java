@@ -30,6 +30,7 @@ public class ArmorSetBuilderSession {
     /** A singleton {@code Decoration} that represents the absence of a decoration. */
     private static Decoration noDecoration = new Decoration();
 
+    /** A singleton {@code Decoration} that represents the additional slots taken up by a decoration of size greater than 1. */
     public static Decoration dummy = new Decoration();
 
     /**
@@ -108,47 +109,47 @@ public class ArmorSetBuilderSession {
 
     /** @return Whether the user has selected a head piece or not. */
     public boolean isHeadSelected() {
-        return armors[0] != noArmor;
+        return armors[HEAD] != noArmor;
     }
 
     /** @return Whether the user has selected a body piece or not. */
     public boolean isBodySelected() {
-        return armors[1] != noArmor;
+        return armors[BODY] != noArmor;
     }
 
     /** @return Whether the user has selected a arms piece or not. */
     public boolean isArmsSelected() {
-        return armors[2] != noArmor;
+        return armors[ARMS] != noArmor;
     }
 
     /** @return Whether the user has selected a waist piece or not. */
     public boolean isWaistSelected() {
-        return armors[3] != noArmor;
+        return armors[WAIST] != noArmor;
     }
 
     /** @return Whether the user has selected a legs piece or not. */
     public boolean isLegsSelected() {
-        return armors[4] != noArmor;
+        return armors[LEGS] != noArmor;
     }
 
     public void setHead(Armor head) {
-        armors[0] = head;
+        armors[HEAD] = head;
     }
 
     public void setBody(Armor body) {
-        armors[1] = body;
+        armors[BODY] = body;
     }
 
     public void setArms(Armor arms) {
-        armors[2] = arms;
+        armors[ARMS] = arms;
     }
 
     public void setWaist(Armor waist) {
-        armors[3] = waist;
+        armors[WAIST] = waist;
     }
 
     public void setLegs(Armor legs) {
-        armors[4] = legs;
+        armors[LEGS] = legs;
     }
 
     public Decoration getDecoration(int pieceIndex, int decorationIndex) {
@@ -160,6 +161,7 @@ public class ArmorSetBuilderSession {
         return decorations[pieceIndex][decorationIndex] == noDecoration;
     }
 
+    /** @return True if the designated slot is a "dummy" decoration - that is, the non-first slot in a decoration of size greater than 1 - and false if it is empty or an actual decoration. */
     public boolean decorationIsDummy(int pieceIndex, int decorationIndex) {
         return getDecoration(pieceIndex, decorationIndex) == dummy;
     }
@@ -184,17 +186,17 @@ public class ArmorSetBuilderSession {
 
     /** @return The armor set's arms piece. */
     public Armor getArms() {
-        return armors[2];
+        return armors[ARMS];
     }
 
     /** @return The armor set's waist piece. */
     public Armor getWaist() {
-        return armors[3];
+        return armors[WAIST];
     }
 
     /** @return The armor set's legs piece. */
     public Armor getLegs() {
-        return armors[4];
+        return armors[LEGS];
     }
 
     public List<SkillTreePointsSet> getSkillTreePointsSets() {
@@ -214,7 +216,7 @@ public class ArmorSetBuilderSession {
 
         for (int i = 0; i < armors.length; i++) {
 
-            Map<SkillTree, Integer> armorSkillTreePoints = getSkillsFromArmorPiece(i, context); // A map of the current piece of armor's skills
+            Map<SkillTree, Integer> armorSkillTreePoints = getSkillsFromArmorPiece(i, context); // A map of the current piece of armor's skills, localized so we don't have to keep calling it
 
             for (SkillTree skillTree : armorSkillTreePoints.keySet()) {
 
@@ -235,19 +237,19 @@ public class ArmorSetBuilderSession {
                 }
 
                 switch (i) {
-                    case 0:
+                    case HEAD:
                         s.setHeadPoints(armorSkillTreePoints.get(skillTree));
                         break;
-                    case 1:
+                    case BODY:
                         s.setBodyPoints(armorSkillTreePoints.get(skillTree));
                         break;
-                    case 2:
+                    case ARMS:
                         s.setArmsPoints(armorSkillTreePoints.get(skillTree));
                         break;
-                    case 3:
+                    case WAIST:
                         s.setWaistPoints(armorSkillTreePoints.get(skillTree));
                         break;
-                    case 4:
+                    case LEGS:
                         s.setLegsPoints(armorSkillTreePoints.get(skillTree));
                         break;
                 }
@@ -281,36 +283,37 @@ public class ArmorSetBuilderSession {
     public static class SkillTreePointsSet {
         
         private SkillTree skillTree;
-        private int headPoints;
-        private int bodyPoints;
-        private int armsPoints;
-        private int waistPoints;
-        private int legsPoints;
+        private int[] points;
+        
+        public SkillTreePointsSet() {
+            points = new int[5];
+        }
 
         public SkillTree getSkillTree() {
             return skillTree;
         }
 
         public int getHeadPoints() {
-            return headPoints;
+            return points[HEAD];
         }
 
         public int getBodyPoints() {
-            return bodyPoints;
+            return points[BODY];
         }
 
         public int getArmsPoints() {
-            return armsPoints;
+            return points[ARMS];
         }
 
         public int getWaistPoints() {
-            return waistPoints;
+            return points[WAIST];
         }
 
         public int getLegsPoints() {
-            return legsPoints;
+            return points[LEGS];
         }
 
+        /** @return The total number of skill points provided to the skill by all pieces in the set. */
         public int getTotal() {
             return getHeadPoints() + getBodyPoints() + getArmsPoints() + getWaistPoints() + getLegsPoints();
         }
@@ -320,23 +323,23 @@ public class ArmorSetBuilderSession {
         }
 
         public void setHeadPoints(int headPoints) {
-            this.headPoints = headPoints;
+            points[HEAD] = headPoints;
         }
 
         public void setBodyPoints(int bodyPoints) {
-            this.bodyPoints = bodyPoints;
+            points[BODY] = bodyPoints;
         }
 
         public void setArmsPoints(int armsPoints) {
-            this.armsPoints = armsPoints;
+            points[ARMS] = armsPoints;
         }
 
         public void setWaistPoints(int waistPoints) {
-            this.waistPoints = waistPoints;
+             points[WAIST] = waistPoints;
         }
 
         public void setLegsPoints(int legsPoints) {
-            this.legsPoints = legsPoints;
+            points[LEGS] = legsPoints;
         }
 
     }

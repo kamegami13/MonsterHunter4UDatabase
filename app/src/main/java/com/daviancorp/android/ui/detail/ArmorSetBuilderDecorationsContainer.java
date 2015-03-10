@@ -43,8 +43,9 @@ public class ArmorSetBuilderDecorationsContainer extends LinearLayout {
     }
 
     private void updateSockets(ArmorSetBuilderSession s, int pieceIndex) {
-
+        
         for (int i = 0; i < 3; i++) {
+            
             if (s.decorationIsReal(pieceIndex, i)) {
 
                 Drawable drawable = null;
@@ -58,13 +59,13 @@ public class ArmorSetBuilderDecorationsContainer extends LinearLayout {
 
                 decorationIcons[i].setImageDrawable(drawable);
             }
-            else if (s.decorationIsDummy(pieceIndex, i)) {
-                // TODO
+            else if (s.decorationIsDummy(pieceIndex, i)) { // The socket index in question is a dummy
+                decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_dummy));
             }
-            else if (s.getArmor(pieceIndex).getNumSlots() >= i + 1) {
+            else if (s.getArmor(pieceIndex).getNumSlots() > i) { // The socket in question is empty
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_empty));
             }
-            else { // The armor piece has no more sockets.
+            else { // The armor piece has no more sockets
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_none));
             }
         }
