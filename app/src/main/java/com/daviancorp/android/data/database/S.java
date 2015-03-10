@@ -6,7 +6,7 @@ package com.daviancorp.android.data.database;
  * Note: Do not need to instantiate to use
  */
 public class S {
-	// Item sections
+	// Item sections ---------- DEPRECATED AND A BAD IDEA FROM THE START
 	public static final long SECTION_DECORATIONS = 1118;
 	
 	public static final long SECTION_HEAD = 1314;
@@ -315,6 +315,16 @@ public class S {
 	static final String COLUMN_WEAPONS_FINAL = "final";
     static final String COLUMN_WEAPONS_TREE_DEPTH = "tree_depth";
     static final String COLUMN_WEAPONS_PARENT_ID = "parent_id";
+
+    // Horn Melodies
+    static final String TABLE_HORN_MELODIES = "horn_melodies";
+    static final String COLUMN_HORN_MELODIES_ID = "_id";
+    static final String COLUMN_HORN_MELODIES_NOTES = "notes";
+    static final String COLUMN_HORN_MELODIES_SONG = "song";
+    static final String COLUMN_HORN_MELODIES_EFFECT_1 = "effect1";
+    static final String COLUMN_HORN_MELODIES_EFFECT_2 = "effect2";
+    static final String COLUMN_HORN_MELODIES_DURATION = "duration";
+    static final String COLUMN_HORN_MELODIES_EXTENSION = "extension";
 
 	// Wishlist
 	static final String TABLE_WISHLIST = "wishlist";
