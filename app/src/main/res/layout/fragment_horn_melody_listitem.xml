@@ -5,105 +5,90 @@
     android:layout_width="match_parent"
     android:layout_height="64dp"
     android:paddingLeft="14dp"
-    android:paddingRight="14dp">
+    android:paddingRight="14dp"
+    style="@style/list_item">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_alignParentRight="true"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content"
+        android:id="@+id/text_layout"
+        android:layout_centerVertical="true">
 
-        <RelativeLayout
-            android:id="@+id/effects"
+        <TextView
+            android:id="@+id/effect1"
+            style="@style/text_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true">
+            android:layout_alignParentRight="true"
+            tools:text="Movement Speed Up"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_alignParentTop="true" />
 
-            <TextView
-                android:id="@+id/effect1"
-                style="@style/text_small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                tools:text="Movement Speed Up" />
-
-            <TextView
-                android:id="@+id/effect2"
-                style="@style/text_small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/effect1"
-                android:layout_alignParentRight="true"
-                tools:text="Attack Deflection" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
+        <TextView
+            android:id="@+id/effect2"
+            style="@style/text_small"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            tools:text="Attack Deflection"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/effect1" />
 
-            <TextView
-                android:id="@+id/duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/filler"
-                tools:text="DUR: 180(240)"
-                android:textIsSelectable="false"
-                android:textSize="12sp" />
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
+            tools:text="DUR: 180(240)"
+            android:textIsSelectable="false"
+            android:textSize="12sp"
+            android:layout_toLeftOf="@+id/extension"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_below="@+id/effect2"
+            android:gravity="right" />
 
-            <ImageView
-                android:id="@+id/filler"
-                android:layout_width="14dp"
-                android:layout_height="16dp"
-                android:layout_toLeftOf="@+id/extension"/>
-            <TextView
-                android:id="@+id/extension"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                tools:text="EXT: +90(+120)"
-                android:textIsSelectable="false"
-                android:textSize="12sp" />
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/extension"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            tools:text="EXT: +120(+180)"
+            android:textIsSelectable="false"
+            android:textSize="12sp"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/duration"
+            android:layout_marginLeft="8dp" />
+    </RelativeLayout>
 
-        </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/note_display"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
+    <ImageView
+        android:id="@+id/horn_note1"
+        android:layout_gravity="center_vertical"
+        tools:src="@drawable/impact"
+        style="@style/small_image"
         android:layout_alignParentLeft="true"
-        android:paddingRight="14dp">
+        android:layout_centerVertical="true" />
 
-        <ImageView
-            android:id="@+id/horn_note1"
-            android:layout_gravity="center_vertical"
-            tools:src="@drawable/impact"
-            style="@style/small_image"
-            android:layout_marginRight="8dp" />
+    <ImageView
+        android:id="@+id/horn_note2"
+        android:layout_gravity="center_vertical"
+        tools:src="@drawable/impact"
+        style="@style/small_image"
+        android:layout_toRightOf="@+id/horn_note1"
+        android:layout_centerVertical="true" />
 
-        <ImageView
-            android:id="@+id/horn_note2"
-            android:layout_gravity="center_vertical"
-            tools:src="@drawable/impact"
-            style="@style/small_image"
-            android:layout_marginRight="8dp" />
+    <ImageView
+        android:id="@+id/horn_note3"
+        android:layout_gravity="center_vertical"
+        tools:src="@drawable/impact"
+        style="@style/small_image"
+        android:layout_toRightOf="@+id/horn_note2"
+        android:layout_centerVertical="true" />
 
-        <ImageView
-            android:id="@+id/horn_note3"
-            android:layout_gravity="center_vertical"
-            tools:src="@drawable/impact"
-            style="@style/small_image"
-            android:layout_marginRight="8dp" />
+    <ImageView
+        android:id="@+id/horn_note4"
+        android:layout_gravity="center_vertical"
+        tools:src="@drawable/impact"
+        style="@style/small_image"
+        android:layout_toRightOf="@+id/horn_note3"
+        android:layout_centerVertical="true" />
 
-        <ImageView
-            android:id="@+id/horn_note4"
-            android:layout_gravity="center_vertical"
-            tools:src="@drawable/impact"
-            style="@style/small_image"
-            android:layout_marginRight="8dp" />
-    </LinearLayout>
 </RelativeLayout>
