@@ -34,6 +34,7 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 	private ImageView mWeaponNote1ImageView,
 			mWeaponNote2ImageView, mWeaponNote3ImageView;
     private DrawSharpness mWeaponSharpnessDrawnView;
+    private View DividerView;
 
     // Public because this needs to be accessed by superclass WeaponDetailFragment
     public  ListView mWeaponHornMelodiesListView;
@@ -110,6 +111,8 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 		mWeaponHornMelodiesListView = (ListView) view
                 .findViewById(R.id.horn_melodies_list);
 
+        DividerView = view.findViewById(R.id.divider);
+
 		return view;
 	}
 
@@ -130,6 +133,8 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 		
 		/* Hunting Horn notes */
 		if (mWeapon.getWtype().equals("Hunting Horn")) {
+            DividerView.setVisibility(View.VISIBLE);
+
 			mWeaponSpecialTypeTextView.setText("Horn Notes:");
 			
 			notes = mWeapon.getHornNotes();
@@ -239,7 +244,12 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 
             // Assign Effect 2
             cellText = melody.getEffect2();
-            effect2TextView.setText(cellText);
+            if(!cellText.equals("N/A")) {
+                effect2TextView.setText(cellText);
+                effect2TextView.setVisibility(View.VISIBLE);
+            } else {
+                effect2TextView.setVisibility(View.GONE);
+            }
 
             // Assign Duration
             cellText = "DUR: " + melody.getDuration();
@@ -247,7 +257,12 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 
             // Assign Extension
             cellText = "EXT: " + melody.getExtension();
-            extensionTextView.setText(cellText);
+            if(!cellText.equals("EXT: N/A")) {
+                extensionTextView.setText(cellText);
+                extensionTextView.setVisibility(View.VISIBLE);
+            } else {
+                extensionTextView.setVisibility(View.GONE);
+            }
 
             // Get string version of song
             String song = melody.getSong();
