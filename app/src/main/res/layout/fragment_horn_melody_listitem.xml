@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/melody_listitem"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical">
+
+        <RelativeLayout
+            android:id="@+id/effects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/effect1"
+                style="@style/text_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                tools:text="Movement Speed Up" />
+
+            <TextView
+                android:id="@+id/effect2"
+                style="@style/text_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/effect1"
+                android:layout_alignParentRight="true"
+                tools:text="Attack Deflection" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/filler"
+                tools:text="DUR: 180(240)" />
+
+            <ImageView
+                android:id="@+id/filler"
+                android:layout_width="14dp"
+                android:layout_height="16dp"
+                android:layout_toLeftOf="@+id/extension"/>
+            <TextView
+                android:id="@+id/extension"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                tools:text="EXT: +90(+120)" />
+        </RelativeLayout>
+
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/note_display"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
+        android:paddingRight="14dp">
+
+        <ImageView
+            android:id="@+id/horn_note1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="2dp"
+            tools:src="@drawable/impact" />
+
+        <ImageView
+            android:id="@+id/horn_note2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="2dp"
+            tools:src="@drawable/impact" />
+
+        <ImageView
+            android:id="@+id/horn_note3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="2dp"
+            tools:src="@drawable/impact" />
+
+        <ImageView
+            android:id="@+id/horn_note4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="2dp"
+            tools:src="@drawable/impact" />
+    </LinearLayout>
+</RelativeLayout>

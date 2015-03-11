@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.loader.WeaponLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.list.WeaponBladeExpandableFragment;
 
 public class WeaponDetailFragment extends Fragment {
 	protected static final String ARG_WEAPON_ID = "WEAPON_ID";
@@ -107,7 +108,7 @@ public class WeaponDetailFragment extends Fragment {
 		}
 	}
 
-	private class WeaponLoaderCallbacks implements LoaderCallbacks<Weapon> {
+	public class WeaponLoaderCallbacks implements LoaderCallbacks<Weapon> {
 
 		@Override
 		public Loader<Weapon> onCreateLoader(int id, Bundle args) {
@@ -116,7 +117,7 @@ public class WeaponDetailFragment extends Fragment {
 
 		@Override
 		public void onLoadFinished(Loader<Weapon> loader, Weapon run) {
-			mWeapon = run;
+            mWeapon = run;
 
 			try {
 				updateUI();
@@ -124,6 +125,7 @@ public class WeaponDetailFragment extends Fragment {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 		}
 
 		@Override
