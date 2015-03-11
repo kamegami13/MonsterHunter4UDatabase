@@ -114,11 +114,16 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
             long decorationId = data.getLongExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, -1);
             int pieceIndex = data.getIntExtra(EXTRA_PIECE_INDEX, -1);
 
+            Log.d("SetBuilder", "Decoration: " + decorationId);
+            Log.d("SetBuilder", "Piece Index: " + pieceIndex);
+
             if (decorationId != -1 && pieceIndex != -1) {
+                Log.d("SetBuilder", "Attempting to add decoration: " + DataManager.get(this).getDecoration(decorationId).getName());
+
                 Decoration decoration = DataManager.get(this).getDecoration(decorationId);
 
                 if (!session.addDecoration(pieceIndex, decoration)) {
-                    // THROW ERROR
+                    Log.i("SetBuilder", "Couldn't add decoration.");
                 }
             }
 
