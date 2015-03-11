@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/melody_listitem"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="64dp"
     android:paddingLeft="14dp"
     android:paddingRight="14dp">
 
@@ -22,7 +22,7 @@
 
             <TextView
                 android:id="@+id/effect1"
-                style="@style/text_medium"
+                style="@style/text_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/effect2"
-                style="@style/text_medium"
+                style="@style/text_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/effect1"
@@ -48,7 +48,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/filler"
-                tools:text="DUR: 180(240)" />
+                tools:text="DUR: 180(240)"
+                android:textIsSelectable="false"
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/filler"
@@ -60,7 +62,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                tools:text="EXT: +90(+120)" />
+                tools:text="EXT: +90(+120)"
+                android:textIsSelectable="false"
+                android:textSize="12sp" />
         </RelativeLayout>
 
         </LinearLayout>
@@ -76,34 +80,30 @@
 
         <ImageView
             android:id="@+id/horn_note1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="2dp"
-            tools:src="@drawable/impact" />
+            tools:src="@drawable/impact"
+            style="@style/small_image"
+            android:layout_marginRight="8dp" />
 
         <ImageView
             android:id="@+id/horn_note2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="2dp"
-            tools:src="@drawable/impact" />
+            tools:src="@drawable/impact"
+            style="@style/small_image"
+            android:layout_marginRight="8dp" />
 
         <ImageView
             android:id="@+id/horn_note3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="2dp"
-            tools:src="@drawable/impact" />
+            tools:src="@drawable/impact"
+            style="@style/small_image"
+            android:layout_marginRight="8dp" />
 
         <ImageView
             android:id="@+id/horn_note4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="2dp"
-            tools:src="@drawable/impact" />
+            tools:src="@drawable/impact"
+            style="@style/small_image"
+            android:layout_marginRight="8dp" />
     </LinearLayout>
 </RelativeLayout>
