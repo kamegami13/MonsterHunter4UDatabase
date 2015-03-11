@@ -261,32 +261,28 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
                 if(song.length()>=1) {
                     open = manager.open(getNoteImage(song.charAt(0)));
                     bitmap = BitmapFactory.decodeStream(open);
-                    note1ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-                            bitmap, 75, 75, false));
+                    note1ImageView.setImageBitmap(bitmap);
                 }
                 else note1ImageView.setImageBitmap(null);
                 // Note 2
                 if(song.length()>=2) {
                     open = manager.open(getNoteImage(song.charAt(1)));
                     bitmap = BitmapFactory.decodeStream(open);
-                    note2ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-                            bitmap, 75, 75, false));
+                    note2ImageView.setImageBitmap(bitmap);
                 }
                 else note2ImageView.setImageBitmap(null);
                 // Note 3
                 if(song.length()>=3) {
                     open = manager.open(getNoteImage(song.charAt(2)));
                     bitmap = BitmapFactory.decodeStream(open);
-                    note3ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-                            bitmap, 75, 75, false));
+                    note3ImageView.setImageBitmap(bitmap);
                 }
                 else note3ImageView.setImageBitmap(null);
                 // Note 4
                 if(song.length()>=4) {
                     open = manager.open(getNoteImage(song.charAt(3)));
                     bitmap = BitmapFactory.decodeStream(open);
-                    note4ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-                            bitmap, 75, 75, false));
+                    note4ImageView.setImageBitmap(bitmap);
                 }
                 else note4ImageView.setImageBitmap(null);
             } catch (IOException e) {
