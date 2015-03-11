@@ -1,4 +1,6 @@
 Release Notes:
+Version 1.04
+	-Fix sizes in Hunting Horn song list
 Version 1.03
 	-Fixed not being to see Wishlist edit/delete icons (long-press Wishlist items or materials to bring up the action bar)
 	-Complete list of Monster Icons
