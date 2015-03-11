@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="?attr/selectableItemBackground">
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_height="wrap_content"
+                  android:layout_width="match_parent"
+                  android:paddingTop="3dp"
+                  android:paddingBottom="3dp">
+        <ImageView android:id="@+id/armor_builder_item_icon"
+                   android:layout_height="match_parent"
+                   android:layout_width="wrap_content"/>
+        <TextView android:id="@+id/armor_builder_item_name"
+                  android:layout_height="wrap_content"
+                  android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:textSize="20sp"/>
+
+        <ImageView android:id="@+id/decoration_1"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/decoration_none"
+                   android:paddingRight="3dp"
+                   android:paddingEnd="3dp"
+                   android:layout_gravity="center"/>
+
+        <ImageView android:id="@+id/decoration_2"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/decoration_none"
+                   android:paddingRight="3dp"
+                   android:paddingEnd="3dp"
+                   android:layout_gravity="center"/>
+
+        <ImageView android:id="@+id/decoration_3"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/decoration_none"
+                   android:paddingRight="3dp"
+                   android:paddingEnd="3dp"
+                   android:layout_gravity="center"/>
+
+        <ImageView android:id="@+id/popup_menu"
+                   android:layout_height="wrap_content"
+                   android:layout_width="wrap_content"
+                   android:src="@drawable/ic_popup_menu"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -4,114 +4,29 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <LinearLayout android:id="@+id/armor_builder_helmet"
-                  android:orientation="horizontal"
-                  android:layout_height="wrap_content"
-                  android:layout_width="match_parent"
-                  android:paddingTop="3dp"
-                  android:paddingBottom="3dp">
-        <ImageView android:id="@+id/armor_builder_item_icon"
-                   android:layout_height="match_parent"
-                   android:layout_width="wrap_content"/>
-        <TextView android:id="@+id/armor_builder_item_name"
-                  android:layout_height="wrap_content"
-                  android:layout_width="0dp"
-                  android:layout_weight="1"
-                  android:textSize="30sp"
-                  android:textIsSelectable="false"/>
-        <view
-                class="com.daviancorp.android.ui.detail.ArmorSetBuilderDecorationsContainer"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:id="@+id/armor_set_builder_decoration_container"/>
-    </LinearLayout>
+    <view android:id="@+id/armor_builder_head"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
 
-    <LinearLayout android:id="@+id/armor_builder_body"
-                  android:orientation="horizontal"
-                  android:layout_height="wrap_content"
-                  android:layout_width="match_parent"
-                  android:paddingTop="3dp"
-                  android:paddingBottom="3dp">
-        <ImageView android:id="@id/armor_builder_item_icon"
-                   android:layout_height="match_parent"
-                   android:layout_width="wrap_content"/>
-        <TextView android:id="@id/armor_builder_item_name"
-                  android:layout_height="wrap_content"
-                  android:layout_width="0dp"
-                  android:layout_weight="1"
-                  android:textSize="30sp"
-                />
-        <view
-                class="com.daviancorp.android.ui.detail.ArmorSetBuilderDecorationsContainer"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:id="@id/armor_set_builder_decoration_container"/>
-    </LinearLayout>
+    <view android:id="@+id/armor_builder_body"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
 
-    <LinearLayout android:id="@+id/armor_builder_arms"
-                  android:orientation="horizontal"
-                  android:layout_height="wrap_content"
-                  android:layout_width="match_parent"
-                  android:paddingTop="3dp"
-                  android:paddingBottom="3dp">
-        <ImageView android:id="@id/armor_builder_item_icon"
-                   android:layout_height="match_parent"
-                   android:layout_width="wrap_content"/>
-        <TextView android:id="@id/armor_builder_item_name"
-                  android:layout_height="wrap_content"
-                  android:layout_width="0dp"
-                  android:layout_weight="1"
-                  android:textSize="30sp"
-                />
-        <view
-                class="com.daviancorp.android.ui.detail.ArmorSetBuilderDecorationsContainer"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:id="@id/armor_set_builder_decoration_container"/>
-    </LinearLayout>
+    <view android:id="@+id/armor_builder_arms"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
 
-    <LinearLayout android:id="@+id/armor_builder_waist"
-                  android:orientation="horizontal"
-                  android:layout_height="wrap_content"
-                  android:layout_width="match_parent"
-                  android:paddingTop="3dp"
-                  android:paddingBottom="3dp">
-        <ImageView android:id="@id/armor_builder_item_icon"
-                   android:layout_height="match_parent"
-                   android:layout_width="wrap_content"/>
-        <TextView android:id="@id/armor_builder_item_name"
-                  android:layout_height="wrap_content"
-                  android:layout_width="0dp"
-                  android:layout_weight="1"
-                  android:textSize="30sp"
-                />
-        <view
-                class="com.daviancorp.android.ui.detail.ArmorSetBuilderDecorationsContainer"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:id="@id/armor_set_builder_decoration_container"/>
-    </LinearLayout>
+    <view android:id="@+id/armor_builder_waist"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
 
-    <LinearLayout android:id="@+id/armor_builder_legs"
-                  android:orientation="horizontal"
-                  android:layout_height="wrap_content"
-                  android:layout_width="match_parent"
-                  android:paddingTop="3dp"
-                  android:paddingBottom="3dp">
-        <ImageView android:id="@id/armor_builder_item_icon"
-                   android:layout_height="match_parent"
-                   android:layout_width="wrap_content"/>
-        <TextView android:id="@id/armor_builder_item_name"
-                  android:layout_height="wrap_content"
-                  android:layout_width="0dp"
-                  android:layout_weight="1"
-                  android:textSize="30sp"
-                />
-        <view
-                class="com.daviancorp.android.ui.detail.ArmorSetBuilderDecorationsContainer"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:id="@id/armor_set_builder_decoration_container"/>
-    </LinearLayout>
+    <view android:id="@+id/armor_builder_legs"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
 
 </LinearLayout>

@@ -26,30 +26,15 @@ import java.io.InputStream;
  */
 public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilderActivity.ArmorSetChangedListener {
 
-    ViewGroup headView;
-    ImageView headImage;
-    TextView headText;
-    ArmorSetBuilderDecorationsContainer headDecorations;
+    ArmorSetBuilderPieceContainer headView;
 
-    View bodyView;
-    ImageView bodyImage;
-    TextView bodyText;
-    ArmorSetBuilderDecorationsContainer bodyDecorations;
+    ArmorSetBuilderPieceContainer bodyView;
 
-    View armsView;
-    ImageView armsImage;
-    TextView armsText;
-    ArmorSetBuilderDecorationsContainer armsDecorations;
+    ArmorSetBuilderPieceContainer armsView;
 
-    View waistView;
-    ImageView waistImage;
-    TextView waistText;
-    ArmorSetBuilderDecorationsContainer waistDecorations;
+    ArmorSetBuilderPieceContainer waistView;
 
-    View legsView;
-    ImageView legsImage;
-    TextView legsText;
-    ArmorSetBuilderDecorationsContainer legsDecorations;
+    ArmorSetBuilderPieceContainer legsView;
 
     public static ArmorSetBuilderFragment newInstance() {
         Bundle args = new Bundle();
@@ -69,41 +54,17 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_armor_set_builder, container, false);
-        headView = (ViewGroup) view.findViewById(R.id.armor_builder_helmet);
-        bodyView = view.findViewById(R.id.armor_builder_body);
-        armsView = view.findViewById(R.id.armor_builder_arms);
-        waistView = view.findViewById(R.id.armor_builder_waist);
-        legsView = view.findViewById(R.id.armor_builder_legs);
+        headView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_head);
+        bodyView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_body);
+        armsView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_arms);
+        waistView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_waist);
+        legsView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_legs);
 
-        headText = (TextView) headView.findViewById(R.id.armor_builder_item_name);
-        headImage = (ImageView) headView.findViewById(R.id.armor_builder_item_icon);
-        headImage.setImageBitmap(fetchIcon("Head", 1));
-        headDecorations = (ArmorSetBuilderDecorationsContainer) headView.findViewById(R.id.armor_set_builder_decoration_container);
-        headView.setOnClickListener(createEmptyPieceClickListener(0));
-
-        bodyText = (TextView) bodyView.findViewById(R.id.armor_builder_item_name);
-        bodyImage = (ImageView) bodyView.findViewById(R.id.armor_builder_item_icon);
-        bodyImage.setImageBitmap(fetchIcon("Body", 1));
-        bodyDecorations = (ArmorSetBuilderDecorationsContainer) bodyView.findViewById(R.id.armor_set_builder_decoration_container);
-        bodyView.setOnClickListener(createEmptyPieceClickListener(1));
-
-        armsText = (TextView) armsView.findViewById(R.id.armor_builder_item_name);
-        armsImage = (ImageView) armsView.findViewById(R.id.armor_builder_item_icon);
-        armsImage.setImageBitmap(fetchIcon("Arms", 1));
-        armsDecorations = (ArmorSetBuilderDecorationsContainer) armsView.findViewById(R.id.armor_set_builder_decoration_container);
-        armsView.setOnClickListener(createEmptyPieceClickListener(2));
-
-        waistText = (TextView) waistView.findViewById(R.id.armor_builder_item_name);
-        waistImage = (ImageView) waistView.findViewById(R.id.armor_builder_item_icon);
-        waistImage.setImageBitmap(fetchIcon("Waist", 1));
-        waistDecorations = (ArmorSetBuilderDecorationsContainer) waistView.findViewById(R.id.armor_set_builder_decoration_container);
-        waistView.setOnClickListener(createEmptyPieceClickListener(3));
-
-        legsText = (TextView) legsView.findViewById(R.id.armor_builder_item_name);
-        legsImage = (ImageView) legsView.findViewById(R.id.armor_builder_item_icon);
-        legsImage.setImageBitmap(fetchIcon("Legs", 1));
-        legsDecorations = (ArmorSetBuilderDecorationsContainer) legsView.findViewById(R.id.armor_set_builder_decoration_container);
-        legsView.setOnClickListener(createEmptyPieceClickListener(4));
+        headView.initialize(0, createEmptyPieceClickListener(0));
+        bodyView.initialize(1, createEmptyPieceClickListener(1));
+        armsView.initialize(2, createEmptyPieceClickListener(2));
+        waistView.initialize(3, createEmptyPieceClickListener(3));
+        legsView.initialize(4, createEmptyPieceClickListener(4));
 
         return view;
     }
@@ -111,39 +72,26 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
     @Override
     public void updateContents(ArmorSetBuilderSession s) {
         if (s.isHeadSelected()) {
-            headText.setText(s.getHead().getName());
-            headImage.setImageBitmap(fetchIcon("Head", s.getHead().getRarity()));
+            headView.updateContents(s, 0);
             headView.setOnClickListener(createPieceClickListener(0));
 
-            headDecorations.updateContents(s, 0);
         }
         if (s.isBodySelected()) {
-            bodyText.setText(s.getBody().getName());
-            bodyImage.setImageBitmap(fetchIcon("Body", s.getBody().getRarity()));
+            bodyView.updateContents(s, 1);
             bodyView.setOnClickListener(createPieceClickListener(1));
 
-            bodyDecorations.updateContents(s, 1);
         }
         if (s.isArmsSelected()) {
-            armsText.setText(s.getArms().getName());
-            armsImage.setImageBitmap(fetchIcon("Arms", s.getArms().getRarity()));
+            armsView.updateContents(s, 2);
             armsView.setOnClickListener(createPieceClickListener(2));
-
-            armsDecorations.updateContents(s, 2);
         }
         if (s.isWaistSelected()) {
-            waistText.setText(s.getWaist().getName());
-            waistImage.setImageBitmap(fetchIcon("Waist", s.getWaist().getRarity()));
+            waistView.updateContents(s, 3);
             waistView.setOnClickListener(createPieceClickListener(3));
-
-            waistDecorations.updateContents(s, 3);
         }
         if (s.isLegsSelected()) {
-            legsText.setText(s.getLegs().getName());
-            legsImage.setImageBitmap(fetchIcon("Legs", s.getLegs().getRarity()));
+            legsView.updateContents(s, 4);
             legsView.setOnClickListener(createPieceClickListener(4));
-
-            legsDecorations.updateContents(s, 4);
         }
     }
 
@@ -159,31 +107,6 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() + " must be a ArmorSetBuilderActivity.");
         }
-    }
-
-    /** Helper method that retrieves a rarity-appropriate equipment icon. */
-    private Bitmap fetchIcon(String slot, int rarity) {
-        if (slot.equals("Head") || slot.equals("Body") || slot.equals("Arms") || slot.equals("Waist") || slot.equals("Legs")) {
-            String imageRes = "icons_armor/icons_" + slot.toLowerCase() + "/" + slot.toLowerCase() + String.valueOf(rarity) + ".png";
-            AssetManager manager = getActivity().getAssets();
-            InputStream stream;
-
-            try {
-                stream = manager.open(imageRes);
-                Bitmap bitmap = BitmapFactory.decodeStream(stream);
-
-                stream.close();
-
-                return bitmap;
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            Log.e("SetBuilder", "Invalid slot argument!");
-        }
-        return null;
     }
 
     private View.OnClickListener createPieceClickListener(final int pieceIndex) {

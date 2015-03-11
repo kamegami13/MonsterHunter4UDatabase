@@ -100,12 +100,12 @@ public class ArmorExpandableListFragment extends Fragment {
                     break;
             }
         }
+
         children.add(g1);
         children.add(g2);
         children.add(g3);
         children.add(g4);
         children.add(g5);
-
     }
 
     @Override
