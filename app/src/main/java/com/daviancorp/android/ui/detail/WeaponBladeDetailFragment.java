@@ -253,7 +253,12 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 
             // Assign Duration
             cellText = "DUR: " + melody.getDuration();
-            durationTextView.setText(cellText);
+            if(!cellText.equals("DUR: N/A")) {
+                durationTextView.setText(cellText);
+                durationTextView.setVisibility(View.VISIBLE);
+            } else {
+                durationTextView.setVisibility(View.GONE);
+            }
 
             // Assign Extension
             cellText = "EXT: " + melody.getExtension();
