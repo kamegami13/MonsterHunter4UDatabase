@@ -63,32 +63,36 @@
         android:id="@+id/horn_note1"
         android:layout_gravity="center_vertical"
         tools:src="@drawable/impact"
-        style="@style/small_image"
+        style="@style/tiny_image"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginRight="4dp" />
 
     <ImageView
         android:id="@+id/horn_note2"
         android:layout_gravity="center_vertical"
         tools:src="@drawable/impact"
-        style="@style/small_image"
+        style="@style/tiny_image"
         android:layout_toRightOf="@+id/horn_note1"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginRight="4dp" />
 
     <ImageView
         android:id="@+id/horn_note3"
         android:layout_gravity="center_vertical"
         tools:src="@drawable/impact"
-        style="@style/small_image"
+        style="@style/tiny_image"
         android:layout_toRightOf="@+id/horn_note2"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginRight="4dp" />
 
     <ImageView
         android:id="@+id/horn_note4"
         android:layout_gravity="center_vertical"
         tools:src="@drawable/impact"
-        style="@style/small_image"
+        style="@style/tiny_image"
         android:layout_toRightOf="@+id/horn_note3"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginRight="4dp" />
 
 </RelativeLayout>
