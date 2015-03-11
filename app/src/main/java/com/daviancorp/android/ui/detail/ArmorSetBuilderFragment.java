@@ -27,13 +27,9 @@ import java.io.InputStream;
 public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilderActivity.ArmorSetChangedListener {
 
     ArmorSetBuilderPieceContainer headView;
-
     ArmorSetBuilderPieceContainer bodyView;
-
     ArmorSetBuilderPieceContainer armsView;
-
     ArmorSetBuilderPieceContainer waistView;
-
     ArmorSetBuilderPieceContainer legsView;
 
     public static ArmorSetBuilderFragment newInstance() {
@@ -60,39 +56,24 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         waistView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_waist);
         legsView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_legs);
 
-        headView.initialize(0, createEmptyPieceClickListener(0));
-        bodyView.initialize(1, createEmptyPieceClickListener(1));
-        armsView.initialize(2, createEmptyPieceClickListener(2));
-        waistView.initialize(3, createEmptyPieceClickListener(3));
-        legsView.initialize(4, createEmptyPieceClickListener(4));
+        ArmorSetBuilderSession s = ((ArmorSetBuilderActivity) getActivity()).getArmorSetBuilderSession();
+
+        headView.initialize(s, 0);
+        bodyView.initialize(s, 1);
+        armsView.initialize(s, 2);
+        waistView.initialize(s, 3);
+        legsView.initialize(s, 4);
 
         return view;
     }
 
     @Override
     public void updateContents(ArmorSetBuilderSession s) {
-        if (s.isHeadSelected()) {
-            headView.updateContents(s, 0);
-            headView.setOnClickListener(createPieceClickListener(0));
-
-        }
-        if (s.isBodySelected()) {
-            bodyView.updateContents(s, 1);
-            bodyView.setOnClickListener(createPieceClickListener(1));
-
-        }
-        if (s.isArmsSelected()) {
-            armsView.updateContents(s, 2);
-            armsView.setOnClickListener(createPieceClickListener(2));
-        }
-        if (s.isWaistSelected()) {
-            waistView.updateContents(s, 3);
-            waistView.setOnClickListener(createPieceClickListener(3));
-        }
-        if (s.isLegsSelected()) {
-            legsView.updateContents(s, 4);
-            legsView.setOnClickListener(createPieceClickListener(4));
-        }
+        headView.updateContents();
+        bodyView.updateContents();
+        armsView.updateContents();
+        waistView.updateContents();
+        legsView.updateContents();
     }
 
     @Override
@@ -103,35 +84,8 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         try {
             ArmorSetBuilderActivity a = (ArmorSetBuilderActivity) getActivity();
             a.addArmorSetChangedListener(this);
-        }
-        catch (ClassCastException e) {
+        } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() + " must be a ArmorSetBuilderActivity.");
         }
-    }
-
-    private View.OnClickListener createPieceClickListener(final int pieceIndex) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), DecorationListActivity.class);
-                i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
-                i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
-
-                getActivity().startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE);
-            }
-        };
-    }
-
-    private View.OnClickListener createEmptyPieceClickListener(final int pieceIndex) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), ArmorListActivity.class);
-                i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
-                i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
-
-                getActivity().startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE);
-            }
-        };
     }
 }

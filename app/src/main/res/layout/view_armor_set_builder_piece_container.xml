@@ -23,7 +23,6 @@
                    android:layout_height="wrap_content"
                    android:src="@drawable/decoration_none"
                    android:paddingRight="3dp"
-                   android:paddingEnd="3dp"
                    android:layout_gravity="center"/>
 
         <ImageView android:id="@+id/decoration_2"
@@ -31,7 +30,6 @@
                    android:layout_height="wrap_content"
                    android:src="@drawable/decoration_none"
                    android:paddingRight="3dp"
-                   android:paddingEnd="3dp"
                    android:layout_gravity="center"/>
 
         <ImageView android:id="@+id/decoration_3"
@@ -39,10 +37,10 @@
                    android:layout_height="wrap_content"
                    android:src="@drawable/decoration_none"
                    android:paddingRight="3dp"
-                   android:paddingEnd="3dp"
                    android:layout_gravity="center"/>
 
-        <ImageView android:id="@+id/popup_menu"
+        <ImageView android:id="@+id/popup_menu_button"
+                   android:paddingRight="10dp"
                    android:layout_height="wrap_content"
                    android:layout_width="wrap_content"
                    android:src="@drawable/ic_popup_menu"/>

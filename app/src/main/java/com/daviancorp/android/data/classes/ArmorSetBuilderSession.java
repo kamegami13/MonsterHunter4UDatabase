@@ -76,7 +76,7 @@ public class ArmorSetBuilderSession {
     }
 
     /**
-     * Attempts to add an decoration to the specified armor piece.
+     * Attempts to add a decoration to the specified armor piece.
      *
      * @param pieceIndex The index of a piece in the set to fetch, according to {@link com.daviancorp.android.data.classes.ArmorSetBuilderSession}.
      * @param decoration The decoration to add.
@@ -122,6 +122,31 @@ public class ArmorSetBuilderSession {
         return armors[pieceIndex].getNumSlots() - decorationCount;
     }
 
+    public boolean hasDecorations(int pieceIndex) {
+        int decorationCount = 0;
+        for (Decoration d : decorations[pieceIndex]) {
+            if (d != noDecoration) {
+                decorationCount++;
+            }
+        }
+
+        return decorationCount > 0;
+    }
+
+    /**
+     * @return True if the designated slot is actually in use, false if it is empty.
+     */
+    public boolean decorationIsReal(int pieceIndex, int decorationIndex) {
+        return decorations[pieceIndex][decorationIndex] != noDecoration && decorations[pieceIndex][decorationIndex] != dummy;
+    }
+
+    /**
+     * @return True if the designated slot is a "dummy" decoration - that is, the non-first slot in a decoration of size greater than 1 - and false if it is empty or an actual decoration.
+     */
+    public boolean decorationIsDummy(int pieceIndex, int decorationIndex) {
+        return getDecoration(pieceIndex, decorationIndex) == dummy;
+    }
+
     /**
      * @return Whether the user has selected a head piece or not.
      */
@@ -157,6 +182,10 @@ public class ArmorSetBuilderSession {
         return armors[LEGS] != noArmor;
     }
 
+    public boolean isPieceSelected(int pieceIndex) {
+        return armors[pieceIndex] != noArmor;
+    }
+
     public void setHead(Armor head) {
         armors[HEAD] = head;
     }
@@ -181,19 +210,6 @@ public class ArmorSetBuilderSession {
         return decorations[pieceIndex][decorationIndex];
     }
 
-    /**
-     * @return True if the designated slot is actually in use, false if it is empty.
-     */
-    public boolean decorationIsReal(int pieceIndex, int decorationIndex) {
-        return decorations[pieceIndex][decorationIndex] != noDecoration && decorations[pieceIndex][decorationIndex] != dummy;
-    }
-
-    /**
-     * @return True if the designated slot is a "dummy" decoration - that is, the non-first slot in a decoration of size greater than 1 - and false if it is empty or an actual decoration.
-     */
-    public boolean decorationIsDummy(int pieceIndex, int decorationIndex) {
-        return getDecoration(pieceIndex, decorationIndex) == dummy;
-    }
 
     /**
      * @return A set of the armor set based on the provided piece index.
@@ -236,6 +252,10 @@ public class ArmorSetBuilderSession {
      */
     public Armor getLegs() {
         return getArmor(LEGS);
+    }
+
+    public void removeArmor(int pieceIndex) {
+        armors[pieceIndex] = noArmor;
     }
 
     public List<SkillTreePointsSet> getSkillTreePointsSets() {

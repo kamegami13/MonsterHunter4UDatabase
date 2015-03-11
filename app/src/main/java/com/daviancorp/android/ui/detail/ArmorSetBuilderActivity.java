@@ -138,6 +138,10 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
         super.onPause();
     }
 
+    public ArmorSetBuilderSession getArmorSetBuilderSession() {
+        return session;
+    }
+
     public void addArmorSetChangedListener(ArmorSetChangedListener a) {
         armorSetChangedListeners.add(a);
     }

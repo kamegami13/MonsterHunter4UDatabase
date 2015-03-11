@@ -1,26 +1,45 @@
 package com.daviancorp.android.ui.detail;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.list.ArmorListActivity;
+import com.daviancorp.android.ui.list.DecorationListActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 public class ArmorSetBuilderPieceContainer extends LinearLayout {
 
+    public static final int MENU_ADD_PIECE = 0;
+    public static final int MENU_REMOVE_PIECE = 1;
+    public static final int MENU_ADD_DECORATION = 2;
+    public static final int MENU_REMOVE_DECORATION = 3;
+    public static final int MENU_GET_INFO = 4;
+
     private ImageView icon;
     private TextView text;
 
     private ImageView[] decorationIcons;
+
+    private ImageView popupMenuButton;
+
+    private ArmorSetBuilderSession session;
+    private int pieceIndex;
 
     public ArmorSetBuilderPieceContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -35,30 +54,39 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         decorationIcons[0] = (ImageView) findViewById(R.id.decoration_1);
         decorationIcons[1] = (ImageView) findViewById(R.id.decoration_2);
         decorationIcons[2] = (ImageView) findViewById(R.id.decoration_3);
+
+        popupMenuButton = (ImageView) findViewById(R.id.popup_menu_button);
     }
 
-    public void initialize(int pieceIndex, OnClickListener clickListener) {
-        icon.setImageBitmap(fetchIcon(pieceIndex, 1));
-        setOnClickListener(clickListener);
+    public void initialize(ArmorSetBuilderSession session, int pieceIndex) {
+        this.session = session;
+        this.pieceIndex = pieceIndex;
+
+        reset();
     }
 
-    public void updateContents(ArmorSetBuilderSession s, int pieceIndex) {
-        updateArmorPiece(s, pieceIndex);
-        updateDecorations(s, pieceIndex);
+    public void updateContents() {
+        updateArmorPiece();
+        updateDecorations();
     }
 
-    private void updateArmorPiece(ArmorSetBuilderSession s, int pieceIndex) {
-        text.setText(s.getHead().getName());
-        icon.setImageBitmap(fetchIcon(pieceIndex, s.getArmor(pieceIndex).getRarity()));
+    private void updateArmorPiece() {
+        if (session.isPieceSelected(pieceIndex)) {
+            text.setText(session.getArmor(pieceIndex).getName());
+            icon.setImageBitmap(fetchIcon(session.getArmor(pieceIndex).getRarity()));
+            setOnClickListener(pieceSelectedClickListener);
+        } else {
+            reset();
+        }
     }
 
-    private void updateDecorations(ArmorSetBuilderSession s, int pieceIndex) {
+    private void updateDecorations() {
         for (int i = 0; i < 3; i++) {
-            if (s.decorationIsReal(pieceIndex, i)) {
+            if (session.decorationIsReal(pieceIndex, i)) {
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_real));
-            } else if (s.decorationIsDummy(pieceIndex, i)) { // The socket index in question is a dummy
+            } else if (session.decorationIsDummy(pieceIndex, i)) { // The socket index in question is a dummy
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_dummy));
-            } else if (s.getArmor(pieceIndex).getNumSlots() > i) { // The socket in question is empty
+            } else if (session.getArmor(pieceIndex).getNumSlots() > i) { // The socket in question is empty
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_empty));
             } else { // The armor piece has no more sockets
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_none));
@@ -66,10 +94,15 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         }
     }
 
+    private void reset() {
+        icon.setImageBitmap(fetchIcon(1));
+        setOnClickListener(pieceUnselectedClickListener);
+    }
+
     /**
      * Helper method that retrieves a rarity-appropriate equipment icon.
      */
-    private Bitmap fetchIcon(int pieceIndex, int rarity) {
+    private Bitmap fetchIcon(int rarity) {
         String slot = "";
         switch (pieceIndex) {
             case ArmorSetBuilderSession.HEAD:
@@ -103,6 +136,78 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    private PopupMenu createPopupMenu() {
+        PopupMenu popup = new PopupMenu(getContext(), popupMenuButton);
+        if (!session.isPieceSelected(pieceIndex)) {
+            popup.getMenu().add(Menu.NONE, MENU_ADD_PIECE, Menu.NONE, R.string.armor_set_builder_add_piece);
+        }
+        else {
+            popup.getMenu().add(Menu.NONE, MENU_REMOVE_PIECE, Menu.NONE, R.string.armor_set_builder_remove_piece);
+            popup.getMenu().add(Menu.NONE, MENU_GET_INFO, Menu.NONE, R.string.armor_set_builder_piece_info);
+        }
+
+        if (session.getAvailableSlots(pieceIndex) > 0) {
+            popup.getMenu().add(Menu.NONE, MENU_ADD_DECORATION, Menu.NONE, R.string.armor_set_builder_add_decoration);
+        }
+
+        if (session.hasDecorations(pieceIndex)) {
+            popup.getMenu().add(Menu.NONE, MENU_REMOVE_DECORATION, Menu.NONE, R.string.armor_set_builder_remove_decoration);
+        }
+
+        return popup;
+    }
+
+    private void addPiece() {
+        Intent i = new Intent(getContext(), ArmorListActivity.class);
+        i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
+        i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
+
+        ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE);
+    }
+
+    private void removePiece() {
+        session.removeArmor(pieceIndex);
+        updateArmorPiece();
+    }
+
+    private View.OnClickListener pieceSelectedClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(getContext(), DecorationListActivity.class);
+            i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
+            i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
+
+            ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE);
+        }
+    };
+
+    private View.OnClickListener pieceUnselectedClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(getContext(), ArmorListActivity.class);
+            i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
+            i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
+
+            ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE);
+        }
+    };
+
+    private class PiecePopupMenuClickListener implements PopupMenu.OnMenuItemClickListener {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+                case MENU_ADD_PIECE:
+                    addPiece();
+                    break;
+                case MENU_REMOVE_PIECE:
+                    removePiece();
+                    break;
+
+            }
+            return true;
         }
     }
 }
