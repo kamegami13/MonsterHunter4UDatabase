@@ -3,28 +3,25 @@ MonsterHunter4UDatabase
 
 Source code for the Android app Monster Hunter 4U Database. 
 
-List of To-Dos can be found here (thanks to kamegami):
+Available on Google Play:
+
+https://play.google.com/store/apps/details?id=com.daviancorp.android.mh4udatabase&hl=en
+
+Also available on F-Droid Market
+
+List of To-Dos can be found here:
 
 https://trello.com/b/OdgrIacq/monster-hunter-4u-database
 
+### Building
+
+Run the 
+
 ### Database
 
-Located in MonsterHunter4UDatabase\app\assets.
+Located in MonsterHunter4UDatabase\app\src\main\assets\databases.
 
-To modify database:
-  1) .sql to modify directly.
-  2) Import .sql file to any SQLite database (SQLite Database Browser)
-  3) Save database as .sqlite
-  4) Split .sqlite to files < 1 MB in db folder
-  
-  or
-  
-  1) Open .sqlite file to any SQLite database
-  2) Make changes through queries
-  3) Save database
-  4) Splite .sqlite to files < 1 MB in db folder
-  
-DO NOT PUT ANY EXTRA FILES IN DB FOLDER
+SQLite Database is built from xlsx spreadsheets using the table_exporter bat file.
 
 ### Package Layout
 
@@ -52,7 +49,7 @@ com.daviancorp.android.ui.dialog
 com.daviancorp.android.ui.general
   - Base activities
   - Home activity
-  - 'Sharpness' code to draw sharpness using values (unused)
+  - 'Sharpness' code to draw sharpness using values
 
 com.daviancorp.android.ui.list
   - List activities + fragments
