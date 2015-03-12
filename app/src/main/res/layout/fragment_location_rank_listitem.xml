@@ -57,7 +57,7 @@
 
         <TextView
             android:id="@+id/rate"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
             android:gravity="center_vertical|right"
@@ -65,7 +65,7 @@
             android:layout_gravity="center_vertical"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/area"
-            android:text="test"
+            android:text="100%"
             android:layout_marginLeft="4dp" />
     </RelativeLayout>
 

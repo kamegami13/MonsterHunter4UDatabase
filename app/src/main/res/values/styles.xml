@@ -33,9 +33,39 @@
         <item name="colorPrimaryDark">@color/dark_primary_color</item>
         <item name="colorAccent">@color/accent_color</item>
 
+        <item name="popupMenuStyle">@style/PopupMenuStyle</item>
+        <item name="dropDownListViewStyle">@style/DropDownListViewStyle</item>
+        <item name="actionDropDownStyle">@style/DropDownNavStyle</item>
+
+        <item name="actionModeBackground">@drawable/primary_drawable</item>
+        <item name="actionModeSplitBackground">@drawable/primary_drawable</item>
+        <item name="actionBarItemBackground">@drawable/primary_drawable</item>
+
+        <item name="android:popupMenuStyle">@style/PopupMenuStyle</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNavStyle</item>
+
+        <item name="android:actionModeBackground">@drawable/primary_drawable</item>
+        <item name="android:actionModeSplitBackground">@drawable/primary_drawable</item>
+        <item name="android:actionBarItemBackground">@drawable/primary_drawable</item>
+
 
         <item name="android:clipToPadding">false</item>
 
+    </style>
+
+    <style name="PopupMenuStyle" parent="@style/AppTheme">
+        <item name="android:popupBackground">@drawable/primary_drawable</item>
+    </style>
+
+    <style name="DropDownListViewStyle" parent="@style/AppTheme">
+        <item name="android:listSelector">@drawable/primary_drawable</item>
+    </style>
+
+    <style name="DropDownNavStyle" parent="@style/AppTheme">
+        <item name="android:background">@drawable/primary_drawable</item>
+        <item name="android:popupBackground">@drawable/primary_drawable</item>
+        <item name="android:dropDownSelector">@drawable/primary_drawable</item>
     </style>
 
     <!-- USE FOR ALL FULLSCREEN ACTIVITIES WHERE VIEWS COVER ALL BACKGROUD TO REDUCE OVERDRAW -->

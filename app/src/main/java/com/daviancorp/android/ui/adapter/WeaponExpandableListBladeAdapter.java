@@ -102,7 +102,7 @@ public class WeaponExpandableListBladeAdapter extends WeaponExpandableListElemen
             if(bitmap2 != null) {
                 holder.note2v.setImageBitmap(bitmap2);
             } else {
-                new LoadImage(holder.note1v, getNoteDrawable(special.charAt(1))).execute();
+                new LoadImage(holder.note2v, getNoteDrawable(special.charAt(1))).execute();
             }
 
             final Bitmap bitmap3 = getBitmapFromMemCache(getNoteDrawable(special.charAt(2)));

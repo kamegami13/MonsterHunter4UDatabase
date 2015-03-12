@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -59,6 +60,7 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
     private DrawerAdapter mDrawerAdapter;
     public ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
+    private static boolean drawerOpened = false;
 
     public interface ActionOnCloseListener {
         void actionOnClose();
@@ -153,6 +155,13 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
         // Enable menu button to toggle drawer
         mDrawerToggle.setDrawerIndicatorEnabled(false);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        //automatically open drawer on launch
+        if(!drawerOpened)
+        {
+            mDrawerLayout.openDrawer(Gravity.LEFT);
+            drawerOpened = true;
+        }
     }
 
     // Set up drawer menu options

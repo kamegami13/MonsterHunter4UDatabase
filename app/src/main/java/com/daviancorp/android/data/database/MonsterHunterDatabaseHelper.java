@@ -67,7 +67,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	private static final int VERSION = 16; // EDIT*/
 
     private static final String DATABASE_NAME = "mh4u.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 8;
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -941,7 +941,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.SelectionArgs = null;
 		qh.GroupBy = null;
 		qh.Having = null;
-		qh.OrderBy = null;
+		qh.OrderBy = "skill_1_name ASC";
 		qh.Limit = null;
 
 		return new DecorationCursor(wrapJoinHelper(builderDecoration(), qh));
@@ -1030,7 +1030,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.SelectionArgs = new String[]{"" + id};
 		qh.GroupBy = null;
 		qh.Having = null;
-		qh.OrderBy = null;
+		qh.OrderBy = "g." + S.COLUMN_GATHERING_RANK + " DESC, " + "l." + S.COLUMN_LOCATIONS_MAP
+                + " ASC";
 		qh.Limit = null;
 		
 		return new GatheringCursor(wrapJoinHelper(builderGathering(), qh));
@@ -1537,8 +1538,30 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		
 		return new LocationCursor(wrapHelper(qh));
 	}
-	
-/********************************* MOGA WOODS REWARD QUERIES ******************************************/
+
+    /******************************** HORN MELODIES QUERIES ***********************************************/
+
+    /*
+     * Get all melodies available from a given set of notes
+     */
+    public HornMelodiesCursor queryMelodiesFromNotes(String notes) {
+        // "SELECT * FROM horn_melodies WHERE notes = notes"
+
+        QueryHelper qh = new QueryHelper();
+        qh.Distinct = false;
+        qh.Table = S.TABLE_HORN_MELODIES;
+        qh.Columns = null;
+        qh.Selection = S.COLUMN_HORN_MELODIES_NOTES + " = ?";
+        qh.SelectionArgs = new String[]{notes};
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new HornMelodiesCursor(wrapHelper(qh));
+    }
+
+    /********************************* MOGA WOODS REWARD QUERIES ******************************************/
 	
 	/*
 	 * Get all moga woods reward monsters based on item
@@ -1778,7 +1801,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         qh.SelectionArgs = new String[]{ String.valueOf(id) };
         qh.GroupBy = null;
         qh.Having = null;
-        qh.OrderBy = null;
+        qh.OrderBy = "m" + S.COLUMN_MONSTERS_SORT_NAME + " ASC";
         qh.Limit = null;
 
         return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct),qh));
@@ -1804,6 +1827,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         projectionMap.put(l + S.COLUMN_LOCATIONS_MAP, l + "." + S.COLUMN_LOCATIONS_MAP + " AS " + l + S.COLUMN_LOCATIONS_MAP );
 
         projectionMap.put(m + S.COLUMN_MONSTERS_ID, m+ "." + S.COLUMN_MONSTERS_ID + " AS " + m + S.COLUMN_MONSTERS_ID);
+        projectionMap.put(m + S.COLUMN_MONSTERS_SORT_NAME, m + "." + S.COLUMN_MONSTERS_SORT_NAME + " AS " + m + S.COLUMN_MONSTERS_SORT_NAME);
         projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
         projectionMap.put(m + S.COLUMN_MONSTERS_CLASS, m + "." + S.COLUMN_MONSTERS_CLASS + " AS " + m + S.COLUMN_MONSTERS_CLASS );
         projectionMap.put(m + S.COLUMN_MONSTERS_FILE_LOCATION, m + "." + S.COLUMN_MONSTERS_FILE_LOCATION + " AS " + m + S.COLUMN_MONSTERS_FILE_LOCATION );
@@ -1959,7 +1983,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.SelectionArgs = new String[]{"" + id};
 		qh.GroupBy = "q." + S.COLUMN_QUESTS_NAME;
 		qh.Having = null;
-		qh.OrderBy = null;
+		qh.OrderBy = "q." + S.COLUMN_QUESTS_HUB + " ASC, " + "q." + S.COLUMN_QUESTS_STARS + " ASC";
 		qh.Limit = null;
 		
 		return new MonsterToQuestCursor(wrapJoinHelper(builderMonsterToQuest(qh.Distinct), qh));
@@ -2157,7 +2181,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.SelectionArgs = new String[]{"" + id};
 		qh.GroupBy = null;
 		qh.Having = null;
-		qh.OrderBy = "qr." + S.COLUMN_QUEST_REWARDS_PERCENTAGE + " DESC";
+		qh.OrderBy = "q." + S.COLUMN_QUESTS_HUB + " ASC, " + "q." + S.COLUMN_QUESTS_STARS + " ASC";
 		qh.Limit = null;
 		
 		return new QuestRewardCursor(wrapJoinHelper(builderQuestReward(), qh));

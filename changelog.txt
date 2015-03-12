@@ -1,4 +1,23 @@
 Release Notes:
+Version 1.04
+	-Fix sizes and layout in Hunting Horn song list
+	-Missing Horn Songs
+Version 1.03
+	-Fixed not being to see Wishlist edit/delete icons (long-press Wishlist items or materials to bring up the action bar)
+	-Complete list of Monster Icons
+	-Added Collapsible Weapon Trees (long-press to collapse)
+	-List of Hunting Horn Songs on the Hunting Horn details page
+	-Complete Weapon List Overhaul
+	-Update location maps with better gather points
+	-UI tweaks
+	-Reduced APK size
+	-Various database typos and incorrect data
+	-Performance improvements on different lists
+	-Better sorting on monster->quest list, item->quest list, and item->location list
+	-Decorations sorted by skill name
+	-New drawer menu icons
+	-Fixed drawer menu icons and text
+	-Fixed incorrect Critical Eye +4 skill entry
 Version 1.02
 	- Migrated from ActionBarSherlock to AppCompat
 	- Added monster status resistances
