@@ -105,10 +105,38 @@ public class ArmorSetBuilderSession {
         }
     }
 
+	/**
+	 * Attmepts to remove the decoration at the specified index.
+	 */
     public void removeDecoration(int pieceIndex, Decoration decoration) {
-        for (Decoration d : decorations[pieceIndex]) {
-
+	
+        for (int i = 0; i < decorations[pieceIndex].length; i++) { // We search for the decoration specified in the arguments
+			if (decorations[pieceIndex, i] == decoration) {
+				decorations[pieceIndex] == noArmor;
+				for (int j = i; j < decorations[pieceIndex].length; j++) {
+					if (decorations[pieceIndex, j] == dummy) {
+						decorations[pieceIndex, j] = noDecoration;
+					}
+					else {
+						break;
+					}
+					
+				}
+				
+				break;
+			}
         }
+
+		int decorationIndex = 0;
+		Decoration[] newDecorations = new Decoration[3]; // We move all of the decorations to a new array so that they are all at the beginning
+		
+		for (Decoration d : decorations[pieceIndex]) {
+			if (d != noDecoration && d != dummy) {
+				newDecorations[decorationIndex++] = d;
+			}
+		}
+		
+		decorations[pieceIndex] = newDecorations;
     }
 
     public int getAvailableSlots(int pieceIndex) {

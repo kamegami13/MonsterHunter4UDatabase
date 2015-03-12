@@ -56,6 +56,12 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         decorationIcons[2] = (ImageView) findViewById(R.id.decoration_3);
 
         popupMenuButton = (ImageView) findViewById(R.id.popup_menu_button);
+		popupMenuButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				createPopupMenu().show();
+			}
+		});
     }
 
     public void initialize(ArmorSetBuilderSession session, int pieceIndex) {
@@ -157,6 +163,8 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
             popup.getMenu().add(Menu.NONE, MENU_REMOVE_DECORATION, Menu.NONE, R.string.armor_set_builder_remove_decoration);
         }
 
+		popup.setOnMenuItemClickListener(new PiecePopupMenuClickListener());
+
         return popup;
     }
 
@@ -173,7 +181,19 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         updateArmorPiece();
     }
 
-    private View.OnClickListener pieceSelectedClickListener = new View.OnClickListener() {
+	private void addDecoration() {
+		Intent i = new Intent(getContext(), DecorationListActivity.class);
+		i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
+		i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
+		
+		((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE);
+	}
+	
+	private void removeDecoration() {
+		
+	}
+
+    private View.OnClickListener pieceSelectedClickListener = new View.OnClickListener() { // TODO: Remove these ClickListeners
         @Override
         public void onClick(View v) {
             Intent i = new Intent(getContext(), DecorationListActivity.class);
@@ -205,7 +225,15 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
                 case MENU_REMOVE_PIECE:
                     removePiece();
                     break;
-
+				case MENU_ADD_DECORATION:
+					addDecoration();
+					break;
+				case MENU_REMOVE_DECORATION: // TODO
+					break;
+				case MENU_PIECE_INFO: // TODO
+					break;
+				default:
+					return false;
             }
             return true;
         }
