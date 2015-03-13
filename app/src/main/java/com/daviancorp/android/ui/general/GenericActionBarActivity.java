@@ -120,13 +120,13 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                         break;
                 }
                 final Intent finalIntent = intent;
+                // Clear the back stack whenever a nav drawer item is selected
                 actionOnCloseListener = new ActionOnCloseListener() {
                     @Override
                     public void actionOnClose() {
                         startActivity(finalIntent);
                     }
                 };
-
                 mDrawerLayout.closeDrawers();
             }
         });
@@ -205,8 +205,18 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
             return true;
         }
 
+
+
         // Detect home and or expansion menu item selections
         switch (item.getItemId()) {
+
+            case android.R.id.home:
+                // Detect back/up button is pressed
+                // Finish current activity and pop it off the stack.
+                // Basically a back button.
+                this.finish();
+                return true;
+
             case R.id.about:
                 FragmentManager fm = getSupportFragmentManager();
                 AboutDialogFragment dialog = new AboutDialogFragment();
