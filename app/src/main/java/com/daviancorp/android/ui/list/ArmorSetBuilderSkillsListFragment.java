@@ -82,23 +82,23 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
 
             treeName.setText(getItem(position).getSkillTree().getName());
 
-            if (session.isHeadSelected()) {
+            if (session.isPieceSelected(ArmorSetBuilderSession.HEAD)) {
                 headPoints.setText(String.valueOf(getItem(position).getHeadPoints()));
             }
 
-            if (session.isBodySelected()) {
+            if (session.isPieceSelected(ArmorSetBuilderSession.BODY)) {
                 bodyPoints.setText(String.valueOf(getItem(position).getBodyPoints()));
             }
 
-            if (session.isArmsSelected()) {
+            if (session.isPieceSelected(ArmorSetBuilderSession.ARMS)) {
                 armsPoints.setText(String.valueOf(getItem(position).getArmsPoints()));
             }
 
-            if (session.isWaistSelected()) {
+            if (session.isPieceSelected(ArmorSetBuilderSession.WAIST)) {
                 waistPoints.setText(String.valueOf(getItem(position).getWaistPoints()));
             }
 
-            if (session.isLegsSelected()) {
+            if (session.isPieceSelected(ArmorSetBuilderSession.LEGS)) {
                 legsPoints.setText(String.valueOf(getItem(position).getLegsPoints()));
             }
 

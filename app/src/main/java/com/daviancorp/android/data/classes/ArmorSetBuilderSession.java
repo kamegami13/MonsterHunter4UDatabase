@@ -24,33 +24,12 @@ public class ArmorSetBuilderSession {
     public static final int WAIST = 3;
     public static final int LEGS = 4;
 
-    /**
-     * A singleton {@code Armor} that represents the absence of armor.
-     */
     private static Armor noArmor = new Armor();
 
-    /**
-     * A singleton {@code Decoration} that represents the absence of a decoration.
-     */
     private static Decoration noDecoration = new Decoration();
-
-    /**
-     * A singleton {@code Decoration} that represents the additional slots taken up by a decoration of size greater than 1.
-     */
     public static Decoration dummy = new Decoration();
 
-    /**
-     * The array of armor pieces in the set.
-     *
-     * @see com.daviancorp.android.data.classes.ArmorSetBuilderSession
-     */
     private Armor[] armors;
-
-    /**
-     * The array of socketed decorations for each armor piece.
-     *
-     * @see com.daviancorp.android.data.classes.ArmorSetBuilderSession
-     */
     private Decoration[][] decorations;
 
     private List<SkillTreePointsSet> skillTreePointsSets;
@@ -77,7 +56,6 @@ public class ArmorSetBuilderSession {
 
     /**
      * Attempts to add a decoration to the specified armor piece.
-     *
      * @param pieceIndex The index of a piece in the set to fetch, according to {@link com.daviancorp.android.data.classes.ArmorSetBuilderSession}.
      * @param decoration The decoration to add.
      * @return True if the piece was successfuly added, otherwise false.
@@ -105,38 +83,70 @@ public class ArmorSetBuilderSession {
         }
     }
 
-	/**
-	 * Attmepts to remove the decoration at the specified index.
-	 */
+    /**
+     * Attmepts to remove a decoration from a piece.
+     * @param pieceIndex The index of the armor piece to look in.
+     * @param decoration The {@code Decoration} to remove.
+     */
     public void removeDecoration(int pieceIndex, Decoration decoration) {
-	
+
         for (int i = 0; i < decorations[pieceIndex].length; i++) { // We search for the decoration specified in the arguments
-			if (decorations[pieceIndex, i] == decoration) {
-				decorations[pieceIndex] == noArmor;
-				for (int j = i; j < decorations[pieceIndex].length; j++) {
-					if (decorations[pieceIndex, j] == dummy) {
-						decorations[pieceIndex, j] = noDecoration;
-					}
-					else {
-						break;
-					}
-					
-				}
-				
-				break;
-			}
+            if (decorations[pieceIndex][i] == decoration) {
+                decorations[pieceIndex][i] = noDecoration;
+                for (int j = i; j < decorations[pieceIndex].length; j++) {
+                    if (decorations[pieceIndex][j] == dummy) {
+                        decorations[pieceIndex][j] = noDecoration;
+                    } else {
+                        break;
+                    }
+
+                }
+
+                break;
+            }
         }
 
-		int decorationIndex = 0;
-		Decoration[] newDecorations = new Decoration[3]; // We move all of the decorations to a new array so that they are all at the beginning
-		
-		for (Decoration d : decorations[pieceIndex]) {
-			if (d != noDecoration && d != dummy) {
-				newDecorations[decorationIndex++] = d;
-			}
-		}
-		
-		decorations[pieceIndex] = newDecorations;
+        int i = 0;
+        Decoration[] newDecorations = new Decoration[3]; // We move all of the decorations to a new array so that they are all at the beginning
+
+        for (Decoration d : decorations[pieceIndex]) {
+            if (d != noDecoration && d != dummy) {
+                newDecorations[i++] = d;
+            }
+        }
+
+        decorations[pieceIndex] = newDecorations;
+    }
+
+    public void removeDecoration(int pieceIndex, int decorationIndex) {
+
+        if (decorations[pieceIndex][decorationIndex] != dummy) {
+            decorations[pieceIndex][decorationIndex] = noDecoration;
+
+            for (int j = decorationIndex + 1; j < decorations[pieceIndex].length; j++) {
+                if (decorations[pieceIndex][j] == dummy) {
+                    decorations[pieceIndex][j] = noDecoration;
+                } else {
+                    break;
+                }
+
+            }
+        }
+
+        int i = 0;
+        Decoration[] newDecorations = new Decoration[3]; // We move all of the decorations to a new array so that they are all at the beginning
+
+        for (Decoration d : decorations[pieceIndex]) {
+            newDecorations[i++] = d;
+        }
+
+        decorations[pieceIndex] = newDecorations;
+    }
+
+    public void removeAllDecorations(int pieceIndex) {
+        for (int i = 0; i < decorations[pieceIndex].length; i++) {
+            decorations[pieceIndex][i] = noDecoration;
+        }
     }
 
     public int getAvailableSlots(int pieceIndex) {
@@ -161,83 +171,27 @@ public class ArmorSetBuilderSession {
         return decorationCount > 0;
     }
 
-    /**
-     * @return True if the designated slot is actually in use, false if it is empty.
-     */
+    /** @return True if the designated slot is actually in use, false if it is empty. */
     public boolean decorationIsReal(int pieceIndex, int decorationIndex) {
         return decorations[pieceIndex][decorationIndex] != noDecoration && decorations[pieceIndex][decorationIndex] != dummy;
     }
 
-    /**
-     * @return True if the designated slot is a "dummy" decoration - that is, the non-first slot in a decoration of size greater than 1 - and false if it is empty or an actual decoration.
-     */
+    /** @return True if the designated slot is a "dummy" decoration - that is, the non-first slot in a decoration of size greater than 1 - and false if it is empty or an actual decoration. */
     public boolean decorationIsDummy(int pieceIndex, int decorationIndex) {
         return getDecoration(pieceIndex, decorationIndex) == dummy;
-    }
-
-    /**
-     * @return Whether the user has selected a head piece or not.
-     */
-    public boolean isHeadSelected() {
-        return armors[HEAD] != noArmor;
-    }
-
-    /**
-     * @return Whether the user has selected a body piece or not.
-     */
-    public boolean isBodySelected() {
-        return armors[BODY] != noArmor;
-    }
-
-    /**
-     * @return Whether the user has selected a arms piece or not.
-     */
-    public boolean isArmsSelected() {
-        return armors[ARMS] != noArmor;
-    }
-
-    /**
-     * @return Whether the user has selected a waist piece or not.
-     */
-    public boolean isWaistSelected() {
-        return armors[WAIST] != noArmor;
-    }
-
-    /**
-     * @return Whether the user has selected a legs piece or not.
-     */
-    public boolean isLegsSelected() {
-        return armors[LEGS] != noArmor;
     }
 
     public boolean isPieceSelected(int pieceIndex) {
         return armors[pieceIndex] != noArmor;
     }
 
-    public void setHead(Armor head) {
-        armors[HEAD] = head;
-    }
-
-    public void setBody(Armor body) {
-        armors[BODY] = body;
-    }
-
-    public void setArms(Armor arms) {
-        armors[ARMS] = arms;
-    }
-
-    public void setWaist(Armor waist) {
-        armors[WAIST] = waist;
-    }
-
-    public void setLegs(Armor legs) {
-        armors[LEGS] = legs;
+    public void setArmor(int pieceIndex, Armor armor) {
+        armors[pieceIndex] = armor;
     }
 
     public Decoration getDecoration(int pieceIndex, int decorationIndex) {
         return decorations[pieceIndex][decorationIndex];
     }
-
 
     /**
      * @return A set of the armor set based on the provided piece index.
@@ -247,43 +201,9 @@ public class ArmorSetBuilderSession {
         return armors[pieceIndex];
     }
 
-    /**
-     * @return The armor set's head piece.
-     */
-    public Armor getHead() {
-        return getArmor(HEAD);
-    }
-
-    /**
-     * @return The armor set's body piece.
-     */
-    public Armor getBody() {
-        return getArmor(BODY);
-    }
-
-    /**
-     * @return The armor set's arms piece.
-     */
-    public Armor getArms() {
-        return getArmor(ARMS);
-    }
-
-    /**
-     * @return The armor set's waist piece.
-     */
-    public Armor getWaist() {
-        return getArmor(WAIST);
-    }
-
-    /**
-     * @return The armor set's legs piece.
-     */
-    public Armor getLegs() {
-        return getArmor(LEGS);
-    }
-
     public void removeArmor(int pieceIndex) {
         armors[pieceIndex] = noArmor;
+        removeAllDecorations(pieceIndex);
     }
 
     public List<SkillTreePointsSet> getSkillTreePointsSets() {
@@ -331,13 +251,12 @@ public class ArmorSetBuilderSession {
 
     /**
      * A helper method that converts an armor piece present in the current session into a map of the skills it provides and the respective points in each.
-     *
      * @param pieceIndex The piece of armor to get the skills from.
-     *                   <li>0: Head
-     *                   <li>1: Body
-     *                   <li>2: Arms
-     *                   <li>3: Waist
-     *                   <li>4: Legs</li>
+     * <li>0: Head
+     * <li>1: Body
+     * <li>2: Arms
+     * <li>3: Waist
+     * <li>4: Legs</li>
      * @return A map of all the skills the armor piece provides along with the number of points in each.
      */
     private Map<SkillTree, Integer> getSkillsFromArmorPiece(int pieceIndex, Context context) {

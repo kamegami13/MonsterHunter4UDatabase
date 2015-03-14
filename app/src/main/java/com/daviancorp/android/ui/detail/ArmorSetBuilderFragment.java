@@ -40,7 +40,6 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         return f;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +57,11 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
 
         ArmorSetBuilderSession s = ((ArmorSetBuilderActivity) getActivity()).getArmorSetBuilderSession();
 
-        headView.initialize(s, 0);
-        bodyView.initialize(s, 1);
-        armsView.initialize(s, 2);
-        waistView.initialize(s, 3);
-        legsView.initialize(s, 4);
+        headView.initialize(s, 0, this);
+        bodyView.initialize(s, 1, this);
+        armsView.initialize(s, 2, this);
+        waistView.initialize(s, 3, this);
+        legsView.initialize(s, 4, this);
 
         return view;
     }
@@ -87,5 +86,10 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() + " must be a ArmorSetBuilderActivity.");
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ((ArmorSetBuilderActivity)getActivity()).fragmentResultReceived(requestCode, resultCode, data);
     }
 }

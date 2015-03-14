@@ -1,6 +1,7 @@
 package com.daviancorp.android.ui.detail;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -17,6 +18,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.dialog.ArmorSetBuilderDecorationsDialogFragment;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.DecorationListActivity;
 
@@ -29,7 +31,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
     public static final int MENU_REMOVE_PIECE = 1;
     public static final int MENU_ADD_DECORATION = 2;
     public static final int MENU_REMOVE_DECORATION = 3;
-    public static final int MENU_GET_INFO = 4;
+    public static final int MENU_PIECE_INFO = 4;
 
     private ImageView icon;
     private TextView text;
@@ -40,6 +42,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
 
     private ArmorSetBuilderSession session;
     private int pieceIndex;
+    private Fragment parentFragment;
 
     public ArmorSetBuilderPieceContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -64,11 +67,12 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
 		});
     }
 
-    public void initialize(ArmorSetBuilderSession session, int pieceIndex) {
+    public void initialize(ArmorSetBuilderSession session, int pieceIndex, Fragment parentFragment) {
         this.session = session;
         this.pieceIndex = pieceIndex;
+        this.parentFragment = parentFragment;
 
-        reset();
+        updateContents();
     }
 
     public void updateContents() {
@@ -80,9 +84,8 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         if (session.isPieceSelected(pieceIndex)) {
             text.setText(session.getArmor(pieceIndex).getName());
             icon.setImageBitmap(fetchIcon(session.getArmor(pieceIndex).getRarity()));
-            setOnClickListener(pieceSelectedClickListener);
         } else {
-            reset();
+            onArmorRemoved();
         }
     }
 
@@ -100,14 +103,14 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         }
     }
 
-    private void reset() {
+    /** Resets the container to its default state. */
+    private void onArmorRemoved() {
+        text.setText("");
         icon.setImageBitmap(fetchIcon(1));
-        setOnClickListener(pieceUnselectedClickListener);
+        updateDecorations();
     }
 
-    /**
-     * Helper method that retrieves a rarity-appropriate equipment icon.
-     */
+    /** Helper method that retrieves a rarity-appropriate equipment icon. */
     private Bitmap fetchIcon(int rarity) {
         String slot = "";
         switch (pieceIndex) {
@@ -146,13 +149,15 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
     }
 
     private PopupMenu createPopupMenu() {
-        PopupMenu popup = new PopupMenu(getContext(), popupMenuButton);
+        Context context = getContext();
+        context.setTheme(R.style.PopupMenuStyle);
+        PopupMenu popup = new PopupMenu(context, popupMenuButton);
         if (!session.isPieceSelected(pieceIndex)) {
             popup.getMenu().add(Menu.NONE, MENU_ADD_PIECE, Menu.NONE, R.string.armor_set_builder_add_piece);
         }
         else {
             popup.getMenu().add(Menu.NONE, MENU_REMOVE_PIECE, Menu.NONE, R.string.armor_set_builder_remove_piece);
-            popup.getMenu().add(Menu.NONE, MENU_GET_INFO, Menu.NONE, R.string.armor_set_builder_piece_info);
+            popup.getMenu().add(Menu.NONE, MENU_PIECE_INFO, Menu.NONE, R.string.armor_set_builder_piece_info);
         }
 
         if (session.getAvailableSlots(pieceIndex) > 0) {
@@ -168,67 +173,21 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         return popup;
     }
 
-    private void addPiece() {
-        Intent i = new Intent(getContext(), ArmorListActivity.class);
-        i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
-        i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
-
-        ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE);
-    }
-
-    private void removePiece() {
-        session.removeArmor(pieceIndex);
-        updateArmorPiece();
-    }
-
-	private void addDecoration() {
-		Intent i = new Intent(getContext(), DecorationListActivity.class);
-		i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
-		i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
-		
-		((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE);
-	}
-	
-	private void removeDecoration() {
-		
-	}
-
-    private View.OnClickListener pieceSelectedClickListener = new View.OnClickListener() { // TODO: Remove these ClickListeners
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent(getContext(), DecorationListActivity.class);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
-
-            ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE);
-        }
-    };
-
-    private View.OnClickListener pieceUnselectedClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent(getContext(), ArmorListActivity.class);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
-
-            ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE);
-        }
-    };
-
     private class PiecePopupMenuClickListener implements PopupMenu.OnMenuItemClickListener {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()) {
                 case MENU_ADD_PIECE:
-                    addPiece();
+                    onMenuAddPieceSelected();
                     break;
                 case MENU_REMOVE_PIECE:
-                    removePiece();
+                    onMenuRemovePieceSelected();
                     break;
 				case MENU_ADD_DECORATION:
-					addDecoration();
+					onMenuAddDecorationSelected();
 					break;
-				case MENU_REMOVE_DECORATION: // TODO
+				case MENU_REMOVE_DECORATION:
+                    onMenuRemoveDecorationSelected();
 					break;
 				case MENU_PIECE_INFO: // TODO
 					break;
@@ -236,6 +195,33 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
 					return false;
             }
             return true;
+        }
+
+        private void onMenuAddPieceSelected() {
+            Intent i = new Intent(getContext(), ArmorListActivity.class);
+            i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
+            i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
+
+            ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
+        }
+
+        private void onMenuRemovePieceSelected() {
+            session.removeArmor(pieceIndex);
+            updateArmorPiece();
+        }
+
+        private void onMenuAddDecorationSelected() {
+            Intent i = new Intent(getContext(), DecorationListActivity.class);
+            i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
+            i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
+
+            ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
+        }
+
+        private void onMenuRemoveDecorationSelected() {
+            ArmorSetBuilderDecorationsDialogFragment d = ArmorSetBuilderDecorationsDialogFragment.newInstance(session, pieceIndex);
+            d.setTargetFragment(parentFragment, ArmorSetBuilderActivity.REMOVE_DECORATION_REQUEST_CODE);
+            d.show(parentFragment.getActivity().getSupportFragmentManager(), "tag");
         }
     }
 }

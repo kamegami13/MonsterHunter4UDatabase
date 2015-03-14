@@ -24,7 +24,10 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
     public static final String EXTRA_FROM_SET_BUILDER = "com.daviancorp.android.ui.detail.from_set_builder";
     public static final String EXTRA_REMAINING_SOCKETS = "com.daviancorp.android.ui.detail.remaining_sockets";
     public static final String EXTRA_PIECE_INDEX = "com.daviancorp.android.ui.detail.piece_index";
-    public static final int REQUEST_CODE = 537;
+    public static final String EXTRA_DECORATION_INDEX = "com.daviancorp.android.ui.detail.decoration_index";
+
+    public static final int BUILDER_REQUEST_CODE = 537;
+    public static final int REMOVE_DECORATION_REQUEST_CODE = 538;
 
     private ArmorSetBuilderSession session;
 
@@ -69,7 +72,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
                 Intent intent = new Intent(getApplicationContext(), ArmorListActivity.class);
                 intent.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
 
-                startActivityForResult(intent, REQUEST_CODE);
+                startActivityForResult(intent, BUILDER_REQUEST_CODE);
                 return true;
 
             default:
@@ -82,55 +85,67 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) { // If the user canceled the request, we don't want to do anything.
-            long armorId = data.getLongExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, -1);
+            if (requestCode == BUILDER_REQUEST_CODE) {
+                long armorId = data.getLongExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, -1);
 
-            if (armorId != -1) {
-                String armorType = DataManager.get(getApplicationContext()).getArmor(armorId).getSlot();
+                if (armorId != -1) {
+                    String armorType = DataManager.get(getApplicationContext()).getArmor(armorId).getSlot();
 
-                switch (armorType) {
-                    case "Head":
-                        Log.d("SetBuilder", "Setting head piece.");
-                        session.setHead(DataManager.get(getApplicationContext()).getArmor(armorId));
-                        break;
-                    case "Body":
-                        Log.d("SetBuilder", "Setting body piece.");
-                        session.setBody(DataManager.get(getApplicationContext()).getArmor(armorId));
-                        break;
-                    case "Arms":
-                        Log.d("SetBuilder", "Setting arms piece.");
-                        session.setArms(DataManager.get(getApplicationContext()).getArmor(armorId));
-                        break;
-                    case "Waist":
-                        Log.d("SetBuilder", "Setting waist piece.");
-                        session.setWaist(DataManager.get(getApplicationContext()).getArmor(armorId));
-                        break;
-                    case "Legs":
-                        Log.d("SetBuilder", "Setting legs piece.");
-                        session.setLegs(DataManager.get(getApplicationContext()).getArmor(armorId));
-                        break;
+                    switch (armorType) {
+                        case "Head":
+                            Log.d("SetBuilder", "Setting head piece.");
+                            session.setArmor(ArmorSetBuilderSession.HEAD, DataManager.get(getApplicationContext()).getArmor(armorId));
+                            break;
+                        case "Body":
+                            Log.d("SetBuilder", "Setting body piece.");
+                            session.setArmor(ArmorSetBuilderSession.BODY, DataManager.get(getApplicationContext()).getArmor(armorId));
+                            break;
+                        case "Arms":
+                            Log.d("SetBuilder", "Setting arms piece.");
+                            session.setArmor(ArmorSetBuilderSession.ARMS, DataManager.get(getApplicationContext()).getArmor(armorId));
+                            break;
+                        case "Waist":
+                            Log.d("SetBuilder", "Setting waist piece.");
+                            session.setArmor(ArmorSetBuilderSession.WAIST, DataManager.get(getApplicationContext()).getArmor(armorId));
+                            break;
+                        case "Legs":
+                            Log.d("SetBuilder", "Setting legs piece.");
+                            session.setArmor(ArmorSetBuilderSession.LEGS, DataManager.get(getApplicationContext()).getArmor(armorId));
+                            break;
+                    }
                 }
+
+                long decorationId = data.getLongExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, -1);
+                int pieceIndex = data.getIntExtra(EXTRA_PIECE_INDEX, -1);
+
+                Log.d("SetBuilder", "Decoration: " + decorationId);
+                Log.d("SetBuilder", "Piece Index: " + pieceIndex);
+
+                if (decorationId != -1 && pieceIndex != -1) {
+                    Log.d("SetBuilder", "Attempting to add decoration: " + DataManager.get(this).getDecoration(decorationId).getName());
+
+                    Decoration decoration = DataManager.get(this).getDecoration(decorationId);
+
+                    if (!session.addDecoration(pieceIndex, decoration)) {
+                        Log.i("SetBuilder", "Couldn't add decoration.");
+                    }
+                }
+
             }
+            else if (requestCode == REMOVE_DECORATION_REQUEST_CODE) {
+                int pieceIndex = data.getIntExtra(EXTRA_PIECE_INDEX, -1);
+                int decorationIndex = data.getIntExtra(EXTRA_DECORATION_INDEX, -1);
 
-            long decorationId = data.getLongExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, -1);
-            int pieceIndex = data.getIntExtra(EXTRA_PIECE_INDEX, -1);
+                Log.d("SetBuilder", "Attempting to remove decoration at index: " + pieceIndex + "," + decorationIndex);
 
-            Log.d("SetBuilder", "Decoration: " + decorationId);
-            Log.d("SetBuilder", "Piece Index: " + pieceIndex);
-
-            if (decorationId != -1 && pieceIndex != -1) {
-                Log.d("SetBuilder", "Attempting to add decoration: " + DataManager.get(this).getDecoration(decorationId).getName());
-
-                Decoration decoration = DataManager.get(this).getDecoration(decorationId);
-
-                if (!session.addDecoration(pieceIndex, decoration)) {
-                    Log.i("SetBuilder", "Couldn't add decoration.");
-                }
+                session.removeDecoration(pieceIndex, decorationIndex);
             }
 
             for (ArmorSetChangedListener a : armorSetChangedListeners) {
                 a.updateContents(session);
             }
         }
+
     }
 
     @Override
@@ -144,6 +159,10 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
 
     public void addArmorSetChangedListener(ArmorSetChangedListener a) {
         armorSetChangedListeners.add(a);
+    }
+
+    public void fragmentResultReceived(int requestCode, int resultCode, Intent data) {
+        onActivityResult(requestCode, resultCode, data);
     }
 
     public static interface ArmorSetChangedListener {
