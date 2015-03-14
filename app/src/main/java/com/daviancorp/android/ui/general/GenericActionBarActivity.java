@@ -121,10 +121,12 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                 }
                 final Intent finalIntent = intent;
                 // Clear the back stack whenever a nav drawer item is selected
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
                 actionOnCloseListener = new ActionOnCloseListener() {
                     @Override
                     public void actionOnClose() {
                         startActivity(finalIntent);
+                        //overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
                     }
                 };
                 mDrawerLayout.closeDrawers();
