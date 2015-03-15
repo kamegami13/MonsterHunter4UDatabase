@@ -21,6 +21,7 @@ import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
+import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,7 +66,6 @@ public class ArmorExpandableListFragment extends Fragment {
             mType = args.getString(ARG_TYPE);
         }
         populateList();
-
     }
 
     private void populateList() {
@@ -100,12 +100,12 @@ public class ArmorExpandableListFragment extends Fragment {
                     break;
             }
         }
+
         children.add(g1);
         children.add(g2);
         children.add(g3);
         children.add(g4);
         children.add(g5);
-
     }
 
     @Override
@@ -129,6 +129,7 @@ public class ArmorExpandableListFragment extends Fragment {
 
                 Intent i = new Intent(getActivity(), ArmorDetailActivity.class);
                 i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, (long) arg1.getTag());
+
                 startActivity(i);
 
                 return false;
@@ -247,7 +248,7 @@ public class ArmorExpandableListFragment extends Fragment {
             long armorId = ((Armor) getChild(groupPosition, childPosition)).getId();
 
             root.setTag(armorId);
-            root.setOnClickListener(new ArmorClickListener(context, armorId));
+            root.setOnClickListener(new ArmorClickListener(context, armorId, getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false), getActivity()));
 
             return v;
 

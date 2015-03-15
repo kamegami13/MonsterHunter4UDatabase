@@ -29,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
@@ -118,6 +119,9 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                     case 9: // Wishlists
                         intent = new Intent(getApplicationContext(), WishlistListActivity.class);
                         break;
+                    case 10:
+                        intent = new Intent(getApplicationContext(), ArmorSetBuilderActivity.class);
+                        break;
                 }
                 final Intent finalIntent = intent;
                 actionOnCloseListener = new ActionOnCloseListener() {
@@ -171,6 +175,10 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
 
     public void enableDrawerIndicator() {
         mDrawerToggle.setDrawerIndicatorEnabled(true);
+    }
+
+    public void disableDrawerIndicator() {
+        mDrawerToggle.setDrawerIndicatorEnabled(false);
     }
 
     // Sync button animation sync with drawer state

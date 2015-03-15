@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorExpandableListPagerAdapter;
+import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
@@ -28,8 +29,10 @@ public class ArmorListActivity extends GenericTabActivity {
 
         mSlidingTabLayout.setViewPager(viewPager);
 
-        // Enable drawer button instead of back button
-        super.enableDrawerIndicator();
+        // Enable back button if we're coming from the set builder
+        if (getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            super.disableDrawerIndicator();
+        }
     }
 
     @Override
