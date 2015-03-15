@@ -14,7 +14,7 @@
             android:id="@+id/detail_decoration_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginRight="10dp"></ImageView>
+            android:layout_marginRight="10dp"/>
 
         <TextView
             android:id="@+id/detail_decoration_label"
@@ -24,7 +24,7 @@
             android:paddingLeft="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/text_color"></TextView>
+            android:textColor="@color/text_color"/>
     </LinearLayout>
 
     <LinearLayout
@@ -44,31 +44,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rare:"
-                android:textColor="@color/text_color"></TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Max:"
-                android:textColor="@color/text_color"></TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Buy:"
-                android:textColor="@color/text_color"></TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sell:"
-                android:textColor="@color/text_color"></TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Slots Req:"
-                android:textColor="@color/text_color"></TextView>
+                android:textColor="@color/text_color"/>
 
         </LinearLayout>
 
@@ -82,25 +82,25 @@
                 android:id="@+id/rare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color"></TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:id="@+id/max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color"></TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:id="@+id/buy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color"></TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:id="@+id/sell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color"></TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:id="@+id/slots_req"
