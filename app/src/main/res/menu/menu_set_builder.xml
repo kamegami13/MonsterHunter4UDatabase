@@ -3,5 +3,5 @@
     <item android:id="@+id/set_builder_add_piece"
           android:title="@string/armor_set_builder_add_piece"
           android:icon="@drawable/ic_menu_add"
-          android:showAsAction="always" />
+          android:showAsAction="ifRoom" />
 </menu>

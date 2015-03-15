@@ -42,7 +42,8 @@
         <item>"Decorations,icons_items/Jewel-White.png"</item>
         <item>"Skills,icons_items/Monster-Jewel-White.png"</item>
         <item>"Wishlists,icons_items/Mantle-White.png"</item>
-    </string-array>
+        <item>"Armor Set Builder,icons_items/Mantle-White.png"</item>
+    </string-array> 
 
     <string name="option_list">List</string>
     <string name="option_grid">Grid</string>
@@ -86,11 +87,19 @@
     <string name="three_slot_jewel">●●●</string>
 
     <string name="activity_armor_set_builder">Armor Set Builder</string>
-    <string name="armor_set_builder_add_piece">Add a piece</string>
+    <string name="armor_set_builder_add_piece">Add Armor</string>
+    <string name="armor_set_builder_add_decoration">Add Decoration</string>
+    <string name="armor_set_builder_remove_piece">Remove Armor</string>
+    <string name="armor_set_builder_remove_decoration">Remove Decoration</string>
+    <string name="armor_set_builder_piece_info">Piece Info</string>
+
+
     <string name="armor_set_builder_helmet">Helmet</string>
     <string name="armor_set_builder_body">Body</string>
     <string name="armor_set_builder_arms">Arms</string>
     <string name="armor_set_builder_waist">Waist</string>
     <string name="armor_set_builder_legs">Legs</string>
+
+
     <string name="placeholder_unknown">Unknown</string>
 </resources>
