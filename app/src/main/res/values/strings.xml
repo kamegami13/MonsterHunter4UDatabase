@@ -40,7 +40,7 @@
         <item>"Combining,icons_items/Liquid-White.png"</item>
         <item>"Locations,icons_items/Map-Icon-White.png"</item>
         <item>"Decorations,icons_items/Jewel-White.png"</item>
-        <item>"Skill Trees,icons_items/Monster-Jewel-White.png"</item>
+        <item>"Skills,icons_items/Monster-Jewel-White.png"</item>
         <item>"Wishlists,icons_items/Mantle-White.png"</item>
     </string-array>
 
@@ -60,7 +60,7 @@
     <string name="combining">Combining</string>
     <string name="quests">Quests</string>
     <string name="hunting_fleet">Hunting Fleet</string>
-    <string name="skill_trees">Skill Trees</string>
+    <string name="skill_trees">Skills</string>
     <string name="decorations">Decorations</string>
     <string name="armor">Armor</string>
     <string name="monster_image">monster_image</string>
