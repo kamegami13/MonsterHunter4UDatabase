@@ -70,6 +70,20 @@
     <string name="wishlist">Wishlists</string>
     <string name="icon_name">MH4U DB</string>
 
+    <!--
+    Unicode Black Circle \u25CF
+    Unicode White Circle \u25CB
+    Unicode Dash \u2015
+    -->
+
+    <string name="no_slots">―――</string>
+    <string name="one_slot">○――</string>
+    <string name="two_slots">○○―</string>
+    <string name="three_slots">○○○</string>
+
+    <string name="one_slot_jewel">●</string>
+    <string name="two_slot_jewel">●●</string>
+    <string name="three_slot_jewel">●●●</string>
 
     <string name="activity_armor_set_builder">Armor Set Builder</string>
     <string name="armor_set_builder_add_piece">Add a piece</string>

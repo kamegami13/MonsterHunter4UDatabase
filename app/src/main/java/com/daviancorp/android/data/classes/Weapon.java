@@ -1,6 +1,10 @@
 package com.daviancorp.android.data.classes;
 
+import android.app.Application;
+import android.content.res.Resources;
 import android.util.Log;
+
+import com.daviancorp.android.mh4udatabase.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -258,18 +262,21 @@ public class Weapon extends Item{
 
         // Set the slot to view
         String slot = "";
+
+        // Unicode White Circle \u25CB
+        // Unicode Dash \u2015
         switch (this.num_slots) {
             case 0:
-                slot = "———";
+                slot = "\u2015\u2015\u2015";
                 break;
             case 1:
-                slot = "○——";
+                slot = "\u25CB\u2015\u2015";
                 break;
             case 2:
-                slot = "○○—";
+                slot = "\u25CB\u25CB\u2015";
                 break;
             case 3:
-                slot = "○○○";
+                slot = "\u25CB\u25CB\u25CB";
                 break;
             default:
                 slot = "error!!";

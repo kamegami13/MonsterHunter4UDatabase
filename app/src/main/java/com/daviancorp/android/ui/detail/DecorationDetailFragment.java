@@ -87,7 +87,7 @@ public class DecorationDetailFragment extends Fragment {
 		String cellMax = "" + mDecoration.getCarryCapacity();
 		String cellBuy = "" + mDecoration.getBuy() + "z";
 		String cellSell = "" + mDecoration.getSell() + "z";
-		String cellSlotsReq = "" + mDecoration.getNumSlots();
+		String cellSlotsReq = "" + mDecoration.getSlotsString();
 
 		if (cellBuy.equals("0z")) {
 			cellBuy = "-";
