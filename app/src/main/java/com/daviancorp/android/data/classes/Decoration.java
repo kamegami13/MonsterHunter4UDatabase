@@ -8,6 +8,7 @@ package com.daviancorp.android.data.classes;
 public class Decoration extends Item{
 
 	private int num_slots;			// Number of slots required
+	private String slots_string;	// Number of slots as unicode display
 	private long skill_1_id;		// Id of SkillTree 1
 	private String skill_1_name;	// Name of SkillTree 1
 	private int skill_1_point;		// # of points for SkillTree 1
@@ -32,9 +33,32 @@ public class Decoration extends Item{
 	public int getNumSlots() {
 		return num_slots;
 	}
-	
+
+	public String getSlotsString() { return slots_string; }
+
 	public void setNumSlots(int num_slots) {
 		this.num_slots = num_slots;
+
+		// Set the slot to view
+		String slot = "";
+
+		// Unicode Black Circle \u25CF
+		switch (this.num_slots) {
+			case 1:
+				slot = "\u25CF";
+				break;
+			case 2:
+				slot = "\u25CF\u25CF";
+				break;
+			case 3:
+				slot = "\u25CF\u25CF\u25CF";
+				break;
+			default:
+				slot = "error!!";
+				break;
+		}
+
+		this.slots_string = slot;
 	}
 	
 	public long getSkill1Id() {

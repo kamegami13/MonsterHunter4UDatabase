@@ -40,17 +40,17 @@
         <item>"Combining,icons_items/Liquid-White.png"</item>
         <item>"Locations,icons_items/Map-Icon-White.png"</item>
         <item>"Decorations,icons_items/Jewel-White.png"</item>
-        <item>"Skill Trees,icons_items/Monster-Jewel-White.png"</item>
+        <item>"Skills,icons_items/Monster-Jewel-White.png"</item>
         <item>"Wishlists,icons_items/Mantle-White.png"</item>
     </string-array>
 
     <string name="option_list">List</string>
     <string name="option_grid">Grid</string>
-    <string name="option_wishlist_add">Add wishlist</string>
+    <string name="option_wishlist_add">Create Wishlist</string>
     <string name="option_wishlist_delete">Delete wishlist</string>
     <string name="option_wishlist_copy">Copy wishlist</string>
     <string name="option_wishlist_rename">Rename wishlist</string>
-    <string name="option_wishlist_data_add">Add to wishlist</string>
+    <string name="option_wishlist_data_add">Create new wishlist</string>
     <string name="option_wishlist_data_edit">Edit quantity</string>
     <string name="option_wishlist_data_delete">Delete from wishlist</string>
     <string name="search_title">Search item</string>
@@ -60,7 +60,7 @@
     <string name="combining">Combining</string>
     <string name="quests">Quests</string>
     <string name="hunting_fleet">Hunting Fleet</string>
-    <string name="skill_trees">Skill Trees</string>
+    <string name="skill_trees">Skills</string>
     <string name="decorations">Decorations</string>
     <string name="armor">Armor</string>
     <string name="monster_image">monster_image</string>
@@ -70,6 +70,20 @@
     <string name="wishlist">Wishlists</string>
     <string name="icon_name">MH4U DB</string>
 
+    <!--
+    Unicode Black Circle \u25CF
+    Unicode White Circle \u25CB
+    Unicode Dash \u2015
+    -->
+
+    <string name="no_slots">―――</string>
+    <string name="one_slot">○――</string>
+    <string name="two_slots">○○―</string>
+    <string name="three_slots">○○○</string>
+
+    <string name="one_slot_jewel">●</string>
+    <string name="two_slot_jewel">●●</string>
+    <string name="three_slot_jewel">●●●</string>
 
     <string name="activity_armor_set_builder">Armor Set Builder</string>
     <string name="armor_set_builder_add_piece">Add a piece</string>
