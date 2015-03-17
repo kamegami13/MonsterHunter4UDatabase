@@ -83,41 +83,6 @@ public class ArmorSetBuilderSession {
         }
     }
 
-    /**
-     * Attmepts to remove a decoration from a piece.
-     * @param pieceIndex The index of the armor piece to look in.
-     * @param decoration The {@code Decoration} to remove.
-     */
-    public void removeDecoration(int pieceIndex, Decoration decoration) {
-
-        for (int i = 0; i < decorations[pieceIndex].length; i++) { // We search for the decoration specified in the arguments
-            if (decorations[pieceIndex][i] == decoration) {
-                decorations[pieceIndex][i] = noDecoration;
-                for (int j = i; j < decorations[pieceIndex].length; j++) {
-                    if (decorations[pieceIndex][j] == dummy) {
-                        decorations[pieceIndex][j] = noDecoration;
-                    } else {
-                        break;
-                    }
-
-                }
-
-                break;
-            }
-        }
-
-        int i = 0;
-        Decoration[] newDecorations = new Decoration[3]; // We move all of the decorations to a new array so that they are all at the beginning
-
-        for (Decoration d : decorations[pieceIndex]) {
-            if (d != noDecoration && d != dummy) {
-                newDecorations[i++] = d;
-            }
-        }
-
-        decorations[pieceIndex] = newDecorations;
-    }
-
     public void removeDecoration(int pieceIndex, int decorationIndex) {
 
         if (decorations[pieceIndex][decorationIndex] != dummy) {
@@ -137,7 +102,13 @@ public class ArmorSetBuilderSession {
         Decoration[] newDecorations = new Decoration[3]; // We move all of the decorations to a new array so that they are all at the beginning
 
         for (Decoration d : decorations[pieceIndex]) {
-            newDecorations[i++] = d;
+            if (d != noDecoration) {
+                newDecorations[i++] = d;
+            }
+        }
+
+        while (i < newDecorations.length) {
+            newDecorations[i++] = noDecoration;
         }
 
         decorations[pieceIndex] = newDecorations;

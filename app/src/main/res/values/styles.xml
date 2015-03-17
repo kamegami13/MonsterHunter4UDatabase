@@ -49,9 +49,7 @@
         <item name="android:actionModeSplitBackground">@drawable/primary_drawable</item>
         <item name="android:actionBarItemBackground">@drawable/primary_drawable</item>
 
-
         <item name="android:clipToPadding">false</item>
-
     </style>
 
     <style name="PopupMenuStyle" parent="@style/AppTheme">

@@ -149,9 +149,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
     }
 
     private PopupMenu createPopupMenu() {
-        Context context = getContext();
-        context.setTheme(R.style.PopupMenuStyle);
-        PopupMenu popup = new PopupMenu(context, popupMenuButton);
+        PopupMenu popup = new PopupMenu(getContext(), popupMenuButton);
         if (!session.isPieceSelected(pieceIndex)) {
             popup.getMenu().add(Menu.NONE, MENU_ADD_PIECE, Menu.NONE, R.string.armor_set_builder_add_piece);
         }
