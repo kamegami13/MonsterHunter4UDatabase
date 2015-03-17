@@ -37,9 +37,7 @@ public class DecorationClickListener implements View.OnClickListener {
 
         if (fromArmorSetBuilder) {
             i.putExtras(activity.getIntent());
-            i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            c.startActivity(i);
-            activity.finish();
+            activity.startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
         }
         else {
             c.startActivity(i);
