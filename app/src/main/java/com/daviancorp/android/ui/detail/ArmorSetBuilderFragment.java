@@ -2,29 +2,18 @@ package com.daviancorp.android.ui.detail;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.list.ArmorListActivity;
-import com.daviancorp.android.ui.list.DecorationListActivity;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * This is where the magic happens baby. Users can define a custom armor set in this fragment.
  */
-public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilderActivity.ArmorSetChangedListener {
+public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilderActivity.OnArmorSetActivityUpdateListener {
 
     ArmorSetBuilderPieceContainer headView;
     ArmorSetBuilderPieceContainer bodyView;
@@ -67,7 +56,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
     }
 
     @Override
-    public void updateContents(ArmorSetBuilderSession s) {
+    public void onArmorSetActivityUpdated(ArmorSetBuilderSession s) {
         headView.updateContents();
         bodyView.updateContents();
         armsView.updateContents();
