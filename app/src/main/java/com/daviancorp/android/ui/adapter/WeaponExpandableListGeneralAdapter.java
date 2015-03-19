@@ -159,6 +159,9 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         String name = "";
         int wFinal = weapon.getWFinal();
         name = name + weapon.getName();
+        // Add ? to indicate that a weapon is create-able
+        if(weapon.getCreationCost() > 0)
+            name = name+"\u2605";
 
         // Get the weapons attack
         String attack = "DMG: " + weapon.getAttackString();

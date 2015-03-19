@@ -99,6 +99,11 @@ public class WeaponTreeFragment extends ListFragment implements
 			
 			TextView weaponView = (TextView) view.findViewById(R.id.name_text);
 			String cellWeaponText = weapon.getName();
+
+			if(weapon.getCreationCost() > 0){
+				cellWeaponText = cellWeaponText + "\u2605";
+			}
+
 			weaponView.setText(cellWeaponText);
 
             View arrowView = (View) view.findViewById(R.id.arrow);

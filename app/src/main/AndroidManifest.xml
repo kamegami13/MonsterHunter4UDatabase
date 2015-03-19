@@ -19,7 +19,7 @@
             android:name="com.daviancorp.android.ui.list.MonsterListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop">
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -40,7 +40,7 @@
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.ItemDetailActivity"
             android:label="@string/app_name"
@@ -55,7 +55,7 @@
             android:name="com.daviancorp.android.ui.list.ArmorListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.ArmorDetailActivity"
             android:label="@string/app_name"
@@ -70,7 +70,7 @@
             android:name="com.daviancorp.android.ui.list.LocationListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.LocationDetailActivity"
             android:label="@string/app_name"
@@ -85,14 +85,14 @@
             android:name="com.daviancorp.android.ui.list.CombiningListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTask"/>
 
         <!-- QUEST LIST SECTION -->
         <activity
             android:name="com.daviancorp.android.ui.list.QuestListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.QuestDetailActivity"
             android:label="@string/app_name"
@@ -107,7 +107,7 @@
             android:name="com.daviancorp.android.ui.list.ArenaQuestListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.ArenaQuestDetailActivity"
             android:label="@string/app_name"
@@ -122,7 +122,7 @@
             android:name="com.daviancorp.android.ui.list.SkillTreeListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.SkillTreeDetailActivity"
             android:label="@string/app_name"
@@ -137,7 +137,7 @@
             android:name="com.daviancorp.android.ui.list.DecorationListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.DecorationDetailActivity"
             android:label="@string/app_name"
@@ -152,7 +152,7 @@
             android:name="com.daviancorp.android.ui.list.WeaponSelectionListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop">
+            android:launchMode="singleTask">
             </activity>
         <activity
             android:name="com.daviancorp.android.ui.list.WeaponListActivity"
@@ -177,7 +177,7 @@
             android:name="com.daviancorp.android.ui.list.WishlistListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTask"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.WishlistDetailActivity"
             android:label="@string/app_name"
@@ -192,7 +192,7 @@
             android:name="com.daviancorp.android.ui.detail.ArmorSetBuilderActivity"
               android:label="@string/app_name"
               android:screenOrientation="portrait"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

@@ -2,20 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp" >
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/detail_decoration_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginRight="10dp" >
-        </ImageView>
+            android:layout_marginRight="10dp"/>
 
         <TextView
             android:id="@+id/detail_decoration_label"
@@ -25,85 +24,89 @@
             android:paddingLeft="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/text_color">
-        </TextView>
+            android:textColor="@color/text_color"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".2"
             android:orientation="vertical"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rare:"
-                android:textColor="@color/text_color">
-            </TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Max:"
-                android:textColor="@color/text_color">
-            </TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Buy:"
-                android:textColor="@color/text_color">
-            </TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sell:"
-                android:textColor="@color/text_color">
-            </TextView>
+                android:textColor="@color/text_color"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Slots Req:"
+                android:textColor="@color/text_color"/>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight=".8"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/rare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color">
-            </TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:id="@+id/max"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color">
-            </TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:id="@+id/buy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color">
-            </TextView>
+                android:textColor="@color/text_color"/>
 
             <TextView
                 android:id="@+id/sell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color">
-            </TextView>
+                android:textColor="@color/text_color"/>
+
+            <TextView
+                android:id="@+id/slots_req"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color" />
         </LinearLayout>
     </LinearLayout>
 

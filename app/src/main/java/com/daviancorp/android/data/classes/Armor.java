@@ -18,6 +18,7 @@ public class Armor extends Item{
 	private String gender;			// Which gender can equip
 	private String hunter_type;		// Which hunter type can equip: Blademaster/Gunner
 	private int num_slots;			// Number of slots
+	private String mSlotString;		// unicode version of number of slots
 	
 	/* Default Constructor */
 	public Armor() {
@@ -119,8 +120,37 @@ public class Armor extends Item{
 		return num_slots;
 	}
 
+	public String getSlotString() {
+		return mSlotString;
+	}
+
 	public void setNumSlots(int num_slots) {
 		this.num_slots = num_slots;
+
+		// Set the slot to view
+		String slot = "";
+
+		// Unicode White Circle \u25CB
+		// Unicode Dash \u2015
+		switch (this.num_slots) {
+			case 0:
+				slot = "\u2015\u2015\u2015";
+				break;
+			case 1:
+				slot = "\u25CB\u2015\u2015";
+				break;
+			case 2:
+				slot = "\u25CB\u25CB\u2015";
+				break;
+			case 3:
+				slot = "\u25CB\u25CB\u25CB";
+				break;
+			default:
+				slot = "error!!";
+				break;
+		}
+
+		this.mSlotString = slot;
 	}
 
 	@Override
