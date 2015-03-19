@@ -59,13 +59,10 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
         ((ArmorSetBuilderActivity) getActivity()).addArmorSetChangedListener(this);
     }
 
-    private static class ArmorSetBuilderSkillsAdapter extends ArrayAdapter<ArmorSetBuilderSession.SkillTreePointsSet> {
-
-        private ArmorSetBuilderSession session;
+    private class ArmorSetBuilderSkillsAdapter extends ArrayAdapter<ArmorSetBuilderSession.SkillTreePointsSet> {
 
         public ArmorSetBuilderSkillsAdapter(Context context, List<ArmorSetBuilderSession.SkillTreePointsSet> trees, ArmorSetBuilderSession session) {
             super(context, R.layout.fragment_armor_set_builder_skills_item, trees);
-            this.session = session;
         }
 
         @Override
@@ -105,7 +102,7 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
 
             totalPoints.setText(String.valueOf(getItem(position).getTotal()));
             
-            itemView.setOnClickListener(new SkillClickListener(getContext(), getItem(position).getSkillTree().getId()));
+            itemView.setOnClickListener(new SkillClickListener(ArmorSetBuilderSkillsListFragment.this.getActivity(), getItem(position).getSkillTree().getId()));
 
             return itemView;
         }
