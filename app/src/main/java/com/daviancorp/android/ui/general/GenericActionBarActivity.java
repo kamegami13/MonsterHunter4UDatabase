@@ -70,7 +70,7 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
 
     // fade in and fade out durations for the main content when switching between
     // different Activities of the app through the Nav Drawer
-    private static final int MAIN_CONTENT_FADEOUT_DURATION = 1500;
+    private static final int MAIN_CONTENT_FADEOUT_DURATION = 150; // Unused until fade out animation is properly implemented
     private static final int MAIN_CONTENT_FADEIN_DURATION = 250;
 
     public interface ActionOnCloseListener {
