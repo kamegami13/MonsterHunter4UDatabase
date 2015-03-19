@@ -89,9 +89,9 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
     }
 
     private void updateArmorPiece() {
-        if (session.isPieceSelected(pieceIndex)) {
-            text.setText(session.getArmor(pieceIndex).getName());
-            icon.setImageBitmap(fetchIcon(session.getArmor(pieceIndex).getRarity()));
+        if (session.isEquipmentSelected(pieceIndex)) {
+            text.setText(session.getEquipment(pieceIndex).getName());
+            icon.setImageBitmap(fetchIcon(session.getEquipment(pieceIndex).getRarity()));
         } else {
             onArmorRemoved();
         }
@@ -103,7 +103,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_real));
             } else if (session.decorationIsDummy(pieceIndex, i)) { // The socket index in question is a dummy
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_dummy));
-            } else if (session.getArmor(pieceIndex).getNumSlots() > i) { // The socket in question is empty
+            } else if (session.getEquipment(pieceIndex).getNumSlots() > i) { // The socket in question is empty
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_empty));
             } else { // The armor piece has no more sockets
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_none));
@@ -163,7 +163,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
     private PopupMenu createPopupMenu() {
         PopupMenu popup = new PopupMenu(new ContextThemeWrapper(getContext(), R.style.PopupMenuStyle), popupMenuButton); // Because we're not in the fragment, we have to use a theme wrapper
         
-        boolean pieceSelected = session.isPieceSelected(pieceIndex);
+        boolean pieceSelected = session.isEquipmentSelected(pieceIndex);
         boolean hasSlotsAvailable = session.getAvailableSlots(pieceIndex) > 0;
         boolean hasDecorations = session.hasDecorations(pieceIndex);
         
@@ -229,7 +229,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
 
         /** Called when the user chooses to remove an armor piece. */
         private void onMenuRemovePieceSelected() {
-            session.removeArmor(pieceIndex);
+            session.removeEquipment(pieceIndex);
             updateArmorPiece();
         }
 
@@ -253,7 +253,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         /** Called when the user chooses to retrieve info about their armor piece. */
         private void onMenuGetPieceInfoSelected() {
             Intent i = new Intent(getContext(), ArmorDetailActivity.class);
-            i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, session.getArmor(pieceIndex).getId());
+            i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, session.getEquipment(pieceIndex).getId());
             getContext().startActivity(i);
         }
     }

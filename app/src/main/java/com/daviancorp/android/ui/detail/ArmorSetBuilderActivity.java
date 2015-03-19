@@ -97,23 +97,23 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
                     switch (armorType) {
                         case "Head":
                             Log.d("SetBuilder", "Setting head piece.");
-                            session.setArmor(ArmorSetBuilderSession.HEAD, DataManager.get(getApplicationContext()).getArmor(armorId));
+                            session.setEquipment(ArmorSetBuilderSession.HEAD, DataManager.get(getApplicationContext()).getArmor(armorId));
                             break;
                         case "Body":
                             Log.d("SetBuilder", "Setting body piece.");
-                            session.setArmor(ArmorSetBuilderSession.BODY, DataManager.get(getApplicationContext()).getArmor(armorId));
+                            session.setEquipment(ArmorSetBuilderSession.BODY, DataManager.get(getApplicationContext()).getArmor(armorId));
                             break;
                         case "Arms":
                             Log.d("SetBuilder", "Setting arms piece.");
-                            session.setArmor(ArmorSetBuilderSession.ARMS, DataManager.get(getApplicationContext()).getArmor(armorId));
+                            session.setEquipment(ArmorSetBuilderSession.ARMS, DataManager.get(getApplicationContext()).getArmor(armorId));
                             break;
                         case "Waist":
                             Log.d("SetBuilder", "Setting waist piece.");
-                            session.setArmor(ArmorSetBuilderSession.WAIST, DataManager.get(getApplicationContext()).getArmor(armorId));
+                            session.setEquipment(ArmorSetBuilderSession.WAIST, DataManager.get(getApplicationContext()).getArmor(armorId));
                             break;
                         case "Legs":
                             Log.d("SetBuilder", "Setting legs piece.");
-                            session.setArmor(ArmorSetBuilderSession.LEGS, DataManager.get(getApplicationContext()).getArmor(armorId));
+                            session.setEquipment(ArmorSetBuilderSession.LEGS, DataManager.get(getApplicationContext()).getArmor(armorId));
                             break;
                     }
                 }

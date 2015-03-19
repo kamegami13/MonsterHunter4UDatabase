@@ -10,11 +10,11 @@ import java.util.*;
  * Represents a session of the user's interaction with the Armor Set Builder.
  * <p/>
  * For using armor arrays:
- * <li>0: Head
- * <li>1: Body
- * <li>2: Arms
- * <li>3: Waist
- * <li>4: Legs
+ * <li/>0: Head
+ * <li/>1: Body
+ * <li/>2: Arms
+ * <li/>3: Waist
+ * <li/>4: Legs
  */
 public class ArmorSetBuilderSession {
 
@@ -23,14 +23,16 @@ public class ArmorSetBuilderSession {
     public static final int ARMS = 2;
     public static final int WAIST = 3;
     public static final int LEGS = 4;
+    public static final int TALISMAN = 5;
 
-    private static Armor noArmor = new Armor();
+    private static Equipment noEquipment = new Equipment();
 
     private static Decoration noDecoration = new Decoration();
     public static Decoration dummy = new Decoration();
 
-    private Armor[] armors;
+    private Equipment[] equipment;
     private Decoration[][] decorations;
+    private Talisman talisman;
 
     private List<SkillTreePointsSet> skillTreePointsSets;
 
@@ -41,12 +43,17 @@ public class ArmorSetBuilderSession {
      */
     public ArmorSetBuilderSession() {
 
-        armors = new Armor[5];
-        for (int i = 0; i < armors.length; i++) {
-            armors[i] = noArmor;
+        equipment = new Equipment[6];
+        for (int i = 0; i < equipment.length; i++) {
+            if (i != TALISMAN) {
+                equipment[i] = noEquipment;
+            }
+            else {
+                equipment[i] = talisman;
+            }
         }
 
-        decorations = new Decoration[5][3];
+        decorations = new Decoration[6][3];
         for (int i = 0; i < decorations.length; i++) {
             for (int j = 0; j < decorations[i].length; j++) {
                 decorations[i][j] = noDecoration;
@@ -58,6 +65,42 @@ public class ArmorSetBuilderSession {
         changedListeners = new ArrayList<>();
     }
 
+    public Decoration getDecoration(int pieceIndex, int decorationIndex) {
+        return decorations[pieceIndex][decorationIndex];
+    }
+
+    public boolean hasDecorations(int pieceIndex) {
+        int decorationCount = 0;
+        for (Decoration d : decorations[pieceIndex]) {
+            if (d != noDecoration) {
+                decorationCount++;
+            }
+        }
+
+        return decorationCount > 0;
+    }
+
+    public int getAvailableSlots(int pieceIndex) {
+        int decorationCount = 0;
+        for (Decoration d : decorations[pieceIndex]) {
+            if (d != noDecoration) {
+                decorationCount++;
+            }
+        }
+
+        return equipment[pieceIndex].getNumSlots() - decorationCount;
+    }
+
+    /** @return True if the designated slot is actually in use, false if it is empty. */
+    public boolean decorationIsReal(int pieceIndex, int decorationIndex) {
+        return decorations[pieceIndex][decorationIndex] != noDecoration && decorations[pieceIndex][decorationIndex] != dummy;
+    }
+
+    /** @return True if the designated slot is a "dummy" decoration - that is, the non-first slot in a decoration of size greater than 1 - and false if it is empty or an actual decoration. */
+    public boolean decorationIsDummy(int pieceIndex, int decorationIndex) {
+        return getDecoration(pieceIndex, decorationIndex) == dummy;
+    }
+
     /**
      * Attempts to add a decoration to the specified armor piece.
      * @param pieceIndex The index of a piece in the set to fetch, according to {@link com.daviancorp.android.data.classes.ArmorSetBuilderSession}.
@@ -65,7 +108,7 @@ public class ArmorSetBuilderSession {
      * @return True if the piece was successfuly added, otherwise false.
      */
     public boolean addDecoration(int pieceIndex, Decoration decoration) {
-        if (getAvailableSlots(pieceIndex) >= decoration.getNumSlots()) { // TODO
+        if (getAvailableSlots(pieceIndex) >= decoration.getNumSlots()) {
             int i = 0;
             while (decorations[pieceIndex][i] != noDecoration) {
                 i++;
@@ -130,62 +173,27 @@ public class ArmorSetBuilderSession {
         notifyArmorSetChangedListeners();
     }
 
-    public int getAvailableSlots(int pieceIndex) {
-        int decorationCount = 0;
-        for (Decoration d : decorations[pieceIndex]) {
-            if (d != noDecoration) {
-                decorationCount++;
-            }
-        }
 
-        return armors[pieceIndex].getNumSlots() - decorationCount;
+    public boolean isEquipmentSelected(int pieceIndex) {
+        return equipment[pieceIndex] != noEquipment;
     }
 
-    public boolean hasDecorations(int pieceIndex) {
-        int decorationCount = 0;
-        for (Decoration d : decorations[pieceIndex]) {
-            if (d != noDecoration) {
-                decorationCount++;
-            }
-        }
-
-        return decorationCount > 0;
-    }
-
-    /** @return True if the designated slot is actually in use, false if it is empty. */
-    public boolean decorationIsReal(int pieceIndex, int decorationIndex) {
-        return decorations[pieceIndex][decorationIndex] != noDecoration && decorations[pieceIndex][decorationIndex] != dummy;
-    }
-
-    /** @return True if the designated slot is a "dummy" decoration - that is, the non-first slot in a decoration of size greater than 1 - and false if it is empty or an actual decoration. */
-    public boolean decorationIsDummy(int pieceIndex, int decorationIndex) {
-        return getDecoration(pieceIndex, decorationIndex) == dummy;
-    }
-
-    public boolean isPieceSelected(int pieceIndex) {
-        return armors[pieceIndex] != noArmor;
-    }
-
-    public void setArmor(int pieceIndex, Armor armor) {
-        armors[pieceIndex] = armor;
+    public void setEquipment(int pieceIndex, Equipment equip) {
+        equipment[pieceIndex] = equip;
 
         notifyArmorSetChangedListeners();
-    }
-
-    public Decoration getDecoration(int pieceIndex, int decorationIndex) {
-        return decorations[pieceIndex][decorationIndex];
     }
 
     /**
      * @return A set of the armor set based on the provided piece index.
      * @see com.daviancorp.android.data.classes.ArmorSetBuilderSession
      */
-    public Armor getArmor(int pieceIndex) {
-        return armors[pieceIndex];
+    public Equipment getEquipment(int pieceIndex) {
+        return equipment[pieceIndex];
     }
 
-    public void removeArmor(int pieceIndex) {
-        armors[pieceIndex] = noArmor;
+    public void removeEquipment(int pieceIndex) {
+        equipment[pieceIndex] = noEquipment;
         removeAllDecorations(pieceIndex);
 
         notifyArmorSetChangedListeners();
@@ -208,7 +216,7 @@ public class ArmorSetBuilderSession {
             skillTreeToSkillTreePointsSet.put(pointsSet.getSkillTree().getId(), pointsSet);
         }
 
-        for (int i = 0; i < armors.length; i++) {
+        for (int i = 0; i < equipment.length; i++) {
 
             Map<SkillTree, Integer> armorSkillTreePoints = getSkillsFromArmorPiece(i, context); // A map of the current piece of armor's skills, localized so we don't have to keep calling it
 
@@ -237,19 +245,21 @@ public class ArmorSetBuilderSession {
     /**
      * A helper method that converts an armor piece present in the current session into a map of the skills it provides and the respective points in each.
      * @param pieceIndex The piece of armor to get the skills from.
-     * <li>0: Head
-     * <li>1: Body
-     * <li>2: Arms
-     * <li>3: Waist
-     * <li>4: Legs</li>
+     * <li/>0: Head
+     * <li/>1: Body
+     * <li/>2: Arms
+     * <li/>3: Waist
+     * <li/>4: Legs
      * @return A map of all the skills the armor piece provides along with the number of points in each.
      */
     private Map<SkillTree, Integer> getSkillsFromArmorPiece(int pieceIndex, Context context) {
         Map<SkillTree, Integer> skills = new HashMap<>();
 
-        for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(armors[pieceIndex].getId())) { // We add skills for armor
-            skills.put(itemToSkillTree.getSkillTree(), itemToSkillTree.getPoints());
-            Log.d("SetBuilder", "Skill tree added to map: " + itemToSkillTree.getSkillTree().getName());
+        if (pieceIndex != TALISMAN) {
+            for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(equipment[pieceIndex].getId())) { // We add skills for armor
+                skills.put(itemToSkillTree.getSkillTree(), itemToSkillTree.getPoints());
+                Log.d("SetBuilder", "Skill tree added to map: " + itemToSkillTree.getSkillTree().getName());
+            }
         }
 
         for (Decoration d : decorations[pieceIndex]) { // Now we work on decorations
@@ -276,6 +286,7 @@ public class ArmorSetBuilderSession {
         }
     }
 
+    /** Allows an object to be notified when the {@code ArmorSetBuilderSession} is changed in some way. */
     public static interface OnArmorSetChangedListener {
         public void onArmorSetChanged();
     }
@@ -314,14 +325,6 @@ public class ArmorSetBuilderSession {
 
         public int getLegsPoints() {
             return points[LEGS];
-        }
-
-        public int getPoints(int pieceIndex) {
-            if (pieceIndex < 5) {
-                return points[pieceIndex];
-            } else {
-                throw new IllegalArgumentException("Please use a number from 0 to 4 when selecting an armor piece index.");
-            }
         }
 
         /**

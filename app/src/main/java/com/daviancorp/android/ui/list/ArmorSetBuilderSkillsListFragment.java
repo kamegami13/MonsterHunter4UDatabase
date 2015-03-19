@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.ClickListeners.SkillClickListener;
 import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 
 import java.util.List;
@@ -82,29 +83,29 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
 
             treeName.setText(getItem(position).getSkillTree().getName());
 
-            if (session.isPieceSelected(ArmorSetBuilderSession.HEAD)) {
+            if (session.isEquipmentSelected(ArmorSetBuilderSession.HEAD)) {
                 headPoints.setText(String.valueOf(getItem(position).getHeadPoints()));
             }
 
-            if (session.isPieceSelected(ArmorSetBuilderSession.BODY)) {
+            if (session.isEquipmentSelected(ArmorSetBuilderSession.BODY)) {
                 bodyPoints.setText(String.valueOf(getItem(position).getBodyPoints()));
             }
 
-            if (session.isPieceSelected(ArmorSetBuilderSession.ARMS)) {
+            if (session.isEquipmentSelected(ArmorSetBuilderSession.ARMS)) {
                 armsPoints.setText(String.valueOf(getItem(position).getArmsPoints()));
             }
 
-            if (session.isPieceSelected(ArmorSetBuilderSession.WAIST)) {
+            if (session.isEquipmentSelected(ArmorSetBuilderSession.WAIST)) {
                 waistPoints.setText(String.valueOf(getItem(position).getWaistPoints()));
             }
 
-            if (session.isPieceSelected(ArmorSetBuilderSession.LEGS)) {
+            if (session.isEquipmentSelected(ArmorSetBuilderSession.LEGS)) {
                 legsPoints.setText(String.valueOf(getItem(position).getLegsPoints()));
             }
 
             totalPoints.setText(String.valueOf(getItem(position).getTotal()));
             
-            itemView.setOnClickListener(new SkillClickListener(getcontext(), getItem(position).getSkillTree().getId()));
+            itemView.setOnClickListener(new SkillClickListener(getContext(), getItem(position).getSkillTree().getId()));
 
             return itemView;
         }

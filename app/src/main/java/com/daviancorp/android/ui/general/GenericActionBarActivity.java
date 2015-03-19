@@ -178,6 +178,8 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
             case 9: // Wishlists
                 intent = new Intent(GenericActionBarActivity.this, WishlistListActivity.class);
                 break;
+            case 10:
+                intent = new Intent(GenericActionBarActivity.this, ArmorSetBuilderActivity.class);
         }
         final Intent finalIntent = intent;
 
