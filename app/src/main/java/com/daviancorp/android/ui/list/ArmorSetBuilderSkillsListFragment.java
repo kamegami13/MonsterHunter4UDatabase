@@ -103,6 +103,8 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
             }
 
             totalPoints.setText(String.valueOf(getItem(position).getTotal()));
+            
+            itemView.setOnClickListener(new SkillClickListener(getcontext(), getItem(position).getSkillTree().getId()));
 
             return itemView;
         }
