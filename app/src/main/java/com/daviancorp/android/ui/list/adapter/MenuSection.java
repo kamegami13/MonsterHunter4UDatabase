@@ -16,7 +16,8 @@ public enum MenuSection {
     LOCATIONS(6),
     DECORATION(7),
     SKILL_TREES(8),
-    WISH_LISTS(9);
+    WISH_LISTS(9),
+    ARMOR_SET_BUILDER(10);
 
     public int menuListPosition;
 

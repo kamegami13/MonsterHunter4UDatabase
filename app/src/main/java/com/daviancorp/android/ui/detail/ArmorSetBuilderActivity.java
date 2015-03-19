@@ -40,6 +40,8 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setTitle(R.string.activity_armor_set_builder);
+
         session = new ArmorSetBuilderSession();
         session.addOnArmorSetChangedListener(this);
 
@@ -55,7 +57,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
 
     @Override
     protected MenuSection getSelectedSection() {
-        return MenuSection.ARMOR;
+        return MenuSection.ARMOR_SET_BUILDER;
     }
 
     @Override

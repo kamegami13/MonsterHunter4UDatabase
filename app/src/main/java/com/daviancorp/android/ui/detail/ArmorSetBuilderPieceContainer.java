@@ -8,10 +8,7 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -149,7 +146,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
     }
 
     private PopupMenu createPopupMenu() {
-        PopupMenu popup = new PopupMenu(getContext(), popupMenuButton);
+        PopupMenu popup = new PopupMenu(new ContextThemeWrapper(getContext(), R.style.PopupMenuStyle), popupMenuButton); // Because we're not in the fragment, we have to use a theme wrapper
         if (!session.isPieceSelected(pieceIndex)) {
             popup.getMenu().add(Menu.NONE, MENU_ADD_PIECE, Menu.NONE, R.string.armor_set_builder_add_piece);
         }
