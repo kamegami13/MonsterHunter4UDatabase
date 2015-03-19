@@ -20,7 +20,7 @@ import com.daviancorp.android.ui.list.adapter.MenuSection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArmorSetBuilderActivity extends GenericTabActivity {
+public class ArmorSetBuilderActivity extends GenericTabActivity implements ArmorSetBuilderSession.OnArmorSetChangedListener {
     public static final String EXTRA_FROM_SET_BUILDER = "com.daviancorp.android.ui.detail.from_set_builder";
     public static final String EXTRA_REMAINING_SOCKETS = "com.daviancorp.android.ui.detail.remaining_sockets";
     public static final String EXTRA_PIECE_INDEX = "com.daviancorp.android.ui.detail.piece_index";
@@ -31,7 +31,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
 
     private ArmorSetBuilderSession session;
 
-    private List<ArmorSetChangedListener> armorSetChangedListeners;
+    private List<OnArmorSetActivityUpdateListener> onArmorSetActivityUpdateListeners;
 
     private ViewPager viewPager;
     private ArmorSetBuilderPagerAdapter adapter;
@@ -40,7 +40,10 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setTitle(R.string.activity_armor_set_builder);
+
         session = new ArmorSetBuilderSession();
+        session.addOnArmorSetChangedListener(this);
 
         // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -49,12 +52,12 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
 
         mSlidingTabLayout.setViewPager(viewPager);
 
-        armorSetChangedListeners = new ArrayList<>();
+        onArmorSetActivityUpdateListeners = new ArrayList<>();
     }
 
     @Override
     protected MenuSection getSelectedSection() {
-        return MenuSection.ARMOR;
+        return MenuSection.ARMOR_SET_BUILDER;
     }
 
     @Override
@@ -118,16 +121,11 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
                 long decorationId = data.getLongExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, -1);
                 int pieceIndex = data.getIntExtra(EXTRA_PIECE_INDEX, -1);
 
-                Log.d("SetBuilder", "Decoration: " + decorationId);
-                Log.d("SetBuilder", "Piece Index: " + pieceIndex);
-
                 if (decorationId != -1 && pieceIndex != -1) {
-                    Log.d("SetBuilder", "Attempting to add decoration: " + DataManager.get(this).getDecoration(decorationId).getName());
-
                     Decoration decoration = DataManager.get(this).getDecoration(decorationId);
 
                     if (!session.addDecoration(pieceIndex, decoration)) {
-                        Log.i("SetBuilder", "Couldn't add decoration.");
+                        // The decoration couldn't be added
                     }
                 }
 
@@ -140,10 +138,6 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
 
                 session.removeDecoration(pieceIndex, decorationIndex);
             }
-
-            for (ArmorSetChangedListener a : armorSetChangedListeners) {
-                a.updateContents(session);
-            }
         }
 
     }
@@ -153,19 +147,27 @@ public class ArmorSetBuilderActivity extends GenericTabActivity {
         super.onPause();
     }
 
+    @Override
+    public void onArmorSetChanged() {
+        for (OnArmorSetActivityUpdateListener a : onArmorSetActivityUpdateListeners) {
+            a.onArmorSetActivityUpdated(session);
+        }
+    }
+
     public ArmorSetBuilderSession getArmorSetBuilderSession() {
         return session;
     }
 
-    public void addArmorSetChangedListener(ArmorSetChangedListener a) {
-        armorSetChangedListeners.add(a);
-    }
-
+    /** To be called when a fragment contained within this activity has {@code onActivityResult} manually called on it. */
     public void fragmentResultReceived(int requestCode, int resultCode, Intent data) {
         onActivityResult(requestCode, resultCode, data);
     }
 
-    public static interface ArmorSetChangedListener {
-        public void updateContents(ArmorSetBuilderSession s);
+    public void addArmorSetChangedListener(OnArmorSetActivityUpdateListener a) {
+        onArmorSetActivityUpdateListeners.add(a);
+    }
+
+    public static interface OnArmorSetActivityUpdateListener {
+        public void onArmorSetActivityUpdated(ArmorSetBuilderSession s);
     }
 }

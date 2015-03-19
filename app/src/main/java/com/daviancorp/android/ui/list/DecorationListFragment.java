@@ -87,6 +87,7 @@ public class DecorationListFragment extends ListFragment implements
             if (context instanceof Activity && ((Activity) context).getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
                 activity = (Activity) context;
                 fromArmorSetBuilder = true;
+                
             }
         }
 

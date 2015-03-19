@@ -34,6 +34,8 @@ public class ArmorSetBuilderSession {
 
     private List<SkillTreePointsSet> skillTreePointsSets;
 
+    private List<OnArmorSetChangedListener> changedListeners;
+
     /**
      * Default constructor.
      */
@@ -52,6 +54,8 @@ public class ArmorSetBuilderSession {
         }
 
         skillTreePointsSets = new ArrayList<>();
+
+        changedListeners = new ArrayList<>();
     }
 
     /**
@@ -77,6 +81,7 @@ public class ArmorSetBuilderSession {
                 decorations[pieceIndex][i + 2] = dummy;
             }
 
+            notifyArmorSetChangedListeners();
             return true;
         } else {
             return false;
@@ -96,6 +101,7 @@ public class ArmorSetBuilderSession {
                 }
 
             }
+
         }
 
         int i = 0;
@@ -112,12 +118,16 @@ public class ArmorSetBuilderSession {
         }
 
         decorations[pieceIndex] = newDecorations;
+
+        notifyArmorSetChangedListeners();
     }
 
     public void removeAllDecorations(int pieceIndex) {
         for (int i = 0; i < decorations[pieceIndex].length; i++) {
             decorations[pieceIndex][i] = noDecoration;
         }
+
+        notifyArmorSetChangedListeners();
     }
 
     public int getAvailableSlots(int pieceIndex) {
@@ -158,6 +168,8 @@ public class ArmorSetBuilderSession {
 
     public void setArmor(int pieceIndex, Armor armor) {
         armors[pieceIndex] = armor;
+
+        notifyArmorSetChangedListeners();
     }
 
     public Decoration getDecoration(int pieceIndex, int decorationIndex) {
@@ -175,6 +187,8 @@ public class ArmorSetBuilderSession {
     public void removeArmor(int pieceIndex) {
         armors[pieceIndex] = noArmor;
         removeAllDecorations(pieceIndex);
+
+        notifyArmorSetChangedListeners();
     }
 
     public List<SkillTreePointsSet> getSkillTreePointsSets() {
@@ -250,6 +264,20 @@ public class ArmorSetBuilderSession {
             }
         }
         return skills;
+    }
+
+    public void addOnArmorSetChangedListener(OnArmorSetChangedListener l) {
+        changedListeners.add(l);
+    }
+
+    private void notifyArmorSetChangedListeners() {
+        for (OnArmorSetChangedListener l : changedListeners) {
+            l.onArmorSetChanged();
+        }
+    }
+
+    public static interface OnArmorSetChangedListener {
+        public void onArmorSetChanged();
     }
 
     /**

@@ -8,10 +8,7 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -44,6 +41,11 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
     private int pieceIndex;
     private Fragment parentFragment;
 
+    /**
+     * Default constructor.
+     * <p/>
+     * It is required to call {@code initialize} after instantiating this class.
+     */
     public ArmorSetBuilderPieceContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -67,6 +69,11 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
 		});
     }
 
+    /** 
+     * Provides necessary external initialization logic.
+     * <p/>
+     * Should always be called after the container's constructor.
+     */
     public void initialize(ArmorSetBuilderSession session, int pieceIndex, Fragment parentFragment) {
         this.session = session;
         this.pieceIndex = pieceIndex;
@@ -75,6 +82,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         updateContents();
     }
 
+    /** Refreshes the contents of the piece container based on the contents of the {@code ArmorSetBuilderSession}. */
     public void updateContents() {
         updateArmorPiece();
         updateDecorations();
@@ -148,14 +156,22 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         }
     }
 
+    /**
+     * The order of the menu items in this menu can be changed by modifying the order in which {@code popup.getMenu().add} is called
+     * @return A {@code PopupMenu} that allows the user to modify the armor piece.
+     */
     private PopupMenu createPopupMenu() {
-        PopupMenu popup = new PopupMenu(getContext(), popupMenuButton);
-        if (!session.isPieceSelected(pieceIndex)) {
+        PopupMenu popup = new PopupMenu(new ContextThemeWrapper(getContext(), R.style.PopupMenuStyle), popupMenuButton); // Because we're not in the fragment, we have to use a theme wrapper
+        
+        boolean pieceSelected = session.isPieceSelected(pieceIndex);
+        boolean hasSlotsAvailable = session.getAvailableSlots(pieceIndex) > 0;
+        boolean hasDecorations = session.hasDecorations(pieceIndex);
+        
+        if (!pieceSelected) {
             popup.getMenu().add(Menu.NONE, MENU_ADD_PIECE, Menu.NONE, R.string.armor_set_builder_add_piece);
         }
         else {
             popup.getMenu().add(Menu.NONE, MENU_REMOVE_PIECE, Menu.NONE, R.string.armor_set_builder_remove_piece);
-            popup.getMenu().add(Menu.NONE, MENU_PIECE_INFO, Menu.NONE, R.string.armor_set_builder_piece_info);
         }
 
         if (session.getAvailableSlots(pieceIndex) > 0) {
@@ -165,13 +181,19 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         if (session.hasDecorations(pieceIndex)) {
             popup.getMenu().add(Menu.NONE, MENU_REMOVE_DECORATION, Menu.NONE, R.string.armor_set_builder_remove_decoration);
         }
+        
+        if (pieceSelected) {
+            popup.getMenu().add(Menu.NONE, MENU_PIECE_INFO, Menu.NONE, R.string.armor_set_builder_piece_info);
+        }
 
 		popup.setOnMenuItemClickListener(new PiecePopupMenuClickListener());
 
         return popup;
     }
 
+    /** Listens for when the user clicks on an element in the {@code PopupMenu}. */
     private class PiecePopupMenuClickListener implements PopupMenu.OnMenuItemClickListener {
+        
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()) {
@@ -188,6 +210,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
                     onMenuRemoveDecorationSelected();
 					break;
 				case MENU_PIECE_INFO: // TODO
+                    onMenuGetPieceInfoSelected();
 					break;
 				default:
 					return false;
@@ -195,6 +218,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
             return true;
         }
 
+        /** Called when the user chooses to add an armor piece. */
         private void onMenuAddPieceSelected() {
             Intent i = new Intent(getContext(), ArmorListActivity.class);
             i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
@@ -203,23 +227,34 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
             ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
         }
 
+        /** Called when the user chooses to remove an armor piece. */
         private void onMenuRemovePieceSelected() {
             session.removeArmor(pieceIndex);
             updateArmorPiece();
         }
 
+        /** Called when the user chooses to add a decoration. */
         private void onMenuAddDecorationSelected() {
             Intent i = new Intent(getContext(), DecorationListActivity.class);
             i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
             i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
+            i.putExtra(ArmorSetBuilderActivity.EXTRA_SLOTS_REMAINING, session.getAvailableSlots(pieceIndex));
 
             ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
         }
 
+        /** Called when the user chooses to remove a decoration. */
         private void onMenuRemoveDecorationSelected() {
             ArmorSetBuilderDecorationsDialogFragment d = ArmorSetBuilderDecorationsDialogFragment.newInstance(session, pieceIndex);
             d.setTargetFragment(parentFragment, ArmorSetBuilderActivity.REMOVE_DECORATION_REQUEST_CODE);
             d.show(parentFragment.getActivity().getSupportFragmentManager(), "tag");
+        }
+        
+        /** Called when the user chooses to retrieve info about their armor piece. */
+        private void onMenuGetPieceInfoSelected() {
+            Intent i = new Intent(getContext(), ArmorDetailActivity.class);
+            i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, session.getArmor(pieceIndex).getId());
+            getContext().startActivity(i);
         }
     }
 }

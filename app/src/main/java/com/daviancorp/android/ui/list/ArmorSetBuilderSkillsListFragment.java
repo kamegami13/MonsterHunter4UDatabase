@@ -16,7 +16,7 @@ import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 
 import java.util.List;
 
-public class ArmorSetBuilderSkillsListFragment extends Fragment implements ArmorSetBuilderActivity.ArmorSetChangedListener {
+public class ArmorSetBuilderSkillsListFragment extends Fragment implements ArmorSetBuilderActivity.OnArmorSetActivityUpdateListener {
 
     private ArmorSetBuilderSession session;
     private ArmorSetBuilderSkillsAdapter adapter;
@@ -47,7 +47,7 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
     }
 
     @Override
-    public void updateContents(ArmorSetBuilderSession s) {
+    public void onArmorSetActivityUpdated(ArmorSetBuilderSession s) {
         session.updateSkillTreePointsSets(getActivity().getApplicationContext());
         adapter.notifyDataSetChanged();
     }
@@ -103,6 +103,8 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
             }
 
             totalPoints.setText(String.valueOf(getItem(position).getTotal()));
+            
+            itemView.setOnClickListener(new SkillClickListener(getcontext(), getItem(position).getSkillTree().getId()));
 
             return itemView;
         }

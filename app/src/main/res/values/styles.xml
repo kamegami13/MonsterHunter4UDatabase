@@ -54,7 +54,7 @@
 
     <style name="PopupMenuStyle" parent="@style/AppTheme">
         <item name="android:textColor">@color/text_primary_color</item>
-        <item name="android:popupBackground">@drawable/primary_drawable</item>
+        <item name="android:popupBackground">@color/primary_color</item>
     </style>
 
     <style name="DropDownListViewStyle" parent="@style/AppTheme">
