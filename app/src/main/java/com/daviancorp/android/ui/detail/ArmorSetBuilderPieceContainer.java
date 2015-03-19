@@ -209,7 +209,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
 				case MENU_REMOVE_DECORATION:
                     onMenuRemoveDecorationSelected();
 					break;
-				case MENU_PIECE_INFO: // TODO
+				case MENU_PIECE_INFO:
                     onMenuGetPieceInfoSelected();
 					break;
 				default:
@@ -238,7 +238,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
             Intent i = new Intent(getContext(), DecorationListActivity.class);
             i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
             i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_SLOTS_REMAINING, session.getAvailableSlots(pieceIndex));
+            i.putExtra(ArmorSetBuilderActivity.EXTRA_REMAINING_SOCKETS, session.getAvailableSlots(pieceIndex));
 
             ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
         }
