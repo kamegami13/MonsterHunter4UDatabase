@@ -1,0 +1,25 @@
+import com.android.builder.core.BuilderConstants
+
+apply plugin: 'android-library'
+
+android {
+    buildToolsVersion "21.1.2"
+    compileSdkVersion 'Google Inc.:Google APIs:21'
+
+    defaultConfig {
+        minSdkVersion 7
+    }
+}
+
+android.libraryVariants.all { variant ->
+    def name = variant.buildType.name
+    if (name.equals(BuilderConstants.DEBUG)) {
+        return; // Skip debug builds.
+    }
+    def task = project.tasks.create "jar${name.capitalize()}", Jar
+    task.dependsOn variant.javaCompile
+    task.from variant.javaCompile.destinationDir
+    artifacts.add('archives', task);
+}
+
+//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'

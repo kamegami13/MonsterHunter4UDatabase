@@ -1,11 +1,15 @@
 package com.daviancorp.android.data.database;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.DownloadManager;
@@ -18,11 +22,26 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
+import android.util.Xml;
 
 import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlSerializer;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 /*
    QUERY REFERENCE:
@@ -104,6 +123,197 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 			throw new Error("Error copying database");
 		}*/
 	}
+
+    @Override
+    protected void preCopyDatabase(SQLiteDatabase db) {
+        //Log.w(TAG, "Pre forcing database upgrade!");
+        String filename = "wishlist.xml";
+        FileOutputStream fos;
+
+        try {
+            fos = myContext.openFileOutput(filename, Context.MODE_PRIVATE);
+            XmlSerializer serializer = Xml.newSerializer();
+            serializer.setOutput(fos, "UTF-8");
+            serializer.startDocument(null, Boolean.valueOf(true));
+            serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+
+            WishlistComponentCursor wcc = queryWishlistsComponent(db);
+            WishlistDataCursor wdc = queryWishlistsData(db);
+            WishlistCursor wc = queryWishlists(db);
+
+            wc.moveToFirst();
+            wdc.moveToFirst();
+            wcc.moveToFirst();
+
+            serializer.startTag(null, "wishlist_tables");
+
+            serializer.startTag(null, "wishlists");
+            while (!wc.isAfterLast()) {
+                Wishlist wishlist = wc.getWishlist();
+                serializer.startTag(null, "wishlist");
+                serializer.startTag(null, "wishlist_id");
+                serializer.text(Long.toString(wishlist.getId()));
+                serializer.endTag(null, "wishlist_id");
+                serializer.startTag(null, "name");
+                serializer.text(wishlist.getName());
+                serializer.endTag(null, "name");
+                serializer.endTag(null, "wishlist");
+                wc.moveToNext();
+            }
+            serializer.endTag(null, "wishlists");
+            wc.close();
+
+            serializer.startTag(null, "wishlist_data");
+            while (!wdc.isAfterLast()) {
+                WishlistData wishlistData = wdc.getWishlistData();
+                serializer.startTag(null, "data");
+                serializer.startTag(null, "wishlist_id");
+                serializer.text(Long.toString(wishlistData.getWishlistId()));
+                serializer.endTag(null, "wishlist_id");
+                serializer.startTag(null, "item_id");
+                serializer.text(Long.toString(wishlistData.getItem().getId()));
+                serializer.endTag(null, "item_id");
+                serializer.startTag(null, "quantity");
+                serializer.text(Integer.toString(wishlistData.getQuantity()));
+                serializer.endTag(null, "quantity");
+                serializer.startTag(null, "satisfied");
+                serializer.text(Integer.toString(wishlistData.getSatisfied()));
+                serializer.endTag(null, "satisfied");
+                serializer.startTag(null, "path");
+                serializer.text(wishlistData.getPath());
+                serializer.endTag(null, "path");
+                serializer.endTag(null, "data");
+
+                /*queryAddWishlistDataAll(newDb, wishlistData.getWishlistId(), wishlistData.getItem().getId(),
+                        wishlistData.getQuantity(), wishlistData.getSatisfied(), wishlistData.getPath());*/
+                wdc.moveToNext();
+            }
+            serializer.endTag(null, "wishlist_data");
+            wdc.close();
+
+            serializer.startTag(null, "wishlist_components");
+            while (!wcc.isAfterLast()) {
+                WishlistComponent wishlistComponent = wcc.getWishlistComponent();
+                serializer.startTag(null, "component");
+                serializer.startTag(null, "wishlist_id");
+                serializer.text(Long.toString(wishlistComponent.getWishlistId()));
+                serializer.endTag(null, "wishlist_id");
+                serializer.startTag(null, "item_id");
+                serializer.text(Long.toString(wishlistComponent.getItem().getId()));
+                serializer.endTag(null, "item_id");
+                serializer.startTag(null, "quantity");
+                serializer.text(Integer.toString(wishlistComponent.getQuantity()));
+                serializer.endTag(null, "quantity");
+                serializer.startTag(null, "notes");
+                serializer.text(Integer.toString(wishlistComponent.getNotes()));
+                serializer.endTag(null, "notes");
+                serializer.endTag(null, "component");
+
+                /*queryAddWishlistComponentAll(newDb, wishlistComponent.getWishlistId(),
+                        wishlistComponent.getItem().getId(), wishlistComponent.getQuantity(), wishlistComponent.getNotes());*/
+                wcc.moveToNext();
+            }
+            serializer.endTag(null, "wishlist_components");
+            wcc.close();
+
+            serializer.endDocument();
+            serializer.flush();
+            fos.close();
+        }
+        catch (IOException e) {
+            //e.printStackTrace();
+        }
+        finally {
+
+        }
+    }
+
+    @Override
+    protected void postCopyDatabase(SQLiteDatabase db) {
+        //Log.w(TAG, "Post forcing database upgrade!");
+        String filename = "wishlist.xml";
+
+        FileInputStream fis = null;
+        InputStreamReader isr = null;
+        String data;
+
+        try {
+            fis = myContext.openFileInput(filename);
+
+            long wishlist_id = 0;
+            String name = "";
+            long item_id = 0;
+            int quantity = 0;
+            int satisfied = 0;
+            String path = "";
+            int notes = 0;
+            String text = "";
+            boolean clear_wishlist = true;
+
+            XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
+            XmlPullParser myParser = xmlFactoryObject.newPullParser();
+            myParser.setInput(fis, null);
+
+            int event = myParser.getEventType();
+            while (event != XmlPullParser.END_DOCUMENT) {
+                String tagName = myParser.getName();
+                switch (event) {
+                    case XmlPullParser.START_TAG:
+                        break;
+                    case XmlPullParser.TEXT:
+                        text = myParser.getText();
+                        break;
+
+                    case XmlPullParser.END_TAG:
+                        if(tagName.equals("wishlist_id")) {
+                            wishlist_id = Long.parseLong(text);
+                        }
+                        else if(tagName.equals("name")) {
+                            name = text;
+                        }
+                        else if(tagName.equals("item_id")) {
+                            item_id = Long.parseLong(text);
+                        }
+                        else if(tagName.equals("quantity")) {
+                            quantity = Integer.parseInt(text);
+                        }
+                        else if(tagName.equals("satisfied")) {
+                            satisfied = Integer.parseInt(text);
+                        }
+                        else if(tagName.equals("path")) {
+                            path = text;
+                        }
+                        else if(tagName.equals("notes")) {
+                            notes = Integer.parseInt(text);
+                        }
+                        else if(tagName.equals("wishlist")) {
+                            if(clear_wishlist) {
+                                db.delete(S.TABLE_WISHLIST, null, null);
+                                //only clear the table once if there is data to load
+                                clear_wishlist = false;
+                            }
+                            queryAddWishlistAll(db, wishlist_id, name);
+                        }
+                        else if(tagName.equals("data")) {
+                            queryAddWishlistDataAll(db, wishlist_id, item_id,
+                                    quantity, satisfied, path);
+                        }
+                        else if(tagName.equals("component")) {
+                            queryAddWishlistComponentAll(db, wishlist_id,
+                                    item_id, quantity, notes);
+                        }
+                        else{
+
+                        }
+                        break;
+                }
+                event = myParser.next();
+            }
+            fis.close();
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+    }
 	
 	/**
 	 * Creates a empty database on the system and overwrite it with your own
