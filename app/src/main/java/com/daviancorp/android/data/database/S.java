@@ -186,6 +186,34 @@ public class S {
     static final String COLUMN_HABITAT_AREAS = "move_area";
     static final String COLUMN_HABITAT_REST = "rest_area";
 
+	// Monster Ailment
+	static final String TABLE_AILMENT = "monster_ailment";
+	static final String COLUMN_AILMENT_ID = "_id";
+	static final String COLUMN_AILMENT_MONSTER_ID = "monster_id";
+	static final String COLUMN_AILMENT_MONSTER_NAME = "monster_name";
+	static final String COLUMN_AILMENT_AILMENT = "ailment";
+
+	// Monster Weakness
+	static final String TABLE_WEAKNESS = "monster_weakness";
+	static final String COLUMN_WEAKNESS_ID = "_id";
+	static final String COLUMN_WEAKNESS_MONSTER_ID = "monster_id";
+	static final String COLUMN_WEAKNESS_MONSTER_NAME = "monster_name";
+	static final String COLUMN_WEAKNESS_STATE = "state";
+	static final String COLUMN_WEAKNESS_FIRE = "fire";
+	static final String COLUMN_WEAKNESS_WATER = "water";
+	static final String COLUMN_WEAKNESS_THUNDER = "thunder";
+	static final String COLUMN_WEAKNESS_ICE = "ice";
+	static final String COLUMN_WEAKNESS_DRAGON = "dragon";
+	static final String COLUMN_WEAKNESS_POISON = "poison";
+	static final String COLUMN_WEAKNESS_PARALYSIS = "paralysis";
+	static final String COLUMN_WEAKNESS_SLEEP = "sleep";
+	static final String COLUMN_WEAKNESS_PITFALL_TRAP = "pitfall_trap";
+	static final String COLUMN_WEAKNESS_SHOCK_TRAP = "shock_trap";
+	static final String COLUMN_WEAKNESS_FLASH_BOMB = "flash_bomb";
+	static final String COLUMN_WEAKNESS_SONIC_BOMB = "sonic_bomb";
+	static final String COLUMN_WEAKNESS_DUNG_BOMB = "dung_bomb";
+	static final String COLUMN_WEAKNESS_MEAT = "meat";
+
     // Monster Status
     static final String TABLE_MONSTER_STATUS = "monster_status";
     static final String COLUMN_MONSTER_STATUS_MONSTER_ID = "monster_id";

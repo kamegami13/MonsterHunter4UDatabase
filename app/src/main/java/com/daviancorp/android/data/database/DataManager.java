@@ -640,7 +640,13 @@ public class DataManager {
 		cursor.close();
 		return monsters;
 	}
-	
+
+/********************************* MONSTER AILMENT QUERIES ******************************************/
+	/* Get a cursor that lists all the ailments a particular monster can inflict */
+	public MonsterAilmentCursor queryAilmentsFromId(long id){
+		return mHelper.queryAilmentsFromMonster(id);
+	}
+
 /********************************* MONSTER DAMAGE QUERIES ******************************************/	
 	/* Get a Cursor that has a list of MonsterDamage for a specific Monster */
 	public MonsterDamageCursor queryMonsterDamage(long id) {

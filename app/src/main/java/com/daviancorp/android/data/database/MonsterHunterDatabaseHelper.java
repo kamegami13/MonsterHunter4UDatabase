@@ -1971,6 +1971,26 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		return new MonsterCursor(wrapHelper(qh));
 	}
 
+/********************************* MONSTER AILMENT QUERIES ******************************************/
+    /* Get all ailments a from a particular monster */
+    public MonsterAilmentCursor queryAilmentsFromMonster(long id){
+        // SELECT * FROM monster_ailment WHERE monster_id = id
+
+        QueryHelper qh = new QueryHelper();
+        qh.Distinct = true;
+        qh.Table = S.TABLE_AILMENT;
+        qh.Columns = null;
+        qh.Selection = S.COLUMN_AILMENT_MONSTER_ID + " = ?";
+        qh.SelectionArgs = new String[] {String.valueOf(id)};
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new MonsterAilmentCursor(wrapHelper(qh));
+    }
+
+
 /********************************* MONSTER HABITAT QUERIES ******************************************/
 
     /**
