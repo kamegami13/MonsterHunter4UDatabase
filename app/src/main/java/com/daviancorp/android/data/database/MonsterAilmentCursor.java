@@ -25,11 +25,11 @@ public class MonsterAilmentCursor extends CursorWrapper {
         MonsterAilment ailment = new MonsterAilment();
 
         long monster_id = getLong(getColumnIndex(S.COLUMN_AILMENT_MONSTER_ID));
-        String monster_name = getString(getColumnIndex(S.COLUMN_AILMENT_MONSTER_NAME));
+        // String monster_name = getString(getColumnIndex(S.COLUMN_AILMENT_MONSTER_NAME)); Not used
         String strailment = getString(getColumnIndex(S.COLUMN_AILMENT_AILMENT));
 
         ailment.setId(monster_id);
-        ailment.setMonstername(monster_name);
+        // ailment.setMonstername(monster_name);
         ailment.setAilment(strailment);
 
         return ailment;

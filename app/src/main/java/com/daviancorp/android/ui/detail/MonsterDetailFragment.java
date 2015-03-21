@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.res.AssetManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -15,16 +17,22 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Monster;
+import com.daviancorp.android.data.classes.MonsterAilment;
 import com.daviancorp.android.data.classes.MonsterDamage;
 import com.daviancorp.android.data.database.DataManager;
+import com.daviancorp.android.data.database.MonsterAilmentCursor;
+import com.daviancorp.android.loader.MonsterAilmentCursorLoader;
 import com.daviancorp.android.loader.MonsterLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.MHUtils;
 
 public class MonsterDetailFragment extends Fragment {
 	private static final String ARG_MONSTER_ID = "MONSTER_ID";
@@ -37,7 +45,9 @@ public class MonsterDetailFragment extends Fragment {
 	private ImageView mMonsterIconImageView;
 	
 	private TableLayout mWeaponDamageTL, mElementalDamageTL;
-	
+	private ListView mAilmentsListView;
+    private View mDividerView;
+
 	private ImageView mCutImageView, mImpactImageView, mShotImageView, mKOImageView;
 	private ImageView mFireImageView, mWaterImageView, mIceImageView, 
 		mThunderImageView, mDragonImageView;
@@ -62,6 +72,7 @@ public class MonsterDetailFragment extends Fragment {
 			if (monsterId != -1) {
 				LoaderManager lm = getLoaderManager();
 				lm.initLoader(R.id.monster_detail_fragment, args, new MonsterLoaderCallbacks());
+                lm.initLoader(R.id.monster_ailments, args, new MonsterAilmentsLoaderCallbacks());
 			}
 		}
 	}
@@ -86,6 +97,9 @@ public class MonsterDetailFragment extends Fragment {
 	
 		mWeaponDamageTL = (TableLayout) view.findViewById(R.id.weapon_damage);
 		mElementalDamageTL = (TableLayout) view.findViewById(R.id.elemental_damage);
+
+        mDividerView = view.findViewById(R.id.divider);
+        mAilmentsListView = (ListView) view.findViewById(R.id.ailments_list);
 		
 		return view;
 	}
@@ -187,7 +201,41 @@ public class MonsterDetailFragment extends Fragment {
 			mElementalDamageTL.addView(edRow);
 		}
 	}
-	
+
+    // Adapter to populate the Ailments Listview
+    private class MonsterAilmentsCursorAdapter extends CursorAdapter{
+
+        private MonsterAilmentCursor mMonsterAilmentsCursor;
+
+        public MonsterAilmentsCursorAdapter(Context context,
+                                         MonsterAilmentCursor cursor) {
+            super(context, cursor, 0);
+            mMonsterAilmentsCursor = cursor;
+        }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            // Use a layout inflater to get a row view
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.fragment_ailment_listitem,
+                    parent, false);
+        }
+
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            // Get the Ailment for the current row
+            MonsterAilment mMonsterAilment = mMonsterAilmentsCursor.getAilment();
+
+            // Locate textview
+            TextView mAilment = (TextView) view.findViewById(R.id.ailment_text);
+
+            // Set ailment text
+            mAilment.setText(mMonsterAilment.getAilment());
+        }
+    }
+
+    // Loader to load data for this monster
 	private class MonsterLoaderCallbacks implements LoaderCallbacks<Monster> {
 		
 		@Override
@@ -206,6 +254,33 @@ public class MonsterDetailFragment extends Fragment {
 			// Do nothing
 		}
 	}
+
+    // Loader to load the ailment data for this monster
+    private class MonsterAilmentsLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cursor> {
+        @Override
+        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+            // Get cursor based on Monster ID
+            return new MonsterAilmentCursorLoader(getActivity(), args.getLong(ARG_MONSTER_ID));
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
+            // Assign adapter the Ailments listview
+            MonsterDetailFragment.MonsterAilmentsCursorAdapter adapter = new MonsterDetailFragment.MonsterAilmentsCursorAdapter(
+                    getActivity(), (MonsterAilmentCursor) cursor);
+            mAilmentsListView.setAdapter(adapter);
+
+            // Resize listview so its height is based on number of items
+            MHUtils.setListViewHeightBasedOnChildren(mAilmentsListView);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Cursor> loader) {
+            // Stop using the cursor (via the adapter)
+            mAilmentsListView.setAdapter(null);
+        }
+    }
 	
 	private String checkDamageValue(String damage) {
 		String ret = damage;

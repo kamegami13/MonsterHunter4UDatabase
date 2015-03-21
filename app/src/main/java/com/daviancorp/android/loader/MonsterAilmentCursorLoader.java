@@ -15,7 +15,7 @@ public class MonsterAilmentCursorLoader extends SQLiteCursorLoader {
 
     @Override
     protected Cursor loadCursor() {
-        // Query the list of skills from a skill tree
+        // Query the list of ailments from monster id
         return DataManager.get(getContext()).queryAilmentsFromId(id);
     }
 }
