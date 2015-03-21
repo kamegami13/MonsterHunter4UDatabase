@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.widget.CursorAdapter;
+import android.support.v7.internal.widget.ViewUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.HornMelodiesCursor;
 import com.daviancorp.android.loader.WeaponLoader;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.MHUtils;
 import com.daviancorp.android.ui.general.DrawSharpness;
 import com.daviancorp.android.loader.HornMelodyListCursorLoader;
 
@@ -140,20 +142,17 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 			notes = mWeapon.getHornNotes();
 			
 			try {
-				open = manager.open(getNoteImage(notes.charAt(0)));
-				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponNote1ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
+                open = manager.open(getNoteImage(notes.charAt(0)));
+                bitmap = BitmapFactory.decodeStream(open);
+                mWeaponNote1ImageView.setImageBitmap(bitmap);
 				
 				open = manager.open(getNoteImage(notes.charAt(1)));
 				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponNote2ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
+                mWeaponNote2ImageView.setImageBitmap(bitmap);
 				
 				open = manager.open(getNoteImage(notes.charAt(2)));
 				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponNote3ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
+                mWeaponNote3ImageView.setImageBitmap(bitmap);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
@@ -353,9 +352,12 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
             // Assign adapter to horn songs listview only if weapon is horn
-                WeaponBladeDetailFragment.HornMelodiesCursorAdapter adapter = new WeaponBladeDetailFragment.HornMelodiesCursorAdapter(
-                        getActivity(), (HornMelodiesCursor) cursor);
-                mWeaponHornMelodiesListView.setAdapter(adapter);
+            WeaponBladeDetailFragment.HornMelodiesCursorAdapter adapter = new WeaponBladeDetailFragment.HornMelodiesCursorAdapter(
+                    getActivity(), (HornMelodiesCursor) cursor);
+            mWeaponHornMelodiesListView.setAdapter(adapter);
+
+            // Resize listview so its height is based on number of items
+            MHUtils.setListViewHeightBasedOnChildren(mWeaponHornMelodiesListView);
         }
 
         @Override
