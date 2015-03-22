@@ -29,6 +29,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
     public static final int MENU_ADD_DECORATION = 2;
     public static final int MENU_REMOVE_DECORATION = 3;
     public static final int MENU_PIECE_INFO = 4;
+    public static final int MENU_EDIT_PIECE_DATA = 5;
 
     private ImageView icon;
     private TextView text;
@@ -137,6 +138,18 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
             case ArmorSetBuilderSession.LEGS:
                 slot = "legs";
                 break;
+            case ArmorSetBuilderSession.TALISMAN:
+                try {
+                    InputStream stream = getContext().getAssets().open("icons_items/Charm-Stone-Grey.png");
+                    Bitmap bitmap = BitmapFactory.decodeStream(stream);
+
+                    stream.close();
+
+                    return bitmap;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                } // TODO: Make the charm icon not weirdly sized
         }
 
         String imageRes = "icons_armor/icons_" + slot + "/" + slot + String.valueOf(rarity) + ".png";
@@ -166,24 +179,30 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         boolean pieceSelected = session.isEquipmentSelected(pieceIndex);
         boolean hasSlotsAvailable = session.getAvailableSlots(pieceIndex) > 0;
         boolean hasDecorations = session.hasDecorations(pieceIndex);
-        
-        if (!pieceSelected) {
-            popup.getMenu().add(Menu.NONE, MENU_ADD_PIECE, Menu.NONE, R.string.armor_set_builder_add_piece);
+
+        if (pieceIndex != ArmorSetBuilderSession.TALISMAN) {
+
+            if (!pieceSelected) {
+                popup.getMenu().add(Menu.NONE, MENU_ADD_PIECE, Menu.NONE, R.string.armor_set_builder_add_piece);
+            } else {
+                popup.getMenu().add(Menu.NONE, MENU_REMOVE_PIECE, Menu.NONE, R.string.armor_set_builder_remove_piece);
+            }
+
+            if (hasSlotsAvailable) {
+                popup.getMenu().add(Menu.NONE, MENU_ADD_DECORATION, Menu.NONE, R.string.armor_set_builder_add_decoration);
+            }
+
+            if (hasDecorations) {
+                popup.getMenu().add(Menu.NONE, MENU_REMOVE_DECORATION, Menu.NONE, R.string.armor_set_builder_remove_decoration);
+            }
+
+            if (pieceSelected) {
+                popup.getMenu().add(Menu.NONE, MENU_PIECE_INFO, Menu.NONE, R.string.armor_set_builder_piece_info);
+            }
+
         }
         else {
-            popup.getMenu().add(Menu.NONE, MENU_REMOVE_PIECE, Menu.NONE, R.string.armor_set_builder_remove_piece);
-        }
-
-        if (session.getAvailableSlots(pieceIndex) > 0) {
-            popup.getMenu().add(Menu.NONE, MENU_ADD_DECORATION, Menu.NONE, R.string.armor_set_builder_add_decoration);
-        }
-
-        if (session.hasDecorations(pieceIndex)) {
-            popup.getMenu().add(Menu.NONE, MENU_REMOVE_DECORATION, Menu.NONE, R.string.armor_set_builder_remove_decoration);
-        }
-        
-        if (pieceSelected) {
-            popup.getMenu().add(Menu.NONE, MENU_PIECE_INFO, Menu.NONE, R.string.armor_set_builder_piece_info);
+            // TODO: Add talisman logic
         }
 
 		popup.setOnMenuItemClickListener(new PiecePopupMenuClickListener());

@@ -20,6 +20,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
     ArmorSetBuilderPieceContainer armsView;
     ArmorSetBuilderPieceContainer waistView;
     ArmorSetBuilderPieceContainer legsView;
+    ArmorSetBuilderPieceContainer talismanView;
 
     public static ArmorSetBuilderFragment newInstance() {
         Bundle args = new Bundle();
@@ -43,6 +44,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         armsView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_arms);
         waistView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_waist);
         legsView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_legs);
+        talismanView = (ArmorSetBuilderPieceContainer) view.findViewById(R.id.armor_builder_talisman);
 
         ArmorSetBuilderSession s = ((ArmorSetBuilderActivity) getActivity()).getArmorSetBuilderSession();
 
@@ -51,6 +53,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         armsView.initialize(s, 2, this);
         waistView.initialize(s, 3, this);
         legsView.initialize(s, 4, this);
+        talismanView.initialize(s, 5, this);
 
         return view;
     }
@@ -62,6 +65,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
         armsView.updateContents();
         waistView.updateContents();
         legsView.updateContents();
+        talismanView.updateContents();
     }
 
     @Override

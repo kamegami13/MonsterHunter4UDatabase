@@ -8,7 +8,12 @@ public class Talisman extends Equipment {
 
     private int[] skillPoints;
 
-    private Talisman(SkillTree skill1, int skill1Points, boolean hasSkill2) {
+    public Talisman() {
+        skillTrees = new SkillTree[2];
+        skillPoints = new int[2];
+    }
+
+    private void initialize(SkillTree skill1, int skill1Points, boolean hasSkill2) {
         skillTrees = new SkillTree[2];
         skillPoints = new int[2];
 
@@ -22,17 +27,17 @@ public class Talisman extends Equipment {
     }
 
     /**
-     * The constructor to be used when created a talisman with one skill.
+     * Used when creating a talisman with one skill.
      */
-    public Talisman(SkillTree skill1, int skill1Points) {
-        this(skill1, skill1Points, false);
+    public void initialize(SkillTree skill1, int skill1Points) {
+        this.initialize(skill1, skill1Points, false);
     }
 
     /**
-     * The constructor to be used when creating a talisman with two skills.
+     * Used when creating a talisman with two skills.
      */
-    public Talisman(SkillTree skill1, int skill1Points, SkillTree skill2, int skill2Points) {
-        this(skill1, skill1Points, true);
+    public void initialize(SkillTree skill1, int skill1Points, SkillTree skill2, int skill2Points) {
+        this.initialize(skill1, skill1Points, true);
 
         skillTrees[1] = skill2;
         skillPoints[1] = skill2Points;

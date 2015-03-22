@@ -44,6 +44,7 @@ public class ArmorSetBuilderSession {
     public ArmorSetBuilderSession() {
 
         equipment = new Equipment[6];
+        talisman = new Talisman();
         for (int i = 0; i < equipment.length; i++) {
             if (i != TALISMAN) {
                 equipment[i] = noEquipment;
@@ -185,14 +186,21 @@ public class ArmorSetBuilderSession {
     }
 
     /**
-     * @return A set of the armor set based on the provided piece index.
+     * @return A piece of the armor set based on the provided piece index.
      * @see com.daviancorp.android.data.classes.ArmorSetBuilderSession
      */
     public Equipment getEquipment(int pieceIndex) {
         return equipment[pieceIndex];
     }
 
+    public Talisman getTalisman() {
+        return (Talisman)equipment[TALISMAN];
+    }
+
     public void removeEquipment(int pieceIndex) {
+        if (pieceIndex == TALISMAN) {
+            throw new IllegalArgumentException("The talisman cannot be removed - only modified.");
+        }
         equipment[pieceIndex] = noEquipment;
         removeAllDecorations(pieceIndex);
 

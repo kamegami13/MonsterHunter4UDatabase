@@ -29,4 +29,8 @@
           android:layout_height="wrap_content"
           class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
 
+    <view android:id="@+id/armor_builder_talisman"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
 </LinearLayout>
