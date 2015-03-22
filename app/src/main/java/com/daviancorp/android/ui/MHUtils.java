@@ -45,7 +45,9 @@ public class MHUtils {
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
-        listView.requestLayout();
+        if(listView.isInLayout() == false){
+            listView.requestLayout();
+        }
     }
 
 

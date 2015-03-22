@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -45,7 +46,7 @@ public class MonsterDetailFragment extends Fragment {
 	private ImageView mMonsterIconImageView;
 	
 	private TableLayout mWeaponDamageTL, mElementalDamageTL;
-	private ListView mAilmentsListView;
+	private LinearLayout mAilmentsLinearLayout;
     private View mDividerView;
 
 	private ImageView mCutImageView, mImpactImageView, mShotImageView, mKOImageView;
@@ -72,7 +73,6 @@ public class MonsterDetailFragment extends Fragment {
 			if (monsterId != -1) {
 				LoaderManager lm = getLoaderManager();
 				lm.initLoader(R.id.monster_detail_fragment, args, new MonsterLoaderCallbacks());
-                lm.initLoader(R.id.monster_ailments, args, new MonsterAilmentsLoaderCallbacks());
 			}
 		}
 	}
@@ -99,7 +99,7 @@ public class MonsterDetailFragment extends Fragment {
 		mElementalDamageTL = (TableLayout) view.findViewById(R.id.elemental_damage);
 
         mDividerView = view.findViewById(R.id.divider);
-        mAilmentsListView = (ListView) view.findViewById(R.id.ailments_list);
+        mAilmentsLinearLayout = (LinearLayout) view.findViewById(R.id.ailments_list);
 		
 		return view;
 	}
@@ -246,7 +246,12 @@ public class MonsterDetailFragment extends Fragment {
 		@Override
 		public void onLoadFinished(Loader<Monster> loader, Monster run) {
 			mMonster = run;
-			updateUI();
+            LoaderManager lm = getLoaderManager();
+            Bundle args = new Bundle();
+            args.putLong(ARG_MONSTER_ID, run.getId());
+
+            // Load ailments data after monster is found
+            lm.initLoader(R.id.monster_ailments, args, new MonsterAilmentsLoaderCallbacks());
 		}
 		
 		@Override
@@ -266,19 +271,27 @@ public class MonsterDetailFragment extends Fragment {
         @Override
         public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
-            // Assign adapter the Ailments listview
+            // Get the cursor adapter
             MonsterDetailFragment.MonsterAilmentsCursorAdapter adapter = new MonsterDetailFragment.MonsterAilmentsCursorAdapter(
                     getActivity(), (MonsterAilmentCursor) cursor);
-            mAilmentsListView.setAdapter(adapter);
 
-            // Resize listview so its height is based on number of items
-            MHUtils.setListViewHeightBasedOnChildren(mAilmentsListView);
+            // mAilmentsListView.setAdapter(adapter);
+            // Assign list items to LinearLayout instead of ListView
+
+            // mAilmentsLinearLayout should be the vertical LinearLayout that you substituted the listview with
+            for(int i=0;i<adapter.getCount();i++) {
+                LinearLayout v = (LinearLayout) adapter.getView(i, null, null);
+                mAilmentsLinearLayout.addView(v);
+            }
+
+            // Update the UI after loaders are finished
+            updateUI();
         }
 
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {
             // Stop using the cursor (via the adapter)
-            mAilmentsListView.setAdapter(null);
+            //mAilmentsListView.setAdapter(null);
         }
     }
 	

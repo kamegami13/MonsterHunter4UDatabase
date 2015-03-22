@@ -1980,7 +1980,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         qh.Distinct = true;
         qh.Table = S.TABLE_AILMENT;
         qh.Columns = null;
-        qh.Selection = null;
+        qh.Selection = S.COLUMN_AILMENT_MONSTER_ID + " = " + id;
         qh.SelectionArgs = null;
         qh.GroupBy = null;
         qh.Having = null;
