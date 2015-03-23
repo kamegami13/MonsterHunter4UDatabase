@@ -1,26 +1,24 @@
 package com.daviancorp.android.ui.list;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
+import android.support.v4.app.FragmentManager;
+import android.view.*;
+import android.widget.*;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Armor;
 import com.daviancorp.android.data.classes.Item;
+import com.daviancorp.android.data.classes.Rank;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
+import com.daviancorp.android.ui.dialog.ArmorFilterDialogFragment;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,11 +31,15 @@ import java.util.ArrayList;
  * alternative
  * http://stackoverflow.com/questions/6495898/findviewbyid-in-fragment-android
  */
-public class ArmorExpandableListFragment extends Fragment {
+public class ArmorExpandableListFragment extends Fragment implements ArmorListActivity.OnRarityLimitsChangedListener {
     private static final String ARG_TYPE = "ARMOR_TYPE";
 
-//	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
+    public static final String KEY_FILTER_RANK = "FILTER_RANK";
+
+    //	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
 //	private static final int REQUEST_ADD_MULTI = 0;
+    private static final String DIALOG_FILTER = "filter";
+    private static final int REQUEST_FILTER = 0;
 
     private String mType;
     private ArrayList<Armor> armors;
@@ -46,6 +48,9 @@ public class ArmorExpandableListFragment extends Fragment {
     private ArrayList<ArrayList<Armor>> children;
 
     private ExpandableListView elv;
+    private ArmorListAdapter adapter;
+
+    private ArmorFilter filter;
 
     public static ArmorExpandableListFragment newInstance(String type) {
         Bundle args = new Bundle();
@@ -66,8 +71,25 @@ public class ArmorExpandableListFragment extends Fragment {
         }
         populateList();
 
+        setHasOptionsMenu(true);
+
+        filter = new ArmorFilter();
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            ((ArmorListActivity) activity).addOnRarityLimitsChangedListener(this);
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Updates the list of armors according to the filter's criteria.
+     */
     private void populateList() {
         children = new ArrayList<ArrayList<Armor>>();
         armors = DataManager.get(getActivity()).queryArmorArrayType(mType);
@@ -79,33 +101,39 @@ public class ArmorExpandableListFragment extends Fragment {
         ArrayList<Armor> g5 = new ArrayList<Armor>();
 
         for (int i = 0; i < armors.size(); i++) {
-            switch (armors.get(i).getSlot()) {
+            if (filter == null || (armors.get(i).getRarity() >= filter.rank.getArmorMinimumRarity() && armors.get(i).getRarity() <= filter.rank.getArmorMaximumRarity())) {
+                switch (armors.get(i).getSlot()) {
 
-                case "Head":
-                    g1.add(armors.get(i));
-                    break;
-                case "Body":
-                    g2.add(armors.get(i));
-                    break;
-                case "Arms":
-                    g3.add(armors.get(i));
-                    break;
-                case "Waist":
-                    g4.add(armors.get(i));
-                    break;
-                case "Legs":
-                    g5.add(armors.get(i));
-                    break;
-                default:
-                    break;
+                    case "Head":
+                        g1.add(armors.get(i));
+                        break;
+                    case "Body":
+                        g2.add(armors.get(i));
+                        break;
+                    case "Arms":
+                        g3.add(armors.get(i));
+                        break;
+                    case "Waist":
+                        g4.add(armors.get(i));
+                        break;
+                    case "Legs":
+                        g5.add(armors.get(i));
+                        break;
+                    default:
+                        break;
+                }
             }
         }
+
         children.add(g1);
         children.add(g2);
         children.add(g3);
         children.add(g4);
         children.add(g5);
 
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -119,7 +147,8 @@ public class ArmorExpandableListFragment extends Fragment {
         elv = (ExpandableListView) v
                 .findViewById(R.id.expandableListView);
 
-        elv.setAdapter(new ArmorListAdapter(slots));
+        adapter = new ArmorListAdapter(slots);
+        elv.setAdapter(adapter);
 
         elv.setOnChildClickListener(new OnChildClickListener() {
 
@@ -136,6 +165,66 @@ public class ArmorExpandableListFragment extends Fragment {
         });
 
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_armor_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.filter_armor:
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ArmorFilterDialogFragment dialog = new ArmorFilterDialogFragment();
+
+                Bundle b = new Bundle();
+                b.putSerializable(KEY_FILTER_RANK, filter.rank);
+
+                dialog.setArguments(b);
+                dialog.setTargetFragment(this, REQUEST_FILTER);
+                dialog.show(fm, DIALOG_FILTER);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_FILTER:
+                    Rank rank = (Rank) data.getSerializableExtra(ArmorFilterDialogFragment.EXTRA_RANK);
+                    filter.rank = rank;
+                    if (rank != Rank.NONE) {
+                        populateList();
+                    }
+                    attemptUpdateOtherFragments(filter);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onRarityLimitsChanged(ArmorFilter filter) {
+        if (this.filter != filter) { // This one's filter has not yet been updated to match the new one
+            this.filter = filter;
+            populateList();
+        } // Otherwise, it was the fragment whose action bar set the filter
+    }
+
+    /** A helper method that attempts to update the other fragments of this fragment's activity to the new filter. */
+    private void attemptUpdateOtherFragments(ArmorFilter filter) {
+        try {
+            ((ArmorListActivity) getActivity()).notifyRarityLimitsChangedListeners(filter);
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+        }
     }
 
     public class ArmorListAdapter extends BaseExpandableListAdapter {
@@ -255,14 +344,20 @@ public class ArmorExpandableListFragment extends Fragment {
 //					ArmorExpandableListFragment.this.getActivity());
 //			textView.setText(getChild(groupPosition, childPosition).toString());
 //			return textView;
-
-
         }
 
         @Override
         public boolean isChildSelectable(int i, int i1) {
             return true;
         }
+    }
 
+    public static class ArmorFilter {
+
+        public ArmorFilter() {
+            rank = Rank.NONE;
+        }
+
+        Rank rank;
     }
 }

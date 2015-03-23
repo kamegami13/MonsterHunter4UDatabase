@@ -36,6 +36,8 @@
         <item name="popupMenuStyle">@style/PopupMenuStyle</item>
         <item name="dropDownListViewStyle">@style/DropDownListViewStyle</item>
         <item name="actionDropDownStyle">@style/DropDownNavStyle</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerDropDownItemStyle</item>
+        <item name="spinnerDropDownItemStyle">@style/SpinnerDropDownItemStyle</item>
 
         <item name="actionModeBackground">@drawable/primary_drawable</item>
         <item name="actionModeSplitBackground">@drawable/primary_drawable</item>
@@ -49,9 +51,12 @@
         <item name="android:actionModeSplitBackground">@drawable/primary_drawable</item>
         <item name="android:actionBarItemBackground">@drawable/primary_drawable</item>
 
-
         <item name="android:clipToPadding">false</item>
 
+    </style>
+
+    <style name="SpinnerDropDownItemStyle" parent="@style/AppTheme">
+        <item name="background">@color/primary_color</item>
     </style>
 
     <style name="PopupMenuStyle" parent="@style/AppTheme">
