@@ -51,7 +51,7 @@
     <string name="option_wishlist_copy">Copy wishlist</string>
     <string name="option_wishlist_rename">Rename wishlist</string>
     <string name="option_wishlist_data_add">Create new wishlist</string>
-    <string name="option_wishlist_data_edit">Edit quantity</string>
+    <string name="option_wishlist_data_edit">Edit wishlist</string>
     <string name="option_wishlist_data_delete">Delete from wishlist</string>
     <string name="search_title">Search item</string>
     <string name="monsters">Monsters</string>
