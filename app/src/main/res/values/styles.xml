@@ -44,12 +44,21 @@
         <item name="android:popupMenuStyle">@style/PopupMenuStyle</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
         <item name="android:actionDropDownStyle">@style/DropDownNavStyle</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerStyle</item>
 
         <item name="android:actionModeBackground">@drawable/primary_drawable</item>
         <item name="android:actionModeSplitBackground">@drawable/primary_drawable</item>
         <item name="android:actionBarItemBackground">@drawable/primary_drawable</item>
 
         <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="SpinnerStyle">
+        <item name="android:textAppearance">@style/SpinnerItemTextAppearance</item>
+    </style>
+
+    <style name="SpinnerItemTextAppearance" parent="AppTheme">
+        <item name="android:textColor">@color/text_color</item>
     </style>
 
     <style name="PopupMenuStyle" parent="@style/AppTheme">
