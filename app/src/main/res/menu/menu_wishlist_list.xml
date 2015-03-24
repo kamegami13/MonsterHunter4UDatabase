@@ -11,6 +11,6 @@
         android:id="@+id/wishlist_edit"
         android:icon="@drawable/ic_menu_edit"
         android:showAsAction="ifRoom"
-        android:title="@string/option_wishlist_data_edit"/>
+        android:title="@string/option_wishlist_edit"/>
 
 </menu>
