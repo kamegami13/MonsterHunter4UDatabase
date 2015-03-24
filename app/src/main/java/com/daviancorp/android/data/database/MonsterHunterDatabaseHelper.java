@@ -1,27 +1,17 @@
 package com.daviancorp.android.data.database;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.DownloadManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.util.Log;
 import android.util.Xml;
 
 import com.daviancorp.android.data.classes.Wishlist;
@@ -29,19 +19,9 @@ import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 /*
    QUERY REFERENCE:
@@ -76,17 +56,9 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	private static final String TAG = "MonsterHunterDatabaseHelper";
 	
 	private static MonsterHunterDatabaseHelper mInstance = null;
-	
-	//The Android's default system path of your application database.
-	// /data/data/com.daviancorp.android.monsterhunter4udatabase/databases/
-    /*private static String DB_PATH = "/data/data/com.daviancorp.android.mh4udatabase/databases/";
-	private static String DB_NAME = "mh4u.db";
-	private static String DB_TEMP_NAME = "mh4u_temp.db";
-	private static String ASSETS_DB_FOLDER = "db";
-	private static final int VERSION = 16; // EDIT*/
 
     private static final String DATABASE_NAME = "mh4u.db";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -223,9 +195,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         catch (IOException e) {
             //e.printStackTrace();
         }
-        finally {
-
-        }
     }
 
     @Override
@@ -314,89 +283,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
             //e.printStackTrace();
         }
     }
-	
-	/**
-	 * Creates a empty database on the system and overwrite it with your own
-	 * database.
-	 **/
-	/*public void createDatabase() throws IOException {
-	    boolean dbExist = checkDatabase();
-		if (!dbExist) {
-			super.getReadableDatabase();
-			try {
-				copyDatabase();
-			}
-			catch (IOException e) {
-				throw new Error("Error copying database");
-			}
-			
-			try {
-				getWritableDatabase().execSQL("INSERT INTO 'wishlist' (`_id`, `name`) VALUES (1, 'My Wishlist');");
-			}
-			finally {
-				close();
-			}
-		}
-	}*/
-
-	/**
-	 * Check if the database already exist to avoid re-copying the file each
-	 * time you open the application.
-	 * 
-	 * @return true if it exists, false if it doesn't
-	 */
-	/*private boolean checkDatabase() {
-        File file = new File(DB_PATH + DB_NAME);
-        return file.exists() && !file.isDirectory();
-    }*/
-
-	/**
-	 * Copy distributed db in assets folder to data folder
-	 * @throws IOException
-	 */
-	/*private void copyDatabase() throws IOException {
-		String[] dbFiles = myContext.getAssets().list(ASSETS_DB_FOLDER);
-		String outFileName = DB_PATH + DB_NAME;
-		OutputStream myOutput = new FileOutputStream(outFileName);		
-		
-		for(int i =0; i < dbFiles.length; i++) {
-			InputStream myInput = myContext.getAssets().open(ASSETS_DB_FOLDER+"/"+dbFiles[i]);
-			byte[] buffer = new byte[1024];
-			int length;
-			
-			while ((length = myInput.read(buffer)) > 0) {
-				myOutput.write(buffer, 0, length);
-			}
-			
-			myInput.close();
-		}
-		myOutput.flush();
-		myOutput.close();
-	}*/
-	
-	/**
-	 * Copy distributed db in assets folder to temp file for upgrade
-	 * @throws IOException
-	 */
-	/*private void copyTempDatabase() throws IOException {
-		String[] dbFiles = myContext.getAssets().list(ASSETS_DB_FOLDER);
-		String outFileName = DB_PATH + DB_TEMP_NAME;
-		OutputStream myOutput = new FileOutputStream(outFileName);		
-		
-		for(int i =0; i < dbFiles.length; i++) {
-			InputStream myInput = myContext.getAssets().open(ASSETS_DB_FOLDER+"/"+dbFiles[i]);
-			byte[] buffer = new byte[1024];
-			int length;
-			
-			while ((length = myInput.read(buffer)) > 0) {
-				myOutput.write(buffer, 0, length);
-			}
-			
-			myInput.close();
-		}
-		myOutput.flush();
-		myOutput.close();
-	}*/
 
 	/**
 	 * Set database instance
@@ -405,17 +291,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	public void openDatabase() throws SQLException {
 		myDataBase = getWritableDatabase();
 	}
-	
-	/**
-	 * Returns an opened instance of the temp database
-	 * @return The temp database object
-	 * @throws SQLException
-	 */
-	/*public SQLiteDatabase openTempDatabase() throws SQLException {
-		// Open the database
-		String myPath = DB_PATH + DB_TEMP_NAME;
-		return SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE|SQLiteDatabase.NO_LOCALIZED_COLLATORS);
-	}*/
 
 	/**
 	 * Close database
@@ -425,116 +300,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		if (myDataBase != null) myDataBase.close();
 		super.close();
 	}
-
-	//@Override
-	//public void onCreate(SQLiteDatabase db) { }
-
-	/**
-	 * Copy the new database and transfer the wishlist data
-	 */
-	/*@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// Transfer over the wishlist data
-		if (newVersion > oldVersion) {
-
-            File file = new File(DB_PATH + DB_TEMP_NAME);
-            if(file.exists())
-                file.delete();
-			
-			//query wishlist data with provided db instance
-			//Must NOT call getReadableDatabase() or loop will occur
-			WishlistCursor wc = queryWishlists(db);
-			WishlistDataCursor wdc = queryWishlistsData(db);
-			WishlistComponentCursor wcc = queryWishlistsComponent(db);
-			
-			//Pull the new database to a temp file
-			try {
-				copyTempDatabase();
-			}
-			catch (IOException e) {
-				throw new Error("Error copying database");
-			}
-			
-			//get connection to temp database 
-			SQLiteDatabase newDb = null;
-			try {
-				newDb = openTempDatabase();
-			}
-			catch (SQLException e) {
-				
-			}
-			
-			//Copy the wishlast tables from current db to new db
-			if(newDb != null)
-			{
-				wc.moveToFirst();
-				wdc.moveToFirst();
-				wcc.moveToFirst();
-				
-				while (!wc.isAfterLast()) {
-					Wishlist wishlist = wc.getWishlist();
-					queryAddWishlistAll(newDb, wishlist.getId(), wishlist.getName());
-					wc.moveToNext();
-				}
-				wc.close();
-				
-				while (!wdc.isAfterLast()) {
-					WishlistData wishlistData = wdc.getWishlistData();
-					queryAddWishlistDataAll(newDb, wishlistData.getWishlistId(), wishlistData.getItem().getId(), 
-							wishlistData.getQuantity(), wishlistData.getSatisfied(), wishlistData.getPath());
-					wdc.moveToNext();
-				}
-				wdc.close();
-				
-				while (!wcc.isAfterLast()) {
-					WishlistComponent wishlistComponent = wcc.getWishlistComponent();
-					queryAddWishlistComponentAll(newDb, wishlistComponent.getWishlistId(), 
-							wishlistComponent.getItem().getId(), wishlistComponent.getQuantity(), wishlistComponent.getNotes());
-					wcc.moveToNext();
-				}
-				wcc.close();
-				
-				newDb.close();
-			}
-
-            db.close();
-
-            File file2 = new File(DB_PATH + DB_NAME);
-            if(file2.exists())
-                file2.delete();
-			
-			//Overwrite current db with temp db
-			//Overwriting with file streams as delete/rename doesn't seem to work correctly
-			try {
-				InputStream myInput = new FileInputStream(DB_PATH + DB_TEMP_NAME);
-				OutputStream myOutput = new FileOutputStream(DB_PATH + DB_NAME);		
-
-				byte[] buffer = new byte[1024];
-				int length;
-
-				while ((length = myInput.read(buffer)) > 0) {
-					myOutput.write(buffer, 0, length);
-				}
-
-				myOutput.flush();
-				myOutput.close();
-				myInput.close();
-				
-			} catch (IOException e) {
-				throw new Error("Error overwritting database");
-			}
-
-            File file3 = new File(DB_PATH + DB_TEMP_NAME);
-            if(file3.exists())
-                file3.delete();
-		}
-	}*/
-	
-	//@Override
-	//public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
-	
-	//removed getWritableDatabase() and getReadableDatabase() overrides as they broke
-	//functionality such as onUpgrade()
     
 	private String makePlaceholders(int len) {
 	    if (len < 1) {
