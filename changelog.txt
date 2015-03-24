@@ -15,7 +15,7 @@ Version 1.05
       Twin Elders, Recriminators, Kecha Wach / Plum Daimyo drops, Cephadrome sleep area)
     * Improve Nav Drawer icons
     * Fix Slagtoth Icon
-    * Improve Plum Daimyo,
+    * Improve Plum Daimyo, Chameleos, and Gogamazios icons
     * Rename Skill Trees to Skills
     * Reduce nav drawer lag
     * Improve corner menu display
