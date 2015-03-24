@@ -2112,7 +2112,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		QueryHelper qh = new QueryHelper();
 		qh.Columns = null;
 		qh.Table = S.TABLE_QUESTS;
-		qh.Selection = "q." + S.COLUMN_QUESTS_HUB + " = ?";
+        qh.Selection = "q." + S.COLUMN_QUESTS_HUB + " = ? AND q." + S.COLUMN_QUESTS_NAME + " <> ''";
 		qh.SelectionArgs = new String[]{ hub };
 		qh.GroupBy = null;
 		qh.Having = null;
@@ -2131,7 +2131,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		qh.Columns = null;
 		qh.Table = S.TABLE_QUESTS;
 		qh.Selection = "q." + S.COLUMN_QUESTS_HUB + " = ?" + " AND " +
-					"q." + S.COLUMN_QUESTS_STARS + " = ?";
+					"q." + S.COLUMN_QUESTS_STARS + " = ?" + " AND " +
+                    "q." + S.COLUMN_QUESTS_NAME + " <> ''";
 		qh.SelectionArgs = new String[]{ hub, stars };
 		qh.GroupBy = null;
 		qh.Having = null;

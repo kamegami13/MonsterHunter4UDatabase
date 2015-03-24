@@ -12,7 +12,7 @@ import com.daviancorp.android.data.database.DataManager;
 public class QuestListCursorLoader extends SQLiteCursorLoader {
 	public static String HUB_CARAVAN = "Caravan";
 	public static String HUB_GUILD = "Guild";
-	public static String HUB_DLC = "DLC";
+	public static String HUB_EVENT = "Event";
 	
 	private String hub; 	// "Village", "Port", or "DLC"
 	private String stars; 	// "1", "2", "3", "4", "5", "6", "7", "8", or
