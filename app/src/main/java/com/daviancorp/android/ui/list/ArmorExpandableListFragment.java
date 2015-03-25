@@ -35,6 +35,8 @@ public class ArmorExpandableListFragment extends Fragment implements ArmorListAc
     private static final String ARG_TYPE = "ARMOR_TYPE";
 
     public static final String KEY_FILTER_RANK = "FILTER_RANK";
+    public static final String KEY_FILTER_SLOTS = "FILTER_SLOTS";
+    public static final String KEY_FILTER_SLOTS_SPECIFICATION = "FILTER_SLOTS_SPEC";
 
     //	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
 //	private static final int REQUEST_ADD_MULTI = 0;
@@ -101,7 +103,7 @@ public class ArmorExpandableListFragment extends Fragment implements ArmorListAc
         ArrayList<Armor> g5 = new ArrayList<Armor>();
 
         for (int i = 0; i < armors.size(); i++) {
-            if (filter == null || (armors.get(i).getRarity() >= filter.rank.getArmorMinimumRarity() && armors.get(i).getRarity() <= filter.rank.getArmorMaximumRarity())) {
+            if (filter == null || filter.armorPassesFilter(armors.get(i))) {
                 switch (armors.get(i).getSlot()) {
 
                     case "Head":
@@ -181,7 +183,9 @@ public class ArmorExpandableListFragment extends Fragment implements ArmorListAc
                 ArmorFilterDialogFragment dialog = new ArmorFilterDialogFragment();
 
                 Bundle b = new Bundle();
-                b.putSerializable(KEY_FILTER_RANK, filter.rank);
+                b.putSerializable(KEY_FILTER_RANK, filter.getRank());
+                b.putInt(KEY_FILTER_SLOTS, filter.getSlots());
+                b.putSerializable(KEY_FILTER_SLOTS_SPECIFICATION, filter.getSlotsSpecification());
 
                 dialog.setArguments(b);
                 dialog.setTargetFragment(this, REQUEST_FILTER);
@@ -200,10 +204,16 @@ public class ArmorExpandableListFragment extends Fragment implements ArmorListAc
             switch (requestCode) {
                 case REQUEST_FILTER:
                     Rank rank = (Rank) data.getSerializableExtra(ArmorFilterDialogFragment.EXTRA_RANK);
-                    filter.rank = rank;
-                    if (rank != Rank.NONE) {
-                        populateList();
-                    }
+                    filter.setRank(rank);
+
+                    int slots = data.getIntExtra(ArmorFilterDialogFragment.EXTRA_SLOTS, -1);
+                    filter.setSlots(slots);
+
+                    ArmorFilterDialogFragment.FilterSpecification slotsSpecificiation = (ArmorFilterDialogFragment.FilterSpecification) data.getSerializableExtra(ArmorFilterDialogFragment.EXTRA_SLOTS_SPEC);
+                    filter.setSlotsSpecification(slotsSpecificiation);
+
+                    populateList();
+
                     attemptUpdateOtherFragments(filter);
                     break;
             }
@@ -355,9 +365,54 @@ public class ArmorExpandableListFragment extends Fragment implements ArmorListAc
     public static class ArmorFilter {
 
         public ArmorFilter() {
-            rank = Rank.NONE;
+            rank = null;
+            slots = -1;
+            slotsSpecification = null;
         }
 
-        Rank rank;
+        private Rank rank;
+        private int slots;
+        private ArmorFilterDialogFragment.FilterSpecification slotsSpecification;
+
+        public Rank getRank() {
+            return rank;
+        }
+
+        public void setRank(Rank rank) {
+            this.rank = rank;
+        }
+
+        public int getSlots() {
+            return slots;
+        }
+
+        public void setSlots(int slots) {
+            this.slots = slots;
+        }
+
+        public ArmorFilterDialogFragment.FilterSpecification getSlotsSpecification() {
+            return slotsSpecification;
+        }
+
+        public void setSlotsSpecification(ArmorFilterDialogFragment.FilterSpecification slotsSpecification) {
+            this.slotsSpecification = slotsSpecification;
+        }
+
+        public boolean armorPassesFilter(Armor armor) {
+            boolean passes = true;
+            if (rank != null) {
+                passes = armor.getRarity() <= rank.getArmorMaximumRarity() && armor.getRarity() >= rank.getArmorMinimumRarity();
+            }
+
+            if (passes && slots != -1) {
+                passes = armor.getNumSlots() >= slots;
+            }
+
+            if (passes && slotsSpecification != null) {
+                passes = slotsSpecification.qualifies(armor.getNumSlots(), slots);
+            }
+
+            return passes;
+        }
     }
 }

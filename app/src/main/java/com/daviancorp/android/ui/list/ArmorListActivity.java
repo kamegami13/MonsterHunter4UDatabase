@@ -18,9 +18,6 @@ import java.util.List;
 
 public class ArmorListActivity extends GenericTabActivity {
 
-    private static final int LOW_RANK_RARITY_MIN = 1;
-    private static final int LOW_RANK_RARITY_MAX = 3;
-
     private ViewPager viewPager;
     private ArmorExpandableListPagerAdapter mAdapter;
 

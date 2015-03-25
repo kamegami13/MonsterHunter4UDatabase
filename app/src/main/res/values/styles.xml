@@ -36,8 +36,9 @@
         <item name="popupMenuStyle">@style/PopupMenuStyle</item>
         <item name="dropDownListViewStyle">@style/DropDownListViewStyle</item>
         <item name="actionDropDownStyle">@style/DropDownNavStyle</item>
-        <item name="android:spinnerItemStyle">@style/SpinnerDropDownItemStyle</item>
-        <item name="spinnerDropDownItemStyle">@style/SpinnerDropDownItemStyle</item>
+
+        <!--<item name="android:spinnerStyle">@style/SpinnerStyle</item>-->
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemStyle</item>
 
         <item name="actionModeBackground">@drawable/primary_drawable</item>
         <item name="actionModeSplitBackground">@drawable/primary_drawable</item>
@@ -55,8 +56,11 @@
 
     </style>
 
-    <style name="SpinnerDropDownItemStyle" parent="@style/AppTheme">
-        <item name="background">@color/primary_color</item>
+    <!--<style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">-->
+    <!--</style>-->
+
+    <style name="SpinnerDropDownItemStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textAppearance">@style/text_large</item>
     </style>
 
     <style name="PopupMenuStyle" parent="@style/AppTheme">
@@ -129,6 +133,12 @@
 
     <style name="list_item_large" parent="@style/list_item">
         <item name="android:layout_height">64dp</item>
+    </style>
+
+    <style name="text_large" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/color_states_enabled</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:typeface">sans</item>
     </style>
 
     <style name="text_medium" parent="@style/Theme.AppCompat.Light.NoActionBar">
