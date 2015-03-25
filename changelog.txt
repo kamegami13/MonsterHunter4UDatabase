@@ -1,50 +1,70 @@
 Release Notes:
+Version 1.05
+    * Added Up button to sub-pages. Has same function as back button without exiting.
+    * Add DLC data
+    * Fixed Wishlist being deleted on upgrade
+    * Default the nav drawer open on launch
+    * Fix scrolling Bowgun details
+    * Improve Horn Note display
+    * Added slots to jewel pages
+    * Improve slot display
+    * Added a star in weapon list to indicate a craftable weapon    
+    * Data fixes (Auberon Great Sword, High Metal S armor, Clockwork Insect Glaive,
+      Emperor's Speech Horn, Protection Up Jewel, Wyvern Conciliation,
+      Stygian Superbia, Garuga Lovebirds, Diablos Bashers, Inferno/Paradis, Suzuka Takamaru, 
+      Twin Elders, Recriminators, Kecha Wach / Plum Daimyo drops, Cephadrome sleep area)
+    * Improve Nav Drawer icons
+    * Fix Slagtoth Icon
+    * Improve Plum Daimyo, Chameleos, and Gogamazios icons
+    * Rename Skill Trees to Skills
+    * Reduce nav drawer lag
+    * Improve corner menu display
 Version 1.04
-	-Fix sizes and layout in Hunting Horn song list
-	-Missing Horn Songs
+    * Fix sizes and layout in Hunting Horn song list
+    * Missing Horn Songs
 Version 1.03
-	-Fixed not being to see Wishlist edit/delete icons (long-press Wishlist items or materials to bring up the action bar)
-	-Complete list of Monster Icons
-	-Added Collapsible Weapon Trees (long-press to collapse)
-	-List of Hunting Horn Songs on the Hunting Horn details page
-	-Complete Weapon List Overhaul
-	-Update location maps with better gather points
-	-UI tweaks
-	-Reduced APK size
-	-Various database typos and incorrect data
-	-Performance improvements on different lists
-	-Better sorting on monster->quest list, item->quest list, and item->location list
-	-Decorations sorted by skill name
-	-New drawer menu icons
-	-Fixed drawer menu icons and text
-	-Fixed incorrect Critical Eye +4 skill entry
+    * Fixed not being to see Wishlist edit/delete icons (long-press Wishlist items or materials to bring up the action bar)
+    * Complete list of Monster Icons
+    * Added Collapsible Weapon Trees (long-press to collapse)
+    * List of Hunting Horn Songs on the Hunting Horn details page
+    * Complete Weapon List Overhaul
+    * Update location maps with better gather points
+    * UI tweaks
+    * Reduced APK size
+    * Various database typos and incorrect data
+    * Performance improvements on different lists
+    * Better sorting on monster->quest list, item->quest list, and item->location list
+    * Decorations sorted by skill name
+    * New drawer menu icons
+    * Fixed drawer menu icons and text
+    * Fixed incorrect Critical Eye +4 skill entry
 Version 1.02
-	- Migrated from ActionBarSherlock to AppCompat
-	- Added monster status resistances
-	- Updated color scheme across app
-	- Updated list view styles across app
-	- Added navigation drawer
-	- Compressed art assets to reduce application size
-	- Fixed some icons which were displaying incorrectly (Lances, Armor Arms)
-	- Fixed super broken phials for Bows
-	- Added fastscroll support
-	- Added support for asynchronous image loading in heavy load listviews
-	- Added support for preloading weapons for weapon trees to remove load from list adapter
-	- Added combination list to item details page, displays all relevant combos
-	- Added alternate low-res maps to improve list loading
-	- Fixed incorrect Monster All list after fast tabbing
+    *  Migrated from ActionBarSherlock to AppCompat
+    *  Added monster status resistances
+    *  Updated color scheme across app
+    *  Updated list view styles across app
+    *  Added navigation drawer
+    *  Compressed art assets to reduce application size
+    *  Fixed some icons which were displaying incorrectly (Lances, Armor Arms)
+    *  Fixed super broken phials for Bows
+    *  Added fastscroll support
+    *  Added support for asynchronous image loading in heavy load listviews
+    *  Added support for preloading weapons for weapon trees to remove load from list adapter
+    *  Added combination list to item details page, displays all relevant combos
+    *  Added alternate low-res maps to improve list loading
+    *  Fixed incorrect Monster All list after fast tabbing
 Version 1.01
-	New Features:
-		- Monster Habitats now appear on the Monster Detail Page
-		- Monster Habitats are now listed on the Location Detail Page
-		
-	Bug Fixes:
-		- Fixed crash on dual element Dual Blades
-		- Fixed crash on Bows with less than three charges
-		- Fixed layout for skill descriptions; long descriptions will no longer be clipped.
-		- Added tabs for padding to the Bow/Bowgun weapon trees.
-		- Fixed small monster links being sent to wrong monster page
-		- Fixed icons for charge blade and insect glaive not appearing
-		
+    New Features:
+    *  Monster Habitats now appear on the Monster Detail Page
+    *  Monster Habitats are now listed on the Location Detail Page
+
+    Bug Fixes:
+    *  Fixed crash on dual element Dual Blades
+    *  Fixed crash on Bows with less than three charges
+    *  Fixed layout for skill descriptions; long descriptions will no longer be clipped.
+    *  Added tabs for padding to the Bow/Bowgun weapon trees.
+    *  Fixed small monster links being sent to wrong monster page
+    *  Fixed icons for charge blade and insect glaive not appearing
+
 Version 1.0
-	- Initial Release
+    *  Initial Release

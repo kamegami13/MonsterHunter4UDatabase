@@ -37,6 +37,9 @@ public class QuestExpandableListFragment extends Fragment {
     private String[] guild = {"1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ",
             "8 ", "9 ", "10 "};
 
+    private String[] event = {"1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ",
+            "8 ", "9 ", "10 "};
+
     private ArrayList<ArrayList<Quest>> children;
 
     public static QuestExpandableListFragment newInstance(String hub) {
@@ -131,8 +134,10 @@ public class QuestExpandableListFragment extends Fragment {
                 .findViewById(R.id.expandableListView);
         if (mHub.equals("Caravan")) {
             elv.setAdapter(new QuestListAdapter(caravan));
-        } else {
+        } else if(mHub.equals("Guild")) {
             elv.setAdapter(new QuestListAdapter(guild));
+        } else {
+            elv.setAdapter(new QuestListAdapter(event));
         }
 
         return v;
