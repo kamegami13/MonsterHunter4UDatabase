@@ -72,6 +72,8 @@
     <string name="icon_name">MH4U DB</string>
 
     <string name="dialog_armor_filter_title">Filter</string>
+    <string name="armor_filter_label_rank">Rank</string>
+    <string name="armor_filter_label_slots">Slots</string>
 
     <!--
     Unicode Black Circle \u25CF
@@ -103,7 +105,9 @@
         <item>Maximum</item>
     </string-array>
 
-    <string name="rank_low">Low</string>
-    <string name="rank_high">High</string>
-    <string name="rank_g">G</string>
+    <string-array name="rank">
+        <item>Low</item>
+        <item>High</item>
+        <item>G</item>
+    </string-array>
 </resources>
