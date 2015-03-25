@@ -45,7 +45,8 @@ public class ArmorFilterDialogFragment extends DialogFragment {
         Rank rank = (Rank) getArguments().getSerializable(ArmorExpandableListFragment.KEY_FILTER_RANK);
 
         final Spinner rankSpinner = (Spinner) addView.findViewById(R.id.filter_spinner_rank);
-        rankSpinner.setAdapter(new ArrayAdapter<Rank>(getActivity().getApplicationContext(), R.layout.view_spinner_item, Rank.values()));
+        rankSpinner.setAdapter(ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.rank, R.layout.view_spinner_item));
+        ((ArrayAdapter) rankSpinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
         final CheckBox rankCheckBox = (CheckBox) addView.findViewById(R.id.filter_checkbox_rank);
 
@@ -75,7 +76,7 @@ public class ArmorFilterDialogFragment extends DialogFragment {
         ////// INITIALIZING SLOTS //////
 
         int[] slotValuesInt = getResources().getIntArray(R.array.slot_values);
-        Integer[] slotValues = new Integer[4];
+        Integer[] slotValues = new Integer[slotValuesInt.length];
         for (int i = 0; i < slotValuesInt.length; i++) {
             slotValues[i] = slotValuesInt[i];
         }
@@ -85,9 +86,11 @@ public class ArmorFilterDialogFragment extends DialogFragment {
 
         final Spinner slotsSpinner = (Spinner) addView.findViewById(R.id.filter_spinner_slots);
         slotsSpinner.setAdapter(new ArrayAdapter<Integer>(getActivity().getApplicationContext(), R.layout.view_spinner_item, slotValues));
+        ((ArrayAdapter) slotsSpinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
         final Spinner slotsSpecSpinner = (Spinner) addView.findViewById(R.id.filter_spinner_slots_spec);
         slotsSpecSpinner.setAdapter(ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.filter_restriction, R.layout.view_spinner_item));
+        ((ArrayAdapter) slotsSpecSpinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
         final CheckBox slotsCheckBox = (CheckBox) addView.findViewById(R.id.filter_checkbox_slots);
 
@@ -128,7 +131,7 @@ public class ArmorFilterDialogFragment extends DialogFragment {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        Rank sendRank = rankSpinner.isEnabled() ? (Rank) rankSpinner.getSelectedItem() : null;
+                        Rank sendRank = rankSpinner.isEnabled() ? (Rank) Rank.values()[rankSpinner.getSelectedItemPosition()] : null;
                         int sendSlots = slotsSpinner.isEnabled() ? slotsSpinner.getSelectedItemPosition() : -1;
                         FilterSpecification sendSlotsSpec = slotsSpecSpinner.isEnabled() ? FilterSpecification.values()[slotsSpecSpinner.getSelectedItemPosition()] : null;
 
@@ -138,6 +141,9 @@ public class ArmorFilterDialogFragment extends DialogFragment {
                 .create();
     }
 
+    /**
+     * Methods that are capable of filtering integer values.
+     */
     public static enum FilterSpecification {
         MINIMUM {
             @Override
