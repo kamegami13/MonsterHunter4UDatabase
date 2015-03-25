@@ -96,4 +96,14 @@
     <string name="armor_set_builder_waist">Waist</string>
     <string name="armor_set_builder_legs">Legs</string>
     <string name="placeholder_unknown">Unknown</string>
+
+    <string-array name="filter_restriction">
+        <item>Minimum</item>
+        <item>Exactly</item>
+        <item>Maximum</item>
+    </string-array>
+
+    <string name="rank_low">Low</string>
+    <string name="rank_high">High</string>
+    <string name="rank_g">G</string>
 </resources>
