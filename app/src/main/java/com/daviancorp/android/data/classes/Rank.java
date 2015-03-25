@@ -1,7 +1,6 @@
 package com.daviancorp.android.data.classes;
 
 public enum Rank {
-    NONE("None", 1, 10),
     LOW("Low", 1, 3),
     HIGH("High", 4, 7),
     G("G", 8, 10);
