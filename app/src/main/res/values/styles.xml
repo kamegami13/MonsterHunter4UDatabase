@@ -37,7 +37,7 @@
         <item name="dropDownListViewStyle">@style/DropDownListViewStyle</item>
         <item name="actionDropDownStyle">@style/DropDownNavStyle</item>
 
-        <!--<item name="android:spinnerStyle">@style/SpinnerStyle</item>-->
+        <item name="android:spinnerItemStyle">@style/SpinnerItemStyle</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemStyle</item>
 
         <item name="actionModeBackground">@drawable/primary_drawable</item>
@@ -56,11 +56,13 @@
 
     </style>
 
-    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">
-        <item name="android:minWidth">100dp</item>
+    <style name="SpinnerItemStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textAppearance">@style/text_medium</item>
     </style>
 
-    <style name="SpinnerDropDownItemStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
+    <style name="SpinnerDropDownItemStyle" parent="SpinnerItemStyle">
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
         <item name="android:textAppearance">@style/text_medium</item>
     </style>
 

@@ -23,7 +23,7 @@
                 style="@style/text_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rank"
+                android:text="@string/armor_filter_label_rank"
                 android:textStyle="bold"/>
 
         <Spinner
@@ -46,7 +46,7 @@
                 style="@style/text_medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Slots"
+                android:text="@string/armor_filter_label_slots"
                 android:textStyle="bold"/>
 
         <Spinner
