@@ -6,9 +6,9 @@
 
     <TextView
         android:id="@+id/numstars"
-        android:layout_width="32dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/text_medium_alt"
+        style="@style/text_medium"
         android:layout_gravity="center_vertical" />
 
     <ImageView
@@ -18,7 +18,8 @@
         android:paddingLeft="3dp"
         android:visibility="gone"
         android:src="@drawable/star"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:tint="@color/text_color" />
     <ImageView
         android:id="@+id/star2"
         android:layout_width="wrap_content"
@@ -26,7 +27,8 @@
         android:paddingLeft="3dp"
         android:visibility="gone"
         android:src="@drawable/star"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:tint="@color/text_color" />
     <ImageView
         android:id="@+id/star3"
         android:layout_width="wrap_content"
@@ -34,7 +36,8 @@
         android:paddingLeft="3dp"
         android:visibility="gone"
         android:src="@drawable/star"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:tint="@color/text_color" />
     <ImageView
         android:id="@+id/star4"
         android:layout_width="wrap_content"
@@ -42,7 +45,8 @@
         android:paddingLeft="3dp"
         android:visibility="gone"
         android:src="@drawable/star"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:tint="@color/text_color" />
     <ImageView
         android:id="@+id/star5"
         android:layout_width="wrap_content"
@@ -50,7 +54,8 @@
         android:paddingLeft="3dp"
         android:visibility="gone"
         android:src="@drawable/star"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:tint="@color/text_color" />
     <ImageView
         android:id="@+id/star6"
         android:layout_width="wrap_content"
@@ -58,7 +63,8 @@
         android:paddingLeft="3dp"
         android:visibility="gone"
         android:src="@drawable/star"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:tint="@color/text_color" />
     <ImageView
         android:id="@+id/star7"
         android:layout_width="wrap_content"
@@ -66,7 +72,8 @@
         android:paddingLeft="3dp"
         android:visibility="gone"
         android:src="@drawable/star"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:tint="@color/text_color" />
     <ImageView
         android:id="@+id/star8"
         android:layout_width="wrap_content"
@@ -74,7 +81,8 @@
         android:paddingLeft="3dp"
         android:visibility="gone"
         android:src="@drawable/star"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:tint="@color/text_color" />
     <ImageView
         android:id="@+id/star9"
         android:layout_width="wrap_content"
@@ -82,7 +90,8 @@
         android:paddingLeft="3dp"
         android:visibility="gone"
         android:src="@drawable/star"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:tint="@color/text_color" />
     <ImageView
         android:id="@+id/star10"
         android:layout_width="wrap_content"
@@ -90,7 +99,8 @@
         android:paddingLeft="3dp"
         android:visibility="gone"
         android:src="@drawable/star"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:tint="@color/text_color" />
 
 
 </LinearLayout>
