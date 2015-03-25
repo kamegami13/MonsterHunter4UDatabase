@@ -31,15 +31,14 @@ import java.util.ArrayList;
  * alternative
  * http://stackoverflow.com/questions/6495898/findviewbyid-in-fragment-android
  */
-public class ArmorExpandableListFragment extends Fragment implements ArmorListActivity.OnRarityLimitsChangedListener {
+public class ArmorExpandableListFragment extends Fragment {
+    
     private static final String ARG_TYPE = "ARMOR_TYPE";
 
     public static final String KEY_FILTER_RANK = "FILTER_RANK";
     public static final String KEY_FILTER_SLOTS = "FILTER_SLOTS";
     public static final String KEY_FILTER_SLOTS_SPECIFICATION = "FILTER_SLOTS_SPEC";
 
-    //	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
-//	private static final int REQUEST_ADD_MULTI = 0;
     private static final String DIALOG_FILTER = "filter";
     private static final int REQUEST_FILTER = 0;
 
@@ -76,17 +75,6 @@ public class ArmorExpandableListFragment extends Fragment implements ArmorListAc
         setHasOptionsMenu(true);
 
         filter = new ArmorFilter();
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        try {
-            ((ArmorListActivity) activity).addOnRarityLimitsChangedListener(this);
-        } catch (ClassCastException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -214,26 +202,8 @@ public class ArmorExpandableListFragment extends Fragment implements ArmorListAc
 
                     populateList();
 
-                    attemptUpdateOtherFragments(filter);
                     break;
             }
-        }
-    }
-
-    @Override
-    public void onRarityLimitsChanged(ArmorFilter filter) {
-        if (this.filter != filter) { // This one's filter has not yet been updated to match the new one
-            this.filter = filter;
-            populateList();
-        } // Otherwise, it was the fragment whose action bar set the filter
-    }
-
-    /** A helper method that attempts to update the other fragments of this fragment's activity to the new filter. */
-    private void attemptUpdateOtherFragments(ArmorFilter filter) {
-        try {
-            ((ArmorListActivity) getActivity()).notifyRarityLimitsChangedListeners(filter);
-        } catch (ClassCastException e) {
-            e.printStackTrace();
         }
     }
 
