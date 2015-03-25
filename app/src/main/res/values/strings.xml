@@ -99,6 +99,13 @@
     <string name="armor_set_builder_legs">Legs</string>
     <string name="placeholder_unknown">Unknown</string>
 
+    <string-array name="slot_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
     <string-array name="filter_restriction">
         <item>Minimum</item>
         <item>Exactly</item>

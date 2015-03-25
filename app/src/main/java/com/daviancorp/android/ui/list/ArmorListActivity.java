@@ -21,8 +21,6 @@ public class ArmorListActivity extends GenericTabActivity {
     private ViewPager viewPager;
     private ArmorExpandableListPagerAdapter mAdapter;
 
-    private List<OnRarityLimitsChangedListener> rarityLimitsChangedListeners;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +32,6 @@ public class ArmorListActivity extends GenericTabActivity {
         viewPager.setAdapter(mAdapter);
 
         mSlidingTabLayout.setViewPager(viewPager);
-
-        rarityLimitsChangedListeners = new ArrayList<>();
 
         // Enable drawer button instead of back button
         super.enableDrawerIndicator();
@@ -49,19 +45,5 @@ public class ArmorListActivity extends GenericTabActivity {
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    public void addOnRarityLimitsChangedListener(OnRarityLimitsChangedListener rarityLimitsChangedListener) {
-        this.rarityLimitsChangedListeners.add(rarityLimitsChangedListener);
-    }
-
-    public void notifyRarityLimitsChangedListeners(ArmorExpandableListFragment.ArmorFilter filter) {
-        for (OnRarityLimitsChangedListener l : rarityLimitsChangedListeners) {
-            l.onRarityLimitsChanged(filter);
-        }
-    }
-
-    public static interface OnRarityLimitsChangedListener {
-        public void onRarityLimitsChanged(ArmorExpandableListFragment.ArmorFilter filter);
     }
 }
