@@ -7,4 +7,6 @@
     <dimen name="damage_table_item_height">24dp</dimen>
     <dimen name="damage_table_icon_height">20dp</dimen>
 
+    <dimen name="filter_dialog_row_spacing">16dp</dimen>
+
 </resources>
