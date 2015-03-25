@@ -75,17 +75,11 @@ public class ArmorFilterDialogFragment extends DialogFragment {
 
         ////// INITIALIZING SLOTS //////
 
-        int[] slotValuesInt = getResources().getIntArray(R.array.slot_values);
-        Integer[] slotValues = new Integer[slotValuesInt.length];
-        for (int i = 0; i < slotValuesInt.length; i++) {
-            slotValues[i] = slotValuesInt[i];
-        }
-
         int slots = getArguments().getInt(ArmorExpandableListFragment.KEY_FILTER_SLOTS, -1);
         FilterSpecification slotsSpecification = (FilterSpecification) getArguments().getSerializable(ArmorExpandableListFragment.KEY_FILTER_SLOTS_SPECIFICATION);
 
         final Spinner slotsSpinner = (Spinner) addView.findViewById(R.id.filter_spinner_slots);
-        slotsSpinner.setAdapter(new ArrayAdapter<Integer>(getActivity().getApplicationContext(), R.layout.view_spinner_item, slotValues));
+        slotsSpinner.setAdapter(ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.slot_values, R.layout.view_spinner_item));
         ((ArrayAdapter) slotsSpinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
         final Spinner slotsSpecSpinner = (Spinner) addView.findViewById(R.id.filter_spinner_slots_spec);
@@ -131,9 +125,9 @@ public class ArmorFilterDialogFragment extends DialogFragment {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        Rank sendRank = rankSpinner.isEnabled() ? (Rank) Rank.values()[rankSpinner.getSelectedItemPosition()] : null;
-                        int sendSlots = slotsSpinner.isEnabled() ? slotsSpinner.getSelectedItemPosition() : -1;
-                        FilterSpecification sendSlotsSpec = slotsSpecSpinner.isEnabled() ? FilterSpecification.values()[slotsSpecSpinner.getSelectedItemPosition()] : null;
+                        Rank sendRank = rankCheckBox.isChecked() ? (Rank) Rank.values()[rankSpinner.getSelectedItemPosition()] : null;
+                        int sendSlots = slotsCheckBox.isChecked() ? slotsSpinner.getSelectedItemPosition() : -1;
+                        FilterSpecification sendSlotsSpec = slotsCheckBox.isChecked() ? FilterSpecification.values()[slotsSpecSpinner.getSelectedItemPosition()] : null;
 
                         sendResult(Activity.RESULT_OK, sendRank, sendSlots, sendSlotsSpec);
                     }

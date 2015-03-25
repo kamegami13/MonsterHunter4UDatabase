@@ -57,7 +57,7 @@
     </style>
 
     <style name="SpinnerItemStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
-        <item name="android:textAppearance">@style/text_medium</item>
+        <item name="android:textAppearance">@style/text_medium.color_states_enabled</item>
     </style>
 
     <style name="SpinnerDropDownItemStyle" parent="SpinnerItemStyle">
@@ -148,6 +148,10 @@
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">18sp</item>
         <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="text_medium.color_states_enabled">
+        <item name="android:textColor">@color/color_states_enabled</item>
     </style>
 
     <style name="text_medium_alt" parent="@style/Theme.AppCompat.Light.NoActionBar">
