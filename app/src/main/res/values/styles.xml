@@ -41,7 +41,6 @@
         <item name="actionModeSplitBackground">@drawable/primary_drawable</item>
         <item name="actionBarItemBackground">@drawable/primary_drawable</item>
 
-        <item name="android:popupMenuStyle">@style/PopupMenuStyle</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
         <item name="android:actionDropDownStyle">@style/DropDownNavStyle</item>
         <item name="android:spinnerItemStyle">@style/SpinnerStyle</item>
@@ -49,6 +48,8 @@
         <item name="android:actionModeBackground">@drawable/primary_drawable</item>
         <item name="android:actionModeSplitBackground">@drawable/primary_drawable</item>
         <item name="android:actionBarItemBackground">@drawable/primary_drawable</item>
+
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
 
         <item name="android:clipToPadding">false</item>
     </style>
@@ -63,7 +64,7 @@
 
     <style name="PopupMenuStyle" parent="@style/AppTheme">
         <item name="android:textColor">@color/text_primary_color</item>
-        <item name="android:popupBackground">@color/primary_color</item>
+        <item name="android:background">@drawable/primary_drawable</item>
     </style>
 
     <style name="DropDownListViewStyle" parent="@style/AppTheme">
@@ -74,6 +75,14 @@
         <item name="android:background">@drawable/primary_drawable</item>
         <item name="android:popupBackground">@drawable/primary_drawable</item>
         <item name="android:dropDownSelector">@drawable/primary_drawable</item>
+    </style>
+
+    <style name="ButtonStyle" parent="@style/AppTheme">
+        <item name="android:background">@drawable/clicked_states_primary</item>
+        <item name="android:textColor">@color/text_primary_color</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <!-- USE FOR ALL FULLSCREEN ACTIVITIES WHERE VIEWS COVER ALL BACKGROUD TO REDUCE OVERDRAW -->

@@ -82,8 +82,8 @@ public class DecorationDetailFragment extends Fragment {
 
         // If the originator of this fragment's activity was the Armor Set Builder...
         if (getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
-            Button selectButton = new Button(getActivity().getApplicationContext());
-            selectButton.setText("Select");
+            Button selectButton = (Button) view.findViewById(R.id.select_button);
+            selectButton.setVisibility(View.VISIBLE);
             selectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -93,7 +93,6 @@ public class DecorationDetailFragment extends Fragment {
                     getActivity().finish();
                 }
             });
-            ((ViewGroup) view).addView(selectButton);
         }
 
 		return view;

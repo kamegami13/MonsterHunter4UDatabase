@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/armor_set_builder_add_piece"
+        android:title="@string/armor_set_builder_add_piece"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/armor_set_builder_remove_piece"
+        android:title="@string/armor_set_builder_remove_piece"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/armor_set_builder_decorations"
+        android:title="@string/armor_set_builder_decoration_info"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/armor_set_builder_piece_info"
+        android:title="@string/armor_set_builder_piece_info"
+        android:visible="false" />
+</menu>

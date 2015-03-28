@@ -28,7 +28,7 @@ public class ArmorSetBuilderSession {
     private static Equipment noEquipment = new Equipment();
 
     private static Decoration noDecoration = new Decoration();
-    public static Decoration dummy = new Decoration();
+    public static Decoration dummyDecoration = new Decoration();
 
     private Equipment[] equipment;
     private Decoration[][] decorations;
@@ -94,12 +94,26 @@ public class ArmorSetBuilderSession {
 
     /** @return True if the designated slot is actually in use, false if it is empty. */
     public boolean decorationIsReal(int pieceIndex, int decorationIndex) {
-        return decorations[pieceIndex][decorationIndex] != noDecoration && decorations[pieceIndex][decorationIndex] != dummy;
+        return decorations[pieceIndex][decorationIndex] != noDecoration && decorations[pieceIndex][decorationIndex] != dummyDecoration;
     }
 
     /** @return True if the designated slot is a "dummy" decoration - that is, the non-first slot in a decoration of size greater than 1 - and false if it is empty or an actual decoration. */
     public boolean decorationIsDummy(int pieceIndex, int decorationIndex) {
-        return getDecoration(pieceIndex, decorationIndex) == dummy;
+        return getDecoration(pieceIndex, decorationIndex) == dummyDecoration;
+    }
+
+    /** A utility method that finds the actual decoration causing a dummy to appear. */
+    public Decoration findRealDecorationOfDummy(int pieceIndex, int decorationIndex) {
+        if (getDecoration(pieceIndex, decorationIndex) != dummyDecoration) {
+            throw new IllegalArgumentException("The specified decoration must be a dummy!");
+        }
+
+        int i = decorationIndex;
+        while (getDecoration(pieceIndex, i) == dummyDecoration) {
+            i--;
+        }
+
+        return getDecoration(pieceIndex, i);
     }
 
     /**
@@ -117,12 +131,12 @@ public class ArmorSetBuilderSession {
 
             decorations[pieceIndex][i] = decoration;
             if (decoration.getNumSlots() == 2) {
-                decorations[pieceIndex][i + 1] = dummy;
+                decorations[pieceIndex][i + 1] = dummyDecoration;
             }
 
             if (decoration.getNumSlots() == 3) {
-                decorations[pieceIndex][i + 1] = dummy;
-                decorations[pieceIndex][i + 2] = dummy;
+                decorations[pieceIndex][i + 1] = dummyDecoration;
+                decorations[pieceIndex][i + 2] = dummyDecoration;
             }
 
             notifyArmorSetChangedListeners();
@@ -134,11 +148,11 @@ public class ArmorSetBuilderSession {
 
     public void removeDecoration(int pieceIndex, int decorationIndex) {
 
-        if (decorations[pieceIndex][decorationIndex] != dummy) {
+        if (decorations[pieceIndex][decorationIndex] != dummyDecoration) {
             decorations[pieceIndex][decorationIndex] = noDecoration;
 
             for (int j = decorationIndex + 1; j < decorations[pieceIndex].length; j++) {
-                if (decorations[pieceIndex][j] == dummy) {
+                if (decorations[pieceIndex][j] == dummyDecoration) {
                     decorations[pieceIndex][j] = noDecoration;
                 } else {
                     break;
@@ -173,7 +187,6 @@ public class ArmorSetBuilderSession {
 
         notifyArmorSetChangedListeners();
     }
-
 
     public boolean isEquipmentSelected(int pieceIndex) {
         return equipment[pieceIndex] != noEquipment;
@@ -286,6 +299,10 @@ public class ArmorSetBuilderSession {
 
     public void addOnArmorSetChangedListener(OnArmorSetChangedListener l) {
         changedListeners.add(l);
+    }
+
+    public void detachOnArmorSetChangedListener(OnArmorSetChangedListener l) {
+        changedListeners.remove(l);
     }
 
     private void notifyArmorSetChangedListeners() {
