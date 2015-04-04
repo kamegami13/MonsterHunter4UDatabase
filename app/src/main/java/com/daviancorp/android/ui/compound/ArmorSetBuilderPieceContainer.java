@@ -1,4 +1,4 @@
-package com.daviancorp.android.ui.detail;
+package com.daviancorp.android.ui.compound;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
@@ -16,7 +16,10 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.detail.ArmorDetailActivity;
+import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 import com.daviancorp.android.ui.dialog.ArmorSetBuilderDecorationsDialogFragment;
+import com.daviancorp.android.ui.dialog.ArmorSetBuilderTalismanDialogFragment;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 
 import java.io.IOException;
@@ -123,6 +126,8 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
 
     /** Helper method that retrieves a rarity-appropriate equipment icon. */
     private Bitmap fetchIcon(int rarity) {
+
+
         String slot = "";
         switch (pieceIndex) {
             case ArmorSetBuilderSession.HEAD:
@@ -141,13 +146,21 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
                 slot = "legs";
                 break;
             case ArmorSetBuilderSession.TALISMAN:
+
+                String imageRes = "icons_items/" + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()].split(",")[1];
+
+                Log.d("SetBuilder", "Attempting to open " + imageRes);
+                AssetManager manager = getContext().getAssets();
+                InputStream stream;
+
                 try {
-                    InputStream stream = getContext().getAssets().open("icons_items/Talisman-white.png");
+                    stream = manager.open(imageRes);
                     Bitmap bitmap = BitmapFactory.decodeStream(stream);
 
                     stream.close();
 
                     return bitmap;
+
                 } catch (IOException e) {
                     e.printStackTrace();
                     return null;
@@ -155,6 +168,8 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         }
 
         String imageRes = "icons_armor/icons_" + slot + "/" + slot + String.valueOf(rarity) + ".png";
+
+        Log.d("SetBuilder", "Attempting to open " + imageRes);
         AssetManager manager = getContext().getAssets();
         InputStream stream;
 
@@ -178,13 +193,14 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
     private PopupMenu createPopupMenu() {
 
         PopupMenu popup = new PopupMenu(getContext(), popupMenuButton); // Because we're not in the fragment, we have to use a theme wrapper
-        popup.inflate(R.menu.menu_set_builder_equipment);
 
         boolean pieceSelected = session.isEquipmentSelected(pieceIndex);
         boolean hasSlotsAvailable = session.getAvailableSlots(pieceIndex) > 0;
         boolean hasDecorations = session.hasDecorations(pieceIndex);
 
         if (pieceIndex != ArmorSetBuilderSession.TALISMAN) {
+
+            popup.inflate(R.menu.menu_set_builder_equipment);
 
             if (!pieceSelected) {
                 popup.getMenu().findItem(R.id.armor_set_builder_add_piece).setVisible(true);
@@ -199,7 +215,14 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
             }
         }
         else {
-            // TODO: Add talisman logic
+            popup.inflate(R.menu.menu_set_builder_talisman);
+
+            if (!pieceSelected) {
+                popup.getMenu().findItem(R.id.armor_set_builder_talisman_create).setVisible(true);
+            }
+            else {
+                popup.getMenu().findItem(R.id.armor_set_builder_talisman_info).setVisible(true);
+            }
         }
 
         popup.setOnMenuItemClickListener(new PiecePopupMenuClickListener());
@@ -225,6 +248,8 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
                 case R.id.armor_set_builder_piece_info:
                     onMenuGetPieceInfoSelected();
                     break;
+                case R.id.armor_set_builder_talisman_create:
+                    onMenuCreateTalismanSelected();
                 default:
                     return false;
             }
@@ -237,7 +262,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
             i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
             i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
 
-            ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
+            ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE_ADD_PIECE);
         }
 
         /** Called when the user chooses to remove an armor piece. */
@@ -249,8 +274,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         /** Called when the user chooses to edit their decorations. */
         private void onMenuDecorationsSelected() {
             ArmorSetBuilderDecorationsDialogFragment d = ArmorSetBuilderDecorationsDialogFragment.newInstance(session, pieceIndex);
-            d.setTargetFragment(parentFragment, ArmorSetBuilderActivity.REMOVE_DECORATION_REQUEST_CODE);
-            d.show(parentFragment.getActivity().getSupportFragmentManager(), "tag");
+            d.show(parentFragment.getActivity().getSupportFragmentManager(), "DECORATIONS");
         }
 
         /** Called when the user chooses to retrieve info about their armor piece. */
@@ -258,6 +282,12 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
             Intent i = new Intent(getContext(), ArmorDetailActivity.class);
             i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, session.getEquipment(pieceIndex).getId());
             getContext().startActivity(i);
+        }
+
+        private void onMenuCreateTalismanSelected() {
+            ArmorSetBuilderTalismanDialogFragment d = ArmorSetBuilderTalismanDialogFragment.newInstance();
+            d.setTargetFragment(parentFragment, ArmorSetBuilderActivity.REQUEST_CODE_CREATE_TALISMAN);
+            d.show(parentFragment.getActivity().getSupportFragmentManager(), "TALISMAN");
         }
     }
 }

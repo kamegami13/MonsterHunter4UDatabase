@@ -76,6 +76,7 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
             TextView armsPoints = (TextView) itemView.findViewById(R.id.arms);
             TextView waistPoints = (TextView) itemView.findViewById(R.id.waist);
             TextView legsPoints = (TextView) itemView.findViewById(R.id.legs);
+            TextView talismanPoints = (TextView) itemView.findViewById(R.id.talisman);
             TextView totalPoints = (TextView) itemView.findViewById(R.id.total);
 
             treeName.setText(getItem(position).getSkillTree().getName());
@@ -98,6 +99,10 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
 
             if (session.isEquipmentSelected(ArmorSetBuilderSession.LEGS)) {
                 legsPoints.setText(String.valueOf(getItem(position).getLegsPoints()));
+            }
+
+            if (session.isEquipmentSelected(ArmorSetBuilderSession.TALISMAN)) {
+                talismanPoints.setText(String.valueOf(getItem(position).getTalismanPoints()));
             }
 
             totalPoints.setText(String.valueOf(getItem(position).getTotal()));

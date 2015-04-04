@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.v4.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -99,13 +98,16 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK && requestCode == ArmorSetBuilderActivity.BUILDER_REQUEST_CODE) {
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case ArmorSetBuilderActivity.REQUEST_CODE_ADD_DECORATION:
+                    long decorationId = data.getLongExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, -1);
+                    Decoration decoration = DataManager.get(getActivity()).getDecoration(decorationId);
 
-            long decorationId = data.getLongExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, -1);
-            Decoration decoration = DataManager.get(getActivity()).getDecoration(decorationId);
-
-            session.addDecoration(pieceIndex, decoration);
-            updateDialog();
+                    session.addDecoration(pieceIndex, decoration);
+                    updateDialog();
+                    break;
+            }
         }
     }
 
@@ -123,7 +125,7 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
                 Drawable icon = null;
                 String cellImage = "icons_items/" + session.getDecoration(pieceIndex, i).getFileLocation();
                 try {
-                    icon = Drawable.createFromStream(getTargetFragment().getActivity().getApplicationContext().getAssets().open(cellImage), null);
+                    icon = Drawable.createFromStream(getActivity().getApplicationContext().getAssets().open(cellImage), null);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -134,7 +136,7 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
                 Drawable icon = null;
                 String cellImage = "icons_items/Jewel-Unknown.png";
                 try {
-                    icon = Drawable.createFromStream(getTargetFragment().getActivity().getApplicationContext().getAssets().open(cellImage), null);
+                    icon = Drawable.createFromStream(getActivity().getApplicationContext().getAssets().open(cellImage), null);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -214,19 +216,12 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
     }
 
     private void onAddDecorationClicked(int decorationIndex) {
-        if (getTargetFragment() == null) {
-            return;
-        }
-
-
         Intent i = new Intent(getActivity().getApplicationContext(), DecorationListActivity.class);
         i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
         i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
         i.putExtra(ArmorSetBuilderActivity.EXTRA_DECORATION_INDEX, decorationIndex);
 
-        startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
-
-        getTargetFragment().onActivityResult(ArmorSetBuilderActivity.BUILDER_REQUEST_CODE, Activity.RESULT_OK, i);
+        startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE_ADD_DECORATION);
     }
 
     private void onRemoveDecorationClicked(int decorationIndex) {
@@ -252,18 +247,12 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
 
         @Override
         public void onClick(View v) {
-            if (getTargetFragment() == null) {
-                return;
-            }
-
             Intent i = new Intent(getActivity().getApplicationContext(), DecorationListActivity.class);
             i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
             i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
             i.putExtra(ArmorSetBuilderActivity.EXTRA_DECORATION_INDEX, decorationIndex);
 
-            startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
-
-            getTargetFragment().onActivityResult(ArmorSetBuilderActivity.BUILDER_REQUEST_CODE, Activity.RESULT_OK, i);
+            startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE_ADD_DECORATION);
         }
     }
 }

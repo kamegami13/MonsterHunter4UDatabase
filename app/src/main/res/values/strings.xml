@@ -99,6 +99,10 @@
     <string name="armor_set_builder_decoration_add">Add Decoration</string>
     <string name="armor_set_builder_decoration_remove">Remove Decoration</string>
 
+    <string name="armor_set_builder_talisman_dialog_title">Talisman</string>
+    <string name="armor_set_builder_talisman_skill_1">Skill 1</string>
+    <string name="armor_set_builder_talisman_skill_2">Skill 2</string>
+
     <string name="armor_set_builder_helmet">Helmet</string>
     <string name="armor_set_builder_body">Body</string>
     <string name="armor_set_builder_arms">Arms</string>
@@ -107,6 +111,22 @@
     <string name="armor_set_builder_skill_name">Skill</string>
     <string name="armor_set_builder_skill_points_total">Total</string>
 
+    <string-array name="talisman_names">
+        <item>Pawn,Talisman-White.png</item>
+        <item>Bishop,Talisman-LightPurple.png</item>
+        <item>Knight</item>
+        <item>Rook,Talisman-Pink.png</item>
+        <item>Queen</item>
+        <item>King,Talisman-Cyan.png</item>
+        <item>Dragon,Talisman-Red.png</item>
+        <item>Unknowable,Talisman-Blue.png</item>
+        <item>Mystic,Talisman-Orange.png</item>
+        <item>Hero,Talisman-Blue.png</item>
+        <item>Legend,Talisman-Orange.png</item>
+        <item>Creator,Talisman-Purple.png</item>
+        <item>Sage,Talisman-Purple.png</item>
+        <item>Miracle,Talisman-Purple.png</item>
+    </string-array>
 
     <string name="placeholder_unknown">Unknown</string>
 </resources>

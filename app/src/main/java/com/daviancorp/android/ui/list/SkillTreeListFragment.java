@@ -1,5 +1,6 @@
 package com.daviancorp.android.ui.list;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.SkillTree;
@@ -20,6 +20,7 @@ import com.daviancorp.android.data.database.SkillTreeCursor;
 import com.daviancorp.android.loader.SkillTreeListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.SkillClickListener;
+import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
 
 public class SkillTreeListFragment extends ListFragment implements
@@ -54,7 +55,7 @@ public class SkillTreeListFragment extends ListFragment implements
 		setListAdapter(null);
 	}
 
-	private static class SkillTreeListCursorAdapter extends CursorAdapter {
+	private class SkillTreeListCursorAdapter extends CursorAdapter {
 
 		private SkillTreeCursor mSkillTreeCursor;
 
@@ -76,7 +77,7 @@ public class SkillTreeListFragment extends ListFragment implements
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
 			// Get the skill for the current row
-			SkillTree skilltree = mSkillTreeCursor.getSkillTree();
+            final SkillTree skilltree = mSkillTreeCursor.getSkillTree();
             LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.listitem);
 
 			// Set up the text view
@@ -84,7 +85,22 @@ public class SkillTreeListFragment extends ListFragment implements
 			String cellText = skilltree.getName();
 			skilltreeNameTextView.setText(cellText);
 
-            itemLayout.setOnClickListener(new SkillClickListener(context, skilltree.getId()));
+            if (getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_TALISMAN_EDITOR, false)) {
+                itemLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent i = getActivity().getIntent();
+                        i.putExtra(SkillTreeDetailActivity.EXTRA_SKILLTREE_ID, skilltree.getId());
+
+                        getActivity().setResult(Activity.RESULT_OK, i);
+                        getActivity().finish();
+                    }
+                });
+            }
+            else {
+                itemLayout.setOnClickListener(new SkillClickListener(context, skilltree.getId()));
+            }
 		}
 	}
 

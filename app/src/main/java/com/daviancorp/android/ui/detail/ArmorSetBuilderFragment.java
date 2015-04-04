@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.compound.ArmorSetBuilderPieceContainer;
 
 /**
  * This is where the magic happens baby. Users can define a custom armor set in this fragment.
@@ -77,7 +78,7 @@ public class ArmorSetBuilderFragment extends Fragment implements ArmorSetBuilder
             ArmorSetBuilderActivity a = (ArmorSetBuilderActivity) getActivity();
             a.addArmorSetChangedListener(this);
         } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must be a ArmorSetBuilderActivity.");
+            throw new ClassCastException(getActivity().toString() + " must be an ArmorSetBuilderActivity.");
         }
     }
 

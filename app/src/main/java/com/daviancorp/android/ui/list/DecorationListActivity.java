@@ -35,7 +35,7 @@ public class DecorationListActivity extends GenericActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ArmorSetBuilderActivity.BUILDER_REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == ArmorSetBuilderActivity.REQUEST_CODE_ADD_DECORATION && resultCode == RESULT_OK) {
             setResult(RESULT_OK, data);
             finish();
         }

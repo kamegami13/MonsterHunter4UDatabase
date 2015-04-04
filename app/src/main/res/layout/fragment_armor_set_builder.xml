@@ -7,30 +7,30 @@
     <view android:id="@+id/armor_builder_head"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
+          class="com.daviancorp.android.ui.compound.ArmorSetBuilderPieceContainer"/>
 
     <view android:id="@+id/armor_builder_body"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
+          class="com.daviancorp.android.ui.compound.ArmorSetBuilderPieceContainer"/>
 
     <view android:id="@+id/armor_builder_arms"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
+          class="com.daviancorp.android.ui.compound.ArmorSetBuilderPieceContainer"/>
 
     <view android:id="@+id/armor_builder_waist"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
+          class="com.daviancorp.android.ui.compound.ArmorSetBuilderPieceContainer"/>
 
     <view android:id="@+id/armor_builder_legs"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
+          class="com.daviancorp.android.ui.compound.ArmorSetBuilderPieceContainer"/>
 
     <view android:id="@+id/armor_builder_talisman"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          class="com.daviancorp.android.ui.detail.ArmorSetBuilderPieceContainer"/>
+          class="com.daviancorp.android.ui.compound.ArmorSetBuilderPieceContainer"/>
 </LinearLayout>

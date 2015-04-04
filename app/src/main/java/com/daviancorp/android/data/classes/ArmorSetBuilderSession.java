@@ -8,13 +8,6 @@ import java.util.*;
 
 /**
  * Represents a session of the user's interaction with the Armor Set Builder.
- * <p/>
- * For using armor arrays:
- * <li/>0: Head
- * <li/>1: Body
- * <li/>2: Arms
- * <li/>3: Waist
- * <li/>4: Legs
  */
 public class ArmorSetBuilderSession {
 
@@ -26,13 +19,13 @@ public class ArmorSetBuilderSession {
     public static final int TALISMAN = 5;
 
     private static Equipment noEquipment = new Equipment();
+    private static Talisman noTalisman = new Talisman();
 
     private static Decoration noDecoration = new Decoration();
     public static Decoration dummyDecoration = new Decoration();
 
     private Equipment[] equipment;
     private Decoration[][] decorations;
-    private Talisman talisman;
 
     private List<SkillTreePointsSet> skillTreePointsSets;
 
@@ -44,13 +37,12 @@ public class ArmorSetBuilderSession {
     public ArmorSetBuilderSession() {
 
         equipment = new Equipment[6];
-        talisman = new Talisman();
         for (int i = 0; i < equipment.length; i++) {
             if (i != TALISMAN) {
                 equipment[i] = noEquipment;
             }
             else {
-                equipment[i] = talisman;
+                equipment[i] = noTalisman;
             }
         }
 
@@ -188,7 +180,11 @@ public class ArmorSetBuilderSession {
         notifyArmorSetChangedListeners();
     }
 
+    /** @return True if the user has chosen a piece at the specified index or has created a talisman, false otherwise. */
     public boolean isEquipmentSelected(int pieceIndex) {
+        if (pieceIndex == TALISMAN) {
+            return equipment[pieceIndex] != noTalisman;
+        }
         return equipment[pieceIndex] != noEquipment;
     }
 
@@ -198,10 +194,7 @@ public class ArmorSetBuilderSession {
         notifyArmorSetChangedListeners();
     }
 
-    /**
-     * @return A piece of the armor set based on the provided piece index.
-     * @see com.daviancorp.android.data.classes.ArmorSetBuilderSession
-     */
+    /** @return A piece of the armor set based on the provided piece index. */
     public Equipment getEquipment(int pieceIndex) {
         return equipment[pieceIndex];
     }
@@ -282,6 +275,12 @@ public class ArmorSetBuilderSession {
                 Log.d("SetBuilder", "Skill tree added to map: " + itemToSkillTree.getSkillTree().getName());
             }
         }
+        else {
+            skills.put(getTalisman().getSkill1(), getTalisman().getSkill1Points());
+            if (getTalisman().hasTwoSkills()) {
+                skills.put(getTalisman().getSkill2(), getTalisman().getSkill2Points());
+            }
+        }
 
         for (Decoration d : decorations[pieceIndex]) { // Now we work on decorations
             for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(d.getId())) {
@@ -325,7 +324,7 @@ public class ArmorSetBuilderSession {
         private int[] points;
 
         public SkillTreePointsSet() {
-            points = new int[5];
+            points = new int[6];
         }
 
         public SkillTree getSkillTree() {
@@ -350,6 +349,10 @@ public class ArmorSetBuilderSession {
 
         public int getLegsPoints() {
             return points[LEGS];
+        }
+
+        public int getTalismanPoints() {
+            return points[TALISMAN];
         }
 
         /**

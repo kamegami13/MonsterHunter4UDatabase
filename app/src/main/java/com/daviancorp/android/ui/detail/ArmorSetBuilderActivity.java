@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
 import com.daviancorp.android.data.classes.Decoration;
+import com.daviancorp.android.data.classes.SkillTree;
+import com.daviancorp.android.data.classes.Talisman;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorSetBuilderPagerAdapter;
@@ -21,13 +23,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArmorSetBuilderActivity extends GenericTabActivity implements ArmorSetBuilderSession.OnArmorSetChangedListener {
+
     public static final String EXTRA_FROM_SET_BUILDER = "com.daviancorp.android.ui.detail.from_set_builder";
-    public static final String EXTRA_REMAINING_SOCKETS = "com.daviancorp.android.ui.detail.remaining_sockets";
+    public static final String EXTRA_FROM_TALISMAN_EDITOR = "com.daviancorp.android.ui.detail.from_talisman_editor";
+    public static final String EXTRA_TALISMAN_SKILL_INDEX = "com.daviancorp.android.ui.detail.talisman_skill_number";
     public static final String EXTRA_PIECE_INDEX = "com.daviancorp.android.ui.detail.piece_index";
     public static final String EXTRA_DECORATION_INDEX = "com.daviancorp.android.ui.detail.decoration_index";
 
-    public static final int BUILDER_REQUEST_CODE = 537;
-    public static final int REMOVE_DECORATION_REQUEST_CODE = 538;
+    public static final String EXTRA_TALISMAN_SKILL_TREE_1 = "com.daviancorp.android.ui.detail.skill_tree_1";
+    public static final String EXTRA_TALISMAN_SKILL_POINTS_1 = "com.daviancorp.android.ui.detail.skill_points_1";
+    public static final String EXTRA_TALISMAN_SKILL_TREE_2 = "com.daviancorp.android.ui.detail.skill_tree_2";
+    public static final String EXTRA_TALISMAN_SKILL_POINTS_2 = "com.daviancorp.android.ui.detail.skill_points_2";
+    public static final String EXTRA_TALISMAN_TYPE_INDEX = "com.daviancorp.android.ui.detail.talisman_type_index";
+
+    public static final int REQUEST_CODE_ADD_PIECE = 537;
+    public static final int REQUEST_CODE_ADD_DECORATION = 538;
+    public static final int REQUEST_CODE_CREATE_TALISMAN = 539;
 
     private ArmorSetBuilderSession session;
 
@@ -75,7 +86,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
                 Intent intent = new Intent(getApplicationContext(), ArmorListActivity.class);
                 intent.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
 
-                startActivityForResult(intent, BUILDER_REQUEST_CODE);
+                startActivityForResult(intent, REQUEST_CODE_ADD_PIECE);
                 return true;
 
             default:
@@ -88,7 +99,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) { // If the user canceled the request, we don't want to do anything.
-            if (requestCode == BUILDER_REQUEST_CODE) {
+            if (requestCode == REQUEST_CODE_ADD_PIECE) {
                 long armorId = data.getLongExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, -1);
 
                 if (armorId != -1) {
@@ -117,7 +128,8 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
                             break;
                     }
                 }
-
+            }
+            else if (requestCode == REQUEST_CODE_ADD_DECORATION) {
                 long decorationId = data.getLongExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, -1);
                 int pieceIndex = data.getIntExtra(EXTRA_PIECE_INDEX, -1);
 
@@ -125,18 +137,29 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
                     Decoration decoration = DataManager.get(this).getDecoration(decorationId);
 
                     if (!session.addDecoration(pieceIndex, decoration)) {
-                        // The decoration couldn't be added
+                        Log.e("SetBuilder", "A decoration was attempted to be added, but it failed.");
                     }
                 }
-
             }
-            else if (requestCode == REMOVE_DECORATION_REQUEST_CODE) {
-                int pieceIndex = data.getIntExtra(EXTRA_PIECE_INDEX, -1);
-                int decorationIndex = data.getIntExtra(EXTRA_DECORATION_INDEX, -1);
+            else if (requestCode == REQUEST_CODE_CREATE_TALISMAN) {
+                Talisman talisman;
 
-                Log.d("SetBuilder", "Attempting to remove decoration at index: " + pieceIndex + "," + decorationIndex);
+                long skill1Id = data.getLongExtra(EXTRA_TALISMAN_SKILL_TREE_1, -1);
+                int skill1Points = data.getIntExtra(EXTRA_TALISMAN_SKILL_POINTS_1, -1);
+                int typeIndex = data.getIntExtra(EXTRA_TALISMAN_TYPE_INDEX, -1);
 
-                session.removeDecoration(pieceIndex, decorationIndex);
+                SkillTree skill1Tree = DataManager.get(getApplicationContext()).getSkillTree(skill1Id);
+                talisman = new Talisman(skill1Tree, skill1Points, typeIndex);
+
+                if (data.hasExtra(EXTRA_TALISMAN_SKILL_TREE_2)) {
+                    long skill2Id = data.getLongExtra(EXTRA_TALISMAN_SKILL_TREE_2, -1);
+                    int skill2Points = data.getIntExtra(EXTRA_TALISMAN_SKILL_POINTS_2, -1);
+
+                    SkillTree skill2Tree = DataManager.get(getApplicationContext()).getSkillTree(skill2Id);
+                    talisman.setSecondSkill(skill2Tree, skill2Points);
+                }
+
+                session.setEquipment(ArmorSetBuilderSession.TALISMAN, talisman);
             }
         }
 

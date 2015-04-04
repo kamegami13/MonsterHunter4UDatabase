@@ -37,7 +37,7 @@ public class ArmorClickListener implements View.OnClickListener {
 
         if (fromArmorSetBuilder) {
             i.putExtras(activity.getIntent());
-            activity.startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
+            activity.startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE_ADD_PIECE);
         }
         else {
             c.startActivity(i);
