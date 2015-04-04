@@ -14,7 +14,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/headerRow"
-            android:background="@color/primary_color">
+            android:background="@color/subheading_color">
 
             <TextView
                 android:layout_width="0dp"
@@ -23,7 +23,7 @@
                 android:layout_weight="1"
                 android:text="Status"
                 android:gravity="center"
-                android:textColor="@color/text_primary_color" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
@@ -32,43 +32,43 @@
                 android:text="Initial"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/text_primary_color" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:id="@+id/textView3"
                 android:text="Increase"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/text_primary_color" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:id="@+id/textView4"
                 android:text="Max"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/text_primary_color" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:id="@+id/textView5"
                 android:text="Duration"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/text_primary_color" />
+                android:textColor="@color/text_color" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:id="@+id/textView6"
                 android:text="Damage"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/text_primary_color" />
+                android:textColor="@color/text_color" />
         </TableRow>
 
     </TableLayout>
