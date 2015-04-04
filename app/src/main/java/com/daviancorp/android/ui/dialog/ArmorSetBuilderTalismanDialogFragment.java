@@ -69,7 +69,7 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment {
                             if (skillTreeViews[1].hasSkillDefined()) {
                                 Log.d("SetBuilder", "Skill 2 is defined.");
 
-                                long skill2Id = skillTreeViews[0].getSkillTree().getId();
+                                long skill2Id = skillTreeViews[1].getSkillTree().getId();
                                 int skill2Points = skillTreeViews[1].getSkillPoints();
 
                                 i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_TREE_2, skill2Id);
