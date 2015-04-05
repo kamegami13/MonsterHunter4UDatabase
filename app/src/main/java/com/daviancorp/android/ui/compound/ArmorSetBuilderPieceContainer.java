@@ -10,11 +10,9 @@ import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.*;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
-import android.widget.TextView;
+import android.widget.*;
 import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
+import com.daviancorp.android.data.classes.Talisman;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
 import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
@@ -26,11 +24,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ArmorSetBuilderPieceContainer extends LinearLayout {
-
-    public static final int MENU_ADD_PIECE = 0;
-    public static final int MENU_REMOVE_PIECE = 1;
-    public static final int MENU_DECORATIONS = 2;
-    public static final int MENU_PIECE_INFO = 3;
 
     private ImageView icon;
     private TextView text;
@@ -127,7 +120,6 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
     /** Helper method that retrieves a rarity-appropriate equipment icon. */
     private Bitmap fetchIcon(int rarity) {
 
-
         String slot = "";
         switch (pieceIndex) {
             case ArmorSetBuilderSession.HEAD:
@@ -146,8 +138,13 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
                 slot = "legs";
                 break;
             case ArmorSetBuilderSession.TALISMAN:
-
-                String imageRes = "icons_items/" + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()].split(",")[1];
+                String imageRes;
+                try {
+                    imageRes = "icons_items/" + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()].split(",")[1];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Log.e("SetBuilder", "Image not found for " + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()]);
+                    imageRes = "icons_items/Talisman-White.png";
+                }
 
                 Log.d("SetBuilder", "Attempting to open " + imageRes);
                 AssetManager manager = getContext().getAssets();
@@ -221,7 +218,8 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
                 popup.getMenu().findItem(R.id.armor_set_builder_talisman_create).setVisible(true);
             }
             else {
-                popup.getMenu().findItem(R.id.armor_set_builder_talisman_info).setVisible(true);
+                popup.getMenu().findItem(R.id.armor_set_builder_talisman_edit).setVisible(true);
+                popup.getMenu().findItem(R.id.armor_set_builder_talisman_remove).setVisible(true);
             }
         }
 
@@ -250,6 +248,13 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
                     break;
                 case R.id.armor_set_builder_talisman_create:
                     onMenuCreateTalismanSelected();
+                    break;
+                case R.id.armor_set_builder_talisman_edit:
+                    onMenuEditTalismanSelected();
+                    break;
+                case R.id.armor_set_builder_talisman_remove:
+                    onMenuRemoveTalismanSelected();
+                    break;
                 default:
                     return false;
             }
@@ -289,5 +294,20 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
             d.setTargetFragment(parentFragment, ArmorSetBuilderActivity.REQUEST_CODE_CREATE_TALISMAN);
             d.show(parentFragment.getActivity().getSupportFragmentManager(), "TALISMAN");
         }
+
+        private void onMenuEditTalismanSelected() {
+            Talisman t = session.getTalisman();
+            ArmorSetBuilderTalismanDialogFragment d = ArmorSetBuilderTalismanDialogFragment.newInstance(t.getTypeIndex(),
+                    t.getSkill1().getId(), t.getSkill1Points(), session.getTalisman().hasTwoSkills() ? session.getTalisman().getSkill2().getId() : -1, // If the talisman only has one skill, we want to pass -1 as the id for the second skill
+                    t.getSkill2Points());
+            d.setTargetFragment(parentFragment, ArmorSetBuilderActivity.REQUEST_CODE_CREATE_TALISMAN);
+            d.show(parentFragment.getActivity().getSupportFragmentManager(), "TALISMAN");
+        }
+
+        private void onMenuRemoveTalismanSelected() {
+            session.removeEquipment(ArmorSetBuilderSession.TALISMAN);
+            updateArmorPiece();
+        }
     }
+
 }

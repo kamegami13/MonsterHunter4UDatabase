@@ -2,6 +2,7 @@ package com.daviancorp.android.ui.list;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.SkillClickListener;
 import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ArmorSetBuilderSkillsListFragment extends Fragment implements ArmorSetBuilderActivity.OnArmorSetActivityUpdateListener {
@@ -61,6 +63,8 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
 
     private class ArmorSetBuilderSkillsAdapter extends ArrayAdapter<ArmorSetBuilderSession.SkillTreePointsSet> {
 
+        private static final int MINIMUM_SKILL_ACTIVATION_POINTS = 10;
+
         public ArmorSetBuilderSkillsAdapter(Context context, List<ArmorSetBuilderSession.SkillTreePointsSet> trees, ArmorSetBuilderSession session) {
             super(context, R.layout.fragment_armor_set_builder_skills_item, trees);
         }
@@ -106,10 +110,29 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
             }
 
             totalPoints.setText(String.valueOf(getItem(position).getTotal()));
+
+            if (getItem(position).getTotal() >= MINIMUM_SKILL_ACTIVATION_POINTS) {
+                totalPoints.setTypeface(null, Typeface.BOLD);
+            }
             
             itemView.setOnClickListener(new SkillClickListener(ArmorSetBuilderSkillsListFragment.this.getActivity(), getItem(position).getSkillTree().getId()));
 
             return itemView;
         }
+
+        @Override
+        public void notifyDataSetChanged() {
+            setNotifyOnChange(false);
+            sort(comparator);
+
+            super.notifyDataSetChanged(); // super#notifyDataSetChanged automatically sets notifyOnChange back to true.
+        }
+
+        Comparator<ArmorSetBuilderSession.SkillTreePointsSet> comparator = new Comparator<ArmorSetBuilderSession.SkillTreePointsSet>() {
+            @Override
+            public int compare(ArmorSetBuilderSession.SkillTreePointsSet lhs, ArmorSetBuilderSession.SkillTreePointsSet rhs) {
+                return rhs.getTotal() - lhs.getTotal();
+            }
+        };
     }
 }

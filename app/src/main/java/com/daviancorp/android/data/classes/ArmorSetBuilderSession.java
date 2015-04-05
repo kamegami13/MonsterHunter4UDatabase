@@ -205,9 +205,11 @@ public class ArmorSetBuilderSession {
 
     public void removeEquipment(int pieceIndex) {
         if (pieceIndex == TALISMAN) {
-            throw new IllegalArgumentException("The talisman cannot be removed - only modified.");
+            equipment[pieceIndex] = noTalisman;
         }
-        equipment[pieceIndex] = noEquipment;
+        else {
+            equipment[pieceIndex] = noEquipment;
+        }
         removeAllDecorations(pieceIndex);
 
         notifyArmorSetChangedListeners();
@@ -231,6 +233,8 @@ public class ArmorSetBuilderSession {
         }
 
         for (int i = 0; i < equipment.length; i++) {
+
+            Log.v("SetBuilder", "Reading skills from armor piece " + i);
 
             Map<SkillTree, Integer> armorSkillTreePoints = getSkillsFromArmorPiece(i, context); // A map of the current piece of armor's skills, localized so we don't have to keep calling it
 
@@ -275,7 +279,7 @@ public class ArmorSetBuilderSession {
                 Log.d("SetBuilder", "Skill tree added to map: " + itemToSkillTree.getSkillTree().getName());
             }
         }
-        else {
+        else if (pieceIndex == TALISMAN && getTalisman() != noTalisman) {
             skills.put(getTalisman().getSkill1(), getTalisman().getSkill1Points());
             if (getTalisman().hasTwoSkills()) {
                 skills.put(getTalisman().getSkill2(), getTalisman().getSkill2Points());

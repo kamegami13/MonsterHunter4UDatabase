@@ -88,8 +88,10 @@
     <string name="three_slot_jewel">●●●</string>
 
     <string name="activity_armor_set_builder">Armor Set Builder</string>
-    <string name="armor_set_builder_add_piece">Add Armor</string>
-    <string name="armor_set_builder_remove_piece">Remove Armor</string>
+
+    <string name="armor_set_builder_action_add">Add</string>
+    <string name="armor_set_builder_action_remove">Remove</string>
+    <string name="armor_set_builder_action_edit">Edit</string>
     <string name="armor_set_builder_decoration_info">Decorations</string>
     <string name="armor_set_builder_piece_info">Piece Info</string>
     <string name="armor_set_builder_empty_slot">Empty slot</string>

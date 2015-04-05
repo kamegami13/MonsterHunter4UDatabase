@@ -1,11 +1,8 @@
 package com.daviancorp.android.data.classes;
 
-import android.content.res.Resources;
 import android.util.Log;
 
 public class Talisman extends Equipment {
-
-    private static SkillTree noSkill = new SkillTree();
 
     private SkillTree[] skillTrees;
 
@@ -47,7 +44,7 @@ public class Talisman extends Equipment {
         this.typeIndex = typeIndex;
 
         if (!hasSkill2) {
-            skillTrees[1] = noSkill;
+            skillTrees[1] = null;
             skillPoints[1] = 0;
         }
     }
@@ -85,7 +82,7 @@ public class Talisman extends Equipment {
 
     /** @return True if the talisman has a second skill defined, false if not. */
     public boolean hasTwoSkills() {
-        return skillTrees[1] != noSkill;
+        return skillTrees[1] != null;
     }
 
     public int getTypeIndex() {

@@ -22,9 +22,15 @@ import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment {
+public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment implements ArmorSetBuilderTalismanSkillContainer.ChangeListener {
 
-    private ArmorSetBuilderTalismanSkillContainer[] skillTreeViews;
+    private static final String ARG_TYPE_INDEX = "type_index";
+    private static final String ARG_SKILL_1_ID = "skill_1_id";
+    private static final String ARG_SKILL_1_POINTS = "skill_1_points";
+    private static final String ARG_SKILL_2_ID = "skill_2_id";
+    private static final String ARG_SKILL_2_POINTS = "skill_2_points";
+
+    private ArmorSetBuilderTalismanSkillContainer[] talismanSkillContainers;
     private int talismanTypeIndex;
 
     public static ArmorSetBuilderTalismanDialogFragment newInstance() {
@@ -32,45 +38,75 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment {
         return f;
     }
 
+    /** Used when creating a talisman dialog for a talisman that has already been created. */
+    public static ArmorSetBuilderTalismanDialogFragment newInstance(int talismanTypeIndex, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
+        ArmorSetBuilderTalismanDialogFragment f = new ArmorSetBuilderTalismanDialogFragment();
+
+        Bundle args = new Bundle();
+        args.putInt(ARG_TYPE_INDEX, talismanTypeIndex);
+        args.putLong(ARG_SKILL_1_ID, skill1Id);
+        args.putInt(ARG_SKILL_1_POINTS, skill1Points);
+        args.putLong(ARG_SKILL_2_ID, skill2Id);
+        args.putInt(ARG_SKILL_2_POINTS, skill2Points);
+        f.setArguments(args);
+
+        return f;
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         final View addView = inflater.inflate(R.layout.dialog_armor_set_builder_edit_talisman, null);
 
-        skillTreeViews = new ArmorSetBuilderTalismanSkillContainer[2];
+        talismanSkillContainers = new ArmorSetBuilderTalismanSkillContainer[2];
+        talismanSkillContainers[0] = (ArmorSetBuilderTalismanSkillContainer) addView.findViewById(R.id.skill_1_view);
+        talismanSkillContainers[1] = (ArmorSetBuilderTalismanSkillContainer) addView.findViewById(R.id.skill_2_view);
+        for (ArmorSetBuilderTalismanSkillContainer c : talismanSkillContainers) {
+            c.setParent(this);
+            c.setChangeListener(this);
+        }
 
-        skillTreeViews[0] = (ArmorSetBuilderTalismanSkillContainer) addView.findViewById(R.id.skill_1_view);
-        skillTreeViews[0].setContainer(this);
+        if (getArguments() != null) { // If the talisman is already defined, we initialize it here.
+            talismanTypeIndex = getArguments().getInt(ARG_TYPE_INDEX);
+            talismanSkillContainers[0].setSkillTree(getArguments().getLong(ARG_SKILL_1_ID));
+            talismanSkillContainers[0].setSkillPoints(getArguments().getInt(ARG_SKILL_1_POINTS));
 
-        skillTreeViews[1] = (ArmorSetBuilderTalismanSkillContainer) addView.findViewById(R.id.skill_2_view);
-        skillTreeViews[1].setContainer(this);
+            if (getArguments().getLong(ARG_SKILL_2_ID) != -1) {
+                talismanSkillContainers[1].setSkillTree(getArguments().getLong(ARG_SKILL_2_ID));
+                talismanSkillContainers[1].setSkillPoints(getArguments().getInt(ARG_SKILL_2_POINTS));
+            }
+        }
 
         initializeTypeSpinner(addView);
+
+        updateSkillEnabledStates();
 
         Dialog d = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.armor_set_builder_talisman_dialog_title)
                 .setView(addView)
+                .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        if (skillTreeViews[0].hasSkillDefined()) {
+                        if (talismanSkillContainers[0].getSkillTree() != null) {
 
                             Intent i = new Intent();
 
-                            long skill1Id = skillTreeViews[0].getSkillTree().getId();
-                            int skill1Points = skillTreeViews[0].getSkillPoints();
+                            long skill1Id = talismanSkillContainers[0].getSkillTree().getId();
+                            int skill1Points = Integer.parseInt(talismanSkillContainers[0].getSkillPoints());
 
                             i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_TREE_1, skill1Id);
                             i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_POINTS_1, skill1Points);
                             i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_TYPE_INDEX, talismanTypeIndex);
 
-                            if (skillTreeViews[1].hasSkillDefined()) {
+                            if (talismanSkillContainers[1].getSkillTree() != null) {
                                 Log.d("SetBuilder", "Skill 2 is defined.");
 
-                                long skill2Id = skillTreeViews[1].getSkillTree().getId();
-                                int skill2Points = skillTreeViews[1].getSkillPoints();
+                                long skill2Id = talismanSkillContainers[1].getSkillTree().getId();
+                                int skill2Points = Integer.parseInt(talismanSkillContainers[1].getSkillPoints());
 
                                 i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_TREE_2, skill2Id);
                                 i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_POINTS_2, skill2Points);
@@ -81,6 +117,12 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment {
                     }
                 })
                 .create();
+        d.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                updateOkButtonState(); // At first, there is no data in the dialog, but there may be if the user is choosing to edit
+            }
+        });
 
         return d;
     }
@@ -92,27 +134,58 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment {
         if (resultCode == Activity.RESULT_OK && requestCode == ArmorSetBuilderActivity.REQUEST_CODE_CREATE_TALISMAN) {
 
             int talismanSkillNumber = data.getIntExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_INDEX, -1);
-
-            switch(talismanSkillNumber) {
-                case 0:
-                    skillTreeViews[0].getPointsField().setEnabled(true);
-                    break;
-                case 1:
-                    skillTreeViews[1].getPointsField().setEnabled(true);
-                    break;
-                default:
-                    Log.e("SetBuilder", "Attempted to change an out-of-bounds skill on a talisman.");
-                    break;
-            }
-
             long skillTreeId = data.getLongExtra(SkillTreeDetailActivity.EXTRA_SKILLTREE_ID, -1);
 
-            skillTreeViews[talismanSkillNumber].setSkillTree(DataManager.get(getActivity()).getSkillTree(skillTreeId));
+            talismanSkillContainers[talismanSkillNumber].setSkillTree(DataManager.get(getActivity()).getSkillTree(skillTreeId));
+            talismanSkillContainers[talismanSkillNumber].requestFocus();
         }
     }
 
-    /** Helper method that performs initialization logic on the type of talisman spinner. */
-    private void initializeTypeSpinner(View view) {
+    @Override
+    public void onTalismanSkillChanged() {
+        updateSkillEnabledStates();
+        updateOkButtonState();
+    }
+
+    @Override
+    public void onTalismanSkillPointsChanged() {
+        if (getDialog() != null) {
+            updateOkButtonState();
+        }
+    }
+
+    /** Updates the enabled status of the second skill tree based on the first. */
+    private void updateSkillEnabledStates() {
+        if (talismanSkillContainers[0].getSkillTree() != null) {
+            talismanSkillContainers[1].setEnabled(true);
+        }
+        else {
+            if (talismanSkillContainers[1].getSkillTree() != null) {
+                talismanSkillContainers[1].setSkillTree(null);
+            }
+            talismanSkillContainers[1].setEnabled(false);
+        }
+    }
+
+    /** Checks to see that all necessary data is defined before the user attempts to submit their talisman. */
+    private void updateOkButtonState() {
+        AlertDialog d = (AlertDialog) getDialog();
+
+        if (d != null) {
+            if (talismanSkillContainers[0].getSkillTree() == null || !talismanSkillContainers[0].skillPointsIsValid()) {
+                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            }
+            else if (talismanSkillContainers[1].getSkillTree() != null && !talismanSkillContainers[1].skillPointsIsValid()) {
+                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            }
+            else {
+                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+            }
+        }
+    }
+
+    /** Helper method that performs initialization logic on the "type of talisman" spinner. */
+    private Spinner initializeTypeSpinner(View view) {
         List<String> talismanNames = new ArrayList<>();
 
         for (String s : getResources().getStringArray(R.array.talisman_names)) {
@@ -133,7 +206,6 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        spinner.setSelection(0);
-
+        return spinner;
     }
 }

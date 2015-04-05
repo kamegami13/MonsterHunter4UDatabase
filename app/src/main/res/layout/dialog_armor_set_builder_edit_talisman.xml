@@ -8,7 +8,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <TextView
             style="@style/text_medium"
@@ -18,10 +21,11 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:layout_marginLeft="@dimen/generic_element_vertical_spacing"
             android:id="@+id/talisman_rank_spinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/generic_element_horizontal_spacing"
+            android:spinnerMode="dialog" />
 
     </LinearLayout>
 
