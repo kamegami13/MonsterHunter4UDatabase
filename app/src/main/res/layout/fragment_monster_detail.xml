@@ -5,14 +5,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp" >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/detail_monster_image"
@@ -24,128 +24,133 @@
             <TextView
                 android:id="@+id/detail_monster_label"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_height="50dp"
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:text="@string/placeholder_unknown"
                 android:textColor="@color/text_color"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-            
+                android:textSize="20sp" />
+
         </LinearLayout>
 
-        <View
+<!--         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="4dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@android:color/darker_gray" /> -->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:background="@color/subheading_color"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/impact_area"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:layout_marginTop="3dp"
                 android:text="Area"
                 android:textColor="@color/text_color"
-                android:textStyle="bold" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/cut"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:layout_weight="0.1"
                 android:contentDescription="@string/monster_image" />
 
             <ImageView
                 android:id="@+id/impact"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:layout_weight="0.1"
                 android:contentDescription="@string/monster_image" />
 
             <ImageView
                 android:id="@+id/shot"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:layout_weight="0.1"
                 android:contentDescription="@string/monster_image" />
 
             <ImageView
                 android:id="@+id/ko"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:layout_weight="0.1"
                 android:contentDescription="@string/monster_image" />
 
             <ImageView
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:layout_weight="0.1" />
         </LinearLayout>
 
         <TableLayout
             android:id="@+id/weapon_damage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:padding="10dp" >
         </TableLayout>
 
-        <View
+<!--         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+            android:background="@android:color/darker_gray" /> -->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:background="@color/subheading_color"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/element_area"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:layout_marginTop="3dp"
                 android:text="Area"
                 android:textColor="@color/text_color"
-                android:textStyle="bold" />
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/fire"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:layout_weight="0.1"
                 android:contentDescription="@string/monster_image" />
 
             <ImageView
                 android:id="@+id/water"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:layout_weight="0.1"
                 android:contentDescription="@string/monster_image" />
 
             <ImageView
                 android:id="@+id/ice"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:layout_weight="0.1"
                 android:contentDescription="@string/monster_image" />
 
             <ImageView
                 android:id="@+id/thunder"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:layout_weight="0.1"
                 android:contentDescription="@string/monster_image" />
 
             <ImageView
                 android:id="@+id/dragon"
                 android:layout_width="0dp"
-                android:layout_height="20dp"
+                android:layout_height="24dp"
                 android:layout_weight="0.1"
                 android:contentDescription="@string/monster_image" />
         </LinearLayout>
@@ -153,7 +158,8 @@
         <TableLayout
             android:id="@+id/elemental_damage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:padding="10dp" >
         </TableLayout>
     </LinearLayout>
 
