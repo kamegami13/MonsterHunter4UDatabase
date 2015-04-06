@@ -2279,7 +2279,28 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		QB.setProjectionMap(projectionMap);
 		return QB;
 	}
-		
+
+
+    /********************************* MONSTER WEAKNESS QUERIES ******************************************/
+    /* Get all weaknesses a from a particular monster */
+    public MonsterWeaknessCursor queryWeaknessFromMonster(long id){
+        // SELECT * FROM monster_ailment WHERE monster_id = id
+
+        QueryHelper qh = new QueryHelper();
+        qh.Distinct = true;
+        qh.Table = S.TABLE_WEAKNESS;
+        qh.Columns = null;
+        qh.Selection = S.COLUMN_WEAKNESS_MONSTER_ID + " = " + id;
+        qh.SelectionArgs = null;
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new MonsterWeaknessCursor(wrapHelper(qh));
+    }
+
+
 /********************************* QUEST QUERIES ******************************************/
 	
 	/*

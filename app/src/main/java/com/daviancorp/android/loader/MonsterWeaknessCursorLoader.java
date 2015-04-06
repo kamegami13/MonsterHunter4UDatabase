@@ -5,10 +5,10 @@ import android.database.Cursor;
 
 import com.daviancorp.android.data.database.DataManager;
 
-public class MonsterAilmentCursorLoader extends SQLiteCursorLoader {
+public class MonsterWeaknessCursorLoader extends SQLiteCursorLoader {
     private long id;
 
-    public MonsterAilmentCursorLoader(Context context, long id) {
+    public MonsterWeaknessCursorLoader(Context context, long id) {
         super(context);
         this.id = id;
     }
@@ -16,6 +16,6 @@ public class MonsterAilmentCursorLoader extends SQLiteCursorLoader {
     @Override
     protected Cursor loadCursor() {
         // Query the list of ailments from monster id
-        return DataManager.get(getContext()).queryAilmentsFromId(id);
+        return DataManager.get(getContext()).queryWeaknessFromMonster(id);
     }
 }

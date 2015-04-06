@@ -772,6 +772,14 @@ public class DataManager {
     public MonsterHabitatCursor queryHabitatLocation(long id) {
         return mHelper.queryHabitatLocation(id);
     }
+
+/********************************* MONSTER HABITAT QUERIES ******************************************/
+
+	/* Get a cursor that has all a monsters weaknesses */
+	public MonsterWeaknessCursor queryWeaknessFromMonster(long id){
+		return mHelper.queryWeaknessFromMonster(id);
+	}
+
 /********************************* QUEST QUERIES ******************************************/	
 
 	/* Get a Cursor that has a list of all Quests */

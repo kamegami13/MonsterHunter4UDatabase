@@ -174,9 +174,16 @@
 
         <!-- This layout is dynamically populated to simulate list -->
         <LinearLayout
+            android:id="@+id/weakness_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <LinearLayout
             android:id="@+id/ailments_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
+
     </LinearLayout>
 </ScrollView>
