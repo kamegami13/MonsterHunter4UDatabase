@@ -46,7 +46,6 @@
 
         <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
         <item name="android:actionDropDownStyle">@style/DropDownNavStyle</item>
-        <item name="android:spinnerItemStyle">@style/SpinnerStyle</item>
 
         <item name="android:actionModeBackground">@drawable/primary_drawable</item>
         <item name="android:actionModeSplitBackground">@drawable/primary_drawable</item>

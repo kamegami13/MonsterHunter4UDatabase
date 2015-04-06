@@ -172,14 +172,6 @@ public class ArmorSetBuilderSession {
         notifyArmorSetChangedListeners();
     }
 
-    public void removeAllDecorations(int pieceIndex) {
-        for (int i = 0; i < decorations[pieceIndex].length; i++) {
-            decorations[pieceIndex][i] = noDecoration;
-        }
-
-        notifyArmorSetChangedListeners();
-    }
-
     /** @return True if the user has chosen a piece at the specified index or has created a talisman, false otherwise. */
     public boolean isEquipmentSelected(int pieceIndex) {
         if (pieceIndex == TALISMAN) {
@@ -210,7 +202,10 @@ public class ArmorSetBuilderSession {
         else {
             equipment[pieceIndex] = noEquipment;
         }
-        removeAllDecorations(pieceIndex);
+
+        for (int i = 0; i < decorations[pieceIndex].length; i++) {
+            decorations[pieceIndex][i] = noDecoration;
+        }
 
         notifyArmorSetChangedListeners();
     }
@@ -226,10 +221,10 @@ public class ArmorSetBuilderSession {
 
         skillTreePointsSets.clear();
 
-        Map<Long, SkillTreePointsSet> skillTreeToSkillTreePointsSet = new HashMap<>(); // A map of the current skill trees' ID's in the set and their associated SkillTreePointsSets
+        Map<SkillTree, SkillTreePointsSet> skillTreeToSkillTreePointsSet = new HashMap<>(); // A map of the skill trees in the set and their associated SkillTreePointsSets
 
         for (SkillTreePointsSet pointsSet : skillTreePointsSets) {
-            skillTreeToSkillTreePointsSet.put(pointsSet.getSkillTree().getId(), pointsSet);
+            skillTreeToSkillTreePointsSet.put(pointsSet.getSkillTree(), pointsSet);
         }
 
         for (int i = 0; i < equipment.length; i++) {
@@ -242,17 +237,18 @@ public class ArmorSetBuilderSession {
 
                 SkillTreePointsSet s; // The actual points set that we are working with that will be shown to the user
 
-                if (!skillTreeToSkillTreePointsSet.containsKey(skillTree.getId())) { // If the armor set does not yet have this skill tree registered...
-                    Log.d("SetBuilder", "Registering skill tree..." + skillTree.getName());
+                if (!skillTreeToSkillTreePointsSet.containsKey(skillTree)) { // If the armor set does not yet have this skill tree registered...
+                    Log.d("SetBuilder", "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
 
                     s = new SkillTreePointsSet(); // We add it...
                     s.setSkillTree(skillTree);
                     skillTreePointsSets.add(s);
 
-                    skillTreeToSkillTreePointsSet.put(skillTree.getId(), s);
+                    skillTreeToSkillTreePointsSet.put(skillTree, s);
+
                 } else {
                     Log.d("SetBuilder", "Skill tree " + skillTree.getName() + " already registered!");
-                    s = skillTreeToSkillTreePointsSet.get(skillTree.getId()); // Otherwise, we just find the skill tree set that's already there
+                    s = skillTreeToSkillTreePointsSet.get(skillTree); // Otherwise, we just find the skill tree set that's already there
                 }
 
                 s.setPoints(i, armorSkillTreePoints.get(skillTree));
@@ -279,9 +275,11 @@ public class ArmorSetBuilderSession {
                 Log.d("SetBuilder", "Skill tree added to map: " + itemToSkillTree.getSkillTree().getName());
             }
         }
-        else if (pieceIndex == TALISMAN && getTalisman() != noTalisman) {
+        else if (getTalisman() != noTalisman) {
             skills.put(getTalisman().getSkill1(), getTalisman().getSkill1Points());
+
             if (getTalisman().hasTwoSkills()) {
+                Log.d("SetBuilder", "Talisman has two skills.");
                 skills.put(getTalisman().getSkill2(), getTalisman().getSkill2Points());
             }
         }

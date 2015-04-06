@@ -172,6 +172,8 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
 
     @Override
     public void onArmorSetChanged() {
+        session.updateSkillTreePointsSets(this);
+
         for (OnArmorSetActivityUpdateListener a : onArmorSetActivityUpdateListeners) {
             a.onArmorSetActivityUpdated(session);
         }

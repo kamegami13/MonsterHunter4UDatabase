@@ -51,7 +51,6 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
 
     @Override
     public void onArmorSetActivityUpdated(ArmorSetBuilderSession s) {
-        session.updateSkillTreePointsSets(getActivity().getApplicationContext());
         adapter.notifyDataSetChanged();
     }
 
