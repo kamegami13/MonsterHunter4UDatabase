@@ -10,7 +10,6 @@ iOS Port available here:
 
 https://github.com/nshetty26/MH4UDatabase
 
-https://appsto.re/us/IxHh6.i
 [![Download on the App Store](https://devimages.apple.com.edgekey.net/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg "Download on the App Store")](https://appsto.re/us/IxHh6.i)
 
 List of To-Dos can be found here:
