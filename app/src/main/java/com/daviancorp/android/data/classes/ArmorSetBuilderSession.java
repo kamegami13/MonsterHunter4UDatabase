@@ -221,10 +221,10 @@ public class ArmorSetBuilderSession {
 
         skillTreePointsSets.clear();
 
-        Map<SkillTree, SkillTreePointsSet> skillTreeToSkillTreePointsSet = new HashMap<>(); // A map of the skill trees in the set and their associated SkillTreePointsSets
+        Map<Long, SkillTreePointsSet> skillTreeToSkillTreePointsSet = new HashMap<>(); // A map of the skill trees in the set and their associated SkillTreePointsSets
 
         for (SkillTreePointsSet pointsSet : skillTreePointsSets) {
-            skillTreeToSkillTreePointsSet.put(pointsSet.getSkillTree(), pointsSet);
+            skillTreeToSkillTreePointsSet.put(pointsSet.getSkillTree().getId(), pointsSet);
         }
 
         for (int i = 0; i < equipment.length; i++) {
@@ -237,18 +237,18 @@ public class ArmorSetBuilderSession {
 
                 SkillTreePointsSet s; // The actual points set that we are working with that will be shown to the user
 
-                if (!skillTreeToSkillTreePointsSet.containsKey(skillTree)) { // If the armor set does not yet have this skill tree registered...
+                if (!skillTreeToSkillTreePointsSet.containsKey(skillTree.getId())) { // If the armor set does not yet have this skill tree registered...
                     Log.d("SetBuilder", "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
 
                     s = new SkillTreePointsSet(); // We add it...
                     s.setSkillTree(skillTree);
                     skillTreePointsSets.add(s);
 
-                    skillTreeToSkillTreePointsSet.put(skillTree, s);
+                    skillTreeToSkillTreePointsSet.put(skillTree.getId(), s);
 
                 } else {
                     Log.d("SetBuilder", "Skill tree " + skillTree.getName() + " already registered!");
-                    s = skillTreeToSkillTreePointsSet.get(skillTree); // Otherwise, we just find the skill tree set that's already there
+                    s = skillTreeToSkillTreePointsSet.get(skillTree.getId()); // Otherwise, we just find the skill tree set that's already there
                 }
 
                 s.setPoints(i, armorSkillTreePoints.get(skillTree));
