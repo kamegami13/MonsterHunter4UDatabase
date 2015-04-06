@@ -10,6 +10,10 @@
         android:title="@string/armor_set_builder_action_edit"
         android:visible="false" />
 
+    <item android:id="@id/armor_set_builder_decorations"
+        android:title="@string/armor_set_builder_decoration_info"
+        android:visible="false" />
+
     <item
         android:id="@+id/armor_set_builder_talisman_remove"
         android:title="@string/armor_set_builder_action_remove"

@@ -15,9 +15,6 @@ import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ArmorListActivity extends GenericTabActivity {
 
     private ViewPager viewPager;
@@ -38,6 +35,9 @@ public class ArmorListActivity extends GenericTabActivity {
         // Enable back button if we're coming from the set builder
         if (getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
             super.disableDrawerIndicator();
+        }
+        else {
+            super.enableDrawerIndicator();
         }
     }
 

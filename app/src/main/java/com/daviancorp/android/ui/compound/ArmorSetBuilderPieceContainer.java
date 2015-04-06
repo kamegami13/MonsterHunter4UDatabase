@@ -206,10 +206,6 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
                 popup.getMenu().findItem(R.id.armor_set_builder_remove_piece).setVisible(true);
                 popup.getMenu().findItem(R.id.armor_set_builder_piece_info).setVisible(true);
             }
-
-            if (hasDecorations || hasSlotsAvailable) {
-                popup.getMenu().findItem(R.id.armor_set_builder_decorations).setVisible(true);
-            }
         }
         else {
             popup.inflate(R.menu.menu_set_builder_talisman);
@@ -221,6 +217,10 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
                 popup.getMenu().findItem(R.id.armor_set_builder_talisman_edit).setVisible(true);
                 popup.getMenu().findItem(R.id.armor_set_builder_talisman_remove).setVisible(true);
             }
+        }
+
+        if (hasDecorations || hasSlotsAvailable) {
+            popup.getMenu().findItem(R.id.armor_set_builder_decorations).setVisible(true);
         }
 
         popup.setOnMenuItemClickListener(new PiecePopupMenuClickListener());
@@ -298,7 +298,9 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         private void onMenuEditTalismanSelected() {
             Talisman t = session.getTalisman();
             ArmorSetBuilderTalismanDialogFragment d = ArmorSetBuilderTalismanDialogFragment.newInstance(t.getTypeIndex(),
-                    t.getSkill1().getId(), t.getSkill1Points(), session.getTalisman().hasTwoSkills() ? session.getTalisman().getSkill2().getId() : -1, // If the talisman only has one skill, we want to pass -1 as the id for the second skill
+                    t.getNumSlots(),
+                    t.getSkill1().getId(),
+                    t.getSkill1Points(), t.hasTwoSkills() ? t.getSkill2().getId() : -1, // If the talisman only has one skill, we want to pass -1 as the id for the second skill
                     t.getSkill2Points());
             d.setTargetFragment(parentFragment, ArmorSetBuilderActivity.REQUEST_CODE_CREATE_TALISMAN);
             d.show(parentFragment.getActivity().getSupportFragmentManager(), "TALISMAN");

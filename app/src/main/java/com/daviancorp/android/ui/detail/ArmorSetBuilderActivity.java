@@ -35,6 +35,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
     public static final String EXTRA_TALISMAN_SKILL_TREE_2 = "com.daviancorp.android.ui.detail.skill_tree_2";
     public static final String EXTRA_TALISMAN_SKILL_POINTS_2 = "com.daviancorp.android.ui.detail.skill_points_2";
     public static final String EXTRA_TALISMAN_TYPE_INDEX = "com.daviancorp.android.ui.detail.talisman_type_index";
+    public static final String EXTRA_TALISMAN_SLOTS = "com.daviancorp.android.ui.detail.talisman_slots";
 
     public static final int REQUEST_CODE_ADD_PIECE = 537;
     public static final int REQUEST_CODE_ADD_DECORATION = 538;
@@ -64,6 +65,8 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
         mSlidingTabLayout.setViewPager(viewPager);
 
         onArmorSetActivityUpdateListeners = new ArrayList<>();
+
+        super.enableDrawerIndicator();
     }
 
     @Override
@@ -150,6 +153,7 @@ public class ArmorSetBuilderActivity extends GenericTabActivity implements Armor
 
                 SkillTree skill1Tree = DataManager.get(getApplicationContext()).getSkillTree(skill1Id);
                 talisman = new Talisman(skill1Tree, skill1Points, typeIndex);
+                talisman.setNumSlots(data.getIntExtra(EXTRA_TALISMAN_SLOTS, 0));
 
                 if (data.hasExtra(EXTRA_TALISMAN_SKILL_TREE_2)) {
                     long skill2Id = data.getLongExtra(EXTRA_TALISMAN_SKILL_TREE_2, -1);
