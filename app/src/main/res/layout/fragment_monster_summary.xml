@@ -17,7 +17,7 @@
             android:orientation="horizontal"
             style="@style/list_item"
             android:layout_height="48dp"
-            android:background="@color/header_background_color">
+            android:background="@color/subheading_color">
 
             <TextView
                 android:id="@+id/quick_summary"
@@ -124,7 +124,7 @@
             android:orientation="horizontal"
             style="@style/list_item"
             android:layout_height="48dp"
-            android:background="@color/header_background_color">
+            android:background="@color/subheading_color">
 
             <TextView
                 android:id="@+id/notes"

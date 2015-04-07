@@ -21,8 +21,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 style="@style/list_item"
-                android:layout_height="32dp"
-                android:background="@color/header_background_color">
+                android:background="@color/subheading_color">
 
                 <TextView
                     android:id="@+id/impact_area"
@@ -82,8 +81,7 @@
             <LinearLayout
                 style="@style/list_item"
                 android:orientation="horizontal"
-                android:layout_height="32dp"
-                android:background="@color/header_background_color">
+                android:background="@color/subheading_color">
 
                 <TextView
                     android:id="@+id/element_area"
