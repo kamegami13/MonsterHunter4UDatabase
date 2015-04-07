@@ -76,7 +76,7 @@ public class MonsterDamageFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_monster_detail, container, false);
+		View view = inflater.inflate(R.layout.fragment_monster_damage, container, false);
 		
 		mMonsterLabelTextView = (TextView) view.findViewById(R.id.detail_monster_label);
 		mMonsterIconImageView = (ImageView) view.findViewById(R.id.detail_monster_image);
@@ -138,9 +138,9 @@ public class MonsterDamageFragment extends Fragment {
 		// build each row of both tables per record
 		for(int i = 0; i < damages.size(); i++) {
 			LinearLayout wdRow = (LinearLayout) inflater.inflate(
-					R.layout.fragment_monster_detail_listitem, mWeaponDamageTL, false);
+					R.layout.fragment_monster_damage_listitem, mWeaponDamageTL, false);
 			LinearLayout edRow = (LinearLayout) inflater.inflate(
-					R.layout.fragment_monster_detail_listitem, mElementalDamageTL, false);
+					R.layout.fragment_monster_damage_listitem, mElementalDamageTL, false);
 			  
 			damage = damages.get(i);
 			
