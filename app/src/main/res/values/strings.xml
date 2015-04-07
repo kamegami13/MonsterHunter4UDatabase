@@ -71,6 +71,10 @@
     <string name="wishlist">Wishlists</string>
     <string name="icon_name">MH4U DB</string>
 
+    <string name="dialog_armor_filter_title">Filter</string>
+    <string name="armor_filter_label_rank">Rank</string>
+    <string name="armor_filter_label_slots">Slots</string>
+
     <!--
     Unicode Black Circle \u25CF
     Unicode White Circle \u25CB
@@ -94,4 +98,23 @@
     <string name="armor_set_builder_waist">Waist</string>
     <string name="armor_set_builder_legs">Legs</string>
     <string name="placeholder_unknown">Unknown</string>
+
+    <string-array name="slot_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="filter_restriction">
+        <item>Minimum</item>
+        <item>Exactly</item>
+        <item>Maximum</item>
+    </string-array>
+
+    <string-array name="rank">
+        <item>Low</item>
+        <item>High</item>
+        <item>G</item>
+    </string-array>
 </resources>

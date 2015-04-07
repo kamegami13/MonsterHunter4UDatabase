@@ -37,6 +37,9 @@
         <item name="dropDownListViewStyle">@style/DropDownListViewStyle</item>
         <item name="actionDropDownStyle">@style/DropDownNavStyle</item>
 
+        <item name="android:spinnerItemStyle">@style/SpinnerItemStyle</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemStyle</item>
+
         <item name="actionModeBackground">@drawable/primary_drawable</item>
         <item name="actionModeSplitBackground">@drawable/primary_drawable</item>
         <item name="actionBarItemBackground">@drawable/primary_drawable</item>
@@ -49,9 +52,18 @@
         <item name="android:actionModeSplitBackground">@drawable/primary_drawable</item>
         <item name="android:actionBarItemBackground">@drawable/primary_drawable</item>
 
-
         <item name="android:clipToPadding">false</item>
 
+    </style>
+
+    <style name="SpinnerItemStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textAppearance">@style/text_medium.color_states_enabled</item>
+    </style>
+
+    <style name="SpinnerDropDownItemStyle" parent="SpinnerItemStyle">
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textAppearance">@style/text_medium</item>
     </style>
 
     <style name="PopupMenuStyle" parent="@style/AppTheme">
@@ -122,10 +134,20 @@
         <item name="android:layout_height">64dp</item>
     </style>
 
+    <style name="text_large" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@color/color_states_enabled</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
     <style name="text_medium" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">18sp</item>
         <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="text_medium.color_states_enabled">
+        <item name="android:textColor">@color/color_states_enabled</item>
     </style>
 
     <style name="text_medium_alt" parent="@style/Theme.AppCompat.Light.NoActionBar">
