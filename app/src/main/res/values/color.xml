@@ -8,6 +8,7 @@
     <color name="accent_color">#FF9800</color>
     <color name="text_color_secondary">#727272</color>
     <color name="divider_color">#e5e5e5</color>
+    <color name="header_background_color">#dfdfdf</color>
 
     <color name="list_background">#ffffff</color>
     <color name="list_text">#333333</color>

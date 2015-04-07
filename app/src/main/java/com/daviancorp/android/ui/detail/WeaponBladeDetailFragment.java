@@ -358,7 +358,7 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 
             // Resize listview so its height is based on number of items
             // If this starts getting bugged you need to replace the entire ListView
-            // with a dynamically populated LinearLayout. Example in MonsterDetailFragment.java
+            // with a dynamically populated LinearLayout. Example in MonsterDamageFragment.java
             MHUtils.setListViewHeightBasedOnChildren(mWeaponHornMelodiesListView);
         }
 

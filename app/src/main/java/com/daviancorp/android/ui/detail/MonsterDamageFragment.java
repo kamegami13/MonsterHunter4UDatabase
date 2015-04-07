@@ -20,9 +20,6 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Monster;
@@ -33,9 +30,8 @@ import com.daviancorp.android.data.database.MonsterAilmentCursor;
 import com.daviancorp.android.loader.MonsterAilmentCursorLoader;
 import com.daviancorp.android.loader.MonsterLoader;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.MHUtils;
 
-public class MonsterDetailFragment extends Fragment {
+public class MonsterDamageFragment extends Fragment {
 	private static final String ARG_MONSTER_ID = "MONSTER_ID";
 
 	private Bundle mBundle;
@@ -45,7 +41,7 @@ public class MonsterDetailFragment extends Fragment {
 	private TextView mMonsterLabelTextView;
 	private ImageView mMonsterIconImageView;
 	
-	private TableLayout mWeaponDamageTL, mElementalDamageTL;
+	private LinearLayout mWeaponDamageTL, mElementalDamageTL;
 	private LinearLayout mAilmentsLinearLayout;
     private View mDividerView;
 
@@ -53,10 +49,10 @@ public class MonsterDetailFragment extends Fragment {
 	private ImageView mFireImageView, mWaterImageView, mIceImageView, 
 		mThunderImageView, mDragonImageView;
 	
-	public static MonsterDetailFragment newInstance(long monsterId) {
+	public static MonsterDamageFragment newInstance(long monsterId) {
 		Bundle args = new Bundle();
 		args.putLong(ARG_MONSTER_ID, monsterId);
-		MonsterDetailFragment f = new MonsterDetailFragment();
+		MonsterDamageFragment f = new MonsterDamageFragment();
 		f.setArguments(args);
 		return f;
 	}
@@ -95,8 +91,8 @@ public class MonsterDetailFragment extends Fragment {
 		mThunderImageView = (ImageView) view.findViewById(R.id.thunder);
 		mDragonImageView = (ImageView) view.findViewById(R.id.dragon);
 	
-		mWeaponDamageTL = (TableLayout) view.findViewById(R.id.weapon_damage);
-		mElementalDamageTL = (TableLayout) view.findViewById(R.id.elemental_damage);
+		mWeaponDamageTL = (LinearLayout) view.findViewById(R.id.weapon_damage);
+		mElementalDamageTL = (LinearLayout) view.findViewById(R.id.elemental_damage);
 
         mDividerView = view.findViewById(R.id.divider);
         mAilmentsLinearLayout = (LinearLayout) view.findViewById(R.id.ailments_list);
@@ -137,24 +133,13 @@ public class MonsterDetailFragment extends Fragment {
 		MonsterDamage damage = null;
 		String body_part, cut, impact, shot, ko, fire, water, ice, thunder, dragon;
 		
-//		body_part_tv1
-//		body_part_tv2
-//		cut_tv
-//		impact_tv
-//		shot_tv
-//		ko_tv
-//		fire_tv
-//		water_tv
-//		ice_tv
-//		thunder_tv
-//		dragon_tv
-		
 		LayoutInflater inflater = getLayoutInflater(mBundle);
-		
+
+		// build each row of both tables per record
 		for(int i = 0; i < damages.size(); i++) {
-			TableRow wdRow = (TableRow) inflater.inflate(
+			LinearLayout wdRow = (LinearLayout) inflater.inflate(
 					R.layout.fragment_monster_detail_listitem, mWeaponDamageTL, false);
-			TableRow edRow = (TableRow) inflater.inflate(
+			LinearLayout edRow = (LinearLayout) inflater.inflate(
 					R.layout.fragment_monster_detail_listitem, mElementalDamageTL, false);
 			  
 			damage = damages.get(i);
@@ -169,14 +154,16 @@ public class MonsterDetailFragment extends Fragment {
 			ice = checkDamageValue("" + damage.getIce());
 			thunder = checkDamageValue("" + damage.getThunder());
 			dragon = checkDamageValue("" + damage.getDragon());
-			
+
+			// Table 1
 			TextView body_part_tv1 = (TextView) wdRow.findViewById(R.id.body_part);
-			TextView cut_tv = (TextView) wdRow.findViewById(R.id.dmg1);
-			TextView impact_tv = (TextView) wdRow.findViewById(R.id.dmg2);
-			TextView shot_tv = (TextView) wdRow.findViewById(R.id.dmg3);
-			TextView ko_tv = (TextView) wdRow.findViewById(R.id.dmg4);
-			TextView dummy_tv = (TextView) wdRow.findViewById(R.id.dmg5);
-			
+			TextView dummy_tv = (TextView) wdRow.findViewById(R.id.dmg1);
+			TextView cut_tv = (TextView) wdRow.findViewById(R.id.dmg2);
+			TextView impact_tv = (TextView) wdRow.findViewById(R.id.dmg3);
+			TextView shot_tv = (TextView) wdRow.findViewById(R.id.dmg4);
+			TextView ko_tv = (TextView) wdRow.findViewById(R.id.dmg5);
+
+			// Table 2
 			TextView body_part_tv2 = (TextView) edRow.findViewById(R.id.body_part);
 			TextView fire_tv = (TextView) edRow.findViewById(R.id.dmg1);
 			TextView water_tv = (TextView) edRow.findViewById(R.id.dmg2);
@@ -196,7 +183,7 @@ public class MonsterDetailFragment extends Fragment {
 			thunder_tv.setText(thunder);
 			dragon_tv.setText(dragon);
 			dummy_tv.setText("");
-			
+
 			mWeaponDamageTL.addView(wdRow);
 			mElementalDamageTL.addView(edRow);
 		}
@@ -272,7 +259,7 @@ public class MonsterDetailFragment extends Fragment {
         public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
             // Get the cursor adapter
-            MonsterDetailFragment.MonsterAilmentsCursorAdapter adapter = new MonsterDetailFragment.MonsterAilmentsCursorAdapter(
+            MonsterDamageFragment.MonsterAilmentsCursorAdapter adapter = new MonsterDamageFragment.MonsterAilmentsCursorAdapter(
                     getActivity(), (MonsterAilmentCursor) cursor);
 
             // mAilmentsListView.setAdapter(adapter);

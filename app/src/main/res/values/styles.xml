@@ -88,6 +88,10 @@
         <item name="android:fastScrollEnabled">true</item>
     </style>
 
+    <style name="damage_table_item" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:layout_height">32dp</item>
+    </style>
+
     <style name="expandable_list" parent="@style/list">
         <item name="android:groupIndicator">@null</item>
     </style>
