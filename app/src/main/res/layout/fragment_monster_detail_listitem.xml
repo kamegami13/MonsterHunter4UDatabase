@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableRow xmlns:android="http://schemas.android.com/apk/res/android" >
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp">
 
     <TextView
         android:id="@+id/body_part"
@@ -44,7 +48,7 @@
         android:id="@+id/dmg5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".1" 
+        android:layout_weight=".1"
         android:gravity="center"
         android:textColor="@color/text_color" />
 
