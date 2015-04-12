@@ -42,7 +42,7 @@
         <item>"Decorations,icons_items/Jewel-White.png"</item>
         <item>"Skills,icons_items/Monster-Jewel-White.png"</item>
         <item>"Wishlists,icons_items/Mantle-White.png"</item>
-        <item>"Armor Set Builder,icons_items/Mantle-White.png"</item>
+        <item>"Armor Set Builder,icons_items/Talisman-White.png"</item>
     </string-array> 
 
     <string name="option_list">List</string>
@@ -123,12 +123,12 @@
     <string name="asb_skill_tree_name">Skill</string>
     <string name="asb_skill_points_total">Total</string>
 
-    <string-array name="talisman_names">
+    <string-array name="talisman_names"> <!--TODO: Get talisman icons for missing colors: YELLOW and GREEN -->
         <item>Pawn,Talisman-White.png</item>
         <item>Bishop,Talisman-Purple.png</item>
-        <item>Knight</item>
+        <item>Knight,Talisman-White.png</item>
         <item>Rook,Talisman-Pink.png</item>
-        <item>Queen</item>
+        <item>Queen,Talisman-White.png</item>
         <item>King,Talisman-Cyan.png</item>
         <item>Dragon,Talisman-Red.png</item>
         <item>Unknowable,Talisman-Blue.png</item>
