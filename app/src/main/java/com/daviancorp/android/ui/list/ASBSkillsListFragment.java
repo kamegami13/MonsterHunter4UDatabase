@@ -11,24 +11,23 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
+import com.daviancorp.android.data.classes.ASBSession;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.SkillClickListener;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
+import com.daviancorp.android.ui.detail.ASBActivity;
 
 import java.util.Comparator;
 import java.util.List;
 
-public class ArmorSetBuilderSkillsListFragment extends Fragment implements ArmorSetBuilderActivity.OnArmorSetActivityUpdateListener {
+public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASBSetActivityUpdateListener {
 
-    private ArmorSetBuilderSession session;
-    private ArmorSetBuilderSkillsAdapter adapter;
+    private ASBSession session;
+    private ASBSkillsAdapter adapter;
 
-    public static ArmorSetBuilderSkillsListFragment newInstance(ArmorSetBuilderSession session) {
+    public static ASBSkillsListFragment newInstance() {
         Bundle args = new Bundle();
-        ArmorSetBuilderSkillsListFragment f = new ArmorSetBuilderSkillsListFragment();
+        ASBSkillsListFragment f = new ASBSkillsListFragment();
         f.setArguments(args);
-        f.session = session;
         return f;
     }
 
@@ -39,39 +38,46 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_armor_set_builder_skills, container, false);
+        View v = inflater.inflate(R.layout.fragment_asb_skills_list, container, false);
 
         ListView listView = (ListView) v.findViewById(R.id.list);
 
-        adapter = new ArmorSetBuilderSkillsAdapter(getActivity().getApplicationContext(), session.getSkillTreePointsSets(), session);
+        adapter = new ASBSkillsAdapter(getActivity().getApplicationContext(), session.getSkillTreePointsSets(), session);
         listView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
 
         return v;
     }
 
     @Override
-    public void onArmorSetActivityUpdated(ArmorSetBuilderSession s) {
+    public void onASBActivityUpdated(ASBSession s) {
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((ArmorSetBuilderActivity) getActivity()).addArmorSetChangedListener(this);
+        ASBActivity a = (ASBActivity) getActivity();
+        a.addASBSetChangedListener(this);
+        session = a.getASBSession();
     }
 
-    private class ArmorSetBuilderSkillsAdapter extends ArrayAdapter<ArmorSetBuilderSession.SkillTreePointsSet> {
+    private static class ASBSkillsAdapter extends ArrayAdapter<ASBSession.SkillTreePointsSet> {
 
         private static final int MINIMUM_SKILL_ACTIVATION_POINTS = 10;
 
-        public ArmorSetBuilderSkillsAdapter(Context context, List<ArmorSetBuilderSession.SkillTreePointsSet> trees, ArmorSetBuilderSession session) {
-            super(context, R.layout.fragment_armor_set_builder_skills_item, trees);
+        ASBSession session;
+
+        public ASBSkillsAdapter(Context context, List<ASBSession.SkillTreePointsSet> trees, ASBSession session) {
+            super(context, R.layout.fragment_asb_skills_listitem, trees);
+            this.session = session;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater.from(getContext()));
-            View itemView = inflater.inflate(R.layout.fragment_armor_set_builder_skills_item, parent, false); // Conditional inflation really isn't necessary simply because of how many skills you'd have to have.
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            View itemView = inflater.inflate(R.layout.fragment_asb_skills_listitem, parent, false); // Conditional inflation really isn't necessary simply because of how many skills you'd have to have.
 
             TextView treeName = (TextView) itemView.findViewById(R.id.skill_tree_name);
             TextView headPoints = (TextView) itemView.findViewById(R.id.helmet);
@@ -84,27 +90,27 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
 
             treeName.setText(getItem(position).getSkillTree().getName());
 
-            if (session.isEquipmentSelected(ArmorSetBuilderSession.HEAD)) {
+            if (session.isEquipmentSelected(ASBSession.HEAD)) {
                 headPoints.setText(String.valueOf(getItem(position).getHeadPoints()));
             }
 
-            if (session.isEquipmentSelected(ArmorSetBuilderSession.BODY)) {
+            if (session.isEquipmentSelected(ASBSession.BODY)) {
                 bodyPoints.setText(String.valueOf(getItem(position).getBodyPoints()));
             }
 
-            if (session.isEquipmentSelected(ArmorSetBuilderSession.ARMS)) {
+            if (session.isEquipmentSelected(ASBSession.ARMS)) {
                 armsPoints.setText(String.valueOf(getItem(position).getArmsPoints()));
             }
 
-            if (session.isEquipmentSelected(ArmorSetBuilderSession.WAIST)) {
+            if (session.isEquipmentSelected(ASBSession.WAIST)) {
                 waistPoints.setText(String.valueOf(getItem(position).getWaistPoints()));
             }
 
-            if (session.isEquipmentSelected(ArmorSetBuilderSession.LEGS)) {
+            if (session.isEquipmentSelected(ASBSession.LEGS)) {
                 legsPoints.setText(String.valueOf(getItem(position).getLegsPoints()));
             }
 
-            if (session.isEquipmentSelected(ArmorSetBuilderSession.TALISMAN)) {
+            if (session.isEquipmentSelected(ASBSession.TALISMAN)) {
                 talismanPoints.setText(String.valueOf(getItem(position).getTalismanPoints()));
             }
 
@@ -114,7 +120,7 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
                 totalPoints.setTypeface(null, Typeface.BOLD);
             }
             
-            itemView.setOnClickListener(new SkillClickListener(ArmorSetBuilderSkillsListFragment.this.getActivity(), getItem(position).getSkillTree().getId()));
+            itemView.setOnClickListener(new SkillClickListener(parent.getContext(), getItem(position).getSkillTree().getId()));
 
             return itemView;
         }
@@ -127,9 +133,9 @@ public class ArmorSetBuilderSkillsListFragment extends Fragment implements Armor
             super.notifyDataSetChanged(); // super#notifyDataSetChanged automatically sets notifyOnChange back to true.
         }
 
-        Comparator<ArmorSetBuilderSession.SkillTreePointsSet> comparator = new Comparator<ArmorSetBuilderSession.SkillTreePointsSet>() {
+        Comparator<ASBSession.SkillTreePointsSet> comparator = new Comparator<ASBSession.SkillTreePointsSet>() {
             @Override
-            public int compare(ArmorSetBuilderSession.SkillTreePointsSet lhs, ArmorSetBuilderSession.SkillTreePointsSet rhs) {
+            public int compare(ASBSession.SkillTreePointsSet lhs, ASBSession.SkillTreePointsSet rhs) {
                 return rhs.getTotal() - lhs.getTotal();
             }
         };

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:background="@drawable/dialog_clicked_states"
-            android:text="@string/armor_set_builder_no_slot" />
+            android:text="@string/asb_no_slot" />
 
         <ImageView android:id="@+id/decoration_1_menu"
             android:layout_width="0dp"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:background="@drawable/dialog_clicked_states"
-            android:text="@string/armor_set_builder_no_slot" />
+            android:text="@string/asb_no_slot" />
 
         <ImageView android:id="@+id/decoration_2_menu"
             android:layout_width="0dp"
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:background="@drawable/dialog_clicked_states"
-            android:text="@string/armor_set_builder_no_slot" />
+            android:text="@string/asb_no_slot" />
 
         <ImageView android:id="@+id/decoration_3_menu"
             android:layout_width="0dp"

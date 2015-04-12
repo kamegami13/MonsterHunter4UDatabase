@@ -30,18 +30,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
-import com.daviancorp.android.ui.list.ArmorListActivity;
-import com.daviancorp.android.ui.list.CombiningListActivity;
-import com.daviancorp.android.ui.list.DecorationListActivity;
-import com.daviancorp.android.ui.list.ItemListActivity;
-import com.daviancorp.android.ui.list.LocationListActivity;
-import com.daviancorp.android.ui.list.MonsterListActivity;
-import com.daviancorp.android.ui.list.QuestListActivity;
-import com.daviancorp.android.ui.list.SkillTreeListActivity;
-import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
-import com.daviancorp.android.ui.list.WishlistListActivity;
+import com.daviancorp.android.ui.list.*;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 import java.io.IOException;
@@ -179,7 +169,7 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                 intent = new Intent(GenericActionBarActivity.this, WishlistListActivity.class);
                 break;
             case 10:
-                intent = new Intent(GenericActionBarActivity.this, ArmorSetBuilderActivity.class);
+                intent = new Intent(GenericActionBarActivity.this, ASBSetListActivity.class);
         }
         final Intent finalIntent = intent;
 

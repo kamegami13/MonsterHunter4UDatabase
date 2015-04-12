@@ -1,37 +1,10 @@
 package com.daviancorp.android.data.database;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.database.SQLException;
 
-import com.daviancorp.android.data.classes.ArenaQuest;
-import com.daviancorp.android.data.classes.ArenaReward;
-import com.daviancorp.android.data.classes.Armor;
-import com.daviancorp.android.data.classes.Combining;
-import com.daviancorp.android.data.classes.Component;
-import com.daviancorp.android.data.classes.Decoration;
-import com.daviancorp.android.data.classes.Gathering;
-import com.daviancorp.android.data.classes.HuntingFleet;
-import com.daviancorp.android.data.classes.HuntingReward;
-import com.daviancorp.android.data.classes.Item;
-import com.daviancorp.android.data.classes.ItemToSkillTree;
-import com.daviancorp.android.data.classes.Location;
-import com.daviancorp.android.data.classes.MogaWoodsReward;
-import com.daviancorp.android.data.classes.Monster;
-import com.daviancorp.android.data.classes.MonsterDamage;
-import com.daviancorp.android.data.classes.MonsterStatus;
-import com.daviancorp.android.data.classes.MonsterToArena;
-import com.daviancorp.android.data.classes.MonsterToQuest;
-import com.daviancorp.android.data.classes.Quest;
-import com.daviancorp.android.data.classes.QuestReward;
-import com.daviancorp.android.data.classes.Skill;
-import com.daviancorp.android.data.classes.SkillTree;
-import com.daviancorp.android.data.classes.Weapon;
-import com.daviancorp.android.data.classes.Wishlist;
-import com.daviancorp.android.data.classes.WishlistComponent;
-import com.daviancorp.android.data.classes.WishlistData;
+import com.daviancorp.android.data.classes.*;
 import com.daviancorp.android.ui.general.WeaponListEntry;
 
 /*
@@ -1368,5 +1341,46 @@ public class DataManager {
 		}
 		
 		wdc.close();
+	}
+
+	/********************************* ARMOR SET BUILDER QUERIES ******************************************/
+
+	/** Get a cursor with a list of all armor sets. */
+	public ASBSetCursor queryASBSets() {
+		return mHelper.queryASBSets();
+	}
+
+	/** Get a specific armor set. */
+	public ASBSession getASBSet(long id) {
+		ASBSession session = null;
+		ASBSetCursor cursor = mHelper.queryASBSet(id);
+		cursor.moveToFirst();
+
+		if (!cursor.isAfterLast())
+			session = cursor.getASBSet(mAppContext);
+
+		cursor.close();
+		return session;
+	}
+
+	/** Adds a new ASB set to the list. */
+	public void queryAddASBSet(String name, int rank,  int hunterType) {
+		mHelper.queryAddASBSet(name, rank, hunterType);
+	}
+
+	public void queryPutASBSetArmor(long asbSetId, long armorId, int pieceIndex) {
+		mHelper.queryAddASBSetArmor(asbSetId, armorId, pieceIndex);
+	}
+
+	public void queryRemoveASBSetArmor(long asbSetId, int pieceIndex) {
+		mHelper.queryAddASBSetArmor(asbSetId, -1, pieceIndex);
+	}
+
+	public void queryPutASBSetDecoration(long asbSetId, long decorationId, int pieceIndex, int decorationIndex) {
+		mHelper.queryPutASBSetDecoration(asbSetId, decorationId, pieceIndex, decorationIndex);
+	}
+
+	public void queryRemoveASBSetDecoration(long asbSetId, int pieceIndex, int decorationIndex) {
+		mHelper.queryPutASBSetDecoration(asbSetId, -1, pieceIndex, decorationIndex);
 	}
 }

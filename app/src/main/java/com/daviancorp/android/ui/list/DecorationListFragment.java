@@ -3,7 +3,6 @@ package com.daviancorp.android.ui.list;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -24,7 +23,7 @@ import com.daviancorp.android.data.database.DecorationCursor;
 import com.daviancorp.android.loader.DecorationListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.DecorationClickListener;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
+import com.daviancorp.android.ui.detail.ASBActivity;
 
 import java.io.IOException;
 
@@ -77,22 +76,23 @@ public class DecorationListFragment extends ListFragment implements
         private DecorationCursor mDecorationCursor;
 
         private Activity activity;
-        private boolean fromArmorSetBuilder;
+        private boolean fromAsb;
 
         public DecorationListCursorAdapter(Context context,
                                            DecorationCursor cursor) {
             super(context, cursor, 0);
             mDecorationCursor = cursor;
 
-            if (context instanceof Activity && ((Activity) context).getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            // ASB stuff
+            if (context instanceof Activity && ((Activity) context).getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
                 activity = (Activity) context;
-                fromArmorSetBuilder = true;
+                fromAsb = true;
                 
             }
         }
 
         @Override
-        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+                 public View newView(Context context, Cursor cursor, ViewGroup parent) {
             // Use a layout inflater to get a row view
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -151,7 +151,7 @@ public class DecorationListFragment extends ListFragment implements
 
             itemLayout.setTag(decoration.getId());
 
-            if (fromArmorSetBuilder) {
+            if (fromAsb) {
                 itemLayout.setOnClickListener(new DecorationClickListener(context, decoration.getId(), true, activity));
             }
             else {

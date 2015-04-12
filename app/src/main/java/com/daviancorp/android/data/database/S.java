@@ -347,4 +347,49 @@ public class S {
 	static final String COLUMN_WISHLIST_COMPONENT_COMPONENT_ID = "component_id";
 	static final String COLUMN_WISHLIST_COMPONENT_QUANTITY = "quantity";
 	static final String COLUMN_WISHLIST_COMPONENT_NOTES = "notes";
+
+	// Armor Sets
+	static final String TABLE_ARMOR_SET = "asb_sets";
+
+	static final String COLUMN_ARMOR_SET_ID = "_id";
+
+	static final String COLUMN_ARMOR_SET_NAME = "name";
+	static final String COLUMN_ARMOR_SET_RANK = "rank";
+	static final String COLUMN_ARMOR_SET_HUNTER_TYPE = "hunter_type";
+	
+	static final String COLUMN_HEAD_ARMOR_ID = "head_armor";
+	static final String COLUMN_HEAD_DECORATION_1_ID = "head_decoration_1";
+	static final String COLUMN_HEAD_DECORATION_2_ID = "head_decoration_2";
+	static final String COLUMN_HEAD_DECORATION_3_ID = "head_decoration_3";
+	
+	static final String COLUMN_BODY_ARMOR_ID = "body_armor";
+	static final String COLUMN_BODY_DECORATION_1_ID = "body_decoration_1";
+	static final String COLUMN_BODY_DECORATION_2_ID = "body_decoration_2";
+	static final String COLUMN_BODY_DECORATION_3_ID = "body_decoration_3";
+	
+	static final String COLUMN_ARMS_ARMOR_ID = "arms_armor";
+	static final String COLUMN_ARMS_DECORATION_1_ID = "arms_decoration_1";
+	static final String COLUMN_ARMS_DECORATION_2_ID = "arms_decoration_2";
+	static final String COLUMN_ARMS_DECORATION_3_ID = "arms_decoration_3";
+	
+	static final String COLUMN_WAIST_ARMOR_ID = "waist_armor";
+	static final String COLUMN_WAIST_DECORATION_1_ID = "waist_decoration_1";
+	static final String COLUMN_WAIST_DECORATION_2_ID = "waist_decoration_2";
+	static final String COLUMN_WAIST_DECORATION_3_ID = "waist_decoration_3";
+	
+	static final String COLUMN_LEGS_ARMOR_ID = "legs_armor";
+	static final String COLUMN_LEGS_DECORATION_1_ID = "legs_decoration_1";
+	static final String COLUMN_LEGS_DECORATION_2_ID = "legs_decoration_2";
+	static final String COLUMN_LEGS_DECORATION_3_ID = "legs_decoration_3";
+
+	static final String COLUMN_TALISMAN_EXISTS = "talisman_exists";
+	static final String COLUMN_TALISMAN_TYPE = "talisman_type";
+	static final String COLUMN_TALISMAN_SLOTS = "talisman_slots";
+	static final String COLUMN_TALISMAN_DECORATION_1_ID = "talisman_decoration_1";
+	static final String COLUMN_TALISMAN_DECORATION_2_ID = "talisman_decoration_2";
+	static final String COLUMN_TALISMAN_DECORATION_3_ID = "talisman_decoration_3";
+	static final String COLUMN_TALISMAN_SKILL_1_ID = "talisman_skill_1";
+	static final String COLUMN_TALISMAN_SKILL_1_POINTS = "talisman_skill_1_points";
+	static final String COLUMN_TALISMAN_SKILL_2_ID = "talisman_skill_2";
+	static final String COLUMN_TALISMAN_SKILL_2_POINTS = "talisman_skill_2_points";
 }

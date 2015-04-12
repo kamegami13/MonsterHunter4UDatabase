@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
+import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 
 /**
@@ -15,7 +15,7 @@ public class DecorationClickListener implements View.OnClickListener {
     private Context c;
     private Long id;
 
-    private boolean fromArmorSetBuilder;
+    private boolean fromAsb;
     private Activity activity;
 
     public DecorationClickListener(Context context, Long id) {
@@ -24,9 +24,9 @@ public class DecorationClickListener implements View.OnClickListener {
         this.c = context;
     }
 
-    public DecorationClickListener(Context context, Long id, boolean fromArmorSetBuilder, Activity activity) {
+    public DecorationClickListener(Context context, Long id, boolean fromAsb, Activity activity) {
         this(context, id);
-        this.fromArmorSetBuilder = fromArmorSetBuilder;
+        this.fromAsb = fromAsb;
         this.activity = activity;
     }
 
@@ -35,9 +35,9 @@ public class DecorationClickListener implements View.OnClickListener {
         Intent i = new Intent(c, DecorationDetailActivity.class);
         i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, id);
 
-        if (fromArmorSetBuilder) {
+        if (fromAsb) {
             i.putExtras(activity.getIntent());
-            activity.startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE_ADD_DECORATION);
+            activity.startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_DECORATION);
         }
         else {
             c.startActivity(i);

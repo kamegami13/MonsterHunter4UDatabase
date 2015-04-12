@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:gravity="center"
-            android:text="@string/armor_set_builder_skill_name"
+            android:text="@string/asb_skill_tree_name"
             android:textColor="@color/text_primary_color" />
 
         <ImageView
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
             android:gravity="center"
-            android:text="@string/armor_set_builder_skill_points_total"
+            android:text="@string/asb_skill_points_total"
             android:textColor="@color/text_primary_color" />
 
     </LinearLayout>

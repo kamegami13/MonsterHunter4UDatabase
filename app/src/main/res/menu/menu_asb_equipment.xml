@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/armor_set_builder_add_piece"
-        android:title="@string/armor_set_builder_action_add"
+        android:title="@string/asb_action_add"
         android:visible="false" />
 
     <item
         android:id="@+id/armor_set_builder_remove_piece"
-        android:title="@string/armor_set_builder_action_remove"
+        android:title="@string/asb_action_remove"
         android:visible="false" />
 
     <item
         android:id="@+id/armor_set_builder_decorations"
-        android:title="@string/armor_set_builder_decoration_info"
+        android:title="@string/asb_action_decorations"
         android:visible="false" />
 
     <item
         android:id="@+id/armor_set_builder_piece_info"
-        android:title="@string/armor_set_builder_piece_info"
+        android:title="@string/asb_action_armor_piece"
         android:visible="false" />
 </menu>

@@ -6,13 +6,10 @@ import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
 import android.util.AttributeSet;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,10 +17,10 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.SkillTree;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
+import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
 
-public class ArmorSetBuilderTalismanSkillContainer extends LinearLayout {
+public class ASBTalismanSkillContainer extends LinearLayout {
 
     private static final int TALISMAN_SKILL_POINTS_MIN = -10;
     private static final int TALISMAN_SKILL_POINTS_MAX = 14;
@@ -40,7 +37,7 @@ public class ArmorSetBuilderTalismanSkillContainer extends LinearLayout {
 
     private ChangeListener changeListener;
 
-    public ArmorSetBuilderTalismanSkillContainer(Context context, AttributeSet attrs) {
+    public ASBTalismanSkillContainer(Context context, AttributeSet attrs) {
 
         super(context, attrs);
 
@@ -163,10 +160,10 @@ public class ArmorSetBuilderTalismanSkillContainer extends LinearLayout {
         if (skillTree == null) {
             Intent i = new Intent(getContext(), SkillTreeListActivity.class);
 
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_TALISMAN_EDITOR, true);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_INDEX, skillIndex - 1);
+            i.putExtra(ASBActivity.EXTRA_FROM_TALISMAN_EDITOR, true);
+            i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_INDEX, skillIndex - 1);
 
-            parent.startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE_CREATE_TALISMAN);
+            parent.startActivityForResult(i, ASBActivity.REQUEST_CODE_CREATE_TALISMAN);
         }
         else {
             setSkillTree(null);

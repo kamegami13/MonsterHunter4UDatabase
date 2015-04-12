@@ -1,8 +1,6 @@
 package com.daviancorp.android.data.classes;
 
-import android.util.Log;
-
-public class Talisman extends Equipment {
+public class ASBTalisman extends Equipment {
 
     private SkillTree[] skillTrees;
 
@@ -13,7 +11,7 @@ public class Talisman extends Equipment {
     /**
      * Used when creating a generic "dummy" talisman with no skills.
      */
-    public Talisman() {
+    public ASBTalisman() {
         skillTrees = new SkillTree[2];
         skillPoints = new int[2];
     }
@@ -21,21 +19,21 @@ public class Talisman extends Equipment {
     /**
      * Used when creating a talisman with one skill.
      */
-    public Talisman(SkillTree skill1, int skill1Points, int typeIndex) {
+    public ASBTalisman(SkillTree skill1, int skill1Points, int typeIndex) {
         this(skill1, skill1Points, typeIndex, false);
     }
 
     /**
      * Used when creating a talisman with two skills.
      */
-    public Talisman(SkillTree skill1, int skill1Points, SkillTree skill2, int skill2Points, int typeIndex) {
+    public ASBTalisman(SkillTree skill1, int skill1Points, SkillTree skill2, int skill2Points, int typeIndex) {
         this(skill1, skill1Points, typeIndex, false);
 
         skillTrees[1] = skill2;
         skillPoints[1] = skill2Points;
     }
 
-    private Talisman(SkillTree skill1, int skill1Points, int typeIndex, boolean hasSkill2) {
+    private ASBTalisman(SkillTree skill1, int skill1Points, int typeIndex, boolean hasSkill2) {
         this();
 
         skillTrees[0] = skill1;
@@ -49,30 +47,36 @@ public class Talisman extends Equipment {
         }
     }
 
-    public void setSecondSkill(SkillTree newSkillTree, int newSkillPoints) {
-        if (skillTrees[0] != null) {
-            skillTrees[1] = newSkillTree;
-            skillPoints[1] = newSkillPoints;
-        }
-        else {
-            Log.e("SetBuilder", "Attempt to set the second skill on a talisman that doesn't yet have the first skill.");
-        }
-    }
-
     public SkillTree getSkill1() {
         return skillTrees[0];
+    }
+
+    public void setSkill1(SkillTree skillTree) {
+        skillTrees[0] = skillTree;
     }
 
     public SkillTree getSkill2() {
         return skillTrees[1];
     }
 
+    public void setSkill2(SkillTree skillTree) {
+        skillTrees[1] = skillTree;
+    }
+
     public int getSkill1Points() {
         return skillPoints[0];
     }
 
+    public void setSkill1Points(int skillPoints) {
+        this.skillPoints[0] = skillPoints;
+    }
+
     public int getSkill2Points() {
         return skillPoints[1];
+    }
+
+    public void setSkill2Points(int skillPoints) {
+        this.skillPoints[1] = skillPoints;
     }
 
     @Override

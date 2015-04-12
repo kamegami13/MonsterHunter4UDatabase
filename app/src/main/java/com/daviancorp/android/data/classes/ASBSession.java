@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Represents a session of the user's interaction with the Armor Set Builder.
  */
-public class ArmorSetBuilderSession {
+public class ASBSession {
 
     public static final int HEAD = 0;
     public static final int BODY = 1;
@@ -19,7 +19,7 @@ public class ArmorSetBuilderSession {
     public static final int TALISMAN = 5;
 
     private static Equipment noEquipment = new Equipment();
-    private static Talisman noTalisman = new Talisman();
+    private static ASBTalisman noTalisman = new ASBTalisman();
 
     private static Decoration noDecoration = new Decoration();
     public static Decoration dummyDecoration = new Decoration();
@@ -29,12 +29,17 @@ public class ArmorSetBuilderSession {
 
     private List<SkillTreePointsSet> skillTreePointsSets;
 
-    private List<OnArmorSetChangedListener> changedListeners;
+    private List<OnASBSetChangedListener> changedListeners;
+
+    private long id;
+    private String name;
+    private int rank;
+    private int hunterType; // 0 is undefined, 1 is blademaster, 2 is gunner
 
     /**
      * Default constructor.
      */
-    public ArmorSetBuilderSession() {
+    public ASBSession() {
 
         equipment = new Equipment[6];
         for (int i = 0; i < equipment.length; i++) {
@@ -56,6 +61,38 @@ public class ArmorSetBuilderSession {
         skillTreePointsSets = new ArrayList<>();
 
         changedListeners = new ArrayList<>();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public int getHunterType() {
+        return hunterType;
+    }
+
+    public void setHunterType(int hunterType) {
+        this.hunterType = hunterType;
     }
 
     public Decoration getDecoration(int pieceIndex, int decorationIndex) {
@@ -110,11 +147,11 @@ public class ArmorSetBuilderSession {
 
     /**
      * Attempts to add a decoration to the specified armor piece.
-     * @param pieceIndex The index of a piece in the set to fetch, according to {@link com.daviancorp.android.data.classes.ArmorSetBuilderSession}.
+     * @param pieceIndex The index of a piece in the set to fetch, according to {@link ASBSession}.
      * @param decoration The decoration to add.
-     * @return True if the piece was successfuly added, otherwise false.
+     * @return The 0-based index of the slot that the decoration was added to.
      */
-    public boolean addDecoration(int pieceIndex, Decoration decoration) {
+    public int addDecoration(int pieceIndex, Decoration decoration) {
         if (getAvailableSlots(pieceIndex) >= decoration.getNumSlots()) {
             int i = 0;
             while (decorations[pieceIndex][i] != noDecoration) {
@@ -131,10 +168,10 @@ public class ArmorSetBuilderSession {
                 decorations[pieceIndex][i + 2] = dummyDecoration;
             }
 
-            notifyArmorSetChangedListeners();
-            return true;
+            notifyASBSetChangedListeners();
+            return i;
         } else {
-            return false;
+            return -1;
         }
     }
 
@@ -169,7 +206,7 @@ public class ArmorSetBuilderSession {
 
         decorations[pieceIndex] = newDecorations;
 
-        notifyArmorSetChangedListeners();
+        notifyASBSetChangedListeners();
     }
 
     /** @return True if the user has chosen a piece at the specified index or has created a talisman, false otherwise. */
@@ -183,7 +220,7 @@ public class ArmorSetBuilderSession {
     public void setEquipment(int pieceIndex, Equipment equip) {
         equipment[pieceIndex] = equip;
 
-        notifyArmorSetChangedListeners();
+        notifyASBSetChangedListeners();
     }
 
     /** @return A piece of the armor set based on the provided piece index. */
@@ -191,8 +228,8 @@ public class ArmorSetBuilderSession {
         return equipment[pieceIndex];
     }
 
-    public Talisman getTalisman() {
-        return (Talisman)equipment[TALISMAN];
+    public ASBTalisman getTalisman() {
+        return (ASBTalisman)equipment[TALISMAN];
     }
 
     public void removeEquipment(int pieceIndex) {
@@ -207,7 +244,7 @@ public class ArmorSetBuilderSession {
             decorations[pieceIndex][i] = noDecoration;
         }
 
-        notifyArmorSetChangedListeners();
+        notifyASBSetChangedListeners();
     }
 
     public List<SkillTreePointsSet> getSkillTreePointsSets() {
@@ -229,7 +266,7 @@ public class ArmorSetBuilderSession {
 
         for (int i = 0; i < equipment.length; i++) {
 
-            Log.v("SetBuilder", "Reading skills from armor piece " + i);
+            Log.v("ASB", "Reading skills from armor piece " + i);
 
             Map<SkillTree, Integer> armorSkillTreePoints = getSkillsFromArmorPiece(i, context); // A map of the current piece of armor's skills, localized so we don't have to keep calling it
 
@@ -238,7 +275,7 @@ public class ArmorSetBuilderSession {
                 SkillTreePointsSet s; // The actual points set that we are working with that will be shown to the user
 
                 if (!skillTreeToSkillTreePointsSet.containsKey(skillTree.getId())) { // If the armor set does not yet have this skill tree registered...
-                    Log.d("SetBuilder", "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
+                    Log.d("ASB", "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
 
                     s = new SkillTreePointsSet(); // We add it...
                     s.setSkillTree(skillTree);
@@ -247,7 +284,7 @@ public class ArmorSetBuilderSession {
                     skillTreeToSkillTreePointsSet.put(skillTree.getId(), s);
 
                 } else {
-                    Log.d("SetBuilder", "Skill tree " + skillTree.getName() + " already registered!");
+                    Log.d("ASB", "Skill tree " + skillTree.getName() + " already registered!");
                     s = skillTreeToSkillTreePointsSet.get(skillTree.getId()); // Otherwise, we just find the skill tree set that's already there
                 }
 
@@ -272,14 +309,14 @@ public class ArmorSetBuilderSession {
         if (pieceIndex != TALISMAN) {
             for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(equipment[pieceIndex].getId())) { // We add skills for armor
                 skills.put(itemToSkillTree.getSkillTree(), itemToSkillTree.getPoints());
-                Log.d("SetBuilder", "Skill tree added to map: " + itemToSkillTree.getSkillTree().getName());
+                Log.d("ASB", "Skill tree added to map: " + itemToSkillTree.getSkillTree().getName());
             }
         }
         else if (getTalisman() != noTalisman) {
             skills.put(getTalisman().getSkill1(), getTalisman().getSkill1Points());
 
             if (getTalisman().hasTwoSkills()) {
-                Log.d("SetBuilder", "Talisman has two skills.");
+                Log.d("ASB", "Talisman has two skills.");
                 skills.put(getTalisman().getSkill2(), getTalisman().getSkill2Points());
             }
         }
@@ -298,23 +335,23 @@ public class ArmorSetBuilderSession {
         return skills;
     }
 
-    public void addOnArmorSetChangedListener(OnArmorSetChangedListener l) {
+    public void addOnASBSetChangedListener(OnASBSetChangedListener l) {
         changedListeners.add(l);
     }
 
-    public void detachOnArmorSetChangedListener(OnArmorSetChangedListener l) {
+    public void detachOnASBSetChangedListener(OnASBSetChangedListener l) {
         changedListeners.remove(l);
     }
 
-    private void notifyArmorSetChangedListeners() {
-        for (OnArmorSetChangedListener l : changedListeners) {
-            l.onArmorSetChanged();
+    private void notifyASBSetChangedListeners() {
+        for (OnASBSetChangedListener l : changedListeners) {
+            l.onASBSetChanged();
         }
     }
 
-    /** Allows an object to be notified when the {@code ArmorSetBuilderSession} is changed in some way. */
-    public static interface OnArmorSetChangedListener {
-        public void onArmorSetChanged();
+    /** Allows an object to be notified when the {@code ASBSession} is changed in some way. */
+    public static interface OnASBSetChangedListener {
+        public void onASBSetChanged();
     }
 
     /**

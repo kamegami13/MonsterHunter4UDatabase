@@ -20,7 +20,7 @@ import com.daviancorp.android.data.database.SkillTreeCursor;
 import com.daviancorp.android.loader.SkillTreeListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.SkillClickListener;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
+import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
 
 public class SkillTreeListFragment extends ListFragment implements
@@ -85,7 +85,7 @@ public class SkillTreeListFragment extends ListFragment implements
 			String cellText = skilltree.getName();
 			skilltreeNameTextView.setText(cellText);
 
-            if (getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_TALISMAN_EDITOR, false)) {
+            if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_TALISMAN_EDITOR, false)) {
                 itemLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

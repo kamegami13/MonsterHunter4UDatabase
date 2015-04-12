@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
+import com.daviancorp.android.ui.detail.ASBActivity;
 
 /**
  * Created by Mark on 2/24/2015.
@@ -15,7 +15,7 @@ public class ArmorClickListener implements View.OnClickListener {
 
     private Context c;
     private Long id;
-    private boolean fromArmorSetBuilder;
+    private boolean fromAsb;
     private Activity activity;
 
     public ArmorClickListener(Context context, Long id) {
@@ -24,9 +24,9 @@ public class ArmorClickListener implements View.OnClickListener {
         this.c = context;
     }
 
-    public ArmorClickListener(Context context, Long id, boolean fromArmorSetBuilder, Activity activity) {
+    public ArmorClickListener(Context context, Long id, boolean fromAsb, Activity activity) {
         this(context, id);
-        this.fromArmorSetBuilder = fromArmorSetBuilder;
+        this.fromAsb = fromAsb;
         this.activity = activity;
     }
 
@@ -35,9 +35,9 @@ public class ArmorClickListener implements View.OnClickListener {
         Intent i = new Intent(c, ArmorDetailActivity.class);
         i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, id);
 
-        if (fromArmorSetBuilder) {
+        if (fromAsb) {
             i.putExtras(activity.getIntent());
-            activity.startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE_ADD_PIECE);
+            activity.startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_PIECE);
         }
         else {
             c.startActivity(i);

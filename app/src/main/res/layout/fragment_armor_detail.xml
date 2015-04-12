@@ -185,7 +185,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/generic_element_vertical_spacing"
-        android:text="@string/armor_set_builder_select_item"
+        android:text="@string/asb_action_select"
         android:visibility="gone"/>
 
 </LinearLayout>

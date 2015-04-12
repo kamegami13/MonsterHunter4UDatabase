@@ -11,19 +11,21 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
-import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
-import com.daviancorp.android.data.classes.Talisman;
+import com.daviancorp.android.data.classes.ASBSession;
+import com.daviancorp.android.data.classes.ASBTalisman;
+import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.detail.ASBFragment;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
-import com.daviancorp.android.ui.dialog.ArmorSetBuilderDecorationsDialogFragment;
-import com.daviancorp.android.ui.dialog.ArmorSetBuilderTalismanDialogFragment;
+import com.daviancorp.android.ui.detail.ASBActivity;
+import com.daviancorp.android.ui.dialog.ASBDecorationsDialogFragment;
+import com.daviancorp.android.ui.dialog.ASBTalismanDialogFragment;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ArmorSetBuilderPieceContainer extends LinearLayout {
+public class ASBPieceContainer extends LinearLayout {
 
     private ImageView icon;
     private TextView text;
@@ -32,7 +34,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
 
     private ImageView popupMenuButton;
 
-    private ArmorSetBuilderSession session;
+    private ASBSession session;
     private int pieceIndex;
     private Fragment parentFragment;
 
@@ -41,7 +43,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
      * <p/>
      * It is required to call {@code initialize} after instantiating this class.
      */
-    public ArmorSetBuilderPieceContainer(Context context, AttributeSet attrs) {
+    public ASBPieceContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -69,7 +71,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
      * <p/>
      * Should always be called after the container's constructor.
      */
-    public void initialize(ArmorSetBuilderSession session, int pieceIndex, Fragment parentFragment) {
+    public void initialize(ASBSession session, int pieceIndex, Fragment parentFragment) {
         this.session = session;
         this.pieceIndex = pieceIndex;
         this.parentFragment = parentFragment;
@@ -77,7 +79,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         updateContents();
     }
 
-    /** Refreshes the contents of the piece container based on the contents of the {@code ArmorSetBuilderSession}. */
+    /** Refreshes the contents of the piece container based on the contents of the {@code ASBSession}. */
     public void updateContents() {
         updateArmorPiece();
         updateDecorations();
@@ -122,31 +124,31 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
 
         String slot = "";
         switch (pieceIndex) {
-            case ArmorSetBuilderSession.HEAD:
+            case ASBSession.HEAD:
                 slot = "head";
                 break;
-            case ArmorSetBuilderSession.BODY:
+            case ASBSession.BODY:
                 slot = "body";
                 break;
-            case ArmorSetBuilderSession.ARMS:
+            case ASBSession.ARMS:
                 slot = "arms";
                 break;
-            case ArmorSetBuilderSession.WAIST:
+            case ASBSession.WAIST:
                 slot = "waist";
                 break;
-            case ArmorSetBuilderSession.LEGS:
+            case ASBSession.LEGS:
                 slot = "legs";
                 break;
-            case ArmorSetBuilderSession.TALISMAN:
+            case ASBSession.TALISMAN:
                 String imageRes;
                 try {
                     imageRes = "icons_items/" + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()].split(",")[1];
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    Log.e("SetBuilder", "Image not found for " + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()]);
+                    Log.e("ASB", "Image not found for " + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()]);
                     imageRes = "icons_items/Talisman-White.png";
                 }
 
-                Log.d("SetBuilder", "Attempting to open " + imageRes);
+                Log.d("ASB", "Attempting to open " + imageRes);
                 AssetManager manager = getContext().getAssets();
                 InputStream stream;
 
@@ -195,9 +197,9 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         boolean hasSlotsAvailable = session.getAvailableSlots(pieceIndex) > 0;
         boolean hasDecorations = session.hasDecorations(pieceIndex);
 
-        if (pieceIndex != ArmorSetBuilderSession.TALISMAN) {
+        if (pieceIndex != ASBSession.TALISMAN) {
 
-            popup.inflate(R.menu.menu_set_builder_equipment);
+            popup.inflate(R.menu.menu_asb_equipment);
 
             if (!pieceSelected) {
                 popup.getMenu().findItem(R.id.armor_set_builder_add_piece).setVisible(true);
@@ -208,7 +210,7 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
             }
         }
         else {
-            popup.inflate(R.menu.menu_set_builder_talisman);
+            popup.inflate(R.menu.menu_asb_talisman);
 
             if (!pieceSelected) {
                 popup.getMenu().findItem(R.id.armor_set_builder_talisman_create).setVisible(true);
@@ -264,21 +266,24 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         /** Called when the user chooses to add an armor piece. */
         private void onMenuAddPieceSelected() {
             Intent i = new Intent(getContext(), ArmorListActivity.class);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
+            i.putExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, true);
+            i.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
+            i.putExtra(ASBActivity.EXTRA_SET_RANK, parentFragment.getArguments().getInt(ASBFragment.ARG_SET_RANK));
+            i.putExtra(ASBActivity.EXTRA_SET_HUNTER_TYPE, parentFragment.getArguments().getInt(ASBFragment.ARG_SET_HUNTER_TYPE));
 
-            ((Activity) getContext()).startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE_ADD_PIECE);
+            ((Activity) getContext()).startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_PIECE);
         }
 
         /** Called when the user chooses to remove an armor piece. */
         private void onMenuRemovePieceSelected() {
             session.removeEquipment(pieceIndex);
+            DataManager.get(getContext()).queryRemoveASBSetArmor(session.getId(), pieceIndex);
             updateArmorPiece();
         }
 
         /** Called when the user chooses to edit their decorations. */
         private void onMenuDecorationsSelected() {
-            ArmorSetBuilderDecorationsDialogFragment d = ArmorSetBuilderDecorationsDialogFragment.newInstance(session, pieceIndex);
+            ASBDecorationsDialogFragment d = ASBDecorationsDialogFragment.newInstance(session, pieceIndex);
             d.show(parentFragment.getActivity().getSupportFragmentManager(), "DECORATIONS");
         }
 
@@ -290,24 +295,24 @@ public class ArmorSetBuilderPieceContainer extends LinearLayout {
         }
 
         private void onMenuCreateTalismanSelected() {
-            ArmorSetBuilderTalismanDialogFragment d = ArmorSetBuilderTalismanDialogFragment.newInstance();
-            d.setTargetFragment(parentFragment, ArmorSetBuilderActivity.REQUEST_CODE_CREATE_TALISMAN);
+            ASBTalismanDialogFragment d = ASBTalismanDialogFragment.newInstance();
+            d.setTargetFragment(parentFragment, ASBActivity.REQUEST_CODE_CREATE_TALISMAN);
             d.show(parentFragment.getActivity().getSupportFragmentManager(), "TALISMAN");
         }
 
         private void onMenuEditTalismanSelected() {
-            Talisman t = session.getTalisman();
-            ArmorSetBuilderTalismanDialogFragment d = ArmorSetBuilderTalismanDialogFragment.newInstance(t.getTypeIndex(),
+            ASBTalisman t = session.getTalisman();
+            ASBTalismanDialogFragment d = ASBTalismanDialogFragment.newInstance(t.getTypeIndex(),
                     t.getNumSlots(),
                     t.getSkill1().getId(),
                     t.getSkill1Points(), t.hasTwoSkills() ? t.getSkill2().getId() : -1, // If the talisman only has one skill, we want to pass -1 as the id for the second skill
                     t.getSkill2Points());
-            d.setTargetFragment(parentFragment, ArmorSetBuilderActivity.REQUEST_CODE_CREATE_TALISMAN);
+            d.setTargetFragment(parentFragment, ASBActivity.REQUEST_CODE_CREATE_TALISMAN);
             d.show(parentFragment.getActivity().getSupportFragmentManager(), "TALISMAN");
         }
 
         private void onMenuRemoveTalismanSelected() {
-            session.removeEquipment(ArmorSetBuilderSession.TALISMAN);
+            session.removeEquipment(ASBSession.TALISMAN);
             updateArmorPiece();
         }
     }

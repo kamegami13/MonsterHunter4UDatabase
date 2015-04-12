@@ -14,14 +14,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.compound.ArmorSetBuilderTalismanSkillContainer;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
+import com.daviancorp.android.ui.compound.ASBTalismanSkillContainer;
+import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment implements ArmorSetBuilderTalismanSkillContainer.ChangeListener {
+public class ASBTalismanDialogFragment extends DialogFragment implements ASBTalismanSkillContainer.ChangeListener {
 
     private static final String ARG_TYPE_INDEX = "type_index";
     private static final String ARG_SLOTS = "slots";
@@ -30,16 +30,16 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment implem
     private static final String ARG_SKILL_2_ID = "skill_2_id";
     private static final String ARG_SKILL_2_POINTS = "skill_2_points";
 
-    private ArmorSetBuilderTalismanSkillContainer[] talismanSkillContainers;
+    private ASBTalismanSkillContainer[] talismanSkillContainers;
 
-    public static ArmorSetBuilderTalismanDialogFragment newInstance() {
-        ArmorSetBuilderTalismanDialogFragment f = new ArmorSetBuilderTalismanDialogFragment();
+    public static ASBTalismanDialogFragment newInstance() {
+        ASBTalismanDialogFragment f = new ASBTalismanDialogFragment();
         return f;
     }
 
     /** Used when creating a talisman dialog for a talisman that has already been created. */
-    public static ArmorSetBuilderTalismanDialogFragment newInstance(int talismanTypeIndex, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
-        ArmorSetBuilderTalismanDialogFragment f = new ArmorSetBuilderTalismanDialogFragment();
+    public static ASBTalismanDialogFragment newInstance(int talismanTypeIndex, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
+        ASBTalismanDialogFragment f = new ASBTalismanDialogFragment();
 
         Bundle args = new Bundle();
         args.putInt(ARG_TYPE_INDEX, talismanTypeIndex);
@@ -58,12 +58,12 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment implem
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        final View addView = inflater.inflate(R.layout.dialog_armor_set_builder_edit_talisman, null);
+        final View addView = inflater.inflate(R.layout.dialog_asb_edit_talisman, null);
 
-        talismanSkillContainers = new ArmorSetBuilderTalismanSkillContainer[2];
-        talismanSkillContainers[0] = (ArmorSetBuilderTalismanSkillContainer) addView.findViewById(R.id.skill_1_view);
-        talismanSkillContainers[1] = (ArmorSetBuilderTalismanSkillContainer) addView.findViewById(R.id.skill_2_view);
-        for (ArmorSetBuilderTalismanSkillContainer c : talismanSkillContainers) {
+        talismanSkillContainers = new ASBTalismanSkillContainer[2];
+        talismanSkillContainers[0] = (ASBTalismanSkillContainer) addView.findViewById(R.id.skill_1_view);
+        talismanSkillContainers[1] = (ASBTalismanSkillContainer) addView.findViewById(R.id.skill_2_view);
+        for (ASBTalismanSkillContainer c : talismanSkillContainers) {
             c.setParent(this);
             c.setChangeListener(this);
         }
@@ -86,7 +86,7 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment implem
         updateSkillEnabledStates();
 
         Dialog d = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.armor_set_builder_talisman_dialog_title)
+                .setTitle(R.string.asb_dialog_talisman_title)
                 .setView(addView)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -100,10 +100,10 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment implem
                             long skill1Id = talismanSkillContainers[0].getSkillTree().getId();
                             int skill1Points = Integer.parseInt(talismanSkillContainers[0].getSkillPoints());
 
-                            i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_TYPE_INDEX, typeSpinner.getSelectedItemPosition());
-                            i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SLOTS, slotsSpinner.getSelectedItemPosition());
-                            i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_TREE_1, skill1Id);
-                            i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_POINTS_1, skill1Points);
+                            i.putExtra(ASBActivity.EXTRA_TALISMAN_TYPE_INDEX, typeSpinner.getSelectedItemPosition());
+                            i.putExtra(ASBActivity.EXTRA_TALISMAN_SLOTS, slotsSpinner.getSelectedItemPosition());
+                            i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_TREE_1, skill1Id);
+                            i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_POINTS_1, skill1Points);
 
                             if (talismanSkillContainers[1].getSkillTree() != null) {
                                 Log.d("SetBuilder", "Skill 2 is defined.");
@@ -111,11 +111,11 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment implem
                                 long skill2Id = talismanSkillContainers[1].getSkillTree().getId();
                                 int skill2Points = Integer.parseInt(talismanSkillContainers[1].getSkillPoints());
 
-                                i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_TREE_2, skill2Id);
-                                i.putExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_POINTS_2, skill2Points);
+                                i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_TREE_2, skill2Id);
+                                i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_POINTS_2, skill2Points);
                             }
 
-                            getTargetFragment().onActivityResult(ArmorSetBuilderActivity.REQUEST_CODE_CREATE_TALISMAN, Activity.RESULT_OK, i);
+                            getTargetFragment().onActivityResult(ASBActivity.REQUEST_CODE_CREATE_TALISMAN, Activity.RESULT_OK, i);
                         }
                     }
                 })
@@ -134,9 +134,9 @@ public class ArmorSetBuilderTalismanDialogFragment extends DialogFragment implem
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK && requestCode == ArmorSetBuilderActivity.REQUEST_CODE_CREATE_TALISMAN) {
+        if (resultCode == Activity.RESULT_OK && requestCode == ASBActivity.REQUEST_CODE_CREATE_TALISMAN) {
 
-            int talismanSkillNumber = data.getIntExtra(ArmorSetBuilderActivity.EXTRA_TALISMAN_SKILL_INDEX, -1);
+            int talismanSkillNumber = data.getIntExtra(ASBActivity.EXTRA_TALISMAN_SKILL_INDEX, -1);
             long skillTreeId = data.getLongExtra(SkillTreeDetailActivity.EXTRA_SKILLTREE_ID, -1);
 
             talismanSkillContainers[talismanSkillNumber].setSkillTree(DataManager.get(getActivity()).getSkillTree(skillTreeId));

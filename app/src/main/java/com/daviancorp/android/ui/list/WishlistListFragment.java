@@ -316,7 +316,6 @@ public class WishlistListFragment extends ListFragment implements
 			TextView wishlistNameTextView = (TextView) view;
 			String cellText = wishlist.getName();
 			wishlistNameTextView.setText(cellText);
-			
 		}
 	}
 

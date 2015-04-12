@@ -91,31 +91,37 @@
     <string name="two_slot_jewel">●●</string>
     <string name="three_slot_jewel">●●●</string>
 
-    <string name="activity_armor_set_builder">Armor Set Builder</string>
 
-    <string name="armor_set_builder_action_add">Add</string>
-    <string name="armor_set_builder_action_remove">Remove</string>
-    <string name="armor_set_builder_action_edit">Edit</string>
-    <string name="armor_set_builder_decoration_info">Decorations</string>
-    <string name="armor_set_builder_piece_info">Piece Info</string>
-    <string name="armor_set_builder_empty_slot">Empty slot</string>
-    <string name="armor_set_builder_no_slot">No slot</string>
-    <string name="armor_set_builder_select_item">Select</string>
+    <!-- Armor Set Builder Stuff !-->
 
-    <string name="armor_set_builder_decoration_add">Add Decoration</string>
-    <string name="armor_set_builder_decoration_remove">Remove Decoration</string>
+    <string name="activity_asb_sets">Armor Sets</string>
+    <string name="activity_asb">Armor Set Builder</string>
 
-    <string name="armor_set_builder_talisman_dialog_title">Talisman</string>
-    <string name="armor_set_builder_talisman_skill_1">Skill 1</string>
-    <string name="armor_set_builder_talisman_skill_2">Skill 2</string>
+    <string name="asb_action_add">Add</string>
+    <string name="asb_action_remove">Remove</string>
+    <string name="asb_action_edit">Edit</string>
+    <string name="asb_action_decorations">Decorations</string>
+    <string name="asb_action_armor_piece">Piece Info</string>
+    <string name="asb_empty_slot">Empty slot</string>
+    <string name="asb_no_slot">No slot</string>
+    <string name="asb_action_select">Select</string>
 
-    <string name="armor_set_builder_helmet">Helmet</string>
-    <string name="armor_set_builder_body">Body</string>
-    <string name="armor_set_builder_arms">Arms</string>
-    <string name="armor_set_builder_waist">Waist</string>
-    <string name="armor_set_builder_legs">Legs</string>
-    <string name="armor_set_builder_skill_name">Skill</string>
-    <string name="armor_set_builder_skill_points_total">Total</string>
+    <string name="asb_option_set_add">New set</string>
+
+    <string name="asb_action_add_decoration">Add Decoration</string>
+    <string name="asb_action_remove_decoration">Remove Decoration</string>
+
+    <string name="asb_dialog_talisman_title">Talisman</string>
+    <string name="asb_talisman_skill_1">Skill 1</string>
+    <string name="asb_talisman_skill_2">Skill 2</string>
+
+    <string name="asb_helmet">Helmet</string>
+    <string name="asb_body">Body</string>
+    <string name="asb_arms">Arms</string>
+    <string name="asb_waist">Waist</string>
+    <string name="asb_legs">Legs</string>
+    <string name="asb_skill_tree_name">Skill</string>
+    <string name="asb_skill_points_total">Total</string>
 
     <string-array name="talisman_names">
         <item>Pawn,Talisman-White.png</item>
@@ -143,7 +149,7 @@
         <item>3</item>
     </string-array>
 
-    <string-array name="filter_restriction">
+    <string-array name="filter_restrictions">
         <item>Minimum</item>
         <item>Exactly</item>
         <item>Maximum</item>
@@ -153,5 +159,10 @@
         <item>Low</item>
         <item>High</item>
         <item>G</item>
+    </string-array>
+
+    <string-array name="hunter_type">
+        <item>Blademaster</item>
+        <item>Gunner</item>
     </string-array>
 </resources>

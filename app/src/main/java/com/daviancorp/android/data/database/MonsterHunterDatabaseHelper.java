@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Xml;
 
+import com.daviancorp.android.data.classes.ASBSession;
 import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
@@ -3128,5 +3129,201 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		QB.setProjectionMap(projectionMap);
 		return QB;
 	}
-	
+
+	/********************************* ARMOR SET BUILDER QUERIES ******************************************/
+
+	/** Get all armor sets. */
+	public ASBSetCursor queryASBSets() {
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARMOR_SET;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
+
+		return new ASBSetCursor(wrapJoinHelper(builderASBSet(), qh));
+	}
+
+	/** Retrieves a specific Armor Set Builder set in the database. */
+	public ASBSetCursor queryASBSet(long id) {
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARMOR_SET;
+		qh.Selection = "ar." + S.COLUMN_ARMOR_SET_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
+
+		return new ASBSetCursor(wrapJoinHelper(builderASBSet(), qh));
+	}
+
+	/** Creates a new Armor Set Builder set in the entries of the database. */
+	public long queryAddASBSet(String name, int rank, int hunterType) {
+		ContentValues values = new ContentValues();
+
+		values.put(S.COLUMN_ARMOR_SET_NAME, name);
+		values.put(S.COLUMN_ARMOR_SET_RANK, rank);
+		values.put(S.COLUMN_ARMOR_SET_HUNTER_TYPE, hunterType);
+
+		return insertRecord(S.TABLE_ARMOR_SET, values);
+	}
+
+	public long queryAddASBSetArmor(long asbSetId, long pieceId, int pieceIndex) {
+		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
+
+		ContentValues values = new ContentValues();
+
+		switch (pieceIndex) {
+			case ASBSession.HEAD:
+				putASBSetItemOrNull(values, S.COLUMN_HEAD_ARMOR_ID, pieceId);
+				break;
+			case ASBSession.BODY:
+				putASBSetItemOrNull(values, S.COLUMN_BODY_ARMOR_ID, pieceId);
+				break;
+			case ASBSession.WAIST:
+				putASBSetItemOrNull(values, S.COLUMN_ARMS_ARMOR_ID, pieceId);
+				break;
+			case ASBSession.ARMS:
+				putASBSetItemOrNull(values, S.COLUMN_WAIST_ARMOR_ID, pieceId);
+				break;
+			case ASBSession.LEGS:
+				putASBSetItemOrNull(values, S.COLUMN_LEGS_ARMOR_ID, pieceId);
+				break;
+		}
+
+		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
+	}
+
+	public long queryPutASBSetDecoration(long asbSetId, long decorationId, int pieceIndex, int decorationIndex) {
+		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
+
+		ContentValues values = new ContentValues();
+
+		switch (pieceIndex) {
+			case ASBSession.HEAD:
+				if (decorationIndex == 0) {
+					putASBSetItemOrNull(values, S.COLUMN_HEAD_DECORATION_1_ID, decorationId);
+				}
+				else if (decorationId == 1) {
+					putASBSetItemOrNull(values, S.COLUMN_HEAD_DECORATION_2_ID, decorationId);
+				}
+				else if (decorationId == 2) {
+					putASBSetItemOrNull(values, S.COLUMN_HEAD_DECORATION_3_ID, decorationId);
+				}
+				break;
+			case ASBSession.BODY:
+				if (decorationIndex == 0) {
+					putASBSetItemOrNull(values, S.COLUMN_BODY_DECORATION_1_ID, decorationId);
+				}
+				else if (decorationId == 1) {
+					putASBSetItemOrNull(values, S.COLUMN_BODY_DECORATION_2_ID, decorationId);
+				}
+				else if (decorationId == 2) {
+					putASBSetItemOrNull(values, S.COLUMN_BODY_DECORATION_3_ID, decorationId);
+				}
+				break;
+			case ASBSession.ARMS:
+				if (decorationIndex == 0) {
+					putASBSetItemOrNull(values, S.COLUMN_ARMS_DECORATION_1_ID, decorationId);
+				}
+				else if (decorationId == 1) {
+					putASBSetItemOrNull(values, S.COLUMN_ARMS_DECORATION_2_ID, decorationId);
+				}
+				else if (decorationId == 2) {
+					putASBSetItemOrNull(values, S.COLUMN_ARMS_DECORATION_3_ID, decorationId);
+				}
+				break;
+			case ASBSession.WAIST:
+				if (decorationIndex == 0) {
+					putASBSetItemOrNull(values, S.COLUMN_WAIST_DECORATION_1_ID, decorationId);
+				}
+				else if (decorationId == 1) {
+					putASBSetItemOrNull(values, S.COLUMN_WAIST_DECORATION_2_ID, decorationId);
+				}
+				else if (decorationId == 2) {
+					putASBSetItemOrNull(values, S.COLUMN_WAIST_DECORATION_3_ID, decorationId);
+				}
+				break;
+			case ASBSession.LEGS:
+				if (decorationIndex == 0) {
+					putASBSetItemOrNull(values, S.COLUMN_LEGS_DECORATION_1_ID, decorationId);
+				}
+				else if (decorationId == 1) {
+					putASBSetItemOrNull(values, S.COLUMN_LEGS_DECORATION_2_ID, decorationId);
+				}
+				else if (decorationId == 2) {
+					putASBSetItemOrNull(values, S.COLUMN_LEGS_DECORATION_3_ID, decorationId);
+				}
+				break;
+		}
+
+		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
+	}
+
+	private SQLiteQueryBuilder builderASBSet() {
+		HashMap<String, String> projectionMap = new HashMap<>();
+
+		String set = "ar";
+
+		projectionMap.put("_id", set + "." + S.COLUMN_ARMOR_SET_ID + " AS " + "_id");
+
+		projectionMap.put(S.COLUMN_ARMOR_SET_NAME, set + "." + S.COLUMN_ARMOR_SET_NAME);
+		projectionMap.put(S.COLUMN_ARMOR_SET_RANK, set + "." + S.COLUMN_ARMOR_SET_RANK);
+		projectionMap.put(S.COLUMN_ARMOR_SET_HUNTER_TYPE, set + "." + S.COLUMN_ARMOR_SET_HUNTER_TYPE);
+
+		projectionMap.put(S.COLUMN_HEAD_ARMOR_ID, set + "." + S.COLUMN_HEAD_ARMOR_ID);
+		projectionMap.put(S.COLUMN_HEAD_DECORATION_1_ID, set + "." + S.COLUMN_HEAD_DECORATION_1_ID);
+		projectionMap.put(S.COLUMN_HEAD_DECORATION_2_ID, set + "." + S.COLUMN_HEAD_DECORATION_2_ID);
+		projectionMap.put(S.COLUMN_HEAD_DECORATION_3_ID, set + "." + S.COLUMN_HEAD_DECORATION_3_ID);
+
+		projectionMap.put(S.COLUMN_BODY_ARMOR_ID, set + "." + S.COLUMN_BODY_ARMOR_ID);
+		projectionMap.put(S.COLUMN_BODY_DECORATION_1_ID, set + "." + S.COLUMN_BODY_DECORATION_1_ID);
+		projectionMap.put(S.COLUMN_BODY_DECORATION_2_ID, set + "." + S.COLUMN_BODY_DECORATION_2_ID);
+		projectionMap.put(S.COLUMN_BODY_DECORATION_3_ID, set + "." + S.COLUMN_BODY_DECORATION_3_ID);
+
+		projectionMap.put(S.COLUMN_ARMS_ARMOR_ID, set + "." + S.COLUMN_ARMS_ARMOR_ID);
+		projectionMap.put(S.COLUMN_ARMS_DECORATION_1_ID, set + "." + S.COLUMN_ARMS_DECORATION_1_ID);
+		projectionMap.put(S.COLUMN_ARMS_DECORATION_2_ID, set + "." + S.COLUMN_ARMS_DECORATION_2_ID);
+		projectionMap.put(S.COLUMN_ARMS_DECORATION_3_ID, set + "." + S.COLUMN_ARMS_DECORATION_3_ID);
+
+		projectionMap.put(S.COLUMN_WAIST_ARMOR_ID, set + "." + S.COLUMN_WAIST_ARMOR_ID);
+		projectionMap.put(S.COLUMN_WAIST_DECORATION_1_ID, set + "." + S.COLUMN_WAIST_DECORATION_1_ID);
+		projectionMap.put(S.COLUMN_WAIST_DECORATION_2_ID, set + "." + S.COLUMN_WAIST_DECORATION_2_ID);
+		projectionMap.put(S.COLUMN_WAIST_DECORATION_3_ID, set + "." + S.COLUMN_WAIST_DECORATION_3_ID);
+
+		projectionMap.put(S.COLUMN_LEGS_ARMOR_ID, set + "." + S.COLUMN_LEGS_ARMOR_ID);
+		projectionMap.put(S.COLUMN_LEGS_DECORATION_1_ID, set + "." + S.COLUMN_LEGS_DECORATION_1_ID);
+		projectionMap.put(S.COLUMN_LEGS_DECORATION_2_ID, set + "." + S.COLUMN_LEGS_DECORATION_2_ID);
+		projectionMap.put(S.COLUMN_LEGS_DECORATION_3_ID, set + "." + S.COLUMN_LEGS_DECORATION_3_ID);
+
+		projectionMap.put(S.COLUMN_TALISMAN_EXISTS, set + "." + S.COLUMN_TALISMAN_EXISTS);
+		projectionMap.put(S.COLUMN_TALISMAN_SKILL_1_ID, set + "." + S.COLUMN_TALISMAN_SKILL_1_ID);
+		projectionMap.put(S.COLUMN_TALISMAN_SKILL_1_POINTS, set + "." + S.COLUMN_TALISMAN_SKILL_1_POINTS);
+		projectionMap.put(S.COLUMN_TALISMAN_SKILL_2_ID, set + "." + S.COLUMN_TALISMAN_SKILL_2_ID);
+		projectionMap.put(S.COLUMN_TALISMAN_SKILL_2_POINTS, set + "." + S.COLUMN_TALISMAN_SKILL_2_POINTS);
+		projectionMap.put(S.COLUMN_TALISMAN_DECORATION_1_ID, set + "." + S.COLUMN_TALISMAN_DECORATION_1_ID);
+		projectionMap.put(S.COLUMN_TALISMAN_DECORATION_2_ID, set + "." + S.COLUMN_TALISMAN_DECORATION_2_ID);
+		projectionMap.put(S.COLUMN_TALISMAN_DECORATION_3_ID, set + "." + S.COLUMN_TALISMAN_DECORATION_3_ID);
+		
+		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+		qb.setTables(S.TABLE_ARMOR_SET + " AS " + set);
+		qb.setProjectionMap(projectionMap);
+
+		return qb;
+	}
+
+	/** A helper method that determines whether to put {@code null} or the actual armor id into the table. */
+	private void putASBSetItemOrNull(ContentValues cv, String column, long pieceId) {
+		if (pieceId != -1) {
+			cv.put(column, pieceId);
+		}
+		else {
+			cv.putNull(column);
+		}
+	}
 }

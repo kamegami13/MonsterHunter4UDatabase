@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 import android.support.v4.app.FragmentManager;
 import android.view.*;
-import android.widget.*;
-import android.widget.ExpandableListView.OnChildClickListener;
 
 import com.daviancorp.android.data.classes.Armor;
 import com.daviancorp.android.data.classes.Item;
@@ -21,8 +19,7 @@ import com.daviancorp.android.data.classes.Rank;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
-import com.daviancorp.android.ui.detail.ArmorDetailActivity;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
+import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.dialog.ArmorFilterDialogFragment;
 
 import java.io.IOException;
@@ -75,11 +72,16 @@ public class ArmorExpandableListFragment extends Fragment {
         if (args != null) {
             mType = args.getString(ARG_TYPE);
         }
+
+        filter = new ArmorFilter();
+
+        if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            filter.setRank(Rank.values()[getActivity().getIntent().getIntExtra(ASBActivity.EXTRA_SET_RANK, -1)]);
+        }
+
         populateList();
 
         setHasOptionsMenu(true);
-
-        filter = new ArmorFilter();
     }
 
     /**
@@ -277,8 +279,8 @@ public class ArmorExpandableListFragment extends Fragment {
 
             armorGroupTextView.setText(getGroup(i).toString());
 
-            if (getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
-                int piece = getActivity().getIntent().getIntExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, -1);
+            if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+                int piece = getActivity().getIntent().getIntExtra(ASBActivity.EXTRA_PIECE_INDEX, -1);
 
                 if (piece != -1) {
                     elv.setDividerHeight(0);
@@ -336,7 +338,7 @@ public class ArmorExpandableListFragment extends Fragment {
             long armorId = ((Armor) getChild(groupPosition, childPosition)).getId();
 
             root.setTag(armorId);
-            root.setOnClickListener(new ArmorClickListener(context, armorId, getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false), getActivity()));
+            root.setOnClickListener(new ArmorClickListener(context, armorId, getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false), getActivity()));
 
             return v;
 

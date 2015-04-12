@@ -8,17 +8,18 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import com.daviancorp.android.data.classes.ArmorSetBuilderSession;
+import com.daviancorp.android.data.classes.ASBSession;
 import com.daviancorp.android.data.classes.Decoration;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
+import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 import com.daviancorp.android.ui.list.DecorationListActivity;
 
@@ -27,17 +28,17 @@ import java.io.IOException;
 /**
  * A dialog that allows the user to view, add, and remove decorations.
  */
-public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment implements ArmorSetBuilderSession.OnArmorSetChangedListener {
+public class ASBDecorationsDialogFragment extends DialogFragment implements ASBSession.OnASBSetChangedListener {
 
-    private ArmorSetBuilderSession session;
+    private ASBSession session;
     private int pieceIndex;
 
     TextView[] decorations;
     ImageView[] decorationIcons;
     ImageView[] menuButtons;
 
-    public static ArmorSetBuilderDecorationsDialogFragment newInstance(ArmorSetBuilderSession session, int pieceIndex) {
-        ArmorSetBuilderDecorationsDialogFragment f = new ArmorSetBuilderDecorationsDialogFragment();
+    public static ASBDecorationsDialogFragment newInstance(ASBSession session, int pieceIndex) {
+        ASBDecorationsDialogFragment f = new ASBDecorationsDialogFragment();
         f.session = session;
         f.pieceIndex = pieceIndex;
         return f;
@@ -47,7 +48,7 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View addView = inflater.inflate(R.layout.dialog_armor_set_builder_decoration_list, null);
+        View addView = inflater.inflate(R.layout.dialog_asb_decoration_list, null);
 
         decorations = new TextView[3];
         decorations[0] = (TextView) addView.findViewById(R.id.decoration_1);
@@ -75,14 +76,14 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
         }
 
         Dialog d = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.armor_set_builder_decoration_info)
+                .setTitle(R.string.asb_action_decorations)
                 .setView(addView)
                 .setNeutralButton(android.R.string.ok, null)
                 .create();
 
         updateDialog();
 
-        session.addOnArmorSetChangedListener(this);
+        session.addOnASBSetChangedListener(this);
 
         return d;
     }
@@ -91,7 +92,7 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
 
-        session.detachOnArmorSetChangedListener(this);
+        session.detachOnASBSetChangedListener(this);
     }
 
     @Override
@@ -100,11 +101,17 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
 
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case ArmorSetBuilderActivity.REQUEST_CODE_ADD_DECORATION:
+                case ASBActivity.REQUEST_CODE_ADD_DECORATION:
                     long decorationId = data.getLongExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, -1);
                     Decoration decoration = DataManager.get(getActivity()).getDecoration(decorationId);
 
-                    session.addDecoration(pieceIndex, decoration);
+                    int decorationIndex = session.addDecoration(pieceIndex, decoration);
+
+                    if (decorationIndex != -1) {
+                        Log.d("ASB", "Adding the decoration to the SQL DB.");
+                        DataManager.get(getActivity()).queryPutASBSetDecoration(session.getId(), decorationId, pieceIndex, decorationIndex);
+                    }
+
                     updateDialog();
                     break;
             }
@@ -112,7 +119,7 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
     }
 
     @Override
-    public void onArmorSetChanged() {
+    public void onASBSetChanged() {
         updateDialog();
     }
 
@@ -157,7 +164,7 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
                 decorations[i].setOnClickListener(null);
             }
             else if (session.getEquipment(pieceIndex).getNumSlots() > i) {
-                decorations[i].setText(R.string.armor_set_builder_empty_slot);
+                decorations[i].setText(R.string.asb_empty_slot);
                 decorations[i].setOnClickListener(new EmptySlotClickListener(i));
             }
 
@@ -172,7 +179,7 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
 
     private PopupMenu createPopupMenu(int decorationIndex) {
         PopupMenu popup = new PopupMenu(getActivity().getApplicationContext(), menuButtons[decorationIndex]);
-        popup.inflate(R.menu.menu_set_builder_decoration);
+        popup.inflate(R.menu.menu_asb_decoration);
 
         if (session.decorationIsReal(pieceIndex, decorationIndex) && !session.decorationIsDummy(pieceIndex, decorationIndex)) {
             popup.getMenu().findItem(R.id.armor_set_builder_decoration_remove).setVisible(true);
@@ -217,15 +224,16 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
 
     private void onAddDecorationClicked(int decorationIndex) {
         Intent i = new Intent(getActivity().getApplicationContext(), DecorationListActivity.class);
-        i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
-        i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
-        i.putExtra(ArmorSetBuilderActivity.EXTRA_DECORATION_INDEX, decorationIndex);
+        i.putExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, true);
+        i.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
+        i.putExtra(ASBActivity.EXTRA_DECORATION_INDEX, decorationIndex);
 
-        startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE_ADD_DECORATION);
+        startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_DECORATION);
     }
 
     private void onRemoveDecorationClicked(int decorationIndex) {
         session.removeDecoration(pieceIndex, decorationIndex);
+        DataManager.get(getActivity()).queryRemoveASBSetDecoration(session.getId(), pieceIndex, decorationIndex);
     }
 
     private void onDecorationInfoClicked(int decorationIndex) {
@@ -248,11 +256,11 @@ public class ArmorSetBuilderDecorationsDialogFragment extends DialogFragment imp
         @Override
         public void onClick(View v) {
             Intent i = new Intent(getActivity().getApplicationContext(), DecorationListActivity.class);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, true);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_PIECE_INDEX, pieceIndex);
-            i.putExtra(ArmorSetBuilderActivity.EXTRA_DECORATION_INDEX, decorationIndex);
+            i.putExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, true);
+            i.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
+            i.putExtra(ASBActivity.EXTRA_DECORATION_INDEX, decorationIndex);
 
-            startActivityForResult(i, ArmorSetBuilderActivity.REQUEST_CODE_ADD_DECORATION);
+            startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_DECORATION);
         }
     }
 }
