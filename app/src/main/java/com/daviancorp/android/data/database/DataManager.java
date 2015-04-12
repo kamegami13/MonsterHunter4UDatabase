@@ -1383,4 +1383,12 @@ public class DataManager {
 	public void queryRemoveASBSetDecoration(long asbSetId, int pieceIndex, int decorationIndex) {
 		mHelper.queryPutASBSetDecoration(asbSetId, -1, pieceIndex, decorationIndex);
 	}
+
+	public void queryCreateASBSetTalisman(long asbSetId, int type, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
+		mHelper.queryCreateASBSetTalisman(asbSetId, type, slots, skill1Id, skill1Points, skill2Id, skill2Points);
+	}
+
+	public void queryRemoveASBSetTalisman(long asbSetId) {
+		mHelper.queryRemoveASBSetTalisman(asbSetId);
+	}
 }

@@ -123,6 +123,11 @@ public class ASBDecorationsDialogFragment extends DialogFragment implements ASBS
         updateDialog();
     }
 
+    @Override
+    public void onASBSetChanged(int pieceIndex) {
+        onASBSetChanged();
+    }
+
     /** Helper method that updates the contents of the dialog based on what's in the armor set builder session. */
     private void updateDialog() {
 

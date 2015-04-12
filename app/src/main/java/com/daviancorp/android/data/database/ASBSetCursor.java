@@ -73,6 +73,8 @@ public class ASBSetCursor extends CursorWrapper {
         int talismanSkill1Points = getInt(getColumnIndex(S.COLUMN_TALISMAN_SKILL_1_POINTS));
         long talismanSkill2Id = getLong(getColumnIndex(S.COLUMN_TALISMAN_SKILL_2_ID));
         int talismanSkill2Points = getInt(getColumnIndex(S.COLUMN_TALISMAN_SKILL_2_POINTS));
+        int talismanType = getInt(getColumnIndex(S.COLUMN_TALISMAN_TYPE));
+        int talismanSlots = getInt(getColumnIndex(S.COLUMN_TALISMAN_SLOTS));
         long talismanDecoration1Id = getLong(getColumnIndex(S.COLUMN_TALISMAN_DECORATION_1_ID));
         long talismanDecoration2Id = getLong(getColumnIndex(S.COLUMN_TALISMAN_DECORATION_2_ID));
         long talismanDecoration3Id = getLong(getColumnIndex(S.COLUMN_TALISMAN_DECORATION_3_ID));
@@ -152,6 +154,8 @@ public class ASBSetCursor extends CursorWrapper {
 
         if (talismanExists == 1) {
             ASBTalisman talisman = new ASBTalisman();
+            talisman.setTypeIndex(talismanType);
+            talisman.setNumSlots(talismanSlots);
             talisman.setSkill1(getSkillTreeById(context, talismanSkill1Id));
             talisman.setSkill1Points(talismanSkill1Points);
 
@@ -160,7 +164,6 @@ public class ASBSetCursor extends CursorWrapper {
                 talisman.setSkill2Points(talismanSkill2Points);
             }
 
-            session.setEquipment(ASBSession.TALISMAN, talisman);
             if (talismanDecoration1 != null) {
                 session.addDecoration(ASBSession.TALISMAN, getDecorationById(context, talismanDecoration1Id));
             }
@@ -170,6 +173,8 @@ public class ASBSetCursor extends CursorWrapper {
             if (talismanDecoration3 != null) {
                 session.addDecoration(ASBSession.TALISMAN, getDecorationById(context, talismanDecoration3Id));
             }
+
+            session.setEquipment(ASBSession.TALISMAN, talisman);
         }
 
         return session;

@@ -244,7 +244,7 @@ public class ASBSession {
             decorations[pieceIndex][i] = noDecoration;
         }
 
-        notifyASBSetChangedListeners();
+        notifyASBSetChangedListeners(pieceIndex);
     }
 
     public List<SkillTreePointsSet> getSkillTreePointsSets() {
@@ -349,9 +349,17 @@ public class ASBSession {
         }
     }
 
+    private void notifyASBSetChangedListeners(int pieceIndex) {
+        for (OnASBSetChangedListener l : changedListeners) {
+            l.onASBSetChanged(pieceIndex);
+        }
+    }
+
     /** Allows an object to be notified when the {@code ASBSession} is changed in some way. */
-    public static interface OnASBSetChangedListener {
-        public void onASBSetChanged();
+    public interface OnASBSetChangedListener {
+        void onASBSetChanged();
+
+        void onASBSetChanged(int pieceIndex);
     }
 
     /**

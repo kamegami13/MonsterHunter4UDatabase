@@ -2,21 +2,20 @@
 <LinearLayout style="@style/list_item_large"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:clickable="false" >
+    android:clickable="false"
+    android:background="@drawable/list_view_generic">
 
     <TextView
         android:id="@+id/name_text"
         style="@style/text_medium"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My Set" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/properties_text"
         style="@style/text_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="G Rank, Blademaster"
         android:textStyle="italic" />
 
 

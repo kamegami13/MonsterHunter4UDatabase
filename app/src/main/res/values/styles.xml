@@ -65,6 +65,7 @@
     </style>
 
     <style name="SpinnerDropDownItemStyle" parent="SpinnerItemStyle">
+        <item name="android:minWidth">50dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
         <item name="android:textAppearance">@style/text_medium</item>

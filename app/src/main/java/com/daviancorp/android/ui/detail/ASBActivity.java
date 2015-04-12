@@ -144,22 +144,29 @@ public class ASBActivity extends GenericTabActivity implements ASBSession.OnASBS
             else if (requestCode == REQUEST_CODE_CREATE_TALISMAN) {
                 ASBTalisman talisman;
 
+                int typeIndex = data.getIntExtra(EXTRA_TALISMAN_TYPE_INDEX, -1);
+                int slots = data.getIntExtra(EXTRA_TALISMAN_SLOTS, 0);
+
                 long skill1Id = data.getLongExtra(EXTRA_TALISMAN_SKILL_TREE_1, -1);
                 int skill1Points = data.getIntExtra(EXTRA_TALISMAN_SKILL_POINTS_1, -1);
-                int typeIndex = data.getIntExtra(EXTRA_TALISMAN_TYPE_INDEX, -1);
+
+                long skill2Id = -1;
+                int skill2Points = 0;
 
                 SkillTree skill1Tree = DataManager.get(getApplicationContext()).getSkillTree(skill1Id);
                 talisman = new ASBTalisman(skill1Tree, skill1Points, typeIndex);
-                talisman.setNumSlots(data.getIntExtra(EXTRA_TALISMAN_SLOTS, 0));
+                talisman.setNumSlots(slots);
 
                 if (data.hasExtra(EXTRA_TALISMAN_SKILL_TREE_2)) {
-                    long skill2Id = data.getLongExtra(EXTRA_TALISMAN_SKILL_TREE_2, -1);
-                    int skill2Points = data.getIntExtra(EXTRA_TALISMAN_SKILL_POINTS_2, -1);
+                    skill2Id = data.getLongExtra(EXTRA_TALISMAN_SKILL_TREE_2, -1);
+                    skill2Points = data.getIntExtra(EXTRA_TALISMAN_SKILL_POINTS_2, -1);
 
                     SkillTree skill2Tree = DataManager.get(getApplicationContext()).getSkillTree(skill2Id);
                     talisman.setSkill2(skill2Tree);
                     talisman.setSkill2Points(skill2Points);
                 }
+
+                DataManager.get(this).queryCreateASBSetTalisman(session.getId(), typeIndex, slots, skill1Id, skill1Points, skill2Id, skill2Points);
 
                 session.setEquipment(ASBSession.TALISMAN, talisman);
             }
@@ -183,6 +190,17 @@ public class ASBActivity extends GenericTabActivity implements ASBSession.OnASBS
         }
     }
 
+    @Override
+    public void onASBSetChanged(int pieceIndex) {
+        session.updateSkillTreePointsSets(this);
+
+        if (onASBSetActivityUpdateListeners != null) {
+            for (OnASBSetActivityUpdateListener a : onASBSetActivityUpdateListeners) {
+                a.onASBActivityUpdated(session, pieceIndex);
+            }
+        }
+    }
+
     public ASBSession getASBSession() {
         return session;
     }
@@ -198,6 +216,8 @@ public class ASBActivity extends GenericTabActivity implements ASBSession.OnASBS
 
     public interface OnASBSetActivityUpdateListener {
         void onASBActivityUpdated(ASBSession s);
+
+        void onASBActivityUpdated(ASBSession s, int pieceIndex);
     }
 
     private class ASBSetLoaderCallbacks implements LoaderManager.LoaderCallbacks<ASBSession> {

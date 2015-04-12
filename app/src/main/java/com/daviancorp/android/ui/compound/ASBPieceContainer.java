@@ -116,7 +116,6 @@ public class ASBPieceContainer extends LinearLayout {
     private void onArmorRemoved() {
         text.setText("");
         icon.setImageBitmap(fetchIcon(1));
-        updateDecorations();
     }
 
     /** Helper method that retrieves a rarity-appropriate equipment icon. */
@@ -313,7 +312,9 @@ public class ASBPieceContainer extends LinearLayout {
 
         private void onMenuRemoveTalismanSelected() {
             session.removeEquipment(ASBSession.TALISMAN);
+            DataManager.get(getContext()).queryRemoveASBSetTalisman(session.getId());
             updateArmorPiece();
+            updateDecorations();
         }
     }
 

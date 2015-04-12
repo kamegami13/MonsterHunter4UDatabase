@@ -93,6 +93,10 @@ public class ASBTalisman extends Equipment {
         return typeIndex;
     }
 
+    public void setTypeIndex(int typeIndex) {
+        this.typeIndex = typeIndex;
+    }
+
     private enum TypeName {
         PAWN("Pawn"),
         BISHOP("Bishop"),

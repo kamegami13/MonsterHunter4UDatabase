@@ -82,6 +82,27 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
     }
 
     @Override
+    public void onASBActivityUpdated(ASBSession s, int pieceIndex) {
+        switch (pieceIndex) {
+            case ASBSession.HEAD:
+                headView.updateContents();
+                break;
+            case ASBSession.BODY:
+                bodyView.updateContents();
+                break;
+            case ASBSession.ARMS:
+                armsView.updateContents();
+                break;
+            case ASBSession.WAIST:
+                waistView.updateContents();
+                break;
+            case ASBSession.LEGS:
+                legsView.updateContents();
+                break;
+        }
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 

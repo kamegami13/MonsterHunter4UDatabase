@@ -3185,10 +3185,10 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 			case ASBSession.BODY:
 				putASBSetItemOrNull(values, S.COLUMN_BODY_ARMOR_ID, pieceId);
 				break;
-			case ASBSession.WAIST:
+			case ASBSession.ARMS:
 				putASBSetItemOrNull(values, S.COLUMN_ARMS_ARMOR_ID, pieceId);
 				break;
-			case ASBSession.ARMS:
+			case ASBSession.WAIST:
 				putASBSetItemOrNull(values, S.COLUMN_WAIST_ARMOR_ID, pieceId);
 				break;
 			case ASBSession.LEGS:
@@ -3265,6 +3265,41 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
 	}
 
+	public long queryCreateASBSetTalisman(long asbSetId, int type, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
+		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
+
+		ContentValues values = new ContentValues();
+
+		values.put(S.COLUMN_TALISMAN_EXISTS, 1);
+
+		values.put(S.COLUMN_TALISMAN_TYPE, type);
+		values.put(S.COLUMN_TALISMAN_SLOTS, slots);
+		values.put(S.COLUMN_TALISMAN_SKILL_1_ID, skill1Id);
+		values.put(S.COLUMN_TALISMAN_SKILL_1_POINTS, skill1Points);
+
+		if (skill2Id != -1) {
+			values.put(S.COLUMN_TALISMAN_SKILL_2_ID, skill2Id);
+			values.put(S.COLUMN_TALISMAN_SKILL_2_POINTS, skill2Points);
+		}
+		else {
+			values.putNull(S.COLUMN_TALISMAN_SKILL_2_ID);
+			values.putNull(S.COLUMN_TALISMAN_SKILL_2_POINTS);
+		}
+
+		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
+	}
+
+	public long queryRemoveASBSetTalisman(long asbSetId) {
+		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
+
+		ContentValues values = new ContentValues();
+
+		values.put(S.COLUMN_TALISMAN_EXISTS, 0);
+
+		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
+	}
+
+	/** Builds an SQL query that gives us all information about the {@code ASBSession} in question. */
 	private SQLiteQueryBuilder builderASBSet() {
 		HashMap<String, String> projectionMap = new HashMap<>();
 
@@ -3302,6 +3337,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		projectionMap.put(S.COLUMN_LEGS_DECORATION_3_ID, set + "." + S.COLUMN_LEGS_DECORATION_3_ID);
 
 		projectionMap.put(S.COLUMN_TALISMAN_EXISTS, set + "." + S.COLUMN_TALISMAN_EXISTS);
+		projectionMap.put(S.COLUMN_TALISMAN_TYPE, set + "." + S.COLUMN_TALISMAN_TYPE);
+		projectionMap.put(S.COLUMN_TALISMAN_SLOTS, set + "." + S.COLUMN_TALISMAN_SLOTS);
 		projectionMap.put(S.COLUMN_TALISMAN_SKILL_1_ID, set + "." + S.COLUMN_TALISMAN_SKILL_1_ID);
 		projectionMap.put(S.COLUMN_TALISMAN_SKILL_1_POINTS, set + "." + S.COLUMN_TALISMAN_SKILL_1_POINTS);
 		projectionMap.put(S.COLUMN_TALISMAN_SKILL_2_ID, set + "." + S.COLUMN_TALISMAN_SKILL_2_ID);

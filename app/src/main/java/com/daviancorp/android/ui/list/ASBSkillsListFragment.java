@@ -56,6 +56,11 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
     }
 
     @Override
+    public void onASBActivityUpdated(ASBSession s, int pieceIndex) {
+        onASBActivityUpdated(s);
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         ASBActivity a = (ASBActivity) getActivity();
@@ -77,7 +82,8 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            View itemView = inflater.inflate(R.layout.fragment_asb_skills_listitem, parent, false); // Conditional inflation really isn't necessary simply because of how many skills you'd have to have.
+            View itemView = inflater.inflate(R.layout.fragment_asb_skills_listitem, parent, false);
+            // Conditional inflation really isn't necessary simply because of how many skills you'd have to have.
 
             TextView treeName = (TextView) itemView.findViewById(R.id.skill_tree_name);
             TextView headPoints = (TextView) itemView.findViewById(R.id.helmet);
@@ -90,27 +96,27 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
 
             treeName.setText(getItem(position).getSkillTree().getName());
 
-            if (session.isEquipmentSelected(ASBSession.HEAD)) {
+            if (session.isEquipmentSelected(ASBSession.HEAD) && getItem(position).getHeadPoints() != 0) {
                 headPoints.setText(String.valueOf(getItem(position).getHeadPoints()));
             }
 
-            if (session.isEquipmentSelected(ASBSession.BODY)) {
+            if (session.isEquipmentSelected(ASBSession.BODY) && getItem(position).getBodyPoints() != 0) {
                 bodyPoints.setText(String.valueOf(getItem(position).getBodyPoints()));
             }
 
-            if (session.isEquipmentSelected(ASBSession.ARMS)) {
+            if (session.isEquipmentSelected(ASBSession.ARMS) && getItem(position).getArmsPoints() != 0) {
                 armsPoints.setText(String.valueOf(getItem(position).getArmsPoints()));
             }
 
-            if (session.isEquipmentSelected(ASBSession.WAIST)) {
+            if (session.isEquipmentSelected(ASBSession.WAIST) && getItem(position).getWaistPoints() != 0) {
                 waistPoints.setText(String.valueOf(getItem(position).getWaistPoints()));
             }
 
-            if (session.isEquipmentSelected(ASBSession.LEGS)) {
+            if (session.isEquipmentSelected(ASBSession.LEGS) && getItem(position).getLegsPoints() != 0) {
                 legsPoints.setText(String.valueOf(getItem(position).getLegsPoints()));
             }
 
-            if (session.isEquipmentSelected(ASBSession.TALISMAN)) {
+            if (session.isEquipmentSelected(ASBSession.TALISMAN) && getItem(position).getTalismanPoints() != 0) {
                 talismanPoints.setText(String.valueOf(getItem(position).getTalismanPoints()));
             }
 

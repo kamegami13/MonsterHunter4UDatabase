@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.compound.ASBTalismanSkillContainer;
@@ -197,17 +198,7 @@ public class ASBTalismanDialogFragment extends DialogFragment implements ASBTali
         }
 
         Spinner spinner = (Spinner) view.findViewById(R.id.talisman_rank_spinner);
-        spinner.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, talismanNames));
-
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                talismanTypeIndex = position;
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {}
-//        });
+        spinner.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, talismanNames));
 
         return spinner;
     }
@@ -215,6 +206,7 @@ public class ASBTalismanDialogFragment extends DialogFragment implements ASBTali
     private Spinner initializeSlotsSpinner(View view) {
         Spinner spinner = (Spinner) view.findViewById(R.id.talisman_slots_spinner);
         spinner.setAdapter(ArrayAdapter.createFromResource(getActivity(), R.array.slot_values, android.R.layout.simple_spinner_dropdown_item));
+        ((ArrayAdapter) spinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
         return spinner;
     }

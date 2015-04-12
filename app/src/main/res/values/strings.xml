@@ -125,7 +125,7 @@
 
     <string-array name="talisman_names">
         <item>Pawn,Talisman-White.png</item>
-        <item>Bishop,Talisman-LightPurple.png</item>
+        <item>Bishop,Talisman-Purple.png</item>
         <item>Knight</item>
         <item>Rook,Talisman-Pink.png</item>
         <item>Queen</item>
@@ -135,9 +135,9 @@
         <item>Mystic,Talisman-Orange.png</item>
         <item>Hero,Talisman-Blue.png</item>
         <item>Legend,Talisman-Orange.png</item>
-        <item>Creator,Talisman-Purple.png</item>
-        <item>Sage,Talisman-Purple.png</item>
-        <item>Miracle,Talisman-Purple.png</item>
+        <item>Creator,Talisman-Magenta.png</item>
+        <item>Sage,Talisman-Magenta.png</item>
+        <item>Miracle,Talisman-Magenta.png</item>
     </string-array>
 
     <string name="placeholder_unknown">Unknown</string>
