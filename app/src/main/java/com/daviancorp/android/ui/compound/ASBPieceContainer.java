@@ -95,7 +95,10 @@ public class ASBPieceContainer extends LinearLayout {
 
     private void updateDecorations() {
         for (int i = 0; i < 3; i++) {
-            if (session.decorationIsReal(pieceIndex, i)) {
+            if (!session.isEquipmentSelected(pieceIndex)) {
+                decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_none));
+            }
+            else if (session.decorationIsReal(pieceIndex, i)) {
                 decorationIcons[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_real));
             }
             else if (session.decorationIsDummy(pieceIndex, i)) { // The socket index in question is a ummy
@@ -139,7 +142,12 @@ public class ASBPieceContainer extends LinearLayout {
             case ASBSession.TALISMAN:
                 String imageRes;
                 try {
-                    imageRes = "icons_items/" + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()].split(",")[1];
+                    if (session.isEquipmentSelected(ASBSession.TALISMAN)) {
+                        imageRes = "icons_items/" + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()].split(",")[1];
+                    }
+                    else {
+                        imageRes = "icons_items/Talisman-White.png";
+                    }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     Log.e("ASB", "Image not found for " + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()]);
                     imageRes = "icons_items/Talisman-White.png";

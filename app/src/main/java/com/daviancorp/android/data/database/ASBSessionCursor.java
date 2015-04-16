@@ -83,68 +83,68 @@ public class ASBSessionCursor extends CursorWrapper {
         Decoration talismanDecoration3 = getDecorationById(context, talismanDecoration3Id);
 
         if (headArmor != null) {
-            session.setEquipment(ASBSession.HEAD, getArmorById(context, headId));
+            session.setEquipment(ASBSession.HEAD, headArmor, false);
         }
         if (headDecoration1 != null) {
-            session.addDecoration(ASBSession.HEAD, getDecorationById(context, headDecoration1Id));
+            session.addDecoration(ASBSession.HEAD, headDecoration1, false);
         }
         if (headDecoration2 != null) {
-            session.addDecoration(ASBSession.HEAD, getDecorationById(context, headDecoration2Id));
+            session.addDecoration(ASBSession.HEAD, headDecoration2, false);
         }
         if (headDecoration3 != null) {
-            session.addDecoration(ASBSession.HEAD, getDecorationById(context, headDecoration3Id));
+            session.addDecoration(ASBSession.HEAD, headDecoration3, false);
         }
 
         if (bodyArmor != null) {
-            session.setEquipment(ASBSession.BODY, getArmorById(context, bodyId));
+            session.setEquipment(ASBSession.BODY, bodyArmor, false);
         }
         if (bodyDecoration1 != null) {
-            session.addDecoration(ASBSession.BODY, getDecorationById(context, bodyDecoration1Id));
+            session.addDecoration(ASBSession.BODY, bodyDecoration1, false);
         }
         if (bodyDecoration2 != null) {
-            session.addDecoration(ASBSession.BODY, getDecorationById(context, bodyDecoration2Id));
+            session.addDecoration(ASBSession.BODY, bodyDecoration2, false);
         }
         if (bodyDecoration3 != null) {
-            session.addDecoration(ASBSession.BODY, getDecorationById(context, bodyDecoration3Id));
+            session.addDecoration(ASBSession.BODY, bodyDecoration3, false);
         }
 
         if (armsArmor != null) {
-            session.setEquipment(ASBSession.ARMS, getArmorById(context, armsId));
+            session.setEquipment(ASBSession.ARMS, armsArmor, false);
         }
         if (armsDecoration1 != null) {
-            session.addDecoration(ASBSession.ARMS, getDecorationById(context, armsDecoration1Id));
+            session.addDecoration(ASBSession.ARMS, armsDecoration1, false);
         }
         if (armsDecoration2 != null) {
-            session.addDecoration(ASBSession.ARMS, getDecorationById(context, armsDecoration2Id));
+            session.addDecoration(ASBSession.ARMS, armsDecoration2, false);
         }
         if (armsDecoration3 != null) {
-            session.addDecoration(ASBSession.ARMS, getDecorationById(context, armsDecoration3Id));
+            session.addDecoration(ASBSession.ARMS, armsDecoration3, false);
         }
 
         if (waistArmor != null) {
-            session.setEquipment(ASBSession.WAIST, getArmorById(context, waistId));
+            session.setEquipment(ASBSession.WAIST, waistArmor, false);
         }
         if (waistDecoration1 != null) {
-            session.addDecoration(ASBSession.WAIST, getDecorationById(context, waistDecoration1Id));
+            session.addDecoration(ASBSession.WAIST, waistDecoration1, false);
         }
         if (waistDecoration2 != null) {
-            session.addDecoration(ASBSession.WAIST, getDecorationById(context, waistDecoration2Id));
+            session.addDecoration(ASBSession.WAIST, waistDecoration2, false);
         }
         if (waistDecoration3 != null) {
-            session.addDecoration(ASBSession.WAIST, getDecorationById(context, waistDecoration3Id));
+            session.addDecoration(ASBSession.WAIST, waistDecoration3, false);
         }
 
         if (legsArmor != null) {
-            session.setEquipment(ASBSession.LEGS, getArmorById(context, legsId));
+            session.setEquipment(ASBSession.LEGS, legsArmor, false);
         }
         if (legsDecoration1 != null) {
-            session.addDecoration(ASBSession.LEGS, getDecorationById(context, legsDecoration1Id));
+            session.addDecoration(ASBSession.LEGS, legsDecoration1, false);
         }
         if (legsDecoration2 != null) {
-            session.addDecoration(ASBSession.LEGS, getDecorationById(context, legsDecoration2Id));
+            session.addDecoration(ASBSession.LEGS, legsDecoration2, false);
         }
         if (legsDecoration3 != null) {
-            session.addDecoration(ASBSession.LEGS, getDecorationById(context, legsDecoration3Id));
+            session.addDecoration(ASBSession.LEGS, legsDecoration3, false);
         }
 
         if (talismanExists == 1) {
@@ -160,17 +160,19 @@ public class ASBSessionCursor extends CursorWrapper {
             }
 
             if (talismanDecoration1 != null) {
-                session.addDecoration(ASBSession.TALISMAN, getDecorationById(context, talismanDecoration1Id));
+                session.addDecoration(ASBSession.TALISMAN, talismanDecoration1);
             }
             if (talismanDecoration2 != null) {
-                session.addDecoration(ASBSession.TALISMAN, getDecorationById(context, talismanDecoration2Id));
+                session.addDecoration(ASBSession.TALISMAN, talismanDecoration2);
             }
             if (talismanDecoration3 != null) {
-                session.addDecoration(ASBSession.TALISMAN, getDecorationById(context, talismanDecoration3Id));
+                session.addDecoration(ASBSession.TALISMAN, talismanDecoration2);
             }
 
-            session.setEquipment(ASBSession.TALISMAN, talisman);
+            session.setEquipment(ASBSession.TALISMAN, talisman, false);
         }
+
+        session.updateSkillTreePointsSets();
 
         return session;
     }
