@@ -1,15 +1,21 @@
 package com.daviancorp.android.ui.detail;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
+import android.widget.ProgressBar;
 import com.daviancorp.android.data.classes.ASBSession;
+import com.daviancorp.android.data.classes.ASBTalisman;
+import com.daviancorp.android.data.classes.Decoration;
+import com.daviancorp.android.data.classes.SkillTree;
+import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.compound.ASBPieceContainer;
+import com.daviancorp.android.ui.list.ArmorListActivity;
 
 /**
  * This is where the magic happens baby. Users can define a custom armor set in this fragment.
@@ -18,6 +24,8 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
 
     public static final String ARG_SET_RANK = "set_rank";
     public static final String ARG_SET_HUNTER_TYPE = "set_hunter_type";
+
+    ASBSession session;
 
     ASBPieceContainer headView;
     ASBPieceContainer bodyView;
@@ -45,6 +53,7 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_asb, container, false);
+
         headView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_head);
         bodyView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_body);
         armsView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_arms);
@@ -52,23 +61,77 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
         legsView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_legs);
         talismanView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_talisman);
 
-        ASBSession s = ((ASBActivity) getActivity()).getASBSession();
-
-        headView.initialize(s, 0, this);
-        bodyView.initialize(s, 1, this);
-        armsView.initialize(s, 2, this);
-        waistView.initialize(s, 3, this);
-        legsView.initialize(s, 4, this);
-        talismanView.initialize(s, 5, this);
-
-        headView.updateContents();
-        bodyView.updateContents();
-        armsView.updateContents();
-        waistView.updateContents();
-        legsView.updateContents();
-        talismanView.updateContents();
+        headView.initialize(session, 0, this);
+        bodyView.initialize(session, 1, this);
+        armsView.initialize(session, 2, this);
+        waistView.initialize(session, 3, this);
+        legsView.initialize(session, 4, this);
+        talismanView.initialize(session, 5, this);
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) { // If the user canceled the request, we don't want to do anything.
+            switch (requestCode) {
+                case ASBActivity.REQUEST_CODE_ADD_PIECE:
+                    new ASBAsyncTask(ASBOperation.ADD_PIECE, data).execute();
+                    break;
+
+                case ASBActivity.REQUEST_CODE_ADD_DECORATION:
+                    new ASBAsyncTask(ASBOperation.ADD_DECORATION, data).execute();
+                    break;
+
+                case ASBActivity.REQUEST_CODE_CREATE_TALISMAN:
+                    new ASBAsyncTask(ASBOperation.CREATE_TALISMAN, data).execute();
+                    break;
+
+                case ASBActivity.REQUEST_CODE_REMOVE_PIECE:
+                    new ASBAsyncTask(ASBOperation.REMOVE_PIECE, data).execute();
+                    break;
+
+                case ASBActivity.REQUEST_CODE_REMOVE_DECORATION:
+                    new ASBAsyncTask(ASBOperation.REMOVE_DECORATION, data).execute();
+                    break;
+
+                case ASBActivity.REQUEST_CODE_REMOVE_TALISMAN:
+                    new ASBAsyncTask(ASBOperation.DELETE_TALISMAN, data).execute();
+
+            }
+        }
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_asb, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.set_builder_add_piece: // The user wants to add an armor piece
+                Intent intent = new Intent(getActivity(), ArmorListActivity.class);
+                intent.putExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, true);
+
+                startActivityForResult(intent, ASBActivity.REQUEST_CODE_ADD_PIECE);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        ASBActivity a = (ASBActivity) getActivity();
+        a.addASBSetChangedListener(this);
+        session = a.getASBSession();
     }
 
     @Override
@@ -81,42 +144,143 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
         talismanView.updateContents();
     }
 
-    @Override
-    public void onASBActivityUpdated(ASBSession s, int pieceIndex) {
-        switch (pieceIndex) {
-            case ASBSession.HEAD:
-                headView.updateContents();
-                break;
-            case ASBSession.BODY:
-                bodyView.updateContents();
-                break;
-            case ASBSession.ARMS:
-                armsView.updateContents();
-                break;
-            case ASBSession.WAIST:
-                waistView.updateContents();
-                break;
-            case ASBSession.LEGS:
-                legsView.updateContents();
-                break;
+    private class ASBAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private ASBOperation operation;
+        private Intent data;
+
+        public ASBAsyncTask(ASBOperation operation, Intent data) {
+            super();
+            this.operation = operation;
+            this.data = data;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            operation.perform(session, getActivity(), data);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            session.notifySessionChangeListeners();
+            ((ASBActivity) getActivity()).updateASBSetChangedListeners();
         }
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    private enum ASBOperation {
+        ADD_PIECE {
+            @Override
+            public void perform(ASBSession session, Context context, Intent data) {
+                long armorId = data.getLongExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, -1);
 
-        // We have to check to make sure that the Activity that this is being attached to is connected to the callback interface for this fragment.
-        try {
-            ASBActivity a = (ASBActivity) getActivity();
-            a.addASBSetChangedListener(this);
-        } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must be an ASBActivity.");
-        }
-    }
+                String armorType = DataManager.get(context).getArmor(armorId).getSlot();
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ((ASBActivity)getActivity()).fragmentResultReceived(requestCode, resultCode, data);
+                switch (armorType) {
+                    case "Head":
+                        session.setEquipment(ASBSession.HEAD, DataManager.get(context).getArmor(armorId));
+                        DataManager.get(context).queryPutASBSessionArmor(session.getId(), armorId, ASBSession.HEAD);
+                        break;
+                    case "Body":
+                        session.setEquipment(ASBSession.BODY, DataManager.get(context).getArmor(armorId));
+                        DataManager.get(context).queryPutASBSessionArmor(session.getId(), armorId, ASBSession.BODY);
+                        break;
+                    case "Arms":
+                        session.setEquipment(ASBSession.ARMS, DataManager.get(context).getArmor(armorId));
+                        DataManager.get(context).queryPutASBSessionArmor(session.getId(), armorId, ASBSession.ARMS);
+                        break;
+                    case "Waist":
+                        session.setEquipment(ASBSession.WAIST, DataManager.get(context).getArmor(armorId));
+                        DataManager.get(context).queryPutASBSessionArmor(session.getId(), armorId, ASBSession.WAIST);
+                        break;
+                    case "Legs":
+                        session.setEquipment(ASBSession.LEGS, DataManager.get(context).getArmor(armorId));
+                        DataManager.get(context).queryPutASBSessionArmor(session.getId(), armorId, ASBSession.LEGS);
+                        break;
+                }
+            }
+        },
+
+        ADD_DECORATION {
+            @Override
+            void perform(ASBSession session, Context context, Intent data) {
+                long decorationId = data.getLongExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, -1);
+                int pieceIndex = data.getIntExtra(ASBActivity.EXTRA_PIECE_INDEX, -1);
+
+                Decoration decoration = DataManager.get(context).getDecoration(decorationId);
+                int decorationIndex = session.addDecoration(pieceIndex, decoration);
+
+                if (decorationIndex != -1 && pieceIndex != -1) {
+                    DataManager.get(context).queryPutASBSessionDecoration(session.getId(), decorationId, pieceIndex, decorationIndex);
+                }
+            }
+        },
+
+        CREATE_TALISMAN {
+            @Override
+            void perform(ASBSession session, Context context, Intent data) {
+                ASBTalisman talisman;
+
+                int typeIndex = data.getIntExtra(ASBActivity.EXTRA_TALISMAN_TYPE_INDEX, -1);
+                int slots = data.getIntExtra(ASBActivity.EXTRA_TALISMAN_SLOTS, 0);
+
+                long skill1Id = data.getLongExtra(ASBActivity.EXTRA_TALISMAN_SKILL_TREE_1, -1);
+                int skill1Points = data.getIntExtra(ASBActivity.EXTRA_TALISMAN_SKILL_POINTS_1, -1);
+
+                long skill2Id = -1;
+                int skill2Points = 0;
+
+                SkillTree skill1Tree = DataManager.get(context).getSkillTree(skill1Id);
+                talisman = new ASBTalisman(skill1Tree, skill1Points, typeIndex);
+                talisman.setNumSlots(slots);
+
+                if (data.hasExtra(ASBActivity.EXTRA_TALISMAN_SKILL_TREE_2)) {
+                    skill2Id = data.getLongExtra(ASBActivity.EXTRA_TALISMAN_SKILL_TREE_2, -1);
+                    skill2Points = data.getIntExtra(ASBActivity.EXTRA_TALISMAN_SKILL_POINTS_2, -1);
+
+                    SkillTree skill2Tree = DataManager.get(context).getSkillTree(skill2Id);
+                    talisman.setSkill2(skill2Tree);
+                    talisman.setSkill2Points(skill2Points);
+                }
+
+                DataManager.get(context).queryCreateASBSessionTalisman(session.getId(), typeIndex, slots, skill1Id, skill1Points, skill2Id, skill2Points);
+
+                session.setEquipment(ASBSession.TALISMAN, talisman);
+            }
+        },
+
+        REMOVE_PIECE {
+            @Override
+            void perform(ASBSession session, Context context, Intent data) {
+                int pieceIndex = data.getIntExtra(ASBActivity.EXTRA_PIECE_INDEX, -1);
+
+                session.removeEquipment(pieceIndex);
+                DataManager.get(context).queryRemoveASBSessionArmor(session.getId(), pieceIndex);
+            }
+        },
+
+        REMOVE_DECORATION {
+            @Override
+            void perform(ASBSession session, Context context, Intent data) {
+                int pieceIndex = data.getIntExtra(ASBActivity.EXTRA_PIECE_INDEX, -1);
+                int decorationIndex = data.getIntExtra(ASBActivity.EXTRA_DECORATION_INDEX, -1);
+
+                session.removeDecoration(pieceIndex, decorationIndex);
+                DataManager.get(context).queryRemoveASBSessionDecoration(session.getId(), pieceIndex, decorationIndex);
+            }
+        },
+
+        DELETE_TALISMAN {
+            @Override
+            void perform(ASBSession session, Context context, Intent data) {
+                session.removeEquipment(ASBSession.TALISMAN);
+                DataManager.get(context).queryRemoveASBSessionTalisman(session.getId());
+            }
+        };
+
+
+        abstract void perform(ASBSession session, Context context, Intent data);
     }
 }

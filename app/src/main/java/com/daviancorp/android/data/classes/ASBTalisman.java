@@ -84,11 +84,6 @@ public class ASBTalisman extends Equipment {
         return TypeName.values()[typeIndex].getName() + " Talisman";
     }
 
-    /** @return True if the talisman has a second skill defined, false if not. */
-    public boolean hasTwoSkills() {
-        return skillTrees[1] != null;
-    }
-
     public int getTypeIndex() {
         return typeIndex;
     }
@@ -115,7 +110,7 @@ public class ASBTalisman extends Equipment {
 
         private String name;
 
-        private TypeName(String name) {
+        TypeName(String name) {
             this.name = name;
         }
 

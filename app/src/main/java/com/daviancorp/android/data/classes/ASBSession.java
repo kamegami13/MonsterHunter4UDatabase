@@ -10,7 +10,6 @@ import java.util.*;
  * Represents a session of the user's interaction with the Armor Set Builder.
  */
 public class ASBSession {
-
     public static final int HEAD = 0;
     public static final int BODY = 1;
     public static final int ARMS = 2;
@@ -24,22 +23,20 @@ public class ASBSession {
     private static Decoration noDecoration = new Decoration();
     public static Decoration dummyDecoration = new Decoration();
 
+    private Context context;
+
+    private ASBSet asbSet;
+
     private Equipment[] equipment;
     private Decoration[][] decorations;
 
-    private List<SkillTreePointsSet> skillTreePointsSets;
+    private List<SkillTreeInSet> skillTreesInSet;
 
-    private List<OnASBSetChangedListener> changedListeners;
+    private List<SessionChangeListener> sessionChangeListeners;
 
-    private long id;
-    private String name;
-    private int rank;
-    private int hunterType; // 0 is undefined, 1 is blademaster, 2 is gunner
+    public ASBSession(Context context) {
 
-    /**
-     * Default constructor.
-     */
-    public ASBSession() {
+        this.context = context;
 
         equipment = new Equipment[6];
         for (int i = 0; i < equipment.length; i++) {
@@ -58,47 +55,30 @@ public class ASBSession {
             }
         }
 
-        skillTreePointsSets = new ArrayList<>();
-
-        changedListeners = new ArrayList<>();
+        skillTreesInSet = new ArrayList<>();
     }
 
     public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return asbSet.getId();
     }
 
     public int getRank() {
-        return rank;
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
+        return asbSet.getRank();
     }
 
     public int getHunterType() {
-        return hunterType;
+        return asbSet.getHunterType();
     }
 
-    public void setHunterType(int hunterType) {
-        this.hunterType = hunterType;
+    public void setASBSet(ASBSet set) {
+        asbSet = set;
     }
 
     public Decoration getDecoration(int pieceIndex, int decorationIndex) {
         return decorations[pieceIndex][decorationIndex];
     }
 
+    /** @return True if the armor piece in question has any number of decorations, otherwise false. */
     public boolean hasDecorations(int pieceIndex) {
         int decorationCount = 0;
         for (Decoration d : decorations[pieceIndex]) {
@@ -121,7 +101,7 @@ public class ASBSession {
         return equipment[pieceIndex].getNumSlots() - decorationCount;
     }
 
-    /** @return True if the designated slot is actually in use, false if it is empty. */
+    /** @return True if the slot is in use by an actual, user-selected decoration. */
     public boolean decorationIsReal(int pieceIndex, int decorationIndex) {
         return decorations[pieceIndex][decorationIndex] != noDecoration && decorations[pieceIndex][decorationIndex] != dummyDecoration;
     }
@@ -168,45 +148,36 @@ public class ASBSession {
                 decorations[pieceIndex][i + 2] = dummyDecoration;
             }
 
-            notifyASBSetChangedListeners();
+            updateSkillTreePointsSets();
+
             return i;
         } else {
             return -1;
         }
     }
 
+    /** Removes the decoration at the specified location from the specified armor piece. Will fail if the decoration in question is non-existent or a dummy. */
     public void removeDecoration(int pieceIndex, int decorationIndex) {
-
-        if (decorations[pieceIndex][decorationIndex] != dummyDecoration) {
+        if (decorations[pieceIndex][decorationIndex] != dummyDecoration && decorations[pieceIndex][decorationIndex] != noDecoration) {
             decorations[pieceIndex][decorationIndex] = noDecoration;
 
-            for (int j = decorationIndex + 1; j < decorations[pieceIndex].length; j++) {
-                if (decorations[pieceIndex][j] == dummyDecoration) {
-                    decorations[pieceIndex][j] = noDecoration;
-                } else {
-                    break;
+            int i = 0;
+            Decoration[] newDecorations = new Decoration[3]; // We move all of the decorations to a new array so that they are all at the beginning
+
+            for (Decoration d : decorations[pieceIndex]) {
+                if (d != noDecoration && d != dummyDecoration) {
+                    newDecorations[i++] = d;
                 }
-
             }
 
-        }
-
-        int i = 0;
-        Decoration[] newDecorations = new Decoration[3]; // We move all of the decorations to a new array so that they are all at the beginning
-
-        for (Decoration d : decorations[pieceIndex]) {
-            if (d != noDecoration) {
-                newDecorations[i++] = d;
+            while (i < newDecorations.length) {
+                newDecorations[i++] = noDecoration;
             }
+
+            decorations[pieceIndex] = newDecorations;
+
+            updateSkillTreePointsSets();
         }
-
-        while (i < newDecorations.length) {
-            newDecorations[i++] = noDecoration;
-        }
-
-        decorations[pieceIndex] = newDecorations;
-
-        notifyASBSetChangedListeners();
     }
 
     /** @return True if the user has chosen a piece at the specified index or has created a talisman, false otherwise. */
@@ -217,19 +188,20 @@ public class ASBSession {
         return equipment[pieceIndex] != noEquipment;
     }
 
-    public void setEquipment(int pieceIndex, Equipment equip) {
-        equipment[pieceIndex] = equip;
-
-        notifyASBSetChangedListeners();
-    }
-
     /** @return A piece of the armor set based on the provided piece index. */
     public Equipment getEquipment(int pieceIndex) {
         return equipment[pieceIndex];
     }
 
+    /** @return The set's talisman. */
     public ASBTalisman getTalisman() {
         return (ASBTalisman)equipment[TALISMAN];
+    }
+
+    public void setEquipment(int pieceIndex, Equipment equip) {
+        equipment[pieceIndex] = equip;
+
+        updateSkillTreePointsSets();
     }
 
     public void removeEquipment(int pieceIndex) {
@@ -244,66 +216,60 @@ public class ASBSession {
             decorations[pieceIndex][i] = noDecoration;
         }
 
-        notifyASBSetChangedListeners(pieceIndex);
+        updateSkillTreePointsSets();
     }
 
-    public List<SkillTreePointsSet> getSkillTreePointsSets() {
-        return skillTreePointsSets;
+    public List<SkillTreeInSet> getSkillTreesInSet() {
+        return skillTreesInSet;
     }
 
     /**
      * Adds any skills to the armor set's skill trees that were not there before, and removes those no longer there.
      */
-    public void updateSkillTreePointsSets(Context context) {
+     private void updateSkillTreePointsSets() {
+         skillTreesInSet.clear();
 
-        skillTreePointsSets.clear();
+         Map<Long, SkillTreeInSet> skillTreeToSkillTreeInSet = new HashMap<>(); // A map of the skill trees in the set and their associated SkillTreePointsSets
 
-        Map<Long, SkillTreePointsSet> skillTreeToSkillTreePointsSet = new HashMap<>(); // A map of the skill trees in the set and their associated SkillTreePointsSets
+         for (SkillTreeInSet pointsSet : skillTreesInSet) {
+             skillTreeToSkillTreeInSet.put(pointsSet.getSkillTree().getId(), pointsSet);
+         }
 
-        for (SkillTreePointsSet pointsSet : skillTreePointsSets) {
-            skillTreeToSkillTreePointsSet.put(pointsSet.getSkillTree().getId(), pointsSet);
-        }
+         for (int i = 0; i < equipment.length; i++) {
 
-        for (int i = 0; i < equipment.length; i++) {
+             Log.v("ASB", "Reading skills from armor piece " + i);
 
-            Log.v("ASB", "Reading skills from armor piece " + i);
+             Map<SkillTree, Integer> armorSkillTreePoints = getSkillsFromArmorPiece(i); // A map of the current piece of armor's skills, localized so we don't have to keep calling it
 
-            Map<SkillTree, Integer> armorSkillTreePoints = getSkillsFromArmorPiece(i, context); // A map of the current piece of armor's skills, localized so we don't have to keep calling it
+             for (SkillTree skillTree : armorSkillTreePoints.keySet()) {
 
-            for (SkillTree skillTree : armorSkillTreePoints.keySet()) {
+                 SkillTreeInSet s; // The actual points set that we are working with that will be shown to the user
 
-                SkillTreePointsSet s; // The actual points set that we are working with that will be shown to the user
+                 if (!skillTreeToSkillTreeInSet.containsKey(skillTree.getId())) { // If the armor set does not yet have this skill tree registered...
+                     Log.d("ASB", "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
 
-                if (!skillTreeToSkillTreePointsSet.containsKey(skillTree.getId())) { // If the armor set does not yet have this skill tree registered...
-                    Log.d("ASB", "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
+                     s = new SkillTreeInSet(); // We add it...
+                     s.setSkillTree(skillTree);
+                     skillTreesInSet.add(s);
 
-                    s = new SkillTreePointsSet(); // We add it...
-                    s.setSkillTree(skillTree);
-                    skillTreePointsSets.add(s);
+                     skillTreeToSkillTreeInSet.put(skillTree.getId(), s);
 
-                    skillTreeToSkillTreePointsSet.put(skillTree.getId(), s);
+                 } else {
+                     Log.d("ASB", "Skill tree " + skillTree.getName() + " already registered!");
+                     s = skillTreeToSkillTreeInSet.get(skillTree.getId()); // Otherwise, we just find the skill tree set that's already there
+                 }
 
-                } else {
-                    Log.d("ASB", "Skill tree " + skillTree.getName() + " already registered!");
-                    s = skillTreeToSkillTreePointsSet.get(skillTree.getId()); // Otherwise, we just find the skill tree set that's already there
-                }
-
-                s.setPoints(i, armorSkillTreePoints.get(skillTree));
-            }
-        }
+                 s.setPoints(i, armorSkillTreePoints.get(skillTree));
+             }
+         }
     }
 
     /**
      * A helper method that converts an armor piece present in the current session into a map of the skills it provides and the respective points in each.
      * @param pieceIndex The piece of armor to get the skills from.
-     * <li/>0: Head
-     * <li/>1: Body
-     * <li/>2: Arms
-     * <li/>3: Waist
-     * <li/>4: Legs
      * @return A map of all the skills the armor piece provides along with the number of points in each.
      */
-    private Map<SkillTree, Integer> getSkillsFromArmorPiece(int pieceIndex, Context context) {
+    private Map<SkillTree, Integer> getSkillsFromArmorPiece(int pieceIndex) {
         Map<SkillTree, Integer> skills = new HashMap<>();
 
         if (pieceIndex != TALISMAN) {
@@ -315,13 +281,13 @@ public class ASBSession {
         else if (getTalisman() != noTalisman) {
             skills.put(getTalisman().getSkill1(), getTalisman().getSkill1Points());
 
-            if (getTalisman().hasTwoSkills()) {
+            if (getTalisman().getSkill2() != null) {
                 Log.d("ASB", "Talisman has two skills.");
                 skills.put(getTalisman().getSkill2(), getTalisman().getSkill2Points());
             }
         }
 
-        for (Decoration d : decorations[pieceIndex]) { // Now we work on decorations
+        for (Decoration d : decorations[pieceIndex]) {
             for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(d.getId())) {
                 if (skills.containsKey(itemToSkillTree.getSkillTree())) {
                     int points = skills.get(itemToSkillTree.getSkillTree()) + itemToSkillTree.getPoints();
@@ -332,45 +298,47 @@ public class ASBSession {
                 }
             }
         }
+
         return skills;
     }
 
-    public void addOnASBSetChangedListener(OnASBSetChangedListener l) {
-        changedListeners.add(l);
+    public void addSessionChangeListener(SessionChangeListener l) {
+        if (sessionChangeListeners == null) {
+            sessionChangeListeners = new ArrayList<>();
+        }
+
+        sessionChangeListeners.add(l);
     }
 
-    public void detachOnASBSetChangedListener(OnASBSetChangedListener l) {
-        changedListeners.remove(l);
+    public void removeSessionChangeListener(SessionChangeListener l) {
+        if (sessionChangeListeners == null) {
+            sessionChangeListeners = new ArrayList<>();
+        }
+
+        sessionChangeListeners.remove(l);
     }
 
-    private void notifyASBSetChangedListeners() {
-        for (OnASBSetChangedListener l : changedListeners) {
-            l.onASBSetChanged();
+    public void notifySessionChangeListeners() {
+        if (sessionChangeListeners != null) {
+            for (SessionChangeListener l : sessionChangeListeners) {
+                l.onSessionChange();
+            }
         }
     }
 
-    private void notifyASBSetChangedListeners(int pieceIndex) {
-        for (OnASBSetChangedListener l : changedListeners) {
-            l.onASBSetChanged(pieceIndex);
-        }
-    }
-
-    /** Allows an object to be notified when the {@code ASBSession} is changed in some way. */
-    public interface OnASBSetChangedListener {
-        void onASBSetChanged();
-
-        void onASBSetChanged(int pieceIndex);
+    public interface SessionChangeListener {
+        void onSessionChange();
     }
 
     /**
      * A container class that represents a skill tree as well as a specific number of points provided by each armor piece in a set.
      */
-    public static class SkillTreePointsSet {
+    public static class SkillTreeInSet {
 
         private SkillTree skillTree;
         private int[] points;
 
-        public SkillTreePointsSet() {
+        public SkillTreeInSet() {
             points = new int[6];
         }
 
@@ -378,28 +346,8 @@ public class ASBSession {
             return skillTree;
         }
 
-        public int getHeadPoints() {
-            return points[HEAD];
-        }
-
-        public int getBodyPoints() {
-            return points[BODY];
-        }
-
-        public int getArmsPoints() {
-            return points[ARMS];
-        }
-
-        public int getWaistPoints() {
-            return points[WAIST];
-        }
-
-        public int getLegsPoints() {
-            return points[LEGS];
-        }
-
-        public int getTalismanPoints() {
-            return points[TALISMAN];
+        public int getPoints(int pieceIndex) {
+            return points[pieceIndex];
         }
 
         /**

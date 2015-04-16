@@ -75,8 +75,6 @@ public class ASBPieceContainer extends LinearLayout {
         this.session = session;
         this.pieceIndex = pieceIndex;
         this.parentFragment = parentFragment;
-
-        updateContents();
     }
 
     /** Refreshes the contents of the piece container based on the contents of the {@code ASBSession}. */
@@ -270,19 +268,21 @@ public class ASBPieceContainer extends LinearLayout {
             i.putExtra(ASBActivity.EXTRA_SET_RANK, parentFragment.getArguments().getInt(ASBFragment.ARG_SET_RANK));
             i.putExtra(ASBActivity.EXTRA_SET_HUNTER_TYPE, parentFragment.getArguments().getInt(ASBFragment.ARG_SET_HUNTER_TYPE));
 
-            ((Activity) getContext()).startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_PIECE);
+            parentFragment.startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_PIECE);
         }
 
         /** Called when the user chooses to remove an armor piece. */
         private void onMenuRemovePieceSelected() {
-            session.removeEquipment(pieceIndex);
-            DataManager.get(getContext()).queryRemoveASBSetArmor(session.getId(), pieceIndex);
-            updateArmorPiece();
+            Log.d("ASB", "Remove clicked.");
+            Intent data = new Intent();
+            data.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
+            parentFragment.onActivityResult(ASBActivity.REQUEST_CODE_REMOVE_PIECE, Activity.RESULT_OK, data);
         }
 
         /** Called when the user chooses to edit their decorations. */
         private void onMenuDecorationsSelected() {
             ASBDecorationsDialogFragment d = ASBDecorationsDialogFragment.newInstance(session, pieceIndex);
+            d.setTargetFragment(parentFragment, ASBActivity.REQUEST_CODE_ADD_DECORATION);
             d.show(parentFragment.getActivity().getSupportFragmentManager(), "DECORATIONS");
         }
 
@@ -304,17 +304,14 @@ public class ASBPieceContainer extends LinearLayout {
             ASBTalismanDialogFragment d = ASBTalismanDialogFragment.newInstance(t.getTypeIndex(),
                     t.getNumSlots(),
                     t.getSkill1().getId(),
-                    t.getSkill1Points(), t.hasTwoSkills() ? t.getSkill2().getId() : -1, // If the talisman only has one skill, we want to pass -1 as the id for the second skill
+                    t.getSkill1Points(), t.getSkill2() != null ? t.getSkill2().getId() : -1, // If the talisman only has one skill, we want to pass -1 as the id for the second skill
                     t.getSkill2Points());
             d.setTargetFragment(parentFragment, ASBActivity.REQUEST_CODE_CREATE_TALISMAN);
             d.show(parentFragment.getActivity().getSupportFragmentManager(), "TALISMAN");
         }
 
         private void onMenuRemoveTalismanSelected() {
-            session.removeEquipment(ASBSession.TALISMAN);
-            DataManager.get(getContext()).queryRemoveASBSetTalisman(session.getId());
-            updateArmorPiece();
-            updateDecorations();
+            parentFragment.onActivityResult(ASBActivity.REQUEST_CODE_REMOVE_TALISMAN, Activity.RESULT_OK, null);
         }
     }
 

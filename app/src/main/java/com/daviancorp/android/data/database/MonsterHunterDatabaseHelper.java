@@ -1758,7 +1758,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         qh.OrderBy = null;
         qh.Limit = null;
 
-        return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct),qh));
+        return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct), qh));
     }
 
     /**
@@ -1780,7 +1780,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         qh.OrderBy = "m" + S.COLUMN_MONSTERS_SORT_NAME + " ASC";
         qh.Limit = null;
 
-        return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct),qh));
+        return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct), qh));
     }
 
     /*
@@ -3162,6 +3162,36 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		return new ASBSetCursor(wrapJoinHelper(builderASBSet(), qh));
 	}
 
+	/** Get all armor sets. */
+	public ASBSessionCursor queryASBSessions() {
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARMOR_SET;
+		qh.Selection = null;
+		qh.SelectionArgs = null;
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
+
+		return new ASBSessionCursor(wrapJoinHelper(builderASBSession(), qh));
+	}
+
+	/** Retrieves a specific Armor Set Builder set in the database. */
+	public ASBSessionCursor queryASBSession(long id) {
+		QueryHelper qh = new QueryHelper();
+		qh.Columns = null;
+		qh.Table = S.TABLE_ARMOR_SET;
+		qh.Selection = "ar." + S.COLUMN_ARMOR_SET_ID + " = ?";
+		qh.SelectionArgs = new String[]{ String.valueOf(id) };
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = "1";
+
+		return new ASBSessionCursor(wrapJoinHelper(builderASBSession(), qh));
+	}
+
 	/** Creates a new Armor Set Builder set in the entries of the database. */
 	public long queryAddASBSet(String name, int rank, int hunterType) {
 		ContentValues values = new ContentValues();
@@ -3169,37 +3199,38 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		values.put(S.COLUMN_ARMOR_SET_NAME, name);
 		values.put(S.COLUMN_ARMOR_SET_RANK, rank);
 		values.put(S.COLUMN_ARMOR_SET_HUNTER_TYPE, hunterType);
+		values.put(S.COLUMN_TALISMAN_EXISTS, 0);
 
 		return insertRecord(S.TABLE_ARMOR_SET, values);
 	}
 
-	public long queryAddASBSetArmor(long asbSetId, long pieceId, int pieceIndex) {
+	public long queryAddASBSessionArmor(long asbSetId, long pieceId, int pieceIndex) {
 		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
 
 		ContentValues values = new ContentValues();
 
 		switch (pieceIndex) {
 			case ASBSession.HEAD:
-				putASBSetItemOrNull(values, S.COLUMN_HEAD_ARMOR_ID, pieceId);
+				putASBSessionItemOrNull(values, S.COLUMN_HEAD_ARMOR_ID, pieceId);
 				break;
 			case ASBSession.BODY:
-				putASBSetItemOrNull(values, S.COLUMN_BODY_ARMOR_ID, pieceId);
+				putASBSessionItemOrNull(values, S.COLUMN_BODY_ARMOR_ID, pieceId);
 				break;
 			case ASBSession.ARMS:
-				putASBSetItemOrNull(values, S.COLUMN_ARMS_ARMOR_ID, pieceId);
+				putASBSessionItemOrNull(values, S.COLUMN_ARMS_ARMOR_ID, pieceId);
 				break;
 			case ASBSession.WAIST:
-				putASBSetItemOrNull(values, S.COLUMN_WAIST_ARMOR_ID, pieceId);
+				putASBSessionItemOrNull(values, S.COLUMN_WAIST_ARMOR_ID, pieceId);
 				break;
 			case ASBSession.LEGS:
-				putASBSetItemOrNull(values, S.COLUMN_LEGS_ARMOR_ID, pieceId);
+				putASBSessionItemOrNull(values, S.COLUMN_LEGS_ARMOR_ID, pieceId);
 				break;
 		}
 
 		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
 	}
 
-	public long queryPutASBSetDecoration(long asbSetId, long decorationId, int pieceIndex, int decorationIndex) {
+	public long queryPutASBSessionDecoration(long asbSetId, long decorationId, int pieceIndex, int decorationIndex) {
 		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
 
 		ContentValues values = new ContentValues();
@@ -3207,57 +3238,68 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		switch (pieceIndex) {
 			case ASBSession.HEAD:
 				if (decorationIndex == 0) {
-					putASBSetItemOrNull(values, S.COLUMN_HEAD_DECORATION_1_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_HEAD_DECORATION_1_ID, decorationId);
 				}
 				else if (decorationId == 1) {
-					putASBSetItemOrNull(values, S.COLUMN_HEAD_DECORATION_2_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_HEAD_DECORATION_2_ID, decorationId);
 				}
 				else if (decorationId == 2) {
-					putASBSetItemOrNull(values, S.COLUMN_HEAD_DECORATION_3_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_HEAD_DECORATION_3_ID, decorationId);
 				}
 				break;
 			case ASBSession.BODY:
 				if (decorationIndex == 0) {
-					putASBSetItemOrNull(values, S.COLUMN_BODY_DECORATION_1_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_BODY_DECORATION_1_ID, decorationId);
 				}
 				else if (decorationId == 1) {
-					putASBSetItemOrNull(values, S.COLUMN_BODY_DECORATION_2_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_BODY_DECORATION_2_ID, decorationId);
 				}
 				else if (decorationId == 2) {
-					putASBSetItemOrNull(values, S.COLUMN_BODY_DECORATION_3_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_BODY_DECORATION_3_ID, decorationId);
 				}
 				break;
 			case ASBSession.ARMS:
 				if (decorationIndex == 0) {
-					putASBSetItemOrNull(values, S.COLUMN_ARMS_DECORATION_1_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_ARMS_DECORATION_1_ID, decorationId);
 				}
 				else if (decorationId == 1) {
-					putASBSetItemOrNull(values, S.COLUMN_ARMS_DECORATION_2_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_ARMS_DECORATION_2_ID, decorationId);
 				}
 				else if (decorationId == 2) {
-					putASBSetItemOrNull(values, S.COLUMN_ARMS_DECORATION_3_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_ARMS_DECORATION_3_ID, decorationId);
 				}
 				break;
 			case ASBSession.WAIST:
 				if (decorationIndex == 0) {
-					putASBSetItemOrNull(values, S.COLUMN_WAIST_DECORATION_1_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_WAIST_DECORATION_1_ID, decorationId);
 				}
 				else if (decorationId == 1) {
-					putASBSetItemOrNull(values, S.COLUMN_WAIST_DECORATION_2_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_WAIST_DECORATION_2_ID, decorationId);
 				}
 				else if (decorationId == 2) {
-					putASBSetItemOrNull(values, S.COLUMN_WAIST_DECORATION_3_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_WAIST_DECORATION_3_ID, decorationId);
 				}
 				break;
 			case ASBSession.LEGS:
 				if (decorationIndex == 0) {
-					putASBSetItemOrNull(values, S.COLUMN_LEGS_DECORATION_1_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_LEGS_DECORATION_1_ID, decorationId);
 				}
 				else if (decorationId == 1) {
-					putASBSetItemOrNull(values, S.COLUMN_LEGS_DECORATION_2_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_LEGS_DECORATION_2_ID, decorationId);
 				}
 				else if (decorationId == 2) {
-					putASBSetItemOrNull(values, S.COLUMN_LEGS_DECORATION_3_ID, decorationId);
+					putASBSessionItemOrNull(values, S.COLUMN_LEGS_DECORATION_3_ID, decorationId);
+				}
+				break;
+			case ASBSession.TALISMAN:
+				if (decorationIndex == 0) {
+					putASBSessionItemOrNull(values, S.COLUMN_TALISMAN_DECORATION_1_ID, decorationId);
+				}
+				else if (decorationId == 1) {
+					putASBSessionItemOrNull(values, S.COLUMN_TALISMAN_DECORATION_2_ID, decorationId);
+				}
+				else if (decorationId == 2) {
+					putASBSessionItemOrNull(values, S.COLUMN_TALISMAN_DECORATION_3_ID, decorationId);
 				}
 				break;
 		}
@@ -3265,7 +3307,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
 	}
 
-	public long queryCreateASBSetTalisman(long asbSetId, int type, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
+	public long queryCreateASBSessionTalisman(long asbSetId, int type, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
 		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
 
 		ContentValues values = new ContentValues();
@@ -3289,7 +3331,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
 	}
 
-	public long queryRemoveASBSetTalisman(long asbSetId) {
+	public long queryRemoveASBSessionTalisman(long asbSetId) {
 		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
 
 		ContentValues values = new ContentValues();
@@ -3299,7 +3341,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
 	}
 
-	/** Builds an SQL query that gives us all information about the {@code ASBSession} in question. */
+	/** Builds an SQL query that gives us all information about the {@code ASBSet} in question. */
 	private SQLiteQueryBuilder builderASBSet() {
 		HashMap<String, String> projectionMap = new HashMap<>();
 
@@ -3310,6 +3352,21 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		projectionMap.put(S.COLUMN_ARMOR_SET_NAME, set + "." + S.COLUMN_ARMOR_SET_NAME);
 		projectionMap.put(S.COLUMN_ARMOR_SET_RANK, set + "." + S.COLUMN_ARMOR_SET_RANK);
 		projectionMap.put(S.COLUMN_ARMOR_SET_HUNTER_TYPE, set + "." + S.COLUMN_ARMOR_SET_HUNTER_TYPE);
+
+		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+		qb.setTables(S.TABLE_ARMOR_SET + " AS " + set);
+		qb.setProjectionMap(projectionMap);
+
+		return qb;
+	}
+
+	/** Builds an SQL query that gives us all information about the {@code ASBSession} in question. */
+	private SQLiteQueryBuilder builderASBSession() {
+		HashMap<String, String> projectionMap = new HashMap<>();
+
+		String set = "ar";
+
+		projectionMap.put("_id", set + "." + S.COLUMN_ARMOR_SET_ID + " AS " + "_id");
 
 		projectionMap.put(S.COLUMN_HEAD_ARMOR_ID, set + "." + S.COLUMN_HEAD_ARMOR_ID);
 		projectionMap.put(S.COLUMN_HEAD_DECORATION_1_ID, set + "." + S.COLUMN_HEAD_DECORATION_1_ID);
@@ -3355,7 +3412,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	}
 
 	/** A helper method that determines whether to put {@code null} or the actual armor id into the table. */
-	private void putASBSetItemOrNull(ContentValues cv, String column, long pieceId) {
+	private void putASBSessionItemOrNull(ContentValues cv, String column, long pieceId) {
 		if (pieceId != -1) {
 			cv.put(column, pieceId);
 		}

@@ -1,5 +1,6 @@
 package com.daviancorp.android.ui.list;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -42,7 +43,7 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
 
         ListView listView = (ListView) v.findViewById(R.id.list);
 
-        adapter = new ASBSkillsAdapter(getActivity().getApplicationContext(), session.getSkillTreePointsSets(), session);
+        adapter = new ASBSkillsAdapter(getActivity().getApplicationContext(), session.getSkillTreesInSet(), session);
         listView.setAdapter(adapter);
 
         adapter.notifyDataSetChanged();
@@ -56,11 +57,6 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
     }
 
     @Override
-    public void onASBActivityUpdated(ASBSession s, int pieceIndex) {
-        onASBActivityUpdated(s);
-    }
-
-    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         ASBActivity a = (ASBActivity) getActivity();
@@ -68,13 +64,13 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
         session = a.getASBSession();
     }
 
-    private static class ASBSkillsAdapter extends ArrayAdapter<ASBSession.SkillTreePointsSet> {
+    private static class ASBSkillsAdapter extends ArrayAdapter<ASBSession.SkillTreeInSet> {
 
         private static final int MINIMUM_SKILL_ACTIVATION_POINTS = 10;
 
         ASBSession session;
 
-        public ASBSkillsAdapter(Context context, List<ASBSession.SkillTreePointsSet> trees, ASBSession session) {
+        public ASBSkillsAdapter(Context context, List<ASBSession.SkillTreeInSet> trees, ASBSession session) {
             super(context, R.layout.fragment_asb_skills_listitem, trees);
             this.session = session;
         }
@@ -82,6 +78,8 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
+
+            @SuppressLint("ViewHolder")
             View itemView = inflater.inflate(R.layout.fragment_asb_skills_listitem, parent, false);
             // Conditional inflation really isn't necessary simply because of how many skills you'd have to have.
 
@@ -96,28 +94,28 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
 
             treeName.setText(getItem(position).getSkillTree().getName());
 
-            if (session.isEquipmentSelected(ASBSession.HEAD) && getItem(position).getHeadPoints() != 0) {
-                headPoints.setText(String.valueOf(getItem(position).getHeadPoints()));
+            if (session.isEquipmentSelected(ASBSession.HEAD) && getItem(position).getPoints(ASBSession.HEAD) != 0) {
+                headPoints.setText(String.valueOf(getItem(position).getPoints(ASBSession.HEAD)));
             }
 
-            if (session.isEquipmentSelected(ASBSession.BODY) && getItem(position).getBodyPoints() != 0) {
-                bodyPoints.setText(String.valueOf(getItem(position).getBodyPoints()));
+            if (session.isEquipmentSelected(ASBSession.BODY) && getItem(position).getPoints(ASBSession.BODY) != 0) {
+                bodyPoints.setText(String.valueOf(getItem(position).getPoints(ASBSession.BODY)));
             }
 
-            if (session.isEquipmentSelected(ASBSession.ARMS) && getItem(position).getArmsPoints() != 0) {
-                armsPoints.setText(String.valueOf(getItem(position).getArmsPoints()));
+            if (session.isEquipmentSelected(ASBSession.ARMS) && getItem(position).getPoints(ASBSession.ARMS) != 0) {
+                armsPoints.setText(String.valueOf(getItem(position).getPoints(ASBSession.ARMS)));
             }
 
-            if (session.isEquipmentSelected(ASBSession.WAIST) && getItem(position).getWaistPoints() != 0) {
-                waistPoints.setText(String.valueOf(getItem(position).getWaistPoints()));
+            if (session.isEquipmentSelected(ASBSession.WAIST) && getItem(position).getPoints(ASBSession.WAIST) != 0) {
+                waistPoints.setText(String.valueOf(getItem(position).getPoints(ASBSession.WAIST)));
             }
 
-            if (session.isEquipmentSelected(ASBSession.LEGS) && getItem(position).getLegsPoints() != 0) {
-                legsPoints.setText(String.valueOf(getItem(position).getLegsPoints()));
+            if (session.isEquipmentSelected(ASBSession.LEGS) && getItem(position).getPoints(ASBSession.LEGS) != 0) {
+                legsPoints.setText(String.valueOf(getItem(position).getPoints(ASBSession.LEGS)));
             }
 
-            if (session.isEquipmentSelected(ASBSession.TALISMAN) && getItem(position).getTalismanPoints() != 0) {
-                talismanPoints.setText(String.valueOf(getItem(position).getTalismanPoints()));
+            if (session.isEquipmentSelected(ASBSession.TALISMAN) && getItem(position).getPoints(ASBSession.TALISMAN) != 0) {
+                talismanPoints.setText(String.valueOf(getItem(position).getPoints(ASBSession.TALISMAN)));
             }
 
             totalPoints.setText(String.valueOf(getItem(position).getTotal()));
@@ -139,9 +137,9 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
             super.notifyDataSetChanged(); // super#notifyDataSetChanged automatically sets notifyOnChange back to true.
         }
 
-        Comparator<ASBSession.SkillTreePointsSet> comparator = new Comparator<ASBSession.SkillTreePointsSet>() {
+        Comparator<ASBSession.SkillTreeInSet> comparator = new Comparator<ASBSession.SkillTreeInSet>() {
             @Override
-            public int compare(ASBSession.SkillTreePointsSet lhs, ASBSession.SkillTreePointsSet rhs) {
+            public int compare(ASBSession.SkillTreeInSet lhs, ASBSession.SkillTreeInSet rhs) {
                 return rhs.getTotal() - lhs.getTotal();
             }
         };

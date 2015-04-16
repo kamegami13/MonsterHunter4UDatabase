@@ -9,7 +9,7 @@
         android:visible="false"/>
 
     <item android:id="@+id/armor_set_builder_decoration_info"
-        android:title="@string/asb_action_decorations"
+        android:title="@string/asb_action_get_decoration_info"
         android:visible="false"/>
 
 </menu>

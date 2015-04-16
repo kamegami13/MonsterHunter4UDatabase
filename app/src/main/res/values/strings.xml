@@ -97,19 +97,21 @@
     <string name="activity_asb_sets">Armor Sets</string>
     <string name="activity_asb">Armor Set Builder</string>
 
-    <string name="asb_action_add">Add</string>
-    <string name="asb_action_remove">Remove</string>
-    <string name="asb_action_edit">Edit</string>
-    <string name="asb_action_decorations">Decorations</string>
-    <string name="asb_action_armor_piece">Piece Info</string>
     <string name="asb_empty_slot">Empty slot</string>
     <string name="asb_no_slot">No slot</string>
     <string name="asb_action_select">Select</string>
 
-    <string name="asb_option_set_add">New set</string>
+    <string name="asb_action_add">Add</string>
+    <string name="asb_action_remove">Remove</string>
+    <string name="asb_action_edit">Edit</string>
+    <string name="asb_action_edit_piece_decorations">Decorations</string>
+    <string name="asb_action_armor_piece">Info</string>
 
-    <string name="asb_action_add_decoration">Add Decoration</string>
-    <string name="asb_action_remove_decoration">Remove Decoration</string>
+    <string name="asb_action_add_decoration">Add</string>
+    <string name="asb_action_remove_decoration">Remove</string>
+    <string name="asb_action_get_decoration_info">Info</string>
+
+    <string name="asb_option_set_add">New set</string>
 
     <string name="asb_dialog_talisman_title">Talisman</string>
     <string name="asb_talisman_skill_1">Skill 1</string>

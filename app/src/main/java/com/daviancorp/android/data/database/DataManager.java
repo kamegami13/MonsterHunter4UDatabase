@@ -1345,19 +1345,35 @@ public class DataManager {
 
 	/********************************* ARMOR SET BUILDER QUERIES ******************************************/
 
-	/** Get a cursor with a list of all armor sets. */
 	public ASBSetCursor queryASBSets() {
 		return mHelper.queryASBSets();
 	}
 
-	/** Get a specific armor set. */
-	public ASBSession getASBSet(long id) {
-		ASBSession session = null;
+	public ASBSet getASBSet(long id) {
+		ASBSet set = null;
 		ASBSetCursor cursor = mHelper.queryASBSet(id);
 		cursor.moveToFirst();
 
 		if (!cursor.isAfterLast())
-			session = cursor.getASBSet(mAppContext);
+			set = cursor.getASBSet();
+
+		cursor.close();
+		return set;
+	}
+
+	/** Get a cursor with a list of all armor sets. */
+	public ASBSessionCursor queryASBSessions() {
+		return mHelper.queryASBSessions();
+	}
+
+	/** Get a specific armor set. */
+	public ASBSession getASBSession(long id) {
+		ASBSession session = null;
+		ASBSessionCursor cursor = mHelper.queryASBSession(id);
+		cursor.moveToFirst();
+
+		if (!cursor.isAfterLast())
+			session = cursor.getASBSession(mAppContext);
 
 		cursor.close();
 		return session;
@@ -1368,27 +1384,27 @@ public class DataManager {
 		mHelper.queryAddASBSet(name, rank, hunterType);
 	}
 
-	public void queryPutASBSetArmor(long asbSetId, long armorId, int pieceIndex) {
-		mHelper.queryAddASBSetArmor(asbSetId, armorId, pieceIndex);
+	public void queryPutASBSessionArmor(long asbSetId, long armorId, int pieceIndex) {
+		mHelper.queryAddASBSessionArmor(asbSetId, armorId, pieceIndex);
 	}
 
-	public void queryRemoveASBSetArmor(long asbSetId, int pieceIndex) {
-		mHelper.queryAddASBSetArmor(asbSetId, -1, pieceIndex);
+	public void queryRemoveASBSessionArmor(long asbSetId, int pieceIndex) {
+		mHelper.queryAddASBSessionArmor(asbSetId, -1, pieceIndex);
 	}
 
-	public void queryPutASBSetDecoration(long asbSetId, long decorationId, int pieceIndex, int decorationIndex) {
-		mHelper.queryPutASBSetDecoration(asbSetId, decorationId, pieceIndex, decorationIndex);
+	public void queryPutASBSessionDecoration(long asbSetId, long decorationId, int pieceIndex, int decorationIndex) {
+		mHelper.queryPutASBSessionDecoration(asbSetId, decorationId, pieceIndex, decorationIndex);
 	}
 
-	public void queryRemoveASBSetDecoration(long asbSetId, int pieceIndex, int decorationIndex) {
-		mHelper.queryPutASBSetDecoration(asbSetId, -1, pieceIndex, decorationIndex);
+	public void queryRemoveASBSessionDecoration(long asbSetId, int pieceIndex, int decorationIndex) {
+		mHelper.queryPutASBSessionDecoration(asbSetId, -1, pieceIndex, decorationIndex);
 	}
 
-	public void queryCreateASBSetTalisman(long asbSetId, int type, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
-		mHelper.queryCreateASBSetTalisman(asbSetId, type, slots, skill1Id, skill1Points, skill2Id, skill2Points);
+	public void queryCreateASBSessionTalisman(long asbSetId, int type, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
+		mHelper.queryCreateASBSessionTalisman(asbSetId, type, slots, skill1Id, skill1Points, skill2Id, skill2Points);
 	}
 
-	public void queryRemoveASBSetTalisman(long asbSetId) {
-		mHelper.queryRemoveASBSetTalisman(asbSetId);
+	public void queryRemoveASBSessionTalisman(long asbSetId) {
+		mHelper.queryRemoveASBSessionTalisman(asbSetId);
 	}
 }

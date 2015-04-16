@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,8 +15,6 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import com.daviancorp.android.data.classes.ASBSession;
-import com.daviancorp.android.data.classes.Decoration;
-import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.detail.DecorationDetailActivity;
@@ -28,7 +25,7 @@ import java.io.IOException;
 /**
  * A dialog that allows the user to view, add, and remove decorations.
  */
-public class ASBDecorationsDialogFragment extends DialogFragment implements ASBSession.OnASBSetChangedListener {
+public class ASBDecorationsDialogFragment extends DialogFragment implements ASBSession.SessionChangeListener {
 
     private ASBSession session;
     private int pieceIndex;
@@ -76,14 +73,12 @@ public class ASBDecorationsDialogFragment extends DialogFragment implements ASBS
         }
 
         Dialog d = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.asb_action_decorations)
+                .setTitle(R.string.asb_action_edit_piece_decorations)
                 .setView(addView)
                 .setNeutralButton(android.R.string.ok, null)
                 .create();
 
         updateDialog();
-
-        session.addOnASBSetChangedListener(this);
 
         return d;
     }
@@ -91,46 +86,16 @@ public class ASBDecorationsDialogFragment extends DialogFragment implements ASBS
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-
-        session.detachOnASBSetChangedListener(this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == Activity.RESULT_OK) {
-            switch (requestCode) {
-                case ASBActivity.REQUEST_CODE_ADD_DECORATION:
-                    long decorationId = data.getLongExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, -1);
-                    Decoration decoration = DataManager.get(getActivity()).getDecoration(decorationId);
-
-                    int decorationIndex = session.addDecoration(pieceIndex, decoration);
-
-                    if (decorationIndex != -1) {
-                        Log.d("ASB", "Adding the decoration to the SQL DB.");
-                        DataManager.get(getActivity()).queryPutASBSetDecoration(session.getId(), decorationId, pieceIndex, decorationIndex);
-                    }
-
-                    updateDialog();
-                    break;
-            }
-        }
-    }
-
-    @Override
-    public void onASBSetChanged() {
-        updateDialog();
-    }
-
-    @Override
-    public void onASBSetChanged(int pieceIndex) {
-        onASBSetChanged();
+        session.addSessionChangeListener(this);
+        getTargetFragment().onActivityResult(requestCode, resultCode, data);
     }
 
     /** Helper method that updates the contents of the dialog based on what's in the armor set builder session. */
     private void updateDialog() {
-
         for (int i = 0; i < decorations.length; i++) {
 
             if (session.decorationIsReal(pieceIndex, i)) { // If it's real we set its icon to its actual icon
@@ -159,18 +124,14 @@ public class ASBDecorationsDialogFragment extends DialogFragment implements ASBS
                 decorationIcons[i].setImageDrawable(null);
             }
 
-
             if (session.decorationIsReal(pieceIndex, i)) {
                 decorations[i].setText(session.getDecoration(pieceIndex, i).getName());
-                decorations[i].setOnClickListener(null);
             }
             else if (session.decorationIsDummy(pieceIndex, i)) {
                 decorations[i].setText(session.findRealDecorationOfDummy(pieceIndex, i).getName());
-                decorations[i].setOnClickListener(null);
             }
             else if (session.getEquipment(pieceIndex).getNumSlots() > i) {
                 decorations[i].setText(R.string.asb_empty_slot);
-                decorations[i].setOnClickListener(new EmptySlotClickListener(i));
             }
 
             if (session.decorationIsReal(pieceIndex, i)) {
@@ -197,6 +158,12 @@ public class ASBDecorationsDialogFragment extends DialogFragment implements ASBS
         popup.setOnMenuItemClickListener(new DecorationPopupMenuClickListener(decorationIndex));
 
         return popup;
+    }
+
+    @Override
+    public void onSessionChange() {
+        updateDialog();
+        session.removeSessionChangeListener(this);
     }
 
     private class DecorationPopupMenuClickListener implements PopupMenu.OnMenuItemClickListener {
@@ -237,8 +204,13 @@ public class ASBDecorationsDialogFragment extends DialogFragment implements ASBS
     }
 
     private void onRemoveDecorationClicked(int decorationIndex) {
-        session.removeDecoration(pieceIndex, decorationIndex);
-        DataManager.get(getActivity()).queryRemoveASBSetDecoration(session.getId(), pieceIndex, decorationIndex);
+        session.addSessionChangeListener(this);
+
+        Intent data = new Intent();
+        data.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
+        data.putExtra(ASBActivity.EXTRA_DECORATION_INDEX, decorationIndex);
+
+        getTargetFragment().onActivityResult(ASBActivity.REQUEST_CODE_REMOVE_DECORATION, Activity.RESULT_OK, data);
     }
 
     private void onDecorationInfoClicked(int decorationIndex) {
@@ -247,25 +219,5 @@ public class ASBDecorationsDialogFragment extends DialogFragment implements ASBS
         i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, session.getDecoration(pieceIndex, decorationIndex).getId());
 
         startActivity(i);
-    }
-
-    /** Used for slots that do not yet have a decoration socketed in them. */
-    private class EmptySlotClickListener implements View.OnClickListener {
-
-        private int decorationIndex;
-
-        public EmptySlotClickListener(int decorationIndex) {
-            this.decorationIndex = decorationIndex;
-        }
-
-        @Override
-        public void onClick(View v) {
-            Intent i = new Intent(getActivity().getApplicationContext(), DecorationListActivity.class);
-            i.putExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, true);
-            i.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
-            i.putExtra(ASBActivity.EXTRA_DECORATION_INDEX, decorationIndex);
-
-            startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_DECORATION);
-        }
     }
 }

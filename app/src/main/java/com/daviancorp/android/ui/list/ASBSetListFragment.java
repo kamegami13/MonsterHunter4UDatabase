@@ -14,7 +14,10 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.daviancorp.android.data.classes.ASBSession;
+import com.daviancorp.android.data.classes.ASBSet;
+import com.daviancorp.android.data.database.ASBSessionCursor;
 import com.daviancorp.android.data.database.ASBSetCursor;
+import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.loader.ASBSetListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.detail.ASBActivity;
@@ -23,10 +26,12 @@ import com.daviancorp.android.ui.dialog.ASBSetAddDialogFragment;
 public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
     public static final String EXTRA_ASB_SET_ID = "com.daviancorp.android.ui.general.asb_set_id";
+    public static final String EXTRA_ASB_SET_NAME = "com.daviancorp.android.ui.general.asb_set_name";
+
 
     public static final String DIALOG_ADD_ASB_SET = "add_asb_set";
 
-    public static final int REQUEST_ADD_ASB_SET = 420;
+    public static final int REQUEST_ADD_ASB_SET = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,7 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent i = new Intent(getActivity(), ASBActivity.class);
         i.putExtra(EXTRA_ASB_SET_ID, id);
+        i.putExtra(EXTRA_ASB_SET_NAME, DataManager.get(getActivity()).getASBSet(id).getName());
         startActivity(i);
     }
 
@@ -122,14 +128,14 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
-            ASBSession session = this.cursor.getASBSet(context);
+            ASBSet set = this.cursor.getASBSet();
 
             TextView textView = (TextView) view.findViewById(R.id.name_text);
-            textView.setText(session.getName());
+            textView.setText(set.getName());
 
             TextView propertiesText = (TextView) view.findViewById(R.id.properties_text);
-            String rank = context.getResources().getStringArray(R.array.rank)[session.getRank()] + " Rank";
-            String hunterType = context.getResources().getStringArray(R.array.hunter_type)[session.getHunterType()];
+            String rank = context.getResources().getStringArray(R.array.rank)[set.getRank()] + " Rank";
+            String hunterType = context.getResources().getStringArray(R.array.hunter_type)[set.getHunterType()];
 
             propertiesText.setText(rank + ", " + hunterType);
         }
