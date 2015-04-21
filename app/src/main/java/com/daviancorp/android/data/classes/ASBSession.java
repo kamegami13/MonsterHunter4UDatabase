@@ -162,6 +162,7 @@ public class ASBSession {
             return i;
         }
         else {
+            Log.e("ASB", "Cannot add that decoration!");
             return -1;
         }
     }
@@ -345,10 +346,19 @@ public class ASBSession {
             for (Decoration d : decorations[pieceIndex]) {
                 if (d != null) {
                     for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(d.getId())) {
-                        if (skills.containsKey(itemToSkillTree.getSkillTree())) {
-                            int points = skills.get(itemToSkillTree.getSkillTree()) + itemToSkillTree.getPoints();
-                            skills.remove(itemToSkillTree.getSkillTree());
-                            skills.put(itemToSkillTree.getSkillTree(), points);
+                        SkillTree skillTreeToAddTo = null;
+
+                        for (SkillTree skillTree : skills.keySet()) {
+                            if (skillTree.getId() == itemToSkillTree.getSkillTree().getId()) {
+                                skillTreeToAddTo = skillTree;
+                                break;
+                            }
+                        }
+
+                        if (skillTreeToAddTo != null) {
+                            int points = skills.get(skillTreeToAddTo) + itemToSkillTree.getPoints();
+                            skills.remove(skillTreeToAddTo);
+                            skills.put(skillTreeToAddTo, points);
                         }
                         else {
                             skills.put(itemToSkillTree.getSkillTree(), itemToSkillTree.getPoints());

@@ -10,12 +10,11 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.app.ListFragment;
 import android.support.v4.content.Loader;
 import android.view.*;
+import android.widget.AbsListView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.daviancorp.android.data.classes.ASBSession;
 import com.daviancorp.android.data.classes.ASBSet;
-import com.daviancorp.android.data.database.ASBSessionCursor;
 import com.daviancorp.android.data.database.ASBSetCursor;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.loader.ASBSetListCursorLoader;
@@ -27,11 +26,13 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
 
     public static final String EXTRA_ASB_SET_ID = "com.daviancorp.android.ui.general.asb_set_id";
     public static final String EXTRA_ASB_SET_NAME = "com.daviancorp.android.ui.general.asb_set_name";
-
+    public static final String EXTRA_ASB_SET_RANK = "com.daviancorp.android.ui.general.asb_set_rank";
+    public static final String EXTRA_ASB_SET_HUNTER_TYPE = "com.daviancorp.android.ui.general.asb_set_hunter_type";
 
     public static final String DIALOG_ADD_ASB_SET = "add_asb_set";
 
     public static final int REQUEST_ADD_ASB_SET = 0;
+    public static final int REQUEST_EDIT_ASB_SET = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
         switch (item.getItemId()) {
             case R.id.asb_set_add:
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                ASBSetAddDialogFragment dialog = new ASBSetAddDialogFragment();
+                ASBSetAddDialogFragment dialog = ASBSetAddDialogFragment.newInstance();
                 dialog.setTargetFragment(this, REQUEST_ADD_ASB_SET);
                 dialog.show(fm, DIALOG_ADD_ASB_SET);
                 return true;
@@ -71,8 +72,21 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_ADD_ASB_SET) {
-                if (data.getBooleanExtra(ASBSetAddDialogFragment.EXTRA_ADD, false)) {
+                if (data.getBooleanExtra(ASBSetAddDialogFragment.EXTRA_CREATE_NEW, false)) {
+                    String name = data.getStringExtra(EXTRA_ASB_SET_NAME);
+                    int rank = data.getIntExtra(EXTRA_ASB_SET_RANK, -1);
+                    int hunterType = data.getIntExtra(EXTRA_ASB_SET_HUNTER_TYPE, -1);
+
+                    DataManager.get(getActivity()).queryAddASBSet(
+                            name,
+                            rank,
+                            hunterType
+                    );
+
                     updateUI();
+                }
+                else {
+                    // Update set data
                 }
             }
         }
@@ -95,6 +109,61 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         ASBSetListCursorAdapter adapter = new ASBSetListCursorAdapter(getActivity(), (ASBSetCursor) cursor);
         setListAdapter(adapter);
+
+        final ListView l = getListView();
+        l.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
+        l.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+                if (l.getCheckedItemCount() > 1) {
+                    mode.getMenu().findItem(R.id.action_edit_data).setVisible(false);
+                }
+                else {
+                    mode.getMenu().findItem(R.id.action_edit_data).setVisible(true);
+                }
+            }
+
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                MenuInflater inflater = mode.getMenuInflater();
+                inflater.inflate(R.menu.context_menu_asb_list, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_delete:
+                        break;
+
+                    case R.id.action_edit_data:
+                        ASBSet set = DataManager.get(getActivity()).getASBSet(l.getCheckedItemIds()[0]);
+
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        ASBSetAddDialogFragment dialog = ASBSetAddDialogFragment.newInstance(
+                                set.getName(),
+                                set.getRank(),
+                                set.getHunterType()
+                        );
+                        dialog.setTargetFragment(ASBSetListFragment.this, REQUEST_EDIT_ASB_SET);
+                        dialog.show(fm, DIALOG_ADD_ASB_SET);
+                        break;
+
+                    case R.id.action_copy:
+                        break;
+                }
+                return false;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+            }
+        });
     }
 
     @Override
@@ -109,7 +178,7 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
         adapter.notifyDataSetChanged();
     }
 
-    private static class ASBSetListCursorAdapter extends CursorAdapter {
+    private class ASBSetListCursorAdapter extends CursorAdapter {
 
         private ASBSetCursor cursor;
 

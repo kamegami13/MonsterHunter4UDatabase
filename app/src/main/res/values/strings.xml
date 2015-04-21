@@ -91,10 +91,19 @@
     <string name="two_slot_jewel">●●</string>
     <string name="three_slot_jewel">●●●</string>
 
+    <!-- ASB List stuff -->
+
+    <string name="activity_asb_sets">Armor Sets</string>
+
+    <string name="dialog_title_add_asb_set">New Set</string>
+    <string name="dialog_title_edit_asb_set">Edit Set</string>
+
+    <string name="context_action_asb_delete">Delete</string>
+    <string name="context_action_asb_edit_data">Edit Data</string>
+    <string name="context_action_asb_copy">Copy</string>
 
     <!-- Armor Set Builder Stuff !-->
 
-    <string name="activity_asb_sets">Armor Sets</string>
     <string name="activity_asb">Armor Set Builder</string>
 
     <string name="asb_empty_slot">Empty slot</string>

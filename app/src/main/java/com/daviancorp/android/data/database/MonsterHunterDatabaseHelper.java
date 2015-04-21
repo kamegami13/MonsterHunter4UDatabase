@@ -3240,10 +3240,10 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 				if (decorationIndex == 0) {
 					putASBSessionItemOrNull(values, S.COLUMN_HEAD_DECORATION_1_ID, decorationId);
 				}
-				else if (decorationId == 1) {
+				else if (decorationIndex == 1) {
 					putASBSessionItemOrNull(values, S.COLUMN_HEAD_DECORATION_2_ID, decorationId);
 				}
-				else if (decorationId == 2) {
+				else if (decorationIndex == 2) {
 					putASBSessionItemOrNull(values, S.COLUMN_HEAD_DECORATION_3_ID, decorationId);
 				}
 				break;
@@ -3251,10 +3251,10 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 				if (decorationIndex == 0) {
 					putASBSessionItemOrNull(values, S.COLUMN_BODY_DECORATION_1_ID, decorationId);
 				}
-				else if (decorationId == 1) {
+				else if (decorationIndex == 1) {
 					putASBSessionItemOrNull(values, S.COLUMN_BODY_DECORATION_2_ID, decorationId);
 				}
-				else if (decorationId == 2) {
+				else if (decorationIndex == 2) {
 					putASBSessionItemOrNull(values, S.COLUMN_BODY_DECORATION_3_ID, decorationId);
 				}
 				break;
@@ -3262,10 +3262,10 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 				if (decorationIndex == 0) {
 					putASBSessionItemOrNull(values, S.COLUMN_ARMS_DECORATION_1_ID, decorationId);
 				}
-				else if (decorationId == 1) {
+				else if (decorationIndex == 1) {
 					putASBSessionItemOrNull(values, S.COLUMN_ARMS_DECORATION_2_ID, decorationId);
 				}
-				else if (decorationId == 2) {
+				else if (decorationIndex == 2) {
 					putASBSessionItemOrNull(values, S.COLUMN_ARMS_DECORATION_3_ID, decorationId);
 				}
 				break;
@@ -3273,10 +3273,10 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 				if (decorationIndex == 0) {
 					putASBSessionItemOrNull(values, S.COLUMN_WAIST_DECORATION_1_ID, decorationId);
 				}
-				else if (decorationId == 1) {
+				else if (decorationIndex == 1) {
 					putASBSessionItemOrNull(values, S.COLUMN_WAIST_DECORATION_2_ID, decorationId);
 				}
-				else if (decorationId == 2) {
+				else if (decorationIndex == 2) {
 					putASBSessionItemOrNull(values, S.COLUMN_WAIST_DECORATION_3_ID, decorationId);
 				}
 				break;
@@ -3284,10 +3284,10 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 				if (decorationIndex == 0) {
 					putASBSessionItemOrNull(values, S.COLUMN_LEGS_DECORATION_1_ID, decorationId);
 				}
-				else if (decorationId == 1) {
+				else if (decorationIndex == 1) {
 					putASBSessionItemOrNull(values, S.COLUMN_LEGS_DECORATION_2_ID, decorationId);
 				}
-				else if (decorationId == 2) {
+				else if (decorationIndex == 2) {
 					putASBSessionItemOrNull(values, S.COLUMN_LEGS_DECORATION_3_ID, decorationId);
 				}
 				break;
@@ -3295,10 +3295,10 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 				if (decorationIndex == 0) {
 					putASBSessionItemOrNull(values, S.COLUMN_TALISMAN_DECORATION_1_ID, decorationId);
 				}
-				else if (decorationId == 1) {
+				else if (decorationIndex == 1) {
 					putASBSessionItemOrNull(values, S.COLUMN_TALISMAN_DECORATION_2_ID, decorationId);
 				}
-				else if (decorationId == 2) {
+				else if (decorationIndex == 2) {
 					putASBSessionItemOrNull(values, S.COLUMN_TALISMAN_DECORATION_3_ID, decorationId);
 				}
 				break;

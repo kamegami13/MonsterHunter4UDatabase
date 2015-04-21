@@ -16,17 +16,49 @@ import com.daviancorp.android.data.classes.HunterType;
 import com.daviancorp.android.data.classes.Rank;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.detail.ASBFragment;
+import com.daviancorp.android.ui.list.ASBSetListActivity;
+import com.daviancorp.android.ui.list.ASBSetListFragment;
 
 public class ASBSetAddDialogFragment extends DialogFragment {
 
-    public static final String EXTRA_ADD = "com.daviancorp.android.ui.general.asb_set_add";
+    public static final String EXTRA_CREATE_NEW = "com.daviancorp.android.ui.general.asb_set_add";
 
-    private void sendResult(int resultCode, boolean add) {
+    private static final String ARG_NAME = "name";
+    private static final String ARG_RANK = "rank";
+    private static final String ARG_HUNTER_TYPE = "hunter_type";
+
+    private boolean isEditing;
+
+    public static ASBSetAddDialogFragment newInstance() {
+        ASBSetAddDialogFragment f = new ASBSetAddDialogFragment();
+        f.isEditing = false;
+        return f;
+    }
+
+    public static ASBSetAddDialogFragment newInstance(String name, int rank, int hunterType) {
+        ASBSetAddDialogFragment f = new ASBSetAddDialogFragment();
+
+        Bundle args = new Bundle();
+        args.putString(ARG_NAME, name);
+        args.putInt(ARG_RANK, rank);
+        args.putInt(ARG_HUNTER_TYPE, hunterType);
+
+        f.setArguments(args);
+        f.isEditing = true;
+
+        return f;
+    }
+
+    private void sendResult(int resultCode, String name, int rank, int hunterType) {
         if (getTargetFragment() == null)
             return;
 
         Intent i = new Intent();
-        i.putExtra(EXTRA_ADD, add);
+        i.putExtra(EXTRA_CREATE_NEW, isEditing);
+        i.putExtra(ASBSetListFragment.EXTRA_ASB_SET_NAME, name);
+        i.putExtra(ASBSetListFragment.EXTRA_ASB_SET_RANK, rank);
+        i.putExtra(ASBSetListFragment.EXTRA_ASB_SET_HUNTER_TYPE, hunterType);
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, i);
     }
@@ -46,8 +78,7 @@ public class ASBSetAddDialogFragment extends DialogFragment {
         hunterTypeSpinner.setAdapter(ArrayAdapter.createFromResource(getActivity(), R.array.hunter_type, R.layout.view_spinner_item));
         ((ArrayAdapter) hunterTypeSpinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
-        return new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.asb_option_set_add)
+        AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
                 .setView(addView)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -55,15 +86,19 @@ public class ASBSetAddDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         String name = nameInput.getText().toString();
-                        DataManager.get(getActivity()).queryAddASBSet(
-                                name,
-                                rankSpinner.getSelectedItemPosition(),
-                                hunterTypeSpinner.getSelectedItemPosition()
-                        );
 
-                        sendResult(Activity.RESULT_OK, true);
+
+                        sendResult(Activity.RESULT_OK, name, rankSpinner.getSelectedItemPosition(), hunterTypeSpinner.getSelectedItemPosition());
                     }
-                })
-                .create();
+                });
+
+        if (!isEditing) {
+            b.setTitle(R.string.dialog_title_add_asb_set);
+        }
+        else {
+            b.setTitle(R.string.dialog_title_edit_asb_set);
+        }
+
+        return b.create();
     }
 }
