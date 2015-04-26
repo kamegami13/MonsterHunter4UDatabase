@@ -35,6 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
+
+        <!-- Weaknesses -->
         <LinearLayout
             android:id="@+id/weaknesses"
             android:layout_width="match_parent"
@@ -64,6 +66,44 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
+        <!-- Weaknesses Mod -->
+        <LinearLayout
+            android:id="@+id/weaknesses_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:id="@+id/weakness_mod_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                style="@style/text_medium"
+                android:text="Weaknesses Mod"/>
+
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/weakness_mod_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/weakness_mod_div"
+            android:background="@color/divider_color"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <!-- Traps -->
         <RelativeLayout
             android:id="@+id/trap"
             android:layout_width="match_parent"
@@ -75,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/text_medium"
-                android:text="Trap"/>
+                android:text="Traps"/>
 
             <org.apmem.tools.layouts.FlowLayout
                 android:id="@+id/trap_data"
@@ -91,6 +131,45 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
+
+        <!-- Traps Mod -->
+        <LinearLayout
+            android:id="@+id/trap_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:id="@+id/trap_mod_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                style="@style/text_medium"
+                android:text="Traps Mod"/>
+
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/trap_mod_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/trap_mod_div"
+            android:background="@color/divider_color"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <!-- Bombs Mod -->
         <RelativeLayout
             android:id="@+id/bombs"
             android:layout_width="match_parent"
@@ -118,6 +197,45 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
+
+        <!-- Bombs Mod -->
+        <LinearLayout
+            android:id="@+id/bombs_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:id="@+id/bomb_mod_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                style="@style/text_medium"
+                android:text="Bombs Mod"/>
+
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/bombs_mod_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/bombs_mod_div"
+            android:background="@color/divider_color"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <!-- AILMENTS -->
         <RelativeLayout
             android:id="@+id/ailments"
             android:layout_width="match_parent"

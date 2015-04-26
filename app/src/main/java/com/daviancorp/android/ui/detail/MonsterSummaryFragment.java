@@ -49,6 +49,10 @@ public class MonsterSummaryFragment extends Fragment {
 
 	// Sections to hold icons and text
 	private FlowLayout mWeaknessData, mTrapData, mBombData;
+	private FlowLayout mWeaknessModData, mTrapModData, mBombModData;
+	private LinearLayout mWeaknessMod, mTrapMod, mBombMod;
+	private View mWeaknessModDiv, mTrapModDiv, mBombModDiv;
+	private TextView mWeaknessModText, mTrapModText, mBombModText;
 	private LinearLayout mAilments;
 
 	// Need to add dividers
@@ -96,6 +100,27 @@ public class MonsterSummaryFragment extends Fragment {
 		mBombData = (FlowLayout) view.findViewById(R.id.bomb_data);
 		mAilments = (LinearLayout) view.findViewById(R.id.ailments_data);
 
+		// Mods if monster has a secondary state
+		// Sections
+		mWeaknessMod = (LinearLayout) view.findViewById(R.id.weaknesses_mod);
+		mTrapMod = (LinearLayout) view.findViewById(R.id.trap_mod);
+		mBombMod = (LinearLayout) view.findViewById(R.id.bombs_mod);
+
+		// Text titles
+		mWeaknessModText = (TextView) view.findViewById(R.id.weakness_mod_text);
+		mTrapModText = (TextView) view.findViewById(R.id.trap_mod_text);
+		mBombModText = (TextView) view.findViewById(R.id.bomb_mod_text);
+
+		// FlowLayouts
+		mWeaknessModData = (FlowLayout) view.findViewById(R.id.weakness_mod_data);
+		mTrapModData = (FlowLayout) view.findViewById(R.id.trap_mod_data);
+		mBombModData = (FlowLayout) view.findViewById(R.id.bombs_mod_data);
+
+		// Dividers
+		mWeaknessModDiv = view.findViewById(R.id.weakness_mod_div);
+		mTrapModDiv = view.findViewById(R.id.trap_mod_div);
+		mBombModDiv = view.findViewById(R.id.bombs_mod_div);
+
 		return view;
 	}
 
@@ -132,7 +157,7 @@ public class MonsterSummaryFragment extends Fragment {
 		// Load ArrayList of weaknesses without using a loader
 		ArrayList<MonsterWeakness> weaknesses = DataManager.get(getActivity()).queryMonsterWeaknessArray(mMonster.getId());
 
-		// Get "Normal" weakness. "Enraged" or "Charge" not yet supported
+		// Get "Normal" weakness. "Enraged" or "Charged" not yet supported
 		mWeakness = weaknesses.get(0);
 
 		// Fire
@@ -171,6 +196,65 @@ public class MonsterSummaryFragment extends Fragment {
 		// Dung Bomb
 		if(mWeakness.getDungbomb() != 0)
 			addIcon(mBombData, getResources().getString(R.string.image_location_dung_bomb), null);
+
+
+		// Apply CHARGED or ENRAGED weaknesses if applicable. Only supports one more state
+		if (weaknesses.size() > 1){
+			mWeakness = weaknesses.get(1);
+
+			String mState = mWeakness.getState();
+
+			// Make all mod layouts and dividers visible
+			mWeaknessMod.setVisibility(View.VISIBLE);
+			mTrapMod.setVisibility(View.VISIBLE);
+			mBombMod.setVisibility(View.VISIBLE);
+			mWeaknessModDiv.setVisibility(View.VISIBLE);
+			mTrapModDiv.setVisibility(View.VISIBLE);
+			mBombModDiv.setVisibility(View.VISIBLE);
+
+			// Set new section names
+			mWeaknessModText.setText("(" + mState + ")");
+			mTrapModText.setText("(" + mState + ")");
+			mBombModText.setText("(" + mState + ")");
+
+			// Set Data
+			// Fire
+			evalWeakness(mWeakness.getFire(), mWeaknessModData, getResources().getString(R.string.image_location_fire));
+			// Water
+			evalWeakness(mWeakness.getWater(), mWeaknessModData, getResources().getString(R.string.image_location_water));
+			// Thunder
+			evalWeakness(mWeakness.getThunder(), mWeaknessModData, getResources().getString(R.string.image_location_thunder));
+			// Ice
+			evalWeakness(mWeakness.getIce(), mWeaknessModData, getResources().getString(R.string.image_location_ice));
+			// Dragon
+			evalWeakness(mWeakness.getDragon(), mWeaknessModData, getResources().getString(R.string.image_location_dragon));
+			// Poison
+			evalWeakness(mWeakness.getPoison(), mWeaknessModData, getResources().getString(R.string.image_location_poison));
+			// Paralysis
+			evalWeakness(mWeakness.getParalysis(), mWeaknessModData, getResources().getString(R.string.image_location_paralysis));
+			// Sleep
+			evalWeakness(mWeakness.getSleep(), mWeaknessModData, getResources().getString(R.string.image_location_sleep));
+
+			// Pitfall Trap
+			if(mWeakness.getPitfalltrap() != 0)
+				addIcon(mTrapModData, getResources().getString(R.string.image_location_pitfall_trap), null);
+			// Shock Trap
+			if(mWeakness.getShocktrap() != 0)
+				addIcon(mTrapModData, getResources().getString(R.string.image_location_shock_trap), null);
+			// Meat
+			if(mWeakness.getMeat() != 0)
+				addIcon(mTrapModData, getResources().getString(R.string.image_location_meat), null);
+
+			// Flash Bomb
+			if(mWeakness.getFlashbomb() != 0)
+				addIcon(mBombModData, getResources().getString(R.string.image_location_flash_bomb), null);
+			// Sonic Bomb
+			if(mWeakness.getSonicbomb() != 0)
+				addIcon(mBombModData, getResources().getString(R.string.image_location_sonic_bomb), null);
+			// Dung Bomb
+			if(mWeakness.getDungbomb() != 0)
+				addIcon(mBombModData, getResources().getString(R.string.image_location_dung_bomb), null);
+		}
 
 	}
 
