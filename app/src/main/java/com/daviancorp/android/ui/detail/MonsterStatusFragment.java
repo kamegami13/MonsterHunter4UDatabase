@@ -154,8 +154,6 @@ public class MonsterStatusFragment extends Fragment {
                     e.printStackTrace();
                 }
                 android.view.ViewGroup.LayoutParams layoutParams = statusImage.getLayoutParams();
-                layoutParams.width = 80;
-                layoutParams.height = 80;
                 statusImage.setLayoutParams(layoutParams);
 
                 statusImage.setImageDrawable(draw);
