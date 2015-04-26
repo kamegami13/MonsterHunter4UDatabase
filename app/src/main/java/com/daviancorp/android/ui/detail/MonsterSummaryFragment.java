@@ -158,6 +158,9 @@ public class MonsterSummaryFragment extends Fragment {
 		// Shock Trap
 		if(mWeakness.getShocktrap() != 0)
 			addIcon(mTrapData, getResources().getString(R.string.image_location_shock_trap), null);
+		// Meat
+		if(mWeakness.getMeat() != 0)
+			addIcon(mTrapData, getResources().getString(R.string.image_location_meat), null);
 
 		// Flash Bomb
 		if(mWeakness.getFlashbomb() != 0)
@@ -168,8 +171,6 @@ public class MonsterSummaryFragment extends Fragment {
 		// Dung Bomb
 		if(mWeakness.getDungbomb() != 0)
 			addIcon(mBombData, getResources().getString(R.string.image_location_dung_bomb), null);
-
-		// Meat
 
 	}
 
