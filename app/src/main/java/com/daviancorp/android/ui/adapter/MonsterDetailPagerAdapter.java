@@ -10,6 +10,7 @@ import com.daviancorp.android.ui.detail.MonsterHabitatFragment;
 import com.daviancorp.android.ui.detail.MonsterQuestFragment;
 import com.daviancorp.android.ui.detail.MonsterRewardFragment;
 import com.daviancorp.android.ui.detail.MonsterStatusFragment;
+import com.daviancorp.android.ui.detail.MonsterSummaryFragment;
 
 public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 	
@@ -21,35 +22,38 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 	}
 
     // Tab titles
-    private String[] tabs = { "Damage","Status","Habitat","Low-Rank", "High-Rank", "G-Rank", "Quest"};
+    private String[] tabs = { "Summary", "Damage","Status","Habitat","Low-Rank", "High-Rank", "G-Rank", "Quest"};
 
 	@Override
 	public Fragment getItem(int index) {
 
 		switch (index) {
-		case 0:
-			// Monster Damage
-			return MonsterDamageFragment.newInstance(monsterId);
-        case 1:
-            // Monster Status
-            return MonsterStatusFragment.newInstance(monsterId);
-        case 2:
-            // Monster Habitat
-            return MonsterHabitatFragment.newInstance(monsterId);
-		case 3:
-			// Low-rank drops
-			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_LR);
-		case 4:
-			// High-rank drops
-			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_HR);
-		case 5:
-			// G-rank drops
-			return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_G);
-		case 6:
-			// Quest appearance
-			return MonsterQuestFragment.newInstance(monsterId);
-		default:
-			return null;
+			case 0:
+				// Monster Summary
+				return MonsterSummaryFragment.newInstance(monsterId);
+			case 1:
+				// Monster Damage
+				return MonsterDamageFragment.newInstance(monsterId);
+			case 2:
+				// Monster Status
+				return MonsterStatusFragment.newInstance(monsterId);
+			case 3:
+				// Monster Habitat
+				return MonsterHabitatFragment.newInstance(monsterId);
+			case 4:
+				// Low-rank drops
+				return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_LR);
+			case 5:
+				// High-rank drops
+				return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_HR);
+			case 6:
+				// G-rank drops
+				return MonsterRewardFragment.newInstance(monsterId, HuntingRewardListCursorLoader.RANK_G);
+			case 7:
+				// Quest appearance
+				return MonsterQuestFragment.newInstance(monsterId);
+			default:
+				return null;
 		}
 	}
 
@@ -61,7 +65,7 @@ public class MonsterDetailPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 7;
+		return 8;
 	}
 
 }

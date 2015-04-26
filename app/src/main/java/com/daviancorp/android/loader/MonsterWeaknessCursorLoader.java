@@ -15,7 +15,7 @@ public class MonsterWeaknessCursorLoader extends SQLiteCursorLoader {
 
     @Override
     protected Cursor loadCursor() {
-        // Query the list of ailments from monster id
+        // Query the list of weaknesses from monster id
         return DataManager.get(getContext()).queryWeaknessFromMonster(id);
     }
 }

@@ -24,7 +24,9 @@ public class MonsterWeaknessCursor extends CursorWrapper {
 
         MonsterWeakness weakness = new MonsterWeakness();
 
-        String monstername = getString(getColumnIndex(S.COLUMN_WEAKNESS_MONSTER_NAME));
+        // This isn't in the current version of the DB yet.
+        //String monstername = getString(getColumnIndex(S.COLUMN_WEAKNESS_MONSTER_NAME));
+
         String state = getString(getColumnIndex(S.COLUMN_WEAKNESS_STATE));
         int fire = getInt(getColumnIndex(S.COLUMN_WEAKNESS_FIRE));
         int water = getInt(getColumnIndex(S.COLUMN_WEAKNESS_WATER));
@@ -41,7 +43,7 @@ public class MonsterWeaknessCursor extends CursorWrapper {
         int dungbomb = getInt(getColumnIndex(S.COLUMN_WEAKNESS_DUNG_BOMB));
         int meat = getInt(getColumnIndex(S.COLUMN_WEAKNESS_MEAT));
 
-        weakness.setMonstername(monstername);
+        //weakness.setMonstername(monstername);
         weakness.setState(state);
         weakness.setFire(fire);
         weakness.setWater(water);

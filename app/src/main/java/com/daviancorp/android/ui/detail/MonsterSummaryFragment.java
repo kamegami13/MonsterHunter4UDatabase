@@ -1,0 +1,389 @@
+package com.daviancorp.android.ui.detail;
+
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CursorAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.daviancorp.android.data.classes.Monster;
+import com.daviancorp.android.data.classes.MonsterAilment;
+import com.daviancorp.android.data.classes.MonsterDamage;
+import com.daviancorp.android.data.classes.MonsterWeakness;
+import com.daviancorp.android.data.database.DataManager;
+import com.daviancorp.android.data.database.MonsterAilmentCursor;
+import com.daviancorp.android.loader.MonsterAilmentCursorLoader;
+import com.daviancorp.android.loader.MonsterLoader;
+import com.daviancorp.android.loader.MonsterWeaknessCursorLoader;
+import com.daviancorp.android.mh4udatabase.R;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class MonsterSummaryFragment extends Fragment {
+	private static final String ARG_MONSTER_ID = "MONSTER_ID";
+
+	private Bundle mBundle;
+
+	private Monster mMonster;
+	private MonsterWeakness mWeakness;
+
+	private TextView mMonsterLabelTextView;
+	private ImageView mMonsterIconImageView;
+
+	// Sections to hold icons and text
+	private LinearLayout mWeaknessData, mAttackData, mEarplugData, mWindpressData, mTrapData, mBombData;
+
+	// Need to add dividers
+    //private View mDividerView;
+
+	public static MonsterSummaryFragment newInstance(long monsterId) {
+		Bundle args = new Bundle();
+		args.putLong(ARG_MONSTER_ID, monsterId);
+		MonsterSummaryFragment f = new MonsterSummaryFragment();
+		f.setArguments(args);
+		return f;
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+
+		// Check for a Monster ID as an argument, and find the monster
+		Bundle args = getArguments();
+		if (args != null) {
+			long monsterId = args.getLong(ARG_MONSTER_ID, -1);
+			if (monsterId != -1) {
+				LoaderManager lm = getLoaderManager();
+				lm.initLoader(R.id.monster_detail_fragment, args, new MonsterLoaderCallbacks());
+			}
+		}
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_monster_summary, container, false);
+
+		mMonsterLabelTextView = (TextView) view.findViewById(R.id.detail_monster_label);
+		mMonsterIconImageView = (ImageView) view.findViewById(R.id.detail_monster_image);
+
+		mWeaknessData = (LinearLayout) view.findViewById(R.id.weakness_data);
+		mAttackData = (LinearLayout) view.findViewById(R.id.attack_data);
+		mEarplugData = (LinearLayout) view.findViewById(R.id.earplugs_data);
+		mWindpressData = (LinearLayout) view.findViewById(R.id.windpress_data);
+		mTrapData = (LinearLayout) view.findViewById(R.id.trap_data);
+		mBombData = (LinearLayout) view.findViewById(R.id.bomb_data);
+
+        //mDividerView = view.findViewById(R.id.divider);
+
+		return view;
+	}
+
+	private void updateUI() {
+
+		LayoutInflater inflater = getLayoutInflater(mBundle);
+
+		// Header
+		String cellText = mMonster.getName();
+		String cellImage = "icons_monster/" + mMonster.getFileLocation();
+
+		mMonsterLabelTextView.setText(cellText);
+        AssetManager manager = getActivity().getAssets();
+        try {
+            InputStream open = manager.open(cellImage);
+            Bitmap bitmap = BitmapFactory.decodeStream(open);
+            // Assign the bitmap to an ImageView in this layout
+            mMonsterIconImageView.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+		updateWeaknessUI();
+
+
+
+		// OLD STUFF -----------------------------------------
+/*		ArrayList<MonsterDamage> damages =
+				DataManager.get(getActivity()).queryMonsterDamageArray(mMonster.getId());
+
+		MonsterDamage damage = null;
+		String body_part, cut, impact, shot, ko, fire, water, ice, thunder, dragon;
+
+
+
+		// build each row of both tables per record
+		for(int i = 0; i < damages.size(); i++) {
+			LinearLayout wdRow = (LinearLayout) inflater.inflate(
+					R.layout.fragment_monster_damage_listitem, mWeaponDamageTL, false);
+			LinearLayout edRow = (LinearLayout) inflater.inflate(
+					R.layout.fragment_monster_damage_listitem, mElementalDamageTL, false);
+
+			damage = damages.get(i);
+
+			body_part = checkDamageValue(damage.getBodyPart());
+			cut = checkDamageValue("" + damage.getCut());
+			impact = checkDamageValue("" + damage.getImpact());
+			shot = checkDamageValue("" + damage.getShot());
+			ko = checkDamageValue("" + damage.getKo());
+			fire = checkDamageValue("" + damage.getFire());
+			water = checkDamageValue("" + damage.getWater());
+			ice = checkDamageValue("" + damage.getIce());
+			thunder = checkDamageValue("" + damage.getThunder());
+			dragon = checkDamageValue("" + damage.getDragon());
+
+			// Table 1
+			TextView body_part_tv1 = (TextView) wdRow.findViewById(R.id.body_part);
+			TextView dummy_tv = (TextView) wdRow.findViewById(R.id.dmg1);
+			TextView cut_tv = (TextView) wdRow.findViewById(R.id.dmg2);
+			TextView impact_tv = (TextView) wdRow.findViewById(R.id.dmg3);
+			TextView shot_tv = (TextView) wdRow.findViewById(R.id.dmg4);
+			TextView ko_tv = (TextView) wdRow.findViewById(R.id.dmg5);
+
+			// Table 2
+			TextView body_part_tv2 = (TextView) edRow.findViewById(R.id.body_part);
+			TextView fire_tv = (TextView) edRow.findViewById(R.id.dmg1);
+			TextView water_tv = (TextView) edRow.findViewById(R.id.dmg2);
+			TextView ice_tv = (TextView) edRow.findViewById(R.id.dmg3);
+			TextView thunder_tv = (TextView) edRow.findViewById(R.id.dmg4);
+			TextView dragon_tv = (TextView) edRow.findViewById(R.id.dmg5);
+
+			body_part_tv1.setText(body_part);
+			body_part_tv2.setText(body_part);
+			cut_tv.setText(cut);
+			impact_tv.setText(impact);
+			shot_tv.setText(shot);
+			ko_tv.setText(ko);
+			fire_tv.setText(fire);
+			water_tv.setText(water);
+			ice_tv.setText(ice);
+			thunder_tv.setText(thunder);
+			dragon_tv.setText(dragon);
+			dummy_tv.setText("");
+
+			mWeaponDamageTL.addView(wdRow);
+			mElementalDamageTL.addView(edRow);
+
+		}
+*/
+	}
+
+	// Update weakness display after loader callback
+	private void updateWeaknessUI(){
+		// Weakness Section
+		int fire, water, thunder, ice, dragon, poison, paralysis, sleep, pitfalltrap,
+				shocktrap, flashbomb, sonicbomb, dungbomb, meat;
+
+
+		// Load ArrayList of weaknesses without using a loader
+		ArrayList<MonsterWeakness> weaknesses = DataManager.get(getActivity()).queryMonsterWeaknessArray(mMonster.getId());
+
+		// Get "Normal" weakness. "Enraged" or "Charge" not yet supported
+		mWeakness = weaknesses.get(0);
+
+		// Fire
+		evalWeakness(mWeakness.getFire(), mWeaknessData, getResources().getString(R.string.image_location_fire));
+		// Water
+		evalWeakness(mWeakness.getWater(), mWeaknessData, getResources().getString(R.string.image_location_water));
+		// Thunder
+		evalWeakness(mWeakness.getThunder(), mWeaknessData, getResources().getString(R.string.image_location_thunder));
+		// Ice
+		evalWeakness(mWeakness.getIce(), mWeaknessData, getResources().getString(R.string.image_location_ice));
+		// Dragon
+		evalWeakness(mWeakness.getDragon(), mWeaknessData, getResources().getString(R.string.image_location_dragon));
+		// Poison
+		evalWeakness(mWeakness.getPoison(), mWeaknessData, getResources().getString(R.string.image_location_poison));
+		// Paralysis
+		evalWeakness(mWeakness.getParalysis(), mWeaknessData, getResources().getString(R.string.image_location_paralysis));
+		// Sleep
+		evalWeakness(mWeakness.getSleep(), mWeaknessData, getResources().getString(R.string.image_location_sleep));
+
+	}
+
+	private void evalWeakness(int weaknessvalue, LinearLayout parentview, String imagelocation){
+		// Add icon and modifier to show effectiveness
+		switch(weaknessvalue){
+			case 1:
+				addIcon(parentview, imagelocation, null);
+				break;
+			case 2:
+				addIcon(parentview, imagelocation, getResources().getString(R.string.image_location_effectiveness_2));
+				break;
+			case 3:
+				addIcon(parentview, imagelocation, getResources().getString(R.string.image_location_effectiveness_3));
+				break;
+			case 0:
+				// Do nothing
+				break;
+		}
+	}
+
+	// Add small_icon to a particular LinearLayout
+	private void addIcon(LinearLayout parentview, String imagelocation, String imagemodlocation){
+		LayoutInflater inflater = getLayoutInflater(mBundle);
+		ImageView mImage; // Generic image holder
+		ImageView mImageMod; // Modifier image holder
+		View view; // Generic icon view holder
+
+		// Create new small_icon layout
+		view = inflater.inflate(R.layout.small_icon, null, false);
+
+		// Get reference to image in small_icon layout
+		mImage = (ImageView) view.findViewById(R.id.image);
+		mImageMod = (ImageView) view.findViewById(R.id.image_mod);
+
+		// Open Image
+		String cellImage = imagelocation;
+		AssetManager manager = getActivity().getAssets();
+		try {
+			InputStream open = manager.open(cellImage);
+			Bitmap bitmap = BitmapFactory.decodeStream(open);
+			// Assign the bitmap to an ImageView in this layout
+			mImage.setImageBitmap(bitmap);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Open Image Mod if applicable
+		if(imagemodlocation != null){
+			cellImage = imagemodlocation;
+			manager = getActivity().getAssets();
+			try {
+				InputStream open = manager.open(cellImage);
+				Bitmap bitmap = BitmapFactory.decodeStream(open);
+				// Assign the bitmap to an ImageView in this layout
+				mImageMod.setImageBitmap(bitmap);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			mImageMod.setVisibility(View.VISIBLE);
+		}
+
+		// Add small_icon to appropriate layout
+		parentview.addView(view);
+	}
+
+	// Update ailments display after loader callback
+	private void updateAilmentsUI(){
+
+	}
+
+    // Adapter to populate the Ailments Listview
+    private class MonsterAilmentsCursorAdapter extends CursorAdapter{
+
+        private MonsterAilmentCursor mMonsterAilmentsCursor;
+
+        public MonsterAilmentsCursorAdapter(Context context,
+                                         MonsterAilmentCursor cursor) {
+            super(context, cursor, 0);
+            mMonsterAilmentsCursor = cursor;
+        }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            // Use a layout inflater to get a row view
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.fragment_ailment_listitem,
+                    parent, false);
+        }
+
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            // Get the Ailment for the current row
+            MonsterAilment mMonsterAilment = mMonsterAilmentsCursor.getAilment();
+
+            // Locate textview
+            TextView mAilment = (TextView) view.findViewById(R.id.ailment_text);
+
+            // Set ailment text
+            mAilment.setText(mMonsterAilment.getAilment());
+        }
+    }
+
+    // Loader to load data for this monster
+	private class MonsterLoaderCallbacks implements LoaderCallbacks<Monster> {
+
+		@Override
+		public Loader<Monster> onCreateLoader(int id, Bundle args) {
+			return new MonsterLoader(getActivity(), args.getLong(ARG_MONSTER_ID));
+		}
+
+		@Override
+		public void onLoadFinished(Loader<Monster> loader, Monster run) {
+			mMonster = run;
+            LoaderManager lm = getLoaderManager();
+            Bundle args = new Bundle();
+            args.putLong(ARG_MONSTER_ID, run.getId());
+
+            // Load ailments data after monster is found
+            lm.initLoader(R.id.monster_ailments, args, new MonsterAilmentsLoaderCallbacks());
+		}
+
+		@Override
+		public void onLoaderReset(Loader<Monster> loader) {
+			// Do nothing
+		}
+	}
+
+    // Loader to load the ailment data for this monster
+    private class MonsterAilmentsLoaderCallbacks implements LoaderCallbacks<Cursor> {
+        @Override
+        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+            // Get cursor based on Monster ID
+            return new MonsterAilmentCursorLoader(getActivity(), args.getLong(ARG_MONSTER_ID));
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
+            // Get the cursor adapter
+            MonsterSummaryFragment.MonsterAilmentsCursorAdapter adapter = new MonsterSummaryFragment.MonsterAilmentsCursorAdapter(
+                    getActivity(), (MonsterAilmentCursor) cursor);
+
+            // mAilmentsListView.setAdapter(adapter);
+            // Assign list items to LinearLayout instead of ListView
+
+            // mAilmentsLinearLayout should be the vertical LinearLayout that you substituted the listview with
+            for(int i=0;i<adapter.getCount();i++) {
+                LinearLayout v = (LinearLayout) adapter.getView(i, null, null);
+                //mAilmentsLinearLayout.addView(v);
+            }
+
+            // Update the UI after loaders are finished
+            updateUI();
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Cursor> loader) {
+            // Stop using the cursor (via the adapter)
+            //mAilmentsListView.setAdapter(null);
+        }
+    }
+	
+	private String checkDamageValue(String damage) {
+		String ret = damage;
+		if (ret.equals("-1")) {
+			ret = "--";
+		}
+		else if (ret.equals("-2")) {
+			ret = "?";
+		}
+		return ret;
+	}
+}

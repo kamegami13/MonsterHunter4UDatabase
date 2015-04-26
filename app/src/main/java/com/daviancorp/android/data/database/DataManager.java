@@ -24,6 +24,7 @@ import com.daviancorp.android.data.classes.MonsterDamage;
 import com.daviancorp.android.data.classes.MonsterStatus;
 import com.daviancorp.android.data.classes.MonsterToArena;
 import com.daviancorp.android.data.classes.MonsterToQuest;
+import com.daviancorp.android.data.classes.MonsterWeakness;
 import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.data.classes.QuestReward;
 import com.daviancorp.android.data.classes.Skill;
@@ -773,11 +774,25 @@ public class DataManager {
         return mHelper.queryHabitatLocation(id);
     }
 
-/********************************* MONSTER HABITAT QUERIES ******************************************/
+/********************************* MONSTER WEAKNESS QUERIES ******************************************/
 
 	/* Get a cursor that has all a monsters weaknesses */
 	public MonsterWeaknessCursor queryWeaknessFromMonster(long id){
 		return mHelper.queryWeaknessFromMonster(id);
+	}
+
+	/* Get an array of MonsterWeakness for a specific Monster */
+	public ArrayList<MonsterWeakness> queryMonsterWeaknessArray(long id) {
+		ArrayList<MonsterWeakness> weaknesses = new ArrayList<MonsterWeakness>();
+		MonsterWeaknessCursor cursor = mHelper.queryWeaknessFromMonster(id);
+		cursor.moveToFirst();
+
+		while(!cursor.isAfterLast()) {
+			weaknesses.add(cursor.getWeakness());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return weaknesses;
 	}
 
 /********************************* QUEST QUERIES ******************************************/	

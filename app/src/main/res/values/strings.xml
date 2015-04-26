@@ -99,6 +99,24 @@
     <string name="armor_set_builder_legs">Legs</string>
     <string name="placeholder_unknown">Unknown</string>
 
+    <string name="image_location_fire">icons_monster_info/Fire.png</string>
+    <string name="image_location_water">icons_monster_info/Water.png</string>
+    <string name="image_location_thunder">icons_monster_info/Thunder.png</string>
+    <string name="image_location_ice">icons_monster_info/Ice.png</string>
+    <string name="image_location_dragon">icons_monster_info/Dragon.png</string>
+    <string name="image_location_poison">icons_monster_info/Poison.png</string>
+    <string name="image_location_paralysis">icons_monster_info/Paralysis.png</string>
+    <string name="image_location_sleep">icons_monster_info/Sleep.png</string>
+    <string name="image_location_pitfall_trap">icons_items/Trap-Green.png</string>
+    <string name="image_location_shock_trap">icons_items/Trap-Purple.png</string>
+    <string name="image_location_flash_bomb">icons_items/Bomb-Yellow.png</string>
+    <string name="image_location_sonic_bomb">icons_items/Bomb-Grey.png</string>
+    <string name="image_location_dung_bomb">icons_items/Dung.png</string>
+    <string name="image_location_meat">icons_items/Meat-White.png</string>
+    <string name="image_location_effectiveness_1">icons_monster_info/effectiveness-1.png</string>
+    <string name="image_location_effectiveness_2">icons_monster_info/effectiveness-2.png</string>
+    <string name="image_location_effectiveness_3">icons_monster_info/effectiveness-3.png</string>
+
     <string-array name="slot_values">
         <item>0</item>
         <item>1</item>

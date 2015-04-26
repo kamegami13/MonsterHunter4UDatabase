@@ -45,6 +45,7 @@
     <item type="id" name="monster_reward_high" />
     <item type="id" name="monster_reward_g" />
 	<item type="id" name="monster_ailments" />
+	<item type="id" name="monster_weakness" />
 	<item type="id" name="horn_melodies_list_fragment" />
 
 

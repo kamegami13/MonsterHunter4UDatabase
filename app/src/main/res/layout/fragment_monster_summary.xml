@@ -10,7 +10,8 @@
         android:orientation="vertical">
 
         <!-- Common header -->
-        <include layout="@layout/monster_detail_header"/>
+        <include layout="@layout/monster_detail_header"
+            android:id="@+id/monster_header" />
 
         <!-- Summary Section -->
         <LinearLayout
@@ -28,26 +29,47 @@
                 style="@style/text_medium"/>
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/weaknesses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             style="@style/list_item"
             android:minHeight="48dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 style="@style/text_medium"
                 android:text="Weaknesses"/>
-        </LinearLayout>
 
-        <LinearLayout
+            <LinearLayout
+                android:id="@+id/weakness_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true">
+
+                <!-- Layout Tests-->
+                <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="right"/>
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/attacks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             style="@style/list_item"
             android:minHeight="48dp">
 
@@ -56,13 +78,20 @@
                 android:layout_height="wrap_content"
                 style="@style/text_medium"
                 android:text="Attacks"/>
-        </LinearLayout>
 
-        <LinearLayout
+            <LinearLayout
+                android:id="@+id/attack_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/earplugs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             style="@style/list_item"
             android:minHeight="48dp">
 
@@ -71,13 +100,19 @@
                 android:layout_height="wrap_content"
                 style="@style/text_medium"
                 android:text="Earplugs"/>
-        </LinearLayout>
 
-        <LinearLayout
+            <LinearLayout
+                android:id="@+id/earplugs_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/windpress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             style="@style/list_item"
             android:minHeight="48dp">
 
@@ -86,13 +121,19 @@
                 android:layout_height="wrap_content"
                 style="@style/text_medium"
                 android:text="Windpress"/>
-        </LinearLayout>
 
-        <LinearLayout
+            <LinearLayout
+                android:id="@+id/windpress_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/trap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             style="@style/list_item"
             android:minHeight="48dp">
 
@@ -101,13 +142,19 @@
                 android:layout_height="wrap_content"
                 style="@style/text_medium"
                 android:text="Trap"/>
-        </LinearLayout>
 
-        <LinearLayout
+            <LinearLayout
+                android:id="@+id/trap_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/bombs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             style="@style/list_item"
             android:minHeight="48dp">
 
@@ -116,7 +163,14 @@
                 android:layout_height="wrap_content"
                 style="@style/text_medium"
                 android:text="Bombs"/>
-        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bomb_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
 
 
         <!-- Key Section -->
