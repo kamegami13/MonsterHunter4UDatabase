@@ -47,6 +47,7 @@ public class MonsterSummaryFragment extends Fragment {
 
 	// Sections to hold icons and text
 	private LinearLayout mWeaknessData, mAttackData, mEarplugData, mWindpressData, mTrapData, mBombData;
+	private LinearLayout mAilments;
 
 	// Need to add dividers
     //private View mDividerView;
@@ -76,6 +77,11 @@ public class MonsterSummaryFragment extends Fragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+	}
+
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_monster_summary, container, false);
@@ -89,8 +95,7 @@ public class MonsterSummaryFragment extends Fragment {
 		mWindpressData = (LinearLayout) view.findViewById(R.id.windpress_data);
 		mTrapData = (LinearLayout) view.findViewById(R.id.trap_data);
 		mBombData = (LinearLayout) view.findViewById(R.id.bomb_data);
-
-        //mDividerView = view.findViewById(R.id.divider);
+		mAilments = (LinearLayout) view.findViewById(R.id.ailments_data);
 
 		return view;
 	}
@@ -116,71 +121,6 @@ public class MonsterSummaryFragment extends Fragment {
 
 		updateWeaknessUI();
 
-
-
-		// OLD STUFF -----------------------------------------
-/*		ArrayList<MonsterDamage> damages =
-				DataManager.get(getActivity()).queryMonsterDamageArray(mMonster.getId());
-
-		MonsterDamage damage = null;
-		String body_part, cut, impact, shot, ko, fire, water, ice, thunder, dragon;
-
-
-
-		// build each row of both tables per record
-		for(int i = 0; i < damages.size(); i++) {
-			LinearLayout wdRow = (LinearLayout) inflater.inflate(
-					R.layout.fragment_monster_damage_listitem, mWeaponDamageTL, false);
-			LinearLayout edRow = (LinearLayout) inflater.inflate(
-					R.layout.fragment_monster_damage_listitem, mElementalDamageTL, false);
-
-			damage = damages.get(i);
-
-			body_part = checkDamageValue(damage.getBodyPart());
-			cut = checkDamageValue("" + damage.getCut());
-			impact = checkDamageValue("" + damage.getImpact());
-			shot = checkDamageValue("" + damage.getShot());
-			ko = checkDamageValue("" + damage.getKo());
-			fire = checkDamageValue("" + damage.getFire());
-			water = checkDamageValue("" + damage.getWater());
-			ice = checkDamageValue("" + damage.getIce());
-			thunder = checkDamageValue("" + damage.getThunder());
-			dragon = checkDamageValue("" + damage.getDragon());
-
-			// Table 1
-			TextView body_part_tv1 = (TextView) wdRow.findViewById(R.id.body_part);
-			TextView dummy_tv = (TextView) wdRow.findViewById(R.id.dmg1);
-			TextView cut_tv = (TextView) wdRow.findViewById(R.id.dmg2);
-			TextView impact_tv = (TextView) wdRow.findViewById(R.id.dmg3);
-			TextView shot_tv = (TextView) wdRow.findViewById(R.id.dmg4);
-			TextView ko_tv = (TextView) wdRow.findViewById(R.id.dmg5);
-
-			// Table 2
-			TextView body_part_tv2 = (TextView) edRow.findViewById(R.id.body_part);
-			TextView fire_tv = (TextView) edRow.findViewById(R.id.dmg1);
-			TextView water_tv = (TextView) edRow.findViewById(R.id.dmg2);
-			TextView ice_tv = (TextView) edRow.findViewById(R.id.dmg3);
-			TextView thunder_tv = (TextView) edRow.findViewById(R.id.dmg4);
-			TextView dragon_tv = (TextView) edRow.findViewById(R.id.dmg5);
-
-			body_part_tv1.setText(body_part);
-			body_part_tv2.setText(body_part);
-			cut_tv.setText(cut);
-			impact_tv.setText(impact);
-			shot_tv.setText(shot);
-			ko_tv.setText(ko);
-			fire_tv.setText(fire);
-			water_tv.setText(water);
-			ice_tv.setText(ice);
-			thunder_tv.setText(thunder);
-			dragon_tv.setText(dragon);
-			dummy_tv.setText("");
-
-			mWeaponDamageTL.addView(wdRow);
-			mElementalDamageTL.addView(edRow);
-
-		}
-*/
 	}
 
 	// Update weakness display after loader callback
@@ -212,6 +152,25 @@ public class MonsterSummaryFragment extends Fragment {
 		evalWeakness(mWeakness.getParalysis(), mWeaknessData, getResources().getString(R.string.image_location_paralysis));
 		// Sleep
 		evalWeakness(mWeakness.getSleep(), mWeaknessData, getResources().getString(R.string.image_location_sleep));
+
+		// Pitfall Trap
+		if(mWeakness.getPitfalltrap() != 0)
+			addIcon(mTrapData, getResources().getString(R.string.image_location_pitfall_trap), null);
+		// Shock Trap
+		if(mWeakness.getShocktrap() != 0)
+			addIcon(mTrapData, getResources().getString(R.string.image_location_shock_trap), null);
+
+		// Flash Bomb
+		if(mWeakness.getFlashbomb() != 0)
+			addIcon(mBombData, getResources().getString(R.string.image_location_flash_bomb), null);
+		// Sonic Bomb
+		if(mWeakness.getSonicbomb() != 0)
+			addIcon(mBombData, getResources().getString(R.string.image_location_sonic_bomb), null);
+		// Dung Bomb
+		if(mWeakness.getDungbomb() != 0)
+			addIcon(mBombData, getResources().getString(R.string.image_location_dung_bomb), null);
+
+		// Meat
 
 	}
 
@@ -328,7 +287,7 @@ public class MonsterSummaryFragment extends Fragment {
 		public void onLoadFinished(Loader<Monster> loader, Monster run) {
 			mMonster = run;
             LoaderManager lm = getLoaderManager();
-            Bundle args = new Bundle();
+			Bundle args = new Bundle();
             args.putLong(ARG_MONSTER_ID, run.getId());
 
             // Load ailments data after monster is found
@@ -338,6 +297,7 @@ public class MonsterSummaryFragment extends Fragment {
 		@Override
 		public void onLoaderReset(Loader<Monster> loader) {
 			// Do nothing
+			System.out.println("TESTING");
 		}
 	}
 
@@ -362,7 +322,7 @@ public class MonsterSummaryFragment extends Fragment {
             // mAilmentsLinearLayout should be the vertical LinearLayout that you substituted the listview with
             for(int i=0;i<adapter.getCount();i++) {
                 LinearLayout v = (LinearLayout) adapter.getView(i, null, null);
-                //mAilmentsLinearLayout.addView(v);
+                mAilments.addView(v);
             }
 
             // Update the UI after loaders are finished

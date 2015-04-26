@@ -29,6 +29,11 @@
                 style="@style/text_medium"/>
         </LinearLayout>
 
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
         <RelativeLayout
             android:id="@+id/weaknesses"
             android:layout_width="match_parent"
@@ -50,7 +55,7 @@
                 android:orientation="horizontal"
                 android:layout_alignParentRight="true">
 
-                <!-- Layout Tests-->
+                <!-- Layout Tests
                 <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -60,75 +65,16 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_gravity="right"/>
-
+                -->
 
             </LinearLayout>
 
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/attacks"
+        <View
+            android:background="@color/divider_color"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/list_item"
-            android:minHeight="48dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/text_medium"
-                android:text="Attacks"/>
-
-            <LinearLayout
-                android:id="@+id/attack_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/earplugs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/list_item"
-            android:minHeight="48dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/text_medium"
-                android:text="Earplugs"/>
-
-            <LinearLayout
-                android:id="@+id/earplugs_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/windpress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/list_item"
-            android:minHeight="48dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/text_medium"
-                android:text="Windpress"/>
-
-            <LinearLayout
-                android:id="@+id/windpress_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true"/>
-        </RelativeLayout>
+            android:layout_height="1dp"/>
 
         <RelativeLayout
             android:id="@+id/trap"
@@ -151,6 +97,11 @@
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
 
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
         <RelativeLayout
             android:id="@+id/bombs"
             android:layout_width="match_parent"
@@ -172,6 +123,128 @@
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
 
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:id="@+id/ailments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/text_medium"
+                android:id="@+id/ailments_label"
+                android:text="Ailments"/>
+
+            <LinearLayout
+                android:id="@+id/ailments_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/ailments_label">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blastblight"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Severe Dragonblight"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dragon Wind Pressure"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <RelativeLayout
+            android:id="@+id/attacks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/list_item"
+            android:minHeight="48dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/text_medium"
+                android:text="Attacks"/>
+
+            <LinearLayout
+                android:id="@+id/attack_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/earplugs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/list_item"
+            android:minHeight="48dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/text_medium"
+                android:text="Earplugs"/>
+
+            <LinearLayout
+                android:id="@+id/earplugs_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/windpress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/list_item"
+            android:minHeight="48dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/text_medium"
+                android:text="Windpress"/>
+
+            <LinearLayout
+                android:id="@+id/windpress_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+
+
 
         <!-- Key Section -->
         <LinearLayout
@@ -188,6 +261,11 @@
                 android:text="Key"
                 style="@style/text_medium"/>
         </LinearLayout>
+
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
 
     </LinearLayout>
 

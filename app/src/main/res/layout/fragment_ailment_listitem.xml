@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center_vertical"
-        style="@style/text_medium"
+        android:clickable="false"
+        style="@style/text_small"
         tools:text="Severe Waterblight"/>
 
 </LinearLayout>

@@ -42,7 +42,6 @@ public class MonsterDamageFragment extends Fragment {
 	private ImageView mMonsterIconImageView;
 	
 	private LinearLayout mWeaponDamageTL, mElementalDamageTL;
-	private LinearLayout mAilmentsLinearLayout;
     private View mDividerView;
 
 	private ImageView mCutImageView, mImpactImageView, mShotImageView, mKOImageView;
@@ -95,7 +94,6 @@ public class MonsterDamageFragment extends Fragment {
 		mElementalDamageTL = (LinearLayout) view.findViewById(R.id.elemental_damage);
 
         mDividerView = view.findViewById(R.id.divider);
-        mAilmentsLinearLayout = (LinearLayout) view.findViewById(R.id.ailments_list);
 		
 		return view;
 	}
@@ -120,7 +118,6 @@ public class MonsterDamageFragment extends Fragment {
 		mImpactImageView.setImageResource(R.drawable.impact);
 		mShotImageView.setImageResource(R.drawable.shot);
 		mKOImageView.setImageResource(R.drawable.stun);
-
 		mFireImageView.setImageResource(R.drawable.fire);
 		mWaterImageView.setImageResource(R.drawable.water);
 		mIceImageView.setImageResource(R.drawable.ice);
@@ -189,39 +186,6 @@ public class MonsterDamageFragment extends Fragment {
 		}
 	}
 
-    // Adapter to populate the Ailments Listview
-    private class MonsterAilmentsCursorAdapter extends CursorAdapter{
-
-        private MonsterAilmentCursor mMonsterAilmentsCursor;
-
-        public MonsterAilmentsCursorAdapter(Context context,
-                                         MonsterAilmentCursor cursor) {
-            super(context, cursor, 0);
-            mMonsterAilmentsCursor = cursor;
-        }
-
-        @Override
-        public View newView(Context context, Cursor cursor, ViewGroup parent) {
-            // Use a layout inflater to get a row view
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            return inflater.inflate(R.layout.fragment_ailment_listitem,
-                    parent, false);
-        }
-
-        @Override
-        public void bindView(View view, Context context, Cursor cursor) {
-            // Get the Ailment for the current row
-            MonsterAilment mMonsterAilment = mMonsterAilmentsCursor.getAilment();
-
-            // Locate textview
-            TextView mAilment = (TextView) view.findViewById(R.id.ailment_text);
-
-            // Set ailment text
-            mAilment.setText(mMonsterAilment.getAilment());
-        }
-    }
-
     // Loader to load data for this monster
 	private class MonsterLoaderCallbacks implements LoaderCallbacks<Monster> {
 		
@@ -237,8 +201,7 @@ public class MonsterDamageFragment extends Fragment {
             Bundle args = new Bundle();
             args.putLong(ARG_MONSTER_ID, run.getId());
 
-            // Load ailments data after monster is found
-            lm.initLoader(R.id.monster_ailments, args, new MonsterAilmentsLoaderCallbacks());
+			updateUI();
 		}
 		
 		@Override
@@ -246,41 +209,6 @@ public class MonsterDamageFragment extends Fragment {
 			// Do nothing
 		}
 	}
-
-    // Loader to load the ailment data for this monster
-    private class MonsterAilmentsLoaderCallbacks implements LoaderManager.LoaderCallbacks<Cursor> {
-        @Override
-        public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-            // Get cursor based on Monster ID
-            return new MonsterAilmentCursorLoader(getActivity(), args.getLong(ARG_MONSTER_ID));
-        }
-
-        @Override
-        public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-
-            // Get the cursor adapter
-            MonsterDamageFragment.MonsterAilmentsCursorAdapter adapter = new MonsterDamageFragment.MonsterAilmentsCursorAdapter(
-                    getActivity(), (MonsterAilmentCursor) cursor);
-
-            // mAilmentsListView.setAdapter(adapter);
-            // Assign list items to LinearLayout instead of ListView
-
-            // mAilmentsLinearLayout should be the vertical LinearLayout that you substituted the listview with
-            for(int i=0;i<adapter.getCount();i++) {
-                LinearLayout v = (LinearLayout) adapter.getView(i, null, null);
-                mAilmentsLinearLayout.addView(v);
-            }
-
-            // Update the UI after loaders are finished
-            updateUI();
-        }
-
-        @Override
-        public void onLoaderReset(Loader<Cursor> loader) {
-            // Stop using the cursor (via the adapter)
-            //mAilmentsListView.setAdapter(null);
-        }
-    }
 	
 	private String checkDamageValue(String damage) {
 		String ret = damage;
