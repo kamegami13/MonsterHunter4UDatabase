@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:f="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -34,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/weaknesses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,28 +49,15 @@
                 style="@style/text_medium"
                 android:text="Weaknesses"/>
 
-            <LinearLayout
+            <org.apmem.tools.layouts.FlowLayout
                 android:id="@+id/weakness_data"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
                 android:orientation="horizontal"
-                android:layout_alignParentRight="true">
+                android:gravity="right"/>
 
-                <!-- Layout Tests
-                <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="right"/>
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="right"/>
-                -->
-
-            </LinearLayout>
-
-        </RelativeLayout>
+        </LinearLayout>
 
         <View
             android:background="@color/divider_color"
@@ -89,12 +77,13 @@
                 style="@style/text_medium"
                 android:text="Trap"/>
 
-            <LinearLayout
+            <org.apmem.tools.layouts.FlowLayout
                 android:id="@+id/trap_data"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
                 android:orientation="horizontal"
-                android:layout_alignParentRight="true"/>
+                android:gravity="right"/>
         </RelativeLayout>
 
         <View
@@ -115,12 +104,13 @@
                 style="@style/text_medium"
                 android:text="Bombs"/>
 
-            <LinearLayout
+            <org.apmem.tools.layouts.FlowLayout
                 android:id="@+id/bomb_data"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
                 android:orientation="horizontal"
-                android:layout_alignParentRight="true"/>
+                android:gravity="right"/>
         </RelativeLayout>
 
         <View
@@ -176,81 +166,12 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-        <RelativeLayout
-            android:id="@+id/attacks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/list_item"
-            android:minHeight="48dp"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/text_medium"
-                android:text="Attacks"/>
-
-            <LinearLayout
-                android:id="@+id/attack_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/earplugs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/list_item"
-            android:minHeight="48dp"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/text_medium"
-                android:text="Earplugs"/>
-
-            <LinearLayout
-                android:id="@+id/earplugs_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/windpress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/list_item"
-            android:minHeight="48dp"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/text_medium"
-                android:text="Windpress"/>
-
-            <LinearLayout
-                android:id="@+id/windpress_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentRight="true"/>
-        </RelativeLayout>
-
-
-
-
         <!-- Key Section -->
         <LinearLayout
             android:orientation="horizontal"
             style="@style/list_item"
             android:layout_height="48dp"
+            android:visibility="gone"
             android:background="@color/subheading_color">
 
             <TextView
@@ -258,6 +179,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:visibility="gone"
                 android:text="Key"
                 style="@style/text_medium"/>
         </LinearLayout>
@@ -265,6 +187,7 @@
         <View
             android:background="@color/divider_color"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="1dp"/>
 
     </LinearLayout>

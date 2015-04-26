@@ -29,6 +29,8 @@ import com.daviancorp.android.loader.MonsterLoader;
 import com.daviancorp.android.loader.MonsterWeaknessCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 
+import org.apmem.tools.layouts.FlowLayout;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class MonsterSummaryFragment extends Fragment {
 	private ImageView mMonsterIconImageView;
 
 	// Sections to hold icons and text
-	private LinearLayout mWeaknessData, mAttackData, mEarplugData, mWindpressData, mTrapData, mBombData;
+	private FlowLayout mWeaknessData, mTrapData, mBombData;
 	private LinearLayout mAilments;
 
 	// Need to add dividers
@@ -83,18 +85,15 @@ public class MonsterSummaryFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_monster_summary, container, false);
 
 		mMonsterLabelTextView = (TextView) view.findViewById(R.id.detail_monster_label);
 		mMonsterIconImageView = (ImageView) view.findViewById(R.id.detail_monster_image);
 
-		mWeaknessData = (LinearLayout) view.findViewById(R.id.weakness_data);
-		mAttackData = (LinearLayout) view.findViewById(R.id.attack_data);
-		mEarplugData = (LinearLayout) view.findViewById(R.id.earplugs_data);
-		mWindpressData = (LinearLayout) view.findViewById(R.id.windpress_data);
-		mTrapData = (LinearLayout) view.findViewById(R.id.trap_data);
-		mBombData = (LinearLayout) view.findViewById(R.id.bomb_data);
+		mWeaknessData = (FlowLayout) view.findViewById(R.id.weakness_data);
+		mTrapData = (FlowLayout) view.findViewById(R.id.trap_data);
+		mBombData = (FlowLayout) view.findViewById(R.id.bomb_data);
 		mAilments = (LinearLayout) view.findViewById(R.id.ailments_data);
 
 		return view;
@@ -174,7 +173,7 @@ public class MonsterSummaryFragment extends Fragment {
 
 	}
 
-	private void evalWeakness(int weaknessvalue, LinearLayout parentview, String imagelocation){
+	private void evalWeakness(int weaknessvalue, FlowLayout parentview, String imagelocation){
 		// Add icon and modifier to show effectiveness
 		switch(weaknessvalue){
 			case 1:
@@ -193,14 +192,14 @@ public class MonsterSummaryFragment extends Fragment {
 	}
 
 	// Add small_icon to a particular LinearLayout
-	private void addIcon(LinearLayout parentview, String imagelocation, String imagemodlocation){
+	private void addIcon(FlowLayout parentview, String imagelocation, String imagemodlocation){
 		LayoutInflater inflater = getLayoutInflater(mBundle);
 		ImageView mImage; // Generic image holder
 		ImageView mImageMod; // Modifier image holder
 		View view; // Generic icon view holder
 
 		// Create new small_icon layout
-		view = inflater.inflate(R.layout.small_icon, null, false);
+		view = inflater.inflate(R.layout.small_icon, parentview, false);
 
 		// Get reference to image in small_icon layout
 		mImage = (ImageView) view.findViewById(R.id.image);
@@ -235,11 +234,6 @@ public class MonsterSummaryFragment extends Fragment {
 
 		// Add small_icon to appropriate layout
 		parentview.addView(view);
-	}
-
-	// Update ailments display after loader callback
-	private void updateAilmentsUI(){
-
 	}
 
     // Adapter to populate the Ailments Listview
@@ -297,7 +291,6 @@ public class MonsterSummaryFragment extends Fragment {
 		@Override
 		public void onLoaderReset(Loader<Monster> loader) {
 			// Do nothing
-			System.out.println("TESTING");
 		}
 	}
 
@@ -327,6 +320,8 @@ public class MonsterSummaryFragment extends Fragment {
 
             // Update the UI after loaders are finished
             updateUI();
+
+			getLoaderManager().destroyLoader(R.id.monster_ailments);
         }
 
         @Override
