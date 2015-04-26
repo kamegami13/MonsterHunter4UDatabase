@@ -19,6 +19,7 @@
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_gravity="top"
+        android:layout_marginLeft="-3dp"
         android:visibility="gone"
         tools:src="@drawable/switch_axe1"
         tools:visibility="visible">
