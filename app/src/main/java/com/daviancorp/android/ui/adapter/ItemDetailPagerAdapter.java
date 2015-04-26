@@ -10,6 +10,7 @@ import com.daviancorp.android.ui.detail.ItemDetailFragment;
 import com.daviancorp.android.ui.detail.ItemLocationFragment;
 import com.daviancorp.android.ui.detail.ItemMonsterFragment;
 import com.daviancorp.android.ui.detail.ItemQuestFragment;
+import com.daviancorp.android.ui.detail.ItemTradeFragment;
 import com.daviancorp.android.ui.list.CombiningListFragment;
 
 public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
@@ -18,7 +19,7 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 
     // Tab titles
     // TODO: Reenable arena quest tab
-    private String[] tabs = { "Detail", "Combining", "Usage", "Monster", "Quest", "Location"};
+    private String[] tabs = { "Detail", "Combining", "Usage", "Monster", "Quest", "Location", "Trade"};
 
 	public ItemDetailPagerAdapter(FragmentManager fm, long id) {
 		super(fm);
@@ -46,6 +47,9 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 		case 5:
 			// Location drops; gathering
 			return ItemLocationFragment.newInstance(itemId);
+        case 6:
+            // Wyporium trade info
+            return ItemTradeFragment.newInstance(itemId);
 //		case 5:
 //			// ArenaQuest rewards
 //            //TODO reenable when arena quests are complete.
@@ -63,7 +67,7 @@ public class ItemDetailPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		// get item count - equal to number of tabs
-		return 6;
+		return 7;
 	}
 
 }

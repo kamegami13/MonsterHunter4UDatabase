@@ -42,6 +42,7 @@
         <item>"Decorations,icons_items/Jewel-White.png"</item>
         <item>"Skills,icons_items/Monster-Jewel-White.png"</item>
         <item>"Wishlists,icons_items/Mantle-White.png"</item>
+        <item>"Wyporium Trade,icons_items/Carapace-White.png"</item>
     </string-array>
 
     <string name="option_list">List</string>
@@ -69,6 +70,7 @@
     <string name="weapons">Weapons</string>
     <string name="arena_quests">Arena Quests</string>
     <string name="wishlist">Wishlists</string>
+    <string name="wyporiumtrade">Wyporium Trade</string>
     <string name="icon_name">MH4U DB</string>
 
     <string name="dialog_armor_filter_title">Filter</string>

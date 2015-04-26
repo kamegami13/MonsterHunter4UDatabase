@@ -35,6 +35,7 @@
 	<item name="weapon_tree_fragment" type="id"/>
 	<item name="wishlist_data_component_fragment" type="id"/>
 	<item name="wishlist_data_detail_fragment" type="id"/>
+    <item name="wyporium_trade_detail_fragment" type="id"/>
 
 
     <!-- LOADER IDS -->
@@ -61,4 +62,5 @@
 	<item name="skill_tree_list_fragment" type="id"/>
 	<item name="weapon_list_fragment" type="id"/>
 	<item name="wishlist_list_fragment" type="id"/>
+    <item name="wyporium_trade_list_fragment" type="id"/>
 </resources>

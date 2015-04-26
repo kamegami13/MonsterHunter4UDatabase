@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/detail_wt_required"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Required Item:"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"
+        android:padding="10dp" />
+
+    <RelativeLayout
+        android:id="@+id/detail_wt_out_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+
+        <ImageView
+            android:id="@+id/detail_wt_out_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/detail_wt_out_label"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignTop="@+id/detail_wt_out_image"
+            android:layout_alignBottom="@+id/detail_wt_out_image"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/detail_wt_out_image"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_wt_unlock"
+        android:text = "Quest to Unlock:"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/detail_wt_quest"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"/>
+
+
+</LinearLayout>
