@@ -3168,7 +3168,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     }
 
     /*
-     * Helper method to query for decorations
+     * Helper method to query for wyporium trades
      */
     private SQLiteQueryBuilder builderWyporiumTrade() {
 //      SELECT wt._id AS trade_id, wt.item_in_id AS in_id, wt.item_out_id AS out_id, wt.unlock_quest_id AS q_id,

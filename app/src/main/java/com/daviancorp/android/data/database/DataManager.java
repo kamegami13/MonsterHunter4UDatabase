@@ -1373,12 +1373,12 @@ public class DataManager {
 	}
 
     /**************************** WYPORIUM TRADE DATA QUERIES *************************************/
-    	/* Get a Cursor that has a list of all Decorations */
+    	/* Get a Cursor that has a list of all wyporium trades */
     public WyporiumTradeCursor queryWyporiumTrades() {
         return mHelper.queryWyporiumTrades();
     }
 
-    /* Get a specific Decoration */
+    /* Get a specific wyporium trade */
     public WyporiumTrade getWyporiumTrade(long id) {
         WyporiumTrade wyporiumTrade = null;
         WyporiumTradeCursor cursor = mHelper.queryWyporiumTrades(id);

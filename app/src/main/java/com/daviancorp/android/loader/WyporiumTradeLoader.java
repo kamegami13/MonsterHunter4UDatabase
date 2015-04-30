@@ -15,7 +15,7 @@ public class WyporiumTradeLoader extends DataLoader<WyporiumTrade> {
 
     @Override
     public WyporiumTrade loadInBackground() {
-        // Query the specific decoration
+        // Query the specific wyporium trade
         return DataManager.get(getContext()).getWyporiumTrade(mTradeId);
     }
 }
