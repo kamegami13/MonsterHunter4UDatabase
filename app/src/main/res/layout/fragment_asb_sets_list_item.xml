@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout style="@style/list_item_large"
+<LinearLayout
+    style="@style/list_item_large"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/clicked_states_context"
     android:clickable="false"
-    android:background="@drawable/list_view_generic">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/name_text"
@@ -17,6 +20,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="italic" />
-
 
 </LinearLayout>

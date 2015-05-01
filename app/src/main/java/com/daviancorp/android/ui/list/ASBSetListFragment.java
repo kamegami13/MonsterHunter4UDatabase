@@ -1,8 +1,8 @@
 package com.daviancorp.android.ui.list;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
+import android.app.*;
+import android.content.*;
+import android.content.DialogInterface.*;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -10,16 +10,13 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.app.ListFragment;
 import android.support.v4.content.Loader;
 import android.view.*;
-import android.widget.AbsListView;
-import android.widget.CursorAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.daviancorp.android.data.classes.ASBSet;
 import com.daviancorp.android.data.database.ASBSetCursor;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.loader.ASBSetListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.detail.ASBActivity;
+import com.daviancorp.android.ui.detail.*;
 import com.daviancorp.android.ui.dialog.ASBSetAddDialogFragment;
 
 public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
@@ -44,7 +41,7 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_list_generic, container, false);
+        return inflater.inflate(R.layout.fragment_list_generic_context, container, false);
     }
 
     @Override
@@ -64,15 +61,15 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
                 return true;
 
             default:
-                return super.onOptionsItemSelected(item);
+                return false;
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == REQUEST_ADD_ASB_SET) {
-                if (data.getBooleanExtra(ASBSetAddDialogFragment.EXTRA_CREATE_NEW, false)) {
+            switch (requestCode) {
+                case REQUEST_ADD_ASB_SET: {
                     String name = data.getStringExtra(EXTRA_ASB_SET_NAME);
                     int rank = data.getIntExtra(EXTRA_ASB_SET_RANK, -1);
                     int hunterType = data.getIntExtra(EXTRA_ASB_SET_HUNTER_TYPE, -1);
@@ -84,9 +81,19 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
                     );
 
                     updateUI();
+                    break;
                 }
-                else {
-                    // Update set data
+
+                case REQUEST_EDIT_ASB_SET: {
+                    long id = data.getLongExtra(EXTRA_ASB_SET_ID, -1);
+                    String name = data.getStringExtra(EXTRA_ASB_SET_NAME);
+                    int rank = data.getIntExtra(EXTRA_ASB_SET_RANK, -1);
+                    int hunterType = data.getIntExtra(EXTRA_ASB_SET_HUNTER_TYPE, -1);
+
+                    DataManager.get(getActivity()).queryUpdateASBSet(id, name, rank, hunterType);
+
+                    updateUI();
+                    break;
                 }
             }
         }
@@ -95,8 +102,8 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent i = new Intent(getActivity(), ASBActivity.class);
+        i.putExtra(EXTRA_ASB_SET_NAME, v.getTag().toString());
         i.putExtra(EXTRA_ASB_SET_ID, id);
-        i.putExtra(EXTRA_ASB_SET_NAME, DataManager.get(getActivity()).getASBSet(id).getName());
         startActivity(i);
     }
 
@@ -111,11 +118,13 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
         setListAdapter(adapter);
 
         final ListView l = getListView();
-        l.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
         l.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+                mode.setTitle(l.getCheckedItemCount() + " selected");
+
                 if (l.getCheckedItemCount() > 1) {
+                    // We hide the edit button since you can only edit one set at a time
                     mode.getMenu().findItem(R.id.action_edit_data).setVisible(false);
                 }
                 else {
@@ -138,14 +147,12 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.action_delete:
-                        break;
-
                     case R.id.action_edit_data:
                         ASBSet set = DataManager.get(getActivity()).getASBSet(l.getCheckedItemIds()[0]);
 
                         FragmentManager fm = getActivity().getSupportFragmentManager();
                         ASBSetAddDialogFragment dialog = ASBSetAddDialogFragment.newInstance(
+                                set.getId(),
                                 set.getName(),
                                 set.getRank(),
                                 set.getHunterType()
@@ -154,16 +161,72 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
                         dialog.show(fm, DIALOG_ADD_ASB_SET);
                         break;
 
+                    case R.id.action_delete:
+                        createConfirmDeleteDialog().show();
+                        break;
+
                     case R.id.action_copy:
+                        createConfirmCopyDialog().show();
                         break;
                 }
                 return false;
             }
 
             @Override
-            public void onDestroyActionMode(ActionMode mode) {
+            public void onDestroyActionMode(ActionMode mode) { }
+
+            private AlertDialog.Builder createConfirmDeleteDialog() {
+                AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
+                        .setPositiveButton(R.string.delete, new OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                for (long id : l.getCheckedItemIds()) {
+                                    DataManager.get(getActivity()).queryDeleteASBSet(id);
+                                }
+                                updateUI();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, null);
+
+                if (l.getCheckedItemCount() == 1) {
+                    b.setMessage(getResources().getString(R.string.dialog_message_delete, DataManager.get(getActivity()).getASBSet(l.getCheckedItemIds()[0]).getName()))
+                            .setTitle(R.string.asb_dialog_title_delete_set);
+                }
+                else {
+                    b.setMessage(getResources().getString(R.string.dialog_message_delete_multi, l.getCheckedItemCount()))
+                            .setTitle(R.string.asb_dialog_title_delete_set_multi);
+                }
+
+                return b;
+            }
+
+            private AlertDialog.Builder createConfirmCopyDialog() {
+                AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
+                        .setPositiveButton(R.string.copy, new OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                for (long id : l.getCheckedItemIds()) {
+                                    DataManager.get(getActivity()).queryAddASBSet(id);
+                                }
+                                updateUI();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, null);
+
+                if (l.getCheckedItemCount() == 1) {
+                    b.setMessage(getResources().getString(R.string.dialog_message_copy, DataManager.get(getActivity()).getASBSet(l.getCheckedItemIds()[0]).getName()))
+                            .setTitle(R.string.asb_dialog_title_copy_set);
+                }
+                else {
+                    b.setMessage(getResources().getString(R.string.dialog_message_delete_multi, l.getCheckedItemCount()))
+                            .setTitle(R.string.asb_dialog_title_copy_set_multi);
+                }
+
+                return b;
             }
         });
+
+        l.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE_MODAL);
     }
 
     @Override
@@ -197,7 +260,7 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
-            ASBSet set = this.cursor.getASBSet();
+            final ASBSet set = this.cursor.getASBSet();
 
             TextView textView = (TextView) view.findViewById(R.id.name_text);
             textView.setText(set.getName());
@@ -207,6 +270,8 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
             String hunterType = context.getResources().getStringArray(R.array.hunter_type)[set.getHunterType()];
 
             propertiesText.setText(rank + ", " + hunterType);
+
+            view.setTag(set.getName());
         }
     }
 }

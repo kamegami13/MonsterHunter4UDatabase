@@ -349,13 +349,13 @@ public class S {
 	static final String COLUMN_WISHLIST_COMPONENT_NOTES = "notes";
 
 	// Armor Sets
-	static final String TABLE_ARMOR_SET = "asb_sets";
+	static final String TABLE_ASB_SETS = "asb_sets";
 
-	static final String COLUMN_ARMOR_SET_ID = "_id";
+	static final String COLUMN_ASB_SET_ID = "_id";
 
-	static final String COLUMN_ARMOR_SET_NAME = "name";
-	static final String COLUMN_ARMOR_SET_RANK = "rank";
-	static final String COLUMN_ARMOR_SET_HUNTER_TYPE = "hunter_type";
+	static final String COLUMN_ASB_SET_NAME = "name";
+	static final String COLUMN_ASB_SET_RANK = "rank";
+	static final String COLUMN_ASB_SET_HUNTER_TYPE = "hunter_type";
 	
 	static final String COLUMN_HEAD_ARMOR_ID = "head_armor";
 	static final String COLUMN_HEAD_DECORATION_1_ID = "head_decoration_1";

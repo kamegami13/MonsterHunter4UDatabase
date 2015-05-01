@@ -7,7 +7,7 @@ import com.daviancorp.android.data.database.DataManager;
 import java.util.*;
 
 /**
- * Represents a session of the user's interaction with the Armor Set Builder.
+ * Contains all of the juicy stuff regarding ASB sets, like the armor inside and the skills it provides.
  */
 public class ASBSession {
     public static final int HEAD = 0;
@@ -139,6 +139,7 @@ public class ASBSession {
      * @return The 0-based index of the slot that the decoration was added to.
      */
     public int addDecoration(int pieceIndex, Decoration decoration, boolean updateSkills) {
+        Log.v("ASB", "Adding decoration at piece index " + pieceIndex);
         if (getAvailableSlots(pieceIndex) >= decoration.getNumSlots()) {
             int i = 0;
             while (decorations[pieceIndex][i] != null) {
@@ -208,9 +209,6 @@ public class ASBSession {
      * @return True if the user has chosen or created a piece at the specified index, false otherwise.
      */
     public boolean isEquipmentSelected(int pieceIndex) {
-        if (pieceIndex == TALISMAN) {
-            return equipment[pieceIndex] != null;
-        }
         return equipment[pieceIndex] != null;
     }
 
@@ -302,7 +300,7 @@ public class ASBSession {
                 SkillTreeInSet s; // The actual points set that we are working with that will be shown to the user
 
                 if (!skillTreeToSkillTreeInSet.containsKey(skillTree.getId())) { // If the armor set does not yet have this skill tree registered...
-                    Log.d("ASB", "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
+                    Log.v("ASB", "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
 
                     s = new SkillTreeInSet(); // We add it...
                     s.setSkillTree(skillTree);
@@ -312,7 +310,7 @@ public class ASBSession {
 
                 }
                 else {
-                    Log.d("ASB", "Skill tree " + skillTree.getName() + " already registered!");
+                    Log.v("ASB", "Skill tree " + skillTree.getName() + " already registered!");
                     s = skillTreeToSkillTreeInSet.get(skillTree.getId()); // Otherwise, we just find the skill tree set that's already there
                 }
 
@@ -416,16 +414,34 @@ public class ASBSession {
         }
 
         public int getPoints(int pieceIndex) {
-            return points[pieceIndex];
+            if (pieceIndex == BODY) {
+                throw new IllegalArgumentException("Use the getPoints(int, List<SkillTreeInSet>) when dealing with the chest piece!");
+            }
+            return getPoints(pieceIndex, null);
+        }
+
+        public int getPoints(int pieceIndex, List<SkillTreeInSet> trees) {
+            if (pieceIndex == BODY) {
+                int torsoUpPieces = 0;
+                for (SkillTreeInSet s : trees) {
+                    if (s.getSkillTree().getId() == 1) { // 1 is the ID of the Torso Up skill.
+                        torsoUpPieces++;
+                    }
+                }
+                return points[pieceIndex] * (torsoUpPieces + 1);
+            }
+            else {
+                return points[pieceIndex];
+            }
         }
 
         /**
          * @return The total number of skill points provided to the skill by all pieces in the set.
          */
-        public int getTotal() {
+        public int getTotal(List<SkillTreeInSet> trees) {
             int total = 0;
-            for (int piecePoints : points) {
-                total += piecePoints;
+            for (int i = 0; i < points.length; i++) {
+                total += getPoints(i, trees);
             }
             return total;
         }

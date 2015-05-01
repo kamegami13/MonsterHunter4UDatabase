@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.daviancorp.android.data.classes.ASBSession;
+import com.daviancorp.android.data.classes.ASBSession.*;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.SkillClickListener;
 import com.daviancorp.android.ui.detail.ASBActivity;
@@ -69,10 +70,12 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
         private static final int MINIMUM_SKILL_ACTIVATION_POINTS = 10;
 
         ASBSession session;
+        List<SkillTreeInSet> trees;
 
         public ASBSkillsAdapter(Context context, List<ASBSession.SkillTreeInSet> trees, ASBSession session) {
             super(context, R.layout.fragment_asb_skills_listitem, trees);
             this.session = session;
+            this.trees = trees;
         }
 
         @Override
@@ -98,8 +101,8 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
                 headPoints.setText(String.valueOf(getItem(position).getPoints(ASBSession.HEAD)));
             }
 
-            if (session.isEquipmentSelected(ASBSession.BODY) && getItem(position).getPoints(ASBSession.BODY) != 0) {
-                bodyPoints.setText(String.valueOf(getItem(position).getPoints(ASBSession.BODY)));
+            if (session.isEquipmentSelected(ASBSession.BODY) && getItem(position).getPoints(ASBSession.BODY, trees) != 0) { // NOTICE: We have to call the alternate getPoints method due to the possibility of Torso Up pieces.
+                bodyPoints.setText(String.valueOf(getItem(position).getPoints(ASBSession.BODY, trees)));
             }
 
             if (session.isEquipmentSelected(ASBSession.ARMS) && getItem(position).getPoints(ASBSession.ARMS) != 0) {
@@ -118,9 +121,9 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
                 talismanPoints.setText(String.valueOf(getItem(position).getPoints(ASBSession.TALISMAN)));
             }
 
-            totalPoints.setText(String.valueOf(getItem(position).getTotal()));
+            totalPoints.setText(String.valueOf(getItem(position).getTotal(trees)));
 
-            if (getItem(position).getTotal() >= MINIMUM_SKILL_ACTIVATION_POINTS) {
+            if (getItem(position).getTotal(trees) >= MINIMUM_SKILL_ACTIVATION_POINTS) {
                 totalPoints.setTypeface(null, Typeface.BOLD);
             }
             
@@ -140,7 +143,7 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
         Comparator<ASBSession.SkillTreeInSet> comparator = new Comparator<ASBSession.SkillTreeInSet>() {
             @Override
             public int compare(ASBSession.SkillTreeInSet lhs, ASBSession.SkillTreeInSet rhs) {
-                return rhs.getTotal() - lhs.getTotal();
+                return rhs.getTotal(trees) - lhs.getTotal(trees);
             }
         };
     }

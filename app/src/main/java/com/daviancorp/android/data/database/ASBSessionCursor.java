@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 import com.daviancorp.android.data.classes.*;
+import com.daviancorp.android.mh4udatabase.*;
+import com.daviancorp.android.ui.general.*;
 
 public class ASBSessionCursor extends CursorWrapper {
 
@@ -18,7 +20,7 @@ public class ASBSessionCursor extends CursorWrapper {
 
         ASBSession session = new ASBSession(context);
 
-        long id = getLong(getColumnIndex(S.COLUMN_ARMOR_SET_ID));
+        long id = getLong(getColumnIndex(S.COLUMN_ASB_SET_ID));
 
         ASBSet set = DataManager.get(context).getASBSet(id);
         session.setASBSet(set);
@@ -149,6 +151,7 @@ public class ASBSessionCursor extends CursorWrapper {
 
         if (talismanExists == 1) {
             ASBTalisman talisman = new ASBTalisman();
+            talisman.setName(ResourceUtils.splitStringInArrayByComma(R.array.talisman_names, talismanType, 0, context) + " Talisman");
             talisman.setTypeIndex(talismanType);
             talisman.setNumSlots(talismanSlots);
             talisman.setSkill1(getSkillTreeById(context, talismanSkill1Id));
@@ -159,17 +162,17 @@ public class ASBSessionCursor extends CursorWrapper {
                 talisman.setSkill2Points(talismanSkill2Points);
             }
 
+            session.setEquipment(ASBSession.TALISMAN, talisman, false);
+
             if (talismanDecoration1 != null) {
-                session.addDecoration(ASBSession.TALISMAN, talismanDecoration1);
+                session.addDecoration(ASBSession.TALISMAN, talismanDecoration1, false);
             }
             if (talismanDecoration2 != null) {
-                session.addDecoration(ASBSession.TALISMAN, talismanDecoration2);
+                session.addDecoration(ASBSession.TALISMAN, talismanDecoration2, false);
             }
             if (talismanDecoration3 != null) {
-                session.addDecoration(ASBSession.TALISMAN, talismanDecoration2);
+                session.addDecoration(ASBSession.TALISMAN, talismanDecoration2, false);
             }
-
-            session.setEquipment(ASBSession.TALISMAN, talisman, false);
         }
 
         session.updateSkillTreePointsSets();

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Similar to fragment_list_generic, but is designed for ListFragments that have contextual long-press menus.-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +9,7 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:drawSelectorOnTop="false"
-        android:listSelector="@color/transparent" />
+        android:listSelector="@drawable/clicked_states_white"
+        android:choiceMode="multipleChoice" />
 
 </LinearLayout>

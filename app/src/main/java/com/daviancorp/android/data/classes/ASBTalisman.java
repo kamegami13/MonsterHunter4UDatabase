@@ -8,29 +8,15 @@ public class ASBTalisman extends Equipment {
 
     private int typeIndex;
 
-    /**
-     * Used when creating a generic "dummy" talisman with no skills.
-     */
+    /** Used when creating a generic "dummy" talisman with no skills. */
     public ASBTalisman() {
         skillTrees = new SkillTree[2];
         skillPoints = new int[2];
     }
 
-    /**
-     * Used when creating a talisman with one skill.
-     */
+    /** Used when creating a talisman with one skill. */
     public ASBTalisman(SkillTree skill1, int skill1Points, int typeIndex) {
         this(skill1, skill1Points, typeIndex, false);
-    }
-
-    /**
-     * Used when creating a talisman with two skills.
-     */
-    public ASBTalisman(SkillTree skill1, int skill1Points, SkillTree skill2, int skill2Points, int typeIndex) {
-        this(skill1, skill1Points, typeIndex, false);
-
-        skillTrees[1] = skill2;
-        skillPoints[1] = skill2Points;
     }
 
     private ASBTalisman(SkillTree skill1, int skill1Points, int typeIndex, boolean hasSkill2) {
@@ -79,43 +65,11 @@ public class ASBTalisman extends Equipment {
         this.skillPoints[1] = skillPoints;
     }
 
-    @Override
-    public String getName() {
-        return TypeName.values()[typeIndex].getName() + " Talisman";
-    }
-
     public int getTypeIndex() {
         return typeIndex;
     }
 
     public void setTypeIndex(int typeIndex) {
         this.typeIndex = typeIndex;
-    }
-
-    private enum TypeName {
-        PAWN("Pawn"),
-        BISHOP("Bishop"),
-        KNIGHT("Knight"),
-        ROOK("Rook"),
-        QUEEN("Queen"),
-        KING("King"),
-        DRAGON("Dragon"),
-        UNKNOWABLE("Unknowable"),
-        MYSTIC("Mystic"),
-        HERO("Hero"),
-        LEGEND("Legend"),
-        CREATOR("Creator"),
-        SAGE("Sage"),
-        MIRACLE("Miracle");
-
-        private String name;
-
-        TypeName(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
     }
 }

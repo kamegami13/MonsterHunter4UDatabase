@@ -85,6 +85,7 @@ public class ASBTalismanSkillContainer extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
+                clampSkillPointsField(skillPointsText);
                 changeListener.onTalismanSkillPointsChanged();
             }
         });
@@ -115,16 +116,15 @@ public class ASBTalismanSkillContainer extends LinearLayout {
             skillPointsText.setEnabled(true);
             selectSkillButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_remove));
         }
-        else {
+        else { // The skill tree has been removed
             skillTreeText.setText("");
+            skillPointsText.setText("");
             skillPointsText.clearFocus();
             skillPointsText.setEnabled(false);
             selectSkillButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_add));
         }
 
-        if (changeListener != null) {
-            changeListener.onTalismanSkillChanged();
-        }
+        changeListener.onTalismanSkillChanged();
     }
 
     public void setSkillTree(long id) {
@@ -185,11 +185,11 @@ public class ASBTalismanSkillContainer extends LinearLayout {
     }
 
     /** An interface allowing the talisman skill container to communicate with other talisman skill containers around it. */
-    public static interface ChangeListener {
+    public interface ChangeListener {
 
-        public void onTalismanSkillChanged();
+        void onTalismanSkillChanged();
 
-        public void onTalismanSkillPointsChanged();
+        void onTalismanSkillPointsChanged();
 
     }
 }

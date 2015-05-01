@@ -26,7 +26,14 @@
     <string name="alert_button">Close</string>
     <string name="alert_rate">Rate!</string>
     <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="copy">Copy</string>
     <string name="submit">Submit</string>
+
+    <string name="dialog_message_delete">\"%s\" will be deleted.</string>
+    <string name="dialog_message_delete_multi">These %d items will be deleted.</string>
+    <string name="dialog_message_copy">\"%s\" will be duplicated.</string>
+    <string name="dialog_message_copy_multi">These %d items will be duplicated.</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -134,12 +141,17 @@
     <string name="asb_skill_tree_name">Skill</string>
     <string name="asb_skill_points_total">Total</string>
 
+    <string name="asb_dialog_title_delete_set">Delete this set?</string>
+    <string name="asb_dialog_title_delete_set_multi">Delete sets?</string>
+    <string name="asb_dialog_title_copy_set">Copy this set?</string>
+    <string name="asb_dialog_title_copy_set_multi">Copy sets?</string>
+
     <string-array name="talisman_names"> <!--TODO: Get talisman icons for missing colors: YELLOW and GREEN -->
         <item>Pawn,Talisman-White.png</item>
         <item>Bishop,Talisman-Purple.png</item>
-        <item>Knight,Talisman-White.png</item>
+        <item>Knight,Talisman-Yellow.png</item>
         <item>Rook,Talisman-Pink.png</item>
-        <item>Queen,Talisman-White.png</item>
+        <item>Queen,Talisman-Green.png</item>
         <item>King,Talisman-Cyan.png</item>
         <item>Dragon,Talisman-Red.png</item>
         <item>Unknowable,Talisman-Blue.png</item>

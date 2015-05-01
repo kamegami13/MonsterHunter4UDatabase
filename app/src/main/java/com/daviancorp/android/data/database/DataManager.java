@@ -1384,6 +1384,20 @@ public class DataManager {
 		mHelper.queryAddASBSet(name, rank, hunterType);
 	}
 
+	/** Adds a new set that is a copy of the designated set to the list. */
+	public void queryAddASBSet(long setId) {
+		ASBSet set = getASBSet(setId);
+		mHelper.queryAddASBSet(set.getName(), set.getRank(), set.getHunterType());
+	}
+
+	public void queryDeleteASBSet(long setId) {
+		mHelper.queryDeleteASBSet(setId);
+	}
+
+	public void queryUpdateASBSet(long setId, String name, int rank, int hunterType) {
+		mHelper.queryUpdateASBSet(setId, name, rank, hunterType);
+	}
+
 	public void queryPutASBSessionArmor(long asbSetId, long armorId, int pieceIndex) {
 		mHelper.queryAddASBSessionArmor(asbSetId, armorId, pieceIndex);
 	}

@@ -12,7 +12,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.util.Xml;
+import android.util.*;
 
 import com.daviancorp.android.data.classes.ASBSession;
 import com.daviancorp.android.data.classes.Wishlist;
@@ -320,7 +320,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	 * Helper method: used for queries that has no JOINs
 	 */
 	private Cursor wrapHelper(QueryHelper qh) {
-		return getReadableDatabase().query(qh.Distinct, qh.Table, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+		return getReadableDatabase().query(qh.Distinct, qh.Table, qh.Columns, qh.Selection, qh.SelectionArgs, qh
+				.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
 	}
 	
 	/*
@@ -3136,7 +3137,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	public ASBSetCursor queryASBSets() {
 		QueryHelper qh = new QueryHelper();
 		qh.Columns = null;
-		qh.Table = S.TABLE_ARMOR_SET;
+		qh.Table = S.TABLE_ASB_SETS;
 		qh.Selection = null;
 		qh.SelectionArgs = null;
 		qh.GroupBy = null;
@@ -3151,8 +3152,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	public ASBSetCursor queryASBSet(long id) {
 		QueryHelper qh = new QueryHelper();
 		qh.Columns = null;
-		qh.Table = S.TABLE_ARMOR_SET;
-		qh.Selection = "ar." + S.COLUMN_ARMOR_SET_ID + " = ?";
+		qh.Table = S.TABLE_ASB_SETS;
+		qh.Selection = "ar." + S.COLUMN_ASB_SET_ID + " = ?";
 		qh.SelectionArgs = new String[]{ String.valueOf(id) };
 		qh.GroupBy = null;
 		qh.Having = null;
@@ -3166,7 +3167,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	public ASBSessionCursor queryASBSessions() {
 		QueryHelper qh = new QueryHelper();
 		qh.Columns = null;
-		qh.Table = S.TABLE_ARMOR_SET;
+		qh.Table = S.TABLE_ASB_SETS;
 		qh.Selection = null;
 		qh.SelectionArgs = null;
 		qh.GroupBy = null;
@@ -3181,8 +3182,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	public ASBSessionCursor queryASBSession(long id) {
 		QueryHelper qh = new QueryHelper();
 		qh.Columns = null;
-		qh.Table = S.TABLE_ARMOR_SET;
-		qh.Selection = "ar." + S.COLUMN_ARMOR_SET_ID + " = ?";
+		qh.Table = S.TABLE_ASB_SETS;
+		qh.Selection = "ar." + S.COLUMN_ASB_SET_ID + " = ?";
 		qh.SelectionArgs = new String[]{ String.valueOf(id) };
 		qh.GroupBy = null;
 		qh.Having = null;
@@ -3196,16 +3197,35 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	public long queryAddASBSet(String name, int rank, int hunterType) {
 		ContentValues values = new ContentValues();
 
-		values.put(S.COLUMN_ARMOR_SET_NAME, name);
-		values.put(S.COLUMN_ARMOR_SET_RANK, rank);
-		values.put(S.COLUMN_ARMOR_SET_HUNTER_TYPE, hunterType);
+		values.put(S.COLUMN_ASB_SET_NAME, name);
+		values.put(S.COLUMN_ASB_SET_RANK, rank);
+		values.put(S.COLUMN_ASB_SET_HUNTER_TYPE, hunterType);
 		values.put(S.COLUMN_TALISMAN_EXISTS, 0);
 
-		return insertRecord(S.TABLE_ARMOR_SET, values);
+		return insertRecord(S.TABLE_ASB_SETS, values);
+	}
+
+	public long queryUpdateASBSet(long asbSetId, String name, int rank, int hunterType) {
+		String filter = S.COLUMN_ASB_SET_ID + " = "  + asbSetId;
+
+		ContentValues values = new ContentValues();
+
+		values.put(S.COLUMN_ASB_SET_NAME, name);
+		values.put(S.COLUMN_ASB_SET_RANK, rank);
+		values.put(S.COLUMN_ASB_SET_HUNTER_TYPE, hunterType);
+		values.put(S.COLUMN_TALISMAN_EXISTS, 0);
+
+		return updateRecord(S.TABLE_ASB_SETS, filter, values);
+	}
+
+	public boolean queryDeleteASBSet(long setId) {
+		String filter = S.COLUMN_ASB_SET_ID + " = " + setId;
+
+		return deleteRecord(S.TABLE_ASB_SETS, filter, new String[0]);
 	}
 
 	public long queryAddASBSessionArmor(long asbSetId, long pieceId, int pieceIndex) {
-		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
+		String filter = S.COLUMN_ASB_SET_ID + " = "  + asbSetId;
 
 		ContentValues values = new ContentValues();
 
@@ -3227,11 +3247,11 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 				break;
 		}
 
-		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
+		return updateRecord(S.TABLE_ASB_SETS, filter, values);
 	}
 
 	public long queryPutASBSessionDecoration(long asbSetId, long decorationId, int pieceIndex, int decorationIndex) {
-		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
+		String filter = S.COLUMN_ASB_SET_ID + " = "  + asbSetId;
 
 		ContentValues values = new ContentValues();
 
@@ -3304,11 +3324,11 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 				break;
 		}
 
-		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
+		return updateRecord(S.TABLE_ASB_SETS, filter, values);
 	}
 
 	public long queryCreateASBSessionTalisman(long asbSetId, int type, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
-		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
+		String filter = S.COLUMN_ASB_SET_ID + " = "  + asbSetId;
 
 		ContentValues values = new ContentValues();
 
@@ -3328,17 +3348,17 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 			values.putNull(S.COLUMN_TALISMAN_SKILL_2_POINTS);
 		}
 
-		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
+		return updateRecord(S.TABLE_ASB_SETS, filter, values);
 	}
 
 	public long queryRemoveASBSessionTalisman(long asbSetId) {
-		String filter = S.COLUMN_ARMOR_SET_ID + " = "  + asbSetId;
+		String filter = S.COLUMN_ASB_SET_ID + " = "  + asbSetId;
 
 		ContentValues values = new ContentValues();
 
 		values.put(S.COLUMN_TALISMAN_EXISTS, 0);
 
-		return updateRecord(S.TABLE_ARMOR_SET, filter, values);
+		return updateRecord(S.TABLE_ASB_SETS, filter, values);
 	}
 
 	/** Builds an SQL query that gives us all information about the {@code ASBSet} in question. */
@@ -3347,14 +3367,14 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
 		String set = "ar";
 
-		projectionMap.put("_id", set + "." + S.COLUMN_ARMOR_SET_ID + " AS " + "_id");
+		projectionMap.put("_id", set + "." + S.COLUMN_ASB_SET_ID + " AS " + "_id");
 
-		projectionMap.put(S.COLUMN_ARMOR_SET_NAME, set + "." + S.COLUMN_ARMOR_SET_NAME);
-		projectionMap.put(S.COLUMN_ARMOR_SET_RANK, set + "." + S.COLUMN_ARMOR_SET_RANK);
-		projectionMap.put(S.COLUMN_ARMOR_SET_HUNTER_TYPE, set + "." + S.COLUMN_ARMOR_SET_HUNTER_TYPE);
+		projectionMap.put(S.COLUMN_ASB_SET_NAME, set + "." + S.COLUMN_ASB_SET_NAME);
+		projectionMap.put(S.COLUMN_ASB_SET_RANK, set + "." + S.COLUMN_ASB_SET_RANK);
+		projectionMap.put(S.COLUMN_ASB_SET_HUNTER_TYPE, set + "." + S.COLUMN_ASB_SET_HUNTER_TYPE);
 
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-		qb.setTables(S.TABLE_ARMOR_SET + " AS " + set);
+		qb.setTables(S.TABLE_ASB_SETS + " AS " + set);
 		qb.setProjectionMap(projectionMap);
 
 		return qb;
@@ -3366,7 +3386,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
 		String set = "ar";
 
-		projectionMap.put("_id", set + "." + S.COLUMN_ARMOR_SET_ID + " AS " + "_id");
+		projectionMap.put("_id", set + "." + S.COLUMN_ASB_SET_ID + " AS " + "_id");
 
 		projectionMap.put(S.COLUMN_HEAD_ARMOR_ID, set + "." + S.COLUMN_HEAD_ARMOR_ID);
 		projectionMap.put(S.COLUMN_HEAD_DECORATION_1_ID, set + "." + S.COLUMN_HEAD_DECORATION_1_ID);
@@ -3405,7 +3425,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		projectionMap.put(S.COLUMN_TALISMAN_DECORATION_3_ID, set + "." + S.COLUMN_TALISMAN_DECORATION_3_ID);
 		
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-		qb.setTables(S.TABLE_ARMOR_SET + " AS " + set);
+		qb.setTables(S.TABLE_ASB_SETS + " AS " + set);
 		qb.setProjectionMap(projectionMap);
 
 		return qb;

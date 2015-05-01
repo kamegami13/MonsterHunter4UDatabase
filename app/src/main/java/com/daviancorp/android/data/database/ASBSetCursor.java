@@ -13,10 +13,10 @@ public class ASBSetCursor extends CursorWrapper {
     public ASBSet getASBSet() {
         ASBSet asbSet = new ASBSet();
 
-        long id = getLong(getColumnIndex(S.COLUMN_ARMOR_SET_ID));
-        String name = getString(getColumnIndex(S.COLUMN_ARMOR_SET_NAME));
-        int rank = getInt(getColumnIndexOrThrow(S.COLUMN_ARMOR_SET_RANK));
-        int hunterType = getInt(getColumnIndex(S.COLUMN_ARMOR_SET_HUNTER_TYPE));
+        long id = getLong(getColumnIndex(S.COLUMN_ASB_SET_ID));
+        String name = getString(getColumnIndex(S.COLUMN_ASB_SET_NAME));
+        int rank = getInt(getColumnIndexOrThrow(S.COLUMN_ASB_SET_RANK));
+        int hunterType = getInt(getColumnIndex(S.COLUMN_ASB_SET_HUNTER_TYPE));
 
         asbSet.setId(id);
         asbSet.setName(name);

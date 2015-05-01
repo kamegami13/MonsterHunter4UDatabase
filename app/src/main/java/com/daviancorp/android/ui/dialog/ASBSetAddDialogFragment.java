@@ -21,9 +21,7 @@ import com.daviancorp.android.ui.list.ASBSetListActivity;
 import com.daviancorp.android.ui.list.ASBSetListFragment;
 
 public class ASBSetAddDialogFragment extends DialogFragment {
-
-    public static final String EXTRA_CREATE_NEW = "com.daviancorp.android.ui.general.asb_set_add";
-
+    private static final String ARG_ID = "id";
     private static final String ARG_NAME = "name";
     private static final String ARG_RANK = "rank";
     private static final String ARG_HUNTER_TYPE = "hunter_type";
@@ -36,10 +34,11 @@ public class ASBSetAddDialogFragment extends DialogFragment {
         return f;
     }
 
-    public static ASBSetAddDialogFragment newInstance(String name, int rank, int hunterType) {
+    public static ASBSetAddDialogFragment newInstance(long id, String name, int rank, int hunterType) {
         ASBSetAddDialogFragment f = new ASBSetAddDialogFragment();
 
         Bundle args = new Bundle();
+        args.putLong(ARG_ID, id);
         args.putString(ARG_NAME, name);
         args.putInt(ARG_RANK, rank);
         args.putInt(ARG_HUNTER_TYPE, hunterType);
@@ -55,7 +54,9 @@ public class ASBSetAddDialogFragment extends DialogFragment {
             return;
 
         Intent i = new Intent();
-        i.putExtra(EXTRA_CREATE_NEW, isEditing);
+        if (isEditing) {
+            i.putExtra(ASBSetListFragment.EXTRA_ASB_SET_ID, getArguments().getLong(ARG_ID));
+        }
         i.putExtra(ASBSetListFragment.EXTRA_ASB_SET_NAME, name);
         i.putExtra(ASBSetListFragment.EXTRA_ASB_SET_RANK, rank);
         i.putExtra(ASBSetListFragment.EXTRA_ASB_SET_HUNTER_TYPE, hunterType);
@@ -75,10 +76,18 @@ public class ASBSetAddDialogFragment extends DialogFragment {
         ((ArrayAdapter) rankSpinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
         final Spinner hunterTypeSpinner = (Spinner) addView.findViewById(R.id.spinner_hunter_type);
-        hunterTypeSpinner.setAdapter(ArrayAdapter.createFromResource(getActivity(), R.array.hunter_type, R.layout.view_spinner_item));
+        hunterTypeSpinner.setAdapter(ArrayAdapter.createFromResource(getActivity(), R.array.hunter_type, R.layout
+                .view_spinner_item));
         ((ArrayAdapter) hunterTypeSpinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
-        AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
+        if (isEditing) {
+            nameInput.setText(getArguments().getString(ARG_NAME));
+            rankSpinner.setSelection(getArguments().getInt(ARG_RANK));
+            hunterTypeSpinner.setSelection(getArguments().getInt(ARG_HUNTER_TYPE));
+        }
+
+        return new AlertDialog.Builder(getActivity())
+                .setTitle(!isEditing ? R.string.dialog_title_add_asb_set : R.string.dialog_title_edit_asb_set)
                 .setView(addView)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -90,15 +99,7 @@ public class ASBSetAddDialogFragment extends DialogFragment {
 
                         sendResult(Activity.RESULT_OK, name, rankSpinner.getSelectedItemPosition(), hunterTypeSpinner.getSelectedItemPosition());
                     }
-                });
-
-        if (!isEditing) {
-            b.setTitle(R.string.dialog_title_add_asb_set);
-        }
-        else {
-            b.setTitle(R.string.dialog_title_edit_asb_set);
-        }
-
-        return b.create();
+                })
+                .create();
     }
 }

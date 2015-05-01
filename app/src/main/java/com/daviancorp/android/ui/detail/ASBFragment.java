@@ -15,6 +15,7 @@ import com.daviancorp.android.data.classes.SkillTree;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.compound.ASBPieceContainer;
+import com.daviancorp.android.ui.general.*;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 
 /**
@@ -234,6 +235,7 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
 
                 SkillTree skill1Tree = DataManager.get(context).getSkillTree(skill1Id);
                 talisman = new ASBTalisman(skill1Tree, skill1Points, typeIndex);
+                talisman.setName(ResourceUtils.splitStringInArrayByComma(R.array.talisman_names, typeIndex, 0, context) + " Talisman");
                 talisman.setNumSlots(slots);
 
                 if (data.hasExtra(ASBActivity.EXTRA_TALISMAN_SKILL_TREE_2)) {
