@@ -17,6 +17,9 @@ public class WishlistListActivity extends GenericActivity {
         // Enable drawer button instead of back button
         super.enableDrawerIndicator();
 
+        // Tag as top level activity
+        super.setAsTopLevel();
+
 		/*FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 

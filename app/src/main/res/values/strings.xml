@@ -28,6 +28,11 @@
     <string name="cancel">Cancel</string>
     <string name="submit">Submit</string>
 
+    <!-- CONFIRM EXIT -->
+    <string name="confirm_exit">CONFIRM EXIT</string>
+    <string name="exit">EXIT</string>
+    <string name="cancel_exit">CANCEL</string>
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="logo_description">Logo</string>
