@@ -15,9 +15,6 @@ public class ItemListActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.items);
 
-        // Enable drawer button instead of back button
-        super.enableDrawerIndicator();
-
         // Tag as top level activity
         super.setAsTopLevel();
     }

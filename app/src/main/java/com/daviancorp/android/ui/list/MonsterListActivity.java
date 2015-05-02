@@ -29,9 +29,6 @@ public class MonsterListActivity extends GenericTabActivity {
 
         mSlidingTabLayout.setViewPager(viewPager);
 
-        // Enable drawer button instead of back button
-        super.enableDrawerIndicator();
-
         // Tag as top level activity
         super.setAsTopLevel();
     }

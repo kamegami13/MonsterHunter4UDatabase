@@ -16,9 +16,6 @@ public class WeaponSelectionListActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.weapons);
 
-        // Enable drawer button instead of back button
-        super.enableDrawerIndicator();
-
         // Tag as top level activity
         super.setAsTopLevel();
     }

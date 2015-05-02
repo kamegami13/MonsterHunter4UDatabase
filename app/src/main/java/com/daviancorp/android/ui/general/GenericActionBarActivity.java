@@ -98,6 +98,9 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
     // Override and set to true when applicable
     public void setAsTopLevel(){
         isTopLevel = true;
+
+        // Enable drawer button instead of back button
+        enableDrawerIndicator();
     }
 
     // Set up drawer toggle actions
