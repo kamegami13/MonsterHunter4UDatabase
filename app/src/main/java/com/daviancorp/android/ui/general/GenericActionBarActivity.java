@@ -319,8 +319,9 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
         // If top level and drawer is open, prompt for exit
             //Ask the user if they want to quit
             new AlertDialog.Builder(this)
-                    .setTitle(R.string.confirm_exit)
-                    .setPositiveButton(R.string.exit, new DialogInterface.OnClickListener() {
+                    .setTitle(R.string.exit_title)
+                    .setMessage(R.string.exit_dialog)
+                    .setPositiveButton(R.string.exit_confirm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Stop the activity
@@ -328,7 +329,7 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                         }
 
                     })
-                    .setNegativeButton(R.string.cancel_exit, null)
+                    .setNegativeButton(R.string.exit_cancel, null)
                     .show();
         }
         else{
