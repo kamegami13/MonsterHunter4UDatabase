@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:f="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Common header -->
+        <include layout="@layout/monster_detail_header"
+            android:id="@+id/monster_header" />
+
+        <!-- Summary Section -->
+        <LinearLayout
+            android:orientation="horizontal"
+            style="@style/list_item"
+            android:layout_height="48dp"
+            android:background="@color/subheading_color">
+
+            <TextView
+                android:id="@+id/quick_summary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Monster Summary"
+                style="@style/text_medium"/>
+        </LinearLayout>
+
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <!-- Weaknesses -->
+        <LinearLayout
+            android:id="@+id/weaknesses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                style="@style/text_medium"
+                android:text="Weaknesses"/>
+
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/weakness_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <!-- Weaknesses Mod -->
+        <LinearLayout
+            android:id="@+id/weaknesses_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:id="@+id/weakness_mod_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                style="@style/text_medium"
+                android:text="Weaknesses Mod"/>
+
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/weakness_mod_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/weakness_mod_div"
+            android:background="@color/divider_color"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <!-- Traps -->
+        <RelativeLayout
+            android:id="@+id/trap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/text_medium"
+                android:text="Traps"/>
+
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/trap_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:gravity="right"/>
+        </RelativeLayout>
+
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <!-- Traps Mod -->
+        <LinearLayout
+            android:id="@+id/trap_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:id="@+id/trap_mod_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                style="@style/text_medium"
+                android:text="Traps Mod"/>
+
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/trap_mod_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/trap_mod_div"
+            android:background="@color/divider_color"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <!-- Bombs Mod -->
+        <RelativeLayout
+            android:id="@+id/bombs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/text_medium"
+                android:text="Bombs"/>
+
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/bomb_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:gravity="right"/>
+        </RelativeLayout>
+
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <!-- Bombs Mod -->
+        <LinearLayout
+            android:id="@+id/bombs_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:id="@+id/bomb_mod_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                style="@style/text_medium"
+                android:text="Bombs Mod"/>
+
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/bombs_mod_data"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                f:layoutDirection="ltr"
+                android:orientation="horizontal"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/bombs_mod_div"
+            android:background="@color/divider_color"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <!-- AILMENTS -->
+        <RelativeLayout
+            android:id="@+id/ailments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/list_item"
+            android:minHeight="48dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/text_medium"
+                android:id="@+id/ailments_label"
+                android:text="Ailments"/>
+
+            <LinearLayout
+                android:id="@+id/ailments_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/ailments_label">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blastblight"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Severe Dragonblight"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dragon Wind Pressure"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <!-- Key Section -->
+        <LinearLayout
+            android:orientation="horizontal"
+            style="@style/list_item"
+            android:layout_height="48dp"
+            android:visibility="gone"
+            android:background="@color/subheading_color">
+
+            <TextView
+                android:id="@+id/notes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="gone"
+                android:text="Key"
+                style="@style/text_medium"/>
+        </LinearLayout>
+
+        <View
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="1dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
