@@ -347,4 +347,11 @@ public class S {
 	static final String COLUMN_WISHLIST_COMPONENT_COMPONENT_ID = "component_id";
 	static final String COLUMN_WISHLIST_COMPONENT_QUANTITY = "quantity";
 	static final String COLUMN_WISHLIST_COMPONENT_NOTES = "notes";
+
+    // Wyporium Trades
+    static final String TABLE_WYPORIUM_TRADE = "wyporium";
+    static final String COLUMN_WYPORIUM_TRADE_ID = "_id";
+    static final String COLUMN_WYPORIUM_TRADE_ITEM_IN_ID = "item_in_id";
+    static final String COLUMN_WYPORIUM_TRADE_ITEM_OUT_ID = "item_out_id";
+    static final String COLUMN_WYPORIUM_TRADE_UNLOCK_QUEST_ID = "unlock_quest_id";
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/list_item"
+    android:layout_width="match_parent"
+    android:id="@+id/listitem">
+
+    <ImageView
+        android:id="@+id/wt_item_out_image"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_height="20dp"
+        android:layout_width="20dp"/>
+
+    <TextView
+        style="@style/text_small"
+        android:text="Item Out"
+        android:id="@+id/wt_item_out_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/wt_item_out_image"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        style="@style/text_medium"
+        android:id="@+id/wt_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="➝"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:id="@+id/wt_item_in_image"
+        android:layout_centerVertical="true"
+        android:layout_height="20dp"
+        android:layout_width="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/wt_item_in_name"
+        style="@style/text_small"
+        android:textStyle="bold"
+        android:text="Item In"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_vertical|right"
+        android:layout_toLeftOf="@+id/wt_item_in_image"
+        android:layout_centerVertical="true" />
+
+</RelativeLayout>

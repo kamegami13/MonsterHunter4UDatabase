@@ -32,7 +32,9 @@ import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
+import com.daviancorp.android.data.classes.WyporiumTrade;
 import com.daviancorp.android.ui.general.WeaponListEntry;
+
 
 /*
  * Singleton class
@@ -1369,4 +1371,22 @@ public class DataManager {
 		
 		wdc.close();
 	}
+
+    /**************************** WYPORIUM TRADE DATA QUERIES *************************************/
+    	/* Get a Cursor that has a list of all wyporium trades */
+    public WyporiumTradeCursor queryWyporiumTrades() {
+        return mHelper.queryWyporiumTrades();
+    }
+
+    /* Get a specific wyporium trade */
+    public WyporiumTrade getWyporiumTrade(long id) {
+        WyporiumTrade wyporiumTrade = null;
+        WyporiumTradeCursor cursor = mHelper.queryWyporiumTrades(id);
+        cursor.moveToFirst();
+
+        if (!cursor.isAfterLast())
+            wyporiumTrade = cursor.getWyporiumTrade();
+        cursor.close();
+        return wyporiumTrade;
+    }
 }

@@ -41,6 +41,7 @@ import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
 import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
 import com.daviancorp.android.ui.list.WishlistListActivity;
+import com.daviancorp.android.ui.list.WyporiumTradeListActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 import java.io.IOException;
@@ -176,6 +177,9 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                 break;
             case 9: // Wishlists
                 intent = new Intent(GenericActionBarActivity.this, WishlistListActivity.class);
+                break;
+            case 10: // Wyporium Trade
+                intent = new Intent(GenericActionBarActivity.this, WyporiumTradeListActivity.class);
                 break;
         }
         final Intent finalIntent = intent;

@@ -193,6 +193,14 @@
               android:label="@string/app_name"
               android:screenOrientation="portrait"
             android:launchMode="singleTask"/>
+
+        <!-- WYPORIUM TRADE SECTION -->
+        <activity
+            android:name="com.daviancorp.android.ui.list.WyporiumTradeListActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+
     </application>
 
 </manifest>

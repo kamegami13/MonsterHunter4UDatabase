@@ -27,6 +27,7 @@ import com.daviancorp.android.ui.list.QuestListActivity;
 import com.daviancorp.android.ui.list.SkillTreeListActivity;
 import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
 import com.daviancorp.android.ui.list.WishlistListActivity;
+import com.daviancorp.android.ui.list.WyporiumTradeListActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -34,7 +35,8 @@ public class HomeFragment extends Fragment {
 
     // Options to navigate
     private TextView mMonsters, mWeapons, mArmors, mQuests, mItems, mCombining,
-            mDecorations, mSkillTrees, mLocations, mHuntingFleet, mArenaQuests, mWishlists;
+            mDecorations, mSkillTrees, mLocations, mHuntingFleet, mArenaQuests, mWishlists,
+            mWyporiumTrade;
 
     private ProgressDialog progress;	// Progress spinner upon creating/updating database
 
@@ -63,6 +65,7 @@ public class HomeFragment extends Fragment {
         mLocations = (TextView) v.findViewById(R.id.locations);
         //mArenaQuests = (TextView) v.findViewById(R.id.arena_quests); // Disabled
         mWishlists = (TextView) v.findViewById(R.id.wishlists);
+        mWyporiumTrade = (TextView) v.findViewById(R.id.wyporiumtrade);
 
         mMonsters.setOnClickListener(new OnClickListener() {
             @Override
@@ -136,6 +139,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        mWyporiumTrade.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WyporiumTradeListActivity.class);
+                startActivity(intent);
+            }
+        });
+
 //		mArenaQuests.setOnClickListener(new OnClickListener() {
 //			@Override
 //			public void onClick(View v) {
@@ -151,6 +162,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
 
         return v;
     }
