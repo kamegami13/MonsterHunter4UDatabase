@@ -30,12 +30,18 @@ public class ItemTradeFragment extends Fragment {
 
     private WyporiumTrade mTrade;
 
+    private View mWyporiumTradeItemOutView;
     private TextView mWyporiumTradeItemOutTextView;
     private ImageView mWyporiumTradeOutIconImageView;
+
+    private View mWyporiumTradeItemInView;
+    private TextView mWyporiumTradeItemInTextView;
+    private ImageView mWyporiumTradeInIconImageView;
+
     private TextView mWyporiumTradeQuestNameTextView;
-    private View mWyporiumTradeItemOutView;
     private TextView mWyporiumTradeUnlockTextView;
     private TextView mWyporiumTradeRequiredTextView;
+    private TextView mWyporiumTradeReceivedTextView;
 
     public static ItemTradeFragment newInstance(long itemInId) {
         Bundle args = new Bundle();
@@ -69,19 +75,33 @@ public class ItemTradeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_wyporiumtrade_detail,
                 container, false);
 
+        mWyporiumTradeItemOutView = view.findViewById(R.id.detail_wt_out_item);
         mWyporiumTradeItemOutTextView = (TextView) view.findViewById(R.id.detail_wt_out_label);
         mWyporiumTradeOutIconImageView = (ImageView) view.findViewById(R.id.detail_wt_out_image);
+
+        mWyporiumTradeItemInView = view.findViewById(R.id.detail_wt_in_item);
+        mWyporiumTradeItemInTextView = (TextView) view.findViewById(R.id.detail_wt_in_label);
+        mWyporiumTradeInIconImageView = (ImageView) view.findViewById(R.id.detail_wt_in_image);
+
         mWyporiumTradeQuestNameTextView = (TextView) view.findViewById(R.id.detail_wt_quest);
-        mWyporiumTradeItemOutView = view.findViewById(R.id.detail_wt_out_item);
-        mWyporiumTradeUnlockTextView = (TextView) view.findViewById(R.id.detail_wt_required);
-        mWyporiumTradeRequiredTextView = (TextView) view.findViewById(R.id.detail_wt_unlock);
+        mWyporiumTradeRequiredTextView = (TextView) view.findViewById(R.id.detail_wt_required);
+        mWyporiumTradeReceivedTextView = (TextView) view.findViewById(R.id.detail_wt_received);
+        mWyporiumTradeUnlockTextView = (TextView) view.findViewById(R.id.detail_wt_unlock);
 
         mWyporiumTradeItemOutView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // The id argument will be the Monster ID; CursorAdapter gives us this
-                // for free
+                Intent i = new Intent(getActivity(), ItemDetailActivity.class);
+                i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, (long) v.getTag());
+                startActivity(i);
+            }
+        });
+
+        mWyporiumTradeItemInView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
                 Intent i = new Intent(getActivity(), ItemDetailActivity.class);
                 i.putExtra(ItemDetailActivity.EXTRA_ITEM_ID, (long) v.getTag());
                 startActivity(i);
@@ -92,8 +112,6 @@ public class ItemTradeFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                // The id argument will be the Monster ID; CursorAdapter gives us this
-                // for free
                 Intent i = new Intent(getActivity(), QuestDetailActivity.class);
                 i.putExtra(QuestDetailActivity.EXTRA_QUEST_ID, (long) v.getTag());
                 startActivity(i);
@@ -105,12 +123,18 @@ public class ItemTradeFragment extends Fragment {
 
     private void updateUI() throws IOException {
         if(mTrade == null) {
+            mWyporiumTradeItemOutView.setVisibility(View.GONE);
             mWyporiumTradeItemOutTextView.setVisibility(View.GONE);
             mWyporiumTradeOutIconImageView.setVisibility(View.GONE);
+
+            mWyporiumTradeItemInView.setVisibility(View.GONE);
+            mWyporiumTradeItemInTextView.setVisibility(View.GONE);
+            mWyporiumTradeInIconImageView.setVisibility(View.GONE);
+
             mWyporiumTradeQuestNameTextView.setVisibility(View.GONE);
-            mWyporiumTradeItemOutView.setVisibility(View.GONE);
             mWyporiumTradeUnlockTextView.setVisibility(View.GONE);
             mWyporiumTradeRequiredTextView.setVisibility(View.GONE);
+            mWyporiumTradeReceivedTextView.setVisibility(View.GONE);
             return;
         }
 
@@ -122,6 +146,8 @@ public class ItemTradeFragment extends Fragment {
 
         mWyporiumTradeItemOutTextView.setText(cellOutText);
         mWyporiumTradeItemOutView.setTag(mTrade.getItemOutId());
+        mWyporiumTradeItemInTextView.setText(cellInText);
+        mWyporiumTradeItemInView.setTag(mTrade.getItemInId());
         mWyporiumTradeQuestNameTextView.setText(cellQuestText);
         mWyporiumTradeQuestNameTextView.setTag(mTrade.getUnlockQuestId());
 
@@ -135,6 +161,18 @@ public class ItemTradeFragment extends Fragment {
             Bitmap bitmap_out = BitmapFactory.decodeStream(open);
             // Assign the bitmap to an ImageView in this layout
             mWyporiumTradeOutIconImageView.setImageBitmap(bitmap_out);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (open != null) {
+                open.close();
+            }
+        }
+        try {
+            open = manager.open(cellImageIn);
+            Bitmap bitmap_in = BitmapFactory.decodeStream(open);
+            // Assign the bitmap to an ImageView in this layout
+            mWyporiumTradeInIconImageView.setImageBitmap(bitmap_in);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
