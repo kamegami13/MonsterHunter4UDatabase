@@ -14,8 +14,8 @@ public class SkillTreeListActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.skill_trees);
 
-        // Enable drawer button instead of back button
-        super.enableDrawerIndicator();
+        // Tag as top level activity
+        super.setAsTopLevel();
     }
 
     @Override
