@@ -14,8 +14,8 @@ public class CombiningListActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.combining);
 
-        // Enable drawer button instead of back button
-        super.enableDrawerIndicator();
+        // Tag as top level activity
+        super.setAsTopLevel();
     }
 
     @Override
