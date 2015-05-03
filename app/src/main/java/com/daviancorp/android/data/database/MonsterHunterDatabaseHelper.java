@@ -3198,8 +3198,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         QueryHelper qh = new QueryHelper();
         qh.Columns = null;
         qh.Table = S.TABLE_WYPORIUM_TRADE;
-        qh.Selection = "wt.item_in_id" + " = ?";
-        qh.SelectionArgs = new String[]{ String.valueOf(id) };
+        qh.Selection = "wt.item_in_id = ? OR wt.item_out_id = ?";
+        qh.SelectionArgs = new String[]{ String.valueOf(id), String.valueOf(id) };
         qh.GroupBy = null;
         qh.Having = null;
         qh.OrderBy = null;

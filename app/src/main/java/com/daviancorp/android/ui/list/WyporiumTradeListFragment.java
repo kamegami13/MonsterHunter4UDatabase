@@ -124,8 +124,14 @@ public class WyporiumTradeListFragment extends ListFragment implements
             itemInNameTextView.setText(itemInNameText);
             itemOutNameTextView.setText(itemOutNameText);
 
-            itemLayout.setTag(wyporiumTrade.getId());
-            itemLayout.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemInId()));
+            itemInImageView.setTag(wyporiumTrade.getId());
+            itemInImageView.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemInId()));
+            itemInNameTextView.setTag(wyporiumTrade.getId());
+            itemInNameTextView.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemInId()));
+            itemOutImageView.setTag(wyporiumTrade.getId());
+            itemOutImageView.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemOutId()));
+            itemOutNameTextView.setTag(wyporiumTrade.getId());
+            itemOutNameTextView.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemOutId()));
         }
     }
 }

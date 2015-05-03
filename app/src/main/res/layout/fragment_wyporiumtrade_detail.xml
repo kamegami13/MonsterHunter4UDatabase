@@ -40,6 +40,41 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/detail_wt_received"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Received Item:"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"
+        android:padding="10dp" />
+
+    <RelativeLayout
+        android:id="@+id/detail_wt_in_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+
+        <ImageView
+            android:id="@+id/detail_wt_in_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/detail_wt_in_label"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignTop="@+id/detail_wt_in_image"
+            android:layout_alignBottom="@+id/detail_wt_in_image"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/detail_wt_in_image"
+            />
+    </RelativeLayout>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/detail_wt_unlock"

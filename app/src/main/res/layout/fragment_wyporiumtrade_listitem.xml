@@ -3,51 +3,66 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/list_item"
     android:layout_width="match_parent"
-    android:id="@+id/listitem">
+    android:id="@+id/listitem"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/wt_item_out_image"
         android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
-        android:layout_height="20dp"
-        android:layout_width="20dp"/>
+        android:layout_height="25dp"
+        android:layout_width="25dp"/>
 
-    <TextView
-        style="@style/text_small"
-        android:text="Item Out"
-        android:id="@+id/wt_item_out_name"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/wt_item_out_image"
-        android:layout_centerVertical="true" />
+        android:layout_toLeftOf="@+id/wt_item_in_image"
+        android:padding="5dp">
+        <TextView
+            android:id="@+id/wt_item_out_name"
+            style="@style/text_small"
+            android:text="Very Very Long Name for an Item Out, Even Longer"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="0.45"
+            android:layout_centerVertical="true"
+            android:scrollHorizontally="false"
+            android:gravity="center_vertical|left"
+            android:padding="5dp"/>
 
-    <TextView
-        style="@style/text_medium"
-        android:id="@+id/wt_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="➝"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        <TextView
+            android:id="@+id/wt_arrow"
+            style="@style/text_medium"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="match_parent"
+            android:text="➝"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+
+        <TextView
+            android:id="@+id/wt_item_in_name"
+            style="@style/text_small"
+            android:textStyle="bold"
+            android:text="Also very long Item In"
+            android:layout_width="0dp"
+            android:layout_weight="0.45"
+            android:layout_height="match_parent"
+            android:scrollHorizontally="false"
+            android:gravity="center_vertical|right"
+            android:padding="5dp" />
+
+
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/wt_item_in_image"
         android:layout_centerVertical="true"
-        android:layout_height="20dp"
-        android:layout_width="20dp"
-        android:layout_marginLeft="10dp"
+        android:layout_height="25dp"
+        android:layout_width="25dp"
         android:layout_alignParentRight="true" />
-
-    <TextView
-        android:id="@+id/wt_item_in_name"
-        style="@style/text_small"
-        android:textStyle="bold"
-        android:text="Item In"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center_vertical|right"
-        android:layout_toLeftOf="@+id/wt_item_in_image"
-        android:layout_centerVertical="true" />
 
 </RelativeLayout>
