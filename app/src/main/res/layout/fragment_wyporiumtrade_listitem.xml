@@ -2,9 +2,10 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listitem"
     style="@style/list_item"
     android:layout_width="match_parent"
-    android:id="@+id/listitem">
+    android:clickable="false">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -26,26 +27,26 @@
             <TextView
                 android:id="@+id/wt_item_out_name"
                 style="@style/text_small"
-                tools:text="Very Very Long Name for an Item Out, Even Longer"
-                android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="0.50"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
+                android:layout_weight="0.50"
+                android:gravity="center_vertical|left"
                 android:scrollHorizontally="false"
-                android:gravity="center_vertical|left" />
+                tools:text="Very Very Long Name for an Item Out, Even Longer" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/wt_arrow"
             style="@style/text_small"
             android:layout_width="0dp"
-            android:layout_weight="0.1"
             android:layout_height="match_parent"
-            android:text="➝"
-            android:gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:padding="5dp" />
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="➝" />
 
         <LinearLayout
             android:id="@+id/btn_in"
@@ -62,12 +63,12 @@
             <TextView
                 android:id="@+id/wt_item_in_name"
                 style="@style/text_small"
-                tools:text="Also very long Item In"
                 android:layout_width="0dp"
-                android:layout_weight="0.49"
                 android:layout_height="match_parent"
+                android:layout_weight="0.49"
+                android:gravity="center_vertical|left"
                 android:scrollHorizontally="false"
-                android:gravity="center_vertical|left" />
+                tools:text="Also very long Item In" />
 
         </LinearLayout>
 
