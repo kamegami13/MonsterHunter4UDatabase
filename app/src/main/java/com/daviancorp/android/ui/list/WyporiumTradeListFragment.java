@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -98,6 +99,10 @@ public class WyporiumTradeListFragment extends ListFragment implements
             ImageView itemOutImageView = (ImageView) view.findViewById(R.id.wt_item_out_image);
             TextView itemOutNameTextView = (TextView) view.findViewById(R.id.wt_item_out_name);
 
+            // Clickable layouts
+            LinearLayout btnItemIn = (LinearLayout) view.findViewById(R.id.btn_in);
+            LinearLayout btnItemOut = (LinearLayout) view.findViewById(R.id.btn_out);
+
             String itemInNameText = wyporiumTrade.getItemInName();
             String itemOutNameText = wyporiumTrade.getItemOutName();
 
@@ -121,17 +126,16 @@ public class WyporiumTradeListFragment extends ListFragment implements
             }
             itemOutImageView.setImageDrawable(i);
 
+            // Set text
             itemInNameTextView.setText(itemInNameText);
             itemOutNameTextView.setText(itemOutNameText);
 
-            itemInImageView.setTag(wyporiumTrade.getId());
-            itemInImageView.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemInId()));
-            itemInNameTextView.setTag(wyporiumTrade.getId());
-            itemInNameTextView.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemInId()));
-            itemOutImageView.setTag(wyporiumTrade.getId());
-            itemOutImageView.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemOutId()));
-            itemOutNameTextView.setTag(wyporiumTrade.getId());
-            itemOutNameTextView.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemOutId()));
+            // Set up clickthroughs
+            btnItemIn.setTag(wyporiumTrade.getId());
+            btnItemIn.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemInId()));
+            btnItemOut.setTag(wyporiumTrade.getId());
+            btnItemOut.setOnClickListener(new WyporiumTradeClickListener(context, wyporiumTrade.getItemOutId()));
+
         }
     }
 }
