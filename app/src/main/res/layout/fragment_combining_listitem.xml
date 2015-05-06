@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    style="@style/list_item"
-    android:gravity="center_vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/listitem"
+    style="@style/list_item"
     android:layout_height="wrap_content"
-    android:paddingRight="0dp"
-    android:paddingLeft="0dp">
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:clickable="false"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp">
 
     <RelativeLayout
-        style="@style/list_sub_item"
         android:id="@+id/item3"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:background="@drawable/clicked_states_white"
+        style="@style/list_sub_item"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
-        android:layout_marginLeft="8dp">
+        android:background="@drawable/clicked_states_white"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
 
         <TextView
             android:id="@+id/percentage"
@@ -23,110 +25,104 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
             android:layout_alignParentRight="true"
+            android:layout_alignParentTop="false"
+            android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            android:text="95%"
-            android:layout_centerVertical="true" />
+            android:text="95%" />
 
         <TextView
             android:id="@+id/amt"
             style="@style/text_small"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:gravity="center"
-            android:layout_toLeftOf="@+id/percentage"
+            android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:text="2"
-            android:layout_centerVertical="true" />
+            android:layout_toLeftOf="@+id/percentage"
+            android:gravity="center"
+            android:text="2" />
 
         <ImageView
             android:id="@+id/item_img3"
             style="@style/main_image"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
 
         <TextView
             android:id="@+id/item_text3"
             style="@style/text_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:text="Potion"
-            android:gravity="center_vertical"
             android:layout_toRightOf="@+id/item_img3"
-            android:layout_centerVertical="true" />
+            android:gravity="center_vertical"
+            android:text="Potion" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        android:layout_alignParentStart="false"
-        android:layout_below="@+id/item3"
-        android:layout_alignParentRight="false"
-        android:layout_marginBottom="8dp"
-        android:paddingRight="8dp"
-        android:paddingLeft="8dp">
+    <LinearLayout
+        style="@style/list_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item3"
+        android:clickable="false"
+        android:gravity="right"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="26dp"
+        <LinearLayout
             android:id="@+id/item1"
-            android:background="@drawable/clicked_states_white"></RelativeLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/clicked_states_white"
+            android:gravity="right"
+            android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="26dp"
+            <TextView
+                android:id="@+id/item_text1"
+                style="@style/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_toLeftOf="@+id/item_img2"
+                android:gravity="center_vertical"
+                tools:text="Dragonbone Artifact" />
+
+            <ImageView
+                android:id="@+id/item_img1"
+                style="@style/small_image"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="0dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/item2"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/clicked_states_white"></RelativeLayout>
-
-        <ImageView
-            android:id="@+id/item_img2"
-            style="@style/small_image"
-            android:layout_gravity="center"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="0dp"
-            android:layout_marginLeft="16dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentBottom="true" />
-
-        <TextView
-            android:id="@+id/item_text2"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            style="@style/text_small"
-            android:layout_toLeftOf="@+id/item_img2"
-            android:text="Dragonbone Artifact"
-            android:layout_centerVertical="true"
-            android:layout_alignParentTop="false"
-            android:gravity="center_vertical"
-            android:layout_alignParentBottom="true" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/clicked_states_white"
+            android:gravity="right"
+            android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/item_img1"
-            style="@style/small_image"
-            android:layout_gravity="center"
-            android:layout_marginRight="0dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="false"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="16dp" />
+            <TextView
+                android:id="@+id/item_text2"
+                style="@style/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                tools:text="Dragonbone Artifact" />
 
-        <TextView
-            android:id="@+id/item_text1"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            style="@style/text_small"
-            android:text="Dragonbone Artifact"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/item_img1" />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/item_img2"
+                style="@style/small_image"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="0dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
