@@ -5,14 +5,14 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="0dp"
-        android:layout_height="40dip"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:layout_gravity="center"
         android:gravity="center">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:id="@+id/statusImage"
             android:layout_gravity="center" />
 

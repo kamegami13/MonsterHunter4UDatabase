@@ -12,9 +12,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.util.*;
+import android.util.Xml;
 
-import com.daviancorp.android.data.classes.ASBSession;
 import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
@@ -320,8 +319,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	 * Helper method: used for queries that has no JOINs
 	 */
 	private Cursor wrapHelper(QueryHelper qh) {
-		return getReadableDatabase().query(qh.Distinct, qh.Table, qh.Columns, qh.Selection, qh.SelectionArgs, qh
-				.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+		return getReadableDatabase().query(qh.Distinct, qh.Table, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
 	}
 	
 	/*
@@ -1759,7 +1757,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         qh.OrderBy = null;
         qh.Limit = null;
 
-        return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct), qh));
+        return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct),qh));
     }
 
     /**
@@ -1781,7 +1779,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         qh.OrderBy = "m" + S.COLUMN_MONSTERS_SORT_NAME + " ASC";
         qh.Limit = null;
 
-        return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct), qh));
+        return new MonsterHabitatCursor(wrapJoinHelper(builderHabitat(qh.Distinct),qh));
     }
 
     /*
@@ -3130,6 +3128,82 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		QB.setProjectionMap(projectionMap);
 		return QB;
 	}
+
+    /****************************** WYPORIUM TRADE QUERIES ****************************************/
+
+	/*
+	 * Get all trades
+	 */
+    public WyporiumTradeCursor queryWyporiumTrades() {
+
+        QueryHelper qh = new QueryHelper();
+        qh.Columns = null;
+        qh.Table = S.TABLE_WYPORIUM_TRADE;
+        qh.Selection = null;
+        qh.SelectionArgs = null;
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new WyporiumTradeCursor(wrapJoinHelper(builderWyporiumTrade(), qh));
+    }
+
+    /*
+	 * Get a specific wyporium trade
+	 */
+    public WyporiumTradeCursor queryWyporiumTrades(long id) {
+
+        QueryHelper qh = new QueryHelper();
+        qh.Columns = null;
+        qh.Table = S.TABLE_WYPORIUM_TRADE;
+        qh.Selection = "wt.item_in_id = ? OR wt.item_out_id = ?";
+        qh.SelectionArgs = new String[]{ String.valueOf(id), String.valueOf(id) };
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = "1";
+
+        return new WyporiumTradeCursor(wrapJoinHelper(builderWyporiumTrade(), qh));
+    }
+
+    /*
+     * Helper method to query for wyporium trades
+     */
+    private SQLiteQueryBuilder builderWyporiumTrade() {
+//      SELECT wt._id AS trade_id, wt.item_in_id AS in_id, wt.item_out_id AS out_id, wt.unlock_quest_id AS q_id,
+//      i1.name AS in_name, i1.icon_name AS in_icon_name, i2.name AS out_name, i2.icon_name AS out_icon_name,
+//      q.name AS q_name
+//      FROM wyporium AS wt LEFT OUTER JOIN items AS i1 ON wt.item_in_id = i1._id
+//      LEFT OUTER JOIN items AS i2 ON wt.item_out_id = i2._id
+//      LEFT OUTER JOIN quests AS q ON wt.unlock_quest_id = q._id;
+
+        HashMap<String, String> projectionMap = new HashMap<String, String>();
+        projectionMap.put("trade_id", "wt." + S.COLUMN_WYPORIUM_TRADE_ID + " AS " + "trade_id");
+        projectionMap.put("in_id", "wt." + S.COLUMN_WYPORIUM_TRADE_ITEM_IN_ID + " AS " + "in_id");
+        projectionMap.put("out_id", "wt." + S.COLUMN_WYPORIUM_TRADE_ITEM_OUT_ID + " AS " + "out_id");
+        projectionMap.put("q_id", "wt." + S.COLUMN_WYPORIUM_TRADE_UNLOCK_QUEST_ID + " AS " + "q_id");
+        projectionMap.put(S.COLUMN_ITEMS_ID, "i1." + S.COLUMN_ITEMS_ID);
+        projectionMap.put("in_name", "i1." + S.COLUMN_ITEMS_NAME + " AS " + "in_name");
+        projectionMap.put("in_icon_name", "i1." + S.COLUMN_ITEMS_ICON_NAME + " AS " + "in_icon_name");
+        projectionMap.put(S.COLUMN_ITEMS_ID, "i2." + S.COLUMN_ITEMS_ID);
+        projectionMap.put("out_name", "i2." + S.COLUMN_ITEMS_NAME + " AS " + "out_name");
+        projectionMap.put("out_icon_name", "i2." + S.COLUMN_ITEMS_ICON_NAME + " AS " + "out_icon_name");
+        projectionMap.put(S.COLUMN_QUESTS_ID, "q." + S.COLUMN_QUESTS_ID);
+        projectionMap.put("q_name", "q." + S.COLUMN_QUESTS_NAME + " AS " + "q_name");
+
+        //Create new querybuilder
+        SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
+
+        QB.setTables(S.TABLE_WYPORIUM_TRADE + " AS wt" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i1" + " ON " + "wt." +
+                S.COLUMN_WYPORIUM_TRADE_ITEM_IN_ID + " = " + "i1." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_ITEMS +
+                " AS i2 " + " ON " + "wt." + S.COLUMN_WYPORIUM_TRADE_ITEM_OUT_ID + " = " + "i2." + S.COLUMN_ITEMS_ID +
+                " LEFT OUTER JOIN " + S.TABLE_QUESTS + " AS q " + " ON " + "wt." + S.COLUMN_WYPORIUM_TRADE_UNLOCK_QUEST_ID + " = " +
+                "q." + S.COLUMN_QUESTS_ID );
+
+        QB.setProjectionMap(projectionMap);
+        return QB;
+    }
 
 	/********************************* ARMOR SET BUILDER QUERIES ******************************************/
 

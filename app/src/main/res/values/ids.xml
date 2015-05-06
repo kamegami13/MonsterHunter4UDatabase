@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ui.detail -->
-	<item name="asb_set_activity" type="id" />
 	<item name="arena_quest_detail_fragment" type="id"/>
 	<item name="arena_quest_monster_fragment" type="id"/>
 	<item name="arena_quest_reward_fragment" type="id"/>
@@ -62,6 +61,7 @@
 	<item name="skill_tree_list_fragment" type="id"/>
 	<item name="weapon_list_fragment" type="id"/>
 	<item name="wishlist_list_fragment" type="id"/>
-    <item name="asb_skills_list_fragment" type="id"/>
+	<item name="wyporium_trade_list_fragment" type="id"/>
+	<item name="asb_skills_list_fragment" type="id"/>
 	<item name="asb_set_list_fragment" type="id"/>
 </resources>

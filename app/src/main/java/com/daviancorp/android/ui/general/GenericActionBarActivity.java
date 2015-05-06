@@ -32,6 +32,17 @@ import android.widget.TextView;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 import com.daviancorp.android.ui.list.*;
+import com.daviancorp.android.ui.list.ArmorListActivity;
+import com.daviancorp.android.ui.list.CombiningListActivity;
+import com.daviancorp.android.ui.list.DecorationListActivity;
+import com.daviancorp.android.ui.list.ItemListActivity;
+import com.daviancorp.android.ui.list.LocationListActivity;
+import com.daviancorp.android.ui.list.MonsterListActivity;
+import com.daviancorp.android.ui.list.QuestListActivity;
+import com.daviancorp.android.ui.list.SkillTreeListActivity;
+import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
+import com.daviancorp.android.ui.list.WishlistListActivity;
+import com.daviancorp.android.ui.list.WyporiumTradeListActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 import java.io.IOException;
@@ -52,6 +63,9 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
     public ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
     private Handler mHandler;
+
+    // is this activity top of the hierarchy?
+    private boolean isTopLevel;
 
     // start drawer in the closed position unless otherwise specified
     private static boolean drawerOpened = false;
@@ -74,6 +88,8 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        isTopLevel = false;
 
         // Handler to implement drawer delay and runnable
         mHandler = new Handler();
@@ -168,8 +184,12 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
             case 9: // Wishlists
                 intent = new Intent(GenericActionBarActivity.this, WishlistListActivity.class);
                 break;
-            case 10:
+            case 10: // Wyporium Trade
+                intent = new Intent(GenericActionBarActivity.this, WyporiumTradeListActivity.class);
+                break;
+            case 11:
                 intent = new Intent(GenericActionBarActivity.this, ASBSetListActivity.class);
+                break;
         }
         final Intent finalIntent = intent;
 
@@ -192,10 +212,6 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
 
     public void enableDrawerIndicator() {
         mDrawerToggle.setDrawerIndicatorEnabled(true);
-    }
-
-    public void disableDrawerIndicator() {
-        mDrawerToggle.setDrawerIndicatorEnabled(false);
     }
 
     // Sync button animation sync with drawer state
