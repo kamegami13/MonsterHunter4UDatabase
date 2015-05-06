@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -338,7 +339,13 @@ public class ArmorExpandableListFragment extends Fragment {
             long armorId = ((Armor) getChild(groupPosition, childPosition)).getId();
 
             root.setTag(armorId);
-            root.setOnClickListener(new ArmorClickListener(context, armorId, getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false), getActivity()));
+
+            if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+                root.setOnClickListener(new ArmorClickListener(context, armorId, getActivity(), ASBActivity.REQUEST_CODE_ADD_PIECE));
+            }
+            else {
+                root.setOnClickListener(new ArmorClickListener(context, armorId));
+            }
 
             return v;
 

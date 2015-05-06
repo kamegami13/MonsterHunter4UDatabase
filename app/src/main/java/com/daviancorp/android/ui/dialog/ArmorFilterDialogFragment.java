@@ -83,7 +83,7 @@ public class ArmorFilterDialogFragment extends DialogFragment {
         ((ArrayAdapter) slotsSpinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
         final Spinner slotsSpecSpinner = (Spinner) addView.findViewById(R.id.filter_spinner_slots_spec);
-        slotsSpecSpinner.setAdapter(ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.filter_restrictions, R.layout.view_spinner_item));
+        slotsSpecSpinner.setAdapter(ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.filter_restriction, R.layout.view_spinner_item));
         ((ArrayAdapter) slotsSpecSpinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
         final CheckBox slotsCheckBox = (CheckBox) addView.findViewById(R.id.filter_checkbox_slots);

@@ -13,7 +13,7 @@ import com.daviancorp.android.mh4udatabase.R;
  *  - override onCreate() to set title
  */
 
-public abstract class GenericTabActivity extends GenericActionBarActivity{
+public abstract class GenericTabActivity extends GenericActionBarActivity {
 
 	protected Fragment detail;
     protected SlidingTabLayout mSlidingTabLayout;

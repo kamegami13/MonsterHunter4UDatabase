@@ -33,12 +33,12 @@ public class ASBActivity extends GenericTabActivity {
     public static final String EXTRA_TALISMAN_TYPE_INDEX = "com.daviancorp.android.ui.detail.talisman_type_index";
     public static final String EXTRA_TALISMAN_SLOTS = "com.daviancorp.android.ui.detail.talisman_slots";
 
-    public static final int REQUEST_CODE_ADD_PIECE = 0;
-    public static final int REQUEST_CODE_ADD_DECORATION = 1;
-    public static final int REQUEST_CODE_CREATE_TALISMAN = 2;
-    public static final int REQUEST_CODE_REMOVE_PIECE = 3;
-    public static final int REQUEST_CODE_REMOVE_DECORATION = 4;
-    public static final int REQUEST_CODE_REMOVE_TALISMAN = 5;
+    public static final int REQUEST_CODE_ADD_PIECE = 537;
+    public static final int REQUEST_CODE_ADD_DECORATION = 538;
+    public static final int REQUEST_CODE_CREATE_TALISMAN = 539;
+    public static final int REQUEST_CODE_REMOVE_PIECE = 540;
+    public static final int REQUEST_CODE_REMOVE_DECORATION = 541;
+    public static final int REQUEST_CODE_REMOVE_TALISMAN = 542;
 
     private ASBSession session;
 

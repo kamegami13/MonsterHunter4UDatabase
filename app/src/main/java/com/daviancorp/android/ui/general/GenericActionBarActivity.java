@@ -95,6 +95,13 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
         mHandler = new Handler();
     }
 
+    // Override and set to true when applicable
+    public void setAsTopLevel(){
+        isTopLevel = true;
+
+        // Enable drawer button instead of back button
+        enableDrawerIndicator();
+    }
 
     // Set up drawer toggle actions
     public void setupDrawer() {
@@ -212,6 +219,10 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
 
     public void enableDrawerIndicator() {
         mDrawerToggle.setDrawerIndicatorEnabled(true);
+    }
+
+    public void disableDrawerIndicator() {
+        mDrawerToggle.setDrawerIndicatorEnabled(false);
     }
 
     // Sync button animation sync with drawer state

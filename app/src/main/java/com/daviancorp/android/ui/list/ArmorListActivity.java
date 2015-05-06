@@ -1,5 +1,6 @@
 package com.daviancorp.android.ui.list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -10,6 +11,8 @@ import android.view.MenuItem;
 import com.daviancorp.android.data.classes.Rank;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorExpandableListPagerAdapter;
+import com.daviancorp.android.ui.detail.ASBActivity;
+import com.daviancorp.android.ui.general.GenericActionBarActivity;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
@@ -41,11 +44,20 @@ public class ArmorListActivity extends GenericTabActivity {
             }
         }
         else {
-            super.enableDrawerIndicator();
+            // Tag as top level activity
+            super.setAsTopLevel();
         }
 
-        // Tag as top level activity
-        super.setAsTopLevel();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ASBActivity.REQUEST_CODE_ADD_PIECE && resultCode == RESULT_OK) {
+            setResult(RESULT_OK, data);
+            finish();
+        }
     }
 
     @Override
