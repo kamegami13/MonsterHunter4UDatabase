@@ -29,9 +29,10 @@
     <string name="submit">Submit</string>
 
     <!-- CONFIRM EXIT -->
-    <string name="confirm_exit">CONFIRM EXIT</string>
-    <string name="exit">EXIT</string>
-    <string name="cancel_exit">CANCEL</string>
+    <string name="exit_title">Abandon Quest</string>
+    <string name="exit_dialog">Stop the Quest and return to town?</string>
+    <string name="exit_confirm">Yes</string>
+    <string name="exit_cancel">No</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

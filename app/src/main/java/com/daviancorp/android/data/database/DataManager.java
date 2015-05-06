@@ -120,7 +120,10 @@ public class DataManager {
 	}
 	
 /********************************* ARMOR QUERIES ******************************************/	
-	
+
+	/* Get a cursor that has a list based on a search term */
+	public ArmorCursor queryArmorSearch(String search) { return mHelper.queryArmorSearch(search); }
+
 	/* Get a Cursor that has a list of all Armors */
 	public ArmorCursor queryArmor() {
 		return mHelper.queryArmor();
