@@ -24,7 +24,7 @@
             android:layout_weight="0.1" />
 
         <TextView
-            android:id="@+id/decoration_1"
+            android:id="@+id/decoration_1_state"
             style="@style/text_medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             android:layout_weight="0.1"/>
 
         <TextView
-            android:id="@+id/decoration_2"
+            android:id="@+id/decoration_2_state"
             style="@style/text_medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
             android:layout_weight="0.1"/>
 
         <TextView
-            android:id="@+id/decoration_3"
+            android:id="@+id/decoration_3_state"
             style="@style/text_medium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

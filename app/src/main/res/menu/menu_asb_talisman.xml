@@ -10,10 +10,6 @@
         android:title="@string/asb_action_edit"
         android:visible="false" />
 
-    <item android:id="@id/armor_set_builder_decorations"
-        android:title="@string/asb_action_edit_piece_decorations"
-        android:visible="false" />
-
     <item
         android:id="@+id/armor_set_builder_talisman_remove"
         android:title="@string/asb_action_remove"
