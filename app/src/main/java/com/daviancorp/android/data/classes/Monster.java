@@ -10,6 +10,7 @@ public class Monster {
 	private String monsterClass;	// Large / small
 	private String trait;			// Traits/different type
 	private String file_location;	// File location for image
+	private String signature_move; // Signature moves
 	
 	/* Default Constructor */
 	public Monster() {
@@ -18,6 +19,7 @@ public class Monster {
 		this.monsterClass = "";
 		this.trait = "";
 		this.file_location = "";
+		this.signature_move = "";
 	}
 
 	/* Getters and Setters */
@@ -60,5 +62,9 @@ public class Monster {
 	public void setFileLocation(String file_location) {
 		this.file_location = file_location;
 	}
+
+	public void setSignatureMove(String signature_move) {this.signature_move = signature_move; }
+
+	public String getSignatureMove(){ return signature_move; }
 	
 }

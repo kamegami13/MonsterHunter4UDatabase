@@ -254,6 +254,7 @@
                 android:id="@+id/ailments_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:orientation="vertical"
                 android:layout_below="@+id/ailments_label">
 
@@ -284,28 +285,37 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
 
-        <!-- Key Section -->
-        <LinearLayout
-            android:orientation="horizontal"
+        <!-- Signature Moves -->
+        <RelativeLayout
+            android:id="@+id/moves"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             style="@style/list_item"
-            android:layout_height="48dp"
-            android:visibility="gone"
-            android:background="@color/subheading_color">
+            android:minHeight="48dp">
 
             <TextView
-                android:id="@+id/notes"
-                android:layout_width="0dp"
+                android:id="@+id/moves_label"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:visibility="gone"
-                android:text="Key"
-                style="@style/text_medium"/>
-        </LinearLayout>
+                style="@style/text_medium"
+                android:text="Signature Moves"/>
+
+            <TextView
+                android:id="@+id/moves_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:ellipsize="none"
+                android:maxLines="100"
+                android:scrollHorizontally="false"
+                android:layout_below="@id/moves_label"
+                tools:text="Mandible attack, Web shot, Abdomen sting" />
+
+        </RelativeLayout>
 
         <View
             android:background="@color/divider_color"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="1dp"/>
 
     </LinearLayout>
