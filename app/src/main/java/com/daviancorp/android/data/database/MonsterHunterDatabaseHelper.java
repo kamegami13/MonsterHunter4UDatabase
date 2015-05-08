@@ -58,7 +58,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	private static MonsterHunterDatabaseHelper mInstance = null;
 
     private static final String DATABASE_NAME = "mh4u.db";
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 12;
 
 	private final Context myContext;
 	private SQLiteDatabase myDataBase;
@@ -2178,7 +2178,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
 		 
 		QB.setTables(S.TABLE_QUESTS + " AS q" + " LEFT OUTER JOIN " + S.TABLE_LOCATIONS + " AS l" + " ON " + "q." +
-				S.COLUMN_QUESTS_LOCATION_ID + " = " + "l." + S.COLUMN_LOCATIONS_ID);
+				S.COLUMN_QUESTS_LOCATION_ID + " = " + "l." + S.COLUMN_LOCATIONS_ID /*+ " LEFT OUTER JOIN " + S.TABLE_QUEST_PREREQS +
+                " AS p ON " + "q." + S.COLUMN_QUESTS_ID + " = p." + S.COLUMN_QUEST_PREREQS_ID*/ );
 
 		QB.setProjectionMap(projectionMap);
 		return QB;
@@ -2466,7 +2467,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		projectionMap.put(S.COLUMN_WEAPONS_DEVIATION, w + "." + S.COLUMN_WEAPONS_DEVIATION);
 		projectionMap.put(S.COLUMN_WEAPONS_AMMO, w + "." + S.COLUMN_WEAPONS_AMMO);
 		projectionMap.put(S.COLUMN_WEAPONS_NUM_SLOTS, w + "." + S.COLUMN_WEAPONS_NUM_SLOTS);
-		projectionMap.put(S.COLUMN_WEAPONS_SHARPNESS_FILE, w + "." + S.COLUMN_WEAPONS_SHARPNESS_FILE);
+		//projectionMap.put(S.COLUMN_WEAPONS_SHARPNESS_FILE, w + "." + S.COLUMN_WEAPONS_SHARPNESS_FILE);
 		projectionMap.put(S.COLUMN_WEAPONS_FINAL, w + "." + S.COLUMN_WEAPONS_FINAL);
         projectionMap.put(S.COLUMN_WEAPONS_TREE_DEPTH, w + "." + S.COLUMN_WEAPONS_TREE_DEPTH);
         projectionMap.put(S.COLUMN_WEAPONS_PARENT_ID, w + "." + S.COLUMN_WEAPONS_PARENT_ID);

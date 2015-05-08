@@ -5,7 +5,7 @@ import timeit
 
 def main():
     columns = { 'items' :
-                    ['_id', 'name', 'jpn_name', 'type', 'sub_type',
+                    ['_id', 'name','name_de','name_fr','name_es','name_it','name_jp', 'type', 'sub_type',
                      'rarity', 'carry_capacity', 'buy', 'sell', 'description',
                      'icon_name', 'armor_dupe_name_fix'],
                 'combining' :
@@ -20,25 +20,27 @@ def main():
                      'element_2','element_2_attack','awaken_element','awaken_element_attack',
                      'defense','sharpness','affinity','horn_notes','shelling_type',
                      'phial','charges','coatings','recoil','reload_speed','rapid_fire','deviation','ammo',
-                     'sharpness_file','num_slots','tree_depth','final'],
+                     'special_ammo','num_slots','tree_depth','final'],
                 'skill_trees' :
-                    ['_id','name','jpn_name'],
+                    ['_id','name','name_de','name_fr','name_es','name_it','name_jp'],
                 'skills' :
-                    ['_id','skill_tree_id','required_skill_tree_points','name','jpn_name','description'],
+                    ['_id','skill_tree_id','required_skill_tree_points','name','name_de','name_fr','name_es','name_it','name_jp','description','description_de','description_fr','description_es','description_it','description_jp'],
                 'item_to_skill_tree' :
                     ['_id','item_id','skill_tree_id','point_value'],
                 'components' :
                     ['_id','created_item_id','component_item_id','quantity','type'],
                 'monsters' :
-                    ['_id','class','name','trait','icon_name','sort_name'],
+                    ['_id','class','name','name_de','name_fr','name_es','name_it','name_jp','signature_move','trait','icon_name','sort_name'],
                 'monster_damage' :
                     ['_id','monster_id','body_part','cut','impact','shot',
                      'fire','water','ice','thunder','dragon','ko'],
                 'locations' :
-                    ['_id','name','map','jpn_name'],
+                    ['_id','name','name_de','name_fr','name_es','name_it','name_jp','map'],
                 'quests' :
                     ['_id','name','goal','hub','type','stars','location_id','time_limit','fee',
                      'reward','hrp','sub_goal','sub_reward','sub_hrp'],
+                'quest_prereqs' :
+                    ['_id','quest_id','prereq_id'],
                 'arena_quests' :
                     ['_id','name','goal','location_id','reward','num_participants',
                      'time_s','time_a','time_b'],
@@ -70,6 +72,8 @@ def main():
                     ['_id', 'ingredient', 'name', 'level', 'quest_id'],
                 'food_combos' :
                     ['_id', 'ingredient1', 'ingredient2', 'cooked', 'bonus', 'skill1_id','skill2_id', 'skill3_id'],
+                'veggie_elder' :
+                    ['_id', 'location_id', 'offer_item_id', 'receive_item_id', 'quantity'],
                 'horn_melodies' :
                     ['_id', 'notes', 'song', 'effect1', 'effect2', 'duration', 'extension'],
                 'monster_ailment' :
