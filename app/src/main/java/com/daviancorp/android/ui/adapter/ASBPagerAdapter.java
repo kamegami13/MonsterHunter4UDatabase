@@ -14,7 +14,7 @@ public class ASBPagerAdapter extends FragmentPagerAdapter {
 
     private ASBSession session;
 
-    private String[] tabs = {"Pieces", "Skills"};
+    private String[] tabs = {"Equipment", "Skills"};
 
     public ASBPagerAdapter(FragmentManager fm, ASBSession session) {
         super(fm);
