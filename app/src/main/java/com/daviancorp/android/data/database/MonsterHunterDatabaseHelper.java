@@ -540,7 +540,25 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 	}
 	
 /********************************* ARMOR QUERIES ******************************************/
-	
+
+
+	/*
+	 * Get armor filtered by search
+	 */
+	public ArmorCursor queryArmorSearch(String search){
+		QueryHelper qh = new QueryHelper();
+		qh.Distinct = false;
+		qh.Columns = null;
+		qh.Selection = "i." + S.COLUMN_ITEMS_NAME + " LIKE ?";
+		qh.SelectionArgs = new String[]{'%' + search + '%'};
+		qh.GroupBy = null;
+		qh.Having = null;
+		qh.OrderBy = null;
+		qh.Limit = null;
+
+		return new ArmorCursor(wrapJoinHelper(builderArmor(), qh));
+	}
+
 	/*
 	 * Get all armor
 	 */
