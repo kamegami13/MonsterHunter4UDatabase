@@ -38,7 +38,9 @@ public class ASBTalismanDialogFragment extends DialogFragment implements ASBTali
         return f;
     }
 
-    /** Used when creating a talisman dialog for a talisman that has already been created. */
+    /**
+     * Used when creating a talisman dialog for a talisman that has already been created.
+     */
     public static ASBTalismanDialogFragment newInstance(int talismanTypeIndex, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
         ASBTalismanDialogFragment f = new ASBTalismanDialogFragment();
 
@@ -158,7 +160,9 @@ public class ASBTalismanDialogFragment extends DialogFragment implements ASBTali
         }
     }
 
-    /** Updates the enabled status of the second skill tree based on the first. */
+    /**
+     * Updates the enabled status of the second skill tree based on the first.
+     */
     private void updateSkillEnabledStates() {
         if (talismanSkillContainers[0].getSkillTree() != null) {
             talismanSkillContainers[1].setEnabled(true);
@@ -171,24 +175,33 @@ public class ASBTalismanDialogFragment extends DialogFragment implements ASBTali
         }
     }
 
-    /** Checks to see that all necessary data is defined before the user attempts to submit their talisman. */
+    /**
+     * Checks to see that all necessary data is defined before the user attempts to submit their talisman.
+     */
     private void updateOkButtonState() {
         AlertDialog d = (AlertDialog) getDialog();
 
         if (d != null) {
-            if (talismanSkillContainers[0].getSkillTree() == null || !talismanSkillContainers[0].skillPointsIsValid()) {
+            if (talismanSkillContainers[0].getSkillTree() == null ||
+                    !talismanSkillContainers[0].skillPointsIsValid()) {
                 d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                return;
             }
-            else if (talismanSkillContainers[1].getSkillTree() != null && !talismanSkillContainers[1].skillPointsIsValid()) {
-                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            else if (talismanSkillContainers[1].getSkillTree() != null) {
+                if (!talismanSkillContainers[1].skillPointsIsValid() ||
+                        talismanSkillContainers[0].getSkillTree().getId() == talismanSkillContainers[1].getSkillTree().getId()) {
+                    d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                    return;
+                }
             }
-            else {
-                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
-            }
+
+            d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
         }
     }
 
-    /** Helper method that performs initialization logic on the "type of talisman" spinner. */
+    /**
+     * Helper method that performs initialization logic on the "type of talisman" spinner.
+     */
     private Spinner initializeTypeSpinner(View view) {
         List<String> talismanNames = new ArrayList<>();
 
