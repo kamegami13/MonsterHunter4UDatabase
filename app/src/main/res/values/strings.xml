@@ -26,7 +26,16 @@
     <string name="alert_button">Close</string>
     <string name="alert_rate">Rate!</string>
     <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="copy">Copy</string>
     <string name="submit">Submit</string>
+
+    <string name="placeholder_unknown">Unknown</string>
+
+    <string name="dialog_message_delete">\"%s\" will be deleted.</string>
+    <string name="dialog_message_delete_multi">These %d items will be deleted.</string>
+    <string name="dialog_message_copy">\"%s\" will be duplicated.</string>
+    <string name="dialog_message_copy_multi">These %d items will be duplicated.</string>
 
     <!-- CONFIRM EXIT -->
     <string name="exit_title">Abandon Quest</string>
@@ -49,6 +58,7 @@
         <item>"Skills,icons_items/Monster-Jewel-White.png"</item>
         <item>"Wishlists,icons_items/Mantle-White.png"</item>
         <item>"Wyporium Trade,icons_items/Carapace-White.png"</item>
+        <item>"Armor Set Builder,icons_items/Talisman-White.png"</item>
     </string-array>
 
     <string name="option_list">List</string>
@@ -98,15 +108,6 @@
     <string name="two_slot_jewel">●●</string>
     <string name="three_slot_jewel">●●●</string>
 
-    <string name="activity_armor_set_builder">Armor Set Builder</string>
-    <string name="armor_set_builder_add_piece">Add a piece</string>
-    <string name="armor_set_builder_helmet">Helmet</string>
-    <string name="armor_set_builder_body">Body</string>
-    <string name="armor_set_builder_arms">Arms</string>
-    <string name="armor_set_builder_waist">Waist</string>
-    <string name="armor_set_builder_legs">Legs</string>
-    <string name="placeholder_unknown">Unknown</string>
-
     <string name="image_location_fire">icons_monster_info/Fire.png</string>
     <string name="image_location_water">icons_monster_info/Water.png</string>
     <string name="image_location_thunder">icons_monster_info/Thunder.png</string>
@@ -125,6 +126,71 @@
     <string name="image_location_effectiveness_2">icons_monster_info/effectiveness-2.png</string>
     <string name="image_location_effectiveness_3">icons_monster_info/effectiveness-3.png</string>
 
+    <!-- ASB List stuff -->
+
+    <string name="activity_asb_sets">Armor Sets</string>
+
+    <string name="dialog_title_add_asb_set">New Set</string>
+    <string name="dialog_title_edit_asb_set">Edit Set</string>
+
+    <string name="context_action_asb_delete">Delete</string>
+    <string name="context_action_asb_edit_data">Edit Data</string>
+    <string name="context_action_asb_copy">Copy</string>
+
+    <!-- Armor Set Builder Stuff !-->
+
+    <string name="activity_asb">Armor Set Builder</string>
+
+    <string name="asb_empty_slot">Empty slot</string>
+    <string name="asb_no_slot">No slot</string>
+    <string name="asb_action_select">Select</string>
+
+    <string name="asb_action_add">Add</string>
+    <string name="asb_action_remove">Remove</string>
+    <string name="asb_action_edit">Edit</string>
+    <string name="asb_action_edit_piece_decorations">Decorations</string>
+    <string name="asb_action_armor_piece">Info</string>
+
+    <string name="asb_action_add_decoration">Add</string>
+    <string name="asb_action_remove_decoration">Remove</string>
+    <string name="asb_action_get_decoration_info">Info</string>
+
+    <string name="asb_option_set_add">New set</string>
+
+    <string name="asb_dialog_talisman_title">Talisman</string>
+    <string name="asb_talisman_skill_1">Skill 1</string>
+    <string name="asb_talisman_skill_2">Skill 2</string>
+
+    <string name="asb_helmet">Helmet</string>
+    <string name="asb_body">Body</string>
+    <string name="asb_arms">Arms</string>
+    <string name="asb_waist">Waist</string>
+    <string name="asb_legs">Legs</string>
+    <string name="asb_skill_tree_name">Skill</string>
+    <string name="asb_skill_points_total">Total</string>
+
+    <string name="asb_dialog_title_delete_set">Delete this set?</string>
+    <string name="asb_dialog_title_delete_set_multi">Delete sets?</string>
+    <string name="asb_dialog_title_copy_set">Copy this set?</string>
+    <string name="asb_dialog_title_copy_set_multi">Copy sets?</string>
+
+    <string-array name="talisman_names">
+        <item>Pawn,Talisman-White.png</item>
+        <item>Bishop,Talisman-Purple.png</item>
+        <item>Knight,Talisman-Yellow.png</item>
+        <item>Rook,Talisman-Pink.png</item>
+        <item>Queen,Talisman-Green.png</item>
+        <item>King,Talisman-Cyan.png</item>
+        <item>Dragon,Talisman-Red.png</item>
+        <item>Unknowable,Talisman-Blue.png</item>
+        <item>Mystic,Talisman-Orange.png</item>
+        <item>Hero,Talisman-Blue.png</item>
+        <item>Legend,Talisman-Orange.png</item>
+        <item>Creator,Talisman-Magenta.png</item>
+        <item>Sage,Talisman-Magenta.png</item>
+        <item>Miracle,Talisman-Magenta.png</item>
+    </string-array>
+
     <string-array name="slot_values">
         <item>0</item>
         <item>1</item>
@@ -142,5 +208,10 @@
         <item>Low</item>
         <item>High</item>
         <item>G</item>
+    </string-array>
+
+    <string-array name="hunter_type">
+        <item>Blademaster</item>
+        <item>Gunner</item>
     </string-array>
 </resources>

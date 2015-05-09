@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <view
+            android:id="@+id/armor_builder_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.daviancorp.android.ui.compound.ASBPieceContainer" />
+
+        <view
+            android:id="@+id/armor_builder_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.daviancorp.android.ui.compound.ASBPieceContainer" />
+
+        <view
+            android:id="@+id/armor_builder_arms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.daviancorp.android.ui.compound.ASBPieceContainer" />
+
+        <view
+            android:id="@+id/armor_builder_waist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.daviancorp.android.ui.compound.ASBPieceContainer" />
+
+        <view
+            android:id="@+id/armor_builder_legs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.daviancorp.android.ui.compound.ASBPieceContainer" />
+
+        <view
+            android:id="@+id/armor_builder_talisman"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            class="com.daviancorp.android.ui.compound.ASBPieceContainer" />
+    </LinearLayout>
+
+</LinearLayout>

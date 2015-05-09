@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.*;
 import android.support.v4.app.FragmentManager;
 import android.view.*;
-import android.widget.*;
-import android.widget.ExpandableListView.OnChildClickListener;
 
 import com.daviancorp.android.data.classes.Armor;
 import com.daviancorp.android.data.classes.Item;
@@ -17,7 +20,7 @@ import com.daviancorp.android.data.classes.Rank;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
-import com.daviancorp.android.ui.detail.ArmorDetailActivity;
+import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.dialog.ArmorFilterDialogFragment;
 
 import java.io.IOException;
@@ -70,11 +73,16 @@ public class ArmorExpandableListFragment extends Fragment {
         if (args != null) {
             mType = args.getString(ARG_TYPE);
         }
+
+        filter = new ArmorFilter();
+
+        if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            filter.setRank(Rank.values()[getActivity().getIntent().getIntExtra(ASBActivity.EXTRA_SET_RANK, -1)]);
+        }
+
         populateList();
 
         setHasOptionsMenu(true);
-
-        filter = new ArmorFilter();
     }
 
     /**
@@ -140,19 +148,20 @@ public class ArmorExpandableListFragment extends Fragment {
         adapter = new ArmorListAdapter(slots);
         elv.setAdapter(adapter);
 
-        elv.setOnChildClickListener(new OnChildClickListener() {
-
-            @Override
-            public boolean onChildClick(ExpandableListView arg0, View arg1,
-                                        int arg2, int arg3, long id) {
-
-                Intent i = new Intent(getActivity(), ArmorDetailActivity.class);
-                i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, (long) arg1.getTag());
-                startActivity(i);
-
-                return false;
-            }
-        });
+//        elv.setOnChildClickListener(new OnChildClickListener() {
+//
+//            @Override
+//            public boolean onChildClick(ExpandableListView arg0, View arg1,
+//                                        int arg2, int arg3, long id) {
+//
+//                Intent i = new Intent(getActivity(), ArmorDetailActivity.class);
+//                i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, (long) arg1.getTag());
+//
+//                startActivity(i);
+//
+//                return false;
+//            }
+//        });
 
         return v;
     }
@@ -271,6 +280,20 @@ public class ArmorExpandableListFragment extends Fragment {
 
             armorGroupTextView.setText(getGroup(i).toString());
 
+            if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+                int piece = getActivity().getIntent().getIntExtra(ASBActivity.EXTRA_PIECE_INDEX, -1);
+
+                if (piece != -1) {
+                    elv.setDividerHeight(0);
+                    if (i != piece) {
+                        v = new FrameLayout(context); // We hide the group if it's not the type of armor we're looking for
+                    }
+                    else {
+                        elv.expandGroup(i);
+                    }
+                }
+            }
+
             return v;
         }
 
@@ -316,7 +339,13 @@ public class ArmorExpandableListFragment extends Fragment {
             long armorId = ((Armor) getChild(groupPosition, childPosition)).getId();
 
             root.setTag(armorId);
-            root.setOnClickListener(new ArmorClickListener(context, armorId));
+
+            if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+                root.setOnClickListener(new ArmorClickListener(context, armorId, getActivity(), ASBActivity.REQUEST_CODE_ADD_PIECE));
+            }
+            else {
+                root.setOnClickListener(new ArmorClickListener(context, armorId));
+            }
 
             return v;
 

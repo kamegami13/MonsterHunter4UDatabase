@@ -1,8 +1,6 @@
 package com.daviancorp.android.ui.general;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -33,6 +31,7 @@ import android.widget.TextView;
 
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
+import com.daviancorp.android.ui.list.*;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.CombiningListActivity;
 import com.daviancorp.android.ui.list.DecorationListActivity;
@@ -195,6 +194,9 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
             case 10: // Wyporium Trade
                 intent = new Intent(GenericActionBarActivity.this, WyporiumTradeListActivity.class);
                 break;
+            case 11:
+                intent = new Intent(GenericActionBarActivity.this, ASBSetListActivity.class);
+                break;
         }
         final Intent finalIntent = intent;
 
@@ -217,6 +219,10 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
 
     public void enableDrawerIndicator() {
         mDrawerToggle.setDrawerIndicatorEnabled(true);
+    }
+
+    public void disableDrawerIndicator() {
+        mDrawerToggle.setDrawerIndicatorEnabled(false);
     }
 
     // Sync button animation sync with drawer state
@@ -308,35 +314,11 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
 
     public void onBackPressed() {
         // If back is pressed while drawer is open, close drawer.
-        if (!isTopLevel && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
-        }
-        else if (isTopLevel && !mDrawerLayout.isDrawerOpen(GravityCompat.START)){
-        // If this is a top level activity and drawer is closed, open drawer
-            mDrawerLayout.openDrawer(GravityCompat.START);
-        }
-        else if(isTopLevel && mDrawerLayout.isDrawerOpen(GravityCompat.START)){
-        // If top level and drawer is open, prompt for exit
-            //Ask the user if they want to quit
-            new AlertDialog.Builder(this)
-                    .setTitle(R.string.exit_title)
-                    .setMessage(R.string.exit_dialog)
-                    .setPositiveButton(R.string.exit_confirm, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //Stop the activity
-                            finish();
-                        }
-
-                    })
-                    .setNegativeButton(R.string.exit_cancel, null)
-                    .show();
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
-
-
     }
 
     public Fragment getDetail() {

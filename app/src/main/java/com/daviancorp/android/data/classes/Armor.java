@@ -5,7 +5,7 @@ package com.daviancorp.android.data.classes;
  *
  * Note: Subclass of Item
  */
-public class Armor extends Item{
+public class Armor extends Equipment {
 	
 	private String slot;			// Equipment type
 	private int defense;			// Base defense
@@ -17,7 +17,6 @@ public class Armor extends Item{
 	private int ice_res;			// Ice resistance
 	private String gender;			// Which gender can equip
 	private String hunter_type;		// Which hunter type can equip: Blademaster/Gunner
-	private int num_slots;			// Number of slots
 	private String mSlotString;		// unicode version of number of slots
 	
 	/* Default Constructor */
@@ -32,7 +31,6 @@ public class Armor extends Item{
 		this.water_res = -1;
 		this.gender = "";
 		this.hunter_type = "";
-		this.num_slots = -1;
 	}
 
 	/* Getters and Setters */
@@ -116,23 +114,20 @@ public class Armor extends Item{
 		this.hunter_type = hunter_type;
 	}
 
-	public int getNumSlots() {
-		return num_slots;
-	}
-
 	public String getSlotString() {
 		return mSlotString;
 	}
 
+    @Override
 	public void setNumSlots(int num_slots) {
-		this.num_slots = num_slots;
+		super.setNumSlots(num_slots);
 
 		// Set the slot to view
 		String slot = "";
 
 		// Unicode White Circle \u25CB
 		// Unicode Dash \u2015
-		switch (this.num_slots) {
+		switch (getNumSlots()) {
 			case 0:
 				slot = "\u2015\u2015\u2015";
 				break;

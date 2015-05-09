@@ -21,6 +21,7 @@
     <!-- used for making anything clickable have a clicked state -->
     <color name="transparent">#00FFFFFF</color>
     <color name="transparentlight">#20D7CCC8</color>
+    <color name="transparentDark">#82434343</color>
 
     <!-- RARITY COLORS -->
     <color name="rare_1">#757575</color>

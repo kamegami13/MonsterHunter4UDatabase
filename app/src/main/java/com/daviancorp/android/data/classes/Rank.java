@@ -8,7 +8,7 @@ public enum Rank {
     int armorMinimumRarity;
     int armorMaximumRarity;
 
-    private Rank(int armorMinimumRarity, int armorMaximumRarity) {
+    Rank(int armorMinimumRarity, int armorMaximumRarity) {
         this.armorMinimumRarity = armorMinimumRarity;
         this.armorMaximumRarity = armorMaximumRarity;
     }
