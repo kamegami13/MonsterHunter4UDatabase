@@ -1,7 +1,5 @@
 package com.daviancorp.android.ui.compound;
 
-import android.animation.LayoutTransition;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
@@ -74,11 +72,17 @@ public class ASBPieceContainer extends LinearLayout {
 
         final View decorationMenu = findViewById(R.id.decorations);
 
-        ImageView dropDownArrow = (ImageView) findViewById(R.id.drop_down_arrow);
+        final ImageView dropDownArrow = (ImageView) findViewById(R.id.drop_down_arrow);
         dropDownArrow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                decorationMenu.setVisibility(decorationMenu.getVisibility() == GONE ? VISIBLE : GONE); // Toggling visibility
+                if (decorationMenu.getVisibility() == GONE) {
+                    decorationMenu.setVisibility(VISIBLE);
+                    dropDownArrow.setImageDrawable(parentFragment.getActivity().getResources().getDrawable(R.drawable.ic_drop_up_arrow));
+                } else {
+                    decorationMenu.setVisibility(GONE);
+                    dropDownArrow.setImageDrawable(parentFragment.getActivity().getResources().getDrawable(R.drawable.ic_drop_down_arrow));
+                }
             }
         });
 
@@ -106,6 +110,7 @@ public class ASBPieceContainer extends LinearLayout {
                 }
             });
         }
+
     }
 
     /**
@@ -117,9 +122,12 @@ public class ASBPieceContainer extends LinearLayout {
         this.session = session;
         this.pieceIndex = pieceIndex;
         this.parentFragment = parentFragment;
+        updateDecorationsView();
     }
 
-    /** Refreshes the contents of the piece container based on the contents of the {@code ASBSession}. */
+    /**
+     * Refreshes the contents of the piece container based on the contents of the {@code ASBSession}.
+     */
     public void updateContents() {
         updateArmorPiece();
         updateDecorationsPreview();
@@ -130,8 +138,7 @@ public class ASBPieceContainer extends LinearLayout {
         if (session.isEquipmentSelected(pieceIndex)) {
             text.setText(session.getEquipment(pieceIndex).getName());
             icon.setImageBitmap(fetchIcon(session.getEquipment(pieceIndex).getRarity()));
-        }
-        else {
+        } else {
             onArmorRemoved();
         }
     }
@@ -140,29 +147,29 @@ public class ASBPieceContainer extends LinearLayout {
         for (int i = 0; i < 3; i++) {
             if (!session.isEquipmentSelected(pieceIndex)) {
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_none));
-            }
-            else if (session.decorationIsReal(pieceIndex, i)) {
+            } else if (session.decorationIsReal(pieceIndex, i)) {
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_real));
-            }
-            else if (session.decorationIsDummy(pieceIndex, i)) { // The socket index in question is a ummy
+            } else if (session.decorationIsDummy(pieceIndex, i)) { // The socket index in question is a ummy
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_dummy));
-            }
-            else if (session.getEquipment(pieceIndex).getNumSlots() > i) { // The socket in question is empty
+            } else if (session.getEquipment(pieceIndex).getNumSlots() > i) { // The socket in question is empty
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_empty));
-            }
-            else { // The armor piece has no more sockets
+            } else { // The armor piece has no more sockets
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_none));
             }
         }
     }
 
-    /** Resets the container to its default state. */
+    /**
+     * Resets the container to its default state.
+     */
     private void onArmorRemoved() {
         text.setText("");
         icon.setImageBitmap(fetchIcon(1));
     }
 
-    /** Helper method that retrieves a rarity-appropriate equipment icon. */
+    /**
+     * Helper method that retrieves a rarity-appropriate equipment icon.
+     */
     private Bitmap fetchIcon(int rarity) {
 
         String slot = "";
@@ -187,8 +194,7 @@ public class ASBPieceContainer extends LinearLayout {
                 try {
                     if (session.isEquipmentSelected(ASBSession.TALISMAN)) {
                         imageRes = "icons_items/" + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()].split(",")[1];
-                    }
-                    else {
+                    } else {
                         imageRes = "icons_items/Talisman-White.png";
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -233,54 +239,57 @@ public class ASBPieceContainer extends LinearLayout {
         }
     }
 
-    /** Helper method that updates the contents of the dialog based on what's in the armor set builder session. */
+    /**
+     * Helper method that updates the contents of the dialog based on what's in the armor set builder session.
+     */
     private void updateDecorationsView() {
         if (session.getEquipment(pieceIndex) != null) {
-        for (int i = 0; i < decorationNames.length; i++) {
+            for (int i = 0; i < decorationNames.length; i++) {
 
-            if (session.decorationIsReal(pieceIndex, i)) { // If it's real we set its icon to its actual icon
-                Drawable icon = null;
-                String cellImage = "icons_items/" + session.getDecoration(pieceIndex, i).getFileLocation();
-                try {
-                    icon = Drawable.createFromStream(parentFragment.getActivity().getAssets().open(cellImage), null);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (session.decorationIsReal(pieceIndex, i)) { // If it's real we set its icon to its actual icon
+                    Drawable icon = null;
+                    String cellImage = "icons_items/" + session.getDecoration(pieceIndex, i).getFileLocation();
+                    try {
+                        icon = Drawable.createFromStream(parentFragment.getActivity().getAssets().open(cellImage), null);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    decorationIcons[i].setImageDrawable(icon);
+                } else if (session.decorationIsDummy(pieceIndex, i)) { // If it's a dummy we just set its icon to a white decoration
+                    Drawable icon = null;
+                    String cellImage = "icons_items/Jewel-Unknown.png";
+                    try {
+                        icon = Drawable.createFromStream(parentFragment.getActivity().getAssets().open(cellImage), null);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    decorationIcons[i].setImageDrawable(icon);
+                } else {
+                    decorationIcons[i].setImageDrawable(null);
                 }
 
-                decorationIcons[i].setImageDrawable(icon);
-            } else if (session.decorationIsDummy(pieceIndex, i)) { // If it's a dummy we just set its icon to a white decoration
-                Drawable icon = null;
-                String cellImage = "icons_items/Jewel-Unknown.png";
-                try {
-                    icon = Drawable.createFromStream(parentFragment.getActivity().getAssets().open(cellImage), null);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (session.decorationIsReal(pieceIndex, i)) {
+                    decorationNames[i].setText(session.getDecoration(pieceIndex, i).getName());
+                } else if (session.decorationIsDummy(pieceIndex, i)) {
+                    decorationNames[i].setText(session.findRealDecorationOfDummy(pieceIndex, i).getName());
+                } else if (session.getEquipment(pieceIndex).getNumSlots() > i) {
+                    decorationNames[i].setText(R.string.asb_empty_slot);
                 }
 
-                decorationIcons[i].setImageDrawable(icon);
-            } else {
-                decorationIcons[i].setImageDrawable(null);
+                if (session.decorationIsReal(pieceIndex, i)) {
+                    decorationNames[i].setTextColor(getResources().getColor(R.color.text_color));
+                } else {
+                    decorationNames[i].setTextColor(getResources().getColor(R.color.text_color_secondary));
+                }
             }
-
-            if (session.decorationIsReal(pieceIndex, i)) {
-                decorationNames[i].setText(session.getDecoration(pieceIndex, i).getName());
-            } else if (session.decorationIsDummy(pieceIndex, i)) {
-                decorationNames[i].setText(session.findRealDecorationOfDummy(pieceIndex, i).getName());
-            } else if (session.getEquipment(pieceIndex).getNumSlots() > i) {
-                decorationNames[i].setText(R.string.asb_empty_slot);
-            }
-
-            if (session.decorationIsReal(pieceIndex, i)) {
-                decorationNames[i].setTextColor(getResources().getColor(R.color.text_color));
-            } else {
-                decorationNames[i].setTextColor(getResources().getColor(R.color.text_color_secondary));
-            }
-        }
         }
     }
 
     /**
      * The order of the menu items in this menu can be changed by modifying the order in which {@code popup.getMenu().add} is called
+     *
      * @return A {@code PopupMenu} that allows the user to modify the armor piece.
      */
     private PopupMenu createArmorPopupMenu() {
@@ -295,19 +304,16 @@ public class ASBPieceContainer extends LinearLayout {
 
             if (!pieceSelected) {
                 popup.getMenu().findItem(R.id.armor_set_builder_add_piece).setVisible(true);
-            }
-            else {
+            } else {
                 popup.getMenu().findItem(R.id.armor_set_builder_remove_piece).setVisible(true);
                 popup.getMenu().findItem(R.id.armor_set_builder_piece_info).setVisible(true);
             }
-        }
-        else {
+        } else {
             popup.inflate(R.menu.menu_asb_talisman);
 
             if (!pieceSelected) {
                 popup.getMenu().findItem(R.id.armor_set_builder_talisman_create).setVisible(true);
-            }
-            else {
+            } else {
                 popup.getMenu().findItem(R.id.armor_set_builder_talisman_edit).setVisible(true);
                 popup.getMenu().findItem(R.id.armor_set_builder_talisman_remove).setVisible(true);
             }
@@ -325,8 +331,7 @@ public class ASBPieceContainer extends LinearLayout {
         if (session.decorationIsReal(pieceIndex, decorationIndex) && !session.decorationIsDummy(pieceIndex, decorationIndex)) {
             popup.getMenu().findItem(R.id.armor_set_builder_decoration_remove).setVisible(true);
             popup.getMenu().findItem(R.id.armor_set_builder_decoration_info).setVisible(true);
-        }
-        else if (!session.decorationIsDummy(pieceIndex, decorationIndex)) {
+        } else if (!session.decorationIsDummy(pieceIndex, decorationIndex)) {
             popup.getMenu().findItem(R.id.armor_set_builder_decoration_add).setVisible(true);
         }
 
@@ -335,7 +340,9 @@ public class ASBPieceContainer extends LinearLayout {
         return popup;
     }
 
-    /** Listens for when the user clicks on an element in the {@code PopupMenu}. */
+    /**
+     * Listens for when the user clicks on an element in the {@code PopupMenu}.
+     */
     private class PiecePopupMenuClickListener implements PopupMenu.OnMenuItemClickListener {
 
         @Override
@@ -365,7 +372,9 @@ public class ASBPieceContainer extends LinearLayout {
             return true;
         }
 
-        /** Called when the user chooses to add an armor piece. */
+        /**
+         * Called when the user chooses to add an armor piece.
+         */
         private void onMenuAddPieceSelected() {
             Intent i = new Intent(getContext(), ArmorListActivity.class);
             i.putExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, true);
@@ -376,7 +385,9 @@ public class ASBPieceContainer extends LinearLayout {
             parentFragment.startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_PIECE);
         }
 
-        /** Called when the user chooses to remove an armor piece. */
+        /**
+         * Called when the user chooses to remove an armor piece.
+         */
         private void onMenuRemovePieceSelected() {
             Log.d("ASB", "Remove clicked.");
             Intent data = new Intent();
@@ -384,7 +395,9 @@ public class ASBPieceContainer extends LinearLayout {
             parentFragment.onActivityResult(ASBActivity.REQUEST_CODE_REMOVE_PIECE, Activity.RESULT_OK, data);
         }
 
-        /** Called when the user chooses to retrieve info about their armor piece. */
+        /**
+         * Called when the user chooses to retrieve info about their armor piece.
+         */
         private void onMenuGetPieceInfoSelected() {
             Intent i = new Intent(getContext(), ArmorDetailActivity.class);
             i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, session.getEquipment(pieceIndex).getId());

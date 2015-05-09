@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -72,10 +74,11 @@ public class ASBTalismanSkillContainer extends LinearLayout {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    clampSkillPointsField(skillPointsText);
+                    changeListener.onTalismanSkillPointsChanged();
                 }
             }
         });
+
         skillPointsText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -85,7 +88,15 @@ public class ASBTalismanSkillContainer extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-                clampSkillPointsField(skillPointsText);
+                if (s.toString().startsWith("-")) {
+                    if (s.toString().length() > 3) {
+                        s.replace(3, s.toString().length(), "");
+                    }
+                }
+                else if (s.toString().length() > 2) {
+                    s.replace(2, s.toString().length(), "");
+                }
+
                 changeListener.onTalismanSkillPointsChanged();
             }
         });
@@ -168,20 +179,6 @@ public class ASBTalismanSkillContainer extends LinearLayout {
         else {
             setSkillTree(null);
         }
-    }
-
-    private void clampSkillPointsField(TextView v) {
-        if (v.getText().toString().equals("") || v.getText().toString().equals("-") || v.getText().toString().equals("0")) {
-            v.setText("1");
-        }
-        else if (Integer.parseInt(v.getText().toString()) > TALISMAN_SKILL_POINTS_MAX) {
-            v.setText(String.valueOf(TALISMAN_SKILL_POINTS_MAX));
-        }
-        else if (Integer.parseInt(v.getText().toString()) < TALISMAN_SKILL_POINTS_MIN) {
-            v.setText(String.valueOf(TALISMAN_SKILL_POINTS_MIN));
-        }
-
-        changeListener.onTalismanSkillPointsChanged();
     }
 
     /** An interface allowing the talisman skill container to communicate with other talisman skill containers around it. */
