@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+
+    <release version="1.05" versioncode="105">
+        <change>Added Up button to sub-pages. Has same function as back button without exiting.</change>
+        <change>Add DLC data</change>
+        <change>Fixed Wishlist being deleted on upgrade</change>
+        <change>Default the nav drawer open on launch</change>
+        <change>Fix scrolling Bowgun details</change>
+        <change>Improve Horn Note display</change>
+        <change>Added slots to jewel pages</change>
+        <change>Improve slot display</change>
+        <change>Added a star in weapon list to indicate a craftable weapon</change>
+        <change>Data fixes (Auberon Great Sword, High Metal S armor, Clockwork Insect Glaive,
+        Emperor's Speech Horn, Protection Up Jewel, Wyvern Conciliation,
+        Stygian Superbia, Garuga Lovebirds, Diablos Bashers, Inferno/Paradis, Suzuka Takamaru,
+        Twin Elders, Recriminators, Kecha Wach / Plum Daimyo drops, Cephadrome sleep area)</change>
+        <change>Improve Nav Drawer icons</change>
+        <change>Fix Slagtoth Icon</change>
+        <change>Improve Plum Daimyo, Chameleos, and Gogamazios icons</change>
+        <change>Rename Skill Trees to Skills</change>
+        <change>Reduce nav drawer lag</change>
+        <change>Improve corner menu display</change>
+    </release>
+
+    <release version="1.04" versioncode="104">
+        <change>Fix sizes and layout in Hunting Horn song list</change>
+        <change>Missing Horn Songs</change>
+    </release>
+
+    <release version="1.03" versioncode="103">
+        <change>Fixed not being to see Wishlist edit/delete icons (long-press Wishlist items or materials to bring up the action bar)</change>
+        <change>Complete list of Monster Icons</change>
+        <change>Added Collapsible Weapon Trees (long-press to collapse)</change>
+        <change>List of Hunting Horn Songs on the Hunting Horn details page</change>
+        <change>Complete Weapon List Overhaul</change>
+        <change>Update location maps with better gather points</change>
+        <change>UI tweaks</change>
+        <change>Reduced APK size</change>
+        <change>Various database typos and incorrect data</change>
+        <change>Performance improvements on different lists</change>
+        <change>Better sorting on monster->quest list, item->quest list, and item->location list</change>
+        <change>Decorations sorted by skill name</change>
+        <change>New drawer menu icons</change>
+        <change>Fixed drawer menu icons and text</change>
+        <change>Fixed incorrect Critical Eye +4 skill entry</change>
+    </release>
+
+    <release version="1.02" versioncode="102" >
+        <change>Migrated from ActionBarSherlock to AppCompat</change>
+        <change>Added monster status resistances</change>
+        <change>Updated color scheme across app</change>
+        <change>Updated list view styles across app</change>
+        <change>Added navigation drawer</change>
+        <change>Compressed art assets to reduce application size</change>
+        <change>Fixed some icons which were displaying incorrectly (Lances, Armor Arms)</change>
+        <change>Fixed super broken phials for Bows</change>
+        <change>Added fastscroll support</change>
+        <change>Added support for asynchronous image loading in heavy load listviews</change>
+        <change>Added support for preloading weapons for weapon trees to remove load from list adapter</change>
+        <change>Added combination list to item details page, displays all relevant combos</change>
+        <change>Added alternate low-res maps to improve list loading</change>
+        <change>Fixed incorrect Monster All list after fast tabbing</change>
+    </release>
+
+    <release version="1.01" versioncode="101" >
+        <change>Monster Habitats now appear on the Monster Detail Page</change>
+        <change>Monster Habitats are now listed on the Location Detail Page</change>
+    </release>
+
+    <release version="1.00" versioncode="100">
+        <change>Initial Release</change>
+    </release>
+
+</changelog>
