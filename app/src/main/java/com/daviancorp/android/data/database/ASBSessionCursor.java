@@ -171,7 +171,7 @@ public class ASBSessionCursor extends CursorWrapper {
                 session.addDecoration(ASBSession.TALISMAN, talismanDecoration2, false);
             }
             if (talismanDecoration3 != null) {
-                session.addDecoration(ASBSession.TALISMAN, talismanDecoration2, false);
+                session.addDecoration(ASBSession.TALISMAN, talismanDecoration3, false);
             }
         }
 

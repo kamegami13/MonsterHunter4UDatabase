@@ -165,6 +165,7 @@ public class ASBPieceContainer extends LinearLayout {
     private void onArmorRemoved() {
         text.setText("");
         icon.setImageBitmap(fetchIcon(1));
+        updateDecorationsView();
     }
 
     /**
@@ -243,6 +244,10 @@ public class ASBPieceContainer extends LinearLayout {
      * Helper method that updates the contents of the dialog based on what's in the armor set builder session.
      */
     private void updateDecorationsView() {
+        for (TextView decorationName : decorationNames) {
+            decorationName.setTextColor(getResources().getColor(R.color.text_color_secondary));
+        }
+
         if (session.getEquipment(pieceIndex) != null) {
             for (int i = 0; i < decorationNames.length; i++) {
 
