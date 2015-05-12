@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
-    <release version="1.05" versioncode="105">
+    <release version="1.05" versioncode="10">
         <change>Added Up button to sub-pages. Has same function as back button without exiting.</change>
         <change>Add DLC data</change>
         <change>Fixed Wishlist being deleted on upgrade</change>
@@ -23,12 +23,12 @@
         <change>Improve corner menu display</change>
     </release>
 
-    <release version="1.04" versioncode="104">
+    <release version="1.04" versioncode="9">
         <change>Fix sizes and layout in Hunting Horn song list</change>
         <change>Missing Horn Songs</change>
     </release>
 
-    <release version="1.03" versioncode="103">
+    <release version="1.03" versioncode="8">
         <change>Fixed not being to see Wishlist edit/delete icons (long-press Wishlist items or materials to bring up the action bar)</change>
         <change>Complete list of Monster Icons</change>
         <change>Added Collapsible Weapon Trees (long-press to collapse)</change>
@@ -46,7 +46,7 @@
         <change>Fixed incorrect Critical Eye +4 skill entry</change>
     </release>
 
-    <release version="1.02" versioncode="102" >
+    <release version="1.02" versioncode="7" >
         <change>Migrated from ActionBarSherlock to AppCompat</change>
         <change>Added monster status resistances</change>
         <change>Updated color scheme across app</change>
@@ -63,12 +63,12 @@
         <change>Fixed incorrect Monster All list after fast tabbing</change>
     </release>
 
-    <release version="1.01" versioncode="101" >
+    <release version="1.01" versioncode="6" >
         <change>Monster Habitats now appear on the Monster Detail Page</change>
         <change>Monster Habitats are now listed on the Location Detail Page</change>
     </release>
 
-    <release version="1.00" versioncode="100">
+    <release version="1.00" versioncode="5">
         <change>Initial Release</change>
     </release>
 
