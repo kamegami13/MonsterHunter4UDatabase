@@ -275,6 +275,11 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                 this.finish();
                 return true;
 
+            case R.id.change_log:
+                ChangeLog cl = new ChangeLog(this);
+                cl.getFullLogDialog().show();
+                return true;
+
             case R.id.about:
                 FragmentManager fm = getSupportFragmentManager();
                 AboutDialogFragment dialog = new AboutDialogFragment();
