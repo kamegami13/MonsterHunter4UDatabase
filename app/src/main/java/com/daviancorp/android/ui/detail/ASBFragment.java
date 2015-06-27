@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.*;
-import android.widget.ProgressBar;
 import com.daviancorp.android.data.classes.ASBSession;
 import com.daviancorp.android.data.classes.ASBTalisman;
 import com.daviancorp.android.data.classes.Decoration;
@@ -15,7 +14,7 @@ import com.daviancorp.android.data.classes.SkillTree;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.compound.ASBPieceContainer;
-import com.daviancorp.android.ui.general.*;
+import com.daviancorp.android.ui.general.ResourceUtils;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 
 /**
@@ -52,7 +51,6 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_asb, container, false);
 
         headView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_head);
@@ -75,7 +73,6 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == Activity.RESULT_OK) { // If the user canceled the request, we don't want to do anything.
             switch (requestCode) {
                 case ASBActivity.REQUEST_CODE_ADD_PIECE:
@@ -97,10 +94,6 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
                 case ASBActivity.REQUEST_CODE_REMOVE_DECORATION:
                     new ASBAsyncTask(ASBOperation.REMOVE_DECORATION, data).execute();
                     break;
-
-                case ASBActivity.REQUEST_CODE_REMOVE_TALISMAN:
-                    new ASBAsyncTask(ASBOperation.DELETE_TALISMAN, data).execute();
-
             }
         }
     }
@@ -143,32 +136,6 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
         waistView.updateContents();
         legsView.updateContents();
         talismanView.updateContents();
-    }
-
-    private class ASBAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        private ASBOperation operation;
-        private Intent data;
-
-        public ASBAsyncTask(ASBOperation operation, Intent data) {
-            super();
-            this.operation = operation;
-            this.data = data;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            operation.perform(session, getActivity(), data);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-            session.notifySessionChangeListeners();
-            ((ASBActivity) getActivity()).updateASBSetChangedListeners();
-        }
     }
 
     private enum ASBOperation {
@@ -257,9 +224,13 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
             @Override
             void perform(ASBSession session, Context context, Intent data) {
                 int pieceIndex = data.getIntExtra(ASBActivity.EXTRA_PIECE_INDEX, -1);
-
                 session.removeEquipment(pieceIndex);
-                DataManager.get(context).queryRemoveASBSessionArmor(session.getId(), pieceIndex);
+
+                if (pieceIndex == ASBSession.TALISMAN) {
+                    DataManager.get(context).queryRemoveASBSessionTalisman(session.getId());
+                } else {
+                    DataManager.get(context).queryRemoveASBSessionArmor(session.getId(), pieceIndex);
+                }
             }
         },
 
@@ -272,17 +243,33 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
                 session.removeDecoration(pieceIndex, decorationIndex);
                 DataManager.get(context).queryRemoveASBSessionDecoration(session.getId(), pieceIndex, decorationIndex);
             }
-        },
-
-        DELETE_TALISMAN {
-            @Override
-            void perform(ASBSession session, Context context, Intent data) {
-                session.removeEquipment(ASBSession.TALISMAN);
-                DataManager.get(context).queryRemoveASBSessionTalisman(session.getId());
-            }
         };
 
-
         abstract void perform(ASBSession session, Context context, Intent data);
+    }
+
+    private class ASBAsyncTask extends AsyncTask<Void, Void, Void> {
+
+        private ASBOperation operation;
+        private Intent data;
+
+        public ASBAsyncTask(ASBOperation operation, Intent data) {
+            super();
+            this.operation = operation;
+            this.data = data;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            operation.perform(session, getActivity(), data);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            ((ASBActivity) getActivity()).updateASBSetChangedListeners();
+        }
     }
 }

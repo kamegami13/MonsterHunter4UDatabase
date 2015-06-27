@@ -6,8 +6,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/list_background"
+        android:orientation="horizontal"
         android:paddingBottom="3dp"
         android:paddingTop="3dp">
 
@@ -15,8 +15,8 @@
             android:id="@+id/drop_down_arrow"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_drop_down_arrow"
-            android:background="@drawable/clicked_states_white"/>
+            android:background="@drawable/clicked_states_white"
+            android:src="@drawable/ic_drop_down_arrow"/>
 
         <ImageView
             android:id="@+id/armor_builder_item_icon"
@@ -56,24 +56,23 @@
             android:src="@drawable/decoration_none"/>
 
         <ImageView
-            android:id="@+id/popup_menu_button"
+            android:id="@+id/add_equipment_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
-            android:src="@drawable/ic_popup_menu"/>
+            android:src="@drawable/ic_add"/>
     </LinearLayout>
 
     <TableLayout
         android:id="@+id/decorations"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -97,8 +96,7 @@
                 android:id="@+id/decoration_1_menu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:src="@drawable/ic_popup_menu"/>
+                android:layout_weight="0.2" />
 
         </TableRow>
 
@@ -106,7 +104,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/generic_element_vertical_spacing"
-            android:layout_weight="0.8"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -130,8 +127,7 @@
                 android:id="@+id/decoration_2_menu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:src="@drawable/ic_popup_menu"/>
+                android:layout_weight="0.2" />
         </TableRow>
 
         <TableRow
@@ -161,8 +157,7 @@
                 android:id="@+id/decoration_3_menu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:src="@drawable/ic_popup_menu"/>
+                android:layout_weight="0.2" />
         </TableRow>
 
     </TableLayout>
