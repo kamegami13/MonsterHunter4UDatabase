@@ -1,23 +1,26 @@
 package com.daviancorp.android.ui.compound;
 
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.daviancorp.android.data.classes.ASBSession;
-import com.daviancorp.android.data.classes.ASBTalisman;
 import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.detail.ASBFragment;
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
-import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 import com.daviancorp.android.ui.dialog.ASBTalismanDialogFragment;
 import com.daviancorp.android.ui.list.ArmorListActivity;
@@ -27,25 +30,20 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ASBPieceContainer extends LinearLayout {
+    private Fragment parentFragment;
 
     private ImageView icon;
     private TextView text;
-
     private ImageView[] decorationStates;
+    private ImageView equipmentButton;
 
-    TextView[] decorationNames;
-    ImageView[] decorationIcons;
-    ImageView[] decorationMenuButtons;
-
-    private ImageView popupMenuButton;
+    private DecorationView decorationView;
 
     private ASBSession session;
     private int pieceIndex;
-    private Fragment parentFragment;
 
     /**
      * Default constructor.
-     * <p/>
      * It is required to call {@code initialize} after instantiating this class.
      */
     public ASBPieceContainer(Context context, AttributeSet attrs) {
@@ -62,67 +60,54 @@ public class ASBPieceContainer extends LinearLayout {
         decorationStates[1] = (ImageView) findViewById(R.id.decoration_2_state);
         decorationStates[2] = (ImageView) findViewById(R.id.decoration_3_state);
 
-        popupMenuButton = (ImageView) findViewById(R.id.popup_menu_button);
-        popupMenuButton.setOnClickListener(new View.OnClickListener() {
+        text.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                createArmorPopupMenu().show();
+                if (session.isEquipmentSelected(pieceIndex)) {
+                    requestPieceInfo();
+                }
             }
         });
 
-        final View decorationMenu = findViewById(R.id.decorations);
+        equipmentButton = (ImageView) findViewById(R.id.add_equipment_button);
+        equipmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!session.isEquipmentSelected(pieceIndex)) {
+                    onAddEquipment();
+                } else {
+                    onRemoveEquipment();
+                }
+            }
+        });
+
+        decorationView = new DecorationView();
 
         final ImageView dropDownArrow = (ImageView) findViewById(R.id.drop_down_arrow);
         dropDownArrow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (decorationMenu.getVisibility() == GONE) {
-                    decorationMenu.setVisibility(VISIBLE);
+                if (decorationView.container.getVisibility() == GONE) {
+                    decorationView.container.setVisibility(VISIBLE);
+                    equipmentButton.setVisibility(GONE);
                     dropDownArrow.setImageDrawable(parentFragment.getActivity().getResources().getDrawable(R.drawable.ic_drop_up_arrow));
                 } else {
-                    decorationMenu.setVisibility(GONE);
+                    decorationView.container.setVisibility(GONE);
+                    equipmentButton.setVisibility(VISIBLE);
                     dropDownArrow.setImageDrawable(parentFragment.getActivity().getResources().getDrawable(R.drawable.ic_drop_down_arrow));
                 }
             }
         });
-
-        decorationNames = new TextView[3];
-        decorationNames[0] = (TextView) findViewById(R.id.decoration_1_name);
-        decorationNames[1] = (TextView) findViewById(R.id.decoration_2_name);
-        decorationNames[2] = (TextView) findViewById(R.id.decoration_3_name);
-
-        decorationIcons = new ImageView[3];
-        decorationIcons[0] = (ImageView) findViewById(R.id.decoration_1_icon);
-        decorationIcons[1] = (ImageView) findViewById(R.id.decoration_2_icon);
-        decorationIcons[2] = (ImageView) findViewById(R.id.decoration_3_icon);
-
-        decorationMenuButtons = new ImageView[3];
-        decorationMenuButtons[0] = (ImageView) findViewById(R.id.decoration_1_menu);
-        decorationMenuButtons[1] = (ImageView) findViewById(R.id.decoration_2_menu);
-        decorationMenuButtons[2] = (ImageView) findViewById(R.id.decoration_3_menu);
-
-        for (int i = 0; i < 3; i++) {
-            final int index = i;
-            decorationMenuButtons[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    createDecorationPopupMenu(index).show();
-                }
-            });
-        }
-
     }
 
     /**
      * Provides necessary external initialization logic.
-     * <p/>
      * Should always be called after the container's constructor.
      */
     public void initialize(ASBSession session, int pieceIndex, Fragment parentFragment) {
         this.session = session;
         this.pieceIndex = pieceIndex;
         this.parentFragment = parentFragment;
-        updateDecorationsView();
     }
 
     /**
@@ -131,15 +116,18 @@ public class ASBPieceContainer extends LinearLayout {
     public void updateContents() {
         updateArmorPiece();
         updateDecorationsPreview();
-        updateDecorationsView();
+        decorationView.update();
     }
 
     private void updateArmorPiece() {
         if (session.isEquipmentSelected(pieceIndex)) {
             text.setText(session.getEquipment(pieceIndex).getName());
             icon.setImageBitmap(fetchIcon(session.getEquipment(pieceIndex).getRarity()));
+            equipmentButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_remove));
         } else {
-            onArmorRemoved();
+            text.setText(null);
+            icon.setImageBitmap(fetchIcon(1));
+            equipmentButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_add));
         }
     }
 
@@ -149,30 +137,20 @@ public class ASBPieceContainer extends LinearLayout {
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_none));
             } else if (session.decorationIsReal(pieceIndex, i)) {
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_real));
-            } else if (session.decorationIsDummy(pieceIndex, i)) { // The socket index in question is a ummy
+            } else if (session.decorationIsDummy(pieceIndex, i)) {
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_dummy));
-            } else if (session.getEquipment(pieceIndex).getNumSlots() > i) { // The socket in question is empty
+            } else if (session.getEquipment(pieceIndex).getNumSlots() > i) {
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_empty));
-            } else { // The armor piece has no more sockets
+            } else {
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_none));
             }
         }
     }
 
     /**
-     * Resets the container to its default state.
-     */
-    private void onArmorRemoved() {
-        text.setText("");
-        icon.setImageBitmap(fetchIcon(1));
-        updateDecorationsView();
-    }
-
-    /**
      * Helper method that retrieves a rarity-appropriate equipment icon.
      */
     private Bitmap fetchIcon(int rarity) {
-
         String slot = "";
         switch (pieceIndex) {
             case ASBSession.HEAD:
@@ -199,7 +177,8 @@ public class ASBPieceContainer extends LinearLayout {
                         imageRes = "icons_items/Talisman-White.png";
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    Log.e("ASB", "Image not found for " + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()]);
+                    Log.e("ASB",
+                          "Image not found for " + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()]);
                     imageRes = "icons_items/Talisman-White.png";
                 }
 
@@ -223,7 +202,7 @@ public class ASBPieceContainer extends LinearLayout {
 
         String imageRes = "icons_armor/icons_" + slot + "/" + slot + String.valueOf(rarity) + ".png";
 
-        Log.d("SetBuilder", "Attempting to open " + imageRes);
+        Log.d("ASB", "Attempting to open " + imageRes);
         AssetManager manager = getContext().getAssets();
         InputStream stream;
 
@@ -240,236 +219,153 @@ public class ASBPieceContainer extends LinearLayout {
         }
     }
 
-    /**
-     * Helper method that updates the contents of the dialog based on what's in the armor set builder session.
-     */
-    private void updateDecorationsView() {
-        for (TextView decorationName : decorationNames) {
-            decorationName.setTextColor(getResources().getColor(R.color.text_color_secondary));
-        }
-
-        if (session.getEquipment(pieceIndex) != null) {
-            for (int i = 0; i < decorationNames.length; i++) {
-
-                if (session.decorationIsReal(pieceIndex, i)) { // If it's real we set its icon to its actual icon
-                    Drawable icon = null;
-                    String cellImage = "icons_items/" + session.getDecoration(pieceIndex, i).getFileLocation();
-                    try {
-                        icon = Drawable.createFromStream(parentFragment.getActivity().getAssets().open(cellImage), null);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    decorationIcons[i].setImageDrawable(icon);
-                } else if (session.decorationIsDummy(pieceIndex, i)) { // If it's a dummy we just set its icon to a white decoration
-                    Drawable icon = null;
-                    String cellImage = "icons_items/Jewel-Unknown.png";
-                    try {
-                        icon = Drawable.createFromStream(parentFragment.getActivity().getAssets().open(cellImage), null);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    decorationIcons[i].setImageDrawable(icon);
-                } else {
-                    decorationIcons[i].setImageDrawable(null);
-                }
-
-                if (session.decorationIsReal(pieceIndex, i)) {
-                    decorationNames[i].setText(session.getDecoration(pieceIndex, i).getName());
-                } else if (session.decorationIsDummy(pieceIndex, i)) {
-                    decorationNames[i].setText(session.findRealDecorationOfDummy(pieceIndex, i).getName());
-                } else if (session.getEquipment(pieceIndex).getNumSlots() > i) {
-                    decorationNames[i].setText(R.string.asb_empty_slot);
-                }
-
-                if (session.decorationIsReal(pieceIndex, i)) {
-                    decorationNames[i].setTextColor(getResources().getColor(R.color.text_color));
-                } else {
-                    decorationNames[i].setTextColor(getResources().getColor(R.color.text_color_secondary));
-                }
-            }
-        }
-    }
-
-    /**
-     * The order of the menu items in this menu can be changed by modifying the order in which {@code popup.getMenu().add} is called
-     *
-     * @return A {@code PopupMenu} that allows the user to modify the armor piece.
-     */
-    private PopupMenu createArmorPopupMenu() {
-
-        PopupMenu popup = new PopupMenu(getContext(), popupMenuButton); // Because we're not in the fragment, we have to use a theme wrapper
-
-        boolean pieceSelected = session.isEquipmentSelected(pieceIndex);
-
-        if (pieceIndex != ASBSession.TALISMAN) {
-
-            popup.inflate(R.menu.menu_asb_equipment);
-
-            if (!pieceSelected) {
-                popup.getMenu().findItem(R.id.armor_set_builder_add_piece).setVisible(true);
-            } else {
-                popup.getMenu().findItem(R.id.armor_set_builder_remove_piece).setVisible(true);
-                popup.getMenu().findItem(R.id.armor_set_builder_piece_info).setVisible(true);
-            }
+    private void onAddEquipment() {
+        if (pieceIndex == ASBSession.TALISMAN) {
+            ASBTalismanDialogFragment d = ASBTalismanDialogFragment.newInstance();
+            d.setTargetFragment(parentFragment, ASBActivity.REQUEST_CODE_CREATE_TALISMAN);
+            d.show(parentFragment.getActivity().getSupportFragmentManager(), "TALISMAN");
         } else {
-            popup.inflate(R.menu.menu_asb_talisman);
-
-            if (!pieceSelected) {
-                popup.getMenu().findItem(R.id.armor_set_builder_talisman_create).setVisible(true);
-            } else {
-                popup.getMenu().findItem(R.id.armor_set_builder_talisman_edit).setVisible(true);
-                popup.getMenu().findItem(R.id.armor_set_builder_talisman_remove).setVisible(true);
-            }
-        }
-
-        popup.setOnMenuItemClickListener(new PiecePopupMenuClickListener());
-
-        return popup;
-    }
-
-    private PopupMenu createDecorationPopupMenu(int decorationIndex) {
-        PopupMenu popup = new PopupMenu(parentFragment.getActivity(), decorationMenuButtons[decorationIndex]);
-        popup.inflate(R.menu.menu_asb_decoration);
-
-        if (session.decorationIsReal(pieceIndex, decorationIndex) && !session.decorationIsDummy(pieceIndex, decorationIndex)) {
-            popup.getMenu().findItem(R.id.armor_set_builder_decoration_remove).setVisible(true);
-            popup.getMenu().findItem(R.id.armor_set_builder_decoration_info).setVisible(true);
-        } else if (!session.decorationIsDummy(pieceIndex, decorationIndex)) {
-            popup.getMenu().findItem(R.id.armor_set_builder_decoration_add).setVisible(true);
-        }
-
-        popup.setOnMenuItemClickListener(new DecorationPopupMenuClickListener(decorationIndex));
-
-        return popup;
-    }
-
-    /**
-     * Listens for when the user clicks on an element in the {@code PopupMenu}.
-     */
-    private class PiecePopupMenuClickListener implements PopupMenu.OnMenuItemClickListener {
-
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.armor_set_builder_add_piece:
-                    onMenuAddPieceSelected();
-                    break;
-                case R.id.armor_set_builder_remove_piece:
-                    onMenuRemovePieceSelected();
-                    break;
-                case R.id.armor_set_builder_piece_info:
-                    onMenuGetPieceInfoSelected();
-                    break;
-                case R.id.armor_set_builder_talisman_create:
-                    onMenuCreateTalismanSelected();
-                    break;
-                case R.id.armor_set_builder_talisman_edit:
-                    onMenuEditTalismanSelected();
-                    break;
-                case R.id.armor_set_builder_talisman_remove:
-                    onMenuRemoveTalismanSelected();
-                    break;
-                default:
-                    return false;
-            }
-            return true;
-        }
-
-        /**
-         * Called when the user chooses to add an armor piece.
-         */
-        private void onMenuAddPieceSelected() {
             Intent i = new Intent(getContext(), ArmorListActivity.class);
             i.putExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, true);
             i.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
             i.putExtra(ASBActivity.EXTRA_SET_RANK, parentFragment.getArguments().getInt(ASBFragment.ARG_SET_RANK));
-            i.putExtra(ASBActivity.EXTRA_SET_HUNTER_TYPE, parentFragment.getArguments().getInt(ASBFragment.ARG_SET_HUNTER_TYPE));
+            i.putExtra(ASBActivity.EXTRA_SET_HUNTER_TYPE,
+                       parentFragment.getArguments().getInt(ASBFragment.ARG_SET_HUNTER_TYPE));
 
             parentFragment.startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_PIECE);
         }
+    }
 
-        /**
-         * Called when the user chooses to remove an armor piece.
-         */
-        private void onMenuRemovePieceSelected() {
-            Log.d("ASB", "Remove clicked.");
-            Intent data = new Intent();
-            data.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
-            parentFragment.onActivityResult(ASBActivity.REQUEST_CODE_REMOVE_PIECE, Activity.RESULT_OK, data);
-        }
+    private void onRemoveEquipment() {
+        Intent data = new Intent();
+        data.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
+        parentFragment.onActivityResult(ASBActivity.REQUEST_CODE_REMOVE_PIECE, Activity.RESULT_OK, data);
+    }
 
-        /**
-         * Called when the user chooses to retrieve info about their armor piece.
-         */
-        private void onMenuGetPieceInfoSelected() {
+    private void requestPieceInfo() {
+        if (pieceIndex == ASBSession.TALISMAN) {
+            onAddEquipment();
+        } else {
             Intent i = new Intent(getContext(), ArmorDetailActivity.class);
             i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, session.getEquipment(pieceIndex).getId());
             getContext().startActivity(i);
         }
-
-        private void onMenuCreateTalismanSelected() {
-            ASBTalismanDialogFragment d = ASBTalismanDialogFragment.newInstance();
-            d.setTargetFragment(parentFragment, ASBActivity.REQUEST_CODE_CREATE_TALISMAN);
-            d.show(parentFragment.getActivity().getSupportFragmentManager(), "TALISMAN");
-        }
-
-        private void onMenuEditTalismanSelected() {
-            ASBTalisman t = session.getTalisman();
-            ASBTalismanDialogFragment d = ASBTalismanDialogFragment.newInstance(t.getTypeIndex(),
-                    t.getNumSlots(),
-                    t.getSkill1().getId(),
-                    t.getSkill1Points(), t.getSkill2() != null ? t.getSkill2().getId() : -1, // If the talisman only has one skill, we want to pass -1 as the id for the second skill
-                    t.getSkill2Points());
-            d.setTargetFragment(parentFragment, ASBActivity.REQUEST_CODE_CREATE_TALISMAN);
-            d.show(parentFragment.getActivity().getSupportFragmentManager(), "TALISMAN");
-        }
-
-        private void onMenuRemoveTalismanSelected() {
-            parentFragment.onActivityResult(ASBActivity.REQUEST_CODE_REMOVE_TALISMAN, Activity.RESULT_OK, null);
-        }
     }
 
-    private class DecorationPopupMenuClickListener implements PopupMenu.OnMenuItemClickListener {
+    private class DecorationView {
+        TextView[] decorationNames;
+        ImageView[] decorationIcons;
+        ImageView[] decorationMenuButtons;
+        ViewGroup container;
 
-        int decorationIndex;
+        public DecorationView() {
+            container = (ViewGroup) findViewById(R.id.decorations);
 
-        private DecorationPopupMenuClickListener(int decorationIndex) {
-            this.decorationIndex = decorationIndex;
+            decorationNames = new TextView[3];
+            decorationNames[0] = (TextView) findViewById(R.id.decoration_1_name);
+            decorationNames[1] = (TextView) findViewById(R.id.decoration_2_name);
+            decorationNames[2] = (TextView) findViewById(R.id.decoration_3_name);
+
+            decorationIcons = new ImageView[3];
+            decorationIcons[0] = (ImageView) findViewById(R.id.decoration_1_icon);
+            decorationIcons[1] = (ImageView) findViewById(R.id.decoration_2_icon);
+            decorationIcons[2] = (ImageView) findViewById(R.id.decoration_3_icon);
+
+            decorationMenuButtons = new ImageView[3];
+            decorationMenuButtons[0] = (ImageView) findViewById(R.id.decoration_1_menu);
+            decorationMenuButtons[1] = (ImageView) findViewById(R.id.decoration_2_menu);
+            decorationMenuButtons[2] = (ImageView) findViewById(R.id.decoration_3_menu);
+
+            for (int i = 0; i < 3; i++) {
+                final int decorationIndex = i;
+                decorationNames[i].setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (session.decorationIsReal(pieceIndex, decorationIndex)) {
+                            requestDecorationInfo(decorationIndex);
+                        }
+                    }
+                });
+
+                decorationMenuButtons[i].setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (session.decorationIsReal(pieceIndex, decorationIndex)) {
+                            requestRemoveDecoration(decorationIndex);
+                        } else {
+                            requestAddDecoration();
+                        }
+                    }
+                });
+            }
         }
 
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.armor_set_builder_decoration_add:
-                    onAddDecorationClicked(decorationIndex);
-                    break;
-                case R.id.armor_set_builder_decoration_remove:
-                    onRemoveDecorationClicked(decorationIndex);
-                    break;
-                case R.id.armor_set_builder_decoration_info:
-                    onDecorationInfoClicked(decorationIndex);
-                    break;
-                default:
-                    return false;
+        private void update() {
+            if (session.getEquipment(pieceIndex) != null) {
+                boolean addButtonExists = false;
+                for (int i = 0; i < decorationNames.length; i++) {
+                    decorationIcons[i].setImageDrawable(fetchDecorationIcon(pieceIndex, i));
+
+                    if (session.decorationIsReal(pieceIndex, i)) {
+                        decorationNames[i].setText(session.getDecoration(pieceIndex, i).getName());
+                        decorationNames[i].setTextColor(getResources().getColor(R.color.text_color));
+
+                        decorationMenuButtons[i].setImageDrawable(getResources().getDrawable(R.drawable.ic_remove));
+                        decorationMenuButtons[i].setVisibility(VISIBLE);
+                    } else {
+                        if (session.decorationIsDummy(pieceIndex, i)) {
+                            decorationNames[i].setText(session.findRealDecorationOfDummy(pieceIndex, i).getName());
+
+                            decorationMenuButtons[i].setVisibility(GONE);
+                        } else if (session.getEquipment(pieceIndex).getNumSlots() > i) {
+                            decorationNames[i].setText(R.string.asb_empty_slot);
+
+                            if (!addButtonExists) {
+                                decorationMenuButtons[i].setImageDrawable(getResources().getDrawable(R.drawable.ic_add));
+                                decorationMenuButtons[i].setVisibility(VISIBLE);
+                                addButtonExists = true;
+                            } else {
+                                decorationMenuButtons[i].setVisibility(GONE);
+                            }
+                        } else {
+                            decorationNames[i].setText(null);
+
+                            decorationMenuButtons[i].setVisibility(GONE);
+                        }
+
+                        decorationNames[i].setTextColor(getResources().getColor(R.color.text_color_secondary));
+                    }
+                }
+            }
+        }
+
+        private Drawable fetchDecorationIcon(int pieceIndex, int decorationIndex) {
+            String imagePath = "icons_items/";
+            if (session.decorationIsReal(pieceIndex, decorationIndex)) {
+                imagePath += session.getDecoration(pieceIndex, decorationIndex).getFileLocation();
+            } else if (session.decorationIsDummy(pieceIndex, decorationIndex)) {
+                imagePath += "Jewel-Unknown.png";
+            } else {
+                return null;
             }
 
-            return true;
+            try {
+                return Drawable.createFromStream(getContext().getAssets().open(imagePath), null);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
 
-        private void onAddDecorationClicked(int decorationIndex) {
+        private void requestAddDecoration() {
             Intent i = new Intent(parentFragment.getActivity(), DecorationListActivity.class);
             i.putExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, true);
             i.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
-            i.putExtra(ASBActivity.EXTRA_DECORATION_INDEX, decorationIndex);
 
             parentFragment.startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_DECORATION);
         }
 
-        private void onRemoveDecorationClicked(int decorationIndex) {
-//            session.addSessionChangeListener(this);
-
+        private void requestRemoveDecoration(int decorationIndex) {
             Intent data = new Intent();
             data.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
             data.putExtra(ASBActivity.EXTRA_DECORATION_INDEX, decorationIndex);
@@ -477,13 +373,13 @@ public class ASBPieceContainer extends LinearLayout {
             parentFragment.onActivityResult(ASBActivity.REQUEST_CODE_REMOVE_DECORATION, Activity.RESULT_OK, data);
         }
 
-        private void onDecorationInfoClicked(int decorationIndex) {
+        private void requestDecorationInfo(int decorationIndex) {
             Intent i = new Intent(parentFragment.getActivity(), DecorationDetailActivity.class);
 
-            i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID, session.getDecoration(pieceIndex, decorationIndex).getId());
+            i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID,
+                       session.getDecoration(pieceIndex, decorationIndex).getId());
 
             parentFragment.startActivity(i);
         }
     }
-
 }
