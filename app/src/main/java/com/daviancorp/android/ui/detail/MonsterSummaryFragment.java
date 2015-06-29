@@ -52,7 +52,7 @@ public class MonsterSummaryFragment extends Fragment {
 	private FlowLayout mWeaknessModData, mTrapModData, mBombModData;
 	private LinearLayout mWeaknessMod, mTrapMod, mBombMod;
 	private View mWeaknessModDiv, mTrapModDiv, mBombModDiv;
-	private TextView mWeaknessModText, mTrapModText, mBombModText;
+	private TextView mWeaknessModText, mTrapModText, mBombModText, mMovesData;
 	private LinearLayout mAilments;
 
 	// Need to add dividers
@@ -99,6 +99,7 @@ public class MonsterSummaryFragment extends Fragment {
 		mTrapData = (FlowLayout) view.findViewById(R.id.trap_data);
 		mBombData = (FlowLayout) view.findViewById(R.id.bomb_data);
 		mAilments = (LinearLayout) view.findViewById(R.id.ailments_data);
+		mMovesData = (TextView) view.findViewById(R.id.moves_data);
 
 		// Mods if monster has a secondary state
 		// Sections
@@ -157,7 +158,7 @@ public class MonsterSummaryFragment extends Fragment {
 		// Load ArrayList of weaknesses without using a loader
 		ArrayList<MonsterWeakness> weaknesses = DataManager.get(getActivity()).queryMonsterWeaknessArray(mMonster.getId());
 
-		// Get "Normal" weakness. "Enraged" or "Charged" not yet supported
+		// Get "Normal" weaknesses
 		mWeakness = weaknesses.get(0);
 
 		// Fire
@@ -198,7 +199,7 @@ public class MonsterSummaryFragment extends Fragment {
 			addIcon(mBombData, getResources().getString(R.string.image_location_dung_bomb), null);
 
 
-		// Apply CHARGED or ENRAGED weaknesses if applicable. Only supports one more state
+		// Apply CHARGED or ENRAGED weaknesses if applicable. Only supports one more state right now.
 		if (weaknesses.size() > 1){
 			mWeakness = weaknesses.get(1);
 
@@ -255,6 +256,10 @@ public class MonsterSummaryFragment extends Fragment {
 			if(mWeakness.getDungbomb() != 0)
 				addIcon(mBombModData, getResources().getString(R.string.image_location_dung_bomb), null);
 		}
+
+
+		// Signature Moves section
+		mMovesData.setText(mMonster.getSignatureMove());
 
 	}
 

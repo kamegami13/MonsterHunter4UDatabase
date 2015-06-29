@@ -176,6 +176,7 @@ public class S {
 	static final String COLUMN_MONSTERS_TRAIT = "trait";
 	static final String COLUMN_MONSTERS_FILE_LOCATION = "icon_name";
 	static final String COLUMN_MONSTERS_SORT_NAME = "sort_name";
+	static final String COLUMN_MONSTERS_SIGNATURE_MOVE = "signature_move";
 
     // Monster Habitat
     static final String TABLE_HABITAT = "monster_habitat";

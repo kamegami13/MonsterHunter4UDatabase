@@ -30,13 +30,15 @@ public class MonsterCursor extends CursorWrapper {
 		String name = getString(getColumnIndex(S.COLUMN_MONSTERS_NAME));
 		String monsterClass = getString(getColumnIndex(S.COLUMN_MONSTERS_CLASS));
 		String trait = getString(getColumnIndex(S.COLUMN_MONSTERS_TRAIT));
-		String file_location = getString(getColumnIndex(S.COLUMN_MONSTERS_FILE_LOCATION)); 
+		String file_location = getString(getColumnIndex(S.COLUMN_MONSTERS_FILE_LOCATION));
+		String signature_move = getString(getColumnIndex(S.COLUMN_MONSTERS_SIGNATURE_MOVE));
 		
 		monster.setId(monsterId);
 		monster.setName(name);
 		monster.setMonsterClass(monsterClass);
 		monster.setTrait(trait);
-		monster.setFileLocation(file_location); 
+		monster.setFileLocation(file_location);
+		monster.setSignatureMove(signature_move);
 
 		return monster;
 	}
