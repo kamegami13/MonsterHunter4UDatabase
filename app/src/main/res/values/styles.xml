@@ -44,7 +44,6 @@
         <item name="actionModeSplitBackground">@drawable/primary_drawable</item>
         <item name="actionBarItemBackground">@drawable/primary_drawable</item>
 
-        <item name="android:popupMenuStyle">@style/PopupMenuStyle</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
         <item name="android:actionDropDownStyle">@style/DropDownNavStyle</item>
 
@@ -52,8 +51,13 @@
         <item name="android:actionModeSplitBackground">@drawable/primary_drawable</item>
         <item name="android:actionBarItemBackground">@drawable/primary_drawable</item>
 
-        <item name="android:clipToPadding">false</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
 
+        <item name="android:clipToPadding">false</item>
+    </style>
+
+    <style name="SpinnerStyle">
+        <item name="android:textAppearance">@style/SpinnerItemTextAppearance</item>
     </style>
 
     <style name="SpinnerItemStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
@@ -61,13 +65,19 @@
     </style>
 
     <style name="SpinnerDropDownItemStyle" parent="SpinnerItemStyle">
+        <item name="android:minWidth">50dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
         <item name="android:textAppearance">@style/text_medium</item>
     </style>
 
+    <style name="SpinnerItemTextAppearance" parent="AppTheme">
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
     <style name="PopupMenuStyle" parent="@style/AppTheme">
-        <item name="android:popupBackground">@drawable/primary_drawable</item>
+        <item name="android:textColor">@color/text_primary_color</item>
+        <item name="android:background">@drawable/primary_drawable</item>
     </style>
 
     <style name="DropDownListViewStyle" parent="@style/AppTheme">
@@ -78,6 +88,14 @@
         <item name="android:background">@drawable/primary_drawable</item>
         <item name="android:popupBackground">@drawable/primary_drawable</item>
         <item name="android:dropDownSelector">@drawable/primary_drawable</item>
+    </style>
+
+    <style name="ButtonStyle" parent="@style/AppTheme">
+        <item name="android:background">@drawable/clicked_states_primary</item>
+        <item name="android:textColor">@color/text_primary_color</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <!-- USE FOR ALL FULLSCREEN ACTIVITIES WHERE VIEWS COVER ALL BACKGROUD TO REDUCE OVERDRAW -->

@@ -1,11 +1,10 @@
 package com.daviancorp.android.data.database;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.database.SQLException;
 
+import com.daviancorp.android.data.classes.*;
 import com.daviancorp.android.data.classes.ArenaQuest;
 import com.daviancorp.android.data.classes.ArenaReward;
 import com.daviancorp.android.data.classes.Armor;
@@ -1402,6 +1401,85 @@ public class DataManager {
 		}
 		
 		wdc.close();
+	}
+
+	/********************************* ARMOR SET BUILDER QUERIES ******************************************/
+
+	public ASBSetCursor queryASBSets() {
+		return mHelper.queryASBSets();
+	}
+
+	public ASBSet getASBSet(long id) {
+		ASBSet set = null;
+		ASBSetCursor cursor = mHelper.queryASBSet(id);
+		cursor.moveToFirst();
+
+		if (!cursor.isAfterLast())
+			set = cursor.getASBSet();
+
+		cursor.close();
+		return set;
+	}
+
+	/** Get a cursor with a list of all armor sets. */
+	public ASBSessionCursor queryASBSessions() {
+		return mHelper.queryASBSessions();
+	}
+
+	/** Get a specific armor set. */
+	public ASBSession getASBSession(long id) {
+		ASBSession session = null;
+		ASBSessionCursor cursor = mHelper.queryASBSession(id);
+		cursor.moveToFirst();
+
+		if (!cursor.isAfterLast())
+			session = cursor.getASBSession(mAppContext);
+
+		cursor.close();
+		return session;
+	}
+
+	/** Adds a new ASB set to the list. */
+	public void queryAddASBSet(String name, int rank,  int hunterType) {
+		mHelper.queryAddASBSet(name, rank, hunterType);
+	}
+
+	/** Adds a new set that is a copy of the designated set to the list. */
+	public void queryAddASBSet(long setId) {
+		ASBSet set = getASBSet(setId);
+		mHelper.queryAddASBSet(set.getName(), set.getRank(), set.getHunterType());
+	}
+
+	public void queryDeleteASBSet(long setId) {
+		mHelper.queryDeleteASBSet(setId);
+	}
+
+	public void queryUpdateASBSet(long setId, String name, int rank, int hunterType) {
+		mHelper.queryUpdateASBSet(setId, name, rank, hunterType);
+	}
+
+	public void queryPutASBSessionArmor(long asbSetId, long armorId, int pieceIndex) {
+		mHelper.queryAddASBSessionArmor(asbSetId, armorId, pieceIndex);
+	}
+
+	public void queryRemoveASBSessionArmor(long asbSetId, int pieceIndex) {
+		mHelper.queryAddASBSessionArmor(asbSetId, -1, pieceIndex);
+	}
+
+	public void queryPutASBSessionDecoration(long asbSetId, long decorationId, int pieceIndex, int decorationIndex) {
+		mHelper.queryPutASBSessionDecoration(asbSetId, decorationId, pieceIndex, decorationIndex);
+	}
+
+	public void queryRemoveASBSessionDecoration(long asbSetId, int pieceIndex, int decorationIndex) {
+		mHelper.queryPutASBSessionDecoration(asbSetId, -1, pieceIndex, decorationIndex);
+	}
+
+	public void queryCreateASBSessionTalisman(long asbSetId, int type, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
+		mHelper.queryCreateASBSessionTalisman(asbSetId, type, slots, skill1Id, skill1Points, skill2Id, skill2Points);
+	}
+
+	public void queryRemoveASBSessionTalisman(long asbSetId) {
+		mHelper.queryRemoveASBSessionTalisman(asbSetId);
 	}
 
     /**************************** WYPORIUM TRADE DATA QUERIES *************************************/

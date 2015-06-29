@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/armor_set_builder_decoration_add"
+        android:title="@string/asb_action_add_decoration"
+        android:visible="false"/>
+
+    <item android:id="@+id/armor_set_builder_decoration_remove"
+        android:title="@string/asb_action_remove_decoration"
+        android:visible="false"/>
+
+    <item android:id="@+id/armor_set_builder_decoration_info"
+        android:title="@string/asb_action_get_decoration_info"
+        android:visible="false"/>
+
+</menu>

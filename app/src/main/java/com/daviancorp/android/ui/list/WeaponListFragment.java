@@ -75,10 +75,10 @@ public abstract class WeaponListFragment extends ListFragment implements
         }
     }
 
-	
+
 	//protected abstract CursorAdapter getDetailAdapter();
-	
+
 	//protected abstract Weapon getDetailWeapon(int position);
-	
+
 	//protected abstract Fragment getThisFragment();
 }

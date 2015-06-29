@@ -94,9 +94,9 @@ public class ArmorDetailFragment extends Fragment {
 		dragonResTextView = (TextView) view.findViewById(R.id.dragon_res);
 
         // If the originator of this fragment's activity was the Armor Set Builder...
-        if (getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
-            Button selectButton = new Button(getActivity().getApplicationContext());
-            selectButton.setText("Select");
+        if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            Button selectButton = (Button) view.findViewById(R.id.select_button);
+            selectButton.setVisibility(View.VISIBLE);
             selectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -106,7 +106,6 @@ public class ArmorDetailFragment extends Fragment {
                     getActivity().finish();
                 }
             });
-            ((ViewGroup) view).addView(selectButton);
         }
 		
 		return view;
