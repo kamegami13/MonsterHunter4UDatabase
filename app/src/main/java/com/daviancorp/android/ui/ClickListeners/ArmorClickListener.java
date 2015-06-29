@@ -3,20 +3,18 @@ package com.daviancorp.android.ui.ClickListeners;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
 
-/**
- * Created by Mark on 2/24/2015.
- */
 public class ArmorClickListener implements View.OnClickListener {
 
     private Context c;
     private Long id;
-    private boolean fromArmorSetBuilder;
+
     private Activity activity;
+    private int requestCode;
 
     public ArmorClickListener(Context context, Long id) {
         super();
@@ -24,10 +22,10 @@ public class ArmorClickListener implements View.OnClickListener {
         this.c = context;
     }
 
-    public ArmorClickListener(Context context, Long id, boolean fromArmorSetBuilder, Activity activity) {
+    public ArmorClickListener(Context context, Long id, Activity activity, int requestCode) {
         this(context, id);
-        this.fromArmorSetBuilder = fromArmorSetBuilder;
         this.activity = activity;
+        this.requestCode = requestCode;
     }
 
     @Override
@@ -35,9 +33,10 @@ public class ArmorClickListener implements View.OnClickListener {
         Intent i = new Intent(c, ArmorDetailActivity.class);
         i.putExtra(ArmorDetailActivity.EXTRA_ARMOR_ID, id);
 
-        if (fromArmorSetBuilder) {
-            i.putExtras(activity.getIntent());
-            activity.startActivityForResult(i, ArmorSetBuilderActivity.BUILDER_REQUEST_CODE);
+        // If we are being called by something else
+        if (activity != null) {
+            i.putExtras(activity.getIntent().getExtras());
+            activity.startActivityForResult(i, requestCode);
         }
         else {
             c.startActivity(i);

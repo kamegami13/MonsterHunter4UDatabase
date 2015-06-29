@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -125,8 +126,8 @@ public class CombiningListFragment extends ListFragment implements
 			ImageView itemiv2 = (ImageView) v.findViewById(R.id.item_img2);
 			ImageView itemiv3 = (ImageView) v.findViewById(R.id.item_img3);
 
-			RelativeLayout itemlayout1 = (RelativeLayout) v.findViewById(R.id.item1);
-			RelativeLayout itemlayout2 = (RelativeLayout) v.findViewById(R.id.item2);
+			LinearLayout itemlayout1 = (LinearLayout) v.findViewById(R.id.item1);
+			LinearLayout itemlayout2 = (LinearLayout) v.findViewById(R.id.item2);
 			RelativeLayout itemlayout3 = (RelativeLayout) v.findViewById(R.id.item3);
 
 			TextView percenttv = (TextView) v.findViewById(R.id.percentage);

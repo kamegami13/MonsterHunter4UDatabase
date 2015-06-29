@@ -48,8 +48,9 @@ public class WishlistListFragment extends ListFragment implements
 	private static final int REQUEST_RENAME = 1;
 	private static final int REQUEST_COPY = 2;
 	private static final int REQUEST_DELETE = 3;
-	
-	private ActionMode mActionMode;
+
+    private int lastSelectionIndex = 0;
+    private ActionMode mActionMode;
 	private ListView mListView;
 	
 	@Override
@@ -83,7 +84,8 @@ public class WishlistListFragment extends ListFragment implements
 			            }
 			
 			            mActionMode = getActivity().startActionMode(new mActionModeCallback());
-			            mActionMode.setTag(position);
+                        highlightSelection(position);
+                        mActionMode.setTag(position);
 			            mListView.setItemChecked(position, true);
 			            return true;
 			        }
@@ -154,7 +156,8 @@ public class WishlistListFragment extends ListFragment implements
 					mActionMode = getActivity().startActionMode(new mActionModeCallback());
 		            mActionMode.setTag(0);
 					mListView.setItemChecked(0, true);
-				}
+                    highlightSelection(0);
+                }
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -197,8 +200,19 @@ public class WishlistListFragment extends ListFragment implements
 		adapter.notifyDataSetChanged();
 		
 	}
-	
-	private boolean onItemSelected(MenuItem item, int position) {
+
+    private void highlightSelection(int position){
+        clearHighlight(lastSelectionIndex);
+        mListView.getChildAt(position).setBackgroundColor(getResources().getColor(R.color.light_primary_color));
+        lastSelectionIndex = position;
+    }
+
+    private void clearHighlight(int position){
+        mListView.getChildAt(lastSelectionIndex).setBackgroundColor(getResources().getColor(R.color.list_background));
+    }
+
+
+    private boolean onItemSelected(MenuItem item, int position) {
 		WishlistListCursorAdapter adapter = (WishlistListCursorAdapter) getListAdapter();
 		Wishlist wishlist = ((WishlistCursor) adapter.getItem(position)).getWishlist();
 		long id = wishlist.getId();
@@ -251,7 +265,8 @@ public class WishlistListFragment extends ListFragment implements
 	    public void onDestroyActionMode(ActionMode mode) {		        
 	        for (int i = 0; i < mListView.getCount(); i++) {
 	        	mListView.setItemChecked(i, false);
-	        }
+                clearHighlight(i);
+            }
 
 	        mActionMode = null;
 	    }
@@ -267,7 +282,8 @@ public class WishlistListFragment extends ListFragment implements
 			startActivity(i);
 		} 
 		// Contextual action bar options
-		else { 
+		else {
+            highlightSelection(position);
             mActionMode.setTag(position);
 		}
 	}
@@ -300,7 +316,6 @@ public class WishlistListFragment extends ListFragment implements
 			TextView wishlistNameTextView = (TextView) view;
 			String cellText = wishlist.getName();
 			wishlistNameTextView.setText(cellText);
-			
 		}
 	}
 

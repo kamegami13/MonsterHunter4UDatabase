@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/list_item"
+    android:layout_height="@dimen/damage_table_item_height"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/body_part"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:textColor="@color/text_color"
+        tools:text="Tail Tip (Break)"/>
+
+    <TextView
+        android:id="@+id/dmg1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:gravity="center"
+        android:textColor="@color/text_color"
+        tools:text="20"/>
+
+    <TextView
+        android:id="@+id/dmg2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:gravity="center"
+        android:textColor="@color/text_color"
+        tools:text="50"/>
+
+    <TextView
+        android:id="@+id/dmg3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:gravity="center"
+        android:textColor="@color/text_color"
+        tools:text="20"/>
+
+    <TextView
+        android:id="@+id/dmg4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:gravity="center"
+        android:textColor="@color/text_color"
+        tools:text="20"/>
+
+    <TextView
+        android:id="@+id/dmg5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:gravity="center"
+        android:textColor="@color/text_color"
+        tools:text="100"/>
+
+</LinearLayout>

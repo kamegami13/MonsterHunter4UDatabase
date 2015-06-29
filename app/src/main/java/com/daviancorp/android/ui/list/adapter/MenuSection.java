@@ -17,7 +17,8 @@ public enum MenuSection {
     DECORATION(7),
     SKILL_TREES(8),
     WISH_LISTS(9),
-    ARMOR_SET_BUILDER(10);
+    WYPORIUM_TRADE(10),
+    ARMOR_SET_BUILDER(11);
 
     public int menuListPosition;
 

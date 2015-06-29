@@ -11,6 +11,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
-        style="@style/text_medium_alt" />
+        style="@style/text_medium" />
 
 </LinearLayout>

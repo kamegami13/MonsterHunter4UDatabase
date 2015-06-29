@@ -1,1 +1,2 @@
-include ':app', ':multilevelexpindlistview'
+include ':app', ':multilevelexpindlistview', ':sqlite-asset-helper', ':android-sqlite-asset-helper'
+project(':sqlite-asset-helper').projectDir = new File('android-sqlite-asset-helper/library')

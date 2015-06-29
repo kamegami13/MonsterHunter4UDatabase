@@ -1,11 +1,10 @@
 package com.daviancorp.android.data.database;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.database.SQLException;
 
+import com.daviancorp.android.data.classes.*;
 import com.daviancorp.android.data.classes.ArenaQuest;
 import com.daviancorp.android.data.classes.ArenaReward;
 import com.daviancorp.android.data.classes.Armor;
@@ -24,6 +23,7 @@ import com.daviancorp.android.data.classes.MonsterDamage;
 import com.daviancorp.android.data.classes.MonsterStatus;
 import com.daviancorp.android.data.classes.MonsterToArena;
 import com.daviancorp.android.data.classes.MonsterToQuest;
+import com.daviancorp.android.data.classes.MonsterWeakness;
 import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.data.classes.QuestReward;
 import com.daviancorp.android.data.classes.Skill;
@@ -32,7 +32,9 @@ import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.classes.Wishlist;
 import com.daviancorp.android.data.classes.WishlistComponent;
 import com.daviancorp.android.data.classes.WishlistData;
+import com.daviancorp.android.data.classes.WyporiumTrade;
 import com.daviancorp.android.ui.general.WeaponListEntry;
+
 
 /*
  * Singleton class
@@ -117,7 +119,10 @@ public class DataManager {
 	}
 	
 /********************************* ARMOR QUERIES ******************************************/	
-	
+
+	/* Get a cursor that has a list based on a search term */
+	public ArmorCursor queryArmorSearch(String search) { return mHelper.queryArmorSearch(search); }
+
 	/* Get a Cursor that has a list of all Armors */
 	public ArmorCursor queryArmor() {
 		return mHelper.queryArmor();
@@ -640,7 +645,13 @@ public class DataManager {
 		cursor.close();
 		return monsters;
 	}
-	
+
+/********************************* MONSTER AILMENT QUERIES ******************************************/
+	/* Get a cursor that lists all the ailments a particular monster can inflict */
+	public MonsterAilmentCursor queryAilmentsFromId(long id){
+		return mHelper.queryAilmentsFromMonster(id);
+	}
+
 /********************************* MONSTER DAMAGE QUERIES ******************************************/	
 	/* Get a Cursor that has a list of MonsterDamage for a specific Monster */
 	public MonsterDamageCursor queryMonsterDamage(long id) {
@@ -766,6 +777,28 @@ public class DataManager {
     public MonsterHabitatCursor queryHabitatLocation(long id) {
         return mHelper.queryHabitatLocation(id);
     }
+
+/********************************* MONSTER WEAKNESS QUERIES ******************************************/
+
+	/* Get a cursor that has all a monsters weaknesses */
+	public MonsterWeaknessCursor queryWeaknessFromMonster(long id){
+		return mHelper.queryWeaknessFromMonster(id);
+	}
+
+	/* Get an array of MonsterWeakness for a specific Monster */
+	public ArrayList<MonsterWeakness> queryMonsterWeaknessArray(long id) {
+		ArrayList<MonsterWeakness> weaknesses = new ArrayList<MonsterWeakness>();
+		MonsterWeaknessCursor cursor = mHelper.queryWeaknessFromMonster(id);
+		cursor.moveToFirst();
+
+		while(!cursor.isAfterLast()) {
+			weaknesses.add(cursor.getWeakness());
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return weaknesses;
+	}
+
 /********************************* QUEST QUERIES ******************************************/	
 
 	/* Get a Cursor that has a list of all Quests */
@@ -1369,4 +1402,101 @@ public class DataManager {
 		
 		wdc.close();
 	}
+
+	/********************************* ARMOR SET BUILDER QUERIES ******************************************/
+
+	public ASBSetCursor queryASBSets() {
+		return mHelper.queryASBSets();
+	}
+
+	public ASBSet getASBSet(long id) {
+		ASBSet set = null;
+		ASBSetCursor cursor = mHelper.queryASBSet(id);
+		cursor.moveToFirst();
+
+		if (!cursor.isAfterLast())
+			set = cursor.getASBSet();
+
+		cursor.close();
+		return set;
+	}
+
+	/** Get a cursor with a list of all armor sets. */
+	public ASBSessionCursor queryASBSessions() {
+		return mHelper.queryASBSessions();
+	}
+
+	/** Get a specific armor set. */
+	public ASBSession getASBSession(long id) {
+		ASBSession session = null;
+		ASBSessionCursor cursor = mHelper.queryASBSession(id);
+		cursor.moveToFirst();
+
+		if (!cursor.isAfterLast())
+			session = cursor.getASBSession(mAppContext);
+
+		cursor.close();
+		return session;
+	}
+
+	/** Adds a new ASB set to the list. */
+	public void queryAddASBSet(String name, int rank,  int hunterType) {
+		mHelper.queryAddASBSet(name, rank, hunterType);
+	}
+
+	/** Adds a new set that is a copy of the designated set to the list. */
+	public void queryAddASBSet(long setId) {
+		ASBSet set = getASBSet(setId);
+		mHelper.queryAddASBSet(set.getName(), set.getRank(), set.getHunterType());
+	}
+
+	public void queryDeleteASBSet(long setId) {
+		mHelper.queryDeleteASBSet(setId);
+	}
+
+	public void queryUpdateASBSet(long setId, String name, int rank, int hunterType) {
+		mHelper.queryUpdateASBSet(setId, name, rank, hunterType);
+	}
+
+	public void queryPutASBSessionArmor(long asbSetId, long armorId, int pieceIndex) {
+		mHelper.queryAddASBSessionArmor(asbSetId, armorId, pieceIndex);
+	}
+
+	public void queryRemoveASBSessionArmor(long asbSetId, int pieceIndex) {
+		mHelper.queryAddASBSessionArmor(asbSetId, -1, pieceIndex);
+	}
+
+	public void queryPutASBSessionDecoration(long asbSetId, long decorationId, int pieceIndex, int decorationIndex) {
+		mHelper.queryPutASBSessionDecoration(asbSetId, decorationId, pieceIndex, decorationIndex);
+	}
+
+	public void queryRemoveASBSessionDecoration(long asbSetId, int pieceIndex, int decorationIndex) {
+		mHelper.queryPutASBSessionDecoration(asbSetId, -1, pieceIndex, decorationIndex);
+	}
+
+	public void queryCreateASBSessionTalisman(long asbSetId, int type, int slots, long skill1Id, int skill1Points, long skill2Id, int skill2Points) {
+		mHelper.queryCreateASBSessionTalisman(asbSetId, type, slots, skill1Id, skill1Points, skill2Id, skill2Points);
+	}
+
+	public void queryRemoveASBSessionTalisman(long asbSetId) {
+		mHelper.queryRemoveASBSessionTalisman(asbSetId);
+	}
+
+    /**************************** WYPORIUM TRADE DATA QUERIES *************************************/
+    	/* Get a Cursor that has a list of all wyporium trades */
+    public WyporiumTradeCursor queryWyporiumTrades() {
+        return mHelper.queryWyporiumTrades();
+    }
+
+    /* Get a specific wyporium trade */
+    public WyporiumTrade getWyporiumTrade(long id) {
+        WyporiumTrade wyporiumTrade = null;
+        WyporiumTradeCursor cursor = mHelper.queryWyporiumTrades(id);
+        cursor.moveToFirst();
+
+        if (!cursor.isAfterLast())
+            wyporiumTrade = cursor.getWyporiumTrade();
+        cursor.close();
+        return wyporiumTrade;
+    }
 }

@@ -35,6 +35,7 @@ public class DecorationDetailFragment extends Fragment {
 	private TextView maxTextView;
 	private TextView buyTextView;
 	private TextView sellTextView;
+	private TextView slotsReqTextView;
 
 	public static DecorationDetailFragment newInstance(long decorationId) {
 		Bundle args = new Bundle();
@@ -77,11 +78,12 @@ public class DecorationDetailFragment extends Fragment {
 		maxTextView = (TextView) view.findViewById(R.id.max);
 		sellTextView = (TextView) view.findViewById(R.id.sell);
 		buyTextView = (TextView) view.findViewById(R.id.buy);
+		slotsReqTextView = (TextView) view.findViewById(R.id.slots_req);
 
         // If the originator of this fragment's activity was the Armor Set Builder...
-        if (getActivity().getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
-            Button selectButton = new Button(getActivity().getApplicationContext());
-            selectButton.setText("Select");
+        if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            Button selectButton = (Button) view.findViewById(R.id.select_button);
+            selectButton.setVisibility(View.VISIBLE);
             selectButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -91,7 +93,6 @@ public class DecorationDetailFragment extends Fragment {
                     getActivity().finish();
                 }
             });
-            ((ViewGroup) view).addView(selectButton);
         }
 
 		return view;
@@ -104,6 +105,7 @@ public class DecorationDetailFragment extends Fragment {
 		String cellMax = "" + mDecoration.getCarryCapacity();
 		String cellBuy = "" + mDecoration.getBuy() + "z";
 		String cellSell = "" + mDecoration.getSell() + "z";
+		String cellSlotsReq = "" + mDecoration.getSlotsString();
 
 		if (cellBuy.equals("0z")) {
 			cellBuy = "-";
@@ -117,6 +119,7 @@ public class DecorationDetailFragment extends Fragment {
 		maxTextView.setText(cellMax);
 		buyTextView.setText(cellBuy);
 		sellTextView.setText(cellSell);
+		slotsReqTextView.setText(cellSlotsReq);
 
 		// Read a Bitmap from Assets
 		AssetManager manager = getActivity().getAssets();

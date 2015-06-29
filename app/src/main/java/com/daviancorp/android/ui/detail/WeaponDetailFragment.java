@@ -55,7 +55,7 @@ public class WeaponDetailFragment extends Fragment {
 		mWeaponTypeTextView.setText(mWeapon.getWtype());
 		mWeaponAttackTextView.setText("" + mWeapon.getAttack());
 		mWeaponRarityTextView.setText("" + mWeapon.getRarity());
-		mWeaponSlotTextView.setText("" + mWeapon.getNumSlots());
+		mWeaponSlotTextView.setText("" + mWeapon.getSlotString());
 		mWeaponDefenseTextView.setText("" + mWeapon.getDefense());
 
         String affinity;

@@ -2,9 +2,36 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="oval">
-            <solid android:color="@color/text_color_secondary"/>
-            <size android:height="20dp"
-                  android:width="20dp"/>
+            <stroke
+                android:color="@color/primary_color"
+                android:width="1dp" />
+            <size
+                android:height="20dp"
+                android:width="20dp" />
         </shape>
+
+
+    </item>
+
+    <item
+        android:top="9.5dp"
+        android:bottom="9.5dp">
+        <rotate
+            android:fromDegrees="45">
+            <shape android:shape="rectangle">
+                <solid android:color="@color/primary_color" />
+            </shape>
+        </rotate>
+    </item>
+
+    <item
+        android:top="9.5dp"
+        android:bottom="9.5dp">
+        <rotate
+            android:fromDegrees="135">
+            <shape android:shape="rectangle">
+                <solid android:color="@color/primary_color" />
+            </shape>
+        </rotate>
     </item>
 </layer-list>

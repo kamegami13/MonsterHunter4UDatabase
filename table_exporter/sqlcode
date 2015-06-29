@@ -2,6 +2,7 @@ drop table if exists android_metadata;
 drop table if exists arena_quests;
 drop table if exists arena_rewards;
 drop table if exists armor;
+drop table if exists asb_sets;
 drop table if exists charms;
 drop table if exists combining;
 drop table if exists components;
@@ -62,6 +63,45 @@ CREATE TABLE IF NOT EXISTS `wishlist_component` (
   foreign key (`wishlist_id`) references wishlist('_id'),
   foreign key (`component_id`) references items('_id')
 );
+
+CREATE TABLE IF NOT EXISTS `asb_sets` (
+  `_id` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `name`  TEXT NOT NULL,
+  `rank`  INTEGER NOT NULL,
+  `hunter_type` INTEGER NOT NULL,
+  `head_armor`  INTEGER,
+  `head_decoration_1` INTEGER,
+  `head_decoration_2` INTEGER,
+  `head_decoration_3` INTEGER,
+  `body_armor`  INTEGER,
+  `body_decoration_1` INTEGER,
+  `body_decoration_2` INTEGER,
+  `body_decoration_3` INTEGER,
+  `arms_armor`  INTEGER,
+  `arms_decoration_1` INTEGER,
+  `arms_decoration_2` INTEGER,
+  `arms_decoration_3` INTEGER,
+  `waist_armor` INTEGER,
+  `waist_decoration_1`  INTEGER,
+  `waist_decoration_2`  INTEGER,
+  `waist_decoration_3`  INTEGER,
+  `legs_armor`  INTEGER,
+  `legs_decoration_1` INTEGER,
+  `legs_decoration_2` INTEGER,
+  `legs_decoration_3` INTEGER,
+  `talisman_exists` INTEGER NOT NULL,
+  `talisman_type` INTEGER,
+  `talisman_slots`  INTEGER,
+  `talisman_decoration_1` INTEGER,
+  `talisman_decoration_2` INTEGER,
+  `talisman_decoration_3` INTEGER,
+  `talisman_skill_1`  INTEGER,
+  `talisman_skill_1_points` INTEGER,
+  `talisman_skill_2`  INTEGER,
+  `talisman_skill_2_points` INTEGER
+);
+
+INSERT INTO `asb_sets` (`_id`, `name`, `rank`, `hunter_type`, `talisman_exists`) VALUES (1, 'My Set', 2, 0, 0);
 
 CREATE TABLE IF NOT EXISTS "android_metadata" ("locale" TEXT DEFAULT 'en_US');
 

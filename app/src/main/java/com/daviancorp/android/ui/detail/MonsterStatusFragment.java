@@ -122,19 +122,19 @@ public class MonsterStatusFragment extends Fragment {
                     imageFile = imageFile + "Stun.png";
                     break;
                 case "Exhaust":
-                    statusView.setText(status);
-                    image = false;
+                    //statusView.setText(status);
+                    imageFile = imageFile + "exhaust.png";
                     break;
                 case "Blast":
                     imageFile = imageFile + "Blastblight.png";
                     break;
                 case "Jump":
-                    statusView.setText(status);
-                    image = false;
+                    //statusView.setText(status);
+                    imageFile = imageFile + "jump.png";
                     break;
                 case "Mount":
-                    statusView.setText(status);
-                    image = false;
+                    //statusView.setText(status);
+                    imageFile = imageFile + "mount.png";
                     break;
             }
 
@@ -154,8 +154,6 @@ public class MonsterStatusFragment extends Fragment {
                     e.printStackTrace();
                 }
                 android.view.ViewGroup.LayoutParams layoutParams = statusImage.getLayoutParams();
-                layoutParams.width = 80;
-                layoutParams.height = 80;
                 statusImage.setLayoutParams(layoutParams);
 
                 statusImage.setImageDrawable(draw);

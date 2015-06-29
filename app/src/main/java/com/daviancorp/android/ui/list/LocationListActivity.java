@@ -16,8 +16,8 @@ public class LocationListActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.locations);
 
-        // Enable drawer button instead of back button
-        super.enableDrawerIndicator();
+        // Tag as top level activity
+        super.setAsTopLevel();
     }
 
     @Override

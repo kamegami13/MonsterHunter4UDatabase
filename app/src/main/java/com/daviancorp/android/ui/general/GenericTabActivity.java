@@ -13,7 +13,7 @@ import com.daviancorp.android.mh4udatabase.R;
  *  - override onCreate() to set title
  */
 
-public abstract class GenericTabActivity extends GenericActionBarActivity{
+public abstract class GenericTabActivity extends GenericActionBarActivity {
 
 	protected Fragment detail;
     protected SlidingTabLayout mSlidingTabLayout;
@@ -44,6 +44,7 @@ public abstract class GenericTabActivity extends GenericActionBarActivity{
 
         setTitle(R.string.app_name);
         super.setupDrawer(); // Needs to be called after setContentView
-        super.enableDrawerIndicator(); // Enable drawer toggle button
+        // Disabled by request. Turns into BACK button
+        //super.enableDrawerIndicator(); // Enable drawer toggle button
 	}
 }

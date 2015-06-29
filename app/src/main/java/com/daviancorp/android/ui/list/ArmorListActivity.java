@@ -1,24 +1,28 @@
 package com.daviancorp.android.ui.list;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.daviancorp.android.data.classes.Rank;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorExpandableListPagerAdapter;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderActivity;
-import com.daviancorp.android.ui.detail.ArmorSetBuilderFragment;
+import com.daviancorp.android.ui.detail.ASBActivity;
+import com.daviancorp.android.ui.general.GenericActionBarActivity;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArmorListActivity extends GenericTabActivity {
 
     private ViewPager viewPager;
     private ArmorExpandableListPagerAdapter mAdapter;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,8 +37,26 @@ public class ArmorListActivity extends GenericTabActivity {
         mSlidingTabLayout.setViewPager(viewPager);
 
         // Enable back button if we're coming from the set builder
-        if (getIntent().getBooleanExtra(ArmorSetBuilderActivity.EXTRA_FROM_SET_BUILDER, false)) {
+        if (getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
             super.disableDrawerIndicator();
+            if (getIntent().getIntExtra(ASBActivity.EXTRA_SET_HUNTER_TYPE, -1) == 1) {
+                viewPager.setCurrentItem(1); // We change to the gunner page if its a gunner set
+            }
+        }
+        else {
+            // Tag as top level activity
+            super.setAsTopLevel();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ASBActivity.REQUEST_CODE_ADD_PIECE && resultCode == RESULT_OK) {
+            setResult(RESULT_OK, data);
+            finish();
         }
     }
 
@@ -43,36 +65,8 @@ public class ArmorListActivity extends GenericTabActivity {
         return MenuSection.ARMOR;
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        // MenuInflater inflater = getMenuInflater();
-        // inflater.inflate(R.menu.monsterlist, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == ArmorSetBuilderActivity.BUILDER_REQUEST_CODE && resultCode == RESULT_OK) {
-            setResult(RESULT_OK, data);
-            finish();
-        }
     }
 }
