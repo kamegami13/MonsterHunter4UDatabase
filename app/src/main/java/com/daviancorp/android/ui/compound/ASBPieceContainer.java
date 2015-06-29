@@ -336,6 +336,12 @@ public class ASBPieceContainer extends LinearLayout {
                         decorationNames[i].setTextColor(getResources().getColor(R.color.text_color_secondary));
                     }
                 }
+            } else {
+                for (int i = 0; i < decorationNames.length; i++) {
+                    decorationNames[i].setText(null);
+                    decorationIcons[i].setImageDrawable(null);
+                    decorationMenuButtons[i].setVisibility(INVISIBLE);
+                }
             }
         }
 
