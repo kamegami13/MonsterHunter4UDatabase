@@ -38,7 +38,6 @@ public class ASBActivity extends GenericTabActivity {
     public static final int REQUEST_CODE_CREATE_TALISMAN = 539;
     public static final int REQUEST_CODE_REMOVE_PIECE = 540;
     public static final int REQUEST_CODE_REMOVE_DECORATION = 541;
-    public static final int REQUEST_CODE_REMOVE_TALISMAN = 542;
 
     private ASBSession session;
 

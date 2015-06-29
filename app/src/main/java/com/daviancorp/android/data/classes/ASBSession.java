@@ -4,7 +4,10 @@ import android.content.Context;
 import android.util.Log;
 import com.daviancorp.android.data.database.DataManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Contains all of the juicy stuff regarding ASB sets, like the armor inside and the skills it provides.
@@ -27,8 +30,6 @@ public class ASBSession {
     private Decoration[][] decorations;
 
     private List<SkillTreeInSet> skillTreesInSet;
-
-    private List<SessionChangeListener> sessionChangeListeners;
 
     public ASBSession(Context context) {
 
@@ -85,8 +86,7 @@ public class ASBSession {
             }
 
             return equipment[pieceIndex].getNumSlots() - decorationCount;
-        }
-        else {
+        } else {
             return 0;
         }
     }
@@ -96,7 +96,7 @@ public class ASBSession {
      */
     public boolean decorationIsReal(int pieceIndex, int decorationIndex) {
         return decorations[pieceIndex][decorationIndex] != null
-                && decorations[pieceIndex][decorationIndex] != dummyDecoration;
+                       && decorations[pieceIndex][decorationIndex] != dummyDecoration;
     }
 
     /**
@@ -133,8 +133,8 @@ public class ASBSession {
 
     /**
      * Attempts to add a decoration to the specified armor piece.
-     * @param pieceIndex The index of a piece in the set to fetch, according to {@link ASBSession}.
-     * @param decoration The decoration to add.
+     * @param pieceIndex   The index of a piece in the set to fetch, according to {@link ASBSession}.
+     * @param decoration   The decoration to add.
      * @param updateSkills Whether or not to call {@link #updateSkillTreePointsSets()} upon completion.
      * @return The 0-based index of the slot that the decoration was added to.
      */
@@ -150,8 +150,7 @@ public class ASBSession {
 
             if (decoration.getNumSlots() == 2) {
                 decorations[pieceIndex][i + 1] = dummyDecoration;
-            }
-            else if (decoration.getNumSlots() == 3) {
+            } else if (decoration.getNumSlots() == 3) {
                 decorations[pieceIndex][i + 1] = dummyDecoration;
                 decorations[pieceIndex][i + 2] = dummyDecoration;
             }
@@ -161,8 +160,7 @@ public class ASBSession {
             }
 
             return i;
-        }
-        else {
+        } else {
             Log.e("ASB", "Cannot add that decoration!");
             return -1;
         }
@@ -227,7 +225,7 @@ public class ASBSession {
     }
 
     /**
-     *  Changes the equipment at the specified location.
+     * Changes the equipment at the specified location.
      */
     public void setEquipment(int pieceIndex, Equipment equip) {
         setEquipment(pieceIndex, equip, true);
@@ -259,8 +257,7 @@ public class ASBSession {
     public void removeEquipment(int pieceIndex, boolean updateSkills) {
         if (pieceIndex == TALISMAN) {
             equipment[pieceIndex] = null;
-        }
-        else {
+        } else {
             equipment[pieceIndex] = null;
         }
 
@@ -300,7 +297,8 @@ public class ASBSession {
                 SkillTreeInSet s; // The actual points set that we are working with that will be shown to the user
 
                 if (!skillTreeToSkillTreeInSet.containsKey(skillTree.getId())) { // If the armor set does not yet have this skill tree registered...
-                    Log.v("ASB", "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
+                    Log.v("ASB",
+                          "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
 
                     s = new SkillTreeInSet(); // We add it...
                     s.setSkillTree(skillTree);
@@ -308,8 +306,7 @@ public class ASBSession {
 
                     skillTreeToSkillTreeInSet.put(skillTree.getId(), s);
 
-                }
-                else {
+                } else {
                     Log.v("ASB", "Skill tree " + skillTree.getName() + " already registered!");
                     s = skillTreeToSkillTreeInSet.get(skillTree.getId()); // Otherwise, we just find the skill tree set that's already there
                 }
@@ -332,8 +329,7 @@ public class ASBSession {
                 for (ItemToSkillTree itemToSkillTree : DataManager.get(context).queryItemToSkillTreeArrayItem(equipment[pieceIndex].getId())) { // We add skills for armor
                     skills.put(itemToSkillTree.getSkillTree(), itemToSkillTree.getPoints());
                 }
-            }
-            else {
+            } else {
                 skills.put(getTalisman().getSkill1(), getTalisman().getSkill1Points());
 
                 if (getTalisman().getSkill2() != null) {
@@ -357,8 +353,7 @@ public class ASBSession {
                             int points = skills.get(skillTreeToAddTo) + itemToSkillTree.getPoints();
                             skills.remove(skillTreeToAddTo);
                             skills.put(skillTreeToAddTo, points);
-                        }
-                        else {
+                        } else {
                             skills.put(itemToSkillTree.getSkillTree(), itemToSkillTree.getPoints());
                         }
                     }
@@ -367,34 +362,6 @@ public class ASBSession {
         }
 
         return skills;
-    }
-
-    public void addSessionChangeListener(SessionChangeListener l) {
-        if (sessionChangeListeners == null) {
-            sessionChangeListeners = new ArrayList<>();
-        }
-
-        sessionChangeListeners.add(l);
-    }
-
-    public void removeSessionChangeListener(SessionChangeListener l) {
-        if (sessionChangeListeners == null) {
-            sessionChangeListeners = new ArrayList<>();
-        }
-
-        sessionChangeListeners.remove(l);
-    }
-
-    public void notifySessionChangeListeners() {
-        if (sessionChangeListeners != null) {
-            for (SessionChangeListener l : sessionChangeListeners) {
-                l.onSessionChange();
-            }
-        }
-    }
-
-    public interface SessionChangeListener {
-        void onSessionChange();
     }
 
     /**
@@ -413,6 +380,10 @@ public class ASBSession {
             return skillTree;
         }
 
+        public void setSkillTree(SkillTree skillTree) {
+            this.skillTree = skillTree;
+        }
+
         public int getPoints(int pieceIndex) {
             if (pieceIndex == BODY) {
                 throw new IllegalArgumentException("Use the getPoints(int, List<SkillTreeInSet>) when dealing with the chest piece!");
@@ -429,8 +400,7 @@ public class ASBSession {
                     }
                 }
                 return points[pieceIndex] * (torsoUpPieces + 1);
-            }
-            else {
+            } else {
                 return points[pieceIndex];
             }
         }
@@ -444,10 +414,6 @@ public class ASBSession {
                 total += getPoints(i, trees);
             }
             return total;
-        }
-
-        public void setSkillTree(SkillTree skillTree) {
-            this.skillTree = skillTree;
         }
 
         public void setPoints(int pieceIndex, int piecePoints) {
