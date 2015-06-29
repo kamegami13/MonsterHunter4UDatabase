@@ -40,7 +40,6 @@ public class Weapon extends Item{
 	private String deviation;					// Deviation for bowguns
 	private String ammo;						// Ammo for bowguns
 	private int num_slots;						// Number of slots
-	private String sharpness_file;				// Sharpness image file location
 	private int wfinal;							// Final in weapon tree or not
     private int tree_depth;                     // Depth of weapon in weapon tree
 
@@ -80,7 +79,6 @@ public class Weapon extends Item{
 		this.deviation = "";
 		this.ammo = "";
 		this.num_slots = -1;
-		this.sharpness_file = "";
 		this.wfinal = -1;
         this.tree_depth = 0;
         this.chargeString = "";
@@ -284,14 +282,6 @@ public class Weapon extends Item{
         }
         
         this.mSlotString = slot;
-	}
-	
-	public String getSharpnessFile() {
-		return sharpness_file;
-	}
-	
-	public void setSharpnessFile(String sharpness_file) {
-		this.sharpness_file = sharpness_file;
 	}
 	
 	public int getWFinal() {

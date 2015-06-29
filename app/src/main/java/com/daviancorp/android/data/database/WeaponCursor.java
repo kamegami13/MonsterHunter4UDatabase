@@ -51,7 +51,6 @@ public class WeaponCursor extends CursorWrapper {
 		String deviation = getString(getColumnIndex(S.COLUMN_WEAPONS_DEVIATION));
 		String ammo = getString(getColumnIndex(S.COLUMN_WEAPONS_AMMO));
 		int num_slots = getInt(getColumnIndex(S.COLUMN_WEAPONS_NUM_SLOTS));
-		String sharpness_file = getString(getColumnIndex(S.COLUMN_WEAPONS_SHARPNESS_FILE));
 		int wfinal = getInt(getColumnIndex(S.COLUMN_WEAPONS_FINAL));
         int tree_depth = getInt(getColumnIndex(S.COLUMN_WEAPONS_TREE_DEPTH));
         int parent_id = getInt(getColumnIndex(S.COLUMN_WEAPONS_PARENT_ID));
@@ -83,7 +82,6 @@ public class WeaponCursor extends CursorWrapper {
 		weapon.setDeviation(deviation);
 		weapon.setAmmo(ammo);
 		weapon.setNumSlots(num_slots);
-		weapon.setSharpnessFile(sharpness_file);
 		weapon.setWFinal(wfinal);
         weapon.setTree_Depth(tree_depth);
 
