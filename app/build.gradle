@@ -32,6 +32,12 @@ dependencies {
     // integration instructions here https://github.com/astuetz/PagerSlidingTabStrip
     compile 'org.apmem.tools:layouts:1.8@aar' // Library for flow layout
     // Resources here https://github.com/ApmeM/android-flowlayout
+    compile 'de.cketti.library.changelog:ckchangelog:1.2.2' // Library to display a changelog on first run
+    // Integration instructions here https://github.com/cketti/ckChangeLog
     compile project(':multilevelexpindlistview')
     compile project(':android-sqlite-asset-helper')
+}
+
+repositories {
+    mavenCentral()
 }

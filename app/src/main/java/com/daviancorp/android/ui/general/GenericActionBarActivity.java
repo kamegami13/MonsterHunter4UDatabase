@@ -47,6 +47,8 @@ import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 import java.io.IOException;
 
+import de.cketti.library.changelog.ChangeLog;
+
 /*
  * Any subclass needs to:
  *  - override onCreate() to set title
@@ -90,6 +92,12 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         isTopLevel = false;
+
+        // Display changelog on first run after update
+        ChangeLog cl = new ChangeLog(this);
+        if (cl.isFirstRun()) {
+            cl.getLogDialog().show();
+        }
 
         // Handler to implement drawer delay and runnable
         mHandler = new Handler();
@@ -271,6 +279,11 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                 // Finish current activity and pop it off the stack.
                 // Basically a back button.
                 this.finish();
+                return true;
+
+            case R.id.change_log:
+                ChangeLog cl = new ChangeLog(this);
+                cl.getFullLogDialog().show();
                 return true;
 
             case R.id.about:
