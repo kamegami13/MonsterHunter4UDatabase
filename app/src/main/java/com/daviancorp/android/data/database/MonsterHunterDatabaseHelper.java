@@ -62,7 +62,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     private static MonsterHunterDatabaseHelper mInstance = null;
 
     private static final String DATABASE_NAME = "mh4u.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
 
     private final Context myContext;
     private SQLiteDatabase myDataBase;
@@ -176,8 +176,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                 serializer.endTag(null, "path");
                 serializer.endTag(null, "data");
 
-                /*queryAddWishlistDataAll(newDb, wishlistData.getWishlistId(), wishlistData.getItem().getId(),
-                        wishlistData.getQuantity(), wishlistData.getSatisfied(), wishlistData.getPath());*/
                 wdc.moveToNext();
             }
             serializer.endTag(null, "wishlist_data");
@@ -201,8 +199,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                 serializer.endTag(null, "notes");
                 serializer.endTag(null, "component");
 
-                /*queryAddWishlistComponentAll(newDb, wishlistComponent.getWishlistId(),
-                        wishlistComponent.getItem().getId(), wishlistComponent.getQuantity(), wishlistComponent.getNotes());*/
                 wcc.moveToNext();
             }
             serializer.endTag(null, "wishlist_components");
@@ -233,110 +229,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
                     serializer.endTag(null, asb_column);
                 }
-
-                /*serializer.startTag(null, "name");
-                serializer.text(asbc.getString(asbc.getColumnIndex(S.COLUMN_ASB_SET_NAME)));
-                serializer.endTag(null, "name");
-                serializer.startTag(null, "rank");
-                serializer.text(asbc.getString(asbc.getColumnIndex(S.COLUMN_ASB_SET_RANK)));
-                serializer.endTag(null, "rank");
-                serializer.startTag(null, "hunter_type");
-                serializer.text(asbc.getString(asbc.getColumnIndex(S.COLUMN_ASB_SET_HUNTER_TYPE)));
-                serializer.endTag(null, "hunter_type");
-                serializer.startTag(null, "head_armor");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_HEAD_ARMOR_ID))));
-                serializer.endTag(null, "head_armor");
-                serializer.startTag(null, "head_decoration_1");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_HEAD_DECORATION_1_ID))));
-                serializer.endTag(null, "head_decoration_1");
-                serializer.startTag(null, "head_decoration_2");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_HEAD_DECORATION_2_ID))));
-                serializer.endTag(null, "head_decoration_2");
-                serializer.startTag(null, "head_decoration_3");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_HEAD_DECORATION_3_ID))));
-                serializer.endTag(null, "head_decoration_3");
-                serializer.startTag(null, "body_armor");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_BODY_ARMOR_ID))));
-                serializer.endTag(null, "body_armor");
-                serializer.startTag(null, "body_decoration_1");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_BODY_DECORATION_1_ID))));
-                serializer.endTag(null, "body_decoration_1");
-                serializer.startTag(null, "body_decoration_2");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_BODY_DECORATION_2_ID))));
-                serializer.endTag(null, "body_decoration_2");
-                serializer.startTag(null, "body_decoration_3");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_BODY_DECORATION_3_ID))));
-                serializer.endTag(null, "body_decoration_3");
-                serializer.startTag(null, S.COLUMN_ARMS_ARMOR_ID);
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_ARMS_ARMOR_ID))));
-                serializer.endTag(null, S.COLUMN_ARMS_ARMOR_ID);
-                serializer.startTag(null, "arms_decoration_1");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_ARMS_DECORATION_1_ID))));
-                serializer.endTag(null, "arms_decoration_1");
-                serializer.startTag(null, "arms_decoration_2");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_ARMS_DECORATION_2_ID))));
-                serializer.endTag(null, "arms_decoration_2");
-                serializer.startTag(null, "arms_decoration_3");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_ARMS_DECORATION_3_ID))));
-                serializer.endTag(null, "arms_decoration_3");
-                serializer.startTag(null, "waist_armor");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_WAIST_ARMOR_ID))));
-                serializer.endTag(null, "waist_armor");
-                serializer.startTag(null, "waist_decoration_1");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_WAIST_DECORATION_1_ID))));
-                serializer.endTag(null, "waist_decoration_1");
-                serializer.startTag(null, "waist_decoration_2");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_WAIST_DECORATION_2_ID))));
-                serializer.endTag(null, "waist_decoration_2");
-                serializer.startTag(null, "waist_decoration_3");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_WAIST_DECORATION_3_ID))));
-                serializer.endTag(null, "waist_decoration_3");
-                serializer.startTag(null, "legs_armor");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_LEGS_ARMOR_ID))));
-                serializer.endTag(null, "legs_armor");
-                serializer.startTag(null, "legs_decoration_1");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_LEGS_DECORATION_1_ID))));
-                serializer.endTag(null, "legs_decoration_1");
-                serializer.startTag(null, "legs_decoration_2");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_LEGS_DECORATION_2_ID))));
-                serializer.endTag(null, "legs_decoration_2");
-                serializer.startTag(null, "legs_decoration_3");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_LEGS_DECORATION_3_ID))));
-                serializer.endTag(null, "legs_decoration_3");
-                serializer.startTag(null, "talisman_exists");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_TALISMAN_EXISTS))));
-                serializer.endTag(null, "talisman_exists");
-                serializer.startTag(null, "talisman_type");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_TALISMAN_TYPE))));
-                serializer.endTag(null, "talisman_type");
-                serializer.startTag(null, "talisman_slots");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_TALISMAN_SLOTS))));
-                serializer.endTag(null, "talisman_slots");
-                serializer.startTag(null, "talisman_decorations_1");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_TALISMAN_DECORATION_1_ID))));
-                serializer.endTag(null, "talisman_decorations_1");
-                serializer.startTag(null, "talisman_decorations_2");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_TALISMAN_DECORATION_2_ID))));
-                serializer.endTag(null, "talisman_decorations_2");
-                serializer.startTag(null, "talisman_decorations_3");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_TALISMAN_DECORATION_3_ID))));
-                serializer.endTag(null, "talisman_decorations_3");
-                serializer.startTag(null, "talisman_skill_1");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_TALISMAN_SKILL_1_ID))));
-                serializer.endTag(null, "talisman_skill_1");
-                serializer.startTag(null, "talisman_skill_1_points");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_TALISMAN_SKILL_1_POINTS))));
-                serializer.endTag(null, "talisman_skill_1_points");
-                serializer.startTag(null, "talisman_skill_2");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_TALISMAN_SKILL_2_ID))));
-                serializer.endTag(null, "talisman_skill_2");
-                serializer.startTag(null, "talisman_skill_2_points");
-                serializer.text(replaceNull(asbc.getString(asbc.getColumnIndex(S.COLUMN_TALISMAN_SKILL_2_POINTS))));
-                serializer.endTag(null, "talisman_skill_2_points");*/
                 serializer.endTag(null, "asb_set");
 
-                /*queryAddarmorSetAll(newDb, armorSet.getWishlistId(),
-                        armorSet.getItem().getId(), armorSet.getQuantity(), armorSet.getNotes());*/
                 asbc.moveToNext();
             }
             serializer.endTag(null, "asb_sets");
