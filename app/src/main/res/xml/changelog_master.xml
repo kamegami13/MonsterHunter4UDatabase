@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+    <release version="1.06" versioncode="11">
+        <change>Added Monster Summary Screen. Shows Weaknesses, Ailments, and Signature Moves.</change>
+        <change>Added Armor Builder (there is known UI issues)</change>
+        <change>List of Wyporium Trades including Quest Unlock</change>
+        <change>Wyporium Trade details in Item Details</change>
+        <change>Confirm Dialog on App Exit</change>
+        <change>Filter Armor</change>
+        <change>Display Changelog on Update</change>
+        <change>Add DLC data for May and June</change>
+        <change>Various database fixes</change>
+        <change>Fix misspelled Quest goals and subgoals.</change>
+    </release>
+
     <release version="1.05" versioncode="10">
         <change>Added Up button to sub-pages. Has same function as back button without exiting.</change>
         <change>Add DLC data</change>

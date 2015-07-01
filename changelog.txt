@@ -1,4 +1,15 @@
 Release Notes:
+Version 1.06
+    * Added Monster Summary Screen. Shows Weaknesses, Ailments, and Signature Moves.
+    * Added Armor Builder (there is known UI issues)
+    * List of Wyporium Trades including Quest Unlock
+    * Wyporium Trade details in Item Details
+    * Confirm Dialog on App Exit
+    * Filter Armor
+    * Display Changelog on Update
+    * Add DLC data for May and June
+    * Various database fixes
+    * Fix misspelled Quest goals and subgoals.
 Version 1.05
     * Added Up button to sub-pages. Has same function as back button without exiting.
     * Add DLC data
