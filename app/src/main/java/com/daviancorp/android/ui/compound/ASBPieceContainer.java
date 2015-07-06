@@ -42,7 +42,9 @@ public class ASBPieceContainer extends LinearLayout {
     private ASBSession session;
     private int pieceIndex;
 
-    /** It is required to call {@code initialize} after instantiating this class. */
+    /**
+     * It is required to call {@code initialize} after instantiating this class.
+     */
     public ASBPieceContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -104,7 +106,9 @@ public class ASBPieceContainer extends LinearLayout {
         this.parentFragment = parentFragment;
     }
 
-    /** Refreshes the contents of the piece container based on the {@code ASBSession}. */
+    /**
+     * Refreshes the contents of the piece container based on the {@code ASBSession}.
+     */
     public void updateContents() {
         updateArmorPiece();
         updateDecorationsPreview();
@@ -345,7 +349,6 @@ public class ASBPieceContainer extends LinearLayout {
                 for (int i = 0; i < decorationNames.length; i++) {
                     decorationNames[i].setText(null);
                     decorationIcons[i].setImageDrawable(null);
-                    decorationMenuButtons[i].setVisibility(INVISIBLE);
                 }
             }
         }
