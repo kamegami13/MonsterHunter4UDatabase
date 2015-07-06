@@ -27,12 +27,7 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
 
     ASBSession session;
 
-    ASBPieceContainer headView;
-    ASBPieceContainer bodyView;
-    ASBPieceContainer armsView;
-    ASBPieceContainer waistView;
-    ASBPieceContainer legsView;
-    ASBPieceContainer talismanView;
+    private ASBPieceContainer[] equipmentViews = new ASBPieceContainer[6];
 
     public static ASBFragment newInstance(int setRank, int setHunterType) {
         Bundle args = new Bundle();
@@ -53,19 +48,19 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_asb, container, false);
 
-        headView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_head);
-        bodyView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_body);
-        armsView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_arms);
-        waistView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_waist);
-        legsView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_legs);
-        talismanView = (ASBPieceContainer) view.findViewById(R.id.armor_builder_talisman);
+        equipmentViews[0] = (ASBPieceContainer) view.findViewById(R.id.armor_builder_head);
+        equipmentViews[1] = (ASBPieceContainer) view.findViewById(R.id.armor_builder_body);
+        equipmentViews[2] = (ASBPieceContainer) view.findViewById(R.id.armor_builder_arms);
+        equipmentViews[3] = (ASBPieceContainer) view.findViewById(R.id.armor_builder_waist);
+        equipmentViews[4] = (ASBPieceContainer) view.findViewById(R.id.armor_builder_legs);
+        equipmentViews[5] = (ASBPieceContainer) view.findViewById(R.id.armor_builder_talisman);
 
-        headView.initialize(session, 0, this);
-        bodyView.initialize(session, 1, this);
-        armsView.initialize(session, 2, this);
-        waistView.initialize(session, 3, this);
-        legsView.initialize(session, 4, this);
-        talismanView.initialize(session, 5, this);
+        equipmentViews[0].initialize(session, 0, this);
+        equipmentViews[1].initialize(session, 1, this);
+        equipmentViews[2].initialize(session, 2, this);
+        equipmentViews[3].initialize(session, 3, this);
+        equipmentViews[4].initialize(session, 4, this);
+        equipmentViews[5].initialize(session, 5, this);
 
         return view;
     }
@@ -130,12 +125,16 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
 
     @Override
     public void onASBActivityUpdated(ASBSession s) {
-        headView.updateContents();
-        bodyView.updateContents();
-        armsView.updateContents();
-        waistView.updateContents();
-        legsView.updateContents();
-        talismanView.updateContents();
+        for (ASBPieceContainer c : equipmentViews) {
+            c.updateContents();
+        }
+    }
+
+    /** Called when the user clicks the drop-down arrow on an equipment view. */
+    public void onDecorationsMenuOpened() {
+        for (ASBPieceContainer c : equipmentViews) {
+            c.hideDecorations();
+        }
     }
 
     private enum ASBOperation {
