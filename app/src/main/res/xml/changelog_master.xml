@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+    <release version="1.07" versioncode="12">
+        <change>Hotfix for startup crash issue</change>
+        <change>Hotfix for app exit issue. Fix breaks Armor Set Builder for Android Versions below 5.0</change>
+    </release>
+
     <release version="1.06" versioncode="11">
         <change>Added Monster Summary Screen. Shows Weaknesses, Ailments, and Signature Moves.</change>
         <change>Added Armor Builder (there is known UI issues)</change>

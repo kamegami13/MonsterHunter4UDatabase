@@ -102,6 +102,18 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		}*/
     }
 
+    public boolean isTableExists(String tableName, SQLiteDatabase db) {
+        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"+tableName+"'", null);
+        if(cursor!=null) {
+            if(cursor.getCount()>0) {
+                cursor.close();
+                return true;
+            }
+            cursor.close();
+        }
+        return false;
+    }
+
     private String replaceNull(String str) {
         return str == null ? "" : str;
     }
@@ -111,6 +123,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         //Log.w(TAG, "Pre forcing database upgrade!");
         String filename = "wishlist.xml";
         FileOutputStream fos;
+        boolean asb_exists = isTableExists(S.TABLE_ASB_SETS, db);
 
         try {
             String[] asb_set_tables = {S.COLUMN_ASB_SET_NAME, S.COLUMN_ASB_SET_RANK, S.COLUMN_ASB_SET_HUNTER_TYPE, S.COLUMN_HEAD_ARMOR_ID, S.COLUMN_HEAD_DECORATION_1_ID, S.COLUMN_HEAD_DECORATION_2_ID,
@@ -129,13 +142,18 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
             WishlistComponentCursor wcc = queryWishlistsComponent(db);
             WishlistDataCursor wdc = queryWishlistsData(db);
             WishlistCursor wc = queryWishlists(db);
-            Cursor asbc = queryASBSessions(db);
+            Cursor asbc = null;
+            if(asb_exists) {
+                asbc = queryASBSessions(db);
+            }
 
 
             wc.moveToFirst();
             wdc.moveToFirst();
             wcc.moveToFirst();
-            asbc.moveToFirst();
+            if(asb_exists) {
+                asbc.moveToFirst();
+            }
 
             serializer.startTag(null, "wishlist_tables");
 
@@ -204,37 +222,32 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
             serializer.endTag(null, "wishlist_components");
             wcc.close();
 
-            serializer.startTag(null, "asb_sets");
-            while (!asbc.isAfterLast()) {
-                serializer.startTag(null, "asb_set");
+            if(asb_exists) {
+                serializer.startTag(null, "asb_sets");
+                while (!asbc.isAfterLast()) {
+                    serializer.startTag(null, "asb_set");
 
-                for(String asb_column : asb_set_tables_list)
-                {
-                    serializer.startTag(null, asb_column);
-                    if(asbc.isNull(asbc.getColumnIndex(asb_column)))
-                    {
-                        serializer.text("");
-                    }
-                    else
-                    {
-                        if(asb_column.equals(S.COLUMN_ASB_SET_NAME))
-                        {
-                            serializer.text(asbc.getString(asbc.getColumnIndex(asb_column)));
+                    for (String asb_column : asb_set_tables_list) {
+                        serializer.startTag(null, asb_column);
+                        if (asbc.isNull(asbc.getColumnIndex(asb_column))) {
+                            serializer.text("");
+                        } else {
+                            if (asb_column.equals(S.COLUMN_ASB_SET_NAME)) {
+                                serializer.text(asbc.getString(asbc.getColumnIndex(asb_column)));
+                            } else {
+                                serializer.text(Integer.toString(asbc.getInt(asbc.getColumnIndex(asb_column))));
+                            }
                         }
-                        else
-                        {
-                            serializer.text(Integer.toString(asbc.getInt(asbc.getColumnIndex(asb_column))));
-                        }
-                    }
 
-                    serializer.endTag(null, asb_column);
+                        serializer.endTag(null, asb_column);
+                    }
+                    serializer.endTag(null, "asb_set");
+
+                    asbc.moveToNext();
                 }
-                serializer.endTag(null, "asb_set");
-
-                asbc.moveToNext();
+                serializer.endTag(null, "asb_sets");
+                asbc.close();
             }
-            serializer.endTag(null, "asb_sets");
-            asbc.close();
 
             serializer.endDocument();
             serializer.flush();

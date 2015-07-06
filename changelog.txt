@@ -1,4 +1,7 @@
 Release Notes:
+Version 1.07
+    * Hotfix for startup crash issue
+    * Hotfix for app exit issue. Fix breaks Armor Set Builder for Android Versions below 5.0
 Version 1.06
     * Added Monster Summary Screen. Shows Weaknesses, Ailments, and Signature Moves.
     * Added Armor Builder (there is known UI issues)
