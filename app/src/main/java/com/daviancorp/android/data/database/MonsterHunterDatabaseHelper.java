@@ -415,7 +415,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
      * Helper method: used for queries that has no JOINs
      */
     private Cursor wrapHelper(QueryHelper qh) {
-        return getReadableDatabase().query(qh.Distinct, qh.Table, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+        return getWritableDatabase().query(qh.Distinct, qh.Table, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
     }
 
     /*
@@ -430,7 +430,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
      */
     private Cursor wrapJoinHelper(SQLiteQueryBuilder qb, QueryHelper qh) {
 //		Log.d(TAG, "qb: " + qb.buildQuery(_Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit));
-        return qb.query(getReadableDatabase(), qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+        return qb.query(getWritableDatabase(), qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
     }
 
     /*
@@ -2892,7 +2892,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         // Multithread issues workaround
         SQLiteQueryBuilder qb = builderWishlistData();
         Cursor cursor = qb.query(
-                getReadableDatabase(), qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+                getWritableDatabase(), qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
 
         return new WishlistDataCursor(cursor);
     }
@@ -2937,7 +2937,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         // Multithread issues workaround
         SQLiteQueryBuilder qb = builderWishlistData();
         Cursor cursor = qb.query(
-                getReadableDatabase(), wdColumns, wdSelection, wdSelectionArgs, wdGroupBy, wdHaving, wdOrderBy, wdLimit);
+                getWritableDatabase(), wdColumns, wdSelection, wdSelectionArgs, wdGroupBy, wdHaving, wdOrderBy, wdLimit);
 
         return new WishlistDataCursor(cursor);
     }
@@ -2959,7 +2959,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         // Multithread issues workaround
         SQLiteQueryBuilder qb = builderWishlistData();
         Cursor cursor = qb.query(
-                getReadableDatabase(), wdColumns, wdSelection, wdSelectionArgs, wdGroupBy, wdHaving, wdOrderBy, wdLimit);
+                getWritableDatabase(), wdColumns, wdSelection, wdSelectionArgs, wdGroupBy, wdHaving, wdOrderBy, wdLimit);
 
         return new WishlistDataCursor(cursor);
     }
@@ -2982,7 +2982,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         // Multithread issues workaround
         SQLiteQueryBuilder qb = builderWishlistData();
         Cursor cursor = qb.query(
-                getReadableDatabase(), wdColumns, wdSelection, wdSelectionArgs, wdGroupBy, wdHaving, wdOrderBy, wdLimit);
+                getWritableDatabase(), wdColumns, wdSelection, wdSelectionArgs, wdGroupBy, wdHaving, wdOrderBy, wdLimit);
 
         return new WishlistDataCursor(cursor);
     }
@@ -3086,7 +3086,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         projectionMap.put(S.COLUMN_WISHLIST_DATA_PATH, wd + "." + S.COLUMN_WISHLIST_DATA_PATH);
 
         projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
-        projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);
+        //projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);
         projectionMap.put(S.COLUMN_ITEMS_TYPE, i + "." + S.COLUMN_ITEMS_TYPE);
         projectionMap.put(S.COLUMN_ITEMS_SUB_TYPE, i + "." + S.COLUMN_ITEMS_SUB_TYPE);
         projectionMap.put(S.COLUMN_ITEMS_RARITY, i + "." + S.COLUMN_ITEMS_RARITY);
@@ -3131,7 +3131,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         // Multithread issues workaround
         SQLiteQueryBuilder qb = builderWishlistComponent();
         Cursor cursor = qb.query(
-                getReadableDatabase(), qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+                getWritableDatabase(), qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
 
         return new WishlistComponentCursor(cursor);
     }
@@ -3179,7 +3179,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         // Multithread issues workaround
         SQLiteQueryBuilder qb = builderWishlistComponent();
         Cursor cursor = qb.query(
-                getReadableDatabase(), wcColumns, wcSelection, wcSelectionArgs, wcGroupBy, wcHaving, wcOrderBy, wcLimit);
+                getWritableDatabase(), wcColumns, wcSelection, wcSelectionArgs, wcGroupBy, wcHaving, wcOrderBy, wcLimit);
 
         return new WishlistComponentCursor(cursor);
     }
@@ -3201,7 +3201,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         // Multithread issues workaround
         SQLiteQueryBuilder qb = builderWishlistComponent();
         Cursor cursor = qb.query(
-                getReadableDatabase(), wcColumns, wcSelection, wcSelectionArgs, wcGroupBy, wcHaving, wcOrderBy, wcLimit);
+                getWritableDatabase(), wcColumns, wcSelection, wcSelectionArgs, wcGroupBy, wcHaving, wcOrderBy, wcLimit);
 
         return new WishlistComponentCursor(cursor);
     }
@@ -3222,7 +3222,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         // Multithread issues workaround
         SQLiteQueryBuilder qb = builderWishlistComponent();
         Cursor cursor = qb.query(
-                getReadableDatabase(), wcColumns, wcSelection, wcSelectionArgs, wcGroupBy, wcHaving, wcOrderBy, wcLimit);
+                getWritableDatabase(), wcColumns, wcSelection, wcSelectionArgs, wcGroupBy, wcHaving, wcOrderBy, wcLimit);
 
         return new WishlistComponentCursor(cursor);
     }
@@ -3320,7 +3320,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         projectionMap.put(S.COLUMN_WISHLIST_COMPONENT_NOTES, wc + "." + S.COLUMN_WISHLIST_COMPONENT_NOTES);
 
         projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
-        projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);
+        //projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);
         projectionMap.put(S.COLUMN_ITEMS_TYPE, i + "." + S.COLUMN_ITEMS_TYPE);
         projectionMap.put(S.COLUMN_ITEMS_SUB_TYPE, i + "." + S.COLUMN_ITEMS_SUB_TYPE);
         projectionMap.put(S.COLUMN_ITEMS_RARITY, i + "." + S.COLUMN_ITEMS_RARITY);
