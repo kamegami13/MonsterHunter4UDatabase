@@ -7,7 +7,7 @@ Version 1.06
     * Confirm Dialog on App Exit
     * Filter Armor
     * Display Changelog on Update
-    * Add DLC data for May and June
+    * Added DLC data for May, June, and July
     * Various database fixes
     * Fix misspelled Quest goals and subgoals.
 Version 1.05
