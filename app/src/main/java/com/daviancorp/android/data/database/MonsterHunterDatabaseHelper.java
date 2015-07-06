@@ -4,7 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -59,7 +62,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     private static MonsterHunterDatabaseHelper mInstance = null;
 
     private static final String DATABASE_NAME = "mh4u.db";
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 12;
 
     private final Context myContext;
     private SQLiteDatabase myDataBase;
@@ -99,13 +102,37 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		}*/
     }
 
+    public boolean isTableExists(String tableName, SQLiteDatabase db) {
+        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"+tableName+"'", null);
+        if(cursor!=null) {
+            if(cursor.getCount()>0) {
+                cursor.close();
+                return true;
+            }
+            cursor.close();
+        }
+        return false;
+    }
+
+    private String replaceNull(String str) {
+        return str == null ? "" : str;
+    }
+
     @Override
     protected void preCopyDatabase(SQLiteDatabase db) {
         //Log.w(TAG, "Pre forcing database upgrade!");
         String filename = "wishlist.xml";
         FileOutputStream fos;
+        boolean asb_exists = isTableExists(S.TABLE_ASB_SETS, db);
 
         try {
+            String[] asb_set_tables = {S.COLUMN_ASB_SET_NAME, S.COLUMN_ASB_SET_RANK, S.COLUMN_ASB_SET_HUNTER_TYPE, S.COLUMN_HEAD_ARMOR_ID, S.COLUMN_HEAD_DECORATION_1_ID, S.COLUMN_HEAD_DECORATION_2_ID,
+                    S.COLUMN_HEAD_DECORATION_3_ID, S.COLUMN_BODY_ARMOR_ID, S.COLUMN_BODY_DECORATION_1_ID, S.COLUMN_BODY_DECORATION_2_ID, S.COLUMN_BODY_DECORATION_3_ID, S.COLUMN_ARMS_ARMOR_ID,
+                    S.COLUMN_ARMS_DECORATION_1_ID, S.COLUMN_ARMS_DECORATION_2_ID, S.COLUMN_ARMS_DECORATION_3_ID, S.COLUMN_WAIST_ARMOR_ID, S.COLUMN_WAIST_DECORATION_1_ID, S.COLUMN_WAIST_DECORATION_2_ID, S.COLUMN_WAIST_DECORATION_3_ID,
+                    S.COLUMN_LEGS_ARMOR_ID, S.COLUMN_LEGS_DECORATION_1_ID, S.COLUMN_LEGS_DECORATION_2_ID, S.COLUMN_LEGS_DECORATION_3_ID, S.COLUMN_TALISMAN_EXISTS, S.COLUMN_TALISMAN_TYPE, S.COLUMN_TALISMAN_SLOTS, S.COLUMN_TALISMAN_DECORATION_1_ID,
+                    S.COLUMN_TALISMAN_DECORATION_2_ID, S.COLUMN_TALISMAN_DECORATION_3_ID, S.COLUMN_TALISMAN_SKILL_1_ID, S.COLUMN_TALISMAN_SKILL_1_POINTS, S.COLUMN_TALISMAN_SKILL_2_ID, S.COLUMN_TALISMAN_SKILL_2_POINTS};
+            List<String> asb_set_tables_list = Arrays.asList(asb_set_tables);
+
             fos = myContext.openFileOutput(filename, Context.MODE_PRIVATE);
             XmlSerializer serializer = Xml.newSerializer();
             serializer.setOutput(fos, "UTF-8");
@@ -115,10 +142,18 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
             WishlistComponentCursor wcc = queryWishlistsComponent(db);
             WishlistDataCursor wdc = queryWishlistsData(db);
             WishlistCursor wc = queryWishlists(db);
+            Cursor asbc = null;
+            if(asb_exists) {
+                asbc = queryASBSessions(db);
+            }
+
 
             wc.moveToFirst();
             wdc.moveToFirst();
             wcc.moveToFirst();
+            if(asb_exists) {
+                asbc.moveToFirst();
+            }
 
             serializer.startTag(null, "wishlist_tables");
 
@@ -159,8 +194,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                 serializer.endTag(null, "path");
                 serializer.endTag(null, "data");
 
-                /*queryAddWishlistDataAll(newDb, wishlistData.getWishlistId(), wishlistData.getItem().getId(),
-                        wishlistData.getQuantity(), wishlistData.getSatisfied(), wishlistData.getPath());*/
                 wdc.moveToNext();
             }
             serializer.endTag(null, "wishlist_data");
@@ -184,12 +217,37 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                 serializer.endTag(null, "notes");
                 serializer.endTag(null, "component");
 
-                /*queryAddWishlistComponentAll(newDb, wishlistComponent.getWishlistId(),
-                        wishlistComponent.getItem().getId(), wishlistComponent.getQuantity(), wishlistComponent.getNotes());*/
                 wcc.moveToNext();
             }
             serializer.endTag(null, "wishlist_components");
             wcc.close();
+
+            if(asb_exists) {
+                serializer.startTag(null, "asb_sets");
+                while (!asbc.isAfterLast()) {
+                    serializer.startTag(null, "asb_set");
+
+                    for (String asb_column : asb_set_tables_list) {
+                        serializer.startTag(null, asb_column);
+                        if (asbc.isNull(asbc.getColumnIndex(asb_column))) {
+                            serializer.text("");
+                        } else {
+                            if (asb_column.equals(S.COLUMN_ASB_SET_NAME)) {
+                                serializer.text(asbc.getString(asbc.getColumnIndex(asb_column)));
+                            } else {
+                                serializer.text(Integer.toString(asbc.getInt(asbc.getColumnIndex(asb_column))));
+                            }
+                        }
+
+                        serializer.endTag(null, asb_column);
+                    }
+                    serializer.endTag(null, "asb_set");
+
+                    asbc.moveToNext();
+                }
+                serializer.endTag(null, "asb_sets");
+                asbc.close();
+            }
 
             serializer.endDocument();
             serializer.flush();
@@ -197,6 +255,10 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         } catch (IOException e) {
             //e.printStackTrace();
         }
+    }
+
+    protected enum Tags {
+        WISHLIST, WISHLIST_DATA, WISHLIST_COMPONENTS, ASB_SET, OTHER
     }
 
     @Override
@@ -225,46 +287,87 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
             XmlPullParser myParser = xmlFactoryObject.newPullParser();
             myParser.setInput(fis, null);
 
+            Tags current_tag = Tags.OTHER;
+
+            String[] asb_set_tables = {S.COLUMN_ASB_SET_NAME, S.COLUMN_ASB_SET_RANK, S.COLUMN_ASB_SET_HUNTER_TYPE, S.COLUMN_HEAD_ARMOR_ID, S.COLUMN_HEAD_DECORATION_1_ID, S.COLUMN_HEAD_DECORATION_2_ID,
+                    S.COLUMN_HEAD_DECORATION_3_ID, S.COLUMN_BODY_ARMOR_ID, S.COLUMN_BODY_DECORATION_1_ID, S.COLUMN_BODY_DECORATION_2_ID, S.COLUMN_BODY_DECORATION_3_ID, S.COLUMN_ARMS_ARMOR_ID,
+                    S.COLUMN_ARMS_DECORATION_1_ID, S.COLUMN_ARMS_DECORATION_2_ID, S.COLUMN_ARMS_DECORATION_3_ID, S.COLUMN_WAIST_ARMOR_ID, S.COLUMN_WAIST_DECORATION_1_ID, S.COLUMN_WAIST_DECORATION_2_ID, S.COLUMN_WAIST_DECORATION_3_ID,
+                    S.COLUMN_LEGS_ARMOR_ID, S.COLUMN_LEGS_DECORATION_1_ID, S.COLUMN_LEGS_DECORATION_2_ID, S.COLUMN_LEGS_DECORATION_3_ID, S.COLUMN_TALISMAN_EXISTS, S.COLUMN_TALISMAN_TYPE, S.COLUMN_TALISMAN_SLOTS, S.COLUMN_TALISMAN_DECORATION_1_ID,
+                    S.COLUMN_TALISMAN_DECORATION_2_ID, S.COLUMN_TALISMAN_DECORATION_3_ID, S.COLUMN_TALISMAN_SKILL_1_ID, S.COLUMN_TALISMAN_SKILL_1_POINTS, S.COLUMN_TALISMAN_SKILL_2_ID, S.COLUMN_TALISMAN_SKILL_2_POINTS};
+            List<String> asb_set_tables_list = Arrays.asList(asb_set_tables);
+            HashMap<String, String> asb_row = new HashMap<String, String>();
+            ContentValues asb_values = new ContentValues();
+
             int event = myParser.getEventType();
             while (event != XmlPullParser.END_DOCUMENT) {
                 String tagName = myParser.getName();
                 switch (event) {
                     case XmlPullParser.START_TAG:
+                        if (tagName.equals("asb_set")) {
+                            asb_values.clear();
+                            asb_row.clear();
+                            current_tag = Tags.ASB_SET;
+                        }
+                        if (tagName.equals("asb_sets")) {
+                            db.delete(S.TABLE_ASB_SETS, null, null);
+                        }
                         break;
                     case XmlPullParser.TEXT:
                         text = myParser.getText();
                         break;
 
                     case XmlPullParser.END_TAG:
-                        if (tagName.equals("wishlist_id")) {
-                            wishlist_id = Long.parseLong(text);
-                        } else if (tagName.equals("name")) {
-                            name = text;
-                        } else if (tagName.equals("item_id")) {
-                            item_id = Long.parseLong(text);
-                        } else if (tagName.equals("quantity")) {
-                            quantity = Integer.parseInt(text);
-                        } else if (tagName.equals("satisfied")) {
-                            satisfied = Integer.parseInt(text);
-                        } else if (tagName.equals("path")) {
-                            path = text;
-                        } else if (tagName.equals("notes")) {
-                            notes = Integer.parseInt(text);
-                        } else if (tagName.equals("wishlist")) {
-                            if (clear_wishlist) {
-                                db.delete(S.TABLE_WISHLIST, null, null);
-                                //only clear the table once if there is data to load
-                                clear_wishlist = false;
+                        if (tagName.equals("asb_set")) {
+                            current_tag = Tags.OTHER;
+                            db.insert(S.TABLE_ASB_SETS, null, asb_values);
+                        }
+
+                        if (current_tag == Tags.ASB_SET) {
+                            if (asb_set_tables_list.contains(tagName)) {
+                                if (tagName.equals(S.COLUMN_ASB_SET_NAME)) {
+                                    asb_values.put(tagName, text);
+                                } else if (text.trim().equals("")) {
+                                    asb_values.putNull(tagName);
+                                } else {
+                                    try {
+                                        asb_values.put(tagName, Integer.valueOf(text));
+                                    } catch (NumberFormatException e) {
+                                        asb_values.putNull(tagName);
+                                    }
+                                }
                             }
-                            queryAddWishlistAll(db, wishlist_id, name);
-                        } else if (tagName.equals("data")) {
-                            queryAddWishlistDataAll(db, wishlist_id, item_id,
-                                    quantity, satisfied, path);
-                        } else if (tagName.equals("component")) {
-                            queryAddWishlistComponentAll(db, wishlist_id,
-                                    item_id, quantity, notes);
                         } else {
 
+                            if (tagName.equals("wishlist_id")) {
+                                wishlist_id = Long.parseLong(text);
+                            } else if (tagName.equals("name")) {
+                                name = text;
+                            } else if (tagName.equals("item_id")) {
+                                item_id = Long.parseLong(text);
+                            } else if (tagName.equals("quantity")) {
+                                quantity = Integer.parseInt(text);
+                            } else if (tagName.equals("satisfied")) {
+                                satisfied = Integer.parseInt(text);
+                            } else if (tagName.equals("path")) {
+                                path = text;
+                            } else if (tagName.equals("notes")) {
+                                notes = Integer.parseInt(text);
+                            } else if (tagName.equals("wishlist")) {
+                                if (clear_wishlist) {
+                                    db.delete(S.TABLE_WISHLIST, null, null);
+                                    //only clear the table once if there is data to load
+                                    clear_wishlist = false;
+                                }
+                                queryAddWishlistAll(db, wishlist_id, name);
+                            } else if (tagName.equals("data")) {
+                                queryAddWishlistDataAll(db, wishlist_id, item_id,
+                                        quantity, satisfied, path);
+                            } else if (tagName.equals("component")) {
+                                queryAddWishlistComponentAll(db, wishlist_id,
+                                        item_id, quantity, notes);
+                            } else {
+
+                            }
                         }
                         break;
                 }
@@ -328,6 +431,14 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     private Cursor wrapJoinHelper(SQLiteQueryBuilder qb, QueryHelper qh) {
 //		Log.d(TAG, "qb: " + qb.buildQuery(_Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit));
         return qb.query(getReadableDatabase(), qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
+    }
+
+    /*
+     * Helper method: used for queries that has JOINs
+     */
+    private Cursor wrapJoinHelper(SQLiteDatabase db, SQLiteQueryBuilder qb, QueryHelper qh) {
+//		Log.d(TAG, "qb: " + qb.buildQuery(_Columns, _Selection, _SelectionArgs, _GroupBy, _Having, _OrderBy, _Limit));
+        return qb.query(db, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
     }
 
     /*
@@ -2217,7 +2328,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         projectionMap.put(S.COLUMN_QUESTS_SUB_GOAL, q + "." + S.COLUMN_QUESTS_SUB_GOAL);
         projectionMap.put(S.COLUMN_QUESTS_SUB_REWARD, q + "." + S.COLUMN_QUESTS_SUB_REWARD);
         projectionMap.put(S.COLUMN_QUESTS_SUB_HRP, q + "." + S.COLUMN_QUESTS_SUB_HRP);
-
         projectionMap.put(l + S.COLUMN_LOCATIONS_NAME, l + "." + S.COLUMN_LOCATIONS_NAME + " AS " + l + S.COLUMN_LOCATIONS_NAME);
         projectionMap.put(S.COLUMN_LOCATIONS_MAP, l + "." + S.COLUMN_LOCATIONS_MAP);
 
@@ -2507,22 +2617,21 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         projectionMap.put(S.COLUMN_WEAPONS_AWAKEN_ATTACK, w + "." + S.COLUMN_WEAPONS_AWAKEN_ATTACK);
         projectionMap.put(S.COLUMN_WEAPONS_ELEMENT_ATTACK, w + "." + S.COLUMN_WEAPONS_ELEMENT_ATTACK);
         projectionMap.put(S.COLUMN_WEAPONS_ELEMENT_2_ATTACK, w + "." + S.COLUMN_WEAPONS_ELEMENT_2_ATTACK);
-        projectionMap.put(S.COLUMN_WEAPONS_DEFENSE, w + "." + S.COLUMN_WEAPONS_DEFENSE);
-        projectionMap.put(S.COLUMN_WEAPONS_SHARPNESS, w + "." + S.COLUMN_WEAPONS_SHARPNESS);
-        projectionMap.put(S.COLUMN_WEAPONS_AFFINITY, w + "." + S.COLUMN_WEAPONS_AFFINITY);
-        projectionMap.put(S.COLUMN_WEAPONS_HORN_NOTES, w + "." + S.COLUMN_WEAPONS_HORN_NOTES);
-        projectionMap.put(S.COLUMN_WEAPONS_SHELLING_TYPE, w + "." + S.COLUMN_WEAPONS_SHELLING_TYPE);
-        projectionMap.put(S.COLUMN_WEAPONS_PHIAL, w + "." + S.COLUMN_WEAPONS_PHIAL);
-        projectionMap.put(S.COLUMN_WEAPONS_CHARGES, w + "." + S.COLUMN_WEAPONS_CHARGES);
-        projectionMap.put(S.COLUMN_WEAPONS_COATINGS, w + "." + S.COLUMN_WEAPONS_COATINGS);
-        projectionMap.put(S.COLUMN_WEAPONS_RECOIL, w + "." + S.COLUMN_WEAPONS_RECOIL);
-        projectionMap.put(S.COLUMN_WEAPONS_RELOAD_SPEED, w + "." + S.COLUMN_WEAPONS_RELOAD_SPEED);
-        projectionMap.put(S.COLUMN_WEAPONS_RAPID_FIRE, w + "." + S.COLUMN_WEAPONS_RAPID_FIRE);
-        projectionMap.put(S.COLUMN_WEAPONS_DEVIATION, w + "." + S.COLUMN_WEAPONS_DEVIATION);
-        projectionMap.put(S.COLUMN_WEAPONS_AMMO, w + "." + S.COLUMN_WEAPONS_AMMO);
-        projectionMap.put(S.COLUMN_WEAPONS_NUM_SLOTS, w + "." + S.COLUMN_WEAPONS_NUM_SLOTS);
-        projectionMap.put(S.COLUMN_WEAPONS_SHARPNESS_FILE, w + "." + S.COLUMN_WEAPONS_SHARPNESS_FILE);
-        projectionMap.put(S.COLUMN_WEAPONS_FINAL, w + "." + S.COLUMN_WEAPONS_FINAL);
+		projectionMap.put(S.COLUMN_WEAPONS_DEFENSE, w + "." + S.COLUMN_WEAPONS_DEFENSE);
+		projectionMap.put(S.COLUMN_WEAPONS_SHARPNESS, w + "." + S.COLUMN_WEAPONS_SHARPNESS);
+		projectionMap.put(S.COLUMN_WEAPONS_AFFINITY, w + "." + S.COLUMN_WEAPONS_AFFINITY);
+		projectionMap.put(S.COLUMN_WEAPONS_HORN_NOTES, w + "." + S.COLUMN_WEAPONS_HORN_NOTES);
+		projectionMap.put(S.COLUMN_WEAPONS_SHELLING_TYPE, w + "." + S.COLUMN_WEAPONS_SHELLING_TYPE);
+		projectionMap.put(S.COLUMN_WEAPONS_PHIAL, w + "." + S.COLUMN_WEAPONS_PHIAL);
+		projectionMap.put(S.COLUMN_WEAPONS_CHARGES, w + "." + S.COLUMN_WEAPONS_CHARGES);
+		projectionMap.put(S.COLUMN_WEAPONS_COATINGS, w + "." + S.COLUMN_WEAPONS_COATINGS);
+		projectionMap.put(S.COLUMN_WEAPONS_RECOIL, w + "." + S.COLUMN_WEAPONS_RECOIL);
+		projectionMap.put(S.COLUMN_WEAPONS_RELOAD_SPEED, w + "." + S.COLUMN_WEAPONS_RELOAD_SPEED);
+		projectionMap.put(S.COLUMN_WEAPONS_RAPID_FIRE, w + "." + S.COLUMN_WEAPONS_RAPID_FIRE);
+		projectionMap.put(S.COLUMN_WEAPONS_DEVIATION, w + "." + S.COLUMN_WEAPONS_DEVIATION);
+		projectionMap.put(S.COLUMN_WEAPONS_AMMO, w + "." + S.COLUMN_WEAPONS_AMMO);
+		projectionMap.put(S.COLUMN_WEAPONS_NUM_SLOTS, w + "." + S.COLUMN_WEAPONS_NUM_SLOTS);
+		projectionMap.put(S.COLUMN_WEAPONS_FINAL, w + "." + S.COLUMN_WEAPONS_FINAL);
         projectionMap.put(S.COLUMN_WEAPONS_TREE_DEPTH, w + "." + S.COLUMN_WEAPONS_TREE_DEPTH);
         projectionMap.put(S.COLUMN_WEAPONS_PARENT_ID, w + "." + S.COLUMN_WEAPONS_PARENT_ID);
 
@@ -3363,6 +3472,13 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         qh.Limit = null;
 
         return new ASBSessionCursor(wrapJoinHelper(builderASBSession(), qh));
+    }
+
+    /**
+     * Get all armor sets.
+     */
+    public Cursor queryASBSessions(SQLiteDatabase db) {
+        return db.rawQuery("SELECT * FROM " + S.TABLE_ASB_SETS, null);
     }
 
     /**

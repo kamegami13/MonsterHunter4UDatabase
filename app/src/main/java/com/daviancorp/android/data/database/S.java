@@ -134,7 +134,7 @@ public class S {
 	static final String TABLE_ITEMS = "items";
 	static final String COLUMN_ITEMS_ID = "_id";
 	static final String COLUMN_ITEMS_NAME = "name";
-	static final String COLUMN_ITEMS_JPN_NAME = "jpn_name";
+	static final String COLUMN_ITEMS_JPN_NAME = "name_jp";
 	static final String COLUMN_ITEMS_TYPE = "type";
     static final String COLUMN_ITEMS_SUB_TYPE = "sub_type";
 	static final String COLUMN_ITEMS_RARITY = "rarity";
@@ -176,6 +176,7 @@ public class S {
 	static final String COLUMN_MONSTERS_TRAIT = "trait";
 	static final String COLUMN_MONSTERS_FILE_LOCATION = "icon_name";
 	static final String COLUMN_MONSTERS_SORT_NAME = "sort_name";
+	static final String COLUMN_MONSTERS_SIGNATURE_MOVE = "signature_move";
 
     // Monster Habitat
     static final String TABLE_HABITAT = "monster_habitat";
@@ -278,6 +279,12 @@ public class S {
     static final String COLUMN_QUESTS_SUB_GOAL = "sub_goal";
     static final String COLUMN_QUESTS_SUB_REWARD = "sub_reward";
     static final String COLUMN_QUESTS_SUB_HRP = "sub_hrp";
+
+    // Quest Pre-Requirements
+    static final String TABLE_QUEST_PREREQS = "quest_prereqs";
+    static final String COLUMN_QUEST_PREREQS_ID = "_id";
+    static final String COLUMN_QUEST_PREREQS_QUEST_ID = "quest_id";
+    static final String COLUMN_QUEST_PREREQS_PREREQ_ID = "prereq_id";
 	
 	// Quest Rewards
 	static final String TABLE_QUEST_REWARDS = "quest_rewards";
@@ -294,14 +301,14 @@ public class S {
 	static final String COLUMN_SKILLS_SKILL_TREE_ID = "skill_tree_id";
 	static final String COLUMN_SKILLS_REQUIRED_SKILL_TREE_POINTS = "required_skill_tree_points";
 	static final String COLUMN_SKILLS_NAME = "name";
-	static final String COLUMN_SKILLS_JPN_NAME = "jpn_name";
+	static final String COLUMN_SKILLS_JPN_NAME = "name_jp";
 	static final String COLUMN_SKILLS_DESCRIPTION = "description";
 	
 	// Skill Trees
 	static final String TABLE_SKILL_TREES = "skill_trees";
 	static final String COLUMN_SKILL_TREES_ID = "_id";
 	static final String COLUMN_SKILL_TREES_NAME = "name";
-	static final String COLUMN_SKILL_TREES_JPN_NAME = "jpn_name";
+	static final String COLUMN_SKILL_TREES_JPN_NAME = "name_jp";
 	
 	// Trading
 	static final String TABLE_TRADING = "trading";
@@ -339,7 +346,6 @@ public class S {
 	static final String COLUMN_WEAPONS_DEVIATION = "deviation";
 	static final String COLUMN_WEAPONS_AMMO = "ammo";
 	static final String COLUMN_WEAPONS_NUM_SLOTS = "num_slots";
-	static final String COLUMN_WEAPONS_SHARPNESS_FILE = "sharpness_file";
 	static final String COLUMN_WEAPONS_FINAL = "final";
     static final String COLUMN_WEAPONS_TREE_DEPTH = "tree_depth";
     static final String COLUMN_WEAPONS_PARENT_ID = "parent_id";

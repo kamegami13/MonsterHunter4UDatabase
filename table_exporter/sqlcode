@@ -27,6 +27,7 @@ drop table if exists monsters;
 drop table if exists planting;
 drop table if exists quest_rewards;
 drop table if exists quests;
+drop table if exists quest_prereqs;
 drop table if exists skill_trees;
 drop table if exists skills;
 drop table if exists trading;
@@ -35,6 +36,7 @@ drop table if exists wishlist;
 drop table if exists wishlist_component;
 drop table if exists wishlist_data;
 drop table if exists wyporium;
+drop table if exists veggie_elder;
 
 CREATE TABLE IF NOT EXISTS `wishlist` (
   `_id` integer primary key autoincrement,
@@ -184,16 +186,16 @@ CREATE TABLE IF NOT EXISTS `decorations` (
 
 CREATE TABLE IF NOT EXISTS 'felyne_skills' (
   '_id' integer primary key autoincrement,
-  'skill_name' varchar(50) NOT NULL,
-  'description' varchar(255) NOT NULL
+  'skill_name' text NOT NULL,
+  'description' text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS 'food_combos' (
   '_id' integer primary key autoincrement,
-  'ingredient1' varchar(30) NOT NULL,
-  'ingredient2' varchar(30) NOT NULL,
-  'cooked' varchar(30) NOT NULL,
-  'bonus' varchar(30) NOT NULL,
+  'ingredient1' text NOT NULL,
+  'ingredient2' text NOT NULL,
+  'cooked' text NOT NULL,
+  'bonus' text NOT NULL,
   'skill1_id' integer,
   'skill2_id' integer,
   'skill3_id' integer,
@@ -207,8 +209,8 @@ CREATE TABLE IF NOT EXISTS `gathering` (
   `_id` integer primary key autoincrement,
   'item_id' integer NOT NULL,
   'location_id' integer NOT NULL,
-  `area` char(30) NOT NULL,
-  `site` varchar(30) NOT NULL,
+  `area` text NOT NULL,
+  `site` text NOT NULL,
   `rank` text NOT NULL,
   'quantity' integer DEFAULT NULL,
   'percentage' integer DEFAULT NULL,
@@ -242,18 +244,18 @@ CREATE TABLE IF NOT EXISTS `hunting_rewards` (
 
 CREATE TABLE IF NOT EXISTS 'horn_melodies' (
   '_id' integer primary key autoincrement,
-  'notes' varchar(3) NOT NULL,
-  'song' varchar(5) NOT NULL,
-  'effect1' varchar(55) NOT NULL,
-  'effect2' varchar(55) NOT NULL,
-  'duration' varchar(10) NOT NULL,
-  'extension' varchar(10) NOT NULL
+  'notes' text NOT NULL,
+  'song' text NOT NULL,
+  'effect1' text NOT NULL,
+  'effect2' text NOT NULL,
+  'duration' text NOT NULL,
+  'extension' text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS 'ingredients' (
   '_id' integer primary key autoincrement,
-  'ingredient' varchar(30) NOT NULL,
-  'name' varchar(30) NOT NULL,
+  'ingredient' text NOT NULL,
+  'name' text NOT NULL,
   'level' integer,
   'quest_id' integer,
   foreign key('quest_id') references quests('_id')
@@ -261,16 +263,20 @@ CREATE TABLE IF NOT EXISTS 'ingredients' (
 
 CREATE TABLE IF NOT EXISTS `items` (
   `_id` integer primary key autoincrement,
-  `name` varchar(255) NOT NULL,
-  `jpn_name` text DEFAULT NULL,
+  `name` text NOT NULL,
+  `name_de` text NOT NULL,
+  `name_fr` text NOT NULL,
+  `name_es` text NOT NULL,
+  `name_it` text NOT NULL,
+  `name_jp` text DEFAULT NULL,
   `type` text NOT NULL,
   `sub_type` text NOT NULL,
   `rarity` integer NOT NULL DEFAULT '0',
   `carry_capacity` integer NOT NULL DEFAULT '0',
   `buy` mediumint(8) DEFAULT NULL,
   `sell` integer DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `icon_name` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `icon_name` text DEFAULT NULL,
   `armor_dupe_name_fix` text NOT NULL DEFAULT ''
 );
 
@@ -285,9 +291,13 @@ CREATE TABLE IF NOT EXISTS `item_to_skill_tree` (
 
 CREATE TABLE IF NOT EXISTS `locations` (
   `_id` integer primary key autoincrement,
-  `name` varchar(255) UNIQUE NOT NULL,
-  `map` varchar(255) NOT NULL,
-  `jpn_name` text
+  `name` text UNIQUE NOT NULL,
+  `name_de` text NOT NULL,
+  `name_fr` text NOT NULL,
+  `name_es` text NOT NULL,
+  `name_it` text NOT NULL,
+  `name_jp` text NOT NULL,
+  `map` text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `moga_woods_rewards` (
@@ -305,16 +315,22 @@ CREATE TABLE IF NOT EXISTS `moga_woods_rewards` (
 CREATE TABLE IF NOT EXISTS `monsters` (
   `_id` integer primary key autoincrement,
   `class` text NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `name` text NOT NULL,
+  `name_de` text NOT NULL,
+  `name_fr` text NOT NULL,
+  `name_es` text NOT NULL,
+  `name_it` text NOT NULL,
+  `name_jp` text NOT NULL,
+  `signature_move` text NOT NULL,
   `trait` text NOT NULL,
-  `icon_name` varchar(255) DEFAULT NULL,
+  `icon_name` text DEFAULT NULL,
   `sort_name` text NOT NULL DEFAULT ''
 );
 
 CREATE TABLE IF NOT EXISTS 'monster_ailment' (
   '_id' integer primary key autoincrement,
   'monster_id' integer NOT NULL,
-  'ailment' varchar(30) NOT NULL,
+  'ailment' text NOT NULL,
   foreign key('monster_id') references monsters('_id')
 );
 
@@ -354,7 +370,7 @@ CREATE TABLE IF NOT EXISTS `monster_to_quest` (
 CREATE TABLE IF NOT EXISTS 'monster_weakness' (
   '_id' integer primary key autoincrement,
   'monster_id' integer NOT NULL,
-  'state' varchar(30) NOT NULL,
+  'state' text NOT NULL,
   'fire' integer NOT NULL,
   'water' integer NOT NULL,
   'thunder' integer NOT NULL,
@@ -398,17 +414,30 @@ CREATE TABLE IF NOT EXISTS `skills` (
   `_id` integer primary key autoincrement,
   `skill_tree_id` integer NOT NULL,
   `required_skill_tree_points` integer NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `jpn_name` text NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `name` text NOT NULL,
+  `name_de` text NOT NULL,
+  `name_fr` text NOT NULL,
+  `name_es` text NOT NULL,
+  `name_it` text NOT NULL,
+  `name_jp` text NOT NULL,
+  `description` text NOT NULL,
+  `description_de` text NOT NULL,
+  `description_fr` text NOT NULL,
+  `description_es` text NOT NULL,
+  `description_it` text NOT NULL,
+  `description_jp` text NOT NULL,
   foreign key(`skill_tree_id`) references skill_tree('_id')
 
 );
 
 CREATE TABLE IF NOT EXISTS `skill_trees` (
   `_id` integer primary key autoincrement,
-  `name` varchar(255) NOT NULL,
-  `jpn_name` text NOT NULL
+  `name` text NOT NULL,
+  `name_de` text NOT NULL,
+  `name_fr` text NOT NULL,
+  `name_es` text NOT NULL,
+  `name_it` text NOT NULL,
+  `name_jp` text NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `trading` (
@@ -426,30 +455,30 @@ CREATE TABLE IF NOT EXISTS `weapons` (
   `_id` integer primary key autoincrement,
   'parent_id' integer DEFAULT NULL,
   `wtype` text NOT NULL,
-  `creation_cost` mediumint(8) DEFAULT NULL,
-  `upgrade_cost` mediumint(8) DEFAULT NULL,
+  `creation_cost` integer DEFAULT NULL,
+  `upgrade_cost` integer DEFAULT NULL,
   `attack` integer NOT NULL,
   `max_attack` integer DEFAULT NULL,
-  `element` varchar(50) DEFAULT NULL,
+  `element` text DEFAULT NULL,
   `element_attack` integer DEFAULT NULL,
-  `element_2` varchar(50) DEFAULT NULL,
+  `element_2` text DEFAULT NULL,
   `element_2_attack` integer DEFAULT NULL,
-  `awaken` varchar(50) DEFAULT NULL,
+  `awaken` text DEFAULT NULL,
   `awaken_attack` integer DEFAULT NULL,
   `defense` integer DEFAULT NULL,
-  `sharpness` varchar(50) DEFAULT NULL,
-  `affinity` varchar(20) NOT NULL,
-  `horn_notes` char(3) DEFAULT NULL,
-  `shelling_type` varchar(20) DEFAULT NULL,
-  `phial` varchar(20) DEFAULT NULL,
+  `sharpness` text DEFAULT NULL,
+  `affinity` text NOT NULL,
+  `horn_notes` text DEFAULT NULL,
+  `shelling_type` text DEFAULT NULL,
+  `phial` text DEFAULT NULL,
   `charges` text DEFAULT NULL,
   `coatings` text DEFAULT NULL,
-  `recoil` varchar(10) DEFAULT NULL,
-  `reload_speed` varchar(20) DEFAULT NULL,
+  `recoil` text DEFAULT NULL,
+  `reload_speed` text DEFAULT NULL,
   `rapid_fire` text DEFAULT NULL,
-  `deviation` varchar(20) DEFAULT NULL,
+  `deviation` text DEFAULT NULL,
   `ammo` text DEFAULT NULL,
-  'sharpness_file' text DEFAULT NULL,
+  `special_ammo` text DEFAULT NULL,
   `num_slots` integer NOT NULL,
   'tree_depth' integer NOT NULL,
   'final' integer
@@ -457,8 +486,8 @@ CREATE TABLE IF NOT EXISTS `weapons` (
 
 CREATE TABLE IF NOT EXISTS `quests` (
   `_id` integer primary key autoincrement,
-  `name` varchar(255) NOT NULL,
-  `goal` varchar(255) NOT NULL,
+  `name` text NOT NULL,
+  `goal` text NOT NULL,
   `hub` text NOT NULL,
   `type` text NOT NULL,
   `stars` integer NOT NULL,
@@ -467,10 +496,18 @@ CREATE TABLE IF NOT EXISTS `quests` (
   `fee` integer NOT NULL,
   `reward` mediumint(8) NOT NULL,
   `hrp` mediumint(8) DEFAULT NULL,
-  `sub_goal` varchar(255) DEFAULT NULL,
+  `sub_goal` text DEFAULT NULL,
   `sub_reward` integer DEFAULT NULL,
   `sub_hrp` integer DEFAULT NULL,
   foreign key('location_id') references locations('_id')
+);
+
+CREATE TABLE IF NOT EXISTS `quest_prereqs` (
+  `_id` integer primary key autoincrement,
+  `quest_id` integer NOT NULL,
+  `prereq_id` integer NOT NULL,
+  foreign key('quest_id') references quests('_id'),
+  foreign key('prereq_id') references quests('_id')
 );
 
 CREATE TABLE IF NOT EXISTS 'monster_habitat' (
@@ -478,7 +515,7 @@ CREATE TABLE IF NOT EXISTS 'monster_habitat' (
   'monster_id' integer NOT NULL,
   'location_id' integer NOT NULL,
   'start_area' integer DEFAULT NULL,
-  'move_area' varchar(20) DEFAULT NULL,
+  'move_area' text DEFAULT NULL,
   'rest_area' integer DEFAULT NULL,
   foreign key('location_id') references locations('_id'),
   foreign key('monster_id') references monsters('_id')
@@ -487,7 +524,7 @@ CREATE TABLE IF NOT EXISTS 'monster_habitat' (
 CREATE TABLE IF NOT EXISTS 'monster_status' (
   '_id' integer primary key autoincrement,
   'monster_id' integer NOT NULL,
-  'status' varchar(25) NOT NULL,
+  'status' text NOT NULL,
   'initial' integer DEFAULT NULL,
   'increase' integer DEFAULT NULL,
   'max' integer DEFAULT NULL,
@@ -503,6 +540,17 @@ CREATE TABLE IF NOT EXISTS 'wyporium' (
   'unlock_quest_id' integer,
   foreign key('item_in_id') references items('_id'),
   foreign key('item_out_id') references items('_id')
+);
+
+CREATE TABLE IF NOT EXISTS 'veggie_elder' (
+  '_id' integer primary key autoincrement,
+  'location_id' integer NOT NULL,
+  'offer_item_id' integer NOT NULL,
+  'receive_item_id' integer NOT NULL,
+  'quantity' integer NOT NULL,
+  foreign key('offer_item_id') references locations('_id'),
+  foreign key('offer_item_id') references items('_id'),
+  foreign key('receive_item_id') references items('_id')
 );
 
 .mode tabs
@@ -531,8 +579,10 @@ CREATE TABLE IF NOT EXISTS 'wyporium' (
 .import data/monster_weakness.tsv monster_weakness
 .import data/quest_rewards.tsv quest_rewards
 .import data/quests.tsv quests
+.import data/quest_prereqs.tsv quest_prereqs
 .import data/skill_trees.tsv skill_trees
 .import data/skills.tsv skills
 .import data/trading.tsv trading
 .import data/weapons.tsv weapons
 .import data/wyporium.tsv wyporium
+.import data/veggie_elder.tsv veggie_elder

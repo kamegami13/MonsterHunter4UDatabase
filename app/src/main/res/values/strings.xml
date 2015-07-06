@@ -4,7 +4,7 @@
     <string name="app_name">MH4U Database</string>
     <string name="about">About</string>
     <string name="action_settings">Settings</string>
-    <string name="about_message">MH4U Database v1.05
+    <string name="about_message">MH4U Database v1.07
                                 \n\n
                                 Contribute at:\n
                                 https://github.com/kamegami13/MonsterHunter4UDatabase
@@ -42,6 +42,12 @@
     <string name="exit_dialog">Stop the Quest and return to town?</string>
     <string name="exit_confirm">Yes</string>
     <string name="exit_cancel">No</string>
+
+    <!-- CHANGELOG DIALOG -->
+    <string name="changelog_full_title">Change Log</string>
+    <string name="changelog_title">What\'s New</string>
+    <string name="changelog_ok_button">OK</string>
+    <string name="changelog_show_full">More…</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
