@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
+    <release version="1.08" versioncode="13">
+        <change>Another hotfix for startup crash issue</change>
+    </release>
+
     <release version="1.07" versioncode="12">
         <change>Hotfix for startup crash issue</change>
         <change>Hotfix for app exit issue. Fix breaks Armor Set Builder for Android Versions below 5.0</change>

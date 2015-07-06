@@ -1,4 +1,6 @@
 Release Notes:
+Version 1.08
+    * Another hotfix for startup crash issue
 Version 1.07
     * Hotfix for startup crash issue
     * Hotfix for app exit issue. Fix breaks Armor Set Builder for Android Versions below 5.0
