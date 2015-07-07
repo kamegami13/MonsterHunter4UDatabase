@@ -7,7 +7,6 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,20 +29,20 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ASBPieceContainer extends LinearLayout {
-    private Fragment parentFragment;
+    private ASBFragment parentFragment;
 
     private ImageView icon;
     private TextView text;
     private ImageView[] decorationStates;
     private ImageView equipmentButton;
 
+    private ImageView dropDownArrow;
     private DecorationView decorationView;
 
     private ASBSession session;
     private int pieceIndex;
 
     /**
-     * Default constructor.
      * It is required to call {@code initialize} after instantiating this class.
      */
     public ASBPieceContainer(Context context, AttributeSet attrs) {
@@ -83,18 +82,15 @@ public class ASBPieceContainer extends LinearLayout {
 
         decorationView = new DecorationView();
 
-        final ImageView dropDownArrow = (ImageView) findViewById(R.id.drop_down_arrow);
+
+        dropDownArrow = (ImageView) findViewById(R.id.drop_down_arrow);
         dropDownArrow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (decorationView.container.getVisibility() == GONE) {
-                    decorationView.container.setVisibility(VISIBLE);
-                    equipmentButton.setVisibility(GONE);
-                    dropDownArrow.setImageDrawable(parentFragment.getActivity().getResources().getDrawable(R.drawable.ic_drop_up_arrow));
+                    showDecorations();
                 } else {
-                    decorationView.container.setVisibility(GONE);
-                    equipmentButton.setVisibility(VISIBLE);
-                    dropDownArrow.setImageDrawable(parentFragment.getActivity().getResources().getDrawable(R.drawable.ic_drop_down_arrow));
+                    hideDecorations();
                 }
             }
         });
@@ -104,14 +100,14 @@ public class ASBPieceContainer extends LinearLayout {
      * Provides necessary external initialization logic.
      * Should always be called after the container's constructor.
      */
-    public void initialize(ASBSession session, int pieceIndex, Fragment parentFragment) {
+    public void initialize(ASBSession session, int pieceIndex, ASBFragment parentFragment) {
         this.session = session;
         this.pieceIndex = pieceIndex;
         this.parentFragment = parentFragment;
     }
 
     /**
-     * Refreshes the contents of the piece container based on the contents of the {@code ASBSession}.
+     * Refreshes the contents of the piece container based on the {@code ASBSession}.
      */
     public void updateContents() {
         updateArmorPiece();
@@ -147,6 +143,19 @@ public class ASBPieceContainer extends LinearLayout {
         }
     }
 
+    public void showDecorations() {
+        parentFragment.onDecorationsMenuOpened();
+        decorationView.container.setVisibility(VISIBLE);
+        equipmentButton.setVisibility(GONE);
+        dropDownArrow.setImageDrawable(parentFragment.getActivity().getResources().getDrawable(R.drawable.ic_drop_up_arrow));
+    }
+
+    public void hideDecorations() {
+        decorationView.container.setVisibility(GONE);
+        equipmentButton.setVisibility(VISIBLE);
+        dropDownArrow.setImageDrawable(parentFragment.getActivity().getResources().getDrawable(R.drawable.ic_drop_down_arrow));
+    }
+
     /**
      * Helper method that retrieves a rarity-appropriate equipment icon.
      */
@@ -178,7 +187,7 @@ public class ASBPieceContainer extends LinearLayout {
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     Log.e("ASB",
-                          "Image not found for " + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()]);
+                            "Image not found for " + getResources().getStringArray(R.array.talisman_names)[session.getTalisman().getTypeIndex()]);
                     imageRes = "icons_items/Talisman-White.png";
                 }
 
@@ -230,7 +239,7 @@ public class ASBPieceContainer extends LinearLayout {
             i.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
             i.putExtra(ASBActivity.EXTRA_SET_RANK, parentFragment.getArguments().getInt(ASBFragment.ARG_SET_RANK));
             i.putExtra(ASBActivity.EXTRA_SET_HUNTER_TYPE,
-                       parentFragment.getArguments().getInt(ASBFragment.ARG_SET_HUNTER_TYPE));
+                    parentFragment.getArguments().getInt(ASBFragment.ARG_SET_HUNTER_TYPE));
 
             parentFragment.startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_PIECE);
         }
@@ -298,6 +307,8 @@ public class ASBPieceContainer extends LinearLayout {
                     }
                 });
             }
+
+
         }
 
         private void update() {
@@ -311,26 +322,24 @@ public class ASBPieceContainer extends LinearLayout {
                         decorationNames[i].setTextColor(getResources().getColor(R.color.text_color));
 
                         decorationMenuButtons[i].setImageDrawable(getResources().getDrawable(R.drawable.ic_remove));
-                        decorationMenuButtons[i].setVisibility(VISIBLE);
                     } else {
                         if (session.decorationIsDummy(pieceIndex, i)) {
                             decorationNames[i].setText(session.findRealDecorationOfDummy(pieceIndex, i).getName());
 
-                            decorationMenuButtons[i].setVisibility(GONE);
+                            decorationMenuButtons[i].setImageDrawable(null);
                         } else if (session.getEquipment(pieceIndex).getNumSlots() > i) {
                             decorationNames[i].setText(R.string.asb_empty_slot);
 
                             if (!addButtonExists) {
                                 decorationMenuButtons[i].setImageDrawable(getResources().getDrawable(R.drawable.ic_add));
-                                decorationMenuButtons[i].setVisibility(VISIBLE);
                                 addButtonExists = true;
                             } else {
-                                decorationMenuButtons[i].setVisibility(GONE);
+                                decorationMenuButtons[i].setImageDrawable(null);
                             }
                         } else {
-                            decorationNames[i].setText(null);
+                            decorationNames[i].setText(R.string.asb_no_slot);
 
-                            decorationMenuButtons[i].setVisibility(GONE);
+                            decorationMenuButtons[i].setImageDrawable(null);
                         }
 
                         decorationNames[i].setTextColor(getResources().getColor(R.color.text_color_secondary));
@@ -340,7 +349,6 @@ public class ASBPieceContainer extends LinearLayout {
                 for (int i = 0; i < decorationNames.length; i++) {
                     decorationNames[i].setText(null);
                     decorationIcons[i].setImageDrawable(null);
-                    decorationMenuButtons[i].setVisibility(INVISIBLE);
                 }
             }
         }
@@ -383,7 +391,7 @@ public class ASBPieceContainer extends LinearLayout {
             Intent i = new Intent(parentFragment.getActivity(), DecorationDetailActivity.class);
 
             i.putExtra(DecorationDetailActivity.EXTRA_DECORATION_ID,
-                       session.getDecoration(pieceIndex, decorationIndex).getId());
+                    session.getDecoration(pieceIndex, decorationIndex).getId());
 
             parentFragment.startActivity(i);
         }
