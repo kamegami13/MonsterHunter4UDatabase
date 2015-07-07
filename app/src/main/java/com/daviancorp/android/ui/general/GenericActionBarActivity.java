@@ -208,10 +208,10 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                 intent = new Intent(GenericActionBarActivity.this, ASBSetListActivity.class);
                 break;
         }
-        final Intent finalIntent = intent;
-
         // Clear the back stack whenever a nav drawer item is selected
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        final Intent finalIntent = intent;
 
         startActivity(finalIntent);
 

@@ -103,7 +103,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     }
 
     public boolean isTableExists(String tableName, SQLiteDatabase db) {
-        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"+tableName+"'", null);
+        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + tableName + "'", null);
         if(cursor!=null) {
             if(cursor.getCount()>0) {
                 cursor.close();
@@ -123,15 +123,23 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         //Log.w(TAG, "Pre forcing database upgrade!");
         String filename = "wishlist.xml";
         FileOutputStream fos;
-        boolean asb_exists = isTableExists(S.TABLE_ASB_SETS, db);
 
         try {
-            String[] asb_set_tables = {S.COLUMN_ASB_SET_NAME, S.COLUMN_ASB_SET_RANK, S.COLUMN_ASB_SET_HUNTER_TYPE, S.COLUMN_HEAD_ARMOR_ID, S.COLUMN_HEAD_DECORATION_1_ID, S.COLUMN_HEAD_DECORATION_2_ID,
+            String[] asb_set_columns = {S.COLUMN_ASB_SET_NAME, S.COLUMN_ASB_SET_RANK, S.COLUMN_ASB_SET_HUNTER_TYPE, S.COLUMN_HEAD_ARMOR_ID, S.COLUMN_HEAD_DECORATION_1_ID, S.COLUMN_HEAD_DECORATION_2_ID,
                     S.COLUMN_HEAD_DECORATION_3_ID, S.COLUMN_BODY_ARMOR_ID, S.COLUMN_BODY_DECORATION_1_ID, S.COLUMN_BODY_DECORATION_2_ID, S.COLUMN_BODY_DECORATION_3_ID, S.COLUMN_ARMS_ARMOR_ID,
                     S.COLUMN_ARMS_DECORATION_1_ID, S.COLUMN_ARMS_DECORATION_2_ID, S.COLUMN_ARMS_DECORATION_3_ID, S.COLUMN_WAIST_ARMOR_ID, S.COLUMN_WAIST_DECORATION_1_ID, S.COLUMN_WAIST_DECORATION_2_ID, S.COLUMN_WAIST_DECORATION_3_ID,
                     S.COLUMN_LEGS_ARMOR_ID, S.COLUMN_LEGS_DECORATION_1_ID, S.COLUMN_LEGS_DECORATION_2_ID, S.COLUMN_LEGS_DECORATION_3_ID, S.COLUMN_TALISMAN_EXISTS, S.COLUMN_TALISMAN_TYPE, S.COLUMN_TALISMAN_SLOTS, S.COLUMN_TALISMAN_DECORATION_1_ID,
                     S.COLUMN_TALISMAN_DECORATION_2_ID, S.COLUMN_TALISMAN_DECORATION_3_ID, S.COLUMN_TALISMAN_SKILL_1_ID, S.COLUMN_TALISMAN_SKILL_1_POINTS, S.COLUMN_TALISMAN_SKILL_2_ID, S.COLUMN_TALISMAN_SKILL_2_POINTS};
-            List<String> asb_set_tables_list = Arrays.asList(asb_set_tables);
+            List<String> asb_set_columns_list = Arrays.asList(asb_set_columns);
+
+            String[] wishlist_columns = {S.COLUMN_WISHLIST_ID, S.COLUMN_WISHLIST_NAME};
+            List<String> wishlist_columns_list = Arrays.asList(wishlist_columns);
+
+            String[] wishlist_data_columns = {S.COLUMN_WISHLIST_DATA_ID, S.COLUMN_WISHLIST_DATA_WISHLIST_ID, S.COLUMN_WISHLIST_DATA_ITEM_ID, S.COLUMN_WISHLIST_DATA_QUANTITY, S.COLUMN_WISHLIST_DATA_SATISFIED, S.COLUMN_WISHLIST_DATA_PATH};
+            List<String> wishlist_data_columns_list = Arrays.asList(wishlist_data_columns);
+
+            String[] wishlist_component_columns = {S.COLUMN_WISHLIST_COMPONENT_ID, S.COLUMN_WISHLIST_COMPONENT_WISHLIST_ID, S.COLUMN_WISHLIST_COMPONENT_COMPONENT_ID, S.COLUMN_WISHLIST_COMPONENT_QUANTITY, S.COLUMN_WISHLIST_COMPONENT_NOTES};
+            List<String> wishlist_component_columns_list = Arrays.asList(wishlist_component_columns);
 
             fos = myContext.openFileOutput(filename, Context.MODE_PRIVATE);
             XmlSerializer serializer = Xml.newSerializer();
@@ -139,95 +147,102 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
             serializer.startDocument(null, Boolean.valueOf(true));
             serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
 
-            WishlistComponentCursor wcc = queryWishlistsComponent(db);
-            WishlistDataCursor wdc = queryWishlistsData(db);
-            WishlistCursor wc = queryWishlists(db);
-            Cursor asbc = null;
-            if(asb_exists) {
-                asbc = queryASBSessions(db);
+            if( isTableExists(S.TABLE_WISHLIST, db) ) {
+                Cursor wc = db.rawQuery("SELECT * FROM " + S.TABLE_WISHLIST, null);
+                wc.moveToFirst();
+
+                serializer.startTag(null, "wishlists");
+                while (!wc.isAfterLast()) {
+                    serializer.startTag(null, "wishlist");
+
+                    for (String wishlist_column : wishlist_columns_list) {
+                        serializer.startTag(null, wishlist_column);
+                        if (wc.isNull(wc.getColumnIndex(wishlist_column))) {
+                            serializer.text("");
+                        } else {
+                            if (wishlist_column.equals(S.COLUMN_WISHLIST_NAME)) {
+                                serializer.text(wc.getString(wc.getColumnIndex(wishlist_column)));
+                            } else {
+                                serializer.text(Integer.toString(wc.getInt(wc.getColumnIndex(wishlist_column))));
+                            }
+                        }
+                        serializer.endTag(null, wishlist_column);
+                    }
+
+                    serializer.endTag(null, "wishlist");
+
+                    wc.moveToNext();
+                }
+                serializer.endTag(null, "wishlists");
+                wc.close();
             }
 
+            if( isTableExists(S.TABLE_WISHLIST_DATA, db) ) {
+                Cursor wdc = db.rawQuery("SELECT * FROM " + S.TABLE_WISHLIST_DATA, null);
+                wdc.moveToFirst();
 
-            wc.moveToFirst();
-            wdc.moveToFirst();
-            wcc.moveToFirst();
-            if(asb_exists) {
+                serializer.startTag(null, "wishlist_data");
+                while (!wdc.isAfterLast()) {
+                    serializer.startTag(null, "data");
+
+                    for (String data_column : wishlist_data_columns_list) {
+                        serializer.startTag(null, data_column);
+                        if (wdc.isNull(wdc.getColumnIndex(data_column))) {
+                            serializer.text("");
+                        } else {
+                            if (data_column.equals(S.COLUMN_WISHLIST_DATA_PATH)) {
+                                serializer.text(wdc.getString(wdc.getColumnIndex(data_column)));
+                            } else {
+                                serializer.text(Integer.toString(wdc.getInt(wdc.getColumnIndex(data_column))));
+                            }
+                        }
+                        serializer.endTag(null, data_column);
+                    }
+
+                    serializer.endTag(null, "data");
+
+                    wdc.moveToNext();
+                }
+                serializer.endTag(null, "wishlist_data");
+                wdc.close();
+            }
+
+            if( isTableExists(S.TABLE_WISHLIST_COMPONENT, db) ) {
+                Cursor wcc = db.rawQuery("SELECT * FROM " + S.TABLE_WISHLIST_COMPONENT, null);
+                wcc.moveToFirst();
+
+                serializer.startTag(null, "wishlist_components");
+                while (!wcc.isAfterLast()) {
+                    serializer.startTag(null, "component");
+
+                    for (String component_column : wishlist_component_columns_list) {
+                        serializer.startTag(null, component_column);
+                        if (wcc.isNull(wcc.getColumnIndex(component_column))) {
+                            serializer.text("");
+                        } else {
+                            serializer.text(Integer.toString(wcc.getInt(wcc.getColumnIndex(component_column))));
+                        }
+
+                        serializer.endTag(null, component_column);
+                    }
+
+                    serializer.endTag(null, "component");
+
+                    wcc.moveToNext();
+                }
+                serializer.endTag(null, "wishlist_components");
+                wcc.close();
+            }
+
+            if( isTableExists(S.TABLE_ASB_SETS, db) ) {
+                Cursor asbc = db.rawQuery("SELECT * FROM " + S.TABLE_ASB_SETS, null);
                 asbc.moveToFirst();
-            }
 
-            serializer.startTag(null, "wishlist_tables");
-
-            serializer.startTag(null, "wishlists");
-            while (!wc.isAfterLast()) {
-                Wishlist wishlist = wc.getWishlist();
-                serializer.startTag(null, "wishlist");
-                serializer.startTag(null, "wishlist_id");
-                serializer.text(Long.toString(wishlist.getId()));
-                serializer.endTag(null, "wishlist_id");
-                serializer.startTag(null, "name");
-                serializer.text(wishlist.getName());
-                serializer.endTag(null, "name");
-                serializer.endTag(null, "wishlist");
-                wc.moveToNext();
-            }
-            serializer.endTag(null, "wishlists");
-            wc.close();
-
-            serializer.startTag(null, "wishlist_data");
-            while (!wdc.isAfterLast()) {
-                WishlistData wishlistData = wdc.getWishlistData();
-                serializer.startTag(null, "data");
-                serializer.startTag(null, "wishlist_id");
-                serializer.text(Long.toString(wishlistData.getWishlistId()));
-                serializer.endTag(null, "wishlist_id");
-                serializer.startTag(null, "item_id");
-                serializer.text(Long.toString(wishlistData.getItem().getId()));
-                serializer.endTag(null, "item_id");
-                serializer.startTag(null, "quantity");
-                serializer.text(Integer.toString(wishlistData.getQuantity()));
-                serializer.endTag(null, "quantity");
-                serializer.startTag(null, "satisfied");
-                serializer.text(Integer.toString(wishlistData.getSatisfied()));
-                serializer.endTag(null, "satisfied");
-                serializer.startTag(null, "path");
-                serializer.text(wishlistData.getPath());
-                serializer.endTag(null, "path");
-                serializer.endTag(null, "data");
-
-                wdc.moveToNext();
-            }
-            serializer.endTag(null, "wishlist_data");
-            wdc.close();
-
-            serializer.startTag(null, "wishlist_components");
-            while (!wcc.isAfterLast()) {
-                WishlistComponent wishlistComponent = wcc.getWishlistComponent();
-                serializer.startTag(null, "component");
-                serializer.startTag(null, "wishlist_id");
-                serializer.text(Long.toString(wishlistComponent.getWishlistId()));
-                serializer.endTag(null, "wishlist_id");
-                serializer.startTag(null, "item_id");
-                serializer.text(Long.toString(wishlistComponent.getItem().getId()));
-                serializer.endTag(null, "item_id");
-                serializer.startTag(null, "quantity");
-                serializer.text(Integer.toString(wishlistComponent.getQuantity()));
-                serializer.endTag(null, "quantity");
-                serializer.startTag(null, "notes");
-                serializer.text(Integer.toString(wishlistComponent.getNotes()));
-                serializer.endTag(null, "notes");
-                serializer.endTag(null, "component");
-
-                wcc.moveToNext();
-            }
-            serializer.endTag(null, "wishlist_components");
-            wcc.close();
-
-            if(asb_exists) {
                 serializer.startTag(null, "asb_sets");
                 while (!asbc.isAfterLast()) {
                     serializer.startTag(null, "asb_set");
 
-                    for (String asb_column : asb_set_tables_list) {
+                    for (String asb_column : asb_set_columns_list) {
                         serializer.startTag(null, asb_column);
                         if (asbc.isNull(asbc.getColumnIndex(asb_column))) {
                             serializer.text("");
@@ -295,8 +310,18 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                     S.COLUMN_LEGS_ARMOR_ID, S.COLUMN_LEGS_DECORATION_1_ID, S.COLUMN_LEGS_DECORATION_2_ID, S.COLUMN_LEGS_DECORATION_3_ID, S.COLUMN_TALISMAN_EXISTS, S.COLUMN_TALISMAN_TYPE, S.COLUMN_TALISMAN_SLOTS, S.COLUMN_TALISMAN_DECORATION_1_ID,
                     S.COLUMN_TALISMAN_DECORATION_2_ID, S.COLUMN_TALISMAN_DECORATION_3_ID, S.COLUMN_TALISMAN_SKILL_1_ID, S.COLUMN_TALISMAN_SKILL_1_POINTS, S.COLUMN_TALISMAN_SKILL_2_ID, S.COLUMN_TALISMAN_SKILL_2_POINTS};
             List<String> asb_set_tables_list = Arrays.asList(asb_set_tables);
-            HashMap<String, String> asb_row = new HashMap<String, String>();
-            ContentValues asb_values = new ContentValues();
+
+            String[] wishlist_columns = {S.COLUMN_WISHLIST_ID, S.COLUMN_WISHLIST_NAME};
+            List<String> wishlist_columns_list = Arrays.asList(wishlist_columns);
+
+            String[] wishlist_data_columns = {S.COLUMN_WISHLIST_DATA_ID, S.COLUMN_WISHLIST_DATA_WISHLIST_ID, S.COLUMN_WISHLIST_DATA_ITEM_ID, S.COLUMN_WISHLIST_DATA_QUANTITY, S.COLUMN_WISHLIST_DATA_SATISFIED, S.COLUMN_WISHLIST_DATA_PATH};
+            List<String> wishlist_data_columns_list = Arrays.asList(wishlist_data_columns);
+
+            String[] wishlist_component_columns = {S.COLUMN_WISHLIST_COMPONENT_ID, S.COLUMN_WISHLIST_COMPONENT_WISHLIST_ID, S.COLUMN_WISHLIST_COMPONENT_COMPONENT_ID, S.COLUMN_WISHLIST_COMPONENT_QUANTITY, S.COLUMN_WISHLIST_COMPONENT_NOTES};
+            List<String> wishlist_component_columns_list = Arrays.asList(wishlist_component_columns);
+
+            //HashMap<String, String> row_hash = new HashMap<String, String>();
+            ContentValues row_values = new ContentValues();
 
             int event = myParser.getEventType();
             while (event != XmlPullParser.END_DOCUMENT) {
@@ -304,11 +329,26 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                 switch (event) {
                     case XmlPullParser.START_TAG:
                         if (tagName.equals("asb_set")) {
-                            asb_values.clear();
-                            asb_row.clear();
+                            row_values.clear();
+                            //row_hash.clear();
                             current_tag = Tags.ASB_SET;
                         }
-                        if (tagName.equals("asb_sets")) {
+                        else if (tagName.equals("wishlist")) {
+                            row_values.clear();
+                            //row_hash.clear();
+                            current_tag = Tags.WISHLIST;
+                        }
+                        else if (tagName.equals("data")) {
+                            row_values.clear();
+                            //row_hash.clear();
+                            current_tag = Tags.WISHLIST_DATA;
+                        }
+                        else if (tagName.equals("component")) {
+                            row_values.clear();
+                            //row_hash.clear();
+                            current_tag = Tags.WISHLIST_COMPONENTS;
+                        }
+                        else if (tagName.equals("asb_sets")) {
                             db.delete(S.TABLE_ASB_SETS, null, null);
                         }
                         break;
@@ -319,54 +359,82 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                     case XmlPullParser.END_TAG:
                         if (tagName.equals("asb_set")) {
                             current_tag = Tags.OTHER;
-                            db.insert(S.TABLE_ASB_SETS, null, asb_values);
+                            db.insert(S.TABLE_ASB_SETS, null, row_values);
+                        }
+                        else if (tagName.equals("wishlist")) {
+                            current_tag = Tags.OTHER;
+                            if (clear_wishlist) {
+                                db.delete(S.TABLE_WISHLIST, null, null);
+                                //only clear the table once if there is data to load
+                                clear_wishlist = false;
+                            }
+                            db.insert(S.TABLE_WISHLIST, null, row_values);
+                        }
+                        else if (tagName.equals("data")) {
+                            current_tag = Tags.OTHER;
+                            db.insert(S.TABLE_WISHLIST_DATA, null, row_values);
+                        }
+                        else if (tagName.equals("component")) {
+                            current_tag = Tags.OTHER;
+                            db.insert(S.TABLE_WISHLIST_COMPONENT, null, row_values);
                         }
 
                         if (current_tag == Tags.ASB_SET) {
                             if (asb_set_tables_list.contains(tagName)) {
                                 if (tagName.equals(S.COLUMN_ASB_SET_NAME)) {
-                                    asb_values.put(tagName, text);
+                                    row_values.put(tagName, text);
                                 } else if (text.trim().equals("")) {
-                                    asb_values.putNull(tagName);
+                                    row_values.putNull(tagName);
                                 } else {
                                     try {
-                                        asb_values.put(tagName, Integer.valueOf(text));
+                                        row_values.put(tagName, Integer.valueOf(text));
                                     } catch (NumberFormatException e) {
-                                        asb_values.putNull(tagName);
+                                        row_values.putNull(tagName);
                                     }
                                 }
                             }
-                        } else {
-
-                            if (tagName.equals("wishlist_id")) {
-                                wishlist_id = Long.parseLong(text);
-                            } else if (tagName.equals("name")) {
-                                name = text;
-                            } else if (tagName.equals("item_id")) {
-                                item_id = Long.parseLong(text);
-                            } else if (tagName.equals("quantity")) {
-                                quantity = Integer.parseInt(text);
-                            } else if (tagName.equals("satisfied")) {
-                                satisfied = Integer.parseInt(text);
-                            } else if (tagName.equals("path")) {
-                                path = text;
-                            } else if (tagName.equals("notes")) {
-                                notes = Integer.parseInt(text);
-                            } else if (tagName.equals("wishlist")) {
-                                if (clear_wishlist) {
-                                    db.delete(S.TABLE_WISHLIST, null, null);
-                                    //only clear the table once if there is data to load
-                                    clear_wishlist = false;
+                        }
+                        else if (current_tag == Tags.WISHLIST) {
+                            if (wishlist_columns_list.contains(tagName)) {
+                                if (tagName.equals(S.COLUMN_WISHLIST_NAME)) {
+                                    row_values.put(tagName, text);
+                                } else if (text.trim().equals("")) {
+                                    row_values.putNull(tagName);
+                                } else {
+                                    try {
+                                        row_values.put(tagName, Integer.valueOf(text));
+                                    } catch (NumberFormatException e) {
+                                        row_values.putNull(tagName);
+                                    }
                                 }
-                                queryAddWishlistAll(db, wishlist_id, name);
-                            } else if (tagName.equals("data")) {
-                                queryAddWishlistDataAll(db, wishlist_id, item_id,
-                                        quantity, satisfied, path);
-                            } else if (tagName.equals("component")) {
-                                queryAddWishlistComponentAll(db, wishlist_id,
-                                        item_id, quantity, notes);
-                            } else {
-
+                            }
+                        }
+                        else if (current_tag == Tags.WISHLIST_DATA) {
+                            if (wishlist_data_columns_list.contains(tagName)) {
+                                if (tagName.equals(S.COLUMN_WISHLIST_DATA_PATH)) {
+                                    row_values.put(tagName, text);
+                                } else if (text.trim().equals("")) {
+                                    row_values.putNull(tagName);
+                                } else {
+                                    try {
+                                        row_values.put(tagName, Integer.valueOf(text));
+                                    } catch (NumberFormatException e) {
+                                        row_values.putNull(tagName);
+                                    }
+                                }
+                            }
+                        }
+                        else if (current_tag == Tags.WISHLIST_COMPONENTS) {
+                            if (wishlist_component_columns_list.contains(tagName)) {
+                                if (text.trim().equals("")) {
+                                    row_values.putNull(tagName);
+                                } else {
+                                    try {
+                                        row_values.put(tagName, Integer.valueOf(text));
+                                    } catch (NumberFormatException e) {
+                                        row_values.putNull(tagName);
+                                    }
+                                }
                             }
                         }
                         break;
