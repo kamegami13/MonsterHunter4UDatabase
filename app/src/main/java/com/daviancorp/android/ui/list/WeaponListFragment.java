@@ -9,6 +9,9 @@ import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,6 +34,9 @@ public abstract class WeaponListFragment extends Fragment implements
 
     private LinearLayoutManager mLayoutManager;
     private Bundle savedState;
+
+    // todo: Use a better mechanism to filter (filter command / object)
+    private boolean isFilterFinal = false;
 
     // todo: refactor so that these variables don't have to be set to protected
     protected WeaponExpandableListGeneralAdapter mAdapter;
@@ -76,6 +82,32 @@ public abstract class WeaponListFragment extends Fragment implements
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_weapon, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.filter_final:
+                // toggle state
+                item.setChecked(!item.isChecked());
+                isFilterFinal = item.isChecked();
+
+                // restart the loader so that filtering can occur
+                getLoaderManager()
+                        .restartLoader(R.id.weapon_list_fragment, getArguments(), this)
+                        .forceLoad();
+
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -98,8 +130,26 @@ public abstract class WeaponListFragment extends Fragment implements
     @Override
     public void onLoadFinished(Loader<ArrayList<WeaponListEntry>> loader,
                                ArrayList<WeaponListEntry> weapons) {
+        // TODO: Use a filter interface/object/etc to perform filtering
+
+        ArrayList<WeaponListEntry> filteredWeapons = weapons;
+
+        if (isFilterFinal) {
+            mAdapter.setPaddingEnabled(false);
+            filteredWeapons = new ArrayList<>();
+            for (WeaponListEntry entry : weapons) {
+                if (entry.weapon.getWFinal() == 1) {
+                    filteredWeapons.add(entry);
+                }
+            }
+        }
+
+        // If filter final is set, disable weapon padding
+        mAdapter.setPaddingEnabled(!isFilterFinal);
+
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.addAll(weapons);
+        mAdapter.clear();
+        mAdapter.addAll(filteredWeapons);
     }
 
     @Override

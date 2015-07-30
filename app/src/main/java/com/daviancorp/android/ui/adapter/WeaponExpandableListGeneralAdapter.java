@@ -41,6 +41,8 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
      */
     private final int mPaddingDP = 4;
 
+    private boolean isPaddingEnabled = true;
+
     // Image cache
     protected LruCache<String, Bitmap> mImageCache;
 
@@ -66,6 +68,13 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         };
     }
 
+    /**
+     * Enables or disables weapon left-side padding.
+     * @param enabled
+     */
+    public void setPaddingEnabled(boolean enabled) {
+        this.isPaddingEnabled = enabled;
+    }
 
     public Bitmap getBitmapFromMemCache(String key) {
         return mImageCache.get(key);
@@ -198,9 +207,13 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         //holder.colorBand.setVisibility(View.VISIBLE);
         holder.setColorBandColor(weapon.getRarity()-1);
 
-        int leftPadding = Utils.getPaddingPixels(mContext, mPaddingDP)
-                * (weaponEntry.getIndentation());
-        holder.setPaddingLeft(leftPadding);
+        if (isPaddingEnabled) {
+            int leftPadding = Utils.getPaddingPixels(mContext, mPaddingDP)
+                    * (weaponEntry.getIndentation());
+            holder.setPaddingLeft(leftPadding);
+        } else {
+            holder.setPaddingLeft(0);
+        }
 
         //
         // Handle groups
