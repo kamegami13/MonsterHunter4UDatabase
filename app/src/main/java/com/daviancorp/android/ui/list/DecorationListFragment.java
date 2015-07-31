@@ -3,6 +3,7 @@ package com.daviancorp.android.ui.list;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -77,6 +78,7 @@ public class DecorationListFragment extends ListFragment implements
 
         private Activity activity;
         private boolean fromAsb;
+        private int maxSlots;
 
         public DecorationListCursorAdapter(Context context,
                                            DecorationCursor cursor) {
@@ -84,15 +86,18 @@ public class DecorationListFragment extends ListFragment implements
             mDecorationCursor = cursor;
 
             // ASB stuff
-            if (context instanceof Activity && ((Activity) context).getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            if (context instanceof Activity) {
                 activity = (Activity) context;
-                fromAsb = true;
-                
+                Intent intent = ((Activity) context).getIntent();
+                if (intent.getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+                    fromAsb = true;
+                    maxSlots = intent.getIntExtra(ASBActivity.EXTRA_DECORATION_MAX_SLOTS, 3);
+                }
             }
         }
 
         @Override
-                 public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
             // Use a layout inflater to get a row view
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -152,6 +157,8 @@ public class DecorationListFragment extends ListFragment implements
             itemLayout.setTag(decoration.getId());
 
             if (fromAsb) {
+                boolean fitsInArmor = (decoration.getNumSlots() <= maxSlots);
+                view.setEnabled(fitsInArmor);
                 itemLayout.setOnClickListener(new DecorationClickListener(context, decoration.getId(), true, activity));
             }
             else {
