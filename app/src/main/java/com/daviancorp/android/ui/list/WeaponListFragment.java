@@ -130,26 +130,9 @@ public abstract class WeaponListFragment extends Fragment implements
     @Override
     public void onLoadFinished(Loader<ArrayList<WeaponListEntry>> loader,
                                ArrayList<WeaponListEntry> weapons) {
-        // TODO: Use a filter interface/object/etc to perform filtering
-
-        ArrayList<WeaponListEntry> filteredWeapons = weapons;
-
-        if (isFilterFinal) {
-            mAdapter.setPaddingEnabled(false);
-            filteredWeapons = new ArrayList<>();
-            for (WeaponListEntry entry : weapons) {
-                if (entry.weapon.getWFinal() == 1) {
-                    filteredWeapons.add(entry);
-                }
-            }
-        }
-
-        // If filter final is set, disable weapon padding
-        mAdapter.setPaddingEnabled(!isFilterFinal);
-
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.clear();
-        mAdapter.addAll(filteredWeapons);
+        mAdapter.addAll(weapons);
     }
 
     @Override
@@ -166,18 +149,24 @@ public abstract class WeaponListFragment extends Fragment implements
         if (args != null) {
             mType = args.getString(ARG_TYPE);
         }
-        return new WeaponArrayLoader(getActivity().getApplicationContext(), mType);
+        return new WeaponArrayLoader(getActivity().getApplicationContext(), mType, isFilterFinal);
     }
 
     static class WeaponArrayLoader extends AsyncTaskLoader<ArrayList<WeaponListEntry>> {
         String mType;
-        public WeaponArrayLoader(Context context, String type) {
+        boolean mFinalOnly;
+        public WeaponArrayLoader(Context context, String type, boolean finalOnly) {
             super(context);
             mType = type;
+            mFinalOnly = finalOnly;
         }
 
         public ArrayList<WeaponListEntry> loadInBackground() {
-            return DataManager.get(getContext()).queryWeaponTreeArray(mType);
+            if (mFinalOnly) {
+                return DataManager.get(getContext()).queryWeaponTreeArrayFinal(mType);
+            } else {
+                return DataManager.get(getContext()).queryWeaponTreeArray(mType);
+            }
         }
     }
 
