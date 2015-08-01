@@ -185,7 +185,14 @@ public class DecorationListFragment extends ListFragment implements
             if (fromAsb) {
                 boolean fitsInArmor = (decoration.getNumSlots() <= maxSlots);
                 view.setEnabled(fitsInArmor);
-                itemLayout.setOnClickListener(new DecorationClickListener(context, decoration.getId(), true, activity));
+
+                // Set the jewel image to be translucent if disabled
+                // TODO: If a way to use alpha with style selectors exist, use that instead
+                itemImageView.setAlpha((fitsInArmor) ? 1.0f : 0.5f);
+
+                if (fitsInArmor) {
+                    itemLayout.setOnClickListener(new DecorationClickListener(context, decoration.getId(), true, activity));
+                }
             }
             else {
                 itemLayout.setOnClickListener(new DecorationClickListener(context, decoration.getId()));
