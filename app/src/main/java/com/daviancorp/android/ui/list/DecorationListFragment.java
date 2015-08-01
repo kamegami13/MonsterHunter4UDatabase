@@ -12,9 +12,12 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -35,6 +38,8 @@ public class DecorationListFragment extends ListFragment implements
 //	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
 //	private static final int REQUEST_ADD_MULTI = 0;
 
+    private String mFilter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +52,34 @@ public class DecorationListFragment extends ListFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_generic_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_generic_list_search, container, false);
+
+        EditText inputSearch = (EditText) v.findViewById(R.id.input_search);
+        inputSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                mFilter = cs.toString();
+                DecorationListFragment parent = DecorationListFragment.this;
+                getLoaderManager().restartLoader(R.id.decoration_list_fragment, null, parent);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) { }
+
+            @Override
+            public void afterTextChanged(Editable arg0) { }
+        });
+
+        return v;
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         // You only ever load the runs, so assume this is the case
-        return new DecorationListCursorLoader(getActivity());
+        return new DecorationListCursorLoader(getActivity(), mFilter);
     }
 
     @Override
