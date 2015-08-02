@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary_color"
+        style="@style/list_item"
+        android:background="@color/subheading_color"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/skill"
+            style="@style/text_medium"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:gravity="center"
-            android:text="@string/asb_skill_tree_name"
-            android:textColor="@color/text_primary_color" />
+            android:layout_height="@dimen/damage_table_item_height"
+            android:layout_weight="0.3"
+            android:gravity="center_vertical"
+            android:text="Skill Tree"/>
 
         <ImageView
             android:id="@+id/helmet"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/asb_skills_table_header_icon_height"
             android:layout_weight="0.1"
             android:gravity="center"
             android:src="@drawable/armor_head" />
@@ -31,7 +31,7 @@
         <ImageView
             android:id="@+id/body"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/asb_skills_table_header_icon_height"
             android:layout_weight="0.1"
             android:gravity="center"
             android:src="@drawable/armor_body" />
@@ -39,7 +39,7 @@
         <ImageView
             android:id="@+id/arms"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/asb_skills_table_header_icon_height"
             android:layout_weight="0.1"
             android:gravity="center"
             android:src="@drawable/armor_arms" />
@@ -47,7 +47,7 @@
         <ImageView
             android:id="@+id/waist"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/asb_skills_table_header_icon_height"
             android:layout_weight="0.1"
             android:gravity="center"
             android:src="@drawable/armor_waist" />
@@ -55,7 +55,7 @@
         <ImageView
             android:id="@+id/legs"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/asb_skills_table_header_icon_height"
             android:layout_weight="0.1"
             android:gravity="center"
             android:src="@drawable/armor_legs" />
@@ -63,25 +63,26 @@
         <ImageView
             android:id="@+id/talisman"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/asb_skills_table_header_icon_height"
             android:layout_weight="0.1"
             android:src="@drawable/talisman" />
 
         <TextView
             android:id="@+id/total"
+            style="@style/text_small"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
             android:gravity="center"
-            android:text="@string/asb_skill_points_total"
-            android:textColor="@color/text_primary_color" />
+            android:text="@string/asb_skill_points_total"/>
 
     </LinearLayout>
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/fragment_asb_skills_listitem">
 
     </ListView>
 
