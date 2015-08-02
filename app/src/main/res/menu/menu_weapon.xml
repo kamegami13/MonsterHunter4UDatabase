@@ -3,6 +3,6 @@
     <item
         android:id="@+id/filter_final"
         android:showAsAction="never"
-        android:title="Final Only"
+        android:title="@string/filter_final_option"
         android:checkable="true"/>
 </menu>
