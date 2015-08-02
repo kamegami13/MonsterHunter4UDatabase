@@ -297,6 +297,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/divider"
             android:layout_alignWithParentIfMissing="true"
+            android:animateLayoutChanges="true"
             tools:listitem="@layout/fragment_horn_melody_listitem"/>
 
     </RelativeLayout>
