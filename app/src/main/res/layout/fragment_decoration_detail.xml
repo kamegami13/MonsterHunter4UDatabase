@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <LinearLayout
@@ -111,10 +112,14 @@
     </LinearLayout>
 
     <Button android:id="@+id/select_button"
-        android:layout_width="match_parent"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/generic_element_vertical_spacing"
+        android:layout_marginTop="8dp"
         android:text="@string/asb_action_select"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:elevation="3dp"
+        android:clickable="true"/>
 
 </LinearLayout>
