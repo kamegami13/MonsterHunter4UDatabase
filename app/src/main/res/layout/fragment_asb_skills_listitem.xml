@@ -20,7 +20,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:gravity="center"
+        android:gravity="right"
+        android:paddingRight="8dp"
         android:textColor="@color/list_text"
         tools:text="9"/>
 
@@ -29,7 +30,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:gravity="center"
+        android:gravity="right"
+        android:paddingRight="8dp"
         android:textColor="@color/list_text"
         tools:text="10"/>
 
@@ -38,7 +40,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:gravity="center"
+        android:gravity="right"
+        android:paddingRight="8dp"
         android:textColor="@color/list_text"
         tools:text="9"/>
 
@@ -47,7 +50,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:gravity="center"
+        android:gravity="right"
+        android:paddingRight="8dp"
         android:textColor="@color/list_text"
         tools:text="9"/>
 
@@ -56,7 +60,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:gravity="center"
+        android:gravity="right"
+        android:paddingRight="8dp"
         android:textColor="@color/list_text"
         tools:text="9"/>
 
@@ -65,7 +70,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:gravity="center"
+        android:gravity="right"
+        android:paddingRight="8dp"
         android:textColor="@color/list_text"
         tools:text="9"/>
 
@@ -74,8 +80,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:gravity="center"
+        android:gravity="right"
         android:textColor="@color/list_text"
-        tools:text="9"/>
+        tools:text="-99"/>
 
 </LinearLayout>

@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    style="@style/list_item_large"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/list_item_large"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:background="@drawable/clicked_states_context"
     android:clickable="false"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+
+
+    <ImageView
+        style="@style/main_image"
+        android:src="@drawable/armor_body"/>
 
     <TextView
         android:id="@+id/name_text"
         style="@style/text_medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:paddingRight="4dp"
+        tools:text="My First Set"/>
 
     <TextView
         android:id="@+id/properties_text"
         style="@style/text_small"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textStyle="italic" />
+        android:layout_weight=".5"
+        android:gravity="right"
+        android:textStyle="italic"
+        tools:text="G Rank/Blademaster"/>
 
 </LinearLayout>
