@@ -2,44 +2,58 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    <TextView
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/text_color" />
-    
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
     <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_color"
-        android:orientation="horizontal" >
+        android:layout_width="match_parent"
+        android:background="@color/subheading_color"
+        android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/item_type"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
             android:gravity="center"
             android:textColor="@color/text_color"
-            android:layout_weight=".5" />
+            android:background="@color/subheading_color"/>
 
-        <TextView
-            android:id="@+id/quantity_type"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/text_color"
-            android:layout_weight=".2" />
 
-        <TextView
-            android:id="@+id/extra_type"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center" 
-            android:textColor="@color/text_color"
-            android:layout_weight=".3"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            style="@style/list_item"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/item_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/text_medium"
+                android:layout_weight=".8"
+                tools:text="Item"/>
+
+            <TextView
+                android:id="@+id/quantity_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/text_small"
+                android:layout_weight=".2"
+                tools:text="Qty"/>
+
+            <TextView
+                android:id="@+id/extra_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/text_small"
+                android:layout_weight=".2"
+                tools:text="Method"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -47,6 +61,7 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-   		android:drawSelectorOnTop="false" />
+   		android:drawSelectorOnTop="false"
+        tools:listitem="@layout/fragment_wishlist_data_listitem"/>
 
 </LinearLayout>
