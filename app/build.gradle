@@ -28,7 +28,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.3'
     compile 'com.android.support:gridlayout-v7:21.0.3'
     compile 'com.android.support:cardview-v7:21.0.3'
-    compile 'com.android.support:design:22.2.0'
+    //compile 'com.android.support:design:22.2.0'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1' // Support library for tab navigation with new Toolbar object
     // integration instructions here https://github.com/astuetz/PagerSlidingTabStrip
     compile 'org.apmem.tools:layouts:1.8@aar' // Library for flow layout
