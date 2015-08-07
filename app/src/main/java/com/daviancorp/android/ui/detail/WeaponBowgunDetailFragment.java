@@ -145,36 +145,40 @@ public class WeaponBowgunDetailFragment extends WeaponDetailFragment {
 			mWeaponSpecialTypeTextView.setText("Crouching Fire:");
 		}
 
+		if (!mWeapon.getSpecialAmmo().isEmpty()) {
+			String[] specials = mWeapon.getSpecialAmmo().split("\\|");
+			int numSpecial = specials.length;
 
-        //TODO Reenable when rapid fire data makes sense
-//		String[] specials = mWeapon.getRapidFire().split("\\|");
-//		int numSpecial = specials.length;
-//
-//		if (numSpecial >= 1) {
-//			String[] tempSpecial = specials[0].split(" ");
-//			mSpecial1.setText(tempSpecial[0]);
-//			mValue1.setText(tempSpecial[1]);
-//		}
-//		if (numSpecial >= 2) {
-//			String[] tempSpecial = specials[1].split(" ");
-//			mSpecial2.setText(tempSpecial[0]);
-//			mValue2.setText(tempSpecial[1]);
-//		}
-//		if (numSpecial >= 3) {
-//			String[] tempSpecial = specials[2].split(" ");
-//			mSpecial3.setText(tempSpecial[0]);
-//			mValue3.setText(tempSpecial[1]);
-//		}
-//		if (numSpecial >= 4) {
-//			String[] tempSpecial = specials[3].split(" ");
-//			mSpecial4.setText(tempSpecial[0]);
-//			mValue4.setText(tempSpecial[1]);
-//		}
-//		if (numSpecial >= 5) {
-//			String[] tempSpecial = specials[4].split(" ");
-//			mSpecial5.setText(tempSpecial[0]);
-//			mValue5.setText(tempSpecial[1]);
-//		}
+			if (numSpecial >= 1) {
+				String[] tempSpecial = specials[0].split(" ");
+				mSpecial1.setText(tempSpecial[0]);
+				mValue1.setText(tempSpecial[1]);
+			}
+			if (numSpecial >= 2) {
+				String[] tempSpecial = specials[1].split(" ");
+				mSpecial2.setText(tempSpecial[0]);
+				mValue2.setText(tempSpecial[1]);
+			}
+			if (numSpecial >= 3) {
+				String[] tempSpecial = specials[2].split(" ");
+				mSpecial3.setText(tempSpecial[0]);
+				mValue3.setText(tempSpecial[1]);
+			}
+			if (numSpecial >= 4) {
+				String[] tempSpecial = specials[3].split(" ");
+				mSpecial4.setText(tempSpecial[0]);
+				mValue4.setText(tempSpecial[1]);
+			}
+			if (numSpecial == 5) {
+				String[] tempSpecial = specials[4].split(" ");
+				mSpecial5.setText(tempSpecial[0]);
+				mValue5.setText(tempSpecial[1]);
+			}
+		}
+		else
+		{
+			mWeaponSpecialTypeTextView.setText("");
+		}
 	}
     
     private TextView getAmmoType(String a)

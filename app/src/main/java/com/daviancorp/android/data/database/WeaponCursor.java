@@ -50,6 +50,7 @@ public class WeaponCursor extends CursorWrapper {
 		String rapid_fire = getString(getColumnIndex(S.COLUMN_WEAPONS_RAPID_FIRE));
 		String deviation = getString(getColumnIndex(S.COLUMN_WEAPONS_DEVIATION));
 		String ammo = getString(getColumnIndex(S.COLUMN_WEAPONS_AMMO));
+		String special_ammo = getString(getColumnIndex(S.COLUMN_WEAPONS_SPECIAL_AMMO));
 		int num_slots = getInt(getColumnIndex(S.COLUMN_WEAPONS_NUM_SLOTS));
 		int wfinal = getInt(getColumnIndex(S.COLUMN_WEAPONS_FINAL));
         int tree_depth = getInt(getColumnIndex(S.COLUMN_WEAPONS_TREE_DEPTH));
@@ -79,6 +80,7 @@ public class WeaponCursor extends CursorWrapper {
 		weapon.setRecoil(recoil);
 		weapon.setReloadSpeed(reload_speed);
 		weapon.setRapidFire(rapid_fire);
+		weapon.setSpecialAmmo(special_ammo);
 		weapon.setDeviation(deviation);
 		weapon.setAmmo(ammo);
 		weapon.setNumSlots(num_slots);
