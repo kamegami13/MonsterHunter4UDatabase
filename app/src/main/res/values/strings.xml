@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">MH4U Database</string>
+    <string name="search">Search</string>
     <string name="about">About</string>
     <string name="action_settings">Settings</string>
     <string name="about_message">MH4U Database v1.08

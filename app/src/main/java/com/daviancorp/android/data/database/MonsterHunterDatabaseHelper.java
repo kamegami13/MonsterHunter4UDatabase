@@ -1894,6 +1894,23 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         return new MonsterCursor(wrapHelper(qh));
     }
 
+    public MonsterCursor queryMonstersSearch(String searchTerm) {
+        // "SELECT DISTINCT * FROM monsters WHERE name LIKE %searchTerm% GROUP BY name"
+
+        QueryHelper qh = new QueryHelper();
+        qh.Distinct = true;
+        qh.Table = S.TABLE_MONSTERS;
+        qh.Columns = null;
+        qh.Selection = S.COLUMN_MONSTERS_TRAIT + " = '' AND " + S.COLUMN_MONSTERS_NAME + " LIKE ?";
+        qh.SelectionArgs = new String[]{"%" + searchTerm + "%"};
+        qh.GroupBy = S.COLUMN_MONSTERS_SORT_NAME;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new MonsterCursor(wrapHelper(qh));
+    }
+
     /*
      * Get all large monsters
      */
@@ -2304,6 +2321,24 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         qh.Table = S.TABLE_QUESTS;
         qh.Selection = null;
         qh.SelectionArgs = null;
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = null;
+        qh.Limit = null;
+
+        return new QuestCursor(wrapJoinHelper(builderQuest(), qh));
+    }
+
+    /*
+     * Get all quests by a filter
+     */
+    public QuestCursor queryQuestsSearch(String searchTerm) {
+
+        QueryHelper qh = new QueryHelper();
+        qh.Columns = null;
+        qh.Table = S.TABLE_QUESTS;
+        qh.Selection = "q." + S.COLUMN_QUESTS_NAME + " LIKE ?";
+        qh.SelectionArgs = new String[] { "%" + searchTerm + "%"};
         qh.GroupBy = null;
         qh.Having = null;
         qh.OrderBy = null;

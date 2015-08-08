@@ -14,6 +14,12 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
+        <!-- UNIVERSAL SEARCH SECTION -->
+        <activity
+            android:name="com.daviancorp.android.ui.list.UniversalSearchActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+
         <!-- MONSTER LIST SECTION -->
         <activity
             android:name="com.daviancorp.android.ui.list.MonsterListActivity"

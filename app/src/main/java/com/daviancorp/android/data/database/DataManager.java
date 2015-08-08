@@ -617,6 +617,10 @@ public class DataManager {
 		return mHelper.queryLargeMonsters();
 	}
 
+	public MonsterCursor queryMonstersSearch(String searchTerm) {
+		return mHelper.queryMonstersSearch(searchTerm);
+	}
+
 	/* Get a specific Monster */
 	public Monster getMonster(long id) {
 		Monster monster = null;
@@ -804,6 +808,10 @@ public class DataManager {
 	/* Get a Cursor that has a list of all Quests */
 	public QuestCursor queryQuests() {
 		return mHelper.queryQuests();
+	}
+
+	public QuestCursor queryQuestsSearch(String searchTerm) {
+		return mHelper.queryQuestsSearch(searchTerm);
 	}
 
 	/* Get a specific Quests */
