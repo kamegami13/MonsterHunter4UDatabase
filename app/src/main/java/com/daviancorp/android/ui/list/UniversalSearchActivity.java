@@ -14,13 +14,7 @@ public class UniversalSearchActivity extends GenericActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(R.string.decorations); // todo: replace
-
-        // Enable drawer button instead of back button
-        super.enableDrawerIndicator();
-
-        // Tag as top level activity
-        super.setAsTopLevel();
+        setTitle(null); // todo: replace
     }
 
     @Override

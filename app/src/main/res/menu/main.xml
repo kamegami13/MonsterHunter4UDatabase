@@ -6,7 +6,7 @@
     <item android:id="@+id/universal_search"
         android:title="@string/search"
         android:icon="@drawable/ic_menu_search"
-        android:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/send_feedback"

@@ -225,7 +225,13 @@ public class UniversalSearchFragment extends ListFragment implements
 
         if (!mSearchTerm.equals("")) {
             getLoaderManager().restartLoader(0, null, this);
+        } else {
+            clearSearch();
         }
+    }
+
+    private void clearSearch() {
+        setListAdapter(null);
     }
 
     @Override
