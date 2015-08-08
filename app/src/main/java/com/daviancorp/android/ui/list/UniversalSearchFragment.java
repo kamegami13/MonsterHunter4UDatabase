@@ -303,6 +303,7 @@ public class UniversalSearchFragment extends ListFragment implements
 
             nameView.setText(handler.getName(result));
             typeView.setText(handler.getType(result));
+            view.setOnClickListener(handler.createListener(result));
         }
     }
 }
