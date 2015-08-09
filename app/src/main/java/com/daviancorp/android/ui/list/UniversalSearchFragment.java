@@ -194,30 +194,10 @@ public class UniversalSearchFragment extends ListFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_generic_list_search, container, false);
-
-        EditText inputSearch = (EditText) v.findViewById(R.id.input_search);
-        inputSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                String searchTerm = cs.toString();
-                UniversalSearchFragment.this.performSearch(searchTerm);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-            }
-        });
-
-        return v;
+        return inflater.inflate(R.layout.fragment_generic_list, container, false);
     }
 
-    private void performSearch(String searchTerm) {
+    public void performSearch(String searchTerm) {
         mSearchTerm = searchTerm;
         if (mSearchTerm != null) {
             mSearchTerm = mSearchTerm.trim();
