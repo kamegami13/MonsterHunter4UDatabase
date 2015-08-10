@@ -76,7 +76,8 @@ public class UniversalSearchFragment extends ListFragment implements
         mHandlers.put(Quest.class, new ResultHandler<Quest>() {
             @Override
             public String getImage(Quest obj) {
-                return null;
+                // todo: Change color if capture/slay (requires db + more icons)
+                return "icons_items/Quest-Icon-White.png";
             }
 
             @Override
