@@ -124,6 +124,8 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 
 		/* Sharpness */
 		mWeaponSharpnessDrawnView.init(mWeapon.getSharpness1(),mWeapon.getSharpness2());
+        // Redraw sharpness after data is loaded
+        mWeaponSharpnessDrawnView.invalidate();
 
         // String notes to use in notes display and song list
         String notes = "";
