@@ -1,14 +1,5 @@
 package com.daviancorp.android.data.database;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,20 +7,23 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Xml;
-
 import com.daviancorp.android.data.classes.ASBSession;
-import com.daviancorp.android.data.classes.Wishlist;
-import com.daviancorp.android.data.classes.WishlistComponent;
-import com.daviancorp.android.data.classes.WishlistData;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
-
+import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
-import org.xmlpull.v1.XmlPullParser;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 /*
    QUERY REFERENCE:
-   
+
 For queries with no JOINs:
 	- call wrapHelper()
 	- set values for
@@ -45,7 +39,7 @@ For queries with no JOINs:
 
 For queries with JOINs:
 	- call wrapJoinHelper(SQLiteQueryBuilder qb)
-	= set values for 
+	= set values for
 		_Columns
 		_Selection
 		_SelectionArgs
@@ -53,7 +47,7 @@ For queries with JOINs:
 		_Having
 		_OrderBy
 		_Limit
-		
+
 */
 
 class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
@@ -544,7 +538,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** ARENA QUEST QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all arena quests
 	 */
@@ -640,7 +634,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** ARENA REWARD QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all reward arena quests based on item
 	 */
@@ -681,7 +675,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
      * Helper method to query for ArenaReward
      */
     private SQLiteQueryBuilder builderArenaReward() {
-//		SELECT ar._id AS _id, ar.arena_id, ar.item_id, 
+//		SELECT ar._id AS _id, ar.arena_id, ar.item_id,
 //		ar.percentage, ar.stack_size,
 //		a.name AS aname, i.name AS iname
 //		FROM quest_rewards AS ar
@@ -881,7 +875,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** COMBINING QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all combinings
 	 */
@@ -937,18 +931,18 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     }
 
     private SQLiteQueryBuilder builderCursor() {
-//		SELECT c._id AS _id, c.amount_made_min,  c.amount_made_max, c.percentage, 
-//		crt._id AS crt__id, crt.name AS crt_name, crt.jpn_name AS crt_jpn_name, crt.type AS crt_type, crt.rarity AS crt_rarity, 
-//		crt.carry_capacity AS crt_carry_capacity, crt.buy AS crt_buy, crt.sell AS crt_sell, crt.description AS crt_description, 
-//		crt.icon_name AS crt_icon_name, crt.armor_dupe_name_fix AS crt_armor_dupe_name, 
+//		SELECT c._id AS _id, c.amount_made_min,  c.amount_made_max, c.percentage,
+//		crt._id AS crt__id, crt.name AS crt_name, crt.jpn_name AS crt_jpn_name, crt.type AS crt_type, crt.rarity AS crt_rarity,
+//		crt.carry_capacity AS crt_carry_capacity, crt.buy AS crt_buy, crt.sell AS crt_sell, crt.description AS crt_description,
+//		crt.icon_name AS crt_icon_name, crt.armor_dupe_name_fix AS crt_armor_dupe_name,
 //
-//		mat1._id AS mat1__id, mat1.name AS mat1_name, mat1.jpn_name AS mat1_jpn_name, mat1.type AS mat1_type, mat1.rarity AS mat1_rarity, 
-//		mat1.carry_capacity AS mat1_carry_capacity, mat1.buy AS mat1_buy, mat1.sell AS mat1_sell, mat1.description AS mat1_description, 
+//		mat1._id AS mat1__id, mat1.name AS mat1_name, mat1.jpn_name AS mat1_jpn_name, mat1.type AS mat1_type, mat1.rarity AS mat1_rarity,
+//		mat1.carry_capacity AS mat1_carry_capacity, mat1.buy AS mat1_buy, mat1.sell AS mat1_sell, mat1.description AS mat1_description,
 //		mat1.icon_name AS mat1_icon_name, mat1.armor_dupe_name_fix AS mat1_armor_dupe_name,
 //
 //
-//		mat2._id AS mat2__id, mat2.name AS mat2_name, mat2.jpn_name AS mat2_jpn_name, mat2.type AS mat2_type, mat2.rarity AS mat2_rarity, 
-//		mat2.carry_capacity AS mat2_carry_capacity, mat2.buy AS mat2_buy, mat2.sell AS mat2_sell, mat2.description AS mat2_description, 
+//		mat2._id AS mat2__id, mat2.name AS mat2_name, mat2.jpn_name AS mat2_jpn_name, mat2.type AS mat2_type, mat2.rarity AS mat2_rarity,
+//		mat2.carry_capacity AS mat2_carry_capacity, mat2.buy AS mat2_buy, mat2.sell AS mat2_sell, mat2.description AS mat2_description,
 //		mat2.icon_name AS mat2_icon_name, mat2.armor_dupe_name_fix AS mat2_armor_dupe_name
 //
 //		FROM combining AS c LEFT OUTER JOIN items AS crt ON c.created_item_id = crt._id
@@ -998,7 +992,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** COMPONENT QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all components for a created item
 	 */
@@ -1104,7 +1098,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** DECORATION QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all decorations
 	 */
@@ -1145,8 +1139,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
      * Helper method to query for decorations
      */
     private SQLiteQueryBuilder builderDecoration() {
-//		 SELECT i._id AS item_id, i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell, i.description, 
-//		 i.icon_name, i.armor_dupe_name_fix, d.num_slots, s1._id AS skill_1_id, s1.name AS skill_1_name, its1.point_value 
+//		 SELECT i._id AS item_id, i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell, i.description,
+//		 i.icon_name, i.armor_dupe_name_fix, d.num_slots, s1._id AS skill_1_id, s1.name AS skill_1_name, its1.point_value
 //		 AS skill_1_point, s2._id AS skill_1_id, s2.name AS skill_2_name, its2.point_value AS skill_2_point
 //		 FROM decorations AS d LEFT OUTER JOIN items AS i ON d._id = i._id
 //		 LEFT OUTER JOIN item_to_skill_tree AS its1 ON i._id = its1.item_id and its1.point_value > 0
@@ -1195,7 +1189,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** GATHERING QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all gathering locations based on item
 	 */
@@ -1295,128 +1289,9 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     }
 
     /**
-     * ****************************** HUNTING FLEET QUERIES *****************************************
-     */
-	
-	/*
-	 * Get all hunting fleets
-	 */
-    public HuntingFleetCursor queryHuntingFleets() {
-
-        QueryHelper qh = new QueryHelper();
-        qh.Columns = null;
-        qh.Table = S.TABLE_HUNTING_FLEET;
-        qh.Selection = null;
-        qh.SelectionArgs = null;
-        qh.GroupBy = null;
-        qh.Having = null;
-        qh.OrderBy = null;
-        qh.Limit = null;
-
-        return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet(), qh));
-    }
-
-    /*
-     * Get a specific hunting fleet
-     */
-    public HuntingFleetCursor queryHuntingFleet(long id) {
-
-        QueryHelper qh = new QueryHelper();
-        qh.Columns = null;
-        qh.Table = S.TABLE_HUNTING_FLEET;
-        qh.Selection = "h." + S.COLUMN_HUNTING_FLEET_ID + " = ?";
-        qh.SelectionArgs = new String[]{String.valueOf(id)};
-        qh.GroupBy = null;
-        qh.Having = null;
-        qh.OrderBy = null;
-        qh.Limit = "1";
-
-        return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet(), qh));
-    }
-
-    /*
-     * Get a specific hunting fleet based on type
-     */
-    public HuntingFleetCursor queryHuntingFleetType(String type) {
-
-        QueryHelper qh = new QueryHelper();
-        qh.Columns = null;
-        qh.Table = S.TABLE_HUNTING_FLEET;
-        qh.Selection = "h." + S.COLUMN_HUNTING_FLEET_TYPE + " = ?";
-        qh.SelectionArgs = new String[]{type};
-        qh.GroupBy = null;
-        qh.Having = null;
-        qh.OrderBy = null;
-        qh.Limit = null;
-
-        return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet(), qh));
-    }
-
-    /*
-     * Get a specific hunting fleet based on location
-     */
-    public HuntingFleetCursor queryHuntingFleetLocation(String location) {
-
-        QueryHelper qh = new QueryHelper();
-        qh.Columns = null;
-        qh.Selection = "h." + S.COLUMN_HUNTING_FLEET_LOCATION + " = ?";
-        qh.SelectionArgs = new String[]{location};
-        qh.GroupBy = null;
-        qh.Having = null;
-        qh.OrderBy = null;
-        qh.Limit = null;
-
-        return new HuntingFleetCursor(wrapJoinHelper(builderHuntingFleet(), qh));
-    }
-
-    /*
-     * Helper method to query for hunting fleets
-     */
-    private SQLiteQueryBuilder builderHuntingFleet() {
-//		SELECT h._id AS _id, h.type AS htype, h.level, h.location, h.amount, h.percentage, h.rank,
-//		h.item_id, i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell,
-//		i.description, i.icon_name, i.armor_dupe_name_fix
-//		FROM hunting_fleet AS h LEFT OUTER JOIN items AS i ON h.item_id = i._id;
-
-        String h = "h";
-        String i = "i";
-
-        HashMap<String, String> projectionMap = new HashMap<String, String>();
-
-        projectionMap.put("_id", h + "." + S.COLUMN_HUNTING_FLEET_ID + " AS " + "_id");
-        projectionMap.put(h + S.COLUMN_HUNTING_FLEET_TYPE, h + "." + S.COLUMN_HUNTING_FLEET_TYPE + " AS " + h + S.COLUMN_HUNTING_FLEET_TYPE);
-        projectionMap.put(S.COLUMN_HUNTING_FLEET_LEVEL, h + "." + S.COLUMN_HUNTING_FLEET_LEVEL);
-        projectionMap.put(S.COLUMN_HUNTING_FLEET_LOCATION, h + "." + S.COLUMN_HUNTING_FLEET_LOCATION);
-        projectionMap.put(S.COLUMN_HUNTING_FLEET_AMOUNT, h + "." + S.COLUMN_HUNTING_FLEET_AMOUNT);
-        projectionMap.put(S.COLUMN_HUNTING_FLEET_PERCENTAGE, h + "." + S.COLUMN_HUNTING_FLEET_PERCENTAGE);
-        projectionMap.put(S.COLUMN_HUNTING_FLEET_RANK, h + "." + S.COLUMN_HUNTING_FLEET_RANK);
-        projectionMap.put(S.COLUMN_HUNTING_FLEET_ITEM_ID, h + "." + S.COLUMN_HUNTING_FLEET_ITEM_ID);
-
-        projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
-        projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);
-        projectionMap.put(i + S.COLUMN_ITEMS_TYPE, i + "." + S.COLUMN_ITEMS_TYPE + " AS " + i + S.COLUMN_ITEMS_TYPE);
-        projectionMap.put(S.COLUMN_ITEMS_RARITY, i + "." + S.COLUMN_ITEMS_RARITY);
-        projectionMap.put(S.COLUMN_ITEMS_CARRY_CAPACITY, i + "." + S.COLUMN_ITEMS_CARRY_CAPACITY);
-        projectionMap.put(S.COLUMN_ITEMS_BUY, i + "." + S.COLUMN_ITEMS_BUY);
-        projectionMap.put(S.COLUMN_ITEMS_SELL, i + "." + S.COLUMN_ITEMS_SELL);
-        projectionMap.put(S.COLUMN_ITEMS_DESCRIPTION, i + "." + S.COLUMN_ITEMS_DESCRIPTION);
-        projectionMap.put(S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME);
-        projectionMap.put(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX, i + "." + S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX);
-
-        //Create new querybuilder
-        SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
-
-        QB.setTables(S.TABLE_HUNTING_FLEET + " AS h" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "h." +
-                S.COLUMN_HUNTING_FLEET_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID);
-
-        QB.setProjectionMap(projectionMap);
-        return QB;
-    }
-
-    /**
      * ****************************** HUNTING REWARD QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all hunting reward monsters based on item
 	 */
@@ -1529,7 +1404,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** ITEM QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all items
 	 */
@@ -1594,7 +1469,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** ITEM TO SKILL TREE QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all skills based on item
 	 */
@@ -1647,7 +1522,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 //		FROM item_to_skill_tree AS itst
 //		LEFT OUTER JOIN items AS i ON itst.item_id = i._id
 //		LEFT OUTER JOIN skill_trees AS s ON itst.skill_tree_id = s._id;
-//		LEFT OUTER JOIN armor AS a ON i._id = a._id 
+//		LEFT OUTER JOIN armor AS a ON i._id = a._id
 //		LEFT OUTER JOIN decorations AS d ON i._id = d._id;
 
         String itst = "itst";
@@ -1685,7 +1560,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** LOCATION QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all locations
 	 */
@@ -1751,109 +1626,9 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     }
 
     /**
-     * ****************************** MOGA WOODS REWARD QUERIES *****************************************
-     */
-	
-	/*
-	 * Get all moga woods reward monsters based on item
-	 */
-    public MogaWoodsRewardCursor queryMogaWoodsRewardItem(long id) {
-
-        QueryHelper qh = new QueryHelper();
-        qh.Columns = null;
-        qh.Table = S.TABLE_MOGA_WOODS_REWARDS;
-        qh.Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID + " = ? ";
-        qh.SelectionArgs = new String[]{"" + id};
-        qh.GroupBy = null;
-        qh.Having = null;
-        qh.OrderBy = null;
-        qh.Limit = null;
-
-        return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward(), qh));
-    }
-
-    /*
-     * Get all moga woods reward items based on monster
-     */
-    public MogaWoodsRewardCursor queryMogaWoodsRewardMonster(long id) {
-
-        QueryHelper qh = new QueryHelper();
-        qh.Columns = null;
-        qh.Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = ? ";
-        qh.SelectionArgs = new String[]{"" + id};
-        qh.GroupBy = null;
-        qh.Having = null;
-        qh.OrderBy = null;
-        qh.Limit = null;
-
-        return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward(), qh));
-    }
-
-    /*
-     * Get all moga woods reward items based on monster and time
-     */
-    public MogaWoodsRewardCursor queryMogaWoodsRewardMonsterTime(long id, String time) {
-
-        QueryHelper qh = new QueryHelper();
-        qh.Columns = null;
-        qh.Table = S.TABLE_MOGA_WOODS_REWARDS;
-        qh.Selection = "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = ? " + "AND " +
-                "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_TIME + " = ? ";
-        qh.SelectionArgs = new String[]{"" + id, time};
-        qh.GroupBy = null;
-        qh.Having = null;
-        qh.OrderBy = null;
-        qh.Limit = null;
-
-        return new MogaWoodsRewardCursor(wrapJoinHelper(builderMogaWoodsReward(), qh));
-    }
-
-    /*
-     * Helper method to query for MogaWoods
-     */
-    private SQLiteQueryBuilder builderMogaWoodsReward() {
-//		SELECT mwr._id AS _id, mwr.monster_id, mwr.item_id,
-//		mwr.time, mwr.commodity_stars, mwr.kill_percentage,
-//		mwr.capture_percentage, 
-//		i.name AS iname, m.name AS mname 
-//		FROM moga_woods_rewards AS mwr
-//		LEFT OUTER JOIN monsters AS m ON mwr.monster_id = m._id 
-//		LEFT OUTER JOIN items AS i ON mwr.item_id = i._id;
-
-        String mwr = "mwr";
-        String i = "i";
-        String m = "m";
-
-        HashMap<String, String> projectionMap = new HashMap<String, String>();
-
-        projectionMap.put("_id", mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_ID + " AS " + "_id");
-        projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID);
-        projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID);
-        projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_TIME, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_TIME);
-        projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_COMMODITY_STARS, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_COMMODITY_STARS);
-        projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_KILL_PERCENTAGE, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_KILL_PERCENTAGE);
-        projectionMap.put(S.COLUMN_MOGA_WOODS_REWARDS_CAPTURE_PERCENTAGE, mwr + "." + S.COLUMN_MOGA_WOODS_REWARDS_CAPTURE_PERCENTAGE);
-
-        projectionMap.put(i + S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME + " AS " + i + S.COLUMN_ITEMS_NAME);
-        projectionMap.put(i + S.COLUMN_ITEMS_ICON_NAME, i + "." + S.COLUMN_ITEMS_ICON_NAME + " AS " + i + S.COLUMN_ITEMS_ICON_NAME);
-        projectionMap.put(m + S.COLUMN_MONSTERS_NAME, m + "." + S.COLUMN_MONSTERS_NAME + " AS " + m + S.COLUMN_MONSTERS_NAME);
-        projectionMap.put(m + S.COLUMN_MONSTERS_FILE_LOCATION, m + "." + S.COLUMN_MONSTERS_FILE_LOCATION + " AS " + m + S.COLUMN_MONSTERS_FILE_LOCATION);
-
-        //Create new querybuilder
-        SQLiteQueryBuilder QB = new SQLiteQueryBuilder();
-
-        QB.setTables(S.TABLE_MOGA_WOODS_REWARDS + " AS mwr" + " LEFT OUTER JOIN " + S.TABLE_ITEMS + " AS i" + " ON " + "mwr." +
-                S.COLUMN_MOGA_WOODS_REWARDS_ITEM_ID + " = " + "i." + S.COLUMN_ITEMS_ID + " LEFT OUTER JOIN " + S.TABLE_MONSTERS +
-                " AS m " + " ON " + "mwr." + S.COLUMN_MOGA_WOODS_REWARDS_MONSTER_ID + " = " + "m." + S.COLUMN_MONSTERS_ID);
-
-        QB.setProjectionMap(projectionMap);
-        return QB;
-    }
-
-    /**
      * ****************************** MONSTER QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all monsters
 	 */
@@ -2084,7 +1859,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** MONSTER DAMAGE QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all monster damage for a monster
 	 */
@@ -2108,7 +1883,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** MONSTER TO ARENA QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all arena quests based on monster
 	 */
@@ -2189,7 +1964,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** MONSTER TO QUEST QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all quests based on monster
 	 */
@@ -2293,7 +2068,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** QUEST QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all quests
 	 */
@@ -2372,7 +2147,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
      * Helper method to query for quests
      */
     private SQLiteQueryBuilder builderQuest() {
-//		SELECT q._id AS _id, q.name AS qname, q.goal, q.hub, q.type, q.stars, q.location_id, q.time_limit, 
+//		SELECT q._id AS _id, q.name AS qname, q.goal, q.hub, q.type, q.stars, q.location_id, q.time_limit,
 //		q.fee, q.reward, q.hrp,	l.name AS lname, l.map
 //		FROM quests AS q LEFT OUTER JOIN locations AS l ON q.location_id = l._id;
 
@@ -2412,7 +2187,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** QUEST REWARD QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all quest reward quests based on item
 	 */
@@ -2453,7 +2228,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
      * Helper method to query for QuestReward
      */
     private SQLiteQueryBuilder builderQuestReward() {
-//		SELECT qr._id AS _id, qr.quest_id, qr.item_id, 
+//		SELECT qr._id AS _id, qr.quest_id, qr.item_id,
 //		qr.reward_slot, qr.percentage, qr.stack_size,
 //		q.name AS qname, q.hub, q.stars, i.name AS iname
 //		FROM quest_rewards AS qr
@@ -2496,7 +2271,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
 //	public SkillCursor querySkill(long id) {
 //		// "SELECT * FROM skills WHERE skill_id = id"
-//		
+//
 //		_Distinct = false;
 //		_Table = S.TABLE_SKILLS;
 //		_Columns = null;
@@ -2506,10 +2281,10 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 //		_Having = null;
 //		_OrderBy = null;
 //		_Limit = null;
-//		
+//
 //		return new SkillCursor(wrapHelper());
-//	}	
-	
+//	}
+
 	/*
 	 * Get all skills for a skill tree
 	 */
@@ -2577,7 +2352,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** WEAPON QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all weapon
 	 */
@@ -2663,7 +2438,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 //		w.elemental_attack, w.awakened_elemental_attack, w.defense, w.sharpness, w.affinity,
 //		w.horn_notes, w.shelling_type, w.charge_levels, w.allowed_coatings, w.recoil, w.reload_speed,
 //		w.rapid_fire, w.normal_shots, w.status_shots, w.elemental_shots, w.tool_shots, w.num_slots,
-//		w.sharpness_file, 
+//		w.sharpness_file,
 //		i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell, i.description,
 //		i.icon_name, i.armor_dupe_name_fix
 //		FROM weapons AS w LEFT OUTER JOIN	items AS i ON w._id = i._id;
@@ -2728,7 +2503,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** WEAPON TREE QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get the parent weapon
 	 */
@@ -2769,8 +2544,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     private SQLiteQueryBuilder builderWeaponTreeParent() {
 //		SELECT i2._id, i2.name
 //		FROM items AS i1
-//		LEFT OUTER JOIN components AS c ON i1._id = c.created_item_id 
-//		JOIN weapons AS w2 ON w2._id = c.component_item_id 
+//		LEFT OUTER JOIN components AS c ON i1._id = c.created_item_id
+//		JOIN weapons AS w2 ON w2._id = c.component_item_id
 //		LEFT OUTER JOIN items AS i2 ON i2._id = w2._id
 //
 //		WHERE i1._id = 'id';
@@ -2805,8 +2580,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     private SQLiteQueryBuilder builderWeaponTreeChild() {
 //		SELECT i2._id, i2.name
 //		FROM items AS i1
-//		LEFT OUTER JOIN components AS c ON i1._id = c.component_item_id 
-//		JOIN weapons AS w2 ON w2._id = c.created_item_id 
+//		LEFT OUTER JOIN components AS c ON i1._id = c.component_item_id
+//		JOIN weapons AS w2 ON w2._id = c.created_item_id
 //		LEFT OUTER JOIN items AS i2 ON i2._id = w2._id
 //
 //		WHERE i1._id = '_id';
@@ -2838,7 +2613,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** WISHLIST QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all wishlist
 	 */
@@ -2940,7 +2715,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** WISHLIST DATA QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all wishlist data
 	 */
@@ -3136,8 +2911,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 //		SELECT wd._id AS _id, wd.wishlist_id, wd.item_id, wd.quantity, wd.satisfied, wd.path
 //		i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell, i.description,
 //		i.icon_name, i.armor_dupe_name_fix
-//		FROM wishlist_data AS wd 
-//		LEFT OUTER JOIN wishlist AS w ON wd.wishlist_id = w._id 
+//		FROM wishlist_data AS wd
+//		LEFT OUTER JOIN wishlist AS w ON wd.wishlist_id = w._id
 //		LEFT OUTER JOIN	items AS i ON wd.item_id = i._id;
 
         String wd = "wd";
@@ -3179,7 +2954,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /**
      * ****************************** WISHLIST COMPONENT QUERIES *****************************************
      */
-	
+
 	/*
 	 * Get all wishlist components
 	 */
@@ -3371,8 +3146,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 //		SELECT wc._id AS _id, wc.wishlist_id, wc.component_id, wc.quantity, wc.notes
 //		i.name, i.jpn_name, i.type, i.sub_type, i.rarity, i.carry_capacity, i.buy, i.sell, i.description,
 //		i.icon_name, i.armor_dupe_name_fix
-//		FROM wishlist_component AS wc 
-//		LEFT OUTER JOIN wishlist AS w ON wd.wishlist_id = w._ic 
+//		FROM wishlist_component AS wc
+//		LEFT OUTER JOIN wishlist AS w ON wd.wishlist_id = w._ic
 //		LEFT OUTER JOIN	items AS i ON wc.component_id = i._id;
 
         String wc = "wc";
