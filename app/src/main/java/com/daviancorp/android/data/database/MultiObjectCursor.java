@@ -9,15 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A cursor that performs searches across the entire application.
- * Delegates work to other cursors.
+ * A cursor that performs searches across the entire application and
+ * delegates work to other cursors.
+ * This class cannot be created directly. Instead, create a MultiObjectCursor.Builder
+ * object, and use that to construct a new MultiObjectCursor.
  * Created by Carlos on 8/5/2015.
  */
 public class MultiObjectCursor extends CursorWrapper {
+
+    /**
+     * A handler used to define how to map a cursor row to an object.
+     * Pass to the a builder instance to
+     * @param <T> The cursor class type
+     */
     public interface Handler<T> {
         Object getObject(T cursor);
     }
 
+    /**
+     * An inner helper class which notifies the MultiObjectCursor
+     * when the MergeCursor passes over to this one.
+     * Necessary because MergeCursor has no "getCurrentCursor()" function
+     */
     private static class IdentifyingCursorWrapper extends CursorWrapper {
         private MultiObjectCursor parent;
         private Handler handler;
@@ -41,6 +54,9 @@ public class MultiObjectCursor extends CursorWrapper {
         }
     }
 
+    /**
+     * Used to construct a new MultiObjectCursor object
+     */
     public static class Builder {
         private List<IdentifyingCursorWrapper> cursors = new ArrayList<IdentifyingCursorWrapper>();
 
@@ -48,6 +64,15 @@ public class MultiObjectCursor extends CursorWrapper {
             cursors.add(new IdentifyingCursorWrapper(cursor, handler));
         }
 
+        /**
+         * A special version of add which takes a method name instead of a handler.
+         * This version uses reflection to create the handler. This handler
+         * will invoke the given method on the cursor.
+         * @param cursor
+         * @param methodName
+         * @param <T>
+         * @throws NoSuchMethodException
+         */
         public <T extends Cursor> void add(T cursor, String methodName) throws NoSuchMethodException {
             final Method method = cursor.getClass().getMethod(methodName);
 
