@@ -1,5 +1,8 @@
 package com.daviancorp.android.ui.list;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,14 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.WeaponExpandableListBladeAdapter;
 import com.daviancorp.android.ui.general.WeaponListEntry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Mark on 3/3/2015.
@@ -132,6 +131,7 @@ public class WeaponBladeExpandableFragment extends Fragment implements
 
     static class WeaponArrayLoader extends AsyncTaskLoader<ArrayList<WeaponListEntry>> {
         String mType;
+
         public WeaponArrayLoader(Context context, String type) {
             super(context);
             mType = type;
@@ -149,7 +149,8 @@ public class WeaponBladeExpandableFragment extends Fragment implements
         super.onPause();
     }
 
-    @Override public void onResume() {
+    @Override
+    public void onResume() {
         if (savedState != null) {
             List<Integer> groups = savedState.getIntegerArrayList(GROUPS_KEY);
             mAdapter.restoreGroups(groups);

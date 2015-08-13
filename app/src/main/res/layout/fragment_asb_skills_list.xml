@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/header"
@@ -18,7 +18,7 @@
             android:layout_weight="0.2"
             android:gravity="center"
             android:text="@string/asb_skill_tree_name"
-            android:textColor="@color/text_primary_color" />
+            android:textColor="@color/text_primary_color"/>
 
         <ImageView
             android:id="@+id/helmet"
@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:gravity="center"
-            android:src="@drawable/armor_head" />
+            android:src="@drawable/armor_head"/>
 
         <ImageView
             android:id="@+id/body"
@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:gravity="center"
-            android:src="@drawable/armor_body" />
+            android:src="@drawable/armor_body"/>
 
         <ImageView
             android:id="@+id/arms"
@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:gravity="center"
-            android:src="@drawable/armor_arms" />
+            android:src="@drawable/armor_arms"/>
 
         <ImageView
             android:id="@+id/waist"
@@ -50,7 +50,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:gravity="center"
-            android:src="@drawable/armor_waist" />
+            android:src="@drawable/armor_waist"/>
 
         <ImageView
             android:id="@+id/legs"
@@ -58,14 +58,14 @@
             android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:gravity="center"
-            android:src="@drawable/armor_legs" />
+            android:src="@drawable/armor_legs"/>
 
         <ImageView
             android:id="@+id/talisman"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.1"
-            android:src="@drawable/talisman" />
+            android:src="@drawable/talisman"/>
 
         <TextView
             android:id="@+id/total"
@@ -74,7 +74,7 @@
             android:layout_weight="0.1"
             android:gravity="center"
             android:text="@string/asb_skill_points_total"
-            android:textColor="@color/text_primary_color" />
+            android:textColor="@color/text_primary_color"/>
 
     </LinearLayout>
 

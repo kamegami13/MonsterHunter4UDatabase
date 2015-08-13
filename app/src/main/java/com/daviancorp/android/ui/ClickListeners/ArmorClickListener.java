@@ -3,7 +3,6 @@ package com.daviancorp.android.ui.ClickListeners;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 
 import com.daviancorp.android.ui.detail.ArmorDetailActivity;
@@ -37,8 +36,7 @@ public class ArmorClickListener implements View.OnClickListener {
         if (activity != null) {
             i.putExtras(activity.getIntent().getExtras());
             activity.startActivityForResult(i, requestCode);
-        }
-        else {
+        } else {
             c.startActivity(i);
         }
     }

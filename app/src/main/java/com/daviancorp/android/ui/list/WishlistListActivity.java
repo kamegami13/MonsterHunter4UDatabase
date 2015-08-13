@@ -16,15 +16,6 @@ public class WishlistListActivity extends GenericActivity {
 
         // Tag as top level activity
         super.setAsTopLevel();
-
-		/*FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-
-		if (fragment == null) {
-			fragment = new WishlistListFragment();
-			fm.beginTransaction().add(R.id.fragment_container, fragment)
-					.commit();
-		}*/
     }
 
     @Override

@@ -16,8 +16,7 @@ public class MonsterStatus {
     /**
      * Default constructor for status object
      */
-    public MonsterStatus()
-    {
+    public MonsterStatus() {
         mMonster = null;
         mStatus = "";
         mInitial = -1;

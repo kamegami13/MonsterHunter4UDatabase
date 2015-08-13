@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listitem"
-    style="@style/list_item"
-    android:orientation="horizontal" >
+              android:id="@+id/listitem"
+              style="@style/list_item"
+              android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/item_layout"
@@ -13,7 +13,7 @@
 
         <ImageView
             android:id="@+id/item_image"
-            style="@style/main_image" />
+            style="@style/main_image"/>
 
         <TextView
             android:id="@+id/item"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
-            style="@style/text_medium" />
+            style="@style/text_medium"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -41,7 +41,7 @@
             style="@style/text_small"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="test" />
+            android:text="test"/>
 
         <TextView
             android:id="@+id/method"
@@ -53,7 +53,7 @@
             style="@style/text_small"
             android:layout_alignTop="@+id/rate"
             android:layout_toLeftOf="@+id/rate"
-            android:text="test" />
+            android:text="test"/>
 
         <TextView
             android:id="@+id/rate"
@@ -66,7 +66,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/area"
             android:text="100%"
-            android:layout_marginLeft="4dp" />
+            android:layout_marginLeft="4dp"/>
     </RelativeLayout>
 
 </LinearLayout>

@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import com.daviancorp.android.data.classes.Melody;
-import com.daviancorp.android.data.classes.Skill;
 
 /**
  * A convenience class to wrap a cursor that returns rows from the "horn_melodies"

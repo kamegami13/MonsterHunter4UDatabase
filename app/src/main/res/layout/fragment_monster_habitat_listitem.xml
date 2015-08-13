@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:id="@+id/listitem"
-    style="@style/list_item_large">
+                android:orientation="horizontal"
+                android:id="@+id/listitem"
+                style="@style/list_item_large">
 
     <ImageView
         android:id="@+id/mapImage"
         style="@style/large_image"
         android:padding="4dp"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
         android:text="Frozen Seaway"
         android:layout_weight="0.5"
         android:layout_toRightOf="@+id/mapImage"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
         android:text="1,2"
         android:gravity="center"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/viewStub" />
+        android:layout_toLeftOf="@+id/viewStub"/>
 
     <View
         android:layout_width="12dp"
@@ -41,7 +41,7 @@
         android:background="@drawable/arrow"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/move"
-        android:layout_marginLeft="6dp" />
+        android:layout_marginLeft="6dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
         android:text="1,2"
         android:gravity="center"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/viewStub2" />
+        android:layout_toLeftOf="@+id/viewStub2"/>
 
     <View
         android:layout_width="12dp"
@@ -62,7 +62,7 @@
         android:background="@drawable/arrow"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/rest"
-        android:layout_marginLeft="6dp" />
+        android:layout_marginLeft="6dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -76,6 +76,6 @@
         android:layout_alignParentTop="false"
         android:layout_alignParentBottom="false"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout>

@@ -1,15 +1,14 @@
 package com.daviancorp.android.ui.adapter;
 
+import java.io.IOException;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.LruCache;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -21,8 +20,6 @@ import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
 import com.daviancorp.android.ui.general.WeaponListEntry;
 import com.oissela.software.multilevelexpindlistview.MultiLevelExpIndListAdapter;
 import com.oissela.software.multilevelexpindlistview.Utils;
-
-import java.io.IOException;
 
 /**
  * Created by Mark on 3/3/2015.
@@ -118,7 +115,7 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
             slotView = (TextView) weaponView.findViewById(R.id.slots_text);
             affinityView = (TextView) weaponView.findViewById(R.id.affinity_text);
             defenseView = (TextView) weaponView.findViewById(R.id.defense_text);
-            
+
             colorBand = weaponView.findViewById(R.id.color_band);
             indentView = weaponView.findViewById(R.id.indent_view);
             arrow = weaponView.findViewById(R.id.arrow);
@@ -160,8 +157,8 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         int wFinal = weapon.getWFinal();
         name = name + weapon.getName();
         // Add ? to indicate that a weapon is create-able
-        if(weapon.getCreationCost() > 0)
-            name = name+"\u2605";
+        if (weapon.getCreationCost() > 0)
+            name = name + "\u2605";
 
         // Get the weapons attack
         String attack = "DMG: " + weapon.getAttackString();
@@ -196,7 +193,7 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         //
 
         //holder.colorBand.setVisibility(View.VISIBLE);
-        holder.setColorBandColor(weapon.getRarity()-1);
+        holder.setColorBandColor(weapon.getRarity() - 1);
 
         int leftPadding = Utils.getPaddingPixels(mContext, mPaddingDP)
                 * (weaponEntry.getIndentation());
@@ -211,7 +208,7 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         }
     }
 
-    protected class LoadImage extends AsyncTask<Void,Void,Bitmap> {
+    protected class LoadImage extends AsyncTask<Void, Void, Bitmap> {
         private ImageView mImage;
         private String path;
         private String imagePath;

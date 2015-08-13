@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_below="@+id/toolbar"
-    android:id="@+id/drawer_layout"
-    android:elevation="7sp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white">
+                                        android:layout_below="@+id/toolbar"
+                                        android:id="@+id/drawer_layout"
+                                        android:elevation="7sp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@android:color/white">
 
-        <LinearLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/fragment_container"
         android:orientation="vertical">
 
 
-            <include layout="@layout/toolbar"/>
-        </LinearLayout>
+        <include layout="@layout/toolbar"/>
+    </LinearLayout>
 
     <include layout="@layout/drawer_list"/>
 

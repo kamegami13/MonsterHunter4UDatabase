@@ -4,13 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.daviancorp.android.ui.adapter.WeaponDetailPagerAdapter;
-import com.daviancorp.android.ui.detail.ArmorDetailActivity;
 import com.daviancorp.android.ui.detail.WeaponDetailActivity;
 
-/**
- * Created by Mark on 2/24/2015.
- */
 public class WeaponClickListener implements View.OnClickListener {
     private Context c;
     private Long id;

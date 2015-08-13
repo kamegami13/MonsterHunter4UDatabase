@@ -6,9 +6,6 @@ import android.view.View;
 
 import com.daviancorp.android.ui.detail.QuestDetailActivity;
 
-/**
- * Created by Mark on 2/24/2015.
- */
 public class QuestClickListener implements View.OnClickListener {
     private Context c;
     private Long id;

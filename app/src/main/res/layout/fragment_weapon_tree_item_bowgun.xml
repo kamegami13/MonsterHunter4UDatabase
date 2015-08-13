@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/main_layout"
-    android:clickable="true"
-    android:background="@drawable/clicked_states_white"
-    android:orientation="horizontal">
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/main_layout"
+              android:clickable="true"
+              android:background="@drawable/clicked_states_white"
+              android:orientation="horizontal">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:id="@+id/indent_view"
-        android:background="@color/divider_color" />
+        android:background="@color/divider_color"/>
 
     <View
         android:layout_width="4dp"
         android:layout_height="match_parent"
-        android:id="@+id/color_band" />
+        android:id="@+id/color_band"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -25,10 +25,11 @@
         android:background="@drawable/clicked_states_white"
         android:id="@+id/clickable_layout">
 
-        <View android:layout_width="fill_parent"
+        <View
+            android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:id="@+id/divider"
-            android:background="@color/divider_color" />
+            android:background="@color/divider_color"/>
 
         <RelativeLayout
             android:id="@+id/item3"
@@ -43,7 +44,7 @@
                 android:text="Leidenskraft"
                 android:id="@+id/name_text"
                 style="@style/text_medium"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"/>
 
         </RelativeLayout>
 
@@ -64,7 +65,7 @@
                 android:id="@+id/attack_text"
                 style="@style/text_small"
                 android:layout_gravity="left"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
             <TextView
                 android:layout_width="68dp"
@@ -73,7 +74,7 @@
                 android:id="@+id/defense_text"
                 android:layout_toLeftOf="@+id/affinity_text"
                 android:layout_alignTop="@+id/affinity_text"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
             <TextView
                 android:layout_width="44dp"
@@ -82,7 +83,7 @@
                 android:id="@+id/slots_text"
                 style="@style/text_small"
                 android:gravity="right|top"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"/>
 
             <TextView
                 android:layout_width="54dp"
@@ -92,7 +93,7 @@
                 android:gravity="right|top"
                 android:paddingBottom="4dp"
                 android:textSize="12sp"
-                android:layout_toLeftOf="@+id/slots_text" />
+                android:layout_toLeftOf="@+id/slots_text"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,7 +102,7 @@
                 android:id="@+id/recoil_text"
                 android:gravity="right"
                 android:textSize="12sp"
-                android:layout_below="@+id/attack_text" />
+                android:layout_below="@+id/attack_text"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -111,7 +112,7 @@
                 android:textSize="12sp"
                 android:layout_alignTop="@+id/recoil_text"
                 android:gravity="center_horizontal"
-                android:layout_alignLeft="@+id/defense_text" />
+                android:layout_alignLeft="@+id/defense_text"/>
 
             <TextView
                 android:layout_width="100dp"
@@ -121,7 +122,7 @@
                 android:layout_alignParentRight="true"
                 android:textSize="12sp"
                 android:layout_alignTop="@+id/recoil_text"
-                android:gravity="right" />
+                android:gravity="right"/>
 
             <View
                 android:layout_width="16dp"
@@ -131,7 +132,7 @@
                 android:id="@+id/arrow"
                 android:layout_below="@+id/attack_text"
                 android:layout_marginRight="24dp"
-                android:layout_toLeftOf="@+id/reload_text" />
+                android:layout_toLeftOf="@+id/reload_text"/>
 
         </RelativeLayout>
     </RelativeLayout>

@@ -6,9 +6,6 @@ import android.view.View;
 
 import com.daviancorp.android.ui.detail.LocationDetailActivity;
 
-/**
- * Created by Mark on 2/23/2015.
- */
 public class LocationClickListener implements View.OnClickListener {
     private Context c;
     private Long id;

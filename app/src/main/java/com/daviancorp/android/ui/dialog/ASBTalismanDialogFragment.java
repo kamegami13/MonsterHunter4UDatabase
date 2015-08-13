@@ -1,5 +1,8 @@
 package com.daviancorp.android.ui.dialog;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,15 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
 import com.daviancorp.android.data.classes.ASBTalisman;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.compound.ASBTalismanSkillContainer;
 import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ASBTalismanDialogFragment extends DialogFragment implements ASBTalismanSkillContainer.ChangeListener {
 
@@ -95,43 +96,43 @@ public class ASBTalismanDialogFragment extends DialogFragment implements ASBTali
         updateSkillEnabledStates();
 
         Dialog d = new AlertDialog.Builder(getActivity())
-                           .setTitle(R.string.asb_dialog_talisman_title)
-                           .setView(addView)
-                           .setNegativeButton(android.R.string.cancel, null)
-                           .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                               @Override
-                               public void onClick(DialogInterface dialog, int which) {
+                .setTitle(R.string.asb_dialog_talisman_title)
+                .setView(addView)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
-                                   if (talismanSkillContainers[0].getSkillTree() != null) {
+                        if (talismanSkillContainers[0].getSkillTree() != null) {
 
-                                       Intent i = new Intent();
+                            Intent i = new Intent();
 
-                                       long skill1Id = talismanSkillContainers[0].getSkillTree().getId();
-                                       int skill1Points = Integer.parseInt(talismanSkillContainers[0].getSkillPoints());
+                            long skill1Id = talismanSkillContainers[0].getSkillTree().getId();
+                            int skill1Points = Integer.parseInt(talismanSkillContainers[0].getSkillPoints());
 
-                                       i.putExtra(ASBActivity.EXTRA_TALISMAN_TYPE_INDEX,
-                                                  typeSpinner.getSelectedItemPosition());
-                                       i.putExtra(ASBActivity.EXTRA_TALISMAN_SLOTS,
-                                                  slotsSpinner.getSelectedItemPosition());
-                                       i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_TREE_1, skill1Id);
-                                       i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_POINTS_1, skill1Points);
+                            i.putExtra(ASBActivity.EXTRA_TALISMAN_TYPE_INDEX,
+                                    typeSpinner.getSelectedItemPosition());
+                            i.putExtra(ASBActivity.EXTRA_TALISMAN_SLOTS,
+                                    slotsSpinner.getSelectedItemPosition());
+                            i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_TREE_1, skill1Id);
+                            i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_POINTS_1, skill1Points);
 
-                                       if (talismanSkillContainers[1].getSkillTree() != null) {
-                                           Log.d("SetBuilder", "Skill 2 is defined.");
+                            if (talismanSkillContainers[1].getSkillTree() != null) {
+                                Log.d("SetBuilder", "Skill 2 is defined.");
 
-                                           long skill2Id = talismanSkillContainers[1].getSkillTree().getId();
-                                           int skill2Points = Integer.parseInt(talismanSkillContainers[1].getSkillPoints());
+                                long skill2Id = talismanSkillContainers[1].getSkillTree().getId();
+                                int skill2Points = Integer.parseInt(talismanSkillContainers[1].getSkillPoints());
 
-                                           i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_TREE_2, skill2Id);
-                                           i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_POINTS_2, skill2Points);
-                                       }
+                                i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_TREE_2, skill2Id);
+                                i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_POINTS_2, skill2Points);
+                            }
 
-                                       getTargetFragment().onActivityResult(ASBActivity.REQUEST_CODE_CREATE_TALISMAN,
-                                                                            Activity.RESULT_OK, i);
-                                   }
-                               }
-                           })
-                           .create();
+                            getTargetFragment().onActivityResult(ASBActivity.REQUEST_CODE_CREATE_TALISMAN,
+                                    Activity.RESULT_OK, i);
+                        }
+                    }
+                })
+                .create();
         d.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -191,12 +192,12 @@ public class ASBTalismanDialogFragment extends DialogFragment implements ASBTali
 
         if (d != null) {
             if (talismanSkillContainers[0].getSkillTree() == null ||
-                        !talismanSkillContainers[0].skillPointsIsValid()) {
+                    !talismanSkillContainers[0].skillPointsIsValid()) {
                 d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
                 return;
             } else if (talismanSkillContainers[1].getSkillTree() != null) {
                 if (!talismanSkillContainers[1].skillPointsIsValid() ||
-                            talismanSkillContainers[0].getSkillTree().getId() == talismanSkillContainers[1].getSkillTree().getId()) {
+                        talismanSkillContainers[0].getSkillTree().getId() == talismanSkillContainers[1].getSkillTree().getId()) {
                     d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
                     return;
                 }
@@ -219,7 +220,7 @@ public class ASBTalismanDialogFragment extends DialogFragment implements ASBTali
 
         Spinner spinner = (Spinner) view.findViewById(R.id.talisman_rank_spinner);
         spinner.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
-                                              talismanNames));
+                talismanNames));
 
         return spinner;
     }
@@ -227,7 +228,7 @@ public class ASBTalismanDialogFragment extends DialogFragment implements ASBTali
     private Spinner initializeSlotsSpinner(View view) {
         Spinner spinner = (Spinner) view.findViewById(R.id.talisman_slots_spinner);
         spinner.setAdapter(ArrayAdapter.createFromResource(getActivity(), R.array.slot_values,
-                                                           android.R.layout.simple_spinner_dropdown_item));
+                android.R.layout.simple_spinner_dropdown_item));
         ((ArrayAdapter) spinner.getAdapter()).setDropDownViewResource(R.layout.view_spinner_dropdown_item);
 
         return spinner;

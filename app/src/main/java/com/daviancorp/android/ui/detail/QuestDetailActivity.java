@@ -11,9 +11,7 @@ import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 public class QuestDetailActivity extends GenericTabActivity {
-    /**
-     * A key for passing a quest ID as a long
-     */
+
     public static final String EXTRA_QUEST_ID =
             "com.daviancorp.android.android.ui.detail.monster_id";
 
@@ -43,8 +41,6 @@ public class QuestDetailActivity extends GenericTabActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-//		MenuInflater inflater = getMenuInflater();
-//		inflater.inflate(R.menu.main, menu);
         return true;
     }
 

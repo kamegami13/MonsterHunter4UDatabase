@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/clicked_states_white"
-    android:orientation="horizontal">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/clicked_states_white"
+              android:orientation="horizontal">
 
     <TextView
         android:id="@+id/skill_tree_name"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.2"
         android:paddingLeft="3dp"
-        android:textColor="@color/list_text" />
+        android:textColor="@color/list_text"/>
 
     <TextView
         android:id="@+id/helmet"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:textColor="@color/list_text" />
+        android:textColor="@color/list_text"/>
 
     <TextView
         android:id="@+id/body"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:textColor="@color/list_text" />
+        android:textColor="@color/list_text"/>
 
     <TextView
         android:id="@+id/arms"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:textColor="@color/list_text" />
+        android:textColor="@color/list_text"/>
 
     <TextView
         android:id="@+id/waist"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:textColor="@color/list_text" />
+        android:textColor="@color/list_text"/>
 
     <TextView
         android:id="@+id/legs"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:textColor="@color/list_text" />
+        android:textColor="@color/list_text"/>
 
     <TextView
         android:id="@+id/talisman"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:textColor="@color/list_text" />
+        android:textColor="@color/list_text"/>
 
     <TextView
         android:id="@+id/total"
@@ -67,6 +67,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
         android:gravity="center"
-        android:textColor="@color/list_text" />
+        android:textColor="@color/list_text"/>
 
 </LinearLayout>

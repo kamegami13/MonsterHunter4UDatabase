@@ -1,10 +1,8 @@
 package com.daviancorp.android.ui.general;
 
-import android.annotation.SuppressLint;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 
 import com.daviancorp.android.mh4udatabase.R;
 
@@ -15,13 +13,12 @@ import com.daviancorp.android.mh4udatabase.R;
 
 public abstract class GenericTabActivity extends GenericActionBarActivity {
 
-	protected Fragment detail;
+    protected Fragment detail;
     protected SlidingTabLayout mSlidingTabLayout;
 
-	@SuppressLint("NewApi")
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_tab);
 
@@ -46,5 +43,5 @@ public abstract class GenericTabActivity extends GenericActionBarActivity {
         super.setupDrawer(); // Needs to be called after setContentView
         // Disabled by request. Turns into BACK button
         //super.enableDrawerIndicator(); // Enable drawer toggle button
-	}
+    }
 }

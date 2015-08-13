@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/main_layout"
-    android:clickable="true"
-    android:orientation="horizontal">
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/main_layout"
+              android:clickable="true"
+              android:orientation="horizontal">
 
     <View
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:id="@+id/indent_view"
-        android:background="@color/divider_color" />
+        android:background="@color/divider_color"/>
 
     <View
         android:layout_width="4dp"
         android:layout_height="match_parent"
-        android:id="@+id/color_band" />
+        android:id="@+id/color_band"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,10 +27,11 @@
         android:background="@drawable/clicked_states_white"
         android:paddingBottom="4dp">
 
-        <View android:layout_width="fill_parent"
+        <View
+            android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:id="@+id/divider"
-            android:background="@color/divider_color" />
+            android:background="@color/divider_color"/>
 
         <RelativeLayout
             android:id="@+id/item3"
@@ -47,7 +48,7 @@
                 android:id="@+id/name_text"
                 style="@style/text_medium"
                 android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true" />
+                android:layout_alignParentLeft="true"/>
 
             <view
                 android:layout_width="92dp"
@@ -55,7 +56,7 @@
                 class="com.daviancorp.android.ui.general.DrawSharpness"
                 android:id="@+id/sharpness"
                 android:layout_centerVertical="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -73,7 +74,7 @@
                 android:id="@+id/attack_text"
                 style="@style/text_small"
                 android:layout_gravity="left"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
             <TextView
                 android:layout_width="44dp"
@@ -84,7 +85,7 @@
                 android:gravity="right|top"
                 android:textSize="14sp"
                 android:layout_weight="1"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"/>
 
             <TextView
                 android:layout_width="52dp"
@@ -93,7 +94,7 @@
                 android:id="@+id/defense_text"
                 android:textSize="12sp"
                 android:layout_weight="1"
-                android:layout_toLeftOf="@+id/affinity_text" />
+                android:layout_toLeftOf="@+id/affinity_text"/>
 
             <TextView
                 android:layout_width="48dp"
@@ -103,7 +104,7 @@
                 android:gravity="right|top"
                 android:layout_alignParentRight="false"
                 android:textSize="12sp"
-                android:layout_toLeftOf="@+id/slots_text" />
+                android:layout_toLeftOf="@+id/slots_text"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -114,12 +115,12 @@
                 android:layout_marginLeft="2dp"
                 android:textSize="12sp"
                 android:gravity="right"
-                android:layout_toRightOf="@+id/attack_text" />
+                android:layout_toRightOf="@+id/attack_text"/>
 
             <com.daviancorp.android.ui.general.FixedImageView
                 android:id="@+id/element_image"
                 style="@style/tiny_image"
-                android:layout_toRightOf="@+id/awaken_text" />
+                android:layout_toRightOf="@+id/awaken_text"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -129,12 +130,12 @@
                 style="@style/text_small"
                 android:layout_marginRight="4dp"
                 android:textSize="12sp"
-                android:layout_toRightOf="@+id/element_image" />
+                android:layout_toRightOf="@+id/element_image"/>
 
             <com.daviancorp.android.ui.general.FixedImageView
                 style="@style/tiny_image"
                 android:id="@+id/element_image2"
-                android:layout_toRightOf="@+id/element_text" />
+                android:layout_toRightOf="@+id/element_text"/>
 
             <TextView
                 style="@style/text_small"
@@ -143,7 +144,7 @@
                 android:id="@+id/element_text2"
                 android:text="350"
                 android:textSize="12sp"
-                android:layout_toRightOf="@+id/element_image2" />
+                android:layout_toRightOf="@+id/element_image2"/>
 
             <TextView
                 android:id="@+id/special_text"
@@ -158,7 +159,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_alignParentRight="false"
                 android:layout_alignWithParentIfMissing="true"
-                android:layout_toLeftOf="@+id/note_image_1" />
+                android:layout_toLeftOf="@+id/note_image_1"/>
 
             <com.daviancorp.android.ui.general.FixedImageView
                 android:id="@+id/note_image_1"
@@ -167,7 +168,7 @@
                 android:visibility="gone"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="4dp"
-                android:layout_toLeftOf="@+id/note_image_2" />
+                android:layout_toLeftOf="@+id/note_image_2"/>
 
             <com.daviancorp.android.ui.general.FixedImageView
                 android:id="@+id/note_image_2"
@@ -175,7 +176,7 @@
                 android:layout_alignTop="@+id/note_image_1"
                 android:visibility="gone"
                 android:layout_marginBottom="4dp"
-                android:layout_toLeftOf="@+id/note_image_3" />
+                android:layout_toLeftOf="@+id/note_image_3"/>
 
             <com.daviancorp.android.ui.general.FixedImageView
                 android:id="@+id/note_image_3"
@@ -183,7 +184,7 @@
                 android:layout_alignTop="@+id/note_image_2"
                 android:visibility="gone"
                 android:layout_marginBottom="4dp"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"/>
 
             <View
                 android:layout_width="16dp"
@@ -193,7 +194,7 @@
                 android:id="@+id/arrow"
                 android:layout_below="@+id/attack_text"
                 android:layout_centerHorizontal="true"
-                android:visibility="visible" />
+                android:visibility="visible"/>
 
         </RelativeLayout>
     </RelativeLayout>

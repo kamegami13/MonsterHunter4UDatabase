@@ -25,73 +25,74 @@ import com.daviancorp.android.loader.ArmorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 
 public class ArmorDetailFragment extends Fragment {
-	private static final String ARG_ARMOR_ID = "ARMOR_ID";
 
-	private Armor mArmor;
+    private static final String ARG_ARMOR_ID = "ARMOR_ID";
 
-	private TextView mArmorLabelTextView;
-	private ImageView mArmorIconImageView;
-	private TextView partTextView;
-	private TextView defenseTextView;
-	private TextView slotTextView;
-	private TextView rareTextView;
-	private TextView buyTextView;
-	
-	private TextView fireResTextView;
-	private TextView waterResTextView;
-	private TextView iceResTextView;
-	private TextView thunderResTextView;
-	private TextView dragonResTextView;
+    private Armor mArmor;
 
-	public static ArmorDetailFragment newInstance(long armorId) {
-		Bundle args = new Bundle();
-		args.putLong(ARG_ARMOR_ID, armorId);
-		ArmorDetailFragment f = new ArmorDetailFragment();
-		f.setArguments(args);
-		return f;
-	}
+    private TextView mArmorLabelTextView;
+    private ImageView mArmorIconImageView;
+    private TextView partTextView;
+    private TextView defenseTextView;
+    private TextView slotTextView;
+    private TextView rareTextView;
+    private TextView buyTextView;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    private TextView fireResTextView;
+    private TextView waterResTextView;
+    private TextView iceResTextView;
+    private TextView thunderResTextView;
+    private TextView dragonResTextView;
 
-		setRetainInstance(true);
-		setHasOptionsMenu(true);
+    public static ArmorDetailFragment newInstance(long armorId) {
+        Bundle args = new Bundle();
+        args.putLong(ARG_ARMOR_ID, armorId);
+        ArmorDetailFragment f = new ArmorDetailFragment();
+        f.setArguments(args);
+        return f;
+    }
 
-		// Check for a Item ID as an argument, and find the item
-		Bundle args = getArguments();
-		if (args != null) {
-			long armorId = args.getLong(ARG_ARMOR_ID, -1);
-			if (armorId != -1) {
-				LoaderManager lm = getLoaderManager();
-				lm.initLoader(R.id.armor_detail_fragment, args,
-						new ArmorLoaderCallbacks());
-			}
-		}
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_armor_detail,
-				container, false);
+        setRetainInstance(true);
+        setHasOptionsMenu(true);
 
-		mArmorLabelTextView = (TextView) view
-				.findViewById(R.id.detail_armor_label);
-		mArmorIconImageView = (ImageView) view
-				.findViewById(R.id.detail_armor_image);
+        // Check for a Item ID as an argument, and find the item
+        Bundle args = getArguments();
+        if (args != null) {
+            long armorId = args.getLong(ARG_ARMOR_ID, -1);
+            if (armorId != -1) {
+                LoaderManager lm = getLoaderManager();
+                lm.initLoader(R.id.armor_detail_fragment, args,
+                        new ArmorLoaderCallbacks());
+            }
+        }
+    }
 
-		partTextView = (TextView) view.findViewById(R.id.part);
-		defenseTextView = (TextView) view.findViewById(R.id.defense_text);
-		slotTextView = (TextView) view.findViewById(R.id.slot);
-		rareTextView = (TextView) view.findViewById(R.id.rare);
-		buyTextView = (TextView) view.findViewById(R.id.buy);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_armor_detail,
+                container, false);
 
-		fireResTextView = (TextView) view.findViewById(R.id.fire_res);
-		waterResTextView = (TextView) view.findViewById(R.id.water_res);
-		iceResTextView = (TextView) view.findViewById(R.id.ice_res);
-		thunderResTextView = (TextView) view.findViewById(R.id.thunder_res);
-		dragonResTextView = (TextView) view.findViewById(R.id.dragon_res);
+        mArmorLabelTextView = (TextView) view
+                .findViewById(R.id.detail_armor_label);
+        mArmorIconImageView = (ImageView) view
+                .findViewById(R.id.detail_armor_image);
+
+        partTextView = (TextView) view.findViewById(R.id.part);
+        defenseTextView = (TextView) view.findViewById(R.id.defense_text);
+        slotTextView = (TextView) view.findViewById(R.id.slot);
+        rareTextView = (TextView) view.findViewById(R.id.rare);
+        buyTextView = (TextView) view.findViewById(R.id.buy);
+
+        fireResTextView = (TextView) view.findViewById(R.id.fire_res);
+        waterResTextView = (TextView) view.findViewById(R.id.water_res);
+        iceResTextView = (TextView) view.findViewById(R.id.ice_res);
+        thunderResTextView = (TextView) view.findViewById(R.id.thunder_res);
+        dragonResTextView = (TextView) view.findViewById(R.id.dragon_res);
 
         // If the originator of this fragment's activity was the Armor Set Builder...
         if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
@@ -107,101 +108,102 @@ public class ArmorDetailFragment extends Fragment {
                 }
             });
         }
-		
-		return view;
-	}
 
-	private void updateUI() throws IOException {
-		String cellText = mArmor.getName();
-		String cellImage = "";
-		String cellPart = "" + mArmor.getSlot();
-		String cellDefense = "" + mArmor.getDefense() + " (min) - " + mArmor.getMaxDefense() + " (max)";
-		String cellSlot = "" + mArmor.getSlotString();
-		String cellRare = "" + mArmor.getRarity();
-		String cellBuy = "" + mArmor.getBuy() + "z";
-		
-		String cellFire = "" + mArmor.getFireRes();
-		String cellWater = "" + mArmor.getWaterRes();
-		String cellIce = "" + mArmor.getIceRes();
-		String cellThunder = "" + mArmor.getThunderRes();
-		String cellDragon = "" + mArmor.getDragonRes();
+        return view;
+    }
 
-		if (cellBuy.equals("0z")) {
-			cellBuy = "-";
-		}
-		
-		mArmorLabelTextView.setText(cellText);
-		partTextView.setText(cellPart);
-		defenseTextView.setText(cellDefense);
-		slotTextView.setText(cellSlot);
-		rareTextView.setText(cellRare);
-		buyTextView.setText(cellBuy);
-		
-		fireResTextView.setText(cellFire);
-		waterResTextView.setText(cellWater);
-		iceResTextView.setText(cellIce);
-		thunderResTextView.setText(cellThunder);
-		dragonResTextView.setText(cellDragon);
-		
-		long createdId = mArmor.getId();
+    private void updateUI() throws IOException {
+        String cellText = mArmor.getName();
+        String cellImage = "";
+        String cellPart = "" + mArmor.getSlot();
+        String cellDefense = "" + mArmor.getDefense() + " (min) - " + mArmor.getMaxDefense() + " (max)";
+        String cellSlot = "" + mArmor.getSlotString();
+        String cellRare = "" + mArmor.getRarity();
+        String cellBuy = "" + mArmor.getBuy() + "z";
 
-		 if (mArmor.getSlot().equals("Head")) {
-				cellImage = "icons_armor/icons_head/head" + cellRare + ".png";
-			}
-			else if (mArmor.getSlot().equals("Body")) {
-				cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
-			}
-			else if (mArmor.getSlot().equals("Arms")) {
-				cellImage = "icons_armor/icons_arms/arms" + cellRare + ".png";
-			}
-			else if (mArmor.getSlot().equals("Waist")) {
-				cellImage = "icons_armor/icons_waist/waist" + cellRare + ".png";
-			}
-			else if (mArmor.getSlot().equals("Legs")) {
-				cellImage = "icons_armor/icons_legs/legs" + cellRare + ".png";
-			}
-		 
-		// Read a Bitmap from Assets
-		AssetManager manager = getActivity().getAssets();
-		InputStream open = null;
+        String cellFire = "" + mArmor.getFireRes();
+        String cellWater = "" + mArmor.getWaterRes();
+        String cellIce = "" + mArmor.getIceRes();
+        String cellThunder = "" + mArmor.getThunderRes();
+        String cellDragon = "" + mArmor.getDragonRes();
 
-		try {
-			open = manager.open(cellImage);
-			Bitmap bitmap = BitmapFactory.decodeStream(open);
-			// Assign the bitmap to an ImageView in this layout
-			mArmorIconImageView.setImageBitmap(bitmap);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (open != null) {
-				open.close();
-			}
-		}
-	}
+        if (cellBuy.equals("0z")) {
+            cellBuy = "-";
+        }
 
-	private class ArmorLoaderCallbacks implements
-			LoaderCallbacks<Armor> {
+        mArmorLabelTextView.setText(cellText);
+        partTextView.setText(cellPart);
+        defenseTextView.setText(cellDefense);
+        slotTextView.setText(cellSlot);
+        rareTextView.setText(cellRare);
+        buyTextView.setText(cellBuy);
 
-		@Override
-		public Loader<Armor> onCreateLoader(int id, Bundle args) {
-			return new ArmorLoader(getActivity(),
-					args.getLong(ARG_ARMOR_ID));
-		}
+        fireResTextView.setText(cellFire);
+        waterResTextView.setText(cellWater);
+        iceResTextView.setText(cellIce);
+        thunderResTextView.setText(cellThunder);
+        dragonResTextView.setText(cellDragon);
 
-		@Override
-		public void onLoadFinished(Loader<Armor> loader, Armor run) {
-			mArmor = run;
-			try {
-				updateUI();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+        long createdId = mArmor.getId();
 
-		@Override
-		public void onLoaderReset(Loader<Armor> loader) {
-			// Do nothing
-		}
-	}
+        switch (mArmor.getSlot()) {
+            case "Head":
+                cellImage = "icons_armor/icons_head/head" + cellRare + ".png";
+                break;
+            case "Body":
+                cellImage = "icons_armor/icons_body/body" + cellRare + ".png";
+                break;
+            case "Arms":
+                cellImage = "icons_armor/icons_arms/arms" + cellRare + ".png";
+                break;
+            case "Waist":
+                cellImage = "icons_armor/icons_waist/waist" + cellRare + ".png";
+                break;
+            case "Legs":
+                cellImage = "icons_armor/icons_legs/legs" + cellRare + ".png";
+                break;
+        }
+
+        // Read a Bitmap from Assets
+        AssetManager manager = getActivity().getAssets();
+        InputStream open = null;
+
+        try {
+            open = manager.open(cellImage);
+            Bitmap bitmap = BitmapFactory.decodeStream(open);
+            // Assign the bitmap to an ImageView in this layout
+            mArmorIconImageView.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (open != null) {
+                open.close();
+            }
+        }
+    }
+
+    private class ArmorLoaderCallbacks implements
+            LoaderCallbacks<Armor> {
+
+        @Override
+        public Loader<Armor> onCreateLoader(int id, Bundle args) {
+            return new ArmorLoader(getActivity(),
+                    args.getLong(ARG_ARMOR_ID));
+        }
+
+        @Override
+        public void onLoadFinished(Loader<Armor> loader, Armor run) {
+            mArmor = run;
+            try {
+                updateUI();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Armor> loader) {
+            // Do nothing
+        }
+    }
 }

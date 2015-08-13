@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listitem"
-    style="@style/list_item"
-    android:orientation="horizontal" >
+              android:id="@+id/listitem"
+              style="@style/list_item"
+              android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/item_layout"
@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/item_image"
             style="@style/main_image"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"/>
 
         <TextView
             android:id="@+id/item"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             style="@style/text_medium"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
     <TextView
@@ -33,7 +33,7 @@
         android:gravity="center_vertical|right"
         android:layout_gravity="center"
         style="@style/text_small"
-        android:layout_weight="0.2" />
+        android:layout_weight="0.2"/>
 
     <TextView
         android:id="@+id/amt"
@@ -42,6 +42,6 @@
         android:gravity="center_vertical|right"
         android:layout_gravity="center"
         style="@style/text_small"
-        android:layout_weight="0.1" />
+        android:layout_weight="0.1"/>
 
 </LinearLayout>

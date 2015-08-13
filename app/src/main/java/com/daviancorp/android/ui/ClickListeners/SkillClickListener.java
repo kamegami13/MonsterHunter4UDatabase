@@ -4,12 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
 
-/**
- * Created by Mark on 2/24/2015.
- */
 public class SkillClickListener implements View.OnClickListener {
     private Context c;
     private Long id;

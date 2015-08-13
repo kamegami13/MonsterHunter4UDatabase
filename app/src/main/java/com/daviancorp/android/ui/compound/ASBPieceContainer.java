@@ -1,5 +1,8 @@
 package com.daviancorp.android.ui.compound;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.daviancorp.android.data.classes.ASBSession;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.detail.ASBActivity;
@@ -24,9 +28,6 @@ import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 import com.daviancorp.android.ui.dialog.ASBTalismanDialogFragment;
 import com.daviancorp.android.ui.list.ArmorListActivity;
 import com.daviancorp.android.ui.list.DecorationListActivity;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 public class ASBPieceContainer extends LinearLayout {
     private ASBFragment parentFragment;

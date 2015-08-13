@@ -1,5 +1,7 @@
 package com.daviancorp.android.ui.list;
 
+import java.io.IOException;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.database.Cursor;
@@ -23,8 +25,6 @@ import com.daviancorp.android.data.database.WyporiumTradeCursor;
 import com.daviancorp.android.loader.WyporiumTradeListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.WyporiumTradeClickListener;
-
-import java.io.IOException;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class WyporiumTradeListFragment extends ListFragment implements
@@ -72,7 +72,7 @@ public class WyporiumTradeListFragment extends ListFragment implements
         private WyporiumTradeCursor mWyporiumTradeCursor;
 
         public WyporiumTradeListCursorAdapter(Context context,
-                                           WyporiumTradeCursor cursor) {
+                                              WyporiumTradeCursor cursor) {
             super(context, cursor, 0);
             mWyporiumTradeCursor = cursor;
         }

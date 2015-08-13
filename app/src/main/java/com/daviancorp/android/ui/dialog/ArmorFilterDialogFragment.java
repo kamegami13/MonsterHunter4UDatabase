@@ -11,7 +11,10 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.Spinner;
 
 import com.daviancorp.android.data.classes.Rank;
 import com.daviancorp.android.mh4udatabase.R;
@@ -66,8 +69,7 @@ public class ArmorFilterDialogFragment extends DialogFragment {
         if (rank == null) {
             rankSpinner.setEnabled(false);
             rankCheckBox.setChecked(false);
-        }
-        else {
+        } else {
             rankSpinner.setEnabled(true);
             rankSpinner.setSelection(rank.ordinal());
             rankCheckBox.setChecked(true);
@@ -105,8 +107,7 @@ public class ArmorFilterDialogFragment extends DialogFragment {
             slotsSpinner.setEnabled(false);
             slotsCheckBox.setChecked(false);
             slotsSpecSpinner.setEnabled(false);
-        }
-        else {
+        } else {
             slotsSpinner.setEnabled(true);
             slotsSpinner.setSelection(slots);
             slotsCheckBox.setChecked(true);
@@ -125,7 +126,7 @@ public class ArmorFilterDialogFragment extends DialogFragment {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        Rank sendRank = rankCheckBox.isChecked() ? (Rank) Rank.values()[rankSpinner.getSelectedItemPosition()] : null;
+                        Rank sendRank = rankCheckBox.isChecked() ? Rank.values()[rankSpinner.getSelectedItemPosition()] : null;
                         int sendSlots = slotsCheckBox.isChecked() ? slotsSpinner.getSelectedItemPosition() : -1;
                         FilterSpecification sendSlotsSpec = slotsCheckBox.isChecked() ? FilterSpecification.values()[slotsSpecSpinner.getSelectedItemPosition()] : null;
 
@@ -138,7 +139,7 @@ public class ArmorFilterDialogFragment extends DialogFragment {
     /**
      * Methods that are capable of filtering integer values.
      */
-    public static enum FilterSpecification {
+    public enum FilterSpecification {
         MINIMUM {
             @Override
             public boolean qualifies(int value, int test) {
@@ -163,7 +164,7 @@ public class ArmorFilterDialogFragment extends DialogFragment {
         /**
          * Evaluates whether or not the value meets the filter's specification.
          * @param value The input value, typically an armor's stat.
-         * @param test The value against which to test the input, typically a fixed value.
+         * @param test  The value against which to test the input, typically a fixed value.
          * @return True if the input value passes the {@code FilterSpecification}'s test, otherwise false.
          */
         public abstract boolean qualifies(int value, int test);

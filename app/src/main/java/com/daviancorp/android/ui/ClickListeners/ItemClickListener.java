@@ -6,9 +6,6 @@ import android.view.View;
 
 import com.daviancorp.android.ui.detail.ItemDetailActivity;
 
-/**
- * Created by Mark on 2/24/2015.
- */
 public class ItemClickListener implements View.OnClickListener {
     private Context c;
     private Long id;

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -16,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.daviancorp.android.data.classes.SkillTree;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
@@ -81,10 +80,12 @@ public class ASBTalismanSkillContainer extends LinearLayout {
 
         skillPointsText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -92,8 +93,7 @@ public class ASBTalismanSkillContainer extends LinearLayout {
                     if (s.toString().length() > 3) {
                         s.replace(3, s.toString().length(), "");
                     }
-                }
-                else if (s.toString().length() > 2) {
+                } else if (s.toString().length() > 2) {
                     s.replace(2, s.toString().length(), "");
                 }
 
@@ -126,8 +126,7 @@ public class ASBTalismanSkillContainer extends LinearLayout {
             skillTreeText.setText(skillTree.getName());
             skillPointsText.setEnabled(true);
             selectSkillButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_remove));
-        }
-        else { // The skill tree has been removed
+        } else { // The skill tree has been removed
             skillTreeText.setText("");
             skillPointsText.setText("");
             skillPointsText.clearFocus();
@@ -166,7 +165,9 @@ public class ASBTalismanSkillContainer extends LinearLayout {
                 Integer.parseInt(getSkillPoints()) >= TALISMAN_SKILL_POINTS_MIN;
     }
 
-    /** Called when the user clicks the button next to the skill tree. */
+    /**
+     * Called when the user clicks the button next to the skill tree.
+     */
     private void onSkillButtonClicked() {
         if (skillTree == null) {
             Intent i = new Intent(getContext(), SkillTreeListActivity.class);
@@ -175,13 +176,14 @@ public class ASBTalismanSkillContainer extends LinearLayout {
             i.putExtra(ASBActivity.EXTRA_TALISMAN_SKILL_INDEX, skillIndex - 1);
 
             parent.startActivityForResult(i, ASBActivity.REQUEST_CODE_CREATE_TALISMAN);
-        }
-        else {
+        } else {
             setSkillTree(null);
         }
     }
 
-    /** An interface allowing the talisman skill container to communicate with other talisman skill containers around it. */
+    /**
+     * An interface allowing the talisman skill container to communicate with other talisman skill containers around it.
+     */
     public interface ChangeListener {
 
         void onTalismanSkillChanged();

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.daviancorp.android.mh4udatabase"
-    android:versionCode="13"
-    android:versionName="1.08">
+          package="com.daviancorp.android.mh4udatabase"
+          android:versionCode="13"
+          android:versionName="1.08">
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="19"/>
 
     <application
         android:allowBackup="true"
@@ -20,8 +20,8 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -30,7 +30,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.MonsterListActivity" />
+                android:value="com.daviancorp.android.ui.list.MonsterListActivity"/>
         </activity>
 
         <!-- ITEM LIST SECTION -->
@@ -45,42 +45,42 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.ItemListActivity" />
+                android:value="com.daviancorp.android.ui.list.ItemListActivity"/>
         </activity>
 
         <!-- ARMOR LIST SECTION -->
         <activity
             android:name="com.daviancorp.android.ui.list.ArmorListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.ArmorDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.ArmorListActivity" />
+                android:value="com.daviancorp.android.ui.list.ArmorListActivity"/>
         </activity>
 
         <!-- LOCATION LIST SECTION -->
         <activity
             android:name="com.daviancorp.android.ui.list.LocationListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.LocationDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.LocationListActivity" />
+                android:value="com.daviancorp.android.ui.list.LocationListActivity"/>
         </activity>
 
         <!-- COMBO LIST SECTION -->
         <activity
             android:name="com.daviancorp.android.ui.list.CombiningListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
 
         <!-- QUEST LIST SECTION -->
         <activity
@@ -93,7 +93,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.QuestListActivity" />
+                android:value="com.daviancorp.android.ui.list.QuestListActivity"/>
         </activity>
 
         <!-- ARENA QUEST SECTION -->
@@ -107,35 +107,35 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.ArenaQuestListActivity" />
+                android:value="com.daviancorp.android.ui.list.ArenaQuestListActivity"/>
         </activity>
 
         <!-- SKILL TREE SECTION -->
         <activity
             android:name="com.daviancorp.android.ui.list.SkillTreeListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.SkillTreeDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.SkillTreeListActivity" />
+                android:value="com.daviancorp.android.ui.list.SkillTreeListActivity"/>
         </activity>
 
         <!-- DECORATION SECTION -->
         <activity
             android:name="com.daviancorp.android.ui.list.DecorationListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.DecorationDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.DecorationListActivity" />
+                android:value="com.daviancorp.android.ui.list.DecorationListActivity"/>
         </activity>
 
         <!-- WEAPON SECTION -->
@@ -150,7 +150,7 @@
             android:theme="@style/FullScreenActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.WeaponSelectionListActivity" />
+                android:value="com.daviancorp.android.ui.list.WeaponSelectionListActivity"/>
         </activity>
         <activity
             android:name="com.daviancorp.android.ui.detail.WeaponDetailActivity"
@@ -158,35 +158,35 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.WeaponSelectionListActivity" />
+                android:value="com.daviancorp.android.ui.list.WeaponSelectionListActivity"/>
         </activity>
 
         <!-- WISHLIST SECTION -->
         <activity
             android:name="com.daviancorp.android.ui.list.WishlistListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.WishlistDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.WishlistListActivity" />
+                android:value="com.daviancorp.android.ui.list.WishlistListActivity"/>
         </activity>
 
         <!-- ARMOR SET BUILDER ACTIVITY -->
         <activity
             android:name="com.daviancorp.android.ui.list.ASBSetListActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.daviancorp.android.ui.detail.ASBActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.daviancorp.android.ui.list.ASBSetListActivity" />
+                android:value="com.daviancorp.android.ui.list.ASBSetListActivity"/>
         </activity>
 
         <!-- WYPORIUM TRADE SECTION -->

@@ -2,6 +2,7 @@ package com.daviancorp.android.data.database;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
+
 import com.daviancorp.android.data.classes.ASBSet;
 
 public class ASBSetCursor extends CursorWrapper {

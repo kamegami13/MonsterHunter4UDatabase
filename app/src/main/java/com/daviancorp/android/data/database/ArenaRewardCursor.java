@@ -14,33 +14,33 @@ import com.daviancorp.android.data.classes.Item;
  */
 public class ArenaRewardCursor extends CursorWrapper {
 
-	public ArenaRewardCursor(Cursor c) {
-		super(c);
-	}
+    public ArenaRewardCursor(Cursor c) {
+        super(c);
+    }
 
-	/**
-	 * Returns a ArenaReward object configured for the current row, or null if the
-	 * current row is invalid.
-	 */
-	public ArenaReward getArenaReward() {
-		if (isBeforeFirst() || isAfterLast())
-			return null;
+    /**
+     * Returns a ArenaReward object configured for the current row, or null if the
+     * current row is invalid.
+     */
+    public ArenaReward getArenaReward() {
+        if (isBeforeFirst() || isAfterLast())
+            return null;
 
-		ArenaReward arenaReward = new ArenaReward();
-		
-		long id = getLong(getColumnIndex(S.COLUMN_ARENA_REWARDS_ID));
-		int percentage = getInt(getColumnIndex(S.COLUMN_ARENA_REWARDS_PERCENTAGE));
-		int stack_size = getInt(getColumnIndex(S.COLUMN_ARENA_REWARDS_STACK_SIZE));
-		
-		arenaReward.setId(id);
-		arenaReward.setPercentage(percentage);
-		arenaReward.setStackSize(stack_size);
+        ArenaReward arenaReward = new ArenaReward();
 
-		// Get the Item
-		Item item = new Item();
-		
-		long itemId = getLong(getColumnIndex(S.COLUMN_ARENA_REWARDS_ITEM_ID));
-		String itemName = getString(getColumnIndex("i" + S.COLUMN_ITEMS_NAME));
+        long id = getLong(getColumnIndex(S.COLUMN_ARENA_REWARDS_ID));
+        int percentage = getInt(getColumnIndex(S.COLUMN_ARENA_REWARDS_PERCENTAGE));
+        int stack_size = getInt(getColumnIndex(S.COLUMN_ARENA_REWARDS_STACK_SIZE));
+
+        arenaReward.setId(id);
+        arenaReward.setPercentage(percentage);
+        arenaReward.setStackSize(stack_size);
+
+        // Get the Item
+        Item item = new Item();
+
+        long itemId = getLong(getColumnIndex(S.COLUMN_ARENA_REWARDS_ITEM_ID));
+        String itemName = getString(getColumnIndex("i" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 //			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
 //			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
@@ -48,11 +48,11 @@ public class ArenaRewardCursor extends CursorWrapper {
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
 //			String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-			String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
+        String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
 //			String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
 
-		item.setId(itemId);
-		item.setName(itemName);
+        item.setId(itemId);
+        item.setName(itemName);
 //			item.setJpnName(jpnName);
 //			item.setType(type);
 //			item.setRarity(rarity);
@@ -60,22 +60,22 @@ public class ArenaRewardCursor extends CursorWrapper {
 //			item.setBuy(buy);
 //			item.setSell(sell);
 //			item.setDescription(description);
-			item.setFileLocation(fileLocation);
+        item.setFileLocation(fileLocation);
 //			item.setArmorDupeNameFix(armor_dupe_name_fix);
-		
-		arenaReward.setItem(item);
-		
-		// Get the ArenaQuest
-		ArenaQuest arenaQuest = new ArenaQuest();
-		
-		long arenaId = getLong(getColumnIndex(S.COLUMN_ARENA_REWARDS_ARENA_ID));
-		String arenaName = getString(getColumnIndex("a" + S.COLUMN_ARENA_QUESTS_NAME));
-		arenaQuest.setId(arenaId);
-		arenaQuest.setName(arenaName);
 
-		arenaReward.setArenaQuest(arenaQuest);
-		
-		return arenaReward;
-	}
+        arenaReward.setItem(item);
+
+        // Get the ArenaQuest
+        ArenaQuest arenaQuest = new ArenaQuest();
+
+        long arenaId = getLong(getColumnIndex(S.COLUMN_ARENA_REWARDS_ARENA_ID));
+        String arenaName = getString(getColumnIndex("a" + S.COLUMN_ARENA_QUESTS_NAME));
+        arenaQuest.setId(arenaId);
+        arenaQuest.setName(arenaName);
+
+        arenaReward.setArenaQuest(arenaQuest);
+
+        return arenaReward;
+    }
 
 }

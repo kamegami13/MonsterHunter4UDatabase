@@ -1,18 +1,17 @@
 package com.daviancorp.android.ui.list;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.*;
 import android.support.v4.app.FragmentManager;
 import android.view.*;
+import android.widget.*;
 
 import com.daviancorp.android.data.classes.Armor;
 import com.daviancorp.android.data.classes.Item;
@@ -23,9 +22,6 @@ import com.daviancorp.android.ui.ClickListeners.ArmorClickListener;
 import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.dialog.ArmorFilterDialogFragment;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 /**
  * Pieced together from: Android samples:
  * com.example.android.apis.view.ExpandableList1
@@ -35,7 +31,7 @@ import java.util.ArrayList;
  * http://stackoverflow.com/questions/6495898/findviewbyid-in-fragment-android
  */
 public class ArmorExpandableListFragment extends Fragment {
-    
+
     private static final String ARG_TYPE = "ARMOR_TYPE";
 
     public static final String KEY_FILTER_RANK = "FILTER_RANK";
@@ -287,8 +283,7 @@ public class ArmorExpandableListFragment extends Fragment {
                     elv.setDividerHeight(0);
                     if (i != piece) {
                         v = new FrameLayout(context); // We hide the group if it's not the type of armor we're looking for
-                    }
-                    else {
+                    } else {
                         elv.expandGroup(i);
                     }
                 }
@@ -342,8 +337,7 @@ public class ArmorExpandableListFragment extends Fragment {
 
             if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
                 root.setOnClickListener(new ArmorClickListener(context, armorId, getActivity(), ASBActivity.REQUEST_CODE_ADD_PIECE));
-            }
-            else {
+            } else {
                 root.setOnClickListener(new ArmorClickListener(context, armorId));
             }
 

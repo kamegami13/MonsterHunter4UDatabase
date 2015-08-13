@@ -16,8 +16,7 @@ public class Habitat {
      * Default constructor
      * Initializes variables to defaults
      */
-    public Habitat()
-    {
+    public Habitat() {
         this.monster = null;
         this.location = null;
         this.areas = null;

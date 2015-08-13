@@ -7,6 +7,7 @@ import com.daviancorp.android.ui.general.GenericActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 public class WeaponListActivity extends GenericActivity {
+    
     public static final String EXTRA_WEAPON_TYPE =
             "com.daviancorp.android.android.ui.list.weapon_type";
 

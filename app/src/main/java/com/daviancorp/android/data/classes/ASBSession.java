@@ -1,13 +1,14 @@
 package com.daviancorp.android.data.classes;
 
-import android.content.Context;
-import android.util.Log;
-import com.daviancorp.android.data.database.DataManager;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import android.content.Context;
+import android.util.Log;
+
+import com.daviancorp.android.data.database.DataManager;
 
 /**
  * Contains all of the juicy stuff regarding ASB sets, like the armor inside and the skills it provides.
@@ -96,7 +97,7 @@ public class ASBSession {
      */
     public boolean decorationIsReal(int pieceIndex, int decorationIndex) {
         return decorations[pieceIndex][decorationIndex] != null
-                       && decorations[pieceIndex][decorationIndex] != dummyDecoration;
+                && decorations[pieceIndex][decorationIndex] != dummyDecoration;
     }
 
     /**
@@ -298,7 +299,7 @@ public class ASBSession {
 
                 if (!skillTreeToSkillTreeInSet.containsKey(skillTree.getId())) { // If the armor set does not yet have this skill tree registered...
                     Log.v("ASB",
-                          "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
+                            "Adding skill tree " + skillTree.getName() + " to the list of Skill Trees in the armor set.");
 
                     s = new SkillTreeInSet(); // We add it...
                     s.setSkillTree(skillTree);

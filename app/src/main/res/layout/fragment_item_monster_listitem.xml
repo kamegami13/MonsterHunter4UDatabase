@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listitem"
-    style="@style/list_item_large"
-    android:orientation="horizontal"
-    android:gravity="center">
+                android:id="@+id/listitem"
+                style="@style/list_item_large"
+                android:orientation="horizontal"
+                android:gravity="center">
 
 
     <ImageView
         android:id="@+id/monster_image"
         style="@style/large_image"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"/>
 
 
     <RelativeLayout
@@ -29,7 +29,7 @@
             android:text="Emerald Congalala"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="true"
-            android:layout_alignWithParentIfMissing="false" />
+            android:layout_alignWithParentIfMissing="false"/>
 
         <TextView
             android:id="@+id/rank"
@@ -41,7 +41,7 @@
             android:gravity="center_vertical|right"
             android:text="LR"
             android:layout_below="@+id/monster"
-            android:layout_alignLeft="@+id/monster" />
+            android:layout_alignLeft="@+id/monster"/>
 
         <TextView
             android:id="@+id/method"
@@ -55,7 +55,7 @@
             android:text="Shiny Drop (Mushroom)"
             android:layout_toRightOf="@+id/rank"
             android:layout_alignTop="@+id/rank"
-            android:layout_alignParentBottom="false" />
+            android:layout_alignParentBottom="false"/>
     </RelativeLayout>
 
     <TextView
@@ -68,7 +68,7 @@
         android:layout_alignTop="@+id/percentage"
         android:gravity="center_vertical|right"
         android:text="3"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"/>
 
     <TextView
         android:id="@+id/percentage"
@@ -80,6 +80,6 @@
         android:gravity="center_vertical|right"
         android:paddingLeft="16dp"
         android:text="25%"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout>

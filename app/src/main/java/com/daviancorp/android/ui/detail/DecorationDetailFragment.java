@@ -25,60 +25,61 @@ import com.daviancorp.android.loader.DecorationLoader;
 import com.daviancorp.android.mh4udatabase.R;
 
 public class DecorationDetailFragment extends Fragment {
-	private static final String ARG_DECORATION_ID = "DECORATION_ID";
 
-	private Decoration mDecoration;
+    private static final String ARG_DECORATION_ID = "DECORATION_ID";
 
-	private TextView mDecorationLabelTextView;
-	private ImageView mDecorationIconImageView;
-	private TextView rareTextView;
-	private TextView maxTextView;
-	private TextView buyTextView;
-	private TextView sellTextView;
-	private TextView slotsReqTextView;
+    private Decoration mDecoration;
 
-	public static DecorationDetailFragment newInstance(long decorationId) {
-		Bundle args = new Bundle();
-		args.putLong(ARG_DECORATION_ID, decorationId);
-		DecorationDetailFragment f = new DecorationDetailFragment();
-		f.setArguments(args);
-		return f;
-	}
+    private TextView mDecorationLabelTextView;
+    private ImageView mDecorationIconImageView;
+    private TextView rareTextView;
+    private TextView maxTextView;
+    private TextView buyTextView;
+    private TextView sellTextView;
+    private TextView slotsReqTextView;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    public static DecorationDetailFragment newInstance(long decorationId) {
+        Bundle args = new Bundle();
+        args.putLong(ARG_DECORATION_ID, decorationId);
+        DecorationDetailFragment f = new DecorationDetailFragment();
+        f.setArguments(args);
+        return f;
+    }
 
-		setRetainInstance(true);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		// Check for a Item ID as an argument, and find the item
-		Bundle args = getArguments();
-		if (args != null) {
-			long decorationId = args.getLong(ARG_DECORATION_ID, -1);
-			if (decorationId != -1) {
-				LoaderManager lm = getLoaderManager();
-				lm.initLoader(R.id.decoration_detail_fragment, args,
-						new DecorationLoaderCallbacks());
-			}
-		}
-	}
+        setRetainInstance(true);
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_decoration_detail,
-				container, false);
+        // Check for a Item ID as an argument, and find the item
+        Bundle args = getArguments();
+        if (args != null) {
+            long decorationId = args.getLong(ARG_DECORATION_ID, -1);
+            if (decorationId != -1) {
+                LoaderManager lm = getLoaderManager();
+                lm.initLoader(R.id.decoration_detail_fragment, args,
+                        new DecorationLoaderCallbacks());
+            }
+        }
+    }
 
-		mDecorationLabelTextView = (TextView) view
-				.findViewById(R.id.detail_decoration_label);
-		mDecorationIconImageView = (ImageView) view
-				.findViewById(R.id.detail_decoration_image);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_decoration_detail,
+                container, false);
 
-		rareTextView = (TextView) view.findViewById(R.id.rare);
-		maxTextView = (TextView) view.findViewById(R.id.max);
-		sellTextView = (TextView) view.findViewById(R.id.sell);
-		buyTextView = (TextView) view.findViewById(R.id.buy);
-		slotsReqTextView = (TextView) view.findViewById(R.id.slots_req);
+        mDecorationLabelTextView = (TextView) view
+                .findViewById(R.id.detail_decoration_label);
+        mDecorationIconImageView = (ImageView) view
+                .findViewById(R.id.detail_decoration_image);
+
+        rareTextView = (TextView) view.findViewById(R.id.rare);
+        maxTextView = (TextView) view.findViewById(R.id.max);
+        sellTextView = (TextView) view.findViewById(R.id.sell);
+        buyTextView = (TextView) view.findViewById(R.id.buy);
+        slotsReqTextView = (TextView) view.findViewById(R.id.slots_req);
 
         // If the originator of this fragment's activity was the Armor Set Builder...
         if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
@@ -95,73 +96,73 @@ public class DecorationDetailFragment extends Fragment {
             });
         }
 
-		return view;
-	}
+        return view;
+    }
 
-	private void updateUI() throws IOException {
-		String cellText = mDecoration.getName();
-		String cellImage = "icons_items/" + mDecoration.getFileLocation();
-		String cellRare = "" + mDecoration.getRarity();
-		String cellMax = "" + mDecoration.getCarryCapacity();
-		String cellBuy = "" + mDecoration.getBuy() + "z";
-		String cellSell = "" + mDecoration.getSell() + "z";
-		String cellSlotsReq = "" + mDecoration.getSlotsString();
+    private void updateUI() throws IOException {
+        String cellText = mDecoration.getName();
+        String cellImage = "icons_items/" + mDecoration.getFileLocation();
+        String cellRare = "" + mDecoration.getRarity();
+        String cellMax = "" + mDecoration.getCarryCapacity();
+        String cellBuy = "" + mDecoration.getBuy() + "z";
+        String cellSell = "" + mDecoration.getSell() + "z";
+        String cellSlotsReq = "" + mDecoration.getSlotsString();
 
-		if (cellBuy.equals("0z")) {
-			cellBuy = "-";
-		}
-		if (cellSell.equals("0z")) {
-			cellSell = "-";
-		}
-		
-		mDecorationLabelTextView.setText(cellText);
-		rareTextView.setText(cellRare);
-		maxTextView.setText(cellMax);
-		buyTextView.setText(cellBuy);
-		sellTextView.setText(cellSell);
-		slotsReqTextView.setText(cellSlotsReq);
+        if (cellBuy.equals("0z")) {
+            cellBuy = "-";
+        }
+        if (cellSell.equals("0z")) {
+            cellSell = "-";
+        }
 
-		// Read a Bitmap from Assets
-		AssetManager manager = getActivity().getAssets();
-		InputStream open = null;
+        mDecorationLabelTextView.setText(cellText);
+        rareTextView.setText(cellRare);
+        maxTextView.setText(cellMax);
+        buyTextView.setText(cellBuy);
+        sellTextView.setText(cellSell);
+        slotsReqTextView.setText(cellSlotsReq);
 
-		try {
-			open = manager.open(cellImage);
-			Bitmap bitmap = BitmapFactory.decodeStream(open);
-			// Assign the bitmap to an ImageView in this layout
-			mDecorationIconImageView.setImageBitmap(bitmap);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (open != null) {
-				open.close();
-			}
-		}
-	}
+        // Read a Bitmap from Assets
+        AssetManager manager = getActivity().getAssets();
+        InputStream open = null;
 
-	private class DecorationLoaderCallbacks implements
-			LoaderCallbacks<Decoration> {
+        try {
+            open = manager.open(cellImage);
+            Bitmap bitmap = BitmapFactory.decodeStream(open);
+            // Assign the bitmap to an ImageView in this layout
+            mDecorationIconImageView.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (open != null) {
+                open.close();
+            }
+        }
+    }
 
-		@Override
-		public Loader<Decoration> onCreateLoader(int id, Bundle args) {
-			return new DecorationLoader(getActivity(),
-					args.getLong(ARG_DECORATION_ID));
-		}
+    private class DecorationLoaderCallbacks implements
+            LoaderCallbacks<Decoration> {
 
-		@Override
-		public void onLoadFinished(Loader<Decoration> loader, Decoration run) {
-			mDecoration = run;
-			try {
-				updateUI();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+        @Override
+        public Loader<Decoration> onCreateLoader(int id, Bundle args) {
+            return new DecorationLoader(getActivity(),
+                    args.getLong(ARG_DECORATION_ID));
+        }
 
-		@Override
-		public void onLoaderReset(Loader<Decoration> loader) {
-			// Do nothing
-		}
-	}
+        @Override
+        public void onLoadFinished(Loader<Decoration> loader, Decoration run) {
+            mDecoration = run;
+            try {
+                updateUI();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Decoration> loader) {
+            // Do nothing
+        }
+    }
 }

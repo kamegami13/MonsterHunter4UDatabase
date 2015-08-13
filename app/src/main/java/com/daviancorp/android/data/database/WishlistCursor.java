@@ -12,26 +12,26 @@ import com.daviancorp.android.data.classes.Wishlist;
  */
 public class WishlistCursor extends CursorWrapper {
 
-	public WishlistCursor(Cursor c) {
-		super(c);
-	}
+    public WishlistCursor(Cursor c) {
+        super(c);
+    }
 
-	/**
-	 * Returns a Wishlist object configured for the current row, or null if the
-	 * current row is invalid.
-	 */
-	public Wishlist getWishlist() {
-		if (isBeforeFirst() || isAfterLast())
-			return null;
-		
-		Wishlist wishlist = new Wishlist();
+    /**
+     * Returns a Wishlist object configured for the current row, or null if the
+     * current row is invalid.
+     */
+    public Wishlist getWishlist() {
+        if (isBeforeFirst() || isAfterLast())
+            return null;
 
-		long wishlistId = getLong(getColumnIndex(S.COLUMN_WISHLIST_ID));
-		String name = getString(getColumnIndex(S.COLUMN_WISHLIST_NAME));
-		
-		wishlist.setId(wishlistId);
-		wishlist.setName(name);
+        Wishlist wishlist = new Wishlist();
 
-		return wishlist;
-	}
+        long wishlistId = getLong(getColumnIndex(S.COLUMN_WISHLIST_ID));
+        String name = getString(getColumnIndex(S.COLUMN_WISHLIST_NAME));
+
+        wishlist.setId(wishlistId);
+        wishlist.setName(name);
+
+        return wishlist;
+    }
 }

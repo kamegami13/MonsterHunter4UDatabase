@@ -4,38 +4,38 @@
 
     <!-- Non focused states -->
     <item android:state_focused="false" android:state_selected="false"
-        android:state_pressed="false"
-        android:drawable="@color/primary_color" />
+          android:state_pressed="false"
+          android:drawable="@color/primary_color"/>
     <item android:state_focused="false" android:state_selected="true"
-        android:state_pressed="false"
-        android:drawable="@drawable/action_bar_tab_cursor" />
+          android:state_pressed="false"
+          android:drawable="@drawable/action_bar_tab_cursor"/>
 
     <!-- Focused states (such as when focused with a d-pad or mouse hover) -->
     <item android:state_focused="true" android:state_selected="false"
-        android:state_pressed="false"
-        android:drawable="@color/primary_color" />
+          android:state_pressed="false"
+          android:drawable="@color/primary_color"/>
     <item android:state_focused="true" android:state_selected="true"
-        android:state_pressed="false"
-        android:drawable="@drawable/action_bar_tab_cursor" />
+          android:state_pressed="false"
+          android:drawable="@drawable/action_bar_tab_cursor"/>
 
 
     <!-- STATES WHEN BUTTON IS PRESSED -->
 
     <!-- Non focused states -->
     <item android:state_focused="false" android:state_selected="false"
-        android:state_pressed="true"
-        android:drawable="@color/dark_primary_color" />
+          android:state_pressed="true"
+          android:drawable="@color/dark_primary_color"/>
     <item android:state_focused="false" android:state_selected="true"
-        android:state_pressed="true"
-        android:drawable="@drawable/action_bar_tab_cursor_pressed" />
+          android:state_pressed="true"
+          android:drawable="@drawable/action_bar_tab_cursor_pressed"/>
 
     <!-- Focused states (such as when focused with a d-pad or mouse hover) -->
     <item android:state_focused="true" android:state_selected="false"
-        android:state_pressed="true"
-        android:drawable="@color/dark_primary_color" />
+          android:state_pressed="true"
+          android:drawable="@color/dark_primary_color"/>
     <item android:state_focused="true" android:state_selected="true"
-        android:state_pressed="true"
-        android:drawable="@drawable/action_bar_tab_cursor_pressed" />
+          android:state_pressed="true"
+          android:drawable="@drawable/action_bar_tab_cursor_pressed"/>
 
 
 </selector>

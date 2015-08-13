@@ -9,11 +9,11 @@ import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 public class ArenaQuestListActivity extends GenericActivity {
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setTitle(R.string.arena_quests);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setTitle(R.string.arena_quests);
+    }
 
     @Override
     protected MenuSection getSelectedSection() {
@@ -21,9 +21,9 @@ public class ArenaQuestListActivity extends GenericActivity {
     }
 
     @Override
-	protected Fragment createFragment() {
-		super.detail = new ArenaQuestListFragment();
-		return super.detail;
-	}
+    protected Fragment createFragment() {
+        super.detail = new ArenaQuestListFragment();
+        return super.detail;
+    }
 
 }

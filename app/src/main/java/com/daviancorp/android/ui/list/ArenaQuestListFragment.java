@@ -21,77 +21,77 @@ import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.detail.ArenaQuestDetailActivity;
 
 public class ArenaQuestListFragment extends ListFragment implements
-		LoaderCallbacks<Cursor> {
+        LoaderCallbacks<Cursor> {
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(R.id.arena_quest_list_fragment, null, this);
-	}
+        // Initialize the loader to load the list of runs
+        getLoaderManager().initLoader(R.id.arena_quest_list_fragment, null, this);
+    }
 
-	@Override
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// You only ever load the runs, so assume this is the case
-		return new ArenaQuestListCursorLoader(getActivity());
-	}
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // You only ever load the runs, so assume this is the case
+        return new ArenaQuestListCursorLoader(getActivity());
+    }
 
-	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		// Create an adapter to point at this cursor
-		ArenaQuestListCursorAdapter adapter = new ArenaQuestListCursorAdapter(
-				getActivity(), (ArenaQuestCursor) cursor);
-		setListAdapter(adapter);
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        // Create an adapter to point at this cursor
+        ArenaQuestListCursorAdapter adapter = new ArenaQuestListCursorAdapter(
+                getActivity(), (ArenaQuestCursor) cursor);
+        setListAdapter(adapter);
 
-	}
+    }
 
-	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-		// Stop using the cursor (via the adapter)
-		setListAdapter(null);
-	}
-	
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// The id argument will be the Arena Quest ID; CursorAdapter gives us this for free
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Stop using the cursor (via the adapter)
+        setListAdapter(null);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        // The id argument will be the Arena Quest ID; CursorAdapter gives us this for free
         //TODO reenable when Arena quests are complete. Don't need to disable this because its recursive.
-		Intent i = new Intent(getActivity(), ArenaQuestDetailActivity.class);
-		i.putExtra(ArenaQuestDetailActivity.EXTRA_ARENA_QUEST_ID, id);
-		startActivity(i);
-	}
+        Intent i = new Intent(getActivity(), ArenaQuestDetailActivity.class);
+        i.putExtra(ArenaQuestDetailActivity.EXTRA_ARENA_QUEST_ID, id);
+        startActivity(i);
+    }
 
-	private static class ArenaQuestListCursorAdapter extends CursorAdapter {
+    private static class ArenaQuestListCursorAdapter extends CursorAdapter {
 
-		private ArenaQuestCursor mArenaQuestCursor;
+        private ArenaQuestCursor mArenaQuestCursor;
 
-		public ArenaQuestListCursorAdapter(Context context,
-				ArenaQuestCursor cursor) {
-			super(context, cursor, 0);
-			mArenaQuestCursor = cursor;
-		}
+        public ArenaQuestListCursorAdapter(Context context,
+                                           ArenaQuestCursor cursor) {
+            super(context, cursor, 0);
+            mArenaQuestCursor = cursor;
+        }
 
-		@Override
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
-			// Use a layout inflater to get a row view
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_arena_quest_listitem,
-					parent, false);
-		}
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            // Use a layout inflater to get a row view
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.fragment_arena_quest_listitem,
+                    parent, false);
+        }
 
-		@Override
-		public void bindView(View view, Context context, Cursor cursor) {
-			// Get the skill for the current row
-			ArenaQuest arenaQuest = mArenaQuestCursor.getArenaQuest();
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            // Get the skill for the current row
+            ArenaQuest arenaQuest = mArenaQuestCursor.getArenaQuest();
 
-			// Set up the text view
-			TextView mainTextView = (TextView) view.findViewById(R.id.item);
-			String cellText = arenaQuest.getName();
-			mainTextView.setText(cellText);
-			
-			
-		}
-	}
+            // Set up the text view
+            TextView mainTextView = (TextView) view.findViewById(R.id.item);
+            String cellText = arenaQuest.getName();
+            mainTextView.setText(cellText);
+
+
+        }
+    }
 
 }

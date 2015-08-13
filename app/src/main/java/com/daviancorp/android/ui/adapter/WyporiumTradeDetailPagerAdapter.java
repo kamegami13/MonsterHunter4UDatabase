@@ -11,7 +11,7 @@ public class WyporiumTradeDetailPagerAdapter extends FragmentPagerAdapter {
     private long tradeId;
 
     // Tab titles
-    private String[] tabs = { "Details" };
+    private String[] tabs = {"Details"};
 
     public WyporiumTradeDetailPagerAdapter(FragmentManager fm, long id) {
         super(fm);

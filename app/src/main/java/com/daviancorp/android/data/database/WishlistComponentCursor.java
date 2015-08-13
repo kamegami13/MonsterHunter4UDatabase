@@ -13,62 +13,62 @@ import com.daviancorp.android.data.classes.WishlistComponent;
  */
 public class WishlistComponentCursor extends CursorWrapper {
 
-	public WishlistComponentCursor(Cursor c) {
-		super(c);
-	}
+    public WishlistComponentCursor(Cursor c) {
+        super(c);
+    }
 
-	/**
-	 * Returns a WishlistComponent object configured for the current row, or null if the
-	 * current row is invalid.
-	 */
-	public WishlistComponent getWishlistComponent() {
-		if (isBeforeFirst() || isAfterLast())
-			return null;
+    /**
+     * Returns a WishlistComponent object configured for the current row, or null if the
+     * current row is invalid.
+     */
+    public WishlistComponent getWishlistComponent() {
+        if (isBeforeFirst() || isAfterLast())
+            return null;
 
-		WishlistComponent wishlistComponent = new WishlistComponent();
-		
-		long id = getLong(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_ID));
-		long wishlist_id = getLong(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_WISHLIST_ID));
-		int quantity = getInt(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_QUANTITY));
-		int notes = getInt(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_NOTES));
-		
-		wishlistComponent.setId(id);
-		wishlistComponent.setWishlistId(wishlist_id);
-		wishlistComponent.setQuantity(quantity);
-		wishlistComponent.setNotes(notes);
+        WishlistComponent wishlistComponent = new WishlistComponent();
 
-		// Get the Item
-		Item item = new Item();
-		
-		long itemId = getLong(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_COMPONENT_ID));
-		String itemName = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
+        long id = getLong(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_ID));
+        long wishlist_id = getLong(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_WISHLIST_ID));
+        int quantity = getInt(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_QUANTITY));
+        int notes = getInt(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_NOTES));
+
+        wishlistComponent.setId(id);
+        wishlistComponent.setWishlistId(wishlist_id);
+        wishlistComponent.setQuantity(quantity);
+        wishlistComponent.setNotes(notes);
+
+        // Get the Item
+        Item item = new Item();
+
+        long itemId = getLong(getColumnIndex(S.COLUMN_WISHLIST_COMPONENT_COMPONENT_ID));
+        String itemName = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
-			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
-            String sub_type = getString(getColumnIndex(S.COLUMN_ITEMS_SUB_TYPE));
-			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
+        String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
+        String sub_type = getString(getColumnIndex(S.COLUMN_ITEMS_SUB_TYPE));
+        int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
 //			int carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
 //			String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-			String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
+        String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
 //			String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
 
-		item.setId(itemId);
-		item.setName(itemName);
+        item.setId(itemId);
+        item.setName(itemName);
 //			item.setJpnName(jpnName);
-			item.setType(type);
-            item.setSubType(sub_type);
-			item.setRarity(rarity);
+        item.setType(type);
+        item.setSubType(sub_type);
+        item.setRarity(rarity);
 //			item.setCarryCapacity(carry_capacity);
 //			item.setBuy(buy);
 //			item.setSell(sell);
 //			item.setDescription(description);
-			item.setFileLocation(fileLocation);
+        item.setFileLocation(fileLocation);
 //			item.setArmorDupeNameFix(armor_dupe_name_fix);
-		
-		wishlistComponent.setItem(item);
-		
-		return wishlistComponent;
-	}
+
+        wishlistComponent.setItem(item);
+
+        return wishlistComponent;
+    }
 
 }

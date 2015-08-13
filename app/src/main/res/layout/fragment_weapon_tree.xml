@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listitem"
-    style="@style/list_item"
-    android:orientation="vertical" >
+                android:id="@+id/listitem"
+                style="@style/list_item"
+                android:orientation="vertical">
 
     <TextView
         android:id="@+id/name_text"
@@ -12,7 +12,7 @@
         style="@style/text_small"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
-        android:layout_above="@+id/arrow" />
+        android:layout_above="@+id/arrow"/>
 
     <View
         android:layout_width="16dp"
@@ -21,6 +21,6 @@
         android:background="@drawable/arrow"
         android:layout_alignParentBottom="true"
         android:rotation="180"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

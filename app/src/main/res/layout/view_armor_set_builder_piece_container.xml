@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,20 +17,20 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/clicked_states_white"
-            android:src="@drawable/ic_drop_down_arrow" />
+            android:src="@drawable/ic_drop_down_arrow"/>
 
         <ImageView
             android:id="@+id/armor_builder_item_icon"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.1" />
+            android:layout_weight="0.1"/>
 
         <TextView
             android:id="@+id/armor_builder_item_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingRight="3dp"
-                android:src="@drawable/decoration_none" />
+                android:src="@drawable/decoration_none"/>
 
             <ImageView
                 android:id="@+id/decoration_2_state"
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingRight="3dp"
-                android:src="@drawable/decoration_none" />
+                android:src="@drawable/decoration_none"/>
 
             <ImageView
                 android:id="@+id/decoration_3_state"
@@ -61,14 +61,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingRight="3dp"
-                android:src="@drawable/decoration_none" />
+                android:src="@drawable/decoration_none"/>
 
             <ImageView
                 android:id="@+id/add_equipment_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:src="@drawable/ic_add" />
+                android:src="@drawable/ic_add"/>
 
         </LinearLayout>
 
@@ -91,7 +91,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:layout_weight="0.1" />
+                android:layout_weight="0.1"/>
 
             <TextView
                 android:id="@+id/decoration_1_name"
@@ -100,13 +100,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.7"
                 android:background="@drawable/dialog_clicked_states"
-                android:text="@string/asb_no_slot" />
+                android:text="@string/asb_no_slot"/>
 
             <ImageView
                 android:id="@+id/decoration_1_menu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2" />
+                android:layout_weight="0.2"/>
 
         </TableRow>
 
@@ -121,7 +121,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:layout_weight="0.1" />
+                android:layout_weight="0.1"/>
 
             <TextView
                 android:id="@+id/decoration_2_name"
@@ -130,13 +130,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.7"
                 android:background="@drawable/dialog_clicked_states"
-                android:text="@string/asb_no_slot" />
+                android:text="@string/asb_no_slot"/>
 
             <ImageView
                 android:id="@+id/decoration_2_menu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2" />
+                android:layout_weight="0.2"/>
         </TableRow>
 
         <TableRow
@@ -150,7 +150,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:layout_weight="0.1" />
+                android:layout_weight="0.1"/>
 
             <TextView
                 android:id="@+id/decoration_3_name"
@@ -159,13 +159,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.7"
                 android:background="@drawable/dialog_clicked_states"
-                android:text="@string/asb_no_slot" />
+                android:text="@string/asb_no_slot"/>
 
             <ImageView
                 android:id="@+id/decoration_3_menu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2" />
+                android:layout_weight="0.2"/>
         </TableRow>
 
     </TableLayout>

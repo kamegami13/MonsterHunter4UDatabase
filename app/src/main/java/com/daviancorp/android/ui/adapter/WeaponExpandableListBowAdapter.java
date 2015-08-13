@@ -2,17 +2,14 @@ package com.daviancorp.android.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.general.DrawSharpness;
 import com.daviancorp.android.ui.general.FixedImageView;
 import com.daviancorp.android.ui.general.WeaponListEntry;
 
@@ -116,7 +113,7 @@ public class WeaponExpandableListBowAdapter extends WeaponExpandableListElementA
         if (!coatings[0].equals("-")) {
             holder.powerv.setTag(weapon.getId());
             bitmap = getBitmapFromMemCache("icons_items/Bottle-Red.png");
-            if(bitmap != null) {
+            if (bitmap != null) {
                 holder.powerv.setImageBitmap(bitmap);
             } else {
                 new LoadImage(holder.powerv, "icons_items/Bottle-Red.png").execute();
@@ -126,7 +123,7 @@ public class WeaponExpandableListBowAdapter extends WeaponExpandableListElementA
         if (!coatings[1].equals("-")) {
             holder.poisonv.setTag(weapon.getId());
             bitmap = getBitmapFromMemCache("icons_items/Bottle-Purple.png");
-            if(bitmap != null) {
+            if (bitmap != null) {
                 holder.poisonv.setImageBitmap(bitmap);
             } else {
                 new LoadImage(holder.poisonv, "icons_items/Bottle-Purple.png").execute();
@@ -136,7 +133,7 @@ public class WeaponExpandableListBowAdapter extends WeaponExpandableListElementA
         if (!coatings[2].equals("-")) {
             holder.parav.setTag(weapon.getId());
             bitmap = getBitmapFromMemCache("icons_items/Bottle-Yellow.png");
-            if(bitmap != null) {
+            if (bitmap != null) {
                 holder.parav.setImageBitmap(bitmap);
             } else {
                 new LoadImage(holder.parav, "icons_items/Bottle-Yellow.png").execute();
@@ -146,7 +143,7 @@ public class WeaponExpandableListBowAdapter extends WeaponExpandableListElementA
         if (!coatings[3].equals("-")) {
             holder.sleepv.setTag(weapon.getId());
             bitmap = getBitmapFromMemCache("icons_items/Bottle-Cyan.png");
-            if(bitmap != null) {
+            if (bitmap != null) {
                 holder.sleepv.setImageBitmap(bitmap);
             } else {
                 new LoadImage(holder.sleepv, "icons_items/Bottle-Cyan.png").execute();
@@ -156,7 +153,7 @@ public class WeaponExpandableListBowAdapter extends WeaponExpandableListElementA
         if (!coatings[4].equals("-")) {
             holder.crangev.setTag(weapon.getId());
             bitmap = getBitmapFromMemCache("icons_items/Bottle-White.png");
-            if(bitmap != null) {
+            if (bitmap != null) {
                 holder.crangev.setImageBitmap(bitmap);
             } else {
                 new LoadImage(holder.crangev, "icons_items/Bottle-White.png").execute();
@@ -171,7 +168,7 @@ public class WeaponExpandableListBowAdapter extends WeaponExpandableListElementA
         if (!coatings[6].equals("-")) {
             holder.exhaustv.setTag(weapon.getId());
             bitmap = getBitmapFromMemCache("icons_items/Bottle-Blue.png");
-            if(bitmap != null) {
+            if (bitmap != null) {
                 holder.exhaustv.setImageBitmap(bitmap);
             } else {
                 new LoadImage(holder.exhaustv, "icons_items/Bottle-Blue.png").execute();
@@ -181,7 +178,7 @@ public class WeaponExpandableListBowAdapter extends WeaponExpandableListElementA
         if (!coatings[7].equals("-")) {
             holder.slimev.setTag(weapon.getId());
             bitmap = getBitmapFromMemCache("icons_items/Bottle-Orange.png");
-            if(bitmap != null) {
+            if (bitmap != null) {
                 holder.slimev.setImageBitmap(bitmap);
             } else {
                 new LoadImage(holder.slimev, "icons_items/Bottle-Orange.png").execute();

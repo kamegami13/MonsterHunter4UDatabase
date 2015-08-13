@@ -14,69 +14,69 @@ import com.daviancorp.android.data.classes.SkillTree;
  */
 public class ItemToSkillTreeCursor extends CursorWrapper {
 
-	public ItemToSkillTreeCursor(Cursor c) {
-		super(c);
-	}
+    public ItemToSkillTreeCursor(Cursor c) {
+        super(c);
+    }
 
-	/**
-	 * Returns a ItemToSkillTree object configured for the current row, or null if the
-	 * current row is invalid.
-	 */
-	public ItemToSkillTree getItemToSkillTree() {
-		if (isBeforeFirst() || isAfterLast())
-			return null;
+    /**
+     * Returns a ItemToSkillTree object configured for the current row, or null if the
+     * current row is invalid.
+     */
+    public ItemToSkillTree getItemToSkillTree() {
+        if (isBeforeFirst() || isAfterLast())
+            return null;
 
-		ItemToSkillTree itemToSkillTree = new ItemToSkillTree();
-		
-		long id = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_ID));
-		int points = getInt(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_POINT_VALUE));
-		
-		itemToSkillTree.setId(id);
-		itemToSkillTree.setPoints(points);
+        ItemToSkillTree itemToSkillTree = new ItemToSkillTree();
 
-		// Get the Item
-		Item item = new Item();
-		
-		long itemId = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID));
-		String itemName = getString(getColumnIndex("i" + S.COLUMN_ITEMS_NAME));
+        long id = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_ID));
+        int points = getInt(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_POINT_VALUE));
+
+        itemToSkillTree.setId(id);
+        itemToSkillTree.setPoints(points);
+
+        // Get the Item
+        Item item = new Item();
+
+        long itemId = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_ITEM_ID));
+        String itemName = getString(getColumnIndex("i" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
-			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
-			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
+        String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
+        int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
 //			int carry_capacity = getInt(getColumnIndex(S.COLUMN_ITEMS_CARRY_CAPACITY));
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
 //			String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-			String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
+        String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
 //			String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
 
-		item.setId(itemId);
-		item.setName(itemName);
+        item.setId(itemId);
+        item.setName(itemName);
 //			item.setJpnName(jpnName);
-			item.setType(type);
-			item.setRarity(rarity);
+        item.setType(type);
+        item.setRarity(rarity);
 //			item.setCarryCapacity(carry_capacity);
 //			item.setBuy(buy);
 //			item.setSell(sell);
 //			item.setDescription(description);
-			item.setFileLocation(fileLocation);
+        item.setFileLocation(fileLocation);
 //			item.setArmorDupeNameFix(armor_dupe_name_fix);
-		
-		itemToSkillTree.setItem(item);
-		
-		// Get the SkillTree
-		SkillTree skillTree = new SkillTree();
 
-		long skillTreeId = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID));
-		String skillTreeName = getString(getColumnIndex("s" + S.COLUMN_SKILL_TREES_NAME));
+        itemToSkillTree.setItem(item);
+
+        // Get the SkillTree
+        SkillTree skillTree = new SkillTree();
+
+        long skillTreeId = getLong(getColumnIndex(S.COLUMN_ITEM_TO_SKILL_TREE_SKILL_TREE_ID));
+        String skillTreeName = getString(getColumnIndex("s" + S.COLUMN_SKILL_TREES_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_SKILL_TREES_JPN_NAME));
-		
-		skillTree.setId(skillTreeId);
-		skillTree.setName(skillTreeName);
+
+        skillTree.setId(skillTreeId);
+        skillTree.setName(skillTreeName);
 //			skillTree.setJpnName(jpnName);
-		
-		itemToSkillTree.setSkillTree(skillTree);
-		
-		return itemToSkillTree;
-	}
+
+        itemToSkillTree.setSkillTree(skillTree);
+
+        return itemToSkillTree;
+    }
 
 }

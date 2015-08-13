@@ -11,9 +11,7 @@ import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 public class WishlistDetailActivity extends GenericTabActivity {
-    /**
-     * A key for passing a wishlist ID as a long
-     */
+
     public static final String EXTRA_WISHLIST_ID =
             "com.daviancorp.android.android.ui.detail.wishlist_id";
 
@@ -44,8 +42,6 @@ public class WishlistDetailActivity extends GenericTabActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-//		MenuInflater inflater = getMenuInflater();
-//		inflater.inflate(R.menu.main, menu);
         return true;
     }
 

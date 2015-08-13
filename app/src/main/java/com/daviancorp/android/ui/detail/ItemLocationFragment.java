@@ -1,10 +1,7 @@
 package com.daviancorp.android.ui.detail;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -15,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Gathering;
@@ -24,131 +20,113 @@ import com.daviancorp.android.loader.GatheringListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.LocationClickListener;
 
-import java.io.IOException;
-
 public class ItemLocationFragment extends ListFragment implements
-		LoaderCallbacks<Cursor> {
-	private static final String ARG_ITEM_ID = "ITEM_ID";
+        LoaderCallbacks<Cursor> {
 
-	public static ItemLocationFragment newInstance(long itemId) {
-		Bundle args = new Bundle();
-		args.putLong(ARG_ITEM_ID, itemId);
-		ItemLocationFragment f = new ItemLocationFragment();
-		f.setArguments(args);
-		return f;
-	}
+    private static final String ARG_ITEM_ID = "ITEM_ID";
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    public static ItemLocationFragment newInstance(long itemId) {
+        Bundle args = new Bundle();
+        args.putLong(ARG_ITEM_ID, itemId);
+        ItemLocationFragment f = new ItemLocationFragment();
+        f.setArguments(args);
+        return f;
+    }
 
-		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(R.id.item_location_fragment, getArguments(), this);
-	}
-	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list, null);
-		return v;
-	}
-	
+        // Initialize the loader to load the list of runs
+        getLoaderManager().initLoader(R.id.item_location_fragment, getArguments(), this);
+    }
 
-	@SuppressLint("NewApi")
-	@Override
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// You only ever load the runs, so assume this is the case
-		long itemId = args.getLong(ARG_ITEM_ID, -1);
 
-		return new GatheringListCursorLoader(getActivity(), 
-				GatheringListCursorLoader.FROM_ITEM, itemId, null);
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_generic_list, null);
+        return v;
+    }
 
-	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		// Create an adapter to point at this cursor
 
-		GatheringListCursorAdapter adapter = new GatheringListCursorAdapter(
-				getActivity(), (GatheringCursor) cursor);
-		setListAdapter(adapter);
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // You only ever load the runs, so assume this is the case
+        long itemId = args.getLong(ARG_ITEM_ID, -1);
 
-	}
+        return new GatheringListCursorLoader(getActivity(),
+                GatheringListCursorLoader.FROM_ITEM, itemId, null);
+    }
 
-	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-		// Stop using the cursor (via the adapter)
-		setListAdapter(null);
-	}
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        // Create an adapter to point at this cursor
 
-	private static class GatheringListCursorAdapter extends CursorAdapter {
+        GatheringListCursorAdapter adapter = new GatheringListCursorAdapter(
+                getActivity(), (GatheringCursor) cursor);
+        setListAdapter(adapter);
 
-		private GatheringCursor mGatheringCursor;
+    }
 
-		public GatheringListCursorAdapter(Context context,
-				GatheringCursor cursor) {
-			super(context, cursor, 0);
-			mGatheringCursor = cursor;
-		}
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Stop using the cursor (via the adapter)
+        setListAdapter(null);
+    }
 
-		@Override
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
-			// Use a layout inflater to get a row view
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_item_location_listitem,
-					parent, false);
-		}
+    private static class GatheringListCursorAdapter extends CursorAdapter {
 
-		@Override
-		public void bindView(View view, Context context, Cursor cursor) {
-			// Get the item for the current row
-			Gathering gathering = mGatheringCursor.getGathering();
+        private GatheringCursor mGatheringCursor;
 
-			// Set up the text view
-			LinearLayout itemLayout = (LinearLayout) view
-					.findViewById(R.id.listitem);
+        public GatheringListCursorAdapter(Context context,
+                                          GatheringCursor cursor) {
+            super(context, cursor, 0);
+            mGatheringCursor = cursor;
+        }
 
-			TextView mapTextView = (TextView) view.findViewById(R.id.map);
-			TextView rankTextView = (TextView) view.findViewById(R.id.rank);
-			TextView areaTextView = (TextView) view.findViewById(R.id.area);
-			TextView methodTextView = (TextView) view.findViewById(R.id.method);
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            // Use a layout inflater to get a row view
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.fragment_item_location_listitem,
+                    parent, false);
+        }
+
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            // Get the item for the current row
+            Gathering gathering = mGatheringCursor.getGathering();
+
+            // Set up the text view
+            LinearLayout itemLayout = (LinearLayout) view
+                    .findViewById(R.id.listitem);
+
+            TextView mapTextView = (TextView) view.findViewById(R.id.map);
+            TextView rankTextView = (TextView) view.findViewById(R.id.rank);
+            TextView areaTextView = (TextView) view.findViewById(R.id.area);
+            TextView methodTextView = (TextView) view.findViewById(R.id.method);
             TextView rateTextView = (TextView) view.findViewById(R.id.rate);
             ImageView mapView = (ImageView) view.findViewById(R.id.map_image);
 
-			
-			String mapName = gathering.getLocation().getName();
-			String rank = gathering.getRank();
-			String area = gathering.getArea();
-			String method = gathering.getSite();
+
+            String mapName = gathering.getLocation().getName();
+            String rank = gathering.getRank();
+            String area = gathering.getArea();
+            String method = gathering.getSite();
             long rate = (long) gathering.getRate();
-			
-			mapTextView.setText(mapName);
-			rankTextView.setText(rank);
-			areaTextView.setText(area);
-			methodTextView.setText(method);
+
+            mapTextView.setText(mapName);
+            rankTextView.setText(rank);
+            areaTextView.setText(area);
+            methodTextView.setText(method);
             rateTextView.setText(Long.toString(rate) + "%");
-			
-			itemLayout.setTag(gathering.getLocation().getId());
+
+            itemLayout.setTag(gathering.getLocation().getId());
             itemLayout.setOnClickListener(new LocationClickListener(context,
                     gathering.getLocation().getId()));
-
-            //This code is too slow, needs async
-            /*
-            Drawable i = null;
-            String cellImage = "icons_location/"
-                    + gathering.getLocation().getFileLocation();
-            try {
-                i = Drawable.createFromStream(
-                        context.getAssets().open(cellImage), null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            mapView.setImageDrawable(i);
-            */
-
-		}
-	}
+        }
+    }
 
 }

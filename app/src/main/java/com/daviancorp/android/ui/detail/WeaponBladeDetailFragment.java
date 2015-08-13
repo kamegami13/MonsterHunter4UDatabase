@@ -4,15 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
-import android.support.v4.content.Loader;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.support.v7.internal.widget.ViewUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +22,11 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.Melody;
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.data.database.HornMelodiesCursor;
+import com.daviancorp.android.loader.HornMelodyListCursorLoader;
 import com.daviancorp.android.loader.WeaponLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.MHUtils;
 import com.daviancorp.android.ui.general.DrawSharpness;
-import com.daviancorp.android.loader.HornMelodyListCursorLoader;
 
 public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 
@@ -102,11 +101,11 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 				.findViewById(R.id.detail_weapon_blade_special);
 		mWeaponSpecialTextView = (TextView) view
 				.findViewById(R.id.detail_weapon_blade_special_value);
-		
+
 		mWeaponNote1ImageView = (ImageView) view
-				.findViewById(R.id.detail_weapon_blade_note1);		
+				.findViewById(R.id.detail_weapon_blade_note1);
 		mWeaponNote2ImageView = (ImageView) view
-				.findViewById(R.id.detail_weapon_blade_note2);		
+				.findViewById(R.id.detail_weapon_blade_note2);
 		mWeaponNote3ImageView = (ImageView) view
 				.findViewById(R.id.detail_weapon_blade_note3);
 
@@ -134,24 +133,24 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 		AssetManager manager = getActivity().getAssets();
 		InputStream open = null;
 		Bitmap bitmap = null;
-		
+
 		/* Hunting Horn notes */
 		if (mWeapon.getWtype().equals("Hunting Horn")) {
             DividerView.setVisibility(View.VISIBLE);
 
 			mWeaponSpecialTypeTextView.setText("Horn Notes:");
-			
+
 			notes = mWeapon.getHornNotes();
-			
+
 			try {
                 open = manager.open(getNoteImage(notes.charAt(0)));
                 bitmap = BitmapFactory.decodeStream(open);
                 mWeaponNote1ImageView.setImageBitmap(bitmap);
-				
+
 				open = manager.open(getNoteImage(notes.charAt(1)));
 				bitmap = BitmapFactory.decodeStream(open);
                 mWeaponNote2ImageView.setImageBitmap(bitmap);
-				
+
 				open = manager.open(getNoteImage(notes.charAt(2)));
 				bitmap = BitmapFactory.decodeStream(open);
                 mWeaponNote3ImageView.setImageBitmap(bitmap);
@@ -163,7 +162,7 @@ public class WeaponBladeDetailFragment extends WeaponDetailFragment{
 				}
 			}
 		}
-		
+
 		/* Gunlance */
 		else if (mWeapon.getWtype().equals("Gunlance")) {
 			mWeaponSpecialTypeTextView.setText("Shelling:");
