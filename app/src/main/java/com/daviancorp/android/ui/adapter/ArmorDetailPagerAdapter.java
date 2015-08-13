@@ -11,42 +11,42 @@ import com.daviancorp.android.ui.detail.ItemToSkillFragment;
 public class ArmorDetailPagerAdapter extends FragmentPagerAdapter {
 
     // Tab titles
-    private String[] tabs = { "Detail", "Skills", "Components"};
-	
-	private long armorId;
+    private String[] tabs = {"Detail", "Skills", "Components"};
 
-	public ArmorDetailPagerAdapter(FragmentManager fm, long id) {
-		super(fm);
-		this.armorId = id;
-	}
+    private long armorId;
 
-	@Override
-	public Fragment getItem(int index) {
+    public ArmorDetailPagerAdapter(FragmentManager fm, long id) {
+        super(fm);
+        this.armorId = id;
+    }
 
-		switch (index) {
-		case 0:
-			// Armor detail
-			return ArmorDetailFragment.newInstance(armorId);
-		case 1:
-			// Armor skills
-			return ItemToSkillFragment.newInstance(armorId, "Armor");
-		case 2:
-			// Item components to make Armor
-			return ComponentListFragment.newInstance(armorId);
-		default:
-			return null;
-		}
-	}
+    @Override
+    public Fragment getItem(int index) {
+
+        switch (index) {
+            case 0:
+                // Armor detail
+                return ArmorDetailFragment.newInstance(armorId);
+            case 1:
+                // Armor skills
+                return ItemToSkillFragment.newInstance(armorId, "Armor");
+            case 2:
+                // Item components to make Armor
+                return ComponentListFragment.newInstance(armorId);
+            default:
+                return null;
+        }
+    }
 
     @Override
     public CharSequence getPageTitle(int index) {
         return tabs[index];
     }
 
-	@Override
-	public int getCount() {
-		// get item count - equal to number of tabs
-		return 3;
-	}
+    @Override
+    public int getCount() {
+        // get item count - equal to number of tabs
+        return 3;
+    }
 
 }

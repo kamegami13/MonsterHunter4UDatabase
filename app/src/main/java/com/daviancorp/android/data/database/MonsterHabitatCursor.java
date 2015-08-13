@@ -24,8 +24,7 @@ public class MonsterHabitatCursor extends CursorWrapper {
      * Generates a Habitat object after retrieving entries from the database
      * @return The habitat object
      */
-    public Habitat getHabitat()
-    {
+    public Habitat getHabitat() {
         if (isBeforeFirst() || isAfterLast())
             return null;
 
@@ -41,8 +40,7 @@ public class MonsterHabitatCursor extends CursorWrapper {
         String[] allAreas = areas.split("/");
 
         long[] areasInt = new long[allAreas.length];
-        for (int i = 0; i < allAreas.length; i++)
-        {
+        for (int i = 0; i < allAreas.length; i++) {
             areasInt[i] = Long.valueOf(allAreas[i]);
         }
 
@@ -62,7 +60,7 @@ public class MonsterHabitatCursor extends CursorWrapper {
         location.setName(loc_name);
         location.setFileLocation(loc_file);
 
-        String mini_file_location = loc_file.substring(0, loc_file.length()-4) + "_mini.png";
+        String mini_file_location = loc_file.substring(0, loc_file.length() - 4) + "_mini.png";
         location.setFileLocationMini(mini_file_location);
 
         habitat.setLocation(location);

@@ -12,15 +12,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import com.daviancorp.android.data.classes.HunterType;
-import com.daviancorp.android.data.classes.Rank;
-import com.daviancorp.android.data.database.DataManager;
+
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.detail.ASBFragment;
-import com.daviancorp.android.ui.list.ASBSetListActivity;
 import com.daviancorp.android.ui.list.ASBSetListFragment;
 
 public class ASBSetAddDialogFragment extends DialogFragment {
+
     private static final String ARG_ID = "id";
     private static final String ARG_NAME = "name";
     private static final String ARG_RANK = "rank";

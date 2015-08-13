@@ -1,10 +1,10 @@
 package com.daviancorp.android.ui.list;
 
+import java.io.IOException;
+
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,97 +25,94 @@ import com.daviancorp.android.loader.LocationListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.LocationClickListener;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 public class LocationListFragment extends ListFragment implements
-		LoaderCallbacks<Cursor> {
+        LoaderCallbacks<Cursor> {
 
-	private LocationListCursorAdapter mAdapter;
+    private LocationListCursorAdapter mAdapter;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(R.id.location_grid_fragment, getArguments(), this);
-	}
+        // Initialize the loader to load the list of runs
+        getLoaderManager().initLoader(R.id.location_grid_fragment, getArguments(), this);
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent,
-			Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent,
+                             Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_generic_list, parent,
                 false);
-	}
+    }
 
-	@Override
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// You only ever load the runs, so assume this is the case
-		return new LocationListCursorLoader(getActivity());
-	}
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // You only ever load the runs, so assume this is the case
+        return new LocationListCursorLoader(getActivity());
+    }
 
-	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		// Create an adapter to point at this cursor
-		mAdapter = new LocationListCursorAdapter(getActivity(),
-				(LocationCursor) cursor);
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        // Create an adapter to point at this cursor
+        mAdapter = new LocationListCursorAdapter(getActivity(),
+                (LocationCursor) cursor);
         setListAdapter(mAdapter);
-	}
+    }
 
-	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-		// Stop using the cursor (via the adapter)
-		setListAdapter(null);
-	}
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Stop using the cursor (via the adapter)
+        setListAdapter(null);
+    }
 
-	private static class LocationListCursorAdapter extends CursorAdapter {
+    private static class LocationListCursorAdapter extends CursorAdapter {
 
-		private LocationCursor mLocationCursor;
+        private LocationCursor mLocationCursor;
 
-		public LocationListCursorAdapter(Context context, LocationCursor cursor) {
-			super(context, cursor, 0);
-			mLocationCursor = cursor;
-		}
+        public LocationListCursorAdapter(Context context, LocationCursor cursor) {
+            super(context, cursor, 0);
+            mLocationCursor = cursor;
+        }
 
-		@Override
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
-			// Use a layout inflater to get a row view
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_list_item_basic,
-					parent, false);
-		}
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            // Use a layout inflater to get a row view
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.fragment_list_item_basic,
+                    parent, false);
+        }
 
-		@Override
-		public void bindView(View view, Context context, Cursor cursor) {
-			// Get the monster for the current row
-			Location location = mLocationCursor.getLocation();
-			AssetManager manager = context.getAssets();
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            // Get the monster for the current row
+            Location location = mLocationCursor.getLocation();
+            AssetManager manager = context.getAssets();
 
-			RelativeLayout listLayout = (RelativeLayout) view
-					.findViewById(R.id.listitem);
+            RelativeLayout listLayout = (RelativeLayout) view
+                    .findViewById(R.id.listitem);
 
-			// Set up the text view
-			TextView locationNameTextView = (TextView) view
-					.findViewById(R.id.item_label);
-			ImageView locationImage = (ImageView) view
-					.findViewById(R.id.item_image);
+            // Set up the text view
+            TextView locationNameTextView = (TextView) view
+                    .findViewById(R.id.item_label);
+            ImageView locationImage = (ImageView) view
+                    .findViewById(R.id.item_image);
 
-			String cellText = location.getName();
-			String cellImage = "icons_location/" + location.getFileLocationMini();
+            String cellText = location.getName();
+            String cellImage = "icons_location/" + location.getFileLocationMini();
 
-			locationNameTextView.setText(cellText);
+            locationNameTextView.setText(cellText);
 
-			// Read a Bitmap from Assets
+            // Read a Bitmap from Assets
             locationImage.setTag(location.getId());
-			new LoadImage(locationImage, cellImage).execute();
+            new LoadImage(locationImage, cellImage).execute();
 
-			listLayout.setTag(location.getId());
+            listLayout.setTag(location.getId());
             listLayout.setOnClickListener(new LocationClickListener(context, location.getId()));
-		}
+        }
 
-        protected class LoadImage extends AsyncTask<Void,Void,Drawable> {
+        protected class LoadImage extends AsyncTask<Void, Void, Drawable> {
             private ImageView mImage;
             private String path;
             private String imagePath;
@@ -146,6 +143,6 @@ public class LocationListFragment extends ListFragment implements
                 }
             }
         }
-	}
+    }
 
 }

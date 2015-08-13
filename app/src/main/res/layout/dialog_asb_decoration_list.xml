@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             android:paddingBottom="@dimen/activity_vertical_margin"
+             android:paddingLeft="@dimen/activity_horizontal_margin"
+             android:paddingRight="@dimen/activity_horizontal_margin"
+             android:paddingTop="@dimen/activity_vertical_margin">
 
     <TableRow
         android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="0.1"/>
 
         <TextView
             android:id="@+id/decoration_1_state"
@@ -30,13 +30,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:background="@drawable/dialog_clicked_states"
-            android:text="@string/asb_no_slot" />
+            android:text="@string/asb_no_slot"/>
 
-        <ImageView android:id="@+id/decoration_1_menu"
+        <ImageView
+            android:id="@+id/decoration_1_menu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:src="@drawable/ic_popup_menu" />
+            android:src="@drawable/ic_popup_menu"/>
 
     </TableRow>
 
@@ -62,13 +63,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:background="@drawable/dialog_clicked_states"
-            android:text="@string/asb_no_slot" />
+            android:text="@string/asb_no_slot"/>
 
-        <ImageView android:id="@+id/decoration_2_menu"
+        <ImageView
+            android:id="@+id/decoration_2_menu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:src="@drawable/ic_popup_menu" />
+            android:src="@drawable/ic_popup_menu"/>
     </TableRow>
 
     <TableRow
@@ -92,13 +94,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
             android:background="@drawable/dialog_clicked_states"
-            android:text="@string/asb_no_slot" />
+            android:text="@string/asb_no_slot"/>
 
-        <ImageView android:id="@+id/decoration_3_menu"
+        <ImageView
+            android:id="@+id/decoration_3_menu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:src="@drawable/ic_popup_menu" />
+            android:src="@drawable/ic_popup_menu"/>
     </TableRow>
 
 </TableLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listitem"
-    style="@style/list_item"
-    android:orientation="horizontal" >
+              android:id="@+id/listitem"
+              style="@style/list_item"
+              android:orientation="horizontal">
 
     <TextView
         android:id="@+id/quest"
@@ -11,7 +11,7 @@
         android:layout_weight=".75"
         style="@style/text_medium"
         android:layout_gravity="center_vertical"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"/>
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -30,7 +30,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:text="test" />
+            android:text="test"/>
 
         <TextView
             android:id="@+id/slot"
@@ -42,7 +42,7 @@
             style="@style/text_small"
             android:layout_toLeftOf="@+id/amount"
             android:layout_alignTop="@+id/amount"
-            android:text="A" />
+            android:text="A"/>
 
         <TextView
             android:id="@+id/amount"
@@ -55,7 +55,7 @@
             android:layout_alignTop="@+id/percentage"
             android:layout_toLeftOf="@+id/percentage"
             android:text="test"
-            android:layout_marginLeft="8dp" />
+            android:layout_marginLeft="8dp"/>
 
         <TextView
             android:id="@+id/percentage"
@@ -68,7 +68,7 @@
             android:layout_below="@+id/level"
             android:text="100%"
             android:gravity="right"
-            android:layout_marginLeft="8dp" />
+            android:layout_marginLeft="8dp"/>
     </RelativeLayout>
 
 </LinearLayout>

@@ -5,49 +5,49 @@ package com.daviancorp.android.data.classes;
  */
 public class MonsterToQuest {
 
-	private long id;			// id
-	private Monster monster;	// Monster
-	private Quest quest;		// Quest
-	private String unstable;	// Unstable or not
-	
-	/* Default Constructors */
-	public MonsterToQuest() {
-		this.id = -1;
-		this.monster = null;
-		this.quest = null;
-		this.unstable = null;
-	}
+    private long id;            // id
+    private Monster monster;    // Monster
+    private Quest quest;        // Quest
+    private String unstable;    // Unstable or not
 
-	/* Getters and Setters */
-	public long getId() {
-		return id;
-	}
+    /* Default Constructors */
+    public MonsterToQuest() {
+        this.id = -1;
+        this.monster = null;
+        this.quest = null;
+        this.unstable = null;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /* Getters and Setters */
+    public long getId() {
+        return id;
+    }
 
-	public Monster getMonster() {
-		return monster;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setMonster(Monster monster) {
-		this.monster = monster;
-	}
+    public Monster getMonster() {
+        return monster;
+    }
 
-	public Quest getQuest() {
-		return quest;
-	}
+    public void setMonster(Monster monster) {
+        this.monster = monster;
+    }
 
-	public void setQuest(Quest quest) {
-		this.quest = quest;
-	}
+    public Quest getQuest() {
+        return quest;
+    }
 
-	public String getUnstable() {
-		return unstable;
-	}
+    public void setQuest(Quest quest) {
+        this.quest = quest;
+    }
 
-	public void setUnstable(String unstable) {
-		this.unstable = unstable;
-	}
+    public String getUnstable() {
+        return unstable;
+    }
+
+    public void setUnstable(String unstable) {
+        this.unstable = unstable;
+    }
 }

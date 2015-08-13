@@ -3,9 +3,10 @@ package com.daviancorp.android.data.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorWrapper;
+
 import com.daviancorp.android.data.classes.*;
-import com.daviancorp.android.mh4udatabase.*;
-import com.daviancorp.android.ui.general.*;
+import com.daviancorp.android.mh4udatabase.R;
+import com.daviancorp.android.ui.general.ResourceUtils;
 
 public class ASBSessionCursor extends CursorWrapper {
 
@@ -183,21 +184,18 @@ public class ASBSessionCursor extends CursorWrapper {
     private static Armor getArmorById(Context context, long id) {
         if (id != 0 && id != -1) {
             return DataManager.get(context).getArmor(id);
-        }
-        else return null;
+        } else return null;
     }
 
     private static Decoration getDecorationById(Context context, long id) {
         if (id != 0 && id != -1) {
             return DataManager.get(context).getDecoration(id);
-        }
-        else return null;
+        } else return null;
     }
 
     private static SkillTree getSkillTreeById(Context context, long id) {
         if (id != 0 && id != -1) {
             return DataManager.get(context).getSkillTree(id);
-        }
-        else return null;
+        } else return null;
     }
 }

@@ -1,50 +1,46 @@
 package com.daviancorp.android.data.classes;
 
-import android.app.Application;
-import android.content.res.Resources;
-import android.util.Log;
-
-import com.daviancorp.android.mh4udatabase.R;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.util.Log;
+
 /*
  * Class for Weapon
  */
-public class Weapon extends Item{
+public class Weapon extends Item {
 
-	private String wtype;						// Weapon type
-	private int creation_cost;					// Cost to create
-	private int upgrade_cost;					// Cost to upgrade
-	private int attack;							// Attack damage
-	private int max_attack;						// Max attack damage; unused at the moment
-	private String element;			            // Elemental type
-	private String awaken;                  	// Awakened elmeental type
+    private String wtype;                        // Weapon type
+    private int creation_cost;                    // Cost to create
+    private int upgrade_cost;                    // Cost to upgrade
+    private int attack;                            // Attack damage
+    private int max_attack;                        // Max attack damage; unused at the moment
+    private String element;                        // Elemental type
+    private String awaken;                    // Awakened elmeental type
     private String element_2;                   // Second element type
     private long element_attack;
     private long element_2_attack;
     private long awaken_attack;
-	private int defense;						// Defense
-	private String sharpness;					// Sharpness values
-	private String affinity;				    // Affinity
-	private String horn_notes;					// Horn notes
-	private String shelling_type;				// Shelling type
-	private String phial;						// Phial type
-	private String charges;						// Charges for bows
-	private String coatings;					// Coatings for bows
-	private String recoil;						// Recoils for bowguns; arc for bows
-	private String reload_speed;				// Reload speed for bowguns
-	private String rapid_fire;					// Rapid fire/crouching fire for bowguns
-	private String deviation;					// Deviation for bowguns
-	private String ammo;						// Ammo for bowguns
-	private int num_slots;						// Number of slots
-	private int wfinal;							// Final in weapon tree or not
+    private int defense;                        // Defense
+    private String sharpness;                    // Sharpness values
+    private String affinity;                    // Affinity
+    private String horn_notes;                    // Horn notes
+    private String shelling_type;                // Shelling type
+    private String phial;                        // Phial type
+    private String charges;                        // Charges for bows
+    private String coatings;                    // Coatings for bows
+    private String recoil;                        // Recoils for bowguns; arc for bows
+    private String reload_speed;                // Reload speed for bowguns
+    private String rapid_fire;                    // Rapid fire/crouching fire for bowguns
+    private String deviation;                    // Deviation for bowguns
+    private String ammo;                        // Ammo for bowguns
+    private int num_slots;                        // Number of slots
+    private int wfinal;                            // Final in weapon tree or not
     private int tree_depth;                     // Depth of weapon in weapon tree
 
     private int parent_id;
-    
+
     private String mSlotString;
     private String file_location;
     private int[] mSharpness1;
@@ -52,133 +48,134 @@ public class Weapon extends Item{
     private String[] coatings_array;
     private String chargeString;
     private String attackString;
-	
-	/* Default Constructor */
-	public Weapon() {
-		super();
-		
-		this.wtype = "";
-		this.creation_cost = -1;
-		this.upgrade_cost = -1;
-		this.attack = -1;
-		this.max_attack = -1;
-		this.element = "";
+
+    /* Default Constructor */
+    public Weapon() {
+        super();
+
+        this.wtype = "";
+        this.creation_cost = -1;
+        this.upgrade_cost = -1;
+        this.attack = -1;
+        this.max_attack = -1;
+        this.element = "";
         this.element_2 = "";
         this.awaken = "";
-		this.defense = -1;
-		this.sharpness = "";
-		this.affinity = "";
-		this.horn_notes = "";
-		this.shelling_type = "";
-		this.phial = "";
-		this.charges = "";
-		this.coatings = "";
-		this.recoil = "";
-		this.reload_speed = "";
-		this.rapid_fire = "";
-		this.deviation = "";
-		this.ammo = "";
-		this.num_slots = -1;
-		this.wfinal = -1;
+        this.defense = -1;
+        this.sharpness = "";
+        this.affinity = "";
+        this.horn_notes = "";
+        this.shelling_type = "";
+        this.phial = "";
+        this.charges = "";
+        this.coatings = "";
+        this.recoil = "";
+        this.reload_speed = "";
+        this.rapid_fire = "";
+        this.deviation = "";
+        this.ammo = "";
+        this.num_slots = -1;
+        this.wfinal = -1;
         this.tree_depth = 0;
         this.chargeString = "";
-	}
+    }
 
-	/* Getters and Setters */
-	public String getWtype() {
-		return wtype;
-	}
+    /* Getters and Setters */
+    public String getWtype() {
+        return wtype;
+    }
 
-	public void setWtype(String wtype) {
-		this.wtype = wtype;
-	}
+    public void setWtype(String wtype) {
+        this.wtype = wtype;
+    }
 
-	public int getCreationCost() {
-		return creation_cost;
-	}
+    public int getCreationCost() {
+        return creation_cost;
+    }
 
-	public void setCreationCost(int creation_cost) {
-		this.creation_cost = creation_cost;
-	}
+    public void setCreationCost(int creation_cost) {
+        this.creation_cost = creation_cost;
+    }
 
-	public int getUpgradeCost() {
-		return upgrade_cost;
-	}
+    public int getUpgradeCost() {
+        return upgrade_cost;
+    }
 
-	public void setUpgradeCost(int upgrade_cost) {
-		this.upgrade_cost = upgrade_cost;
-	}
+    public void setUpgradeCost(int upgrade_cost) {
+        this.upgrade_cost = upgrade_cost;
+    }
 
-	public int getAttack() {
-		return attack;
-	}
+    public int getAttack() {
+        return attack;
+    }
 
-	public void setAttack(int attack) {
-		this.attack = attack; this.attackString = Integer.toString(attack);
-	}
+    public void setAttack(int attack) {
+        this.attack = attack;
+        this.attackString = Integer.toString(attack);
+    }
 
-	public int getMaxAttack() {
-		return max_attack;
-	}
+    public int getMaxAttack() {
+        return max_attack;
+    }
 
-	public void setMaxAttack(int max_attack) {
-		this.max_attack = max_attack;
-	}
+    public void setMaxAttack(int max_attack) {
+        this.max_attack = max_attack;
+    }
 
-	public int getDefense() {
-		return defense;
-	}
+    public int getDefense() {
+        return defense;
+    }
 
-	public void setDefense(int defense) {
-		this.defense = defense;
-	}
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
 
-	public String getSharpness() {
-		return sharpness;
-	}
+    public String getSharpness() {
+        return sharpness;
+    }
 
-	public void setSharpness(String sharpness) {
-		this.sharpness = sharpness;
-	}
+    public void setSharpness(String sharpness) {
+        this.sharpness = sharpness;
+    }
 
-	public String getAffinity() {
-		return affinity;
-	}
+    public String getAffinity() {
+        return affinity;
+    }
 
-	public void setAffinity(String affinity) {
-		this.affinity = affinity;
-	}
+    public void setAffinity(String affinity) {
+        this.affinity = affinity;
+    }
 
-	public String getHornNotes() {
-		return horn_notes;
-	}
+    public String getHornNotes() {
+        return horn_notes;
+    }
 
-	public void setHornNotes(String horn_notes) {
-		this.horn_notes = horn_notes;
-	}
+    public void setHornNotes(String horn_notes) {
+        this.horn_notes = horn_notes;
+    }
 
-	public String getShellingType() {
-		return shelling_type;
-	}
+    public String getShellingType() {
+        return shelling_type;
+    }
 
-	public void setShellingType(String shelling_type) {
-		this.shelling_type = shelling_type;
-	}
-	
-	public String getPhial() {
-		return phial;
-	}
-	
-	public void setPhial(String phial) {
-		this.phial = phial;
-	}
+    public void setShellingType(String shelling_type) {
+        this.shelling_type = shelling_type;
+    }
 
-	public String getCharges() {
-		return charges;
-	}
+    public String getPhial() {
+        return phial;
+    }
 
-	public void setCharges(String charges) {
-		this.charges = charges;
+    public void setPhial(String phial) {
+        this.phial = phial;
+    }
+
+    public String getCharges() {
+        return charges;
+    }
+
+    public void setCharges(String charges) {
+        this.charges = charges;
         String charge = "";
         String level = "";
 
@@ -186,77 +183,76 @@ public class Weapon extends Item{
         for (String c : new_charges) {
 
             if (c.endsWith("*")) {
-                charge = "(" + c.substring(0,c.length()-3) + c.charAt(c.length() - 2) + ")";
-            }
-            else {
-                charge = c.substring(0,c.length()-2) + c.charAt(c.length()-1);
+                charge = "(" + c.substring(0, c.length() - 3) + c.charAt(c.length() - 2) + ")";
+            } else {
+                charge = c.substring(0, c.length() - 2) + c.charAt(c.length() - 1);
             }
 
             this.chargeString = this.chargeString + charge + " / ";
         }
-        chargeString = chargeString.substring(0, this.chargeString.length()-3);
+        chargeString = chargeString.substring(0, this.chargeString.length() - 3);
     }
 
-	public String getCoatings() {
-		return coatings;
-	}
+    public String getCoatings() {
+        return coatings;
+    }
 
-	public void setCoatings(String coatings) {
-		this.coatings = coatings;
+    public void setCoatings(String coatings) {
+        this.coatings = coatings;
 
         this.coatings_array = coatings.split("\\|");
-	}
+    }
 
-	public String getRecoil() {
-		return recoil;
-	}
+    public String getRecoil() {
+        return recoil;
+    }
 
-	public void setRecoil(String recoil) {
-		this.recoil = recoil;
-	}
+    public void setRecoil(String recoil) {
+        this.recoil = recoil;
+    }
 
-	public String getReloadSpeed() {
-		return reload_speed;
-	}
+    public String getReloadSpeed() {
+        return reload_speed;
+    }
 
-	public void setReloadSpeed(String reload_speed) {
-		this.reload_speed = reload_speed;
-	}
+    public void setReloadSpeed(String reload_speed) {
+        this.reload_speed = reload_speed;
+    }
 
-	public String getRapidFire() {
-		return rapid_fire;
-	}
+    public String getRapidFire() {
+        return rapid_fire;
+    }
 
-	public void setRapidFire(String rapid_fire) {
-		this.rapid_fire = rapid_fire;
-	}
+    public void setRapidFire(String rapid_fire) {
+        this.rapid_fire = rapid_fire;
+    }
 
-	public String getDeviation() {
-		return deviation;
-	}
+    public String getDeviation() {
+        return deviation;
+    }
 
-	public void setDeviation(String deviation) {
-		this.deviation = deviation;
-	}
+    public void setDeviation(String deviation) {
+        this.deviation = deviation;
+    }
 
-	public String getAmmo() {
-		return ammo;
-	}
+    public String getAmmo() {
+        return ammo;
+    }
 
-	public void setAmmo(String ammo) {
-		this.ammo = ammo;
-	}
+    public void setAmmo(String ammo) {
+        this.ammo = ammo;
+    }
 
-	public int getNumSlots() {
-		return num_slots;
-	}
+    public int getNumSlots() {
+        return num_slots;
+    }
 
     public String getSlotString() {
         return mSlotString;
     }
 
     public void setNumSlots(int num_slots) {
-		this.num_slots = num_slots;
+        this.num_slots = num_slots;
 
         // Set the slot to view
         String slot = "";
@@ -280,17 +276,17 @@ public class Weapon extends Item{
                 slot = "error!!";
                 break;
         }
-        
+
         this.mSlotString = slot;
-	}
-	
-	public int getWFinal() {
-		return wfinal;
-	}
-	
-	public void setWFinal(int wfinal) {
-		this.wfinal = wfinal;
-	}
+    }
+
+    public int getWFinal() {
+        return wfinal;
+    }
+
+    public void setWFinal(int wfinal) {
+        this.wfinal = wfinal;
+    }
 
     public int getTree_Depth() {
         return tree_depth;
@@ -349,9 +345,8 @@ public class Weapon extends Item{
     }
 
 
-    
     public void setFileLocation() {
-        
+
         String cellImage = "";
         switch (this.wtype) {
             case "Great Sword":

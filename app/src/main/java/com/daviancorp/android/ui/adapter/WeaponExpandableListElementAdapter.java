@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
@@ -27,7 +26,7 @@ public abstract class WeaponExpandableListElementAdapter extends WeaponExpandabl
         public TextView elementView;
         public TextView elementView2;
         public TextView awakenView;
-        
+
         public ImageView elementIconView;
         public ImageView elementIconView2;
 
@@ -50,7 +49,7 @@ public abstract class WeaponExpandableListElementAdapter extends WeaponExpandabl
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         super.onBindViewHolder(viewHolder, position);
-        
+
         WeaponElementViewHolder holder = (WeaponElementViewHolder) viewHolder;
         Weapon weapon = ((WeaponListEntry) getItemAt(position)).weapon;
 
@@ -83,17 +82,17 @@ public abstract class WeaponExpandableListElementAdapter extends WeaponExpandabl
             holder.elementIconView.setVisibility(View.VISIBLE);
 
             final Bitmap bitmap = getBitmapFromMemCache("icons_monster_info/" + element + ".png");
-            if(bitmap != null) {
+            if (bitmap != null) {
                 holder.elementIconView.setImageBitmap(bitmap);
             } else {
                 new LoadImage(holder.elementIconView, "icons_monster_info/" + element + ".png").execute();
             }
 
         }
-        if(!"".equals(element2)) {
+        if (!"".equals(element2)) {
             holder.elementIconView2.setTag(weapon.getId());
             final Bitmap bitmap = getBitmapFromMemCache("icons_monster_info/" + element2 + ".png");
-            if(bitmap != null) {
+            if (bitmap != null) {
                 holder.elementIconView2.setImageBitmap(bitmap);
             } else {
                 new LoadImage(holder.elementIconView2, "icons_monster_info/" + element2 + ".png").execute();

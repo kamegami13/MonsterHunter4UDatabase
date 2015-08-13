@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="48dp"
     android:layout_width="match_parent">
-    
+
     <ImageView
         android:id="@+id/nav_list_icon"
         android:layout_centerVertical="true"
         tools:src="@drawable/great_sword1"
         style="@style/main_image"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"/>
 
     <TextView
         android:id="@+id/nav_list_item"
@@ -25,7 +25,7 @@
         android:background="@drawable/generic_clicked_states"
         tools:layout_gravity=""
         tools:text="List Item 1"
-        style="@style/text_medium" />
+        style="@style/text_medium"/>
 
 </RelativeLayout>
 

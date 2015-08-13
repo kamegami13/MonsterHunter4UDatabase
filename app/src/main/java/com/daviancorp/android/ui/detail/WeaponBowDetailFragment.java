@@ -18,177 +18,171 @@ import com.daviancorp.android.mh4udatabase.R;
 
 public class WeaponBowDetailFragment extends WeaponDetailFragment {
 
-	private TextView mWeaponArcTextView, mWeaponCharge1TextView,
-			mWeaponCharge2TextView, mWeaponCharge3TextView,
-			mWeaponCharge4TextView, mWeaponElementTextView;
-    ;
-	private ImageView mWeaponCoating1ImageView, mWeaponCoating2ImageView,
-			mWeaponCoating3ImageView, mWeaponCoating4ImageView,
-			mWeaponCoating5ImageView, mWeaponCoating6ImageView,
-			mWeaponCoating7ImageView, mWeaponCoating8ImageView;
+    private TextView mWeaponArcTextView, mWeaponCharge1TextView,
+            mWeaponCharge2TextView, mWeaponCharge3TextView,
+            mWeaponCharge4TextView, mWeaponElementTextView;
 
-	public static WeaponBowDetailFragment newInstance(long weaponId) {
-		Bundle args = new Bundle();
-		args.putLong(WeaponDetailFragment.ARG_WEAPON_ID, weaponId);
-		WeaponBowDetailFragment f = new WeaponBowDetailFragment();
-		f.setArguments(args);
-		return f;
-	}
+    private ImageView mWeaponCoating1ImageView, mWeaponCoating2ImageView,
+            mWeaponCoating3ImageView, mWeaponCoating4ImageView,
+            mWeaponCoating5ImageView, mWeaponCoating6ImageView,
+            mWeaponCoating7ImageView, mWeaponCoating8ImageView;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_weapon_bow_detail,
-				container, false);
+    public static WeaponBowDetailFragment newInstance(long weaponId) {
+        Bundle args = new Bundle();
+        args.putLong(WeaponDetailFragment.ARG_WEAPON_ID, weaponId);
+        WeaponBowDetailFragment f = new WeaponBowDetailFragment();
+        f.setArguments(args);
+        return f;
+    }
 
-		mWeaponLabelTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_name);
-		mWeaponTypeTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_type);
-		mWeaponAttackTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_attack);
-		mWeaponElementTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_element);
-		mWeaponRarityTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_rarity);
-		mWeaponSlotTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_slot);
-		mWeaponAffinityTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_affinity);
-		mWeaponDefenseTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_defense);
-		mWeaponCreationTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_creation);
-		mWeaponUpgradeTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_upgrade);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_weapon_bow_detail,
+                container, false);
 
-		mWeaponArcTextView = (TextView) view
-				.findViewById(R.id.detail_weapon_bow_arc);
-		mWeaponCharge1TextView = (TextView) view
-				.findViewById(R.id.detail_weapon_bow_charge1);
-		mWeaponCharge2TextView = (TextView) view
-				.findViewById(R.id.detail_weapon_bow_charge2);
-		mWeaponCharge3TextView = (TextView) view
-				.findViewById(R.id.detail_weapon_bow_charge3);
-		mWeaponCharge4TextView = (TextView) view
-				.findViewById(R.id.detail_weapon_bow_charge4);
+        mWeaponLabelTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_name);
+        mWeaponTypeTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_type);
+        mWeaponAttackTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_attack);
+        mWeaponElementTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_element);
+        mWeaponRarityTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_rarity);
+        mWeaponSlotTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_slot);
+        mWeaponAffinityTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_affinity);
+        mWeaponDefenseTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_defense);
+        mWeaponCreationTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_creation);
+        mWeaponUpgradeTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_upgrade);
 
-		mWeaponCoating1ImageView = (ImageView) view.findViewById(R.id.power);
-		mWeaponCoating2ImageView = (ImageView) view.findViewById(R.id.poison);
-		mWeaponCoating3ImageView = (ImageView) view.findViewById(R.id.para);
-		mWeaponCoating4ImageView = (ImageView) view.findViewById(R.id.sleep);
-		mWeaponCoating5ImageView = (ImageView) view.findViewById(R.id.crange);
-		mWeaponCoating6ImageView = (ImageView) view.findViewById(R.id.paint);
-		mWeaponCoating7ImageView = (ImageView) view.findViewById(R.id.exhaust);
-		mWeaponCoating8ImageView = (ImageView) view.findViewById(R.id.blast);
+        mWeaponArcTextView = (TextView) view
+                .findViewById(R.id.detail_weapon_bow_arc);
+        mWeaponCharge1TextView = (TextView) view
+                .findViewById(R.id.detail_weapon_bow_charge1);
+        mWeaponCharge2TextView = (TextView) view
+                .findViewById(R.id.detail_weapon_bow_charge2);
+        mWeaponCharge3TextView = (TextView) view
+                .findViewById(R.id.detail_weapon_bow_charge3);
+        mWeaponCharge4TextView = (TextView) view
+                .findViewById(R.id.detail_weapon_bow_charge4);
 
-		return view;
-	}
+        mWeaponCoating1ImageView = (ImageView) view.findViewById(R.id.power);
+        mWeaponCoating2ImageView = (ImageView) view.findViewById(R.id.poison);
+        mWeaponCoating3ImageView = (ImageView) view.findViewById(R.id.para);
+        mWeaponCoating4ImageView = (ImageView) view.findViewById(R.id.sleep);
+        mWeaponCoating5ImageView = (ImageView) view.findViewById(R.id.crange);
+        mWeaponCoating6ImageView = (ImageView) view.findViewById(R.id.paint);
+        mWeaponCoating7ImageView = (ImageView) view.findViewById(R.id.exhaust);
+        mWeaponCoating8ImageView = (ImageView) view.findViewById(R.id.blast);
 
-	@Override
-	protected void updateUI() throws IOException {
-		super.updateUI();
+        return view;
+    }
 
-		mWeaponArcTextView.setText(mWeapon.getRecoil());
+    @Override
+    protected void updateUI() throws IOException {
+        super.updateUI();
 
-		// Charges
-		String[] charges = mWeapon.getCharges().split("\\|");
+        mWeaponArcTextView.setText(mWeapon.getRecoil());
 
-		mWeaponCharge1TextView.setText(charges[0]);
-		mWeaponCharge2TextView.setText(charges[1]);
-		mWeaponCharge3TextView.setText(charges[2]);
+        // Charges
+        String[] charges = mWeapon.getCharges().split("\\|");
 
-        if (charges[2].contains("*")){
+        mWeaponCharge1TextView.setText(charges[0]);
+        mWeaponCharge2TextView.setText(charges[1]);
+        mWeaponCharge3TextView.setText(charges[2]);
+
+        if (charges[2].contains("*")) {
             mWeaponCharge2TextView.setTypeface(null, Typeface.BOLD);
         }
 
         if (charges.length == 4) {
             mWeaponCharge4TextView.setText(charges[3]);
-            if (charges[3].contains("*")){
+            if (charges[3].contains("*")) {
                 mWeaponCharge3TextView.setTypeface(null, Typeface.BOLD);
             }
-        }
-        else {
+        } else {
             mWeaponCharge4TextView.setText("None");
         }
 
-		// Read a Bitmap from Assets
-		AssetManager manager = getActivity().getAssets();
-		InputStream open = null;
-		Bitmap bitmap = null;
+        // Read a Bitmap from Assets
+        AssetManager manager = getActivity().getAssets();
+        InputStream open = null;
+        Bitmap bitmap = null;
 
 		/* Coatings */
-		String[] coatings = mWeapon.getCoatings().split("\\|");
+        String[] coatings = mWeapon.getCoatings().split("\\|");
 
-		try {
-			if (!coatings[0].equals("-")) {
-				open = manager.open("icons_items/Bottle-Red.png");
-				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponCoating1ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
-			}
-			if (!coatings[1].equals("-")) {
-				open = manager.open("icons_items/Bottle-Purple.png");
-				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponCoating2ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
-			}
-			if (!coatings[2].equals("-")) {
-				open = manager.open("icons_items/Bottle-Yellow.png");
-				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponCoating3ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
-			}
-			if (!coatings[3].equals("-")) {
-				open = manager.open("icons_items/Bottle-Cyan.png");
-				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponCoating4ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
-			}
-			if (!coatings[4].equals("-")) {
-				open = manager.open("icons_items/Bottle-White.png");
-				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponCoating5ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
-			}
-			if (!coatings[5].equals("-")) {
-				open = manager.open("icons_items/Bottle-Pink.png");
-				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponCoating6ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
-			}
-			if (!coatings[6].equals("-")) {
-				open = manager.open("icons_items/Bottle-Blue.png");
-				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponCoating7ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
-			}
-			if (!coatings[7].equals("-")) {
-				open = manager.open("icons_items/Bottle-Orange.png");
-				bitmap = BitmapFactory.decodeStream(open);
-				mWeaponCoating8ImageView.setImageBitmap(Bitmap.createScaledBitmap(
-						bitmap, 50, 50, false));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (open != null) {
-				open.close();
-			}
-		}
+        try {
+            if (!coatings[0].equals("-")) {
+                open = manager.open("icons_items/Bottle-Red.png");
+                bitmap = BitmapFactory.decodeStream(open);
+                mWeaponCoating1ImageView.setImageBitmap(Bitmap.createScaledBitmap(
+                        bitmap, 50, 50, false));
+            }
+            if (!coatings[1].equals("-")) {
+                open = manager.open("icons_items/Bottle-Purple.png");
+                bitmap = BitmapFactory.decodeStream(open);
+                mWeaponCoating2ImageView.setImageBitmap(Bitmap.createScaledBitmap(
+                        bitmap, 50, 50, false));
+            }
+            if (!coatings[2].equals("-")) {
+                open = manager.open("icons_items/Bottle-Yellow.png");
+                bitmap = BitmapFactory.decodeStream(open);
+                mWeaponCoating3ImageView.setImageBitmap(Bitmap.createScaledBitmap(
+                        bitmap, 50, 50, false));
+            }
+            if (!coatings[3].equals("-")) {
+                open = manager.open("icons_items/Bottle-Cyan.png");
+                bitmap = BitmapFactory.decodeStream(open);
+                mWeaponCoating4ImageView.setImageBitmap(Bitmap.createScaledBitmap(
+                        bitmap, 50, 50, false));
+            }
+            if (!coatings[4].equals("-")) {
+                open = manager.open("icons_items/Bottle-White.png");
+                bitmap = BitmapFactory.decodeStream(open);
+                mWeaponCoating5ImageView.setImageBitmap(Bitmap.createScaledBitmap(
+                        bitmap, 50, 50, false));
+            }
+            if (!coatings[5].equals("-")) {
+                open = manager.open("icons_items/Bottle-Pink.png");
+                bitmap = BitmapFactory.decodeStream(open);
+                mWeaponCoating6ImageView.setImageBitmap(Bitmap.createScaledBitmap(
+                        bitmap, 50, 50, false));
+            }
+            if (!coatings[6].equals("-")) {
+                open = manager.open("icons_items/Bottle-Blue.png");
+                bitmap = BitmapFactory.decodeStream(open);
+                mWeaponCoating7ImageView.setImageBitmap(Bitmap.createScaledBitmap(
+                        bitmap, 50, 50, false));
+            }
+            if (!coatings[7].equals("-")) {
+                open = manager.open("icons_items/Bottle-Orange.png");
+                bitmap = BitmapFactory.decodeStream(open);
+                mWeaponCoating8ImageView.setImageBitmap(Bitmap.createScaledBitmap(
+                        bitmap, 50, 50, false));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (open != null) {
+                open.close();
+            }
+        }
 
         /* Element */
         String element = "";
-        if (!mWeapon.getElement().equals(""))
-        {
+        if (!mWeapon.getElement().equals("")) {
             element = mWeapon.getElement() + " " + mWeapon.getElementAttack();
-        }
-        else if (!mWeapon.getAwaken().equals(""))
-        {
+        } else if (!mWeapon.getAwaken().equals("")) {
             element = mWeapon.getAwaken() + " " + mWeapon.getAwakenAttack();
-        }
-        else
-        {
+        } else {
             element = "None";
         }
 
@@ -196,11 +190,10 @@ public class WeaponBowDetailFragment extends WeaponDetailFragment {
             element = element + ", " + mWeapon.getElement2() + " " + mWeapon.getElement2Attack();
         }
 
-        if (!mWeapon.getAwaken().equals(""))
-        {
+        if (!mWeapon.getAwaken().equals("")) {
             element = "(" + element + ")";
         }
 
         mWeaponElementTextView.setText(element);
-	}
+    }
 }

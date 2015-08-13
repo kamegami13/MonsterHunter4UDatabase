@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listitem"
-    style = "@style/list_item" >
+              android:id="@+id/listitem"
+              style="@style/list_item">
 
     <LinearLayout
         android:id="@+id/item_layout"
@@ -13,7 +13,7 @@
 
         <ImageView
             style="@style/main_image"
-            android:id="@+id/item_image" />
+            android:id="@+id/item_image"/>
 
         <TextView
             android:id="@+id/item"
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
         android:gravity="center_vertical|right"
-        android:layout_gravity="center" >
+        android:layout_gravity="center">
 
         <TextView
             style="@style/text_small"
@@ -44,7 +44,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="false"
             android:layout_alignParentEnd="false"
-            android:layout_alignParentRight="false" />
+            android:layout_alignParentRight="false"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/slot"
             android:layout_centerInParent="true"
-            android:gravity="right" >
+            android:gravity="right">
 
             <TextView
                 style="@style/text_small"
@@ -63,7 +63,7 @@
                 android:gravity="center"
                 android:textColor="@color/text_color"
                 android:layout_below="@+id/name_text"
-                android:layout_marginRight="16dp" />
+                android:layout_marginRight="16dp"/>
 
             <TextView
                 style="@style/text_small"
@@ -75,7 +75,7 @@
                 android:textColor="@color/text_color"
                 android:layout_below="@+id/name_text"
                 android:layout_toRightOf="@+id/element_text"
-                android:text="test" />
+                android:text="test"/>
         </LinearLayout>
     </RelativeLayout>
 

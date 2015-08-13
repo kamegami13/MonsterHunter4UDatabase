@@ -24,66 +24,66 @@ import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.detail.SkillTreeDetailActivity;
 
 public class SkillTreeListFragment extends ListFragment implements
-		LoaderCallbacks<Cursor> {
+        LoaderCallbacks<Cursor> {
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(R.id.skill_tree_list_fragment, null, this);
-	}
+        // Initialize the loader to load the list of runs
+        getLoaderManager().initLoader(R.id.skill_tree_list_fragment, null, this);
+    }
 
-	@Override
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// You only ever load the runs, so assume this is the case
-		return new SkillTreeListCursorLoader(getActivity());
-	}
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // You only ever load the runs, so assume this is the case
+        return new SkillTreeListCursorLoader(getActivity());
+    }
 
-	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		// Create an adapter to point at this cursor
-		SkillTreeListCursorAdapter adapter = new SkillTreeListCursorAdapter(
-				getActivity(), (SkillTreeCursor) cursor);
-		setListAdapter(adapter);
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        // Create an adapter to point at this cursor
+        SkillTreeListCursorAdapter adapter = new SkillTreeListCursorAdapter(
+                getActivity(), (SkillTreeCursor) cursor);
+        setListAdapter(adapter);
 
-	}
+    }
 
-	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-		// Stop using the cursor (via the adapter)
-		setListAdapter(null);
-	}
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Stop using the cursor (via the adapter)
+        setListAdapter(null);
+    }
 
-	private class SkillTreeListCursorAdapter extends CursorAdapter {
+    private class SkillTreeListCursorAdapter extends CursorAdapter {
 
-		private SkillTreeCursor mSkillTreeCursor;
+        private SkillTreeCursor mSkillTreeCursor;
 
-		public SkillTreeListCursorAdapter(Context context,
-				SkillTreeCursor cursor) {
-			super(context, cursor, 0);
-			mSkillTreeCursor = cursor;
-		}
+        public SkillTreeListCursorAdapter(Context context,
+                                          SkillTreeCursor cursor) {
+            super(context, cursor, 0);
+            mSkillTreeCursor = cursor;
+        }
 
-		@Override
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
-			// Use a layout inflater to get a row view
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_skilltree_listitem,
-					parent, false);
-		}
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            // Use a layout inflater to get a row view
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.fragment_skilltree_listitem,
+                    parent, false);
+        }
 
-		@Override
-		public void bindView(View view, Context context, Cursor cursor) {
-			// Get the skill for the current row
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            // Get the skill for the current row
             final SkillTree skilltree = mSkillTreeCursor.getSkillTree();
             LinearLayout itemLayout = (LinearLayout) view.findViewById(R.id.listitem);
 
-			// Set up the text view
-			TextView skilltreeNameTextView = (TextView) view.findViewById(R.id.item);
-			String cellText = skilltree.getName();
-			skilltreeNameTextView.setText(cellText);
+            // Set up the text view
+            TextView skilltreeNameTextView = (TextView) view.findViewById(R.id.item);
+            String cellText = skilltree.getName();
+            skilltreeNameTextView.setText(cellText);
 
             if (getActivity().getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_TALISMAN_EDITOR, false)) {
                 itemLayout.setOnClickListener(new View.OnClickListener() {
@@ -97,11 +97,10 @@ public class SkillTreeListFragment extends ListFragment implements
                         getActivity().finish();
                     }
                 });
-            }
-            else {
+            } else {
                 itemLayout.setOnClickListener(new SkillClickListener(context, skilltree.getId()));
             }
-		}
-	}
+        }
+    }
 
 }

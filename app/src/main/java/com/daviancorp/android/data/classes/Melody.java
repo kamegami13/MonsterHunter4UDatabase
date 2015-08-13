@@ -5,7 +5,7 @@ package com.daviancorp.android.data.classes;
  */
 public class Melody {
 
-    private long id;				// id
+    private long id;                // id
     private String notes;           // notes available
     private String song;            // song available
     private String effect1;         // initial effect
@@ -65,19 +65,19 @@ public class Melody {
         this.effect2 = effect2;
     }
 
-    public String getDuration(){
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration){
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    public String getExtension(){
+    public String getExtension() {
         return extension;
     }
 
-    public void setExtension(String extension){
+    public void setExtension(String extension) {
         this.extension = extension;
     }
 

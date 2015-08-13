@@ -1,8 +1,8 @@
 package com.daviancorp.android.ui.detail;
 
-import android.annotation.SuppressLint;
+import java.io.IOException;
+
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,8 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,39 +23,21 @@ import com.daviancorp.android.loader.MonsterHabitatListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.MonsterClickListener;
 
-import java.io.IOException;
-
-/**
- * A simple {@link android.app.Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link com.daviancorp.android.ui.detail.LocationHabitatFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link com.daviancorp.android.ui.detail.LocationHabitatFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LocationHabitatFragment extends ListFragment implements
         LoaderCallbacks<Cursor> {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_LOCATION_ID = "LOCATION_ID";
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param loc_id The id of the location for the fragment
-     *
-     * @return A new instance of fragment MonsterHabitatFragment.
-     */
+    public LocationHabitatFragment() {
+        // Required empty public constructor
+    }
+
     public static LocationHabitatFragment newInstance(long loc_id) {
         LocationHabitatFragment fragment = new LocationHabitatFragment();
         Bundle args = new Bundle();
         args.putLong(ARG_LOCATION_ID, loc_id);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public LocationHabitatFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -75,7 +55,6 @@ public class LocationHabitatFragment extends ListFragment implements
         return inflater.inflate(R.layout.fragment_generic_list, container, false);
     }
 
-    @SuppressLint("NewApi")
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         long itemId = args.getLong(ARG_LOCATION_ID, -1);
@@ -105,7 +84,7 @@ public class LocationHabitatFragment extends ListFragment implements
         private MonsterHabitatCursor mHabitatCursor;
 
         public MonsterHabitatCursorAdapter(Context context,
-                                          MonsterHabitatCursor cursor) {
+                                           MonsterHabitatCursor cursor) {
             super(context, cursor, 0);
             mHabitatCursor = cursor;
         }
@@ -139,11 +118,9 @@ public class LocationHabitatFragment extends ListFragment implements
             long rest = habitat.getRest();
 
             String areas = "";
-            for(int i = 0; i < area.length; i++)
-            {
+            for (int i = 0; i < area.length; i++) {
                 areas += Long.toString(area[i]);
-                if (i != area.length - 1)
-                {
+                if (i != area.length - 1) {
                     areas += ", ";
                 }
             }

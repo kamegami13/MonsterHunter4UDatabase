@@ -5,35 +5,35 @@ package com.daviancorp.android.data.classes;
  */
 public class Wishlist {
 
-	private long id;			// Wishlist id
-	private String name;		// Wishlist name
-	
-	/* Default Constructor */
-	public Wishlist() {
-		this.id = -1;
-		this.name = "";
-	}
-	
-	public Wishlist(long id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    private long id;            // Wishlist id
+    private String name;        // Wishlist name
 
-	/* Getters and Setters */
-	public long getId() {
-		return id;
-	}
+    /* Default Constructor */
+    public Wishlist() {
+        this.id = -1;
+        this.name = "";
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public Wishlist(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    /* Getters and Setters */
+    public long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

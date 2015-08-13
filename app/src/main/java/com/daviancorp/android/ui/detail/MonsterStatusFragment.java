@@ -1,57 +1,30 @@
 package com.daviancorp.android.ui.detail;
 
 
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
 
 import com.daviancorp.android.data.classes.MonsterStatus;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MonsterStatusFragment extends Fragment {
-    private static final String ARG_MONSTER_ID = "MONSTER_ID";
 
-    private Bundle mBundle;
+    private static final String ARG_MONSTER_ID = "MONSTER_ID";
 
     private TableLayout mStatusTable; // Location of table to add rows to
 
-    /**
-     * Default constructor
-     */
-    public MonsterStatusFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Create a new instance of the fragment for a monster
-     * @param monsterId id of monster for the fragment
-     * @return The created fragment
-     */
     public static MonsterStatusFragment newInstance(long monsterId) {
         Bundle args = new Bundle();
         args.putLong(ARG_MONSTER_ID, monsterId);
@@ -82,11 +55,11 @@ public class MonsterStatusFragment extends Fragment {
         String status, initial, increase, max, duration, damage;
         String imageFile;
 
-        for(int i = 0; i < statuses.size(); i++) {
+        for (MonsterStatus s : statuses) {
             TableRow wdRow = (TableRow) inflater.inflate(
                     R.layout.fragment_monster_status_listitem, mStatusTable, false);
 
-            currentStatus = statuses.get(i);
+            currentStatus = s;
 
             // Get our strings and our views
             status = currentStatus.getStatus();
@@ -105,10 +78,8 @@ public class MonsterStatusFragment extends Fragment {
             TextView damageView = (TextView) wdRow.findViewById(R.id.damage);
 
             // Check which image to load
-            boolean image = true;
             imageFile = "icons_monster_info/";
-            switch (status)
-            {
+            switch (status) {
                 case "Poison":
                     imageFile = imageFile + "Poison.png";
                     break;
@@ -145,19 +116,17 @@ public class MonsterStatusFragment extends Fragment {
             durationView.setText(duration);
             damageView.setText(damage);
 
-            if (image) {
-                Drawable draw = null;
-                try {
-                    draw = Drawable.createFromStream(
-                            getActivity().getAssets().open(imageFile), null);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                android.view.ViewGroup.LayoutParams layoutParams = statusImage.getLayoutParams();
-                statusImage.setLayoutParams(layoutParams);
-
-                statusImage.setImageDrawable(draw);
+            Drawable draw = null;
+            try {
+                draw = Drawable.createFromStream(
+                        getActivity().getAssets().open(imageFile), null);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            ViewGroup.LayoutParams layoutParams = statusImage.getLayoutParams();
+            statusImage.setLayoutParams(layoutParams);
+
+            statusImage.setImageDrawable(draw);
 
             mStatusTable.addView(wdRow);
         }

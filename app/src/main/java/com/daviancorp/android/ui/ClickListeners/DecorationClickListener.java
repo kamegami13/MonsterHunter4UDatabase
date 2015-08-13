@@ -8,9 +8,6 @@ import android.view.View;
 import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.detail.DecorationDetailActivity;
 
-/**
- * Created by Mark on 2/24/2015.
- */
 public class DecorationClickListener implements View.OnClickListener {
     private Context c;
     private Long id;
@@ -38,8 +35,7 @@ public class DecorationClickListener implements View.OnClickListener {
         if (fromAsb) {
             i.putExtras(activity.getIntent());
             activity.startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_DECORATION);
-        }
-        else {
+        } else {
             c.startActivity(i);
         }
     }

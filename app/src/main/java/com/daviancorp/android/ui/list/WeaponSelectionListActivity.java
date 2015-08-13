@@ -10,7 +10,6 @@ import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 public class WeaponSelectionListActivity extends GenericActivity {
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,5 +35,4 @@ public class WeaponSelectionListActivity extends GenericActivity {
         super.onCreateOptionsMenu(menu);
         return true;
     }
-
 }

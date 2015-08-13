@@ -14,37 +14,37 @@ import com.daviancorp.android.data.classes.Location;
  */
 public class GatheringCursor extends CursorWrapper {
 
-	public GatheringCursor(Cursor c) {
-		super(c);
-	}
+    public GatheringCursor(Cursor c) {
+        super(c);
+    }
 
-	/**
-	 * Returns a Gathering object configured for the current row, or null if the
-	 * current row is invalid.
-	 */
-	public Gathering getGathering() {
-		if (isBeforeFirst() || isAfterLast())
-			return null;
+    /**
+     * Returns a Gathering object configured for the current row, or null if the
+     * current row is invalid.
+     */
+    public Gathering getGathering() {
+        if (isBeforeFirst() || isAfterLast())
+            return null;
 
-		Gathering gathering = new Gathering();
-		
-		long id = getLong(getColumnIndex(S.COLUMN_GATHERING_ID));
-		String area = getString(getColumnIndex(S.COLUMN_GATHERING_AREA));
-		String site = getString(getColumnIndex(S.COLUMN_GATHERING_SITE));
-		String rank = getString(getColumnIndex(S.COLUMN_GATHERING_RANK));
+        Gathering gathering = new Gathering();
+
+        long id = getLong(getColumnIndex(S.COLUMN_GATHERING_ID));
+        String area = getString(getColumnIndex(S.COLUMN_GATHERING_AREA));
+        String site = getString(getColumnIndex(S.COLUMN_GATHERING_SITE));
+        String rank = getString(getColumnIndex(S.COLUMN_GATHERING_RANK));
         Float rate = getFloat(getColumnIndex(S.COLUMN_GATHERING_RATE));
-		
-		gathering.setId(id);
-		gathering.setArea(area);
-		gathering.setSite(site);
-		gathering.setRank(rank);
+
+        gathering.setId(id);
+        gathering.setArea(area);
+        gathering.setSite(site);
+        gathering.setRank(rank);
         gathering.setRate(rate);
-		
-		// Get the Item
-		Item item = new Item();
-		
-		long itemId = getLong(getColumnIndex(S.COLUMN_GATHERING_ITEM_ID));
-		String itemName = getString(getColumnIndex("i" + S.COLUMN_ITEMS_NAME));
+
+        // Get the Item
+        Item item = new Item();
+
+        long itemId = getLong(getColumnIndex(S.COLUMN_GATHERING_ITEM_ID));
+        String itemName = getString(getColumnIndex("i" + S.COLUMN_ITEMS_NAME));
 //			String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 //			String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
 //			int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
@@ -52,11 +52,11 @@ public class GatheringCursor extends CursorWrapper {
 //			int buy = getInt(getColumnIndex(S.COLUMN_ITEMS_BUY));
 //			int sell = getInt(getColumnIndex(S.COLUMN_ITEMS_SELL));
 //			String description = getString(getColumnIndex(S.COLUMN_ITEMS_DESCRIPTION));
-			String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
+        String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
 //			String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
 
-		item.setId(itemId);
-		item.setName(itemName);
+        item.setId(itemId);
+        item.setName(itemName);
 //			item.setJpnName(jpnName);
 //			item.setType(type);
 //			item.setRarity(rarity);
@@ -64,25 +64,25 @@ public class GatheringCursor extends CursorWrapper {
 //			item.setBuy(buy);
 //			item.setSell(sell);
 //			item.setDescription(description);
-			item.setFileLocation(fileLocation);
+        item.setFileLocation(fileLocation);
 //			item.setArmorDupeNameFix(armor_dupe_name_fix);
-		
-		gathering.setItem(item);
 
-		// Get the Location
-		Location location = new Location();
+        gathering.setItem(item);
 
-		long locationId = getLong(getColumnIndex(S.COLUMN_GATHERING_LOCATION_ID));
-		String locationName = getString(getColumnIndex("l" + S.COLUMN_LOCATIONS_NAME));
-	    String fileLocationLoc = getString(getColumnIndex("l" + S.COLUMN_LOCATIONS_MAP));
+        // Get the Location
+        Location location = new Location();
 
-		location.setId(locationId);
-		location.setName(locationName);
+        long locationId = getLong(getColumnIndex(S.COLUMN_GATHERING_LOCATION_ID));
+        String locationName = getString(getColumnIndex("l" + S.COLUMN_LOCATIONS_NAME));
+        String fileLocationLoc = getString(getColumnIndex("l" + S.COLUMN_LOCATIONS_MAP));
+
+        location.setId(locationId);
+        location.setName(locationName);
         location.setFileLocation(fileLocationLoc);
-		
-		gathering.setLocation(location);
-		
-		return gathering;
-	}
+
+        gathering.setLocation(location);
+
+        return gathering;
+    }
 
 }

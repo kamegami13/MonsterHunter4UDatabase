@@ -1,5 +1,8 @@
 package com.daviancorp.android.ui.list;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,9 +19,6 @@ import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.WeaponExpandableListBowAdapter;
 import com.daviancorp.android.ui.general.WeaponListEntry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Mark on 3/5/2015.

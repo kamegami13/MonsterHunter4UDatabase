@@ -5,50 +5,50 @@ package com.daviancorp.android.data.classes;
  */
 public class ItemToSkillTree {
 
-	private long id;				// Id
-	private Item item;				// Item
-	private SkillTree skillTree;	// SkillTree
-	private int points;				// # of points in SkillTree
-	
-	/* Default Constructor */
-	public ItemToSkillTree() {
-		this.id = -1;
-		this.item = null;
-		this.skillTree = null;
-		this.points = -1;
-	}
+    private long id;                // Id
+    private Item item;                // Item
+    private SkillTree skillTree;    // SkillTree
+    private int points;                // # of points in SkillTree
 
-	/* Getters and Setters */
-	public long getId() {
-		return id;
-	}
+    /* Default Constructor */
+    public ItemToSkillTree() {
+        this.id = -1;
+        this.item = null;
+        this.skillTree = null;
+        this.points = -1;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /* Getters and Setters */
+    public long getId() {
+        return id;
+    }
 
-	public Item getItem() {
-		return item;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setItem(Item item) {
-		this.item = item;
-	}
+    public Item getItem() {
+        return item;
+    }
 
-	public SkillTree getSkillTree() {
-		return skillTree;
-	}
+    public void setItem(Item item) {
+        this.item = item;
+    }
 
-	public void setSkillTree(SkillTree skillTree) {
-		this.skillTree = skillTree;
-	}
+    public SkillTree getSkillTree() {
+        return skillTree;
+    }
 
-	public int getPoints() {
-		return points;
-	}
+    public void setSkillTree(SkillTree skillTree) {
+        this.skillTree = skillTree;
+    }
 
-	public void setPoints(int points) {
-		this.points = points;
-	}
-	
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
 }

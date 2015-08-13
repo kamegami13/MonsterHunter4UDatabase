@@ -9,10 +9,6 @@ import android.widget.TextView;
 
 import com.daviancorp.android.mh4udatabase.R;
 
-/**
- * 2015
- * Created by habibokanla on 01/03/15.
- */
 public class MenuDrawerListAdapter extends BaseAdapter {
 
     private String[] menuArray;

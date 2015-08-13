@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root"
-    style="@style/list_item"
-    android:orientation="horizontal" >
+              android:id="@+id/root"
+              style="@style/list_item"
+              android:orientation="horizontal">
 
     <TextView
         android:id="@+id/name_text"
@@ -11,7 +11,7 @@
         android:layout_weight="0.8"
         android:layout_gravity="center"
         android:gravity="center_vertical"
-        style="@style/text_medium" />
+        style="@style/text_medium"/>
 
     <TextView
         android:id="@+id/key"
@@ -20,7 +20,7 @@
         android:gravity="center_vertical|right"
         android:layout_weight="0.2"
         android:layout_gravity="center"
-        style="@style/text_small" />
-    
+        style="@style/text_small"/>
+
 
 </LinearLayout>

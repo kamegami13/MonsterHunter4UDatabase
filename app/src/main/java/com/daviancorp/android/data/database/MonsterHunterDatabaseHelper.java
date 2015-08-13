@@ -1,18 +1,5 @@
 package com.daviancorp.android.data.database;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
-import android.util.Xml;
-import com.daviancorp.android.data.classes.ASBSession;
-import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-import org.xmlpull.v1.XmlSerializer;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,6 +7,20 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Xml;
+
+import com.daviancorp.android.data.classes.ASBSession;
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlSerializer;
 
 /*
    QUERY REFERENCE:
@@ -63,7 +64,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
     /**
      * Returns Singleton instance of the helper object
-     *
      * @param c Application context
      * @return Singleton instance of helper
      */
@@ -80,7 +80,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
     /**
      * Initialize the helper object
-     *
      * @param context
      */
     private MonsterHunterDatabaseHelper(Context context) {
@@ -98,8 +97,8 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
     public boolean isTableExists(String tableName, SQLiteDatabase db) {
         Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + tableName + "'", null);
-        if(cursor!=null) {
-            if(cursor.getCount()>0) {
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
                 cursor.close();
                 return true;
             }
@@ -141,7 +140,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
             serializer.startDocument(null, Boolean.valueOf(true));
             serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
 
-            if( isTableExists(S.TABLE_WISHLIST, db) ) {
+            if (isTableExists(S.TABLE_WISHLIST, db)) {
                 Cursor wc = db.rawQuery("SELECT * FROM " + S.TABLE_WISHLIST, null);
                 wc.moveToFirst();
 
@@ -171,7 +170,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                 wc.close();
             }
 
-            if( isTableExists(S.TABLE_WISHLIST_DATA, db) ) {
+            if (isTableExists(S.TABLE_WISHLIST_DATA, db)) {
                 Cursor wdc = db.rawQuery("SELECT * FROM " + S.TABLE_WISHLIST_DATA, null);
                 wdc.moveToFirst();
 
@@ -201,7 +200,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                 wdc.close();
             }
 
-            if( isTableExists(S.TABLE_WISHLIST_COMPONENT, db) ) {
+            if (isTableExists(S.TABLE_WISHLIST_COMPONENT, db)) {
                 Cursor wcc = db.rawQuery("SELECT * FROM " + S.TABLE_WISHLIST_COMPONENT, null);
                 wcc.moveToFirst();
 
@@ -228,7 +227,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                 wcc.close();
             }
 
-            if( isTableExists(S.TABLE_ASB_SETS, db) ) {
+            if (isTableExists(S.TABLE_ASB_SETS, db)) {
                 Cursor asbc = db.rawQuery("SELECT * FROM " + S.TABLE_ASB_SETS, null);
                 asbc.moveToFirst();
 
@@ -326,23 +325,19 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                             row_values.clear();
                             //row_hash.clear();
                             current_tag = Tags.ASB_SET;
-                        }
-                        else if (tagName.equals("wishlist")) {
+                        } else if (tagName.equals("wishlist")) {
                             row_values.clear();
                             //row_hash.clear();
                             current_tag = Tags.WISHLIST;
-                        }
-                        else if (tagName.equals("data")) {
+                        } else if (tagName.equals("data")) {
                             row_values.clear();
                             //row_hash.clear();
                             current_tag = Tags.WISHLIST_DATA;
-                        }
-                        else if (tagName.equals("component")) {
+                        } else if (tagName.equals("component")) {
                             row_values.clear();
                             //row_hash.clear();
                             current_tag = Tags.WISHLIST_COMPONENTS;
-                        }
-                        else if (tagName.equals("asb_sets")) {
+                        } else if (tagName.equals("asb_sets")) {
                             db.delete(S.TABLE_ASB_SETS, null, null);
                         }
                         break;
@@ -354,8 +349,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                         if (tagName.equals("asb_set")) {
                             current_tag = Tags.OTHER;
                             db.insert(S.TABLE_ASB_SETS, null, row_values);
-                        }
-                        else if (tagName.equals("wishlist")) {
+                        } else if (tagName.equals("wishlist")) {
                             current_tag = Tags.OTHER;
                             if (clear_wishlist) {
                                 db.delete(S.TABLE_WISHLIST, null, null);
@@ -363,12 +357,10 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                                 clear_wishlist = false;
                             }
                             db.insert(S.TABLE_WISHLIST, null, row_values);
-                        }
-                        else if (tagName.equals("data")) {
+                        } else if (tagName.equals("data")) {
                             current_tag = Tags.OTHER;
                             db.insert(S.TABLE_WISHLIST_DATA, null, row_values);
-                        }
-                        else if (tagName.equals("component")) {
+                        } else if (tagName.equals("component")) {
                             current_tag = Tags.OTHER;
                             db.insert(S.TABLE_WISHLIST_COMPONENT, null, row_values);
                         }
@@ -387,8 +379,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                                     }
                                 }
                             }
-                        }
-                        else if (current_tag == Tags.WISHLIST) {
+                        } else if (current_tag == Tags.WISHLIST) {
                             if (wishlist_columns_list.contains(tagName)) {
                                 if (tagName.equals(S.COLUMN_WISHLIST_NAME)) {
                                     row_values.put(tagName, text);
@@ -402,8 +393,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                                     }
                                 }
                             }
-                        }
-                        else if (current_tag == Tags.WISHLIST_DATA) {
+                        } else if (current_tag == Tags.WISHLIST_DATA) {
                             if (wishlist_data_columns_list.contains(tagName)) {
                                 if (tagName.equals(S.COLUMN_WISHLIST_DATA_PATH)) {
                                     row_values.put(tagName, text);
@@ -417,8 +407,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
                                     }
                                 }
                             }
-                        }
-                        else if (current_tag == Tags.WISHLIST_COMPONENTS) {
+                        } else if (current_tag == Tags.WISHLIST_COMPONENTS) {
                             if (wishlist_component_columns_list.contains(tagName)) {
                                 if (text.trim().equals("")) {
                                     row_values.putNull(tagName);
@@ -443,7 +432,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
     /**
      * Set database instance
-     *
      * @throws SQLException
      */
     public void openDatabase() throws SQLException {
@@ -540,7 +528,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
      */
 
 	/*
-	 * Get all arena quests
+     * Get all arena quests
 	 */
     public ArenaQuestCursor queryArenaQuests() {
 
@@ -1729,7 +1717,9 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         return new MonsterCursor(wrapHelper(qh));
     }
 
-/******************************** MONSTER AILMENT QUERIES ******************************************/
+    /********************************
+     * MONSTER AILMENT QUERIES
+     ******************************************/
     /* Get all ailments a from a particular monster */
     public MonsterAilmentCursor queryAilmentsFromMonster(long id) {
         // SELECT * FROM monster_ailment WHERE monster_id = id
@@ -1752,7 +1742,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
     /**
      * Get a cursor with a query to grab all habitats of a monster
-     *
      * @param id id of the monster to query
      * @return A habitat cursor
      */
@@ -1774,7 +1763,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
     /**
      * Get a cursor with a query to grab all monsters by a location
-     *
      * @param id id of the location to query
      * @return A habitat cursor
      */
@@ -2046,9 +2034,11 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     }
 
 
-    /********************************* MONSTER WEAKNESS QUERIES ******************************************/
+    /*********************************
+     * MONSTER WEAKNESS QUERIES
+     ******************************************/
     /* Get all weaknesses a from a particular monster */
-    public MonsterWeaknessCursor queryWeaknessFromMonster(long id){
+    public MonsterWeaknessCursor queryWeaknessFromMonster(long id) {
         // SELECT * FROM monster_ailment WHERE monster_id = id
 
         QueryHelper qh = new QueryHelper();
@@ -2460,21 +2450,21 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         projectionMap.put(S.COLUMN_WEAPONS_AWAKEN_ATTACK, w + "." + S.COLUMN_WEAPONS_AWAKEN_ATTACK);
         projectionMap.put(S.COLUMN_WEAPONS_ELEMENT_ATTACK, w + "." + S.COLUMN_WEAPONS_ELEMENT_ATTACK);
         projectionMap.put(S.COLUMN_WEAPONS_ELEMENT_2_ATTACK, w + "." + S.COLUMN_WEAPONS_ELEMENT_2_ATTACK);
-		projectionMap.put(S.COLUMN_WEAPONS_DEFENSE, w + "." + S.COLUMN_WEAPONS_DEFENSE);
-		projectionMap.put(S.COLUMN_WEAPONS_SHARPNESS, w + "." + S.COLUMN_WEAPONS_SHARPNESS);
-		projectionMap.put(S.COLUMN_WEAPONS_AFFINITY, w + "." + S.COLUMN_WEAPONS_AFFINITY);
-		projectionMap.put(S.COLUMN_WEAPONS_HORN_NOTES, w + "." + S.COLUMN_WEAPONS_HORN_NOTES);
-		projectionMap.put(S.COLUMN_WEAPONS_SHELLING_TYPE, w + "." + S.COLUMN_WEAPONS_SHELLING_TYPE);
-		projectionMap.put(S.COLUMN_WEAPONS_PHIAL, w + "." + S.COLUMN_WEAPONS_PHIAL);
-		projectionMap.put(S.COLUMN_WEAPONS_CHARGES, w + "." + S.COLUMN_WEAPONS_CHARGES);
-		projectionMap.put(S.COLUMN_WEAPONS_COATINGS, w + "." + S.COLUMN_WEAPONS_COATINGS);
-		projectionMap.put(S.COLUMN_WEAPONS_RECOIL, w + "." + S.COLUMN_WEAPONS_RECOIL);
-		projectionMap.put(S.COLUMN_WEAPONS_RELOAD_SPEED, w + "." + S.COLUMN_WEAPONS_RELOAD_SPEED);
-		projectionMap.put(S.COLUMN_WEAPONS_RAPID_FIRE, w + "." + S.COLUMN_WEAPONS_RAPID_FIRE);
-		projectionMap.put(S.COLUMN_WEAPONS_DEVIATION, w + "." + S.COLUMN_WEAPONS_DEVIATION);
-		projectionMap.put(S.COLUMN_WEAPONS_AMMO, w + "." + S.COLUMN_WEAPONS_AMMO);
-		projectionMap.put(S.COLUMN_WEAPONS_NUM_SLOTS, w + "." + S.COLUMN_WEAPONS_NUM_SLOTS);
-		projectionMap.put(S.COLUMN_WEAPONS_FINAL, w + "." + S.COLUMN_WEAPONS_FINAL);
+        projectionMap.put(S.COLUMN_WEAPONS_DEFENSE, w + "." + S.COLUMN_WEAPONS_DEFENSE);
+        projectionMap.put(S.COLUMN_WEAPONS_SHARPNESS, w + "." + S.COLUMN_WEAPONS_SHARPNESS);
+        projectionMap.put(S.COLUMN_WEAPONS_AFFINITY, w + "." + S.COLUMN_WEAPONS_AFFINITY);
+        projectionMap.put(S.COLUMN_WEAPONS_HORN_NOTES, w + "." + S.COLUMN_WEAPONS_HORN_NOTES);
+        projectionMap.put(S.COLUMN_WEAPONS_SHELLING_TYPE, w + "." + S.COLUMN_WEAPONS_SHELLING_TYPE);
+        projectionMap.put(S.COLUMN_WEAPONS_PHIAL, w + "." + S.COLUMN_WEAPONS_PHIAL);
+        projectionMap.put(S.COLUMN_WEAPONS_CHARGES, w + "." + S.COLUMN_WEAPONS_CHARGES);
+        projectionMap.put(S.COLUMN_WEAPONS_COATINGS, w + "." + S.COLUMN_WEAPONS_COATINGS);
+        projectionMap.put(S.COLUMN_WEAPONS_RECOIL, w + "." + S.COLUMN_WEAPONS_RECOIL);
+        projectionMap.put(S.COLUMN_WEAPONS_RELOAD_SPEED, w + "." + S.COLUMN_WEAPONS_RELOAD_SPEED);
+        projectionMap.put(S.COLUMN_WEAPONS_RAPID_FIRE, w + "." + S.COLUMN_WEAPONS_RAPID_FIRE);
+        projectionMap.put(S.COLUMN_WEAPONS_DEVIATION, w + "." + S.COLUMN_WEAPONS_DEVIATION);
+        projectionMap.put(S.COLUMN_WEAPONS_AMMO, w + "." + S.COLUMN_WEAPONS_AMMO);
+        projectionMap.put(S.COLUMN_WEAPONS_NUM_SLOTS, w + "." + S.COLUMN_WEAPONS_NUM_SLOTS);
+        projectionMap.put(S.COLUMN_WEAPONS_FINAL, w + "." + S.COLUMN_WEAPONS_FINAL);
         projectionMap.put(S.COLUMN_WEAPONS_TREE_DEPTH, w + "." + S.COLUMN_WEAPONS_TREE_DEPTH);
         projectionMap.put(S.COLUMN_WEAPONS_PARENT_ID, w + "." + S.COLUMN_WEAPONS_PARENT_ID);
 
@@ -2981,7 +2971,6 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 
     /**
      * Get all wishlist components using a specific db instance
-     *
      * @param db
      * @return
      */

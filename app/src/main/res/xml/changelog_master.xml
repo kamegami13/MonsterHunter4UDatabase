@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog>
 
-    <release version="1.08" versioncode="13">
+    <release
+        version="1.08"
+        versioncode="13">
         <change>Another hotfix for startup crash issue</change>
     </release>
 
-    <release version="1.07" versioncode="12">
+    <release
+        version="1.07"
+        versioncode="12">
         <change>Hotfix for startup crash issue</change>
         <change>Hotfix for app exit issue. Fix breaks Armor Set Builder for Android Versions below 5.0</change>
     </release>
 
-    <release version="1.06" versioncode="11">
+    <release
+        version="1.06"
+        versioncode="11">
         <change>Added Monster Summary Screen. Shows Weaknesses, Ailments, and Signature Moves.</change>
         <change>Added Armor Builder (there is known UI issues)</change>
         <change>List of Wyporium Trades including Quest Unlock</change>
@@ -23,7 +29,9 @@
         <change>Fix misspelled Quest goals and subgoals.</change>
     </release>
 
-    <release version="1.05" versioncode="10">
+    <release
+        version="1.05"
+        versioncode="10">
         <change>Added Up button to sub-pages. Has same function as back button without exiting.</change>
         <change>Add DLC data</change>
         <change>Fixed Wishlist being deleted on upgrade</change>
@@ -34,9 +42,10 @@
         <change>Improve slot display</change>
         <change>Added a star in weapon list to indicate a craftable weapon</change>
         <change>Data fixes (Auberon Great Sword, High Metal S armor, Clockwork Insect Glaive,
-        Emperor's Speech Horn, Protection Up Jewel, Wyvern Conciliation,
-        Stygian Superbia, Garuga Lovebirds, Diablos Bashers, Inferno/Paradis, Suzuka Takamaru,
-        Twin Elders, Recriminators, Kecha Wach / Plum Daimyo drops, Cephadrome sleep area)</change>
+            Emperor's Speech Horn, Protection Up Jewel, Wyvern Conciliation,
+            Stygian Superbia, Garuga Lovebirds, Diablos Bashers, Inferno/Paradis, Suzuka Takamaru,
+            Twin Elders, Recriminators, Kecha Wach / Plum Daimyo drops, Cephadrome sleep area)
+        </change>
         <change>Improve Nav Drawer icons</change>
         <change>Fix Slagtoth Icon</change>
         <change>Improve Plum Daimyo, Chameleos, and Gogamazios icons</change>
@@ -45,13 +54,19 @@
         <change>Improve corner menu display</change>
     </release>
 
-    <release version="1.04" versioncode="9">
+    <release
+        version="1.04"
+        versioncode="9">
         <change>Fix sizes and layout in Hunting Horn song list</change>
         <change>Missing Horn Songs</change>
     </release>
 
-    <release version="1.03" versioncode="8">
-        <change>Fixed not being to see Wishlist edit/delete icons (long-press Wishlist items or materials to bring up the action bar)</change>
+    <release
+        version="1.03"
+        versioncode="8">
+        <change>Fixed not being to see Wishlist edit/delete icons (long-press Wishlist items or materials to bring up
+            the action bar)
+        </change>
         <change>Complete list of Monster Icons</change>
         <change>Added Collapsible Weapon Trees (long-press to collapse)</change>
         <change>List of Hunting Horn Songs on the Hunting Horn details page</change>
@@ -68,7 +83,9 @@
         <change>Fixed incorrect Critical Eye +4 skill entry</change>
     </release>
 
-    <release version="1.02" versioncode="7" >
+    <release
+        version="1.02"
+        versioncode="7">
         <change>Migrated from ActionBarSherlock to AppCompat</change>
         <change>Added monster status resistances</change>
         <change>Updated color scheme across app</change>
@@ -85,12 +102,16 @@
         <change>Fixed incorrect Monster All list after fast tabbing</change>
     </release>
 
-    <release version="1.01" versioncode="6" >
+    <release
+        version="1.01"
+        versioncode="6">
         <change>Monster Habitats now appear on the Monster Detail Page</change>
         <change>Monster Habitats are now listed on the Location Detail Page</change>
     </release>
 
-    <release version="1.00" versioncode="5">
+    <release
+        version="1.00"
+        versioncode="5">
         <change>Initial Release</change>
     </release>
 

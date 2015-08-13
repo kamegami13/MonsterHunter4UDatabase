@@ -2,9 +2,7 @@ package com.daviancorp.android.ui.detail;
 
 import java.io.IOException;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.QuestReward;
@@ -27,133 +24,133 @@ import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
 
 public class QuestRewardFragment extends ListFragment implements
-		LoaderCallbacks<Cursor> {
-	private static final String ARG_QUEST_ID = "QUEST_ID";
+        LoaderCallbacks<Cursor> {
 
-	public static QuestRewardFragment newInstance(long questId) {
-		Bundle args = new Bundle();
-		args.putLong(ARG_QUEST_ID, questId);
-		QuestRewardFragment f = new QuestRewardFragment();
-		f.setArguments(args);
-		return f;
-	}
+    private static final String ARG_QUEST_ID = "QUEST_ID";
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    public static QuestRewardFragment newInstance(long questId) {
+        Bundle args = new Bundle();
+        args.putLong(ARG_QUEST_ID, questId);
+        QuestRewardFragment f = new QuestRewardFragment();
+        f.setArguments(args);
+        return f;
+    }
 
-		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(R.id.quest_reward_fragment, getArguments(), this);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list, null);
-		return v;
-	}
+        // Initialize the loader to load the list of runs
+        getLoaderManager().initLoader(R.id.quest_reward_fragment, getArguments(), this);
+    }
 
-	@SuppressLint("NewApi")
-	@Override
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// You only ever load the runs, so assume this is the case
-		long questId = args.getLong(ARG_QUEST_ID, -1);
-		
-		return new QuestRewardListCursorLoader(getActivity(), 
-				QuestRewardListCursorLoader.FROM_QUEST, questId);
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_generic_list, null);
+        return v;
+    }
 
-	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		// Create an adapter to point at this cursor
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // You only ever load the runs, so assume this is the case
+        long questId = args.getLong(ARG_QUEST_ID, -1);
 
-		QuestRewardListCursorAdapter adapter = new QuestRewardListCursorAdapter(
-				getActivity(), (QuestRewardCursor) cursor);
-		setListAdapter(adapter);
+        return new QuestRewardListCursorLoader(getActivity(),
+                QuestRewardListCursorLoader.FROM_QUEST, questId);
+    }
 
-	}
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        // Create an adapter to point at this cursor
 
-	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-		// Stop using the cursor (via the adapter)
-		setListAdapter(null);
-	}
+        QuestRewardListCursorAdapter adapter = new QuestRewardListCursorAdapter(
+                getActivity(), (QuestRewardCursor) cursor);
+        setListAdapter(adapter);
 
-	private static class QuestRewardListCursorAdapter extends CursorAdapter {
+    }
 
-		private QuestRewardCursor mQuestRewardCursor;
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Stop using the cursor (via the adapter)
+        setListAdapter(null);
+    }
 
-		public QuestRewardListCursorAdapter(Context context, QuestRewardCursor cursor) {
-			super(context, cursor, 0);
-			mQuestRewardCursor = cursor;
-		}
+    private static class QuestRewardListCursorAdapter extends CursorAdapter {
 
-		@Override
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
-			// Use a layout inflater to get a row view
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_quest_reward_listitem,
-					parent, false);
-		}
+        private QuestRewardCursor mQuestRewardCursor;
 
-		@Override
-		public void bindView(View view, Context context, Cursor cursor) {
-			// Get the item for the current row
-			QuestReward questReward = mQuestRewardCursor.getQuestReward();
+        public QuestRewardListCursorAdapter(Context context, QuestRewardCursor cursor) {
+            super(context, cursor, 0);
+            mQuestRewardCursor = cursor;
+        }
 
-			// Set up the text view
-			LinearLayout itemLayout = (LinearLayout) view
-					.findViewById(R.id.listitem);
-			ImageView itemImageView = (ImageView) view
-					.findViewById(R.id.item_image);
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            // Use a layout inflater to get a row view
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.fragment_quest_reward_listitem,
+                    parent, false);
+        }
 
-			TextView itemTextView = (TextView) view.findViewById(R.id.item);
-			TextView slotTextView = (TextView) view.findViewById(R.id.slot);
-			TextView amountTextView = (TextView) view.findViewById(R.id.amount);
-			TextView percentageTextView = (TextView) view
-					.findViewById(R.id.percentage);
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            // Get the item for the current row
+            QuestReward questReward = mQuestRewardCursor.getQuestReward();
 
-			String cellItemText = questReward.getItem().getName();
-			String cellSlotText = questReward.getRewardSlot();
+            // Set up the text view
+            LinearLayout itemLayout = (LinearLayout) view
+                    .findViewById(R.id.listitem);
+            ImageView itemImageView = (ImageView) view
+                    .findViewById(R.id.item_image);
+
+            TextView itemTextView = (TextView) view.findViewById(R.id.item);
+            TextView slotTextView = (TextView) view.findViewById(R.id.slot);
+            TextView amountTextView = (TextView) view.findViewById(R.id.amount);
+            TextView percentageTextView = (TextView) view
+                    .findViewById(R.id.percentage);
+
+            String cellItemText = questReward.getItem().getName();
+            String cellSlotText = questReward.getRewardSlot();
             String slotText;
-			int cellAmountText = questReward.getStackSize();
-			int cellPercentageText = questReward.getPercentage();
+            int cellAmountText = questReward.getStackSize();
+            int cellPercentageText = questReward.getPercentage();
 
-            switch(cellSlotText) {
-                case("A"):
+            switch (cellSlotText) {
+                case ("A"):
                     slotText = "Primary";
                     break;
-                case("B"):
+                case ("B"):
                     slotText = "Secondary";
                     break;
                 default:
                     slotText = "Subquest";
             }
 
-			itemTextView.setText(cellItemText);
-			slotTextView.setText(slotText);
-			amountTextView.setText("" + cellAmountText);
+            itemTextView.setText(cellItemText);
+            slotTextView.setText(slotText);
+            amountTextView.setText("" + cellAmountText);
 
-			String percent = "" + cellPercentageText + "%";
-			percentageTextView.setText(percent);
+            String percent = "" + cellPercentageText + "%";
+            percentageTextView.setText(percent);
 
-			Drawable i = null;
-			String cellImage = "icons_items/" + questReward.getItem().getFileLocation();
-			
-			try {
-				i = Drawable.createFromStream(
-						context.getAssets().open(cellImage), null);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+            Drawable i = null;
+            String cellImage = "icons_items/" + questReward.getItem().getFileLocation();
 
-			itemImageView.setImageDrawable(i);
+            try {
+                i = Drawable.createFromStream(
+                        context.getAssets().open(cellImage), null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-			itemLayout.setTag(questReward.getItem().getId());
+            itemImageView.setImageDrawable(i);
+
+            itemLayout.setTag(questReward.getItem().getId());
             itemLayout.setOnClickListener(new ItemClickListener(context, questReward.getItem()
                     .getId()));
-		}
-	}
+        }
+    }
 
 }

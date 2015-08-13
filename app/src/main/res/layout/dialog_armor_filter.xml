@@ -16,7 +16,7 @@
             android:id="@+id/filter_checkbox_rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="top" />
+            android:gravity="top"/>
 
         <TextView
             android:id="@+id/filter_label_rank"
@@ -24,12 +24,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/armor_filter_label_rank"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <Spinner
             android:id="@+id/filter_spinner_rank"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
     </TableRow>
 
     <TableRow
@@ -39,7 +39,7 @@
         <CheckBox
             android:id="@+id/filter_checkbox_slots"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/filter_label_slots"
@@ -47,17 +47,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/armor_filter_label_slots"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <Spinner
             android:id="@+id/filter_spinner_slots"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <Spinner
             android:id="@+id/filter_spinner_slots_spec"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
     </TableRow>
 
 </TableLayout>

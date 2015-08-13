@@ -5,60 +5,60 @@ package com.daviancorp.android.data.classes;
  */
 public class ArenaReward {
 
-	private long id;				// Reward id
-	private ArenaQuest arenaQuest;	// ArenaQuest this belongs to
-	private Item item;				// Item drop
-	private int percentage;			// Percentage drop
-	private int stack_size;			// Amount of drops of the Item
-	
-	/* Default Constructor */
-	public ArenaReward() {
-		this.id = -1;
-		this.arenaQuest = null;
-		this.item = null;
-		this.percentage = -1;
-		this.stack_size = -1;
-	}
+    private long id;                // Reward id
+    private ArenaQuest arenaQuest;    // ArenaQuest this belongs to
+    private Item item;                // Item drop
+    private int percentage;            // Percentage drop
+    private int stack_size;            // Amount of drops of the Item
 
-	/* Getters and Setters */
-	public long getId() {
-		return id;
-	}
+    /* Default Constructor */
+    public ArenaReward() {
+        this.id = -1;
+        this.arenaQuest = null;
+        this.item = null;
+        this.percentage = -1;
+        this.stack_size = -1;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /* Getters and Setters */
+    public long getId() {
+        return id;
+    }
 
-	public ArenaQuest getArenaQuest() {
-		return arenaQuest;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setArenaQuest(ArenaQuest arenaQuest) {
-		this.arenaQuest = arenaQuest;
-	}
+    public ArenaQuest getArenaQuest() {
+        return arenaQuest;
+    }
 
-	public Item getItem() {
-		return item;
-	}
+    public void setArenaQuest(ArenaQuest arenaQuest) {
+        this.arenaQuest = arenaQuest;
+    }
 
-	public void setItem(Item item) {
-		this.item = item;
-	}
+    public Item getItem() {
+        return item;
+    }
 
-	public int getPercentage() {
-		return percentage;
-	}
+    public void setItem(Item item) {
+        this.item = item;
+    }
 
-	public void setPercentage(int percentage) {
-		this.percentage = percentage;
-	}
+    public int getPercentage() {
+        return percentage;
+    }
 
-	public int getStackSize() {
-		return stack_size;
-	}
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
+    }
 
-	public void setStackSize(int stack_size) {
-		this.stack_size = stack_size;
-	}
-	
+    public int getStackSize() {
+        return stack_size;
+    }
+
+    public void setStackSize(int stack_size) {
+        this.stack_size = stack_size;
+    }
+
 }

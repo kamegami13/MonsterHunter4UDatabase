@@ -12,19 +12,19 @@ import com.daviancorp.android.data.classes.Weapon;
  */
 public class WeaponTreeCursor extends CursorWrapper {
 
-	public WeaponTreeCursor(Cursor c) {
-		super(c);
-	}
+    public WeaponTreeCursor(Cursor c) {
+        super(c);
+    }
 
-	/**
-	 * Returns a Weapon object configured for the current row, or null if the
-	 * current row is invalid.
-	 */
-	public Weapon getWeapon() {
-		if (isBeforeFirst() || isAfterLast())
-			return null;
+    /**
+     * Returns a Weapon object configured for the current row, or null if the
+     * current row is invalid.
+     */
+    public Weapon getWeapon() {
+        if (isBeforeFirst() || isAfterLast())
+            return null;
 
-		Weapon weapon = new Weapon();
+        Weapon weapon = new Weapon();
 
 //		String wtype = getString(getColumnIndex(S.COLUMN_WEAPONS_WTYPE));
 //		int creation_cost = getInt(getColumnIndex(S.COLUMN_WEAPONS_CREATION_COST));
@@ -72,8 +72,8 @@ public class WeaponTreeCursor extends CursorWrapper {
 //		weapon.setNumSlots(num_slots);
 //		weapon.setSharpnessFile(sharpness_file);
 
-		long itemId = getLong(getColumnIndex(S.COLUMN_ITEMS_ID));
-		String name = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
+        long itemId = getLong(getColumnIndex(S.COLUMN_ITEMS_ID));
+        String name = getString(getColumnIndex(S.COLUMN_ITEMS_NAME));
 //		String jpnName = getString(getColumnIndex(S.COLUMN_ITEMS_JPN_NAME));
 //		String type = getString(getColumnIndex(S.COLUMN_ITEMS_TYPE));
 //		int rarity = getInt(getColumnIndex(S.COLUMN_ITEMS_RARITY));
@@ -84,8 +84,8 @@ public class WeaponTreeCursor extends CursorWrapper {
 //		String fileLocation = getString(getColumnIndex(S.COLUMN_ITEMS_ICON_NAME));
 //		String armor_dupe_name_fix = getString(getColumnIndex(S.COLUMN_ITEMS_ARMOR_DUPE_NAME_FIX));
 
-		weapon.setId(itemId);
-		weapon.setName(name);
+        weapon.setId(itemId);
+        weapon.setName(name);
 //		weapon.setJpnName(jpnName);
 //		weapon.setType(type);
 //		weapon.setRarity(rarity);
@@ -96,7 +96,7 @@ public class WeaponTreeCursor extends CursorWrapper {
 //		weapon.setFileLocation(fileLocation);
 //		weapon.setArmorDupeNameFix(armor_dupe_name_fix);
 
-		return weapon;
-	}
+        return weapon;
+    }
 
 }

@@ -18,28 +18,18 @@ import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.loader.QuestLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.detail.ASBActivity;
-import com.daviancorp.android.ui.list.ArmorListActivity;
-import com.daviancorp.android.ui.list.CombiningListActivity;
-import com.daviancorp.android.ui.list.DecorationListActivity;
-import com.daviancorp.android.ui.list.ItemListActivity;
-import com.daviancorp.android.ui.list.LocationListActivity;
-import com.daviancorp.android.ui.list.MonsterListActivity;
-import com.daviancorp.android.ui.list.QuestListActivity;
-import com.daviancorp.android.ui.list.SkillTreeListActivity;
-import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
-import com.daviancorp.android.ui.list.WishlistListActivity;
-import com.daviancorp.android.ui.list.WyporiumTradeListActivity;
+import com.daviancorp.android.ui.list.*;
 
 public class HomeFragment extends Fragment {
 
-    private ImageView mLogo;		// Image logo for home screen
+    private ImageView mLogo;        // Image logo for home screen
 
     // Options to navigate
     private TextView mMonsters, mWeapons, mArmors, mQuests, mItems, mCombining,
             mDecorations, mSkillTrees, mLocations, mHuntingFleet, mArenaQuests, mWishlists,
             mWyporiumTrade;
 
-    private ProgressDialog progress;	// Progress spinner upon creating/updating database
+    private ProgressDialog progress;    // Progress spinner upon creating/updating database
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +61,7 @@ public class HomeFragment extends Fragment {
         mMonsters.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),MonsterListActivity.class);
+                Intent intent = new Intent(getActivity(), MonsterListActivity.class);
                 startActivity(intent);
             }
         });
@@ -171,7 +161,6 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
 
         return v;
     }

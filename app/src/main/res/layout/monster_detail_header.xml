@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/detail_monster_image"
@@ -12,7 +12,7 @@
         android:layout_margin="14dp"
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/monster_image"
-        tools:src="@drawable/charge_blade1" />
+        tools:src="@drawable/charge_blade1"/>
 
     <TextView
         android:id="@+id/detail_monster_label"
@@ -23,5 +23,5 @@
         android:textColor="@color/text_color"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:text="AZURE RATHALOS" />
+        tools:text="AZURE RATHALOS"/>
 </LinearLayout>

@@ -7,60 +7,60 @@ package com.daviancorp.android.data.classes;
  */
 public class Component {
 
-	private long id;			// Component id
-	private Item created;		// Created Item
-	private Item component;		// Component Item
-	private int quantity;		// Amount needed for the component Item
-	private String type;		// Creation method
-	
-	/* Default Constructor */
-	public Component() {
-		this.id = -1;
-		this.created = null;
-		this.component = null;
-		this.quantity = -1;
-		this.type = "";
-	}
+    private long id;            // Component id
+    private Item created;        // Created Item
+    private Item component;        // Component Item
+    private int quantity;        // Amount needed for the component Item
+    private String type;        // Creation method
 
-	/* Getters and Setters */
-	public long getId() {
-		return id;
-	}
+    /* Default Constructor */
+    public Component() {
+        this.id = -1;
+        this.created = null;
+        this.component = null;
+        this.quantity = -1;
+        this.type = "";
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /* Getters and Setters */
+    public long getId() {
+        return id;
+    }
 
-	public Item getCreated() {
-		return created;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setCreated(Item created) {
-		this.created = created;
-	}
+    public Item getCreated() {
+        return created;
+    }
 
-	public Item getComponent() {
-		return component;
-	}
+    public void setCreated(Item created) {
+        this.created = created;
+    }
 
-	public void setComponent(Item component) {
-		this.component = component;
-	}
+    public Item getComponent() {
+        return component;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
+    public void setComponent(Item component) {
+        this.component = component;
+    }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    public int getQuantity() {
+        return quantity;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
-	
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 }

@@ -39,7 +39,6 @@
     <item name="wyporium_trade_detail_fragment" type="id"/>
 
 
-
     <!-- LOADER IDS -->
     <item type="id" name="monster_small_loader"/>
     <item type="id" name="monster_large_loader"/>
@@ -47,8 +46,8 @@
     <item type="id" name="monster_reward_low"/>
     <item type="id" name="monster_reward_high"/>
     <item type="id" name="monster_reward_g"/>
-    <item type="id" name="monster_ailments" />
-    <item type="id" name="monster_weakness" />
+    <item type="id" name="monster_ailments"/>
+    <item type="id" name="monster_weakness"/>
 
     <!-- ui.general -->
     <item name="home_fragment" type="id"/>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listitem"
-    android:orientation="horizontal"
-    style="@style/list_item">
+                android:id="@+id/listitem"
+                android:orientation="horizontal"
+                style="@style/list_item">
 
     <ImageView
         style="@style/main_image"
         android:id="@+id/item_image"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"/>
 
     <TextView
         android:id="@+id/item"
@@ -18,7 +18,7 @@
         style="@style/text_medium"
         android:text="Akantor Carapace"
         android:layout_toRightOf="@+id/item_image"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"/>
 
     <RelativeLayout
         android:orientation="horizontal"
@@ -42,7 +42,7 @@
             android:layout_alignParentEnd="false"
             android:layout_alignParentRight="true"
             style="@style/text_small"
-            android:text="Break Front Leg" />
+            android:text="Break Front Leg"/>
 
         <TextView
             android:id="@+id/amount"
@@ -53,7 +53,7 @@
             android:layout_below="@+id/method"
             style="@style/text_small"
             android:text="1"
-            android:layout_toLeftOf="@+id/percentage" />
+            android:layout_toLeftOf="@+id/percentage"/>
 
         <TextView
             android:id="@+id/percentage"
@@ -64,7 +64,7 @@
             android:layout_below="@+id/method"
             android:text="4%"
             android:layout_alignParentRight="true"
-            android:gravity="right" />
+            android:gravity="right"/>
 
     </RelativeLayout>
 

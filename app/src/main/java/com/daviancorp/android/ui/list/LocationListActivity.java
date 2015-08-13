@@ -9,8 +9,7 @@ import com.daviancorp.android.ui.general.GenericActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 public class LocationListActivity extends GenericActivity {
-
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

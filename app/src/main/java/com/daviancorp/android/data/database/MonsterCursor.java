@@ -12,34 +12,34 @@ import com.daviancorp.android.data.classes.Monster;
  */
 public class MonsterCursor extends CursorWrapper {
 
-	public MonsterCursor(Cursor c) {
-		super(c);
-	}
+    public MonsterCursor(Cursor c) {
+        super(c);
+    }
 
-	/**
-	 * Returns a Monster object configured for the current row, or null if the
-	 * current row is invalid.
-	 */
-	public Monster getMonster() {
-		if (isBeforeFirst() || isAfterLast())
-			return null;
-		
-		Monster monster = new Monster();
+    /**
+     * Returns a Monster object configured for the current row, or null if the
+     * current row is invalid.
+     */
+    public Monster getMonster() {
+        if (isBeforeFirst() || isAfterLast())
+            return null;
 
-		long monsterId = getLong(getColumnIndex(S.COLUMN_MONSTERS_ID));
-		String name = getString(getColumnIndex(S.COLUMN_MONSTERS_NAME));
-		String monsterClass = getString(getColumnIndex(S.COLUMN_MONSTERS_CLASS));
-		String trait = getString(getColumnIndex(S.COLUMN_MONSTERS_TRAIT));
-		String file_location = getString(getColumnIndex(S.COLUMN_MONSTERS_FILE_LOCATION));
-		String signature_move = getString(getColumnIndex(S.COLUMN_MONSTERS_SIGNATURE_MOVE));
-		
-		monster.setId(monsterId);
-		monster.setName(name);
-		monster.setMonsterClass(monsterClass);
-		monster.setTrait(trait);
-		monster.setFileLocation(file_location);
-		monster.setSignatureMove(signature_move);
+        Monster monster = new Monster();
 
-		return monster;
-	}
+        long monsterId = getLong(getColumnIndex(S.COLUMN_MONSTERS_ID));
+        String name = getString(getColumnIndex(S.COLUMN_MONSTERS_NAME));
+        String monsterClass = getString(getColumnIndex(S.COLUMN_MONSTERS_CLASS));
+        String trait = getString(getColumnIndex(S.COLUMN_MONSTERS_TRAIT));
+        String file_location = getString(getColumnIndex(S.COLUMN_MONSTERS_FILE_LOCATION));
+        String signature_move = getString(getColumnIndex(S.COLUMN_MONSTERS_SIGNATURE_MOVE));
+
+        monster.setId(monsterId);
+        monster.setName(name);
+        monster.setMonsterClass(monsterClass);
+        monster.setTrait(trait);
+        monster.setFileLocation(file_location);
+        monster.setSignatureMove(signature_move);
+
+        return monster;
+    }
 }

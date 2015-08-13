@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.daviancorp.android.ui.general.GenericActivity">
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.daviancorp.android.ui.general.GenericActivity">
 
     <item
         android:id="@+id/action_edit_data"
         android:icon="@drawable/ic_edit"
-        android:title="@string/context_action_asb_edit_data" />
+        android:title="@string/context_action_asb_edit_data"/>
 
     <item
         android:id="@+id/action_delete"
         android:icon="@drawable/ic_delete"
-        android:title="@string/context_action_asb_delete" />
+        android:title="@string/context_action_asb_delete"/>
 
     <item
         android:id="@+id/action_copy"
         android:icon="@drawable/ic_copy"
-        android:title="@string/context_action_asb_copy" />
+        android:title="@string/context_action_asb_copy"/>
 </menu>

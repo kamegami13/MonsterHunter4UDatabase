@@ -15,14 +15,11 @@ import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
 
 public class WeaponDetailActivity extends GenericTabActivity {
-    /**
-     * A key for passing a weapon ID as a long
-     */
+
     public static final String EXTRA_WEAPON_ID =
             "com.daviancorp.android.android.ui.detail.weapon_id";
 
     private static final String DIALOG_WISHLIST_ADD = "wishlist_add";
-    private static final int REQUEST_ADD = 0;
 
     private ViewPager viewPager;
     private WeaponDetailPagerAdapter mAdapter;

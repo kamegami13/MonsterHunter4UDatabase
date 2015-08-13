@@ -3,15 +3,15 @@
     <item
         android:id="@+id/armor_set_builder_add_piece"
         android:title="@string/asb_action_add"
-        android:visible="false" />
+        android:visible="false"/>
 
     <item
         android:id="@+id/armor_set_builder_remove_piece"
         android:title="@string/asb_action_remove"
-        android:visible="false" />
+        android:visible="false"/>
 
     <item
         android:id="@+id/armor_set_builder_piece_info"
         android:title="@string/asb_action_armor_piece"
-        android:visible="false" />
+        android:visible="false"/>
 </menu>

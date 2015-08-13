@@ -8,13 +8,17 @@ public class ASBTalisman extends Equipment {
 
     private int typeIndex;
 
-    /** Used when creating a generic "dummy" talisman with no skills. */
+    /**
+     * Used when creating a generic "dummy" talisman with no skills.
+     */
     public ASBTalisman() {
         skillTrees = new SkillTree[2];
         skillPoints = new int[2];
     }
 
-    /** Used when creating a talisman with one skill. */
+    /**
+     * Used when creating a talisman with one skill.
+     */
     public ASBTalisman(SkillTree skill1, int skill1Points, int typeIndex) {
         this(skill1, skill1Points, typeIndex, false);
     }

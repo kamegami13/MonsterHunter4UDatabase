@@ -1,5 +1,8 @@
 package com.daviancorp.android.ui.detail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -12,9 +15,6 @@ import com.daviancorp.android.ui.adapter.ASBPagerAdapter;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.ASBSetListFragment;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ASBActivity extends GenericTabActivity {
 

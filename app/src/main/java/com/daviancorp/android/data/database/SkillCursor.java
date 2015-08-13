@@ -12,32 +12,32 @@ import com.daviancorp.android.data.classes.Skill;
  */
 public class SkillCursor extends CursorWrapper {
 
-	public SkillCursor(Cursor c) {
-		super(c);
-	}
+    public SkillCursor(Cursor c) {
+        super(c);
+    }
 
-	/**
-	 * Returns a Skill object configured for the current row, or null if the
-	 * current row is invalid.
-	 */
-	public Skill getSkill() {
-		if (isBeforeFirst() || isAfterLast())
-			return null;
-		
-		Skill skill = new Skill();
-		
-		long id = getLong(getColumnIndex(S.COLUMN_SKILLS_ID));
-		int required_points = getInt(getColumnIndex(S.COLUMN_SKILLS_REQUIRED_SKILL_TREE_POINTS));
-		String name = getString(getColumnIndex(S.COLUMN_SKILLS_NAME));
-		String jpn_name = getString(getColumnIndex(S.COLUMN_SKILLS_JPN_NAME));
-		String description = getString(getColumnIndex(S.COLUMN_SKILLS_DESCRIPTION));
-		
-		skill.setId(id);
-		skill.setRequiredPoints(required_points);
-		skill.setName(name);
-		skill.setJpnName(jpn_name);
-		skill.setDescription(description);
+    /**
+     * Returns a Skill object configured for the current row, or null if the
+     * current row is invalid.
+     */
+    public Skill getSkill() {
+        if (isBeforeFirst() || isAfterLast())
+            return null;
 
-		return skill;
-	}
+        Skill skill = new Skill();
+
+        long id = getLong(getColumnIndex(S.COLUMN_SKILLS_ID));
+        int required_points = getInt(getColumnIndex(S.COLUMN_SKILLS_REQUIRED_SKILL_TREE_POINTS));
+        String name = getString(getColumnIndex(S.COLUMN_SKILLS_NAME));
+        String jpn_name = getString(getColumnIndex(S.COLUMN_SKILLS_JPN_NAME));
+        String description = getString(getColumnIndex(S.COLUMN_SKILLS_DESCRIPTION));
+
+        skill.setId(id);
+        skill.setRequiredPoints(required_points);
+        skill.setName(name);
+        skill.setJpnName(jpn_name);
+        skill.setDescription(description);
+
+        return skill;
+    }
 }

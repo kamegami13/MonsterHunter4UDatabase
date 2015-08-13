@@ -10,14 +10,15 @@ import com.daviancorp.android.data.classes.MonsterStatus;
  * Cursor for a Monster Status Query
  */
 public class MonsterStatusCursor extends CursorWrapper {
-    public MonsterStatusCursor(Cursor c) {super(c);}
+    public MonsterStatusCursor(Cursor c) {
+        super(c);
+    }
 
     /**
      * Get next status object of the cursor
      * @return A MonsterStatus object
      */
-    public MonsterStatus getStatus()
-    {
+    public MonsterStatus getStatus() {
         if (isBeforeFirst() || isAfterLast())
             return null;
 

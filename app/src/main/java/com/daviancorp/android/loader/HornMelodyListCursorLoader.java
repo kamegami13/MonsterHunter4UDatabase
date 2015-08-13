@@ -6,7 +6,7 @@ import android.database.Cursor;
 import com.daviancorp.android.data.database.DataManager;
 
 public class HornMelodyListCursorLoader extends SQLiteCursorLoader {
-    private String notes; 		// Notes available in a horn
+    private String notes;        // Notes available in a horn
 
     public HornMelodyListCursorLoader(Context context, String notes) {
         super(context);

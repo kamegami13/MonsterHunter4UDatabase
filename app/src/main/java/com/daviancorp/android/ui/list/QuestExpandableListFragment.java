@@ -1,23 +1,19 @@
 package com.daviancorp.android.ui.list;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 
 import com.daviancorp.android.data.classes.Quest;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.QuestClickListener;
-
-import java.util.ArrayList;
 
 /**
  * Pieced together from: Android samples:
@@ -134,7 +130,7 @@ public class QuestExpandableListFragment extends Fragment {
                 .findViewById(R.id.expandableListView);
         if (mHub.equals("Caravan")) {
             elv.setAdapter(new QuestListAdapter(caravan));
-        } else if(mHub.equals("Guild")) {
+        } else if (mHub.equals("Guild")) {
             elv.setAdapter(new QuestListAdapter(guild));
         } else {
             elv.setAdapter(new QuestListAdapter(event));

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.*;
+
 import com.daviancorp.android.data.classes.ASBSession;
 import com.daviancorp.android.data.classes.ASBTalisman;
 import com.daviancorp.android.data.classes.Decoration;
@@ -130,7 +131,9 @@ public class ASBFragment extends Fragment implements ASBActivity.OnASBSetActivit
         }
     }
 
-    /** Called when the user clicks the drop-down arrow on an equipment view. */
+    /**
+     * Called when the user clicks the drop-down arrow on an equipment view.
+     */
     public void onDecorationsMenuOpened() {
         for (ASBPieceContainer c : equipmentViews) {
             c.hideDecorations();

@@ -99,7 +99,7 @@
     </style>
 
     <!-- USE FOR ALL FULLSCREEN ACTIVITIES WHERE VIEWS COVER ALL BACKGROUD TO REDUCE OVERDRAW -->
-    <style name="FullScreenActivity" parent = "AppTheme">
+    <style name="FullScreenActivity" parent="AppTheme">
         <item name="android:windowBackground">@null</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>

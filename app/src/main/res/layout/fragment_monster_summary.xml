@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:f="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+            xmlns:tools="http://schemas.android.com/tools"
+            xmlns:f="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,8 +11,9 @@
         android:orientation="vertical">
 
         <!-- Common header -->
-        <include layout="@layout/monster_detail_header"
-            android:id="@+id/monster_header" />
+        <include
+            layout="@layout/monster_detail_header"
+            android:id="@+id/monster_header"/>
 
         <!-- Summary Section -->
         <LinearLayout
@@ -264,12 +265,14 @@
                     android:text="Blastblight"
                     android:visibility="gone"
                     tools:visibility="visible"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Severe Dragonblight"
                     android:visibility="gone"
                     tools:visibility="visible"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -309,7 +312,7 @@
                 android:maxLines="100"
                 android:scrollHorizontally="false"
                 android:layout_below="@id/moves_label"
-                tools:text="Mandible attack, Web shot, Abdomen sting" />
+                tools:text="Mandible attack, Web shot, Abdomen sting"/>
 
         </RelativeLayout>
 

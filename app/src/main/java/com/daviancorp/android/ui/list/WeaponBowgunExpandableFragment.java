@@ -1,5 +1,8 @@
 package com.daviancorp.android.ui.list;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,25 +17,17 @@ import android.view.ViewGroup;
 
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.adapter.WeaponExpandableListBowAdapter;
 import com.daviancorp.android.ui.adapter.WeaponExpandableListBowgunAdapter;
 import com.daviancorp.android.ui.general.WeaponListEntry;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by Mark on 3/5/2015.
- */
 public class WeaponBowgunExpandableFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<ArrayList<WeaponListEntry>> {
 
     protected static final String ARG_TYPE = "WEAPON_TYPE";
-
+    private static final String GROUPS_KEY = "groups_key";
     private WeaponExpandableListBowgunAdapter mAdapter;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
-    private static final String GROUPS_KEY = "groups_key";
     private Bundle savedState;
 
     public static WeaponBowgunExpandableFragment newInstance(String type) {
@@ -130,19 +125,6 @@ public class WeaponBowgunExpandableFragment extends Fragment implements
         return new WeaponArrayLoader(getActivity().getApplicationContext(), mType);
     }
 
-    static class WeaponArrayLoader extends AsyncTaskLoader<ArrayList<WeaponListEntry>> {
-        String mType;
-
-        public WeaponArrayLoader(Context context, String type) {
-            super(context);
-            mType = type;
-        }
-
-        public ArrayList<WeaponListEntry> loadInBackground() {
-            return DataManager.get(getContext()).queryWeaponTreeArray(mType);
-        }
-    }
-
     @Override
     public void onPause() {
         savedState = new Bundle();
@@ -157,5 +139,18 @@ public class WeaponBowgunExpandableFragment extends Fragment implements
             mAdapter.restoreGroups(groups);
         }
         super.onResume();
+    }
+
+    static class WeaponArrayLoader extends AsyncTaskLoader<ArrayList<WeaponListEntry>> {
+        String mType;
+
+        public WeaponArrayLoader(Context context, String type) {
+            super(context);
+            mType = type;
+        }
+
+        public ArrayList<WeaponListEntry> loadInBackground() {
+            return DataManager.get(getContext()).queryWeaponTreeArray(mType);
+        }
     }
 }

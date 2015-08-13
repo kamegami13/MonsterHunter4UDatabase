@@ -1,31 +1,29 @@
 package com.daviancorp.android.ui.detail;
 
+import java.io.IOException;
+
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.app.Fragment;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 
 import com.daviancorp.android.data.classes.Habitat;
 import com.daviancorp.android.data.database.MonsterHabitatCursor;
 import com.daviancorp.android.loader.MonsterHabitatListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.LocationClickListener;
-
-import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,27 +35,15 @@ import java.io.IOException;
  */
 public class MonsterHabitatFragment extends ListFragment implements
         LoaderCallbacks<Cursor> {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_MONSTER_ID = "MONSTER_ID";
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param mon_id The id of the monster for the fragment
-     *
-     * @return A new instance of fragment MonsterHabitatFragment.
-     */
     public static MonsterHabitatFragment newInstance(long mon_id) {
         MonsterHabitatFragment fragment = new MonsterHabitatFragment();
         Bundle args = new Bundle();
         args.putLong(ARG_MONSTER_ID, mon_id);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public MonsterHabitatFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -100,21 +86,12 @@ public class MonsterHabitatFragment extends ListFragment implements
         setListAdapter(null);
     }
 
-    /*@Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        // The id argument will be the Location ID set by adapter
-
-        Intent i = new Intent(getActivity(), LocationDetailActivity.class);
-        i.putExtra(LocationDetailActivity.EXTRA_LOCATION_ID, (long) v.getTag());
-        startActivity(i);
-    }*/
-
     private static class MonsterHabitatCursorAdapter extends CursorAdapter {
 
         private MonsterHabitatCursor mHabitatCursor;
 
         public MonsterHabitatCursorAdapter(Context context,
-                                          MonsterHabitatCursor cursor) {
+                                           MonsterHabitatCursor cursor) {
             super(context, cursor, 0);
             mHabitatCursor = cursor;
         }
@@ -151,11 +128,9 @@ public class MonsterHabitatFragment extends ListFragment implements
             long rest = habitat.getRest();
 
             String areas = "";
-            for(int i = 0; i < area.length; i++)
-            {
+            for (int i = 0; i < area.length; i++) {
                 areas += Long.toString(area[i]);
-                if (i != area.length - 1)
-                {
+                if (i != area.length - 1) {
                     areas += ", ";
                 }
             }

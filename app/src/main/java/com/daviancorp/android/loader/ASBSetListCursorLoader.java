@@ -2,6 +2,7 @@ package com.daviancorp.android.loader;
 
 import android.content.Context;
 import android.database.Cursor;
+
 import com.daviancorp.android.data.database.DataManager;
 
 public class ASBSetListCursorLoader extends SQLiteCursorLoader {

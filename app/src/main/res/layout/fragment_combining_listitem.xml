@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/listitem"
-    style="@style/list_item"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:clickable="false"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/listitem"
+                style="@style/list_item"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:clickable="false"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp">
 
     <RelativeLayout
         android:id="@+id/item3"
@@ -29,7 +29,7 @@
             android:layout_alignParentTop="false"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            android:text="95%" />
+            android:text="95%"/>
 
         <TextView
             android:id="@+id/amt"
@@ -40,13 +40,13 @@
             android:layout_marginRight="16dp"
             android:layout_toLeftOf="@+id/percentage"
             android:gravity="center"
-            android:text="2" />
+            android:text="2"/>
 
         <ImageView
             android:id="@+id/item_img3"
             style="@style/main_image"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"/>
 
         <TextView
             android:id="@+id/item_text3"
@@ -57,7 +57,7 @@
             android:layout_gravity="center"
             android:layout_toRightOf="@+id/item_img3"
             android:gravity="center_vertical"
-            android:text="Potion" />
+            android:text="Potion"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -86,14 +86,14 @@
                 android:layout_gravity="center"
                 android:layout_toLeftOf="@+id/item_img2"
                 android:gravity="center_vertical"
-                tools:text="Dragonbone Artifact" />
+                tools:text="Dragonbone Artifact"/>
 
             <ImageView
                 android:id="@+id/item_img1"
                 style="@style/small_image"
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="0dp" />
+                android:layout_marginRight="0dp"/>
 
         </LinearLayout>
 
@@ -112,14 +112,14 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:gravity="center_vertical"
-                tools:text="Dragonbone Artifact" />
+                tools:text="Dragonbone Artifact"/>
 
             <ImageView
                 android:id="@+id/item_img2"
                 style="@style/small_image"
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="0dp" />
+                android:layout_marginRight="0dp"/>
 
         </LinearLayout>
 

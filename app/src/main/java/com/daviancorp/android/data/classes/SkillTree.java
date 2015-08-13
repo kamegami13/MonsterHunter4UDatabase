@@ -5,40 +5,40 @@ package com.daviancorp.android.data.classes;
  */
 public class SkillTree {
 
-	private long id;			// Id
-	private String name;		// SkillTree name
-	private String jpn_name;	// Japanese name; unused at the moment
-	
-	/* Default Constructor */
-	public SkillTree() {
-		this.id = -1;
-		this.name = "";
-		this.jpn_name = "";
-	}
+    private long id;            // Id
+    private String name;        // SkillTree name
+    private String jpn_name;    // Japanese name; unused at the moment
 
-	/* Getters and Setters */
-	public long getId() {
-		return id;
-	}
+    /* Default Constructor */
+    public SkillTree() {
+        this.id = -1;
+        this.name = "";
+        this.jpn_name = "";
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /* Getters and Setters */
+    public long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getJpnName() {
-		return jpn_name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setJpnName(String jpn_name) {
-		this.jpn_name = jpn_name;
-	}
-	
+    public String getJpnName() {
+        return jpn_name;
+    }
+
+    public void setJpnName(String jpn_name) {
+        this.jpn_name = jpn_name;
+    }
+
 }

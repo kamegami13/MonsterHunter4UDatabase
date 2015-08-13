@@ -3,7 +3,6 @@ package com.daviancorp.android.ui.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
 import com.daviancorp.android.ui.general.DrawSharpness;
 import com.daviancorp.android.ui.general.WeaponListEntry;
 
@@ -92,35 +90,32 @@ public class WeaponExpandableListBladeAdapter extends WeaponExpandableListElemen
             holder.specialView.setText("NOTES: ");
 
             final Bitmap bitmap = getBitmapFromMemCache(getNoteDrawable(special.charAt(0)));
-            if(bitmap != null) {
+            if (bitmap != null) {
                 holder.note1v.setImageBitmap(bitmap);
             } else {
                 new LoadImage(holder.note1v, getNoteDrawable(special.charAt(0))).execute();
             }
 
             final Bitmap bitmap2 = getBitmapFromMemCache(getNoteDrawable(special.charAt(1)));
-            if(bitmap2 != null) {
+            if (bitmap2 != null) {
                 holder.note2v.setImageBitmap(bitmap2);
             } else {
                 new LoadImage(holder.note2v, getNoteDrawable(special.charAt(1))).execute();
             }
 
             final Bitmap bitmap3 = getBitmapFromMemCache(getNoteDrawable(special.charAt(2)));
-            if(bitmap3 != null) {
+            if (bitmap3 != null) {
                 holder.note3v.setImageBitmap(bitmap3);
             } else {
                 new LoadImage(holder.note3v, getNoteDrawable(special.charAt(2))).execute();
             }
 
 
-
-        }
-        else if (type.equals("Gunlance")) {
+        } else if (type.equals("Gunlance")) {
             holder.specialView.setVisibility(View.VISIBLE);
             String special = weapon.getShellingType();
             holder.specialView.setText(special);
-        }
-        else if (type.equals("Switch Axe") || type.equals("Charge Blade")) {
+        } else if (type.equals("Switch Axe") || type.equals("Charge Blade")) {
             holder.specialView.setVisibility(View.VISIBLE);
             String special = weapon.getPhial();
             holder.specialView.setText(special);

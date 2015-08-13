@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listitem"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+                android:id="@+id/listitem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
     <TextView
         android:id="@+id/skill"
@@ -13,7 +13,7 @@
         android:layout_height="40dp"
         style="@style/text_medium"
         android:text="Enlightened Blade"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"/>
 
     <TextView
         android:id="@+id/pts"
@@ -22,7 +22,7 @@
         style="@style/text_small"
         android:text="10"
         android:layout_alignParentRight="true"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"/>
 
     <TextView
         android:id="@+id/description"
@@ -32,6 +32,6 @@
         android:text="Unlocks latent weapon elements, and powers up elemental and abnormal status attacks."
         android:layout_below="@+id/skill"
         android:layout_alignParentRight="true"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"/>
 
 </RelativeLayout>

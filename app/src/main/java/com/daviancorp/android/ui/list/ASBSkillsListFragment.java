@@ -1,5 +1,8 @@
 package com.daviancorp.android.ui.list;
 
+import java.util.Comparator;
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -12,14 +15,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.daviancorp.android.data.classes.ASBSession;
-import com.daviancorp.android.data.classes.ASBSession.*;
+import com.daviancorp.android.data.classes.ASBSession.SkillTreeInSet;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.SkillClickListener;
 import com.daviancorp.android.ui.detail.ASBActivity;
-
-import java.util.Comparator;
-import java.util.List;
 
 public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASBSetActivityUpdateListener {
 
@@ -126,7 +127,7 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
             if (getItem(position).getTotal(trees) >= MINIMUM_SKILL_ACTIVATION_POINTS) {
                 totalPoints.setTypeface(null, Typeface.BOLD);
             }
-            
+
             itemView.setOnClickListener(new SkillClickListener(parent.getContext(), getItem(position).getSkillTree().getId()));
 
             return itemView;

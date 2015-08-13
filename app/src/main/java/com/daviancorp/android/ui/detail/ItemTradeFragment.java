@@ -21,11 +21,9 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.WyporiumTrade;
 import com.daviancorp.android.loader.WyporiumTradeLoader;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
-
-import org.w3c.dom.Text;
 
 public class ItemTradeFragment extends Fragment {
+
     private static final String ARG_ITEM_IN_ID = "ITEM_IN_ID";
 
     private WyporiumTrade mTrade;
@@ -122,7 +120,7 @@ public class ItemTradeFragment extends Fragment {
     }
 
     private void updateUI() throws IOException {
-        if(mTrade == null) {
+        if (mTrade == null) {
             mWyporiumTradeItemOutView.setVisibility(View.GONE);
             mWyporiumTradeItemOutTextView.setVisibility(View.GONE);
             mWyporiumTradeOutIconImageView.setVisibility(View.GONE);
@@ -197,7 +195,6 @@ public class ItemTradeFragment extends Fragment {
             try {
                 updateUI();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

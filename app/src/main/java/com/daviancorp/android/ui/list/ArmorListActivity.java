@@ -2,22 +2,13 @@ package com.daviancorp.android.ui.list;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import com.daviancorp.android.data.classes.Rank;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.adapter.ArmorExpandableListPagerAdapter;
 import com.daviancorp.android.ui.detail.ASBActivity;
-import com.daviancorp.android.ui.general.GenericActionBarActivity;
 import com.daviancorp.android.ui.general.GenericTabActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ArmorListActivity extends GenericTabActivity {
 
@@ -42,8 +33,7 @@ public class ArmorListActivity extends GenericTabActivity {
             if (getIntent().getIntExtra(ASBActivity.EXTRA_SET_HUNTER_TYPE, -1) == 1) {
                 viewPager.setCurrentItem(1); // We change to the gunner page if its a gunner set
             }
-        }
-        else {
+        } else {
             // Tag as top level activity
             super.setAsTopLevel();
         }

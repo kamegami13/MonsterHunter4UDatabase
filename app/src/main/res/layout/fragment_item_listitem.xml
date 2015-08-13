@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listitem"
-    style="@style/list_item" >
+              android:id="@+id/listitem"
+              style="@style/list_item">
 
     <ImageView
         android:id="@+id/icon"
-        style="@style/main_image" />
+        style="@style/main_image"/>
 
     <TextView
         android:id="@+id/text1"
@@ -13,6 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center_vertical"
-        style="@style/text_medium" />
+        style="@style/text_medium"/>
 
 </LinearLayout>

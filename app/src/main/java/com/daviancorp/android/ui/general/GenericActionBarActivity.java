@@ -1,5 +1,7 @@
 package com.daviancorp.android.ui.general;
 
+import java.io.IOException;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,44 +20,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
 
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.dialog.AboutDialogFragment;
 import com.daviancorp.android.ui.list.*;
-import com.daviancorp.android.ui.list.ArmorListActivity;
-import com.daviancorp.android.ui.list.CombiningListActivity;
-import com.daviancorp.android.ui.list.DecorationListActivity;
-import com.daviancorp.android.ui.list.ItemListActivity;
-import com.daviancorp.android.ui.list.LocationListActivity;
-import com.daviancorp.android.ui.list.MonsterListActivity;
-import com.daviancorp.android.ui.list.QuestListActivity;
-import com.daviancorp.android.ui.list.SkillTreeListActivity;
-import com.daviancorp.android.ui.list.WeaponSelectionListActivity;
-import com.daviancorp.android.ui.list.WishlistListActivity;
-import com.daviancorp.android.ui.list.WyporiumTradeListActivity;
 import com.daviancorp.android.ui.list.adapter.MenuSection;
-
-import java.io.IOException;
-
 import de.cketti.library.changelog.ChangeLog;
 
-/*
- * Any subclass needs to:
- *  - override onCreate() to set title
- *  - override createFragment() for detail fragments
- */
 
 public abstract class GenericActionBarActivity extends ActionBarActivity {
 
@@ -106,7 +79,7 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
     }
 
     // Override and set to true when applicable
-    public void setAsTopLevel(){
+    public void setAsTopLevel() {
         isTopLevel = true;
 
         // Enable drawer button instead of back button
@@ -158,15 +131,14 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         //automatically open drawer on launch
-        if(!drawerOpened)
-        {
+        if (!drawerOpened) {
             mDrawerLayout.openDrawer(Gravity.LEFT);
             drawerOpened = true;
         }
     }
 
     // Go to nav drawer selection
-    private void goToNavDrawerItem(int itemId){
+    private void goToNavDrawerItem(int itemId) {
         // Set navigation actions
         Intent intent = new Intent();
 
@@ -242,7 +214,7 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
 
         // Animate fade in
         View mainContent = findViewById(R.id.fragment_container);
-        if(mainContent != null){
+        if (mainContent != null) {
             mainContent.animate().alpha(1).setDuration(MAIN_CONTENT_FADEIN_DURATION);
         }
         mDrawerToggle.syncState();
@@ -331,12 +303,10 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
         // If back is pressed while drawer is open, close drawer.
         if (!isTopLevel && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
-        }
-        else if (isTopLevel && !mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+        } else if (isTopLevel && !mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             // If this is a top level activity and drawer is closed, open drawer
             mDrawerLayout.openDrawer(GravityCompat.START);
-        }
-        else if(isTopLevel && mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+        } else if (isTopLevel && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             // If top level and drawer is open, prompt for exit
             //Ask the user if they want to quit
             new AlertDialog.Builder(this)
@@ -352,8 +322,7 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                     })
                     .setNegativeButton(R.string.exit_cancel, null)
                     .show();
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
 

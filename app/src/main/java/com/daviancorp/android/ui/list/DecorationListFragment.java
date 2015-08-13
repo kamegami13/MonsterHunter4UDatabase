@@ -1,5 +1,7 @@
 package com.daviancorp.android.ui.list;
 
+import java.io.IOException;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -24,8 +26,6 @@ import com.daviancorp.android.loader.DecorationListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.DecorationClickListener;
 import com.daviancorp.android.ui.detail.ASBActivity;
-
-import java.io.IOException;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class DecorationListFragment extends ListFragment implements
@@ -87,12 +87,12 @@ public class DecorationListFragment extends ListFragment implements
             if (context instanceof Activity && ((Activity) context).getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
                 activity = (Activity) context;
                 fromAsb = true;
-                
+
             }
         }
 
         @Override
-                 public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
             // Use a layout inflater to get a row view
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -153,8 +153,7 @@ public class DecorationListFragment extends ListFragment implements
 
             if (fromAsb) {
                 itemLayout.setOnClickListener(new DecorationClickListener(context, decoration.getId(), true, activity));
-            }
-            else {
+            } else {
                 itemLayout.setOnClickListener(new DecorationClickListener(context, decoration.getId()));
             }
         }

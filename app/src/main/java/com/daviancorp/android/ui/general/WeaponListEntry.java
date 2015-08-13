@@ -1,26 +1,25 @@
 package com.daviancorp.android.ui.general;
 
-import com.daviancorp.android.data.classes.Weapon;
-import com.oissela.software.multilevelexpindlistview.MultiLevelExpIndListAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.daviancorp.android.data.classes.Weapon;
+import com.oissela.software.multilevelexpindlistview.MultiLevelExpIndListAdapter;
 
 /**
  * Created by Mark on 3/3/2015.
  * Expandable data entry wrapper for a weapon object
  */
 public class WeaponListEntry implements MultiLevelExpIndListAdapter.ExpIndData {
+    public Weapon weapon;
     private int mIndentation;
     private List<WeaponListEntry> mChildren;
     private boolean mIsGroup;
     private int mGroupSize;
 
-    public Weapon weapon;
-
     public WeaponListEntry(Weapon weapon) {
         this.weapon = weapon;
-        mChildren = new ArrayList<WeaponListEntry>();
+        mChildren = new ArrayList<>();
 
         setIndentation(0);
     }
@@ -40,13 +39,13 @@ public class WeaponListEntry implements MultiLevelExpIndListAdapter.ExpIndData {
         mIsGroup = value;
     }
 
+    public int getGroupSize() {
+        return mGroupSize;
+    }
+
     @Override
     public void setGroupSize(int groupSize) {
         mGroupSize = groupSize;
-    }
-
-    public int getGroupSize() {
-        return mGroupSize;
     }
 
     public void addChild(WeaponListEntry child) {

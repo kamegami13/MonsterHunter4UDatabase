@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:orientation="horizontal" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:baselineAligned="false"
+              android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight=".3"
         android:orientation="vertical"
-        android:padding="10dp" >
+        android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="Quest:"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Location:"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Reward:"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="# Players:"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="S Rank:"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="A Rank:"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="B Rank:"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Goal:"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
     </LinearLayout>
 
     <LinearLayout
@@ -79,66 +79,66 @@
         android:layout_height="wrap_content"
         android:layout_weight=".7"
         android:orientation="vertical"
-        android:padding="10dp" >
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/quest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:id="@+id/reward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:id="@+id/participants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:id="@+id/s_rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:id="@+id/a_rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:id="@+id/b_rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:id="@+id/goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/text_color"/>
     </LinearLayout>
 
 </LinearLayout>

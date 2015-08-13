@@ -3,7 +3,6 @@ package com.daviancorp.android.data.database;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.daviancorp.android.data.classes.MonsterStatus;
 import com.daviancorp.android.data.classes.MonsterWeakness;
 
 /**
@@ -11,14 +10,15 @@ import com.daviancorp.android.data.classes.MonsterWeakness;
  * Cursor for a Monster Status Query
  */
 public class MonsterWeaknessCursor extends CursorWrapper {
-    public MonsterWeaknessCursor(Cursor c) {super(c);}
+    public MonsterWeaknessCursor(Cursor c) {
+        super(c);
+    }
 
     /**
      * Get next status object of the cursor
      * @return A MonsterWeakness object
      */
-    public MonsterWeakness getWeakness()
-    {
+    public MonsterWeakness getWeakness() {
         if (isBeforeFirst() || isAfterLast())
             return null;
 

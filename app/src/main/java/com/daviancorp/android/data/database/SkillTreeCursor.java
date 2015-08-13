@@ -12,28 +12,28 @@ import com.daviancorp.android.data.classes.SkillTree;
  */
 public class SkillTreeCursor extends CursorWrapper {
 
-	public SkillTreeCursor(Cursor c) {
-		super(c);
-	}
+    public SkillTreeCursor(Cursor c) {
+        super(c);
+    }
 
-	/**
-	 * Returns a SkillTree object configured for the current row, or null if the
-	 * current row is invalid.
-	 */
-	public SkillTree getSkillTree() {
-		if (isBeforeFirst() || isAfterLast())
-			return null;
-		
-		SkillTree skillTree = new SkillTree();
+    /**
+     * Returns a SkillTree object configured for the current row, or null if the
+     * current row is invalid.
+     */
+    public SkillTree getSkillTree() {
+        if (isBeforeFirst() || isAfterLast())
+            return null;
 
-		long skillTreeId = getLong(getColumnIndex(S.COLUMN_SKILL_TREES_ID));
-		String name = getString(getColumnIndex(S.COLUMN_SKILL_TREES_NAME));
-		String jpnName = getString(getColumnIndex(S.COLUMN_SKILL_TREES_JPN_NAME));
-		
-		skillTree.setId(skillTreeId);
-		skillTree.setName(name);
-		skillTree.setJpnName(jpnName);
+        SkillTree skillTree = new SkillTree();
 
-		return skillTree;
-	}
+        long skillTreeId = getLong(getColumnIndex(S.COLUMN_SKILL_TREES_ID));
+        String name = getString(getColumnIndex(S.COLUMN_SKILL_TREES_NAME));
+        String jpnName = getString(getColumnIndex(S.COLUMN_SKILL_TREES_JPN_NAME));
+
+        skillTree.setId(skillTreeId);
+        skillTree.setName(name);
+        skillTree.setJpnName(jpnName);
+
+        return skillTree;
+    }
 }

@@ -1,22 +1,29 @@
 package com.daviancorp.android.ui.list;
 
-import android.app.*;
-import android.content.*;
-import android.content.DialogInterface.*;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.*;
-import android.widget.*;
+import android.widget.AbsListView;
+import android.widget.CursorAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import com.daviancorp.android.data.classes.ASBSet;
 import com.daviancorp.android.data.database.ASBSetCursor;
 import com.daviancorp.android.data.database.DataManager;
 import com.daviancorp.android.loader.ASBSetListCursorLoader;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.detail.*;
+import com.daviancorp.android.ui.detail.ASBActivity;
 import com.daviancorp.android.ui.dialog.ASBSetAddDialogFragment;
 
 public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<Cursor> {
@@ -126,8 +133,7 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
                 if (l.getCheckedItemCount() > 1) {
                     // We hide the edit button since you can only edit one set at a time
                     mode.getMenu().findItem(R.id.action_edit_data).setVisible(false);
-                }
-                else {
+                } else {
                     mode.getMenu().findItem(R.id.action_edit_data).setVisible(true);
                 }
             }
@@ -173,7 +179,8 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
             }
 
             @Override
-            public void onDestroyActionMode(ActionMode mode) { }
+            public void onDestroyActionMode(ActionMode mode) {
+            }
 
             private AlertDialog.Builder createConfirmDeleteDialog() {
                 AlertDialog.Builder b = new AlertDialog.Builder(getActivity())
@@ -191,8 +198,7 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
                 if (l.getCheckedItemCount() == 1) {
                     b.setMessage(getResources().getString(R.string.dialog_message_delete, DataManager.get(getActivity()).getASBSet(l.getCheckedItemIds()[0]).getName()))
                             .setTitle(R.string.asb_dialog_title_delete_set);
-                }
-                else {
+                } else {
                     b.setMessage(getResources().getString(R.string.dialog_message_delete_multi, l.getCheckedItemCount()))
                             .setTitle(R.string.asb_dialog_title_delete_set_multi);
                 }
@@ -216,8 +222,7 @@ public class ASBSetListFragment extends ListFragment implements LoaderCallbacks<
                 if (l.getCheckedItemCount() == 1) {
                     b.setMessage(getResources().getString(R.string.dialog_message_copy, DataManager.get(getActivity()).getASBSet(l.getCheckedItemIds()[0]).getName()))
                             .setTitle(R.string.asb_dialog_title_copy_set);
-                }
-                else {
+                } else {
                     b.setMessage(getResources().getString(R.string.dialog_message_delete_multi, l.getCheckedItemCount()))
                             .setTitle(R.string.asb_dialog_title_copy_set_multi);
                 }

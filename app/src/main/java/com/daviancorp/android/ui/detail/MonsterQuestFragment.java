@@ -1,6 +1,5 @@
 package com.daviancorp.android.ui.detail;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -21,114 +20,113 @@ import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.ClickListeners.QuestClickListener;
 
 public class MonsterQuestFragment extends ListFragment implements
-		LoaderCallbacks<Cursor> {
-	private static final String ARG_MONSTER_ID = "MONSTER_ID";
+        LoaderCallbacks<Cursor> {
 
-	public static MonsterQuestFragment newInstance(long questId) {
-		Bundle args = new Bundle();
-		args.putLong(ARG_MONSTER_ID, questId);
-		MonsterQuestFragment f = new MonsterQuestFragment();
-		f.setArguments(args);
-		return f;
-	}
+    private static final String ARG_MONSTER_ID = "MONSTER_ID";
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    public static MonsterQuestFragment newInstance(long questId) {
+        Bundle args = new Bundle();
+        args.putLong(ARG_MONSTER_ID, questId);
+        MonsterQuestFragment f = new MonsterQuestFragment();
+        f.setArguments(args);
+        return f;
+    }
 
-		// Initialize the loader to load the list of runs
-		getLoaderManager().initLoader(R.id.monster_quest_fragment, getArguments(), this);
-	}
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.fragment_generic_list, null);
-		return v;
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-	@SuppressLint("NewApi")
-	@Override
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// You only ever load the runs, so assume this is the case
-		long monsterId = args.getLong(ARG_MONSTER_ID, -1);
+        // Initialize the loader to load the list of runs
+        getLoaderManager().initLoader(R.id.monster_quest_fragment, getArguments(), this);
+    }
 
-		return new MonsterToQuestListCursorLoader(getActivity(), 
-				MonsterToQuestListCursorLoader.FROM_MONSTER,
-				monsterId);
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_generic_list, null);
+        return v;
+    }
 
-	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		// Create an adapter to point at this cursor
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        // You only ever load the runs, so assume this is the case
+        long monsterId = args.getLong(ARG_MONSTER_ID, -1);
 
-		MonsterToQuestListCursorAdapter adapter = new MonsterToQuestListCursorAdapter(
-				getActivity(), (MonsterToQuestCursor) cursor);
-		setListAdapter(adapter);
+        return new MonsterToQuestListCursorLoader(getActivity(),
+                MonsterToQuestListCursorLoader.FROM_MONSTER,
+                monsterId);
+    }
 
-	}
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        // Create an adapter to point at this cursor
 
-	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-		// Stop using the cursor (via the adapter)
-		setListAdapter(null);
-	}
+        MonsterToQuestListCursorAdapter adapter = new MonsterToQuestListCursorAdapter(
+                getActivity(), (MonsterToQuestCursor) cursor);
+        setListAdapter(adapter);
 
-	private static class MonsterToQuestListCursorAdapter extends CursorAdapter {
+    }
 
-		private MonsterToQuestCursor mMonsterToQuestCursor;
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Stop using the cursor (via the adapter)
+        setListAdapter(null);
+    }
 
-		public MonsterToQuestListCursorAdapter(Context context,
-				MonsterToQuestCursor cursor) {
-			super(context, cursor, 0);
-			mMonsterToQuestCursor = cursor;
-		}
+    private static class MonsterToQuestListCursorAdapter extends CursorAdapter {
 
-		@Override
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
-			// Use a layout inflater to get a row view
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			return inflater.inflate(R.layout.fragment_monster_monstertoquest_listitem,
-					parent, false);
-		}
+        private MonsterToQuestCursor mMonsterToQuestCursor;
 
-		@Override
-		public void bindView(View view, Context context, Cursor cursor) {
-			// Get the item for the current row
-			MonsterToQuest monsterToQuest = mMonsterToQuestCursor
-					.getMonsterToQuest();
+        public MonsterToQuestListCursorAdapter(Context context,
+                                               MonsterToQuestCursor cursor) {
+            super(context, cursor, 0);
+            mMonsterToQuestCursor = cursor;
+        }
 
-			// Set up the text view
-			LinearLayout itemLayout = (LinearLayout) view
-					.findViewById(R.id.listitem);
-			TextView questTextView = (TextView) view
-					.findViewById(R.id.quest_name);
-			TextView locationTextView = (TextView) view
-					.findViewById(R.id.quest_location);
-			TextView unstableTextView = (TextView) view
-					.findViewById(R.id.quest_unstable);
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            // Use a layout inflater to get a row view
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return inflater.inflate(R.layout.fragment_monster_monstertoquest_listitem,
+                    parent, false);
+        }
 
-			String cellQuestText = monsterToQuest.getQuest().getName();
-			String cellLocationText = monsterToQuest.getQuest().getHub() + " "
-					+ monsterToQuest.getQuest().getStars();
-			String cellUnstableText = monsterToQuest.getUnstable();
-			
-			if (cellUnstableText.equals("no")) {
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            // Get the item for the current row
+            MonsterToQuest monsterToQuest = mMonsterToQuestCursor
+                    .getMonsterToQuest();
+
+            // Set up the text view
+            LinearLayout itemLayout = (LinearLayout) view
+                    .findViewById(R.id.listitem);
+            TextView questTextView = (TextView) view
+                    .findViewById(R.id.quest_name);
+            TextView locationTextView = (TextView) view
+                    .findViewById(R.id.quest_location);
+            TextView unstableTextView = (TextView) view
+                    .findViewById(R.id.quest_unstable);
+
+            String cellQuestText = monsterToQuest.getQuest().getName();
+            String cellLocationText = monsterToQuest.getQuest().getHub() + " "
+                    + monsterToQuest.getQuest().getStars();
+            String cellUnstableText = monsterToQuest.getUnstable();
+
+            if (cellUnstableText.equals("no")) {
                 unstableTextView.setVisibility(View.GONE);
-			}
-			else {
-				cellUnstableText = "Unstable";
+            } else {
+                cellUnstableText = "Unstable";
                 unstableTextView.setText(cellUnstableText);
-			}
-			
-			questTextView.setText(cellQuestText);
-			locationTextView.setText(cellLocationText);
+            }
 
-			itemLayout.setTag(monsterToQuest.getQuest().getId());
-            itemLayout.setOnClickListener(new QuestClickListener(context,monsterToQuest
+            questTextView.setText(cellQuestText);
+            locationTextView.setText(cellLocationText);
+
+            itemLayout.setTag(monsterToQuest.getQuest().getId());
+            itemLayout.setOnClickListener(new QuestClickListener(context, monsterToQuest
                     .getQuest().getId()));
-		}
-	}
+        }
+    }
 
 }
