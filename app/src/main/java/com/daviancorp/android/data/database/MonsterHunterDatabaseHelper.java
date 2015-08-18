@@ -509,6 +509,35 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         return qb.query(db, qh.Columns, qh.Selection, qh.SelectionArgs, qh.GroupBy, qh.Having, qh.OrderBy, qh.Limit);
     }
 
+    /**
+     * Modifies a query helper to perform searching.
+     * The current algorithm is "beginning of word, union match all words"
+     * Modifies Selection and and SelectionArgs
+     * Note: This fails if there is already arguments on the query.
+     * TODO: support arguments already existing by expanding the array and adding "AND"
+     * @param qh
+     * @param columnName
+     * @param searchTerm
+     */
+    private void modifyQueryForSearch(QueryHelper qh, String columnName, String searchTerm) {
+        // WHERE (name LIKE '% word1%' OR name LIKE 'word1%')
+        //   AND (name LIKE '% word2%' OR name LIKE 'word2%')
+
+        String[] words = searchTerm.split(" ");
+        String[] selectionArgs = new String[words.length * 2];
+        qh.Selection = "";
+        for (int i = 0; i < words.length; i++) {
+            if (i != 0) {
+                qh.Selection += " AND ";
+            }
+            qh.Selection += "(" + columnName + " LIKE ? OR " + columnName + " LIKE ?)";
+            selectionArgs[i * 2] = "% " + words[i] + "%";
+            selectionArgs[(i * 2) + 1] = words[i] + "%";
+        }
+
+        qh.SelectionArgs = selectionArgs;
+    }
+
     /*
      * Insert data to a table
      */
@@ -1574,18 +1603,21 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
      * Get items based on search text
      */
     public ItemCursor queryItemSearch(String search) {
-        // "SELECT * FROM items WHERE name LIKE %?%"
+        // "SELECT * FROM items
+        //  WHERE (name LIKE '% word%' OR name LIKE 'word%')
+        //    AND (name LIKE '% word2%' OR name LIKE 'word2%')
+        //  GROUP BY name"
 
         QueryHelper qh = new QueryHelper();
         qh.Distinct = false;
         qh.Table = S.TABLE_ITEMS;
         qh.Columns = null;
-        qh.Selection = S.COLUMN_ITEMS_NAME + " LIKE ?";
-        qh.SelectionArgs = new String[]{'%' + search + '%'};
         qh.GroupBy = null;
         qh.Having = null;
         qh.OrderBy = null;
         qh.Limit = null;
+
+        modifyQueryForSearch(qh, S.COLUMN_ITEMS_NAME, search);
 
         return new ItemCursor(wrapHelper(qh));
     }
@@ -1895,18 +1927,27 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     }
 
     public MonsterCursor queryMonstersSearch(String searchTerm) {
-        // "SELECT DISTINCT * FROM monsters WHERE name LIKE %searchTerm% GROUP BY name"
+        // "SELECT DISTINCT * FROM monsters
+        //  WHERE (name LIKE '% word%' OR name LIKE 'word%')
+        //    AND (name LIKE '% word2%' OR name LIKE 'word2%')
+        //  GROUP BY name"
+
+        // If the search is empty, use the retrieve all version
+        if (searchTerm == null || searchTerm.trim().equals("")) {
+            return queryMonsters();
+        }
 
         QueryHelper qh = new QueryHelper();
         qh.Distinct = true;
         qh.Table = S.TABLE_MONSTERS;
         qh.Columns = null;
-        qh.Selection = S.COLUMN_MONSTERS_TRAIT + " = '' AND " + S.COLUMN_MONSTERS_NAME + " LIKE ?";
-        qh.SelectionArgs = new String[]{"%" + searchTerm + "%"};
         qh.GroupBy = S.COLUMN_MONSTERS_SORT_NAME;
         qh.Having = null;
         qh.OrderBy = null;
         qh.Limit = null;
+
+        modifyQueryForSearch(qh, S.COLUMN_MONSTERS_NAME, searchTerm);
+        qh.Selection += " AND " + S.COLUMN_MONSTERS_TRAIT + " = ''";
 
         return new MonsterCursor(wrapHelper(qh));
     }
@@ -2337,12 +2378,12 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
         QueryHelper qh = new QueryHelper();
         qh.Columns = null;
         qh.Table = S.TABLE_QUESTS;
-        qh.Selection = "q." + S.COLUMN_QUESTS_NAME + " LIKE ?";
-        qh.SelectionArgs = new String[] { "%" + searchTerm + "%"};
         qh.GroupBy = null;
         qh.Having = null;
         qh.OrderBy = null;
         qh.Limit = null;
+
+        modifyQueryForSearch(qh, "q." + S.COLUMN_QUESTS_NAME, searchTerm);
 
         return new QuestCursor(wrapJoinHelper(builderQuest(), qh));
     }
