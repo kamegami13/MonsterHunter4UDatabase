@@ -343,6 +343,7 @@ public class S {
 	static final String COLUMN_WEAPONS_RECOIL = "recoil";
 	static final String COLUMN_WEAPONS_RELOAD_SPEED = "reload_speed";
 	static final String COLUMN_WEAPONS_RAPID_FIRE = "rapid_fire";
+	static final String COLUMN_WEAPONS_SPECIAL_AMMO = "special_ammo";
 	static final String COLUMN_WEAPONS_DEVIATION = "deviation";
 	static final String COLUMN_WEAPONS_AMMO = "ammo";
 	static final String COLUMN_WEAPONS_NUM_SLOTS = "num_slots";
