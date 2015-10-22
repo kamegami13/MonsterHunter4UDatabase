@@ -89,12 +89,9 @@ public class WishlistDataDetailFragment extends ListFragment implements
 		mItemTypeTextView = (TextView) v.findViewById(R.id.item_type);
 		mQuantityTypeTextView = (TextView) v.findViewById(R.id.quantity_type);
 		mExtraTypeTextView = (TextView) v.findViewById(R.id.extra_type);
-
-		mHeaderTextView.setText("Red highlight = Can make one");
-		mHeaderTextView.setTextColor(Color.RED);
 		
 		mItemTypeTextView.setText("Item");
-		mQuantityTypeTextView.setText("Quantity");
+		mQuantityTypeTextView.setText("Qty");
 		mExtraTypeTextView.setText("Method");
 		
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {

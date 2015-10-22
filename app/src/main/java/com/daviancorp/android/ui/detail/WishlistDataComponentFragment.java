@@ -90,7 +90,7 @@ public class WishlistDataComponentFragment extends ListFragment implements
 		mExtraTypeTextView = (TextView) v.findViewById(R.id.extra_type);
 
 		mItemTypeTextView.setText("Item");
-		mQuantityTypeTextView.setText("Required");
+		mQuantityTypeTextView.setText("Req");
 		mExtraTypeTextView.setText("Have");
 		
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {

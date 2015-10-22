@@ -124,6 +124,13 @@ public class ASBSkillsListFragment extends Fragment implements ASBActivity.OnASB
             totalPoints.setText(String.valueOf(getItem(position).getTotal(trees)));
 
             if (getItem(position).getTotal(trees) >= MINIMUM_SKILL_ACTIVATION_POINTS) {
+                treeName.setTypeface(null, Typeface.BOLD);
+                headPoints.setTypeface(null, Typeface.BOLD);
+                bodyPoints.setTypeface(null, Typeface.BOLD);
+                armsPoints.setTypeface(null, Typeface.BOLD);
+                waistPoints.setTypeface(null, Typeface.BOLD);
+                legsPoints.setTypeface(null, Typeface.BOLD);
+                talismanPoints.setTypeface(null, Typeface.BOLD);
                 totalPoints.setTypeface(null, Typeface.BOLD);
             }
             

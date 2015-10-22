@@ -134,7 +134,7 @@ public class ASBPieceContainer extends LinearLayout {
             } else if (session.decorationIsReal(pieceIndex, i)) {
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_real));
             } else if (session.decorationIsDummy(pieceIndex, i)) {
-                decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_dummy));
+                decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_real));
             } else if (session.getEquipment(pieceIndex).getNumSlots() > i) {
                 decorationStates[i].setImageDrawable(getResources().getDrawable(R.drawable.decoration_empty));
             } else {
@@ -146,7 +146,7 @@ public class ASBPieceContainer extends LinearLayout {
     public void showDecorations() {
         parentFragment.onDecorationsMenuOpened();
         decorationView.container.setVisibility(VISIBLE);
-        equipmentButton.setVisibility(GONE);
+        equipmentButton.setVisibility(INVISIBLE);
         dropDownArrow.setImageDrawable(parentFragment.getActivity().getResources().getDrawable(R.drawable.ic_drop_up_arrow));
     }
 
