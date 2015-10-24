@@ -1124,6 +1124,25 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     }
 
     /*
+     * Get decorations filtered by a search term
+     */
+    public DecorationCursor queryDecorationsSearch(String searchTerm) {
+        searchTerm = '%' + searchTerm + '%';
+
+        QueryHelper qh = new QueryHelper();
+        qh.Columns = null;
+        qh.Table = S.TABLE_DECORATIONS;
+        qh.Selection = "i.name LIKE ? OR skill_1_name LIKE ? OR skill_2_name LIKE ?";
+        qh.SelectionArgs = new String[]{ searchTerm, searchTerm, searchTerm };
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = "skill_1_name ASC";
+        qh.Limit = null;
+
+        return new DecorationCursor(wrapJoinHelper(builderDecoration(), qh));
+    }
+
+    /*
      * Get a specific decoration
      */
     public DecorationCursor queryDecoration(long id) {
@@ -2668,7 +2687,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 //		w.rapid_fire, w.normal_shots, w.status_shots, w.elemental_shots, w.tool_shots, w.num_slots,
 //		w.sharpness_file, 
 //		i.name, i.jpn_name, i.type, i.rarity, i.carry_capacity, i.buy, i.sell, i.description,
-//		i.icon_name, i.armor_dupe_name_fix
+//		i.icon_name, i.armor_dupe_name_fix, w.special_ammo
 //		FROM weapons AS w LEFT OUTER JOIN	items AS i ON w._id = i._id;
 
         String w = "w";
@@ -2705,6 +2724,7 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
 		projectionMap.put(S.COLUMN_WEAPONS_FINAL, w + "." + S.COLUMN_WEAPONS_FINAL);
         projectionMap.put(S.COLUMN_WEAPONS_TREE_DEPTH, w + "." + S.COLUMN_WEAPONS_TREE_DEPTH);
         projectionMap.put(S.COLUMN_WEAPONS_PARENT_ID, w + "." + S.COLUMN_WEAPONS_PARENT_ID);
+        projectionMap.put(S.COLUMN_WEAPONS_SPECIAL_AMMO, w + "." + S.COLUMN_WEAPONS_SPECIAL_AMMO);
 
         projectionMap.put(S.COLUMN_ITEMS_NAME, i + "." + S.COLUMN_ITEMS_NAME);
         projectionMap.put(S.COLUMN_ITEMS_JPN_NAME, i + "." + S.COLUMN_ITEMS_JPN_NAME);

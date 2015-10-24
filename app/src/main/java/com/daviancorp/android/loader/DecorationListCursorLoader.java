@@ -7,13 +7,15 @@ import com.daviancorp.android.data.database.DataManager;
 
 public class DecorationListCursorLoader extends SQLiteCursorLoader {
 
-	public DecorationListCursorLoader(Context context) {
+	private String filter;
+	public DecorationListCursorLoader(Context context, String filter) {
 		super(context);
+		this.filter = filter;
 	}
 
 	@Override
 	protected Cursor loadCursor() {
-		// Query the list of all decorations
-		return DataManager.get(getContext()).queryDecorations();
+		// Query the list of decorations. Null/empty strings are handled
+		return DataManager.get(getContext()).queryDecorationsSearch(filter);
 	}
 }

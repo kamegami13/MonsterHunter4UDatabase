@@ -1,34 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/list_item"
+    android:layout_height="48dp">
 
-    <LinearLayout
-        android:orientation="horizontal"
+
+    <ImageView
+        style="@style/main_image"
         android:layout_width="0dp"
-        android:layout_height="48dp"
         android:layout_weight="1"
+        android:layout_marginRight="0dp"
+        android:id="@+id/statusImage"
         android:layout_gravity="center"
-        android:gravity="center">
+        tools:src="@drawable/sword_and_shield1"/>
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:id="@+id/statusImage"
-            android:layout_gravity="center" />
-
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="@color/text_color" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/initial"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_weight="1"
         android:gravity="center"
         android:layout_gravity="center"

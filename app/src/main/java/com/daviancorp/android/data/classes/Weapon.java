@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Weapon extends Item{
 
-	private String wtype;						// Weapon type
+    private String wtype;						// Weapon type
 	private int creation_cost;					// Cost to create
 	private int upgrade_cost;					// Cost to upgrade
 	private int attack;							// Attack damage
@@ -39,6 +39,7 @@ public class Weapon extends Item{
 	private String rapid_fire;					// Rapid fire/crouching fire for bowguns
 	private String deviation;					// Deviation for bowguns
 	private String ammo;						// Ammo for bowguns
+    private String special_ammo;                // Special ammo for bowguns (rapid fire ammo?)
 	private int num_slots;						// Number of slots
 	private int wfinal;							// Final in weapon tree or not
     private int tree_depth;                     // Depth of weapon in weapon tree
@@ -82,6 +83,7 @@ public class Weapon extends Item{
 		this.wfinal = -1;
         this.tree_depth = 0;
         this.chargeString = "";
+        this.special_ammo = "";
 	}
 
 	/* Getters and Setters */
@@ -247,6 +249,10 @@ public class Weapon extends Item{
 		this.ammo = ammo;
 	}
 
+    public String getSpecialAmmo() { return this.special_ammo; }
+
+    public void setSpecialAmmo(String value) { this.special_ammo = value; }
+
 	public int getNumSlots() {
 		return num_slots;
 	}
@@ -347,8 +353,6 @@ public class Weapon extends Item{
     public void setAwakenAttack(long awaken_attack) {
         this.awaken_attack = awaken_attack;
     }
-
-
     
     public void setFileLocation() {
         

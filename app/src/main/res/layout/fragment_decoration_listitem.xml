@@ -8,7 +8,8 @@
     <ImageView
         android:id="@+id/item_image"
         style="@style/main_image"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:duplicateParentState="true" />
 
     <TextView
         android:id="@+id/item"
@@ -16,10 +17,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center_vertical"
-        style="@style/text_medium"
+        style="@style/text_medium.color_states_enabled"
         android:text="Trekker Jewel"
         android:layout_toRightOf="@+id/item_image"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:duplicateParentState="true" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -30,7 +32,8 @@
         android:layout_alignParentLeft="false"
         android:layout_alignParentTop="false"
         android:layout_centerVertical="true"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:duplicateParentState="true">
 
         <TextView
             android:id="@+id/skill1"
@@ -39,12 +42,13 @@
             android:layout_weight=".8"
             android:layout_gravity="center_vertical|right"
             android:gravity="center_vertical"
-            style="@style/text_small"
+            style="@style/text_small.color_states_enabled"
             android:text="Sleep"
             android:layout_above="@+id/skill2_amt"
             android:layout_alignParentRight="false"
             android:layout_toLeftOf="@+id/skill1_amt"
-            android:layout_alignWithParentIfMissing="false" />
+            android:layout_alignWithParentIfMissing="false"
+            android:duplicateParentState="true" />
 
         <TextView
             android:id="@+id/skill1_amt"
@@ -53,11 +57,12 @@
             android:layout_weight=".3"
             android:layout_gravity="center_vertical|right"
             android:gravity="center_vertical|right"
-            style="@style/text_small"
+            style="@style/text_small.color_states_enabled"
             android:text="3"
             android:layout_above="@+id/skill2_amt"
             android:layout_alignParentRight="true"
-            android:layout_alignWithParentIfMissing="false" />
+            android:layout_alignWithParentIfMissing="false"
+            android:duplicateParentState="true" />
 
         <TextView
             android:id="@+id/skill2_amt"
@@ -66,11 +71,12 @@
             android:layout_weight=".3"
             android:layout_gravity="center_vertical|right"
             android:gravity="center_vertical|right"
-            style="@style/text_small"
+            style="@style/text_small.color_states_enabled"
             android:text="-1"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:duplicateParentState="true" />
 
         <TextView
             android:id="@+id/skill2"
@@ -79,12 +85,13 @@
             android:layout_weight=".8"
             android:layout_gravity="center_vertical|right"
             android:gravity="center_vertical"
-            style="@style/text_small"
+            style="@style/text_small.color_states_enabled"
             android:text="Mud/Snow"
             android:layout_marginLeft="8dp"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/skill2_amt"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:duplicateParentState="true" />
     </RelativeLayout>
 
 </RelativeLayout>

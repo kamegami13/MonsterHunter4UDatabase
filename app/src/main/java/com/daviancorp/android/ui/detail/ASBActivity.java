@@ -23,6 +23,7 @@ public class ASBActivity extends GenericTabActivity {
     public static final String EXTRA_TALISMAN_SKILL_INDEX = "com.daviancorp.android.ui.detail.talisman_skill_number";
     public static final String EXTRA_PIECE_INDEX = "com.daviancorp.android.ui.detail.piece_index";
     public static final String EXTRA_DECORATION_INDEX = "com.daviancorp.android.ui.detail.decoration_index";
+    public static final String EXTRA_DECORATION_MAX_SLOTS = "com.daviancorp.android.ui.detail.decoration_max_slots";
     public static final String EXTRA_SET_RANK = "com.daviancorp.android.ui.detail.set_rank";
     public static final String EXTRA_SET_HUNTER_TYPE = "com.daviancorp.android.ui.detail.hunter_type";
 

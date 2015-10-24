@@ -93,9 +93,13 @@
     <style name="ButtonStyle" parent="@style/AppTheme">
         <item name="android:background">@drawable/clicked_states_primary</item>
         <item name="android:textColor">@color/text_primary_color</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
+        <item name="android:height">36dp</item>
+        <item name="android:minWidth">64dp</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingLeft">8dp</item>
     </style>
 
     <!-- USE FOR ALL FULLSCREEN ACTIVITIES WHERE VIEWS COVER ALL BACKGROUD TO REDUCE OVERDRAW -->
@@ -182,6 +186,10 @@
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">14sp</item>
         <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="text_small.color_states_enabled">
+        <item name="android:textColor">@color/color_states_enabled</item>
     </style>
 
     <style name="main_image" parent="@style/Theme.AppCompat.Light.NoActionBar">

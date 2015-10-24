@@ -42,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/list_item"
+            android:animateLayoutChanges="true"
             android:minHeight="48dp">
 
             <TextView
@@ -49,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 style="@style/text_medium"
+                android:layout_gravity="center_vertical"
                 android:text="Weaknesses"/>
 
             <org.apmem.tools.layouts.FlowLayout
@@ -73,6 +75,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             tools:visibility="visible"
+            android:animateLayoutChanges="true"
             style="@style/list_item"
             android:minHeight="48dp">
 
@@ -82,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 style="@style/text_medium"
+                android:layout_gravity="center_vertical"
                 android:text="Weaknesses Mod"/>
 
             <org.apmem.tools.layouts.FlowLayout
@@ -109,12 +113,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/list_item"
+            android:animateLayoutChanges="true"
             android:minHeight="48dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/text_medium"
+                android:animateLayoutChanges="true"
+                android:layout_gravity="center_vertical"
                 android:text="Traps"/>
 
             <org.apmem.tools.layouts.FlowLayout
@@ -140,6 +147,7 @@
             android:visibility="gone"
             tools:visibility="visible"
             style="@style/list_item"
+            android:animateLayoutChanges="true"
             android:minHeight="48dp">
 
             <TextView
@@ -148,6 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 style="@style/text_medium"
+                android:layout_gravity="center_vertical"
                 android:text="Traps Mod"/>
 
             <org.apmem.tools.layouts.FlowLayout
@@ -175,12 +184,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/list_item"
+            android:animateLayoutChanges="true"
             android:minHeight="48dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/text_medium"
+                android:layout_gravity="center_vertical"
                 android:text="Bombs"/>
 
             <org.apmem.tools.layouts.FlowLayout
@@ -206,6 +217,7 @@
             android:visibility="gone"
             tools:visibility="visible"
             style="@style/list_item"
+            android:animateLayoutChanges="true"
             android:minHeight="48dp">
 
             <TextView
@@ -213,6 +225,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_gravity="center_vertical"
                 style="@style/text_medium"
                 android:text="Bombs Mod"/>
 
@@ -255,6 +268,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
+                android:animateLayoutChanges="true"
                 android:orientation="vertical"
                 android:layout_below="@+id/ailments_label">
 
@@ -309,6 +323,7 @@
                 android:maxLines="100"
                 android:scrollHorizontally="false"
                 android:layout_below="@id/moves_label"
+                android:animateLayoutChanges="true"
                 tools:text="Mandible attack, Web shot, Abdomen sting" />
 
         </RelativeLayout>

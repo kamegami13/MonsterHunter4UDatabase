@@ -96,7 +96,6 @@ public class MonsterStatusFragment extends Fragment {
             duration = Long.toString(currentStatus.getDuration());
             damage = Long.toString(currentStatus.getDamage());
 
-            TextView statusView = (TextView) wdRow.findViewById(R.id.status);
             ImageView statusImage = (ImageView) wdRow.findViewById(R.id.statusImage);
             TextView initialView = (TextView) wdRow.findViewById(R.id.initial);
             TextView increaseView = (TextView) wdRow.findViewById(R.id.increase);

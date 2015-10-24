@@ -21,7 +21,7 @@ public class WeaponBowDetailFragment extends WeaponDetailFragment {
 	private TextView mWeaponArcTextView, mWeaponCharge1TextView,
 			mWeaponCharge2TextView, mWeaponCharge3TextView,
 			mWeaponCharge4TextView, mWeaponElementTextView;
-    ;
+
 	private ImageView mWeaponCoating1ImageView, mWeaponCoating2ImageView,
 			mWeaponCoating3ImageView, mWeaponCoating4ImageView,
 			mWeaponCoating5ImageView, mWeaponCoating6ImageView,
@@ -94,19 +94,31 @@ public class WeaponBowDetailFragment extends WeaponDetailFragment {
 		// Charges
 		String[] charges = mWeapon.getCharges().split("\\|");
 
+		/* charges[0] maps to mWeaponCharge1TextView
+		 * charges[1] maps to mWeaponCharge2TextView
+		 * etc. */
 		mWeaponCharge1TextView.setText(charges[0]);
 		mWeaponCharge2TextView.setText(charges[1]);
-		mWeaponCharge3TextView.setText(charges[2]);
 
-        if (charges[2].contains("*")){
-            mWeaponCharge2TextView.setTypeface(null, Typeface.BOLD);
-        }
+		if (charges.length >= 3) {
+			String thirdCharge = charges[2];
+			if (thirdCharge.contains("*")){
+				thirdCharge = thirdCharge.replace("*", "");
+				mWeaponCharge3TextView.setTypeface(null, Typeface.BOLD);
+			}
+			mWeaponCharge3TextView.setText(thirdCharge);
+		}
+		else {
+			mWeaponCharge3TextView.setText("None");
+		}
 
         if (charges.length == 4) {
-            mWeaponCharge4TextView.setText(charges[3]);
-            if (charges[3].contains("*")){
-                mWeaponCharge3TextView.setTypeface(null, Typeface.BOLD);
+			String fourthCharge = charges[3];
+			if (fourthCharge.contains("*")) {
+				fourthCharge = fourthCharge.replace("*", "");
+                mWeaponCharge4TextView.setTypeface(null, Typeface.BOLD);
             }
+			mWeaponCharge4TextView.setText(fourthCharge);
         }
         else {
             mWeaponCharge4TextView.setText("None");

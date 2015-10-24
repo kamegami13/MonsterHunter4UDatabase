@@ -265,6 +265,17 @@ public class DataManager {
 		return mHelper.queryDecorations();
 	}
 
+	/**
+	 * Gets a cursor that has a list of decorations that pass the filter.
+	 * Having a null or empty filter is the same as calling without a filter
+	 */
+	public DecorationCursor queryDecorationsSearch(String filter) {
+		filter = (filter == null) ? "" : filter.trim();
+		if (filter.equals(""))
+			return mHelper.queryDecorations();
+		return mHelper.queryDecorationsSearch(filter);
+	}
+
 	/* Get a specific Decoration */
 	public Decoration getDecoration(long id) {
 		Decoration decoration = null;
