@@ -188,6 +188,10 @@
         <item name="android:typeface">sans</item>
     </style>
 
+    <style name="text_small.color_states_enabled">
+        <item name="android:textColor">@color/color_states_enabled</item>
+    </style>
+
     <style name="main_image" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:layout_height">32dp</item>
         <item name="android:layout_width">32dp</item>

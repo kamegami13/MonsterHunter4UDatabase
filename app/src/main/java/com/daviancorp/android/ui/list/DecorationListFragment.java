@@ -3,6 +3,7 @@ package com.daviancorp.android.ui.list;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -11,9 +12,12 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,6 +38,8 @@ public class DecorationListFragment extends ListFragment implements
 //	private static final String DIALOG_WISHLIST_DATA_ADD_MULTI = "wishlist_data_add_multi";
 //	private static final int REQUEST_ADD_MULTI = 0;
 
+    private String mFilter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +52,34 @@ public class DecorationListFragment extends ListFragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_generic_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_generic_list_search, container, false);
+
+        EditText inputSearch = (EditText) v.findViewById(R.id.input_search);
+        inputSearch.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                mFilter = cs.toString();
+                DecorationListFragment parent = DecorationListFragment.this;
+                getLoaderManager().restartLoader(R.id.decoration_list_fragment, null, parent);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) { }
+
+            @Override
+            public void afterTextChanged(Editable arg0) { }
+        });
+
+        return v;
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         // You only ever load the runs, so assume this is the case
-        return new DecorationListCursorLoader(getActivity());
+        return new DecorationListCursorLoader(getActivity(), mFilter);
     }
 
     @Override
@@ -77,6 +104,7 @@ public class DecorationListFragment extends ListFragment implements
 
         private Activity activity;
         private boolean fromAsb;
+        private int maxSlots;
 
         public DecorationListCursorAdapter(Context context,
                                            DecorationCursor cursor) {
@@ -84,15 +112,18 @@ public class DecorationListFragment extends ListFragment implements
             mDecorationCursor = cursor;
 
             // ASB stuff
-            if (context instanceof Activity && ((Activity) context).getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            if (context instanceof Activity) {
                 activity = (Activity) context;
-                fromAsb = true;
-                
+                Intent intent = ((Activity) context).getIntent();
+                if (intent.getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+                    fromAsb = true;
+                    maxSlots = intent.getIntExtra(ASBActivity.EXTRA_DECORATION_MAX_SLOTS, 3);
+                }
             }
         }
 
         @Override
-                 public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
             // Use a layout inflater to get a row view
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -152,7 +183,16 @@ public class DecorationListFragment extends ListFragment implements
             itemLayout.setTag(decoration.getId());
 
             if (fromAsb) {
-                itemLayout.setOnClickListener(new DecorationClickListener(context, decoration.getId(), true, activity));
+                boolean fitsInArmor = (decoration.getNumSlots() <= maxSlots);
+                view.setEnabled(fitsInArmor);
+
+                // Set the jewel image to be translucent if disabled
+                // TODO: If a way to use alpha with style selectors exist, use that instead
+                itemImageView.setAlpha((fitsInArmor) ? 1.0f : 0.5f);
+
+                if (fitsInArmor) {
+                    itemLayout.setOnClickListener(new DecorationClickListener(context, decoration.getId(), true, activity));
+                }
             }
             else {
                 itemLayout.setOnClickListener(new DecorationClickListener(context, decoration.getId()));

@@ -375,6 +375,7 @@ public class ASBPieceContainer extends LinearLayout {
             Intent i = new Intent(parentFragment.getActivity(), DecorationListActivity.class);
             i.putExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, true);
             i.putExtra(ASBActivity.EXTRA_PIECE_INDEX, pieceIndex);
+            i.putExtra(ASBActivity.EXTRA_DECORATION_MAX_SLOTS, session.getAvailableSlots(pieceIndex));
 
             parentFragment.startActivityForResult(i, ASBActivity.REQUEST_CODE_ADD_DECORATION);
         }

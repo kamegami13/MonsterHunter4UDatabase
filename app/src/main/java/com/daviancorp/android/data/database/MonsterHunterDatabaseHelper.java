@@ -1124,6 +1124,25 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     }
 
     /*
+     * Get decorations filtered by a search term
+     */
+    public DecorationCursor queryDecorationsSearch(String searchTerm) {
+        searchTerm = '%' + searchTerm + '%';
+
+        QueryHelper qh = new QueryHelper();
+        qh.Columns = null;
+        qh.Table = S.TABLE_DECORATIONS;
+        qh.Selection = "i.name LIKE ? OR skill_1_name LIKE ? OR skill_2_name LIKE ?";
+        qh.SelectionArgs = new String[]{ searchTerm, searchTerm, searchTerm };
+        qh.GroupBy = null;
+        qh.Having = null;
+        qh.OrderBy = "skill_1_name ASC";
+        qh.Limit = null;
+
+        return new DecorationCursor(wrapJoinHelper(builderDecoration(), qh));
+    }
+
+    /*
      * Get a specific decoration
      */
     public DecorationCursor queryDecoration(long id) {

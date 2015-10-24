@@ -16,11 +16,16 @@ public class DecorationListActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setTitle(R.string.decorations);
 
-        // Enable drawer button instead of back button
-        super.enableDrawerIndicator();
+        // Enable back button if we're coming from the set builder
+        if (getIntent().getBooleanExtra(ASBActivity.EXTRA_FROM_SET_BUILDER, false)) {
+            super.disableDrawerIndicator();
+        } else {
+            // Enable drawer button instead of back button
+            super.enableDrawerIndicator();
 
-        // Tag as top level activity
-        super.setAsTopLevel();
+            // Tag as top level activity
+            super.setAsTopLevel();
+        }
     }
 
     @Override
