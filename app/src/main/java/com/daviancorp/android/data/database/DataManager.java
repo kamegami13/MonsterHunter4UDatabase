@@ -275,7 +275,7 @@ public class DataManager {
 			return mHelper.queryDecorations();
 		return mHelper.queryDecorationsSearch(filter);
 	}
-	
+
 	/* Get a specific Decoration */
 	public Decoration getDecoration(long id) {
 		Decoration decoration = null;
@@ -955,14 +955,14 @@ public class DataManager {
 
 	/* Get a Cursor that has a list of Weapons based on weapon type */
 	public WeaponCursor queryWeaponType(String type) {
-		return mHelper.queryWeaponType(type);
+		return mHelper.queryWeaponType(type, false);
 	}
 
     /* Get an array that has a list of Weapons based on weapon type
     * This method is for preloading info for weapons to prevent lots of
     * work in binding a view to a list */
     public ArrayList<Weapon> queryWeaponTypeArray(String type) {
-        WeaponCursor cursor = mHelper.queryWeaponType(type);
+        WeaponCursor cursor = mHelper.queryWeaponType(type, false);
 
         cursor.moveToFirst();
         ArrayList<Weapon> weapons = new ArrayList<Weapon>();
@@ -979,7 +979,7 @@ public class DataManager {
     /* Get an array of weapon expandable list items
     * */
     public ArrayList<WeaponListEntry> queryWeaponTreeArray(String type) {
-        WeaponCursor cursor = mHelper.queryWeaponType(type);
+        WeaponCursor cursor = mHelper.queryWeaponType(type, false);
 
         cursor.moveToFirst();
         ArrayList<WeaponListEntry> weapons = new ArrayList<WeaponListEntry>();
@@ -1008,6 +1008,23 @@ public class DataManager {
 
         return weapons;
     }
+
+	/*
+	* Get an array of weapon expandable list items consisting only of the final upgrades
+    */
+	public ArrayList<WeaponListEntry> queryWeaponTreeArrayFinal(String type) {
+		WeaponCursor cursor = mHelper.queryWeaponType(type, true);
+
+		ArrayList<WeaponListEntry> weapons = new ArrayList<>();
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			weapons.add(new WeaponListEntry(cursor.getWeapon()));
+			cursor.moveToNext();
+		}
+
+		return weapons;
+	}
 	
 	/* Get a Cursor that has a list of Weapons in the weapon tree for a specified weapon */
 	public WeaponCursor queryWeaponTree(long id) {

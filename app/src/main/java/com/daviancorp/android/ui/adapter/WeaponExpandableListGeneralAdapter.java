@@ -66,7 +66,6 @@ public abstract class WeaponExpandableListGeneralAdapter extends MultiLevelExpIn
         };
     }
 
-
     public Bitmap getBitmapFromMemCache(String key) {
         return mImageCache.get(key);
     }

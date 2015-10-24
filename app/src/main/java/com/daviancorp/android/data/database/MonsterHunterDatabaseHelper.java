@@ -2659,12 +2659,15 @@ class MonsterHunterDatabaseHelper extends SQLiteAssetHelper {
     /*
      * Get a specific weapon based on weapon type
      */
-    public WeaponCursor queryWeaponType(String type) {
+    public WeaponCursor queryWeaponType(String type, boolean finalOnly) {
 
         QueryHelper qh = new QueryHelper();
         qh.Columns = null;
         qh.Table = S.TABLE_WEAPONS;
         qh.Selection = "w." + S.COLUMN_WEAPONS_WTYPE + " = ? ";
+        if (finalOnly) {
+            qh.Selection += "AND w." + S.COLUMN_WEAPONS_FINAL + " = 1 ";
+        }
         qh.SelectionArgs = new String[]{type};
         qh.GroupBy = null;
         qh.Having = null;

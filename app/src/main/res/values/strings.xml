@@ -31,6 +31,7 @@
     <string name="submit">Submit</string>
 
     <string name="placeholder_unknown">Unknown</string>
+    <string name="filter_final_option">Final Only</string>
 
     <string name="dialog_message_delete">\"%s\" will be deleted.</string>
     <string name="dialog_message_delete_multi">These %d items will be deleted.</string>
