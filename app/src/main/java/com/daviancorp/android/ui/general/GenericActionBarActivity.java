@@ -283,6 +283,11 @@ public abstract class GenericActionBarActivity extends ActionBarActivity {
                 this.finish();
                 return true;
 
+            case R.id.universal_search:
+                Intent startSearch = new Intent(GenericActionBarActivity.this, UniversalSearchActivity.class);
+                startActivity(startSearch);
+                return true;
+
             case R.id.change_log:
                 ChangeLog cl = new ChangeLog(this);
                 cl.getFullLogDialog().show();

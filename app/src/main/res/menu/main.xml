@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.daviancorp.android.monsterhunter4udatabase.MainActivity" >
 
+    <item android:id="@+id/universal_search"
+        android:title="@string/search"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/send_feedback"
         android:showAsAction="never"
