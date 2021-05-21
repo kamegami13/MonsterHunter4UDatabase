@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 'Google Inc.:Google APIs:21'
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 29
+    buildToolsVersion '29.0.2'
 
     defaultConfig {
         applicationId "com.daviancorp.android.mh4udatabase"
@@ -23,20 +23,20 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.3'
-    compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.android.support:recyclerview-v7:21.0.3'
-    compile 'com.android.support:gridlayout-v7:21.0.3'
-    compile 'com.android.support:cardview-v7:21.0.3'
+    implementation 'com.android.support:support-v4:21.0.3'
+    implementation 'com.android.support:appcompat-v7:21.0.3'
+    implementation 'com.android.support:recyclerview-v7:21.0.3'
+    implementation 'com.android.support:gridlayout-v7:21.0.3'
+    implementation 'com.android.support:cardview-v7:21.0.3'
     //compile 'com.android.support:design:22.2.0'
-    compile 'com.astuetz:pagerslidingtabstrip:1.0.1' // Support library for tab navigation with new Toolbar object
+    implementation 'com.astuetz:pagerslidingtabstrip:1.0.1' // Support library for tab navigation with new Toolbar object
     // integration instructions here https://github.com/astuetz/PagerSlidingTabStrip
-    compile 'org.apmem.tools:layouts:1.8@aar' // Library for flow layout
+    implementation 'org.apmem.tools:layouts:1.8@aar' // Library for flow layout
     // Resources here https://github.com/ApmeM/android-flowlayout
-    compile 'de.cketti.library.changelog:ckchangelog:1.2.2' // Library to display a changelog on first run
+    implementation 'de.cketti.library.changelog:ckchangelog:1.2.2' // Library to display a changelog on first run
     // Integration instructions here https://github.com/cketti/ckChangeLog
-    compile project(':multilevelexpindlistview')
-    compile project(':android-sqlite-asset-helper')
+    implementation project(':multilevelexpindlistview')
+    implementation project(':android-sqlite-asset-helper')
 }
 
 repositories {
