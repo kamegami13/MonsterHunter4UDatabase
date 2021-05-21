@@ -2,8 +2,8 @@ package com.daviancorp.android.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.daviancorp.android.data.classes.Weapon;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.ClickListeners.WeaponClickListener;
 import com.daviancorp.android.ui.general.DrawSharpness;
 import com.daviancorp.android.ui.general.WeaponListEntry;
 

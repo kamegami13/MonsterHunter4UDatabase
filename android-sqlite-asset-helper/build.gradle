@@ -3,8 +3,7 @@ import com.android.builder.core.BuilderConstants
 apply plugin: 'android-library'
 
 android {
-    buildToolsVersion "21.1.2"
-    compileSdkVersion 'Google Inc.:Google APIs:21'
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 7
@@ -17,8 +16,8 @@ android.libraryVariants.all { variant ->
         return; // Skip debug builds.
     }
     def task = project.tasks.create "jar${name.capitalize()}", Jar
-    task.dependsOn variant.javaCompile
-    task.from variant.javaCompile.destinationDir
+    task.dependsOn variant.javaCompileProvider
+    //task.from variant.javaCompile.destinationDir
     artifacts.add('archives', task);
 }
 

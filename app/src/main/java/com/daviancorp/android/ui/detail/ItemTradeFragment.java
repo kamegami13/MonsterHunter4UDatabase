@@ -8,10 +8,10 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +21,6 @@ import android.widget.TextView;
 import com.daviancorp.android.data.classes.WyporiumTrade;
 import com.daviancorp.android.loader.WyporiumTradeLoader;
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.ClickListeners.ItemClickListener;
-
-import org.w3c.dom.Text;
 
 public class ItemTradeFragment extends Fragment {
     private static final String ARG_ITEM_IN_ID = "ITEM_IN_ID";

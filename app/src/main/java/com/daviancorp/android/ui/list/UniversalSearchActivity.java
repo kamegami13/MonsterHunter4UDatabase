@@ -1,13 +1,10 @@
 package com.daviancorp.android.ui.list;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 
 import com.daviancorp.android.mh4udatabase.R;
 import com.daviancorp.android.ui.general.GenericActivity;

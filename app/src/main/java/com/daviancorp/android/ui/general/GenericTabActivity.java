@@ -3,8 +3,7 @@ package com.daviancorp.android.ui.general;
 import android.annotation.SuppressLint;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
 
 import com.daviancorp.android.mh4udatabase.R;
 
@@ -26,7 +25,7 @@ public abstract class GenericTabActivity extends GenericActionBarActivity {
         setContentView(R.layout.activity_tab);
 
         // Integrate Toolbar so sliding drawer can go over toolbar
-        android.support.v7.widget.Toolbar mtoolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbar);
+        androidx.appcompat.widget.Toolbar mtoolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mtoolbar);
 
         // Set up tabs

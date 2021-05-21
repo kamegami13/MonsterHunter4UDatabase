@@ -1,6 +1,6 @@
 package com.oissela.software.multilevelexpindlistview;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.test.AndroidTestCase;
 import android.view.ViewGroup;
 
