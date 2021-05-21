@@ -1,9 +1,9 @@
 package com.daviancorp.android.ui.detail;
 
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v4.view.ViewPager;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.viewpager.widget.ViewPager;
 
 import com.daviancorp.android.data.classes.ASBSession;
 import com.daviancorp.android.loader.ASBSessionLoader;

@@ -1,7 +1,7 @@
 package com.daviancorp.android.ui.detail;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.Menu;
 
 import com.daviancorp.android.data.database.DataManager;

@@ -23,11 +23,11 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:21.0.3'
-    implementation 'com.android.support:appcompat-v7:21.0.3'
-    implementation 'com.android.support:recyclerview-v7:21.0.3'
-    implementation 'com.android.support:gridlayout-v7:21.0.3'
-    implementation 'com.android.support:cardview-v7:21.0.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
     //compile 'com.android.support:design:22.2.0'
     implementation 'com.astuetz:pagerslidingtabstrip:1.0.1' // Support library for tab navigation with new Toolbar object
     // integration instructions here https://github.com/astuetz/PagerSlidingTabStrip

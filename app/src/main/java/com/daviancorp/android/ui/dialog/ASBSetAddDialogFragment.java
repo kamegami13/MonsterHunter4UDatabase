@@ -6,18 +6,14 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import com.daviancorp.android.data.classes.HunterType;
-import com.daviancorp.android.data.classes.Rank;
-import com.daviancorp.android.data.database.DataManager;
+
 import com.daviancorp.android.mh4udatabase.R;
-import com.daviancorp.android.ui.detail.ASBFragment;
-import com.daviancorp.android.ui.list.ASBSetListActivity;
 import com.daviancorp.android.ui.list.ASBSetListFragment;
 
 public class ASBSetAddDialogFragment extends DialogFragment {

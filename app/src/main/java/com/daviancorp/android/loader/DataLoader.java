@@ -1,7 +1,7 @@
 package com.daviancorp.android.loader;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+import androidx.loader.content.AsyncTaskLoader;
 
 /*
  * Abstract class used for querying a specific data
